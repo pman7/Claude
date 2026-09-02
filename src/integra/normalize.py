@@ -73,9 +73,12 @@ _ADDRESS_SUFFIXES = {
     "TERRACE": "TER",
     "TRAIL": "TRL",
     "WAY": "WAY",
+    # One office, one key: a suite written as "Suite", "Ste", "Unit", "#" or "No." is the same
+    # suite, so every unit designator collapses to STE (see address_key).
     "SUITE": "STE",
     "SUITES": "STE",
-    "UNIT": "UNIT",
+    "UNIT": "STE",
+    "#": "STE",
     "APARTMENT": "APT",
     "BUILDING": "BLDG",
     "FLOOR": "FL",
@@ -88,8 +91,8 @@ _ADDRESS_SUFFIXES = {
     "NORTHWEST": "NW",
     "SOUTHEAST": "SE",
     "SOUTHWEST": "SW",
-    "NUMBER": "#",
-    "NO": "#",
+    "NUMBER": "STE",
+    "NO": "STE",
     "POB": "PO BOX",
     "PO": "PO",
     "BOX": "BOX",
@@ -205,7 +208,8 @@ def address_key(line1: str | None, postal_code: str | None, line2: str | None = 
     """Dedupe key: normalized street line(s) + ZIP5. Suite tokens are kept: one suite, one practice.
 
     line2 is folded in because NPPES puts the suite in address_1 for some records and in
-    address_2 for others ("715 S KING ST STE 425" vs "715 S KING ST" + "SUITE 425").
+    address_2 for others ("715 S KING ST STE 425" vs "715 S KING ST" + "SUITE 425"), and
+    "#425", "UNIT 425" and "Suite 425" all become "STE 425" so they land on the same key.
     """
     line = normalize_address_line(" ".join(part for part in (line1, line2) if part))
     zipcode = zip5(postal_code)
