@@ -1,0 +1,33 @@
+# ICP rubric (CLAUDE.md section 9). Phillip tunes weights here; code never hardcodes them.
+base_active_license_and_npi: 20
+specialty:
+  prosth: 20
+  os: 15
+  perio: 10
+  gp: 10
+  endo: 0
+  ortho: -20
+  pedo: -20
+  other: 0
+signals:
+  scanner: 15
+  cerec: -15
+  implants: 10
+  new_practice: 15
+  study_club: 10
+  society: 3
+  implants_vendor_locator: 5
+  ortho_clear_gold_or_higher: 5
+  hiring: 5
+reviews:
+  - {min_count: 200, points: 10}
+  - {min_count: 50, points: 5}
+distance_miles:
+  - {max_miles: 10, points: 15}
+  - {max_miles: 25, points: 10}
+  - {max_miles: 50, points: 5}
+hawaii_oahu_or_maui: 10
+is_dso: -10
+verified_personal_email: 5
+no_harvest_score: 0
+clamp: [0, 100]

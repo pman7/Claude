@@ -1,0 +1,85 @@
+# Per-source settings. Adapters read rate limits and URLs from here, never hardcoded.
+defaults:
+  rate_limit_per_sec: 1.0      # hard rule 3: max 1 request per second per host on government portals
+  concurrency: 1
+  timeout_sec: 30
+  max_attempts: 5
+  cache: true
+
+sources:
+  nppes:
+    enabled: true
+    base_url: https://npiregistry.cms.hhs.gov/api/
+    version: "2.1"
+    page_size: 200               # API maximum
+    max_skip: 1000               # documented maximum; a partition that needs more is subdivided
+    taxonomy_description: Dentist   # substring match; covers every "Dentist, <specialty>" description
+    address_purpose: LOCATION    # filter on the practice location address, not the mailing address
+    enumeration_types: [NPI-1, NPI-2]
+    states:
+      WA: ["980", "981", "982", "983", "984", "985", "986", "987", "988", "989", "990", "991", "992", "993", "994"]
+      HI: ["967", "968"]
+    dentist_taxonomy_prefix: "1223"
+
+  wa_doh:
+    enabled: true
+    base_url: https://data.wa.gov/resource/qxh8-f4bd.json
+    metadata_url: https://data.wa.gov/api/views/qxh8-f4bd.json
+    page_size: 5000
+    max_rows: 250000             # safety stop: the dentist credential types total ~20k rows today
+    # Confirmed against the live dataset metadata on 2026-09-02 (tests/fixtures/wa_doh/metadata_columns.json).
+    # birthyear exists in the dataset and is deliberately excluded (hard rule 4).
+    business_fields:
+      - credentialnumber
+      - lastname
+      - firstname
+      - middlename
+      - credentialtype
+      - status
+      - ceduedate
+      - firstissuedate
+      - lastissuedate
+      - expirationdate
+      - actiontaken
+    credential_types:
+      - Dentist License
+      - Dental Faculty License
+      - Dentist Resident Community License
+      - Dentist Resident Postdoctoral License
+      - Dentist Temporary Practice Permit
+    active_statuses:
+      - Active
+      - Active With Conditions
+      - Active With Restrictions
+
+  hi_dcca:
+    enabled: true
+    base_url: https://mypvl.dcca.hawaii.gov/public-license-search/
+    rate_limit_per_sec: 0.5
+    license_prefix: DT           # Hawaii dentist license numbers as seen in NPPES: DT-2878, DT1513, DT 939
+    license_number_start: 1
+    license_number_end: 6000
+    batch_size: 20               # license numbers per comma-separated search
+    stop_after_empty_batches: 25
+    license_types: [DENTIST, DENTIST TEMP, COMMUNITY SERVICE DENTIST]
+    active_statuses: [ACTIVE, CURRENT, VALID]   # confirm on first live run; see tests/fixtures/hi_dcca
+    fetch_details: true          # open each dentist's detail page for status and dates
+    headless: true
+    fetch_details: true          # open each dentist's detail page for status and dates (rows with a link only)
+
+  gmaps:
+    enabled: false               # phase 2
+    base_url: https://places.googleapis.com/v1/places:searchText
+    rate_limit_per_sec: 5
+    field_mask: "places.id,places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.websiteUri,places.rating,places.userRatingCount,places.location,places.businessStatus"
+
+  site_crawl:
+    enabled: false               # phase 2
+    rate_limit_per_sec: 1.0
+    timeout_sec: 10
+    max_attempts: 3
+    max_pages_per_site: 8
+    paths: ["/", "/contact", "/contact-us", "/about", "/about-us", "/team", "/our-team", "/meet-the-doctor", "/doctors", "/technology", "/services"]
+
+finders:
+  order: [findymail, prospeo, anymailfinder, hunter]

@@ -1,0 +1,3 @@
+kind,value,reason,note
+npi,,client,example: existing client by NPI
+domain,,client,example: existing client by website domain
