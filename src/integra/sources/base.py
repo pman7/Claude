@@ -7,6 +7,7 @@ upsert idempotently, and record a source_runs row on every invocation, success o
 from __future__ import annotations
 
 import importlib
+import json
 import traceback
 from abc import ABC, abstractmethod
 from collections.abc import Iterable, Iterator
@@ -20,7 +21,7 @@ from integra.config import Settings, SourceConfig, get_settings, source_config
 from integra.db.models import SourceRun
 from integra.db.session import get_session_factory
 from integra.db.upsert import UpsertCounts
-from integra.http import HTTPFailure
+from integra.http import HTTPFailure, write_snapshot
 from integra.logging import get_logger
 from integra.records import NormalizedRecord
 
@@ -135,19 +136,23 @@ class Adapter(ABC):
         try:
             for raw in self.fetch(state=state, limit=limit):
                 self.stats.record_count += 1
-                record = self.normalize(raw)
+                try:
+                    record = self.normalize(raw)
+                except Exception:
+                    self._snapshot_json(raw.payload, f"normalize failed for {raw.key}")
+                    raise
                 if record is None:
                     self.stats.skipped_count += 1
                 else:
                     batch.append(record)
                 if len(batch) >= UPSERT_BATCH:
-                    self.stats.add_counts(self.upsert(batch))
+                    self._upsert_batch(batch)
                     batch = []
                 if limit and self.stats.record_count >= limit:
                     self.stats.notes.append(f"stopped at --limit {limit}")
                     break
             if batch:
-                self.stats.add_counts(self.upsert(batch))
+                self._upsert_batch(batch)
             self.after_run()
             if self.stats.status == "running":
                 self.stats.status = "ok"
@@ -170,6 +175,29 @@ class Adapter(ABC):
                 elapsed=round(self.stats.elapsed_seconds, 1),
             )
         return self.stats
+
+    def _upsert_batch(self, batch: list[NormalizedRecord]) -> None:
+        try:
+            self.stats.add_counts(self.upsert(batch))
+        except Exception:
+            self._snapshot_json(
+                [r.model_dump(mode="json") for r in batch],
+                f"upsert failed for {len(batch)} records",
+            )
+            raise
+
+    def _snapshot_json(self, payload: Any, reason: str) -> None:
+        """Save the offending record(s) so REPAIR_NEEDED.md has something to reproduce against."""
+        try:
+            path = write_snapshot(
+                self.settings, self.name, json.dumps(payload, default=str, indent=1), ".json"
+            )
+        except Exception as exc:  # noqa: BLE001 - never mask the original failure
+            self.log.warning("snapshot.failed", error=str(exc))
+            return
+        if not self.stats.snapshot_path:
+            self.stats.snapshot_path = str(path)
+        self.log.error("run.record_failure", reason=reason, snapshot=str(path))
 
     def _open_run(self) -> int | None:
         try:

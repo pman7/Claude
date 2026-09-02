@@ -63,6 +63,32 @@ def location_state(result: dict[str, Any]) -> str | None:
     return state.upper() if state else None
 
 
+def address_state(address: dict[str, Any]) -> str | None:
+    state = text_field(address, "state")
+    return state.upper() if state else None
+
+
+def select_location(result: dict[str, Any], target_states: set[str] | None) -> dict[str, Any]:
+    """The practice location to store.
+
+    The primary LOCATION address when it is in a target state (or when no targets are given);
+    otherwise the first practiceLocations[] entry in a target state, because the API matched
+    the record through that secondary office; otherwise the primary address, which the caller
+    then rejects on state.
+    """
+    primary = address_by_purpose(result, PURPOSE_LOCATION)
+    if not target_states or address_state(primary) in target_states:
+        return primary
+    for extra in result.get("practiceLocations") or []:
+        if isinstance(extra, dict) and address_state(extra) in target_states:
+            return extra
+    return primary
+
+
+def is_secondary_location(result: dict[str, Any], location: dict[str, Any]) -> bool:
+    return location is not address_by_purpose(result, PURPOSE_LOCATION)
+
+
 def one_line_address(address: dict[str, Any]) -> str | None:
     """Human readable single line: '715 S KING ST STE 425, HONOLULU, HI 96813-3021'."""
     parts = [
@@ -105,19 +131,24 @@ def primary_taxonomy(result: dict[str, Any], prefix: str) -> str | None:
     return None
 
 
-def _state_code(address: dict[str, Any]) -> str | None:
-    state = text_field(address, "state")
-    return state.upper() if state else None
+_state_code = address_state
 
 
-def parse_provider(result: dict[str, Any], dentist_prefix: str) -> ProviderRecord:
-    """NPI-1 result -> ProviderRecord. Caller has already applied the state and taxonomy filters."""
+def parse_provider(
+    result: dict[str, Any], dentist_prefix: str, location: dict[str, Any] | None = None
+) -> ProviderRecord:
+    """NPI-1 result -> ProviderRecord. Caller has already applied the state and taxonomy filters.
+
+    `location` is the address chosen by select_location(); defaults to the primary LOCATION.
+    """
     basic = result.get("basic") or {}
-    location = address_by_purpose(result, PURPOSE_LOCATION)
+    if location is None:
+        location = address_by_purpose(result, PURPOSE_LOCATION)
     mailing = address_by_purpose(result, PURPOSE_MAILING)
     codes = taxonomy_codes(result)
     primary = primary_taxonomy(result, dentist_prefix)
     line1 = text_field(location, "address_1")
+    line2 = text_field(location, "address_2")
     location_zip = text_field(location, "postal_code")
     return ProviderRecord(
         npi=str(result["number"]),
@@ -140,12 +171,12 @@ def parse_provider(result: dict[str, Any], dentist_prefix: str) -> ProviderRecor
         practice_fax_e164=normalize_phone(text_field(location, "fax_number")),
         practice_address_raw=one_line_address(location),
         practice_address_line1=line1,
-        practice_address_line2=text_field(location, "address_2"),
+        practice_address_line2=line2,
         practice_city=text_field(location, "city"),
         practice_state=_state_code(location),
         practice_zip=zip5(location_zip),
         practice_zip9=zip9(location_zip),
-        practice_address_key=address_key(line1, location_zip),
+        practice_address_key=address_key(line1, location_zip, line2),
         mailing_address_raw=one_line_address(mailing),
         mailing_city=text_field(mailing, "city"),
         mailing_state=_state_code(mailing),
@@ -167,13 +198,17 @@ def _other_names(result: dict[str, Any]) -> list[str]:
     return names
 
 
-def parse_organization(result: dict[str, Any], dentist_prefix: str) -> OrganizationRecord:
+def parse_organization(
+    result: dict[str, Any], dentist_prefix: str, location: dict[str, Any] | None = None
+) -> OrganizationRecord:
     """NPI-2 result -> OrganizationRecord (candidate practice anchor)."""
     basic = result.get("basic") or {}
-    location = address_by_purpose(result, PURPOSE_LOCATION)
+    if location is None:
+        location = address_by_purpose(result, PURPOSE_LOCATION)
     codes = taxonomy_codes(result)
     primary = primary_taxonomy(result, dentist_prefix)
     line1 = text_field(location, "address_1")
+    line2 = text_field(location, "address_2")
     location_zip = text_field(location, "postal_code")
     return OrganizationRecord(
         npi=str(result["number"]),
@@ -182,12 +217,12 @@ def parse_organization(result: dict[str, Any], dentist_prefix: str) -> Organizat
         taxonomy_codes=codes,
         primary_taxonomy=primary,
         address_line1=line1,
-        address_line2=text_field(location, "address_2"),
+        address_line2=line2,
         city=text_field(location, "city"),
         state=_state_code(location),
         postal_code=zip5(location_zip),
         postal_code9=zip9(location_zip),
-        address_key=address_key(line1, location_zip),
+        address_key=address_key(line1, location_zip, line2),
         phone_raw=text_field(location, "telephone_number"),
         phone_e164=normalize_phone(text_field(location, "telephone_number")),
         fax_e164=normalize_phone(text_field(location, "fax_number")),

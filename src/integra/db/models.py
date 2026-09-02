@@ -249,7 +249,12 @@ class Signal(Base):
 
     __table_args__ = (
         UniqueConstraint(
-            "practice_id", "signal_type", "value", "source", name="uq_signals_practice_type_value"
+            "practice_id",
+            "signal_type",
+            "value",
+            "source",
+            name="uq_signals_practice_type_value",
+            postgresql_nulls_not_distinct=True,  # a NULL value is one signal, not infinitely many
         ),
         Index("ix_signals_practice", "practice_id"),
     )

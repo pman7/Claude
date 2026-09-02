@@ -6,7 +6,7 @@ from sqlalchemy import select
 
 from integra.db.models import Organization, Practice, Provider
 from integra.normalize import address_key, normalize_phone, zip5
-from integra.resolve.practice_rows import resolution_key
+from integra.resolve.practice_rows import Member, group_members
 from integra.resolve.practices import run_resolve
 
 PHONE = "(425) 555-0100"
@@ -62,14 +62,44 @@ def _provider_rows(session_factory) -> dict[str, Provider]:
         return {p.npi: p for p in session.execute(select(Provider)).scalars()}
 
 
-def test_resolution_key_prefers_phone_and_address_then_falls_back_to_npi():
-    assert resolution_key("+14255550100", "35 148TH AVE SE STE 10|98007", "1") == (
-        "pa:+14255550100|35 148TH AVE SE STE 10|98007",
-        "phone_address",
+def _member(npi, phone, line1, line2, zipc):
+    return Member(
+        "provider",
+        npi,
+        "Adachi",
+        None,
+        phone,
+        None,
+        line1,
+        line2,
+        "HONOLULU",
+        "HI",
+        zipc,
+        address_key(line1, zipc, line2),
+        None,
     )
-    assert resolution_key(None, "X|98007", "1") == ("a:X|98007", "address")
-    assert resolution_key("+14255550100", None, "1") == ("p:+14255550100", "phone")
-    assert resolution_key(None, None, "1234567890") == ("npi:1234567890", "npi_solo")
+
+
+def test_group_members_merges_on_address_or_phone_zip_and_falls_back_to_npi():
+    same_suite_a = _member("1", "+18085214421", "715 S KING ST STE 425", None, "968133021")
+    same_suite_b = _member("2", None, "715 S KING ST", "SUITE 425", "96813")  # suite in line 2
+    same_phone = _member("3", "+18085214421", "715 S KING STREET", None, "96813")  # phone+zip
+    phone_only = _member("4", "+18085550000", None, None, None)
+    nothing = _member("5", None, None, None, None)
+    groups = group_members([same_suite_a, same_suite_b, same_phone, phone_only, nothing], set())
+    assert set(groups) == {"a:715 S KING ST STE 425|96813", "p:+18085550000", "npi:5"}
+    method, members = groups["a:715 S KING ST STE 425|96813"]
+    assert method == "address_phone"
+    assert {m.npi for m in members} == {"1", "2", "3"}
+    assert groups["p:+18085550000"] == ("phone", [phone_only])
+    assert groups["npi:5"] == ("npi_solo", [nothing])
+
+
+def test_group_members_reuses_an_existing_practice_key():
+    a = _member("1", "+18085214421", "715 S KING ST STE 425", None, "96813")
+    b = _member("2", "+18085214421", "715 S KING ST", None, "96813")
+    groups = group_members([a, b], {"pz:+18085214421|96813"})
+    assert list(groups) == ["pz:+18085214421|96813"]
 
 
 def test_two_providers_sharing_phone_and_address_form_one_practice(session_factory, settings):
@@ -83,7 +113,7 @@ def test_two_providers_sharing_phone_and_address_form_one_practice(session_facto
     practices = _practices(session_factory)
     assert len(practices) == 1
     practice = practices[0]
-    assert practice.resolution_method == "phone_address"
+    assert practice.resolution_method == "address_phone"
     assert practice.provider_count == 2
     assert practice.name == "Dr. Adachi"  # first provider by last name, until Google Maps
     assert practice.phone_e164 == "+14255550100"

@@ -193,6 +193,8 @@ class WaDohAdapter(Adapter):
         base_url = self.config.base_url
         if not base_url:
             raise ValueError("wa_doh.base_url missing in config/sources.yaml")
+        max_rows = int(self.config.get("max_rows", 250_000))
+        previous_first: str | None = None
         with self._client() as client:
             self._check_metadata(client)
             offset = 0
@@ -200,6 +202,16 @@ class WaDohAdapter(Adapter):
                 body, result = self._get_json(client, base_url, {**params, "$offset": offset})
                 rows = self._business_rows(body, result)
                 self.log.info("page", offset=offset, rows=len(rows), cached=result.from_cache)
+                first_key = clean_text(rows[0].get(KEY_FIELD)) if rows else None
+                if rows and first_key is not None and first_key == previous_first:
+                    snapshot = write_snapshot(self.settings, self.name, result.text, ".json")
+                    raise SchemaDriftError(
+                        f"page at $offset {offset} repeats the previous page (first {KEY_FIELD}"
+                        f" {first_key}); $offset is not being honored, stopping",
+                        url=result.url,
+                        snapshot_path=snapshot,
+                    )
+                previous_first = first_key
                 for row in rows:
                     key = clean_text(row.get(KEY_FIELD))
                     if not key:
@@ -216,6 +228,14 @@ class WaDohAdapter(Adapter):
                 if len(rows) < page_size:
                     break
                 offset += page_size
+                if offset > max_rows:
+                    snapshot = write_snapshot(self.settings, self.name, result.text, ".json")
+                    raise SchemaDriftError(
+                        f"more than max_rows {max_rows:,} rows for {self._where_clause()};"
+                        " raise wa_doh.max_rows in config/sources.yaml if this is real growth",
+                        url=result.url,
+                        snapshot_path=snapshot,
+                    )
         if self._dropped_fields:
             self.stats.notes.append(
                 f"stripped non-business field(s) {sorted(self._dropped_fields)} from rows"

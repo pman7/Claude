@@ -45,6 +45,10 @@ from integra.sources.hi_dcca_parse import (
 STATE = "HI"
 FIRST_RESULTS_SUFFIX = "_first_results.html"
 EMPTY_DETAIL: dict[str, Any] = {"status": None, "first_issue_date": None, "expiration_date": None}
+# Run bookkeeping kept in the raw payload and cache but excluded from source_json, so a change
+# of batch_size or fetch_details never rewrites rows (running twice changes only last_seen).
+RUN_ONLY_KEYS = frozenset({"source_batch", "detail_fetched", "detail_href"})
+MAX_UNRECOGNIZED_BEFORE_HITS = 3
 
 # Business columns compared on upsert: every LicenseRecord field except the conflict key.
 # provider_npi / match_* belong to license matching and are never touched here.
@@ -133,6 +137,7 @@ class HiDccaAdapter(Adapter):
                 browser = self._browser_factory()
                 browser.open()
                 self._browser = browser
+                self._last_action_at = time.monotonic()  # the page load counts as an action
             self._throttle()
             html = action(self._browser)
         except BrowserPageError as exc:
@@ -202,17 +207,29 @@ class HiDccaAdapter(Adapter):
         if state not in (None, STATE):
             self.stats.notes.append(f"hi_dcca covers {STATE} only; state {state} skipped")
             return
-        yielded = hits = empty_streak = 0
+        yielded = hits = empty_streak = unrecognized_count = 0
+        first_html: str | None = None
         unrecognized: str | None = None
         try:
             for numbers in self._batches():
                 html, from_cache, path = self._batch_html(numbers)
+                if first_html is None:
+                    first_html = html
                 rows = parse_results_table(html)
+                batch = f"{numbers[0]}..{numbers[-1]}"
                 if rows is None and not looks_like_no_results(html):
                     unrecognized = html
-                    self.log.warning("page.unrecognized", batch=numbers[0])
+                    unrecognized_count += 1
+                    self.stats.notes.append(f"unrecognized results page for {batch}")
+                    self.log.warning("page.unrecognized", batch=batch)
+                    if hits == 0 and unrecognized_count >= MAX_UNRECOGNIZED_BEFORE_HITS:
+                        raise self._blocked(
+                            html,
+                            f"{unrecognized_count} unrecognized pages and no dentist rows;"
+                            " the parser probably needs repair against the snapshot",
+                        )
+                    continue  # never counts toward the empty streak
                 dentists = filter_license_types(rows or [], self.license_types)
-                batch = f"{numbers[0]}..{numbers[-1]}"
                 self.log.info("batch", batch=batch, dentists=len(dentists), cached=from_cache)
                 if not dentists:
                     empty_streak += 1
@@ -245,12 +262,16 @@ class HiDccaAdapter(Adapter):
                         return
         finally:
             self._close_browser()
-        if hits == 0 and unrecognized is not None:
+        if hits == 0:
             raise self._blocked(
-                unrecognized,
-                "no results table and no no-results message on any page; "
-                "the parser probably needs repair against the snapshot",
+                unrecognized or first_html or "",
+                f"no dentist rows on any page in {self.prefix}-{self.number_start}.."
+                f"{self.prefix}-{self.number_end}; the parser, the number format or the portal"
+                " needs repair against the snapshot",
             )
+        if unrecognized_count:
+            self.stats.status = "partial"
+            self.stats.notes.append(f"{unrecognized_count} unrecognized pages skipped")
 
     # -- normalize -------------------------------------------------------------------------------
     def normalize(self, raw: RawRecord) -> NormalizedRecord | None:
@@ -270,7 +291,7 @@ class HiDccaAdapter(Adapter):
             city=city_from_location(payload.get("location")),
             first_issue_date=parse_date(payload.get("first_issue_date")),
             expiration_date=parse_date(payload.get("expiration_date")),
-            source_json=dict(payload),
+            source_json={k: v for k, v in payload.items() if k not in RUN_ONLY_KEYS},
         )
 
     # -- upsert ----------------------------------------------------------------------------------

@@ -21,6 +21,7 @@ from collections.abc import Callable, Iterable, Iterator
 from typing import Any, ClassVar
 
 import httpx
+from sqlalchemy import func, update
 
 from integra.db.models import Organization, Provider
 from integra.db.upsert import UpsertCounts, upsert_rows
@@ -31,10 +32,12 @@ from integra.sources.base import Adapter, RawRecord
 from integra.sources.nppes_parse import (
     ENTITY_INDIVIDUAL,
     ENTITY_ORGANIZATION,
+    address_state,
     has_dentist_code,
-    location_state,
+    is_secondary_location,
     parse_organization,
     parse_provider,
+    select_location,
 )
 
 MAX_PREFIX_DIGITS = 5  # a full ZIP5; there is nothing finer to subdivide by
@@ -68,6 +71,9 @@ class NppesAdapter(Adapter):
         }
         # normalize() rejects records outside these; fetch() narrows them to the requested state.
         self.target_states: set[str] = set(self.states_config)
+        self._run_states: list[str] = []
+        self._run_limit: int | None = None
+        self._secondary_locations = 0
 
     # -- fetch -------------------------------------------------------------------------------
     def _client(self) -> PoliteClient:
@@ -96,6 +102,8 @@ class NppesAdapter(Adapter):
     def fetch(self, *, state: str | None = None, limit: int | None = None) -> Iterator[RawRecord]:
         states = self._states_for(state)
         self.target_states = set(states)
+        self._run_states = states
+        self._run_limit = limit
         seen: set[str] = set()
         yielded = 0
         with self._client() as client:
@@ -194,18 +202,22 @@ class NppesAdapter(Adapter):
     # -- normalize ---------------------------------------------------------------------------
     def normalize(self, raw: RawRecord) -> NormalizedRecord | None:
         result = raw.payload
-        state = location_state(result)
+        location = select_location(result, self.target_states)
+        state = address_state(location)
         if state not in self.target_states:
             self.log.debug("normalize.skip_state", npi=raw.key, state=state)
             return None
         if not has_dentist_code(result, self.dentist_prefix):
             self.log.debug("normalize.skip_taxonomy", npi=raw.key)
             return None
+        if is_secondary_location(result, location):
+            self._secondary_locations += 1
+            self.log.debug("normalize.secondary_location", npi=raw.key, state=state)
         entity_type = str(result.get("enumeration_type") or "")
         if entity_type == ENTITY_INDIVIDUAL:
-            return parse_provider(result, self.dentist_prefix)
+            return parse_provider(result, self.dentist_prefix, location)
         if entity_type == ENTITY_ORGANIZATION:
-            return parse_organization(result, self.dentist_prefix)
+            return parse_organization(result, self.dentist_prefix, location)
         self.log.warning("normalize.unknown_entity_type", npi=raw.key, entity_type=entity_type)
         return None
 
@@ -248,8 +260,49 @@ class NppesAdapter(Adapter):
         return counts
 
     def after_run(self) -> None:
-        """New NPIs may now match licenses that arrived earlier; re-run the linker per source."""
+        """Flag records that vanished or were deactivated, then re-run the license linker."""
+        if self._secondary_locations:
+            self.stats.notes.append(
+                f"{self._secondary_locations} records use a secondary practice location in state"
+            )
+        if self._run_limit is None and self._run_states:
+            self._deactivate_unseen()
         for source in SOURCE_STATES:
             stats = match_licenses(self.session_factory, source=source, settings=self.settings)
             if stats.considered:
                 self.stats.notes.append(stats.summary())
+
+    def _deactivate_unseen(self) -> None:
+        """After a complete pull (no --limit) flag records NPPES no longer returns for the pulled
+        states, plus records NPPES itself marks deactivated. Never deletes (hard rule 8)."""
+        started = self.stats.started_at
+        states = list(self._run_states)
+        unseen = deactivated = 0
+        with self.session_factory() as session:
+            for table, state_column in (
+                (Provider.__table__, "practice_state"),
+                (Organization.__table__, "state"),
+            ):
+                gone = (
+                    update(table)
+                    .where(
+                        table.c.is_active.is_(True),
+                        table.c[state_column].in_(states),
+                        table.c.last_seen < started,
+                    )
+                    .values(is_active=False, deactivated_at=func.now())
+                )
+                unseen += session.execute(gone).rowcount or 0
+                flagged = (
+                    update(table)
+                    .where(table.c.is_active.is_(True), table.c.nppes_status == "D")
+                    .values(is_active=False, deactivated_at=func.now())
+                )
+                deactivated += session.execute(flagged).rowcount or 0
+            session.commit()
+        if unseen or deactivated:
+            self.stats.notes.append(
+                f"{unseen} records not returned this run and {deactivated} NPPES-deactivated"
+                f" records flagged inactive for {', '.join(states)}"
+            )
+        self.log.info("deactivate", unseen=unseen, nppes_deactivated=deactivated, states=states)

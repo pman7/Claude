@@ -1,8 +1,8 @@
 """initial schema
 
-Revision ID: e87ca2bec3ec
+Revision ID: 80651593a71e
 Revises:
-Create Date: 2026-09-02 07:35:49.155783
+Create Date: 2026-09-02 09:20:06.950629
 
 """
 
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects import postgresql
 
-revision = "e87ca2bec3ec"
+revision = "80651593a71e"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -260,7 +260,12 @@ def upgrade() -> None:
         ),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint(
-            "practice_id", "signal_type", "value", "source", name="uq_signals_practice_type_value"
+            "practice_id",
+            "signal_type",
+            "value",
+            "source",
+            name="uq_signals_practice_type_value",
+            postgresql_nulls_not_distinct=True,
         ),
     )
     op.create_index("ix_signals_practice", "signals", ["practice_id"], unique=False)

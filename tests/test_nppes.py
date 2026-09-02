@@ -236,9 +236,19 @@ def test_normalize_skips_non_dentist_taxonomy(settings):
     assert adapter.normalize(_raw(_fixture_record("1326656216"))) is None
 
 
-def test_normalize_skips_out_of_state_location_even_with_dentist_code(settings):
-    """Alvarez Suarez has 1223S0112X but practices in Florida (WA is a secondary location)."""
+def test_normalize_uses_the_secondary_practice_location_in_state(settings):
+    """Alvarez Suarez practices in Florida but lists a Seattle office in practiceLocations, which
+    is why the WA query returned him: that office becomes the practice address."""
     adapter = _adapter(settings, _fixture_pages)
+    record = adapter.normalize(_raw(_fixture_record("1437501079")))
+    assert isinstance(record, ProviderRecord)
+    assert record.practice_state == "WA"
+    assert record.practice_address_line1 == "1959 NE PACIFIC ST"
+    assert record.practice_zip == "98195"
+    assert record.practice_phone_e164 == "+13109518421"
+    assert record.specialty == "os"
+    # Narrowed to Hawaii, the same record has no office in state and is skipped.
+    adapter.target_states = {"HI"}
     assert adapter.normalize(_raw(_fixture_record("1437501079"))) is None
 
 

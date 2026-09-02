@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import time
 import uuid
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 
 from sqlalchemy import Table, bindparam, select, update
@@ -21,12 +21,8 @@ from integra.db.models import Organization, Practice, Provider
 from integra.db.session import get_session_factory
 from integra.db.upsert import upsert_rows
 from integra.logging import get_logger
-from integra.resolve.practice_rows import (
-    Member,
-    build_practice_row,
-    load_members,
-    resolution_key,
-)
+from integra.resolve.licenses import SOURCE_STATES, match_licenses
+from integra.resolve.practice_rows import build_practice_row, group_members, load_members
 from integra.specialty import derive_specialty
 
 log = get_logger(component="resolve")
@@ -60,6 +56,7 @@ class ResolveStats:
     organizations_relinked: int = 0
     solo_practices: int = 0
     specialties_derived: int = 0
+    license_matching: list[str] = field(default_factory=list)
     elapsed_seconds: float = 0.0
 
     @property
@@ -75,7 +72,8 @@ class ResolveStats:
             f"{self.organizations_linked:,} organizations linked "
             f"({self.organizations_relinked:,} changed), "
             f"{self.specialties_derived:,} specialties derived. "
-            f"Elapsed {self.elapsed_seconds:.1f}s."
+            + "".join(f"{line} " for line in self.license_matching)
+            + f"Elapsed {self.elapsed_seconds:.1f}s."
         )
 
 
@@ -143,21 +141,16 @@ def run_resolve(
     stats = ResolveStats()
     with session_factory() as session:
         members = load_members(session)
-        groups: dict[str, list[Member]] = {}
-        methods: dict[str, str] = {}
-        for member in members:
-            key, method = resolution_key(member.phone, member.address_key, member.npi)
-            groups.setdefault(key, []).append(member)
-            methods[key] = method
         existing = {
             p.resolution_key: p
             for p in session.execute(
                 select(Practice).where(Practice.resolution_key.is_not(None))
             ).scalars()
         }
+        groups = group_members(members, set(existing))
         rows = [
-            build_practice_row(key, methods[key], group, existing.get(key))
-            for key, group in sorted(groups.items())
+            build_practice_row(key, method, group, existing.get(key))
+            for key, (method, group) in sorted(groups.items())
         ]
         stats.solo_practices = sum(1 for r in rows if r["resolution_method"] == "npi_solo")
         counts = upsert_rows(
@@ -173,7 +166,7 @@ def run_resolve(
         practice_ids: dict[str, uuid.UUID] = {r["resolution_key"]: r["id"] for r in rows}
         provider_pairs: list[tuple[str, uuid.UUID]] = []
         org_pairs: list[tuple[str, uuid.UUID]] = []
-        for key, group in groups.items():
+        for key, (_method, group) in groups.items():
             pid = practice_ids[key]
             for member in group:
                 if member.is_org:
@@ -191,6 +184,12 @@ def run_resolve(
         stats.specialties_derived = _derive_missing_specialties(session)
         stats.practices_deactivated = _deactivate_orphans(session, set(groups))
         session.commit()
+    # Names or nicknames may have changed since the last pull: re-run the license linker so
+    # `make resolve` refreshes data/review/unmatched_<source>.csv as the README promises.
+    for source in SOURCE_STATES:
+        stats.license_matching.append(
+            match_licenses(session_factory, source=source, settings=settings).summary()
+        )
     stats.elapsed_seconds = time.monotonic() - start
     log.info(
         "resolve.finish",

@@ -127,7 +127,7 @@ class MyPvlBrowser:
         before = self._results_signature()
         self._submit_button().click()
         self._settle()
-        self._wait_for_results(before)
+        self._wait_for_results(before, numbers)
         return self.page.content()
 
     def open_detail(self, row: dict[str, Any]) -> str | None:
@@ -219,20 +219,34 @@ class MyPvlBrowser:
             return None
         return None
 
-    def _wait_for_results(self, before: str | None) -> None:
+    def _wait_for_results(self, before: str | None, expected: Sequence[str] = ()) -> None:
         started = time.monotonic()
         deadline = started + self.timeout_sec
         while time.monotonic() < deadline:
             signature = self._results_signature()
-            if signature is not None and (
-                signature != before or time.monotonic() - started >= SAME_RESULT_GRACE_SEC
-            ):
-                return
+            if signature is not None:
+                if signature != before:
+                    return
+                grace_over = time.monotonic() - started >= SAME_RESULT_GRACE_SEC
+                if grace_over and self._signature_shows(signature, expected):
+                    return
             self._raise_if_challenge("results")
             self.page.wait_for_timeout(POLL_MS)
         raise ResultsTimeout(
-            "neither a results table nor a no-results message appeared", html=self.page.content()
+            "results did not update for this batch (no table showing the submitted numbers"
+            " and no no-results message)",
+            html=self.page.content(),
         )
+
+    @staticmethod
+    def _signature_shows(signature: str, expected: Sequence[str]) -> bool:
+        """An unchanged result area is only accepted when it shows this batch's numbers (or a
+        no-results message), so a slow page can never be cached under the next batch's name."""
+        if not expected or signature.startswith("message:"):
+            return True
+        wanted = {re.sub(r"\D", "", n).lstrip("0") for n in expected}
+        shown = {digits.lstrip("0") for digits in re.findall(r"\d+", signature)}
+        return any(w and w in shown for w in wanted)
 
     def _first_present(self, candidates: list[Locator], *, wait: bool = False) -> Locator | None:
         deadline = time.monotonic() + (self.timeout_sec if wait else 0)

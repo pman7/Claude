@@ -1,8 +1,9 @@
 # nickname -> canonical first name, used only for cross-source name matching (CLAUDE.md 6.9).
+# Only unambiguous nicknames belong here. Short forms shared by several legal names (Pat, Sam,
+# Chris, Alex, Terry, Jerry) and spelling variants (Steven/Stephen) are deliberately absent:
+# those fall through to the fuzzy tier and the review file instead of being force-linked.
 abe: abraham
 al: albert
-alex: alexander
-andy: andrew
 art: arthur
 becky: rebecca
 ben: benjamin
@@ -15,7 +16,6 @@ bob: robert
 bobby: robert
 cathy: catherine
 charlie: charles
-chris: christopher
 chuck: charles
 cindy: cynthia
 dan: daniel
@@ -37,7 +37,6 @@ jake: jacob
 jen: jennifer
 jenny: jennifer
 jeff: jeffrey
-jerry: gerald
 jim: james
 jimmy: james
 joe: joseph
@@ -55,26 +54,19 @@ maggie: margaret
 matt: matthew
 mike: michael
 nate: nathan
-nick: nicholas
-pat: patrick
 peggy: margaret
 pete: peter
 phil: phillip
-philip: phillip
 ray: raymond
 rick: richard
 rob: robert
 ron: ronald
 russ: russell
-sam: samuel
 steve: stephen
-steven: stephen
 sue: susan
 ted: theodore
-terry: terrence
 tim: timothy
 tom: thomas
 tommy: thomas
-tony: anthony
 vicky: victoria
 will: william

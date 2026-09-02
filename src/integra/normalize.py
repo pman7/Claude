@@ -150,8 +150,10 @@ def clean_person_name(raw: str | None) -> str:
     if not raw:
         return ""
     text = re.sub(r"[^a-z0-9 ]+", " ", raw.lower().replace(".", ""))
-    tokens = [t for t in text.split() if t not in CREDENTIAL_TOKENS]
-    return " ".join(tokens)
+    tokens = text.split()
+    kept = [t for t in tokens if t not in CREDENTIAL_TOKENS]
+    # Surnames such as Do, Ma, Ba or Sr are also credential/suffix tokens: never empty a name.
+    return " ".join(kept or tokens)
 
 
 @lru_cache
@@ -186,7 +188,7 @@ def normalize_address_line(raw: str | None) -> str | None:
     """Uppercase, standard USPS abbreviations, punctuation and repeated spaces removed."""
     if not raw:
         return None
-    text = _NON_ALNUM.sub(" ", raw.upper().replace(".", ""))
+    text = _NON_ALNUM.sub(" ", raw.upper().replace(".", "").replace("#", " # "))
     tokens = [_ADDRESS_SUFFIXES.get(t, t) for t in text.split()]
     out = _SPACES.sub(" ", " ".join(tokens)).strip()
     return out or None
@@ -199,9 +201,13 @@ def street_number(line1: str | None) -> str | None:
     return match.group(1).upper() if match else None
 
 
-def address_key(line1: str | None, postal_code: str | None) -> str | None:
-    """Dedupe key: normalized street line + ZIP5. Suite tokens are kept: one suite, one practice."""
-    line = normalize_address_line(line1)
+def address_key(line1: str | None, postal_code: str | None, line2: str | None = None) -> str | None:
+    """Dedupe key: normalized street line(s) + ZIP5. Suite tokens are kept: one suite, one practice.
+
+    line2 is folded in because NPPES puts the suite in address_1 for some records and in
+    address_2 for others ("715 S KING ST STE 425" vs "715 S KING ST" + "SUITE 425").
+    """
+    line = normalize_address_line(" ".join(part for part in (line1, line2) if part))
     zipcode = zip5(postal_code)
     if not line or not zipcode:
         return None

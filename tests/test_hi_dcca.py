@@ -292,7 +292,8 @@ def test_unrecognized_pages_with_no_hits_fail_the_run(settings, session_factory)
     assert stats.status == "error"
     assert "parser probably needs repair" in stats.error
     assert stats.snapshot_path is not None
-    assert len(fake.searches) == 6  # the whole DT-1..DT-60 window was walked (no hit to stop on)
+    # Three unrecognized pages with no hit stop the run early instead of walking the window.
+    assert len(fake.searches) == 3
 
 
 # -- batch enumeration and stop rule ------------------------------------------------------------
@@ -323,7 +324,7 @@ def test_rate_limit_sleeps_between_browser_actions(settings):
     adapter = make_adapter(settings, fake)
     list(adapter.fetch())
     sleeps = adapter.test_sleeps
-    assert len(sleeps) == 6  # 7 actions, one sleep between each consecutive pair
+    assert len(sleeps) == 7  # the page load plus 7 actions: one sleep before each action
     interval = 1.0 / CONFIG.rate_limit_per_sec
     assert all(interval - 0.1 <= s <= interval for s in sleeps)
 
@@ -431,7 +432,13 @@ def test_normalize_active_dentist(settings):
     assert record.first_issue_date == date(2010, 6, 15)
     assert record.expiration_date == date(2027, 12, 31)
     assert record.last_issue_date is None and record.ce_due_date is None
-    assert record.source_json == payload
+    # Run bookkeeping never reaches source_json, so a batch_size change cannot rewrite rows.
+    expected_json = {
+        k: v
+        for k, v in payload.items()
+        if k not in ("source_batch", "detail_fetched", "detail_href")
+    }
+    assert record.source_json == expected_json
 
 
 def test_normalize_without_detail_leaves_unknowns_null(settings):
@@ -488,7 +495,7 @@ def test_run_is_idempotent_and_records_source_runs(settings, session_factory):
         kahale = next(lic for lic in licenses if lic.license_number == "DT-3")
         assert (kahale.first_name, kahale.last_name, kahale.city) == ("MALIA", "KAHALE", "HONOLULU")
         assert kahale.expiration_date == date(2027, 12, 31)
-        assert kahale.source_json["source_batch"] == "DT-1..DT-10"
+        assert "source_batch" not in kahale.source_json  # run bookkeeping stays out of rows
 
         runs = session.execute(select(SourceRun).order_by(SourceRun.id)).scalars().all()
         assert [r.status for r in runs] == ["ok", "ok"]

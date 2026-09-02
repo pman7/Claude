@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -12,12 +13,15 @@ from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import Session, sessionmaker
 
 from integra.config import Settings
+from integra.db.migrate import upgrade_head
 from integra.db.models import Base
 
 FIXTURES = Path(__file__).parent / "fixtures"
+ALLOW_NO_DB = "INTEGRA_TESTS_ALLOW_NO_DB"
 
 
-def _ensure_database(url: str) -> bool:
+def _ensure_database(url: str) -> str | None:
+    """Create the test database if needed. Returns an error message when Postgres is unreachable."""
     parsed = make_url(url)
     maintenance = parsed.set(database="postgres")
     try:
@@ -29,20 +33,34 @@ def _ensure_database(url: str) -> bool:
             if not exists:
                 conn.execute(text(f'CREATE DATABASE "{parsed.database}"'))
         engine.dispose()
-        return True
-    except OperationalError:
-        return False
+        return None
+    except OperationalError as exc:
+        return str(exc).splitlines()[0]
 
 
 @pytest.fixture(scope="session")
 def db_url() -> str:
+    """Test database, migrated from scratch with alembic so model/migration drift fails tests.
+
+    Database tests are mandatory (`make test` must mean something); they only skip when
+    INTEGRA_TESTS_ALLOW_NO_DB=1 is set explicitly.
+    """
     url = Settings().test_database_url
-    if not _ensure_database(url):
-        pytest.skip("test database unavailable; set TEST_DATABASE_URL to a reachable Postgres")
+    error = _ensure_database(url)
+    if error is not None:
+        message = (
+            f"test database unavailable ({error}). Start Postgres (make db-up) or point"
+            f" TEST_DATABASE_URL at one; set {ALLOW_NO_DB}=1 to skip database tests on purpose."
+        )
+        if os.environ.get(ALLOW_NO_DB) == "1":
+            pytest.skip(message)
+        pytest.fail(message, pytrace=False)
     engine = create_engine(url)
     Base.metadata.drop_all(engine)
-    Base.metadata.create_all(engine)
+    with engine.begin() as conn:
+        conn.execute(text("DROP TABLE IF EXISTS alembic_version"))
     engine.dispose()
+    upgrade_head(url)
     return url
 
 

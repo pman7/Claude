@@ -1,11 +1,14 @@
 """Building practice rows from providers and organizations. Used by resolve/practices.py.
 
-Resolution key per record (deterministic, every record gets one):
+One practice per physical office (CLAUDE.md section 5). Members are grouped with union-find:
+two records belong to the same office when they share a normalized address key (street line
+plus suite plus ZIP5) OR the same phone number within the same ZIP (6.9 rules 2 and 4). NPPES
+is inconsistent about suite placement and about which phone a dentist lists, so neither key
+alone is enough. A record with neither address nor phone becomes a solo practice keyed by NPI.
 
-    pa:<phone>|<address_key>   phone and address both known   (method phone_address)
-    a:<address_key>            address only                   (method address)
-    p:<phone>                  phone only                     (method phone)
-    npi:<npi>                  neither: a solo practice       (method npi_solo)
+Group key (stable across runs): an existing practice's key when one of the group's keys already
+names a practice, else the smallest address key, else the smallest phone key, else npi:<npi>.
+Methods: address_phone (both kinds of key present), address, phone, npi_solo.
 """
 
 from __future__ import annotations
@@ -45,15 +48,69 @@ class Member:
         return self.kind == "organization"
 
 
-def resolution_key(phone: str | None, address_key: str | None, npi: str) -> tuple[str, str]:
-    """(key, method). Falls back to the NPI so every record lands in some practice."""
-    if phone and address_key:
-        return f"pa:{phone}|{address_key}", "phone_address"
-    if address_key:
-        return f"a:{address_key}", "address"
-    if phone:
-        return f"p:{phone}", "phone"
-    return f"npi:{npi}", "npi_solo"
+def member_keys(member: Member) -> tuple[str | None, str | None]:
+    """(address key, phone key) for grouping. Either may be None."""
+    address = f"a:{member.address_key}" if member.address_key else None
+    zipcode = zip5(member.postal_code)
+    if member.phone and zipcode:
+        phone = f"pz:{member.phone}|{zipcode}"
+    elif member.phone:
+        phone = f"p:{member.phone}"
+    else:
+        phone = None
+    return address, phone
+
+
+def group_members(
+    members: list[Member], existing_keys: set[str]
+) -> dict[str, tuple[str, list[Member]]]:
+    """Group members into offices. Returns {group key: (method, members)}, deterministic."""
+    parent = list(range(len(members)))
+
+    def find(i: int) -> int:
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    def union(i: int, j: int) -> None:
+        ri, rj = find(i), find(j)
+        if ri != rj:
+            parent[max(ri, rj)] = min(ri, rj)
+
+    first_seen: dict[str, int] = {}
+    for index, member in enumerate(members):
+        for key in member_keys(member):
+            if key is None:
+                continue
+            if key in first_seen:
+                union(index, first_seen[key])
+            else:
+                first_seen[key] = index
+
+    grouped: dict[int, list[Member]] = {}
+    for index, member in enumerate(members):
+        grouped.setdefault(find(index), []).append(member)
+
+    out: dict[str, tuple[str, list[Member]]] = {}
+    for group in grouped.values():
+        keys = [member_keys(m) for m in group]
+        address_keys = sorted({a for a, _ in keys if a})
+        phone_keys = sorted({p for _, p in keys if p})
+        candidates = address_keys + phone_keys
+        if not candidates:
+            out[f"npi:{group[0].npi}"] = ("npi_solo", group)
+            continue
+        reused = sorted(k for k in candidates if k in existing_keys)
+        key = reused[0] if reused else candidates[0]
+        if address_keys and phone_keys:
+            method = "address_phone"
+        elif address_keys:
+            method = "address"
+        else:
+            method = "phone"
+        out[key] = (method, group)
+    return out
 
 
 def fallback_name(providers: list[Member]) -> str | None:
@@ -74,9 +131,12 @@ def build_practice_row(
     )
     providers = sorted(
         (m for m in members if not m.is_org),
-        key=lambda m: ((m.last_name or "").lower(), m.npi),
+        key=lambda m: (m.address_key is None, (m.last_name or "").lower(), m.npi),
     )
     anchor = orgs[0] if orgs else providers[0]
+    ordered = [*orgs, *providers]
+    phone = next((m.phone for m in ordered if m.phone), None)
+    fax = next((m.fax for m in ordered if m.fax), None)
     org_name = orgs[0].org_name if orgs else None
     if existing is not None and existing.google_place_id and existing.name:
         name = existing.name  # Google Maps name wins (CLAUDE.md section 5)
@@ -101,8 +161,8 @@ def build_practice_row(
         "postal_code": postal,
         "county": county_for_zip(state, postal),
         "address_key": anchor.address_key,
-        "phone_e164": anchor.phone,
-        "fax_e164": anchor.fax,
+        "phone_e164": phone,
+        "fax_e164": fax,
         "provider_count": len(providers),
     }
 

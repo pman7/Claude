@@ -23,6 +23,7 @@ from typing import Any
 from rapidfuzz import fuzz, process
 
 from integra.normalize import full_name, name_key, normalized_last_name
+from integra.specialty import DENTIST_TAXONOMY_PREFIX
 
 LINK_THRESHOLD = 0.8
 FUZZY_CUTOFF = 90.0
@@ -44,12 +45,19 @@ def license_digits(raw: str | None) -> str | None:
 
 
 def taxonomy_license_keys(source_json: dict[str, Any] | None) -> frozenset[tuple[str, str]]:
-    """(license digits, state) pairs from an NPPES record's taxonomies[] list."""
+    """(license digits, state) pairs from the dentist entries of an NPPES taxonomies[] list.
+
+    Only codes in the 1223 family count: a dual-degree surgeon's MD number must never be
+    mistaken for a dental license (Hawaii numbers each profession from its own sequence).
+    """
     keys: set[tuple[str, str]] = set()
     if not source_json:
         return frozenset()
     for taxonomy in source_json.get("taxonomies") or []:
         if not isinstance(taxonomy, dict):
+            continue
+        code = str(taxonomy.get("code") or "")
+        if not code.startswith(DENTIST_TAXONOMY_PREFIX):
             continue
         digits = license_digits(taxonomy.get("license"))
         state = str(taxonomy.get("state") or "").strip().upper()

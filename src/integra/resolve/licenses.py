@@ -109,11 +109,17 @@ def write_review(path: Path, rows: Iterable[dict[str, Any]]) -> Path:
     return path
 
 
-def _license_rank(lic: License) -> tuple[int, int, str]:
-    """Best license first: active status, then latest expiration, then number for stability."""
+# The practice credential wins over faculty, resident and temporary permits when both are active.
+PRIMARY_CREDENTIAL_TYPES = frozenset({"dentist license", "dentist"})
+
+
+def _license_rank(lic: License) -> tuple[int, int, int, str]:
+    """Best license first: active, then the practice credential type, then latest expiration."""
     expiration = lic.expiration_date
+    credential = (lic.credential_type or "").strip().lower()
     return (
         0 if lic.is_active_status else 1,
+        0 if credential in PRIMARY_CREDENTIAL_TYPES else 1,
         # date.max sorts a missing expiration after every real one.
         -(expiration.toordinal()) if expiration else 0,
         lic.license_number,
