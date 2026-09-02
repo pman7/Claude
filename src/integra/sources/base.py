@@ -52,8 +52,8 @@ class RunStats(BaseModel):
     updated_count: int = 0
     unchanged_count: int = 0
     skipped_count: int = 0
-    requests: int = 0
-    cache_hits: int = 0
+    requests: int = 0  # live HTTP requests / browser actions (cache misses)
+    cache_hits: int = 0  # responses served from the same-day raw cache
     error: str | None = None
     traceback: str | None = None
     snapshot_path: str | None = None

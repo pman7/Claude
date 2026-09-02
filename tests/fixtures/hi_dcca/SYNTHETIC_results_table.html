@@ -1,0 +1,69 @@
+<!--
+SYNTHETIC FIXTURE. Hand-written approximation of the MyPVL public license search results
+layout (https://mypvl.dcca.hawaii.gov/public-license-search/), based only on the rendered
+text recorded in mypvl_search_page_notes.md (columns Name | License | License Type | Location).
+The real DOM is unknown until the first live run captures it; replace this file with the
+real capture (data/snapshots/hi_dcca/<timestamp>_first_results.html) when it exists.
+Names and license numbers below are invented placeholders, not real licensees.
+-->
+<div id="app">
+  <div class="banner">
+    License information on this site reflects posted information in the Professional and
+    Vocational Licensing Division as of 08/31/2026. This site is normally updated daily,
+    Monday through Friday, except holidays.
+  </div>
+  <ul role="tablist">
+    <li role="tab" aria-selected="true">License Number</li>
+    <li role="tab">Name / License Type</li>
+    <li role="tab">Application Status</li>
+  </ul>
+  <form>
+    <label for="licenseNumbers">License Number</label>
+    <p class="help">To search multiple license numbers at once, enter the license numbers
+      separated by a comma. e.g., ACU-12345,ACU-67890</p>
+    <input id="licenseNumbers" type="text" value="DT-1,DT-2,DT-3,DT-4,DT-5" />
+    <button type="submit">Submit</button>
+  </form>
+  <table class="table results">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>License</th>
+        <th>License Type</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="/public-license-search/detail/DT-1">KAHALE, MALIA K DDS</a></td>
+        <td>DT-1</td>
+        <td>DENTIST</td>
+        <td>HONOLULU, HI</td>
+      </tr>
+      <tr>
+        <td>Noa Kealoha Akana</td>
+        <td> DT 2 </td>
+        <td>DENTIST TEMP</td>
+        <td>KAHULUI, HI</td>
+      </tr>
+      <tr>
+        <td>LEE, SUSAN</td>
+        <td>DH-3</td>
+        <td>DENTAL HYGIENIST</td>
+        <td>HILO, HI</td>
+      </tr>
+      <tr>
+        <td>Madonna</td>
+        <td>DT4</td>
+        <td>Community Service Dentist</td>
+        <td>HI</td>
+      </tr>
+      <tr>
+        <td>O'NEIL-SANTOS, PATRICK</td>
+        <td>DT-5</td>
+        <td>DENTIST</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

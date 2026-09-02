@@ -42,7 +42,11 @@ def pull(
     """Fetch, normalize and upsert one source."""
     from integra.sources import get_adapter
 
-    adapter = get_adapter(source, force=force)
+    try:
+        adapter = get_adapter(source, force=force)
+    except KeyError as exc:
+        typer.echo(f"pull: {exc.args[0]}", err=True)
+        raise typer.Exit(code=2) from exc
     stats = adapter.run(state=state.upper() if state else None, limit=limit or None)
     typer.echo(stats.summary())
     if stats.status == "error":

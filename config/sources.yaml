@@ -63,6 +63,7 @@ sources:
     license_types: [DENTIST, DENTIST TEMP, COMMUNITY SERVICE DENTIST]
     active_statuses: [ACTIVE, CURRENT, VALID]   # confirm on first live run; see tests/fixtures/hi_dcca
     headless: true
+    fetch_details: true          # open each dentist's detail page for status and dates (rows with a link only)
 
   gmaps:
     enabled: false               # phase 2
