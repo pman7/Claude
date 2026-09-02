@@ -1,0 +1,17 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+data/raw/
+data/snapshots/
+data/review/
+data/suppression/*.csv
+!data/suppression/*.example.csv
+exports/
+REPAIR_NEEDED.md
+.DS_Store

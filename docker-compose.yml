@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: integra
+      POSTGRES_PASSWORD: integra
+      POSTGRES_DB: integra
+    ports:
+      - "5432:5432"
+    volumes:
+      - integra_pg:/var/lib/postgresql/data
+volumes:
+  integra_pg: {}

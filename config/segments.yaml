@@ -1,0 +1,58 @@
+# Segment definitions and export copy (CLAUDE.md sections 9 and 12).
+# priority: lower number wins when a practice qualifies for several segments.
+segments:
+  new_practice:
+    priority: 1
+    rule: signal new_practice
+    proof_point: "Bellevue digital lab, first case free, local pickup and delivery"
+  hi_oahu:
+    priority: 2
+    rule: state HI and county Honolulu
+    proof_point: "Shipping both ways covered on the first case, in-person review on Oahu Sept 25 to Oct 6"
+  hi_maui:
+    priority: 3
+    rule: state HI and county Maui
+    proof_point: "Shipping both ways covered on the first case, in-person review on Maui Sept 25 to Oct 6"
+  wa_implant:
+    priority: 4
+    rule: state WA and (specialty in [prosth, os, perio] or (specialty gp and signal implants))
+    proof_point: "Full-arch zirconia with a slow-cooldown sintering protocol that solved connector cracking"
+  wa_scanner:
+    priority: 5
+    rule: state WA and signal scanner and not signal cerec
+    proof_point: "Digital impressions accepted directly from TRIOS, iTero and Medit into 3Shape design with manual QC"
+  wa_eastside_gp:
+    priority: 6
+    rule: state WA and specialty gp and distance_miles_home <= 25 and not is_dso
+    proof_point: "Bellevue lab with in-house Arum 5-axis milling, Eastside and Seattle pickup and delivery"
+  dso:
+    priority: 90
+    rule: is_dso
+    proof_point: ""
+  equipment_cerec:
+    priority: 95
+    rule: signal cerec
+    proof_point: ""
+    enabled: false
+  excluded:
+    priority: 99
+    rule: no_harvest or specialty in [ortho, pedo] or icp_score < 20
+    proof_point: ""
+export_columns:
+  - email
+  - first_name
+  - last_name
+  - practice_name
+  - city
+  - state
+  - specialty
+  - segment
+  - icp_score
+  - proof_point
+  - personalization_line
+  - verification_status
+  - email_type
+  - npi
+  - practice_id
+  - phone_e164
+  - contact_channel

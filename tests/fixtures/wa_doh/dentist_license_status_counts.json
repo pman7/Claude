@@ -1,0 +1,74 @@
+[
+ {
+  "status": "Expired",
+  "n": "9868"
+ },
+ {
+  "status": "Active",
+  "n": "7048"
+ },
+ {
+  "status": "Closed",
+  "n": "432"
+ },
+ {
+  "status": "Pending",
+  "n": "142"
+ },
+ {
+  "status": "Inactive",
+  "n": "121"
+ },
+ {
+  "status": "Suspended",
+  "n": "63"
+ },
+ {
+  "status": "Retired Active",
+  "n": "60"
+ },
+ {
+  "status": "Active With Conditions",
+  "n": "41"
+ },
+ {
+  "status": "Revoked",
+  "n": "36"
+ },
+ {
+  "status": "Military",
+  "n": "25"
+ },
+ {
+  "status": "Voluntary Surrender",
+  "n": "24"
+ },
+ {
+  "status": "Surrender",
+  "n": "24"
+ },
+ {
+  "status": "Denied",
+  "n": "7"
+ },
+ {
+  "status": "Active With Restrictions",
+  "n": "4"
+ },
+ {
+  "status": "Retired",
+  "n": "2"
+ },
+ {
+  "status": "Terminated",
+  "n": "2"
+ },
+ {
+  "status": "Inactive Military Related",
+  "n": "1"
+ },
+ {
+  "status": "Summary Suspension",
+  "n": "1"
+ }
+]
