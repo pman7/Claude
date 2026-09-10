@@ -59,13 +59,31 @@ M9
 M30
 ```
 
+`cut` writes to `OUTPUT.unverified`, runs every check below, and only then renames it to
+`OUTPUT`; if any check fails nothing is left on disk.  After a successful cut that does not
+start at op 1 it prints the entry level of the first extracted op, e.g.
+
+```
+NOTE: this partial starts at op 6. Its first rapid (G0) goes down to Z5.84 in G55 before
+the first feed move. Ops 1..5 (T05 (ops 1-2), T06 (ops 3-5)) are NOT included: run this
+program only on a blank that has already been machined through op 5 in the same fixture
+position (same G55, same tool offsets).
+```
+
+A partial program is only safe on a blank that has already been machined through the ops
+that precede it: the first op's rapids descend to the level the earlier ops cleared.
+
 ## Checks performed by `verify`
 
 * line endings identical to the source (CRLF) and file ends with a terminator
 * output is byte-identical to a fresh build from the same source and range
 * the body – from the first op's `F` word to the last op's final retract – is a verbatim
-  contiguous slice of the source
-* the footer is the source's own program-end block
+  contiguous slice of the source, and (independently of the parser) occurs exactly once
+  as a contiguous byte string in the raw source file
+* the footer is the source's own program-end block, and (independently of the parser) the
+  output ends with the literal 7-line `M5 / G53… / M9 / M30` block that ends the raw source
+* the header's T and S words equal the last T and S lines that precede the first selected
+  op in the raw source (so a mid-tool spindle-speed change is honoured)
 * header contains exactly one `T`, plus `S`, `M3`, `M8`, `G4`, `G55`, `G90 A.. B..` in the
   order hyperDENT emits them, and the tool activation block equals the source's own
   program-start block with only T/S substituted
@@ -75,6 +93,17 @@ M30
   the partial right after the `G43` line and again at the op's first positioning move
 * every line parses into known words only; the op count is right
 * `cut SOURCE 1 74` reproduces the source byte-for-byte (round trip)
+
+The parser refuses loudly (non-zero exit, no file written) on anything outside the
+program family it knows: a program-end block that is not `M5 / G53… / M9 / M30`, mixed
+line endings, a trailing blank line, an op without an `F` word, or lines before the first
+`G53` retract.
+
+## Independent verification of the Op 6–18 partial
+
+Six independent reviewers (splice integrity, controller modal state, format fidelity
+against hyperDENT-native exports, crash-hazard review, script review, op matching) each
+tried to refute the partial and the tool.  None succeeded; see `VERIFICATION.md`.
 
 ## Op numbering vs the simulation
 

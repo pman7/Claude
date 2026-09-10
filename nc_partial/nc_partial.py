@@ -73,6 +73,7 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 
 CRLF = b"\r\n"
+NUM = rb"[-+]?(?:\d+\.?\d*|\.\d+)"
 WORD_RE = re.compile(rb"([A-Z])([-+]?\d*\.?\d*)")
 
 RETRACT_RE = re.compile(rb"^G53\b")
@@ -80,9 +81,13 @@ TOOL_RE = re.compile(rb"^T(\d+)\s*$")
 SPEED_RE = re.compile(rb"^S(\d+)\s*$")
 M_RE = re.compile(rb"^M(\d+)\s*$")
 OP_START_RE = re.compile(rb"^G55\s*$")
-G90_RE = re.compile(rb"^G90\s+A([-+]?\d*\.?\d+)\s+B([-+]?\d*\.?\d+)\s*$")
-FEED_RE = re.compile(rb"^F(\d*\.?\d+)\s*$")
-G43_RE = re.compile(rb"^G0\s+Z([-+]?\d*\.?\d+)\s+G43\s+H(\d+)\s*$")
+G90_RE = re.compile(rb"^G90\s+A(" + NUM + rb")\s+B(" + NUM + rb")\s*$")
+FEED_RE = re.compile(rb"^F(" + NUM + rb")\s*$")
+G43_RE = re.compile(rb"^G0\s+Z(" + NUM + rb")\s+G43\s+H(\d+)\s*$")
+ROTARY_RE = re.compile(rb"^G0 A" + NUM + rb" B" + NUM + rb"\s*$")
+FOOTER_M5_RE = re.compile(rb"^M5\s*$")
+FOOTER_M9_RE = re.compile(rb"^M9\s*$")
+M30_RE = re.compile(rb"^M30\s*$")
 COOLANT_RE = re.compile(rb"^M8\s*$")
 DWELL_RE = re.compile(rb"^G4\s+X[\d.]+\s*$")
 
@@ -102,6 +107,8 @@ class Op:
     body_end: int                  # last line of the op body (inclusive, 0-based)
     tool: Optional[int] = None
     speed: Optional[int] = None
+    tool_line: Optional[bytes] = None      # the T line in force for this op (verbatim)
+    speed_line: Optional[bytes] = None     # the S line in force for this op (verbatim)
     feed: Optional[bytes] = None
     h: Optional[int] = None
     g90_ab: Optional[tuple] = None
@@ -137,10 +144,22 @@ def read_lines(path: str):
     else:
         trailing = False
     lines = data.split(eol)
+    if lines and lines[-1] == b"":
+        raise SystemExit("file ends with a blank line (double line terminator); refusing to continue")
     for i, ln in enumerate(lines):
         if b"\r" in ln or b"\n" in ln:
             raise SystemExit(f"line {i+1}: mixed line endings, refusing to continue")
     return lines, eol, trailing
+
+
+def check_footer_shape(footer: List[bytes], what: str):
+    """The program-end block must be exactly: M5, then only G53 lines, then M9, then M30.
+    Anything else (an unexpected G-code, a motion line, a missing line) is refused loudly,
+    because a mis-detected footer would otherwise be silently swallowed into the last op."""
+    if len(footer) < 4 or not FOOTER_M5_RE.match(footer[0]) or not FOOTER_M9_RE.match(footer[-2]) \
+            or not M30_RE.match(footer[-1]) or not all(RETRACT_RE.match(l) for l in footer[1:-2]):
+        raise SystemExit(f"{what}: unexpected program-end block {[l.decode() for l in footer[-10:]]!r}; "
+                         f"expected M5 / G53... / M9 / M30")
 
 
 def parse(path: str) -> Program:
@@ -154,14 +173,15 @@ def parse(path: str) -> Program:
 
     # footer: walk back from EOF over prefix-type lines (M30, M9, G53..., M5)
     footer_start = len(lines)
-    while footer_start > 0 and (is_prefix_line(lines[footer_start - 1]) or re.match(rb"^M30\s*$", lines[footer_start - 1])):
+    while footer_start > 0 and (is_prefix_line(lines[footer_start - 1]) or M30_RE.match(lines[footer_start - 1])):
         footer_start -= 1
-    if not re.match(rb"^M30\s*$", lines[-1]):
-        raise SystemExit("last line is not M30; refusing to continue")
+    check_footer_shape(lines[footer_start:], "source program")
 
     ops: List[Op] = []
     current_tool = None
     current_speed = None
+    current_tool_line = None
+    current_speed_line = None
     for k, hs in enumerate(op_starts):
         # prefix: walk back over retract / tool-change lines
         ps = hs
@@ -176,11 +196,14 @@ def parse(path: str) -> Program:
             m = TOOL_RE.match(lines[i])
             if m:
                 current_tool = int(m.group(1))
+                current_tool_line = lines[i]
             m = SPEED_RE.match(lines[i])
             if m:
                 current_speed = int(m.group(1))
+                current_speed_line = lines[i]
         op = Op(index=k + 1, prefix_start=ps, header_start=hs, body_end=body_end,
-                tool=current_tool, speed=current_speed)
+                tool=current_tool, speed=current_speed,
+                tool_line=current_tool_line, speed_line=current_speed_line)
         # header words
         j = hs + 1
         m = G90_RE.match(lines[j]) if j <= body_end else None
@@ -208,14 +231,14 @@ def parse(path: str) -> Program:
         # first positioning move: first G0 with X and Y after the fixed approach sequence
         # (G0 X0.0 / G0 Y-68.0 / G0 A.. B.. / G0 X0.0 Y0.0 / G0 A.. B..)
         j += 1
-        # fixed safe-approach sequence: G0 X0.0 / G0 Y-68.0 / G0 A.. B.. / G0 X0.0 Y0.0 [/ G0 A.. B..]
-        expected = [rb"^G0 X0\.0\s*$", rb"^G0 Y-68\.0\s*$", rb"^G0 A[-\d.]+ B[-\d.]+\s*$",
-                    rb"^G0 X0\.0 Y0\.0\s*$"]
+        # fixed safe-approach sequence: G0 X.. / G0 Y.. / G0 A.. B.. / G0 X.. Y.. [/ G0 A.. B..]
+        expected = [rb"^G0 X" + NUM + rb"\s*$", rb"^G0 Y" + NUM + rb"\s*$", ROTARY_RE.pattern,
+                    rb"^G0 X" + NUM + rb" Y" + NUM + rb"\s*$"]
         for pat in expected:
             if not re.match(pat, lines[j]):
                 raise SystemExit(f"op {op.index}: line {j+1} expected {pat!r}, got {lines[j]!r}")
             j += 1
-        if re.match(rb"^G0 A[-\d.]+ B[-\d.]+\s*$", lines[j]):
+        if ROTARY_RE.match(lines[j]):
             j += 1
         op.first_pos_line = j
         op.first_pos = lines[j]
@@ -271,8 +294,9 @@ def tool_activation_lines(prog: Program, op: Op) -> List[bytes]:
     t0 = next(i for i in range(first.prefix_start, first.header_start) if TOOL_RE.match(lines[i]))
     template = lines[t0: first.header_start]
     cand = first_op_of_tool(prog, op)
-    t_line = next(lines[i] for i in range(cand.prefix_start, cand.header_start) if TOOL_RE.match(lines[i]))
-    s_line = next(lines[i] for i in range(cand.prefix_start, cand.header_start) if SPEED_RE.match(lines[i]))
+    t_line, s_line = op.tool_line, op.speed_line     # the T and S actually in force for this op
+    if t_line is None or s_line is None:
+        raise SystemExit(f"op {op.index}: no T/S line in force before it")
     out = []
     for ln in template:
         if TOOL_RE.match(ln):
@@ -339,12 +363,50 @@ def cmd_list(src: str):
         print(describe(prog, op) + tc)
 
 
+def entry_note(prog: Program, a: int) -> str:
+    """Where does the first extracted op first descend to?  A partial program assumes the
+    ops before it have already been machined on this blank."""
+    op = prog.ops[a - 1]
+    lines = prog.lines
+    zs = []
+    for i in range(op.first_pos_line, op.body_end + 1):
+        ln = lines[i]
+        if ln.startswith(b"G1"):
+            break
+        m = re.search(rb"Z(" + NUM + rb")", ln)
+        if m:
+            zs.append(float(m.group(1)))
+    skipped = prog.ops[: a - 1]
+    tools = []
+    for o in skipped:
+        if not tools or tools[-1][0] != o.tool:
+            tools.append([o.tool, o.index, o.index])
+        else:
+            tools[-1][2] = o.index
+    tool_txt = ", ".join(f"T{t:02d} (ops {x}-{y})" if x != y else f"T{t:02d} (op {x})" for t, x, y in tools)
+    first_z = f"Z{min(zs):g}" if zs else "?"
+    return (f"NOTE: this partial starts at op {a}. Its first rapid (G0) goes down to {first_z} in G55 before the "
+            f"first feed move. Ops 1..{a-1} ({tool_txt}) are NOT included: run this program only on a blank "
+            f"that has already been machined through op {a-1} in the same fixture position (same G55, same tool offsets).")
+
+
 def cmd_cut(src: str, a: int, b: int, dst: str):
+    import os
     prog = parse(src)
     out = build_partial(prog, a, b)
-    write_lines(dst, out, prog.eol)
+    tmp = dst + ".unverified"
+    write_lines(tmp, out, prog.eol)
+    print(f"built {len(out)} lines for ops {a}..{b}; verifying before writing {dst}")
+    try:
+        cmd_verify(src, a, b, tmp, prog=prog)
+    except SystemExit:
+        os.remove(tmp)
+        print(f"NOT written: {dst}")
+        raise
+    os.replace(tmp, dst)
     print(f"wrote {dst}: {len(out)} lines, ops {a}..{b}")
-    cmd_verify(src, a, b, dst, prog=prog)
+    if a > 1:
+        print(entry_note(prog, a))
 
 
 # ---------------------------------------------------------------- verification
@@ -421,6 +483,9 @@ def cmd_verify(src: str, a: int, b: int, dst: str, prog: Program = None):
         print(("  PASS " if cond else "  FAIL ") + msg)
         ok = ok and bool(cond)
 
+    def find(pred, seq, start=0):
+        return next((i for i, l in enumerate(seq) if i >= start and pred(l)), None)
+
     print(f"verifying {dst} against {src} ops {a}..{b}")
     eolname = 'CRLF' if eol == CRLF else 'LF'
     check(eol == prog.eol and trailing, f"line endings match source ({eolname}) and file ends with EOL")
@@ -429,15 +494,44 @@ def cmd_verify(src: str, a: int, b: int, dst: str, prog: Program = None):
 
     opa, opb = prog.ops[a - 1], prog.ops[b - 1]
     # verbatim body: from op a's F line through op b's end
-    body_src = prog.lines[opa.header_start + 2 + (2 if (opa.has_coolant and opa.has_dwell) else 0): opb.body_end + 1]
+    src_f = find(FEED_RE.match, prog.lines, opa.header_start)
+    body_src = prog.lines[src_f: opb.body_end + 1]
     # locate the F line of op a in the output
-    f_idx = next(i for i, ln in enumerate(out_lines) if FEED_RE.match(ln))
+    f_idx = find(FEED_RE.match, out_lines)
+    if f_idx is None:
+        check(False, "an F word exists in the output")
+        print("RESULT: SOME CHECKS FAILED"); sys.exit(1)
     body_out = out_lines[f_idx: f_idx + len(body_src)]
     check(body_out == body_src, f"body (from op {a} F-word to end of op {b}) is a verbatim slice: {len(body_src)} lines")
     check(out_lines[f_idx + len(body_src):] == prog.lines[prog.footer_start:], "footer is the original program footer (M5 ... M30)")
-    check(out_lines[-1].startswith(b"M30"), "last line is M30")
+    check(M30_RE.match(out_lines[-1]) is not None, "last line is M30")
 
-    # header structure
+    # checks that do NOT depend on this parser's segmentation of the source ----------------
+    raw_src = open(src, "rb").read()
+    raw_out = open(dst, "rb").read()
+    body_bytes = eol.join(out_lines[f_idx: f_idx + len(body_src)]) + eol
+    pos = raw_src.find(eol + body_bytes)
+    check(pos >= 0 and raw_src.find(eol + body_bytes, pos + 1) < 0,
+          "output body occurs exactly once as a contiguous byte string in the raw source file")
+    tail_ok = False
+    try:
+        check_footer_shape(out_lines[-7:], "output"); tail_ok = True
+    except SystemExit:
+        pass
+    check(tail_ok and raw_src.endswith(eol.join(out_lines[-7:]) + eol), "output ends with the literal 7-line footer that ends the raw source")
+    # T/S in the header == the last T/S lines that precede op a's G55 in the raw source
+    src_g55_pos = pos + len(eol) - len(eol.join(prog.lines[opa.header_start: src_f]) + eol)
+    pre = raw_src[:src_g55_pos].split(eol)
+    last_t = next((l for l in reversed(pre) if TOOL_RE.match(l)), None)
+    last_s = next((l for l in reversed(pre) if SPEED_RE.match(l)), None)
+    hdr_t = next((l for l in out_lines[:f_idx] if TOOL_RE.match(l)), None)
+    hdr_s = next((l for l in out_lines[:f_idx] if SPEED_RE.match(l)), None)
+    check(last_t is not None and hdr_t is not None and TOOL_RE.match(last_t).group(1) == TOOL_RE.match(hdr_t).group(1),
+          f"header T word == last T word before op {a} in the raw source ({(last_t or b'?').decode().strip()})")
+    check(last_s is not None and hdr_s is not None and SPEED_RE.match(last_s).group(1) == SPEED_RE.match(hdr_s).group(1),
+          f"header S word == last S word before op {a} in the raw source ({(last_s or b'?').decode().strip()})")
+
+    # header structure --------------------------------------------------------------------
     hdr = out_lines[:f_idx]
     print("  header:")
     for ln in hdr:
@@ -450,23 +544,28 @@ def cmd_verify(src: str, a: int, b: int, dst: str, prog: Program = None):
     check(any(DWELL_RE.match(l) for l in hdr), "G4 dwell present")
     check(any(OP_START_RE.match(l) for l in hdr), "G55 present")
     check(any(G90_RE.match(l) for l in hdr), "G90 A.. B.. present")
-    t_hdr = next(int(TOOL_RE.match(l).group(1)) for l in hdr if TOOL_RE.match(l))
-    check(t_hdr == opa.tool, f"header tool T{t_hdr:02d} == op {a} tool T{opa.tool:02d}")
+    t_i = find(TOOL_RE.match, hdr)
+    t_hdr = int(TOOL_RE.match(hdr[t_i]).group(1)) if t_i is not None else None
+    check(t_hdr == opa.tool, f"header tool T{t_hdr} == op {a} tool T{opa.tool:02d}")
     # order: T, S, M3, G53 Z (after T), G55, G90, M8, G4 -- strictly increasing line index
-    t_i = next(i for i, l in enumerate(hdr) if TOOL_RE.match(l))
-    order = [t_i] + [next(i for i, l in enumerate(hdr) if i > t_i and r.match(l)) for r in
-                     (SPEED_RE, re.compile(rb"^M3\s*$"), re.compile(rb"^G53 Z"), OP_START_RE, G90_RE, COOLANT_RE, DWELL_RE)]
-    check(order == sorted(order) and len(set(order)) == len(order), "header order: T, S, M3, G53 Z, G55, G90, M8, G4")
-    # the activation block must be the original program-start block with only T/S substituted
-    first = prog.ops[0]
-    t0 = next(i for i in range(first.prefix_start, first.header_start) if TOOL_RE.match(prog.lines[i]))
-    template = prog.lines[t0: first.header_start]
-    g55_i = next(i for i, l in enumerate(hdr) if OP_START_RE.match(l))
-    act = hdr[t_i: g55_i]
-    same_shape = len(act) == len(template) and all(
-        (TOOL_RE.match(a) and TOOL_RE.match(b)) or (SPEED_RE.match(a) and SPEED_RE.match(b)) or a == b
-        for a, b in zip(act, template))
-    check(same_shape, "tool activation block == original program-start block with T/S substituted")
+    if t_i is not None:
+        order = [t_i] + [find(r.match, hdr, t_i + 1) for r in
+                         (SPEED_RE, re.compile(rb"^M3\s*$"), re.compile(rb"^G53 Z"), OP_START_RE, G90_RE, COOLANT_RE, DWELL_RE)]
+        check(None not in order and order == sorted(order) and len(set(order)) == len(order),
+              "header order: T, S, M3, G53 Z, G55, G90, M8, G4")
+        # the activation block must be the original program-start block with only T/S substituted
+        first = prog.ops[0]
+        t0 = next(i for i in range(first.prefix_start, first.header_start) if TOOL_RE.match(prog.lines[i]))
+        template = prog.lines[t0: first.header_start]
+        g55_i = find(OP_START_RE.match, hdr)
+        act = hdr[t_i: g55_i] if g55_i is not None else []
+        same_shape = len(act) == len(template) and all(
+            (TOOL_RE.match(x) and TOOL_RE.match(y)) or (SPEED_RE.match(x) and SPEED_RE.match(y)) or x == y
+            for x, y in zip(act, template))
+        check(same_shape, "tool activation block == original program-start block with T/S substituted")
+    else:
+        check(False, "header order: T, S, M3, G53 Z, G55, G90, M8, G4")
+        check(False, "tool activation block == original program-start block with T/S substituted")
 
     # modal / positional state must be identical in both programs at (1) the G43 activation
     # line (first Z move after the tool is active) and (2) op a's first positioning move
@@ -480,15 +579,20 @@ def cmd_verify(src: str, a: int, b: int, dst: str, prog: Program = None):
                 if st_src.get(k) != st_out.get(k):
                     print(f"      {k}: source={st_src.get(k)} partial={st_out.get(k)}")
         print("     state:", {k: (sorted(v) if isinstance(v, frozenset) else v) for k, v in st_src.items()})
-    g43_src = next(i for i in range(opa.header_start, opa.body_end + 1) if G43_RE.match(prog.lines[i]))
-    g43_out = next(i for i, ln in enumerate(out_lines) if G43_RE.match(ln))
-    check(modal_state(out_lines, g43_out)["homed"] >= {"X", "Y", "Z"}, "X, Y and Z are at machine home when G43 is activated")
-    compare(f"the line right after op {a}'s 'G0 Z80.0 G43 H..' (tool active, length comp on)", g43_src + 1, g43_out + 1)
-    out_first_pos = next(i for i, ln in enumerate(out_lines) if ln == opa.first_pos and i > f_idx)
-    compare(f"op {a}'s first positioning move ({opa.first_pos.decode().strip()})", opa.first_pos_line, out_first_pos)
+    g43_src = find(G43_RE.match, prog.lines, opa.header_start)
+    g43_out = find(G43_RE.match, out_lines)
+    if g43_out is None or g43_src is None:
+        check(False, "a 'G0 Z.. G43 H..' line exists")
+    else:
+        check(modal_state(out_lines, g43_out)["homed"] >= {"X", "Y", "Z"}, "X, Y and Z are at machine home when G43 is activated")
+        compare(f"the line right after op {a}'s 'G0 Z80.0 G43 H..' (tool active, length comp on)", g43_src + 1, g43_out + 1)
+        out_first_pos = f_idx + (opa.first_pos_line - src_f)     # same offset from the F line in both files
+        check(out_first_pos < len(out_lines) and out_lines[out_first_pos] == opa.first_pos,
+              f"op {a}'s first positioning move is at the expected offset")
+        compare(f"op {a}'s first positioning move ({opa.first_pos.decode().strip()})", opa.first_pos_line, out_first_pos)
 
     # sanity: every output line parses into known words only
-    bad = [i for i, ln in enumerate(out_lines) if not re.match(rb"^([GMTSFHXYZAB][-+]?(\d+\.?\d*|\.\d+)\s*)+$", ln)]
+    bad = [i for i, ln in enumerate(out_lines) if not re.match(rb"^([GMTSFHXYZAB]" + NUM + rb"\s*)+$", ln)]
     check(not bad, f"every line is well-formed G-code words (bad lines: {[i+1 for i in bad[:5]]})")
     # sanity: the output contains exactly ops a..b
     out_ops = [i for i, ln in enumerate(out_lines) if OP_START_RE.match(ln)]
@@ -576,4 +680,7 @@ def cmd_match(src: str, other: str):
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    try:
+        main(sys.argv)
+    except BrokenPipeError:      # e.g. `list ... | head`
+        pass
