@@ -17,7 +17,11 @@ export const reach = (want) => {
   return { got, short: Math.abs(want) - Math.abs(got) };
 };
 
-const deg = (v) => `${v >= 0 ? "" : "−"}${Math.abs(v).toFixed(1)}°`;
+// round before choosing the sign, so a value settling onto zero never reads −0.0°
+const deg = (v) => {
+  const r = Math.round(v * 10) / 10 || 0;
+  return `${r < 0 ? "−" : ""}${Math.abs(r).toFixed(1)}°`;
+};
 // A reads in (−180°, 180°]: a half turn is 180°, never −180°
 const half = (v) => { const w = wrap(v); return w <= -179.95 ? 180 : w; };
 export const readoutOf = (a, b) => `A ${deg(half(a))} · B ${deg(b)} of ±${SPEC.bLimit}°`;
