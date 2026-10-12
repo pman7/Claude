@@ -1,0 +1,1046 @@
+{
+ "topic": "Puget Sound (King, Snohomish, Pierce; Bellevue/Kirkland/Redmond/Seattle Eastside) as baseline growth market for Integra Dental Design \u2014 dentist supply, named implant/digital practices, local labs and milling centers, DSOs, pricing/turnaround norms, study-club channels, switching barriers (desk research, accessed 2026-10-12)",
+ "summary": "Bottom line: the three-county Puget Sound market is large, dense in dentists, and already served by roughly 30 named independent labs in King County alone plus national mail-order labs, DSO in-house labs, and full-arch chains with on-site labs. There is no evidence it is underserved. Integra's realistic edge is proximity to a Bel-Red corridor cluster of prosthodontists, in-house 5-axis milling including titanium, and published flat pricing \u2014 not scarcity of competitors.\n\nFACTS (primary sources). Washington had 7,071 dentist licenses in 2024 (UW CHWS using DOH licensure). King County's ratio was 112 licensed dentists per 100,000 (2023; 110 in the 2022 ACH brief), versus under 70 everywhere else in the state; Elevate Health (Pierce) was 55 and North Sound ACH (Snohomish plus four counties) 62 per 100,000 in 2022. DOH's 2023 legislative report puts King at ~1,000 patients per provider and Pierce at ~1,600. OFM April 1, 2025 populations: King 2,411,700; Pierce 959,900; Snohomish 873,800. Society memberships: SKCDS \"over 1,600\" dentists (WSDA takes over SKCDS management Sept 24, 2026; contact skcds@wsda.org); Snohomish County Dental Society \"over 380\"; Pierce County Dental Society \"over 385\" (~55% of Pierce dentists). Nationally, 21.2% of active dentists are specialists (ADA HPI 2025), so ~79% are GPs.\n\nESTIMATES. Applying the UW ratio to OFM population gives ~2,630 dentist license addresses in King County (2023) and ~2,700 at 2025 population; Pierce ~530\u2013600 (license-based) or ~540\u2013700 (society-implied); Snohomish ~540 (if it matches the North Sound ACH average) to ~690 (society-implied). Three-county total ~3,700\u20134,000 licenses, of which ~2,900\u20133,150 are GPs. Caveat from the source: license mailing address is not practice location and includes non-practicing dentists.\n\nLABS. Desk research identified ~29 named labs in King County (Nakanishi, Protea, PNW Pros, Prime, Denny, New Era, Novus, Smile Design, Skylab, Shama, Seattle Dental Arts, Swiss Dental, Thorn Ford, First Impressions/Dentcron, Cox, New Smile, Paragon, Choice, Emerald, VTA-Renton, United, Ray Dental Studio, Cosmetic Dental Arts, Athena, Oral Esthetics, Tom Cummings, ProWest, Issaquah Dental Lab, Integra), 4+ in Snohomish (Seabrook, Oasis, Trosvig, Edgewood) and at least two in Pierce (University Park, Tacoma Dental Laboratories), plus Ziemek (Olympia) with its own milling center. That is roughly one identified lab per ~90 King County dentists \u2014 a floor, since the DOH Dental Laboratory Registration database could not be queried and the Census CBP API requires a key. No national-baseline comparison could be sourced, so \"underserved\" is not supportable. Only Integra publishes a public fee schedule locally; every other local lab quotes privately. National labs reach the area by mail (Glidewell: $9 FedEx each way or free USPS 2\u20134 days each way; Pro-Craft of Murrieta CA sells WA dentists a \"free iTero\" program with 3\u20135 day turnaround; Dandy has a Kirkland testimonial). NDX lists no WA lab; Issaquah Dental Laboratory (founded 1973) shows as acquired/PE-backed and its NDX page now redirects, so its status is unknown.\n\nDSOs. PDS: 40 WA offices (Becker's, ~2023) running CEREC same-day crowns in-office. Willamette Dental Group: in-house lab (milled crowns, printed dentures) with WA offices in Bellevue, Everett, Kent, Mountlake Terrace, Puyallup, Seattle, Tacoma and 11 other cities. Light Dental Studios: 30 Puget Sound offices with an in-house denture lab. Gentle Dental 27 WA offices; Bright Now ~19. ClearChoice Metro-Seattle (Bellevue) and Nuvia Bellevue each run on-site labs and capture full-arch volume. Affordable Dentures has on-site denture labs in Tacoma and Lynnwood.\n\nPRICING/TURNAROUND BENCHMARKS (published, mostly out-of-area): monolithic zirconia $89\u2013$122 (Crown World, ROE, TrueGuide), lab-to-lab zirconia $39\u2013$59 (Mabel), screw-retained zirconia implant crowns $299\u2013$349, full-arch zirconia finals $1,999\u2013$2,420. Integra's $129 crown is at the upper edge of national mail-order pricing, its $22 mill-only is well below lab-to-lab norms, and its $1,700 arch is competitive. Turnaround parity is 5\u20137 business days; local labs differentiate on free courier pickup/delivery (Oasis, Choice, Seabrook, CBI).\n\nCHANNELS. SKCDS/SCDS/PCDS general meetings (PCDS sells sponsorships; Nakanishi sponsored April 2026), WSDA's PNDC (May 28\u201330, 2026, Seattle Convention Center, ~150 exhibitors), Seattle Study Club HQ in Kirkland with WA affiliates (Seattle Digital Dental Hub, ISGNW), Kois Center and four local Kois study groups (incl. Protea's in Redmond), Seattle Implant Study Club (Lynnwood, AAID-affiliated), 47 North Oral Surgery's restorative-implant mini-residency, Puget Sound Perio's South Sound study club, Washington AGD (SeaTac), WSDLA (board includes Protea's Leon Hermanides), and UW Graduate Prosthodontics (Interim Director Dr. John Sorensen, fully digital All-on-4 research lab; residents print models).\n\nSWITCHING BARRIERS. Decades-long lab loyalty is documented in local testimonials; in-office milling is spreading (PDS, Bellevue Premier Dental, Sunrise Redmond, Lynnwood Dental Excellence); national labs subsidize scanners; full-arch chains and DSOs are vertically integrated. A dentist would try Integra for proximity (Drs. Najafi and Libman and two labs sit within ~1 mile), titanium milling, transparent pricing and owner access \u2014 not because alternatives are missing. Integra's concentration risk (2 clients = 91%) and thin cash are credibility issues a skeptical buyer will probe.",
+ "findings": [
+  {
+   "claim": "Washington had 7,071 dentist licenses in 2024 (DENT, DEFC, DERE, DEUW), up from 6,886 in 2022",
+   "detail": "UW Center for Health Workforce Studies, Washington Oral Health Workforce tracking page, using DOH licensure data as of December each year; 2022 breakdown: DENT 6,815, DEFC 17, DERE 23, DEUW 31. Funding for the tracking program ended 12/31/2025, page archived.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://familymedicine.uw.edu/chws/resources/wohw/workforce-data/current-supply/",
+   "source_date": "undated page (data through 2024); accessed 2026-10-12",
+   "value": "7,071 licenses (2024)"
+  },
+  {
+   "claim": "King County (Healthier Here ACH) had 112 licensed dentists per 100,000 population in 2023; all other ACHs were below 70",
+   "detail": "Same UW CHWS page; ratio is based on license mailing address with a Washington address, which the source says may not reflect practice status or location. The Nov 2024 UW data brief shows 110 per 100,000 for Healthier Here in its 2022 chart while its text says 130 \u2014 an internal inconsistency in the source.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://familymedicine.uw.edu/chws/resources/wohw/workforce-data/current-supply/",
+   "source_date": "undated (2023 data); accessed 2026-10-12",
+   "value": "112 per 100,000 (King, 2023); 110 per 100,000 (2022 chart)"
+  },
+  {
+   "claim": "Pierce County (Elevate Health ACH) had 55 and North Sound ACH (Snohomish, Skagit, Whatcom, Island, San Juan) 62 licensed dentists per 100,000 in 2022",
+   "detail": "UW CHWS Data Brief 'Dentist Distribution and Population Dental Need in Washington, 2022' (Nov 2024). Choice ACH lowest at 49. Snohomish-only figure is not published in the brief.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://familymedicine.uw.edu/chws/wp-content/uploads/sites/5/2025/01/Data-Brief-Dentist-Distribution-and-Population-Dental-Need-2022.pdf",
+   "source_date": "November 2024; accessed 2026-10-12",
+   "value": "Pierce 55/100k; North Sound 62/100k (2022)"
+  },
+  {
+   "claim": "DOH reports ~74 dentists per 100,000 statewide, with King County at ~1,000 patients per provider and Pierce at ~1,600",
+   "detail": "Washington DOH Oral Health Equity Assessment, Report to the Legislature, Sept 2023. 1,000 patients/provider equals ~100 dentists per 100,000; 1,600 equals ~62.5 per 100,000.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://doh.wa.gov/sites/default/files/2023-09/140265-OralHealthEquityAssessment.pdf",
+   "source_date": "September 2023; accessed 2026-10-12",
+   "value": "King ~1,000 pts/dentist; Pierce ~1,600 pts/dentist"
+  },
+  {
+   "claim": "OFM April 1, 2025 county populations: King 2,411,700; Pierce 959,900; Snohomish 873,800 (King 2023: 2,347,800)",
+   "detail": "Office of Financial Management April 1, 2025 official estimates (press release Table 1 and city/county allocation table). Bellevue 158,000; Kirkland 97,850; Redmond 82,380; Seattle 816,600; Issaquah 41,560 (2025).",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://ofm.wa.gov/sites/default/files/public/dataresearch/pop/april1/ofm_april1_press_release.pdf",
+   "source_date": "June 27, 2025; accessed 2026-10-12",
+   "value": "King 2,411,700; Pierce 959,900; Snohomish 873,800"
+  },
+  {
+   "claim": "Estimated licensed dentists: King ~2,630 (2023) to ~2,700 (2025); Pierce ~530\u2013700; Snohomish ~540\u2013690; three-county ~3,700\u20134,000, of which ~2,900\u20133,150 are general dentists",
+   "detail": "Estimate = UW per-100k ratio x OFM population (King 112 x 23.478 = 2,630; Pierce 55\u201363 x 9.599 = 528\u2013605; Snohomish 62 x 8.738 = 542 if it matches the North Sound ACH average). Society-implied upper bounds: PCDS 385 members = ~55% of Pierce dentists implies ~700; SCDS 380 members at a similar 55\u201360% share implies ~630\u2013690. GP share uses ADA HPI 2025 national figure of 21.2% specialists (~79% GP). License address is not practice location; includes non-practicing licensees.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://familymedicine.uw.edu/chws/resources/wohw/workforce-data/current-supply/",
+   "source_date": "derived 2026-10-12 from 2022\u20132025 sources",
+   "value": "~2,630\u20132,700 King; ~3,700\u20134,000 three-county; ~2,900\u20133,150 GPs"
+  },
+  {
+   "claim": "ADA HPI: 205,088 professionally active U.S. dentists in 2025, 60.0 per 100,000, 21.2% in an ADA-recognized specialty",
+   "detail": "ADA Health Policy Institute dentist workforce page. King County's 110\u2013112 per 100,000 is roughly 1.8x the national ratio \u2014 the county is dentist-dense, not dentist-scarce.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.ada.org/resources/research/health-policy-institute/dentist-workforce",
+   "source_date": "2025 update; accessed 2026-10-12",
+   "value": "60.0 dentists/100k US; 21.2% specialists"
+  },
+  {
+   "claim": "Seattle-King County Dental Society has 'over 1,600' member dentists; WSDA will provide its association management from Sept 24, 2026",
+   "detail": "SKCDS homepage. President Dr. April Dennison; questions to skcds@wsda.org; President-Elect nominations due Oct 23, 2026; General Membership Meetings held (September GMM referenced). Third-party profiles say 'almost 1,700'.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.skcds.org/",
+   "source_date": "undated (references Sept 2026 events); accessed 2026-10-12",
+   "value": ">1,600 members"
+  },
+  {
+   "claim": "Snohomish County Dental Society has over 380 members; Pierce County Dental Society over 385 members (~55% of Pierce dentists)",
+   "detail": "SCDS homepage (Executive Director Sandra Anderson, info@scdentists.org). PCDS About Us page; PCDS LinkedIn gives 'over 430 members, ~80%' \u2014 conflicting and undated. PCDS GMMs at Tacoma Country & Golf Club with corporate sponsors; Nakanishi Dental Laboratory and Nobel Biocare sponsored the April 21, 2026 GMM; Executive Director Cindy Stephen, cindy@pcdentists.org.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://pcdentists.org/p/Dental-Society-Pierce-County-Washington-About-Us-p32339.asp",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "SCDS >380; PCDS >385 (or >430 per LinkedIn)"
+  },
+  {
+   "claim": "At least 29 named dental labs operate in King County, ~4 in Snohomish and ~2 in Pierce, i.e., roughly one identified lab per ~90 King County dentists (a floor)",
+   "detail": "Compiled from lab websites and the Enigma WA dental-laboratory directory: Bellevue \u2014 Nakanishi (2959 Northup Way), PNW Pros (1726 138th Pl NE), Prime (14595 Bel-Red Rd), Denny Dental Lab (14420 NE Bel-Red Rd), New Era (1551 116th Ave NE), Integra; Redmond \u2014 Protea (15955 NE 85th St #204), Smile Design (2045 152nd Ave NE), Novus (425-867-5000); Kirkland \u2014 Skylab, Paragon Dental Arts; Issaquah \u2014 Issaquah Dental Laboratory (640 NW Gilman); Bothell \u2014 First Impressions/Dentcron, Cox, Thorn Ford; Kenmore \u2014 New Smile; Seattle \u2014 Shama, Seattle Dental Arts, Swiss Dental, Oral Esthetics, Tom Cummings, ProWest; Tukwila \u2014 United; Renton \u2014 Choice, Emerald, VTA office, Paragon; Kent \u2014 Ray Dental Studio; Maple Valley \u2014 Cosmetic Dental Arts; Auburn \u2014 Athena. Snohomish: Seabrook & Oasis (Lynnwood), Trosvig (Everett), Edgewood (Mukilteo). Pierce: University Park Dental Lab (University Place), Tacoma Dental Laboratories. Thurston: Ziemek (Olympia), Pacific Dental Arts (Olympia). The DOH registry (definitive count) could not be queried; no national baseline (Census CBP NAICS 339116) could be fetched, so no 'underserved' claim is made.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://www.enigma.com/directory/wa/all-cities/dental-laboratory/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "~29 King County labs identified; ~1 per 90 dentists (floor)"
+  },
+  {
+   "claim": "Nakanishi Dental Laboratory (Bellevue, 2959 Northup Way) is a full-service lab with 'many Certified Dental Technicians', ships nationwide, and sponsors county dental-society meetings",
+   "detail": "Company site: crowns/bridges/veneers, dentures, implant abutments and bars, nightguards, online case submission, doctor web portal; phone 425-822-2245. Enigma directory revenue band $1M\u2013$5M. Sponsored PCDS April 2026 GMM. No public fee schedule found.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.nakanishidentallab.com/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "revenue band $1M\u2013$5M (directory estimate)"
+  },
+  {
+   "claim": "Protea Dental Studio (Redmond) is a Kois-affiliated lab run by Leon Hermanides CDT, hosts a Kois study club, and Hermanides is WSDLA Past President",
+   "detail": "Protea hosts the Protea Dental Kois Study Group at 15955 NE 85th St #204, Redmond (meetings 9:00\u201312:30; info@proteadental.com; 425-497-9428); Dr. John Kois endorses the lab. WSDLA 2026 board: President Autumn Ellingson, Past President Leon Hermanides, VP Matthew Chapman, Sec/Treas Robert Hayes. Enigma revenue band $1M\u2013$5M.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.proteadental.com/kois-study-club/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "PNW Pros Dental Lab (Bellevue) is owned/led by two prosthodontists who do implant surgical planning, guides and full-arch work; DOH registration DLAB.FS.61146491",
+   "detail": "Site says Dr. Brooks 'was the prosthodontist for a national implant company, opening their office in Bellevue' and 'has restored thousands of edentulous arches'; Dr. Johnson 35 years in prosthodontics. Address 1726 138th Place NE, Bellevue 98005; 425-698-1440. Indicates some Eastside prosthodontists are vertically integrated into their own lab.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://pnwproslab.com/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Ray Dental Studio (Kent) mills custom titanium abutments in-house and offers lifetime warranty on BruxZir/Origin Live zirconia; Choice Dental Lab (Renton) runs driver pickup/delivery and full-arch zirconia; Emerald Dental Arts (Renton) mills Ti/CoCr bars",
+   "detail": "Ray: 431 E Ward St, Kent; 206-701-9797; also 3D-printed surgical guides. Choice: 3016 Benson Rd S, Renton; accepts STL from all scanners; NeoBiotech certified; 'Choice I-Bar' Ti-reinforced zirconia arch; 253-946-0903. Emerald: 529 Shattuck Ave S, Renton; 425-277-4779; 25+ years; 'picking up the case until delivery'. These are direct local competitors for Integra's implant and lab-to-lab milling offers.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.raydentalstudio.net/services",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Lynnwood-area labs Oasis and Seabrook offer free local pickup and delivery; Oasis charges no rush fee and covers Seattle, Bellevue and Arlington",
+   "detail": "Oasis Dental Lab: founded 2011, 16418 7th Pl W Ste B, Lynnwood; (425) 835-0660; all in-house; accepts all major IOS. Seabrook: 40+ years, 6101 200th St SW Ste 201, Lynnwood; 800-693-7487; free local pickup/delivery plus nationwide; prepaid USPS labels. Trosvig (Everett, 3224 Colby Ave Ste B) is a multi-technician family lab. Free courier service is a local norm Integra must match.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.oasisdentallabllc.com/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "free local pickup/delivery; no rush charge (Oasis)"
+  },
+  {
+   "claim": "VTA Dental Lab (multi-state) keeps a Renton office at 901 Rainier Ave N Ste B103 and advertises 7-day zirconia crowns; Pro-Craft (Murrieta, CA) targets WA dentists with a free iTero program and 3\u20135 business-day delivery",
+   "detail": "VTA: offices in Scottsdale, Garden Grove, Houston and Renton; '7-day zirconia crowns', first-case $150 promo, nationwide shipping. Pro-Craft: HQ 25791 Jefferson Ave, Murrieta CA (877-484-3522); claims 'most practices receiving restorations within 3\u20135 business days', free remakes/rush, 'perks valued at over $17,000' incl. free scanner trial; lists Seattle, Bellevue, Redmond, Kirkland, Renton among service areas.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.pro-craft.com/dental-laboratory-bellevue-washington",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "Pro-Craft 3\u20135 business days; VTA 7-day zirconia"
+  },
+  {
+   "claim": "Glidewell has no Washington lab; it serves WA by mail \u2014 FedEx Overnight $9 each way or free prepaid USPS Priority Mail taking 2\u20134 business days each way; in-office pickup for existing customers",
+   "detail": "Glidewell pickup-and-delivery page (2201 Dupont Dr, Irvine CA). A Dental Lab Network forum post (Oct 2023) by a user shown as 'Glidewell Dental in Kent, Washington' offered 2-day STL zirconia milling; the poster later said it was a private account and no corporate evidence of a Kent facility was found \u2014 treat as unverified.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://glidewelldental.com/send-case/pickup-and-delivery",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "$9/way FedEx; USPS 2\u20134 days each way"
+  },
+  {
+   "claim": "National Dentex (NDX) lists no Washington or Oregon laboratory; Issaquah Dental Laboratory (640 NW Gilman Blvd, founded 1973) appears acquired/PE-backed and its former NDX page now redirects",
+   "detail": "NDX labs directory (accessed 2026-10-12) shows nearest labs in Danville and Sacramento CA, Provo UT, Reno NV. Enigma directory links Issaquah Dental Laboratory to nationaldentex.com/ndxissaquah/home, which now redirects to NDX Heumann Topeka; PitchBook lists status 'Acquired/Merged, PE-backed'. Current operating status in Issaquah is unknown.",
+   "kind": "unknown",
+   "confidence": "medium",
+   "source_url": "https://nationaldentex.com/labs",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Dandy manufactures in Lehi, UT and Carrollton, TX and has at least one Kirkland, WA practice testimonial (Smiles Dental Services); it supplies a scanner against a lab minimum",
+   "detail": "From Dandy site and third-party reviews surfaced in search; Dandy is a digital-only mail-order competitor present in the Eastside.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.meetdandy.com/labs/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Pacific Dental Services supports 40 Washington offices and runs CEREC same-day crowns in-office across supported practices",
+   "detail": "Becker's state-by-state breakdown (~2023) gives 40 WA offices; Dentaltown (2018) says all PDS-supported offices provide CEREC CAD/CAM same-day crowns; PDS executive described buying mills and milling in-house as its chosen model. No PDS central lab network found. Removes single-unit crowns from the outsourced-lab pool.",
+   "kind": "historical",
+   "confidence": "medium",
+   "source_url": "https://www.beckersdental.com/dso-dpms/pacific-dental-services-network-state-by-state-breakdown/",
+   "source_date": "~2023 (article ~1,200 days old at access); accessed 2026-10-12",
+   "value": "40 WA offices"
+  },
+  {
+   "claim": "Willamette Dental Group operates an in-house dental lab (digitally scanned and milled ceramic crowns, 3D-printed dentures) and has Washington offices in 18 cities including Bellevue, Everett, Kent, Mountlake Terrace, Puyallup, Seattle and Tacoma",
+   "detail": "Willamette services page and WA locations page. Administrative office Hillsboro, OR; lab location not stated. A closed system for lab work.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://locations.willamettedental.com/wa/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "18 WA cities"
+  },
+  {
+   "claim": "Light Dental Studios runs 30 Puget Sound locations (incl. Bellevue, Kent, Lynnwood, Burien, Covington, Auburn) with an in-house denture lab serving all offices; Gentle Dental 27 WA offices; Bright Now ~19 WA offices; Affordable Dentures & Implants has on-site denture labs in Tacoma and Lynnwood",
+   "detail": "Light Dental Studios services page (in-house denture lab for dentures, partials, relines; in-house perio/OS). Gentle Dental WA locations page (~2024). Bright Now WA office list incl. Bellevue, Issaquah. Affordable Dentures Tacoma (3801 S Steele St Ste D) and Lynnwood (2701 184th St SW Ste 118) pages/Yelp cite on-site labs. Aspen Dental WA count not found.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://lightdentalstudios.com/dental-services/",
+   "source_date": "page dated 2024-09-04; accessed 2026-10-12",
+   "value": "LDS 30; Gentle 27; Bright Now ~19"
+  },
+  {
+   "claim": "ClearChoice Metro-Seattle (1200 112th Ave NE, Bellevue) and Nuvia Bellevue each operate on-site labs and capture full-arch zirconia volume internally",
+   "detail": "ClearChoice: lead prosthodontists Dr. Alfonso Pi\u00f1eyro and Dr. Russell Deal (UW), oral surgeons Podlosky, Lutgen, Zurayk; company states each center has a fully equipped on-site implant lab staffed by master technicians (2\u20133 person labs); lifetime zirconia warranty from 03/21/2025. Nuvia: 'in-house lab at every Nuvia location', permanent zirconia in 24 hours; Drs. Michael Cho and Neha Rajput (prosthodontist). ClearChoice also in Federal Way.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.clearchoice.com/locations/wa/bellevue/1200-112th-ave-ne/",
+   "source_date": "undated (reviews dated May 2026); accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "No Puget Sound lab other than Integra publishes a public fee schedule; local pricing norms must be inferred from national published lists",
+   "detail": "Searched Nakanishi, Protea, Shama, Seattle Dental Arts, Smile Design, Prime, PNW Pros, Choice, Oasis, Seabrook, Trosvig, Emerald, Ray, VTA, Ziemek \u2014 none post prices. United Dental Lab (Tukwila) mails a price list in its starter kit. Integra's published fees: FCZ $129, e.max $149, implant crown $269\u2013$299, full-arch zirconia $1,700, bar+superstructure $2,200, thimble bar $2,700.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://integra.dental/fee-schedule/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Published national benchmarks for monolithic zirconia crowns run $89\u2013$122 (digital) and screw-retained zirconia implant crowns $299\u2013$349; Integra's $129 crown sits at the upper edge of mail-order pricing",
+   "detail": "Crown World (Irvine CA, 2025 list): BruxZir $89 digital/$99 conventional, BruxZir Esthetic $99/$109, e.max $119\u2013$149, screw-retained BruxZir $339, custom-abutment packages $432\u2013$508, 3\u20135 day lab time. ROE (OH, 2026): zRc $93, TLZ $122, e.max $134 (3 days model-free), TLZ-SR screw-retained $299 (4 days). TrueGuide (NJ, Sept 2026): zirconia $99, Ti-base SRC $349, 5\u20137 business days. Ceratech boutique list: full zirconia $315\u2013$335, SRC $625\u2013$680.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://crownworlddental.com/lab-services-2025/",
+   "source_date": "2025-09-10 (Crown World); 2026 (ROE); 2026-09-24 (TrueGuide); accessed 2026-10-12",
+   "value": "$89\u2013$122 FCZ; $299\u2013$349 screw-retained zirconia"
+  },
+  {
+   "claim": "Published lab-to-lab zirconia pricing is $39 (coping) to $59 (full contour) with 6-day digital turnaround; Integra's $22 mill-only is far below this benchmark",
+   "detail": "Mabel Dental Lab (Cuyahoga Falls, OH) January 2026 lab-to-lab list: FCZ coping $39, full contour $59, multilayer $65, Ti custom abutment $119, screw-retained full zirconia $189; full-arch zirconia $1,999 incl. up to six MUAs and two try-ins; copy-mill from approved setup $999; Ti bar hybrid $2,999. Next Dental Lab 2024: FCZ $37 (Classic) to $89 (Elite); All-on-4 zirconia with Ti bar $1,935.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://mabeldental.com/wp-content/uploads/2026/01/Mabel-Dental-Lab-to-Lab-1-2026-Fee-Schedule.pdf",
+   "source_date": "January 2026; accessed 2026-10-12",
+   "value": "$39\u2013$59 lab-to-lab zirconia; $1,999 full-arch zirconia"
+  },
+  {
+   "claim": "Published full-arch zirconia final pricing ranges from $1,999 (Mabel) to $2,420 (ROE TLZ-IB) and $2,888 (ROE NobelProcera); ADL lists $3,750 for a zirconia bridge with gingival up to 5 sites",
+   "detail": "ROE 2026 fee schedule (TLZ-IB $2,420 at 10 days; grammetry design $287\u2013$335); ADL 2024 schedule (milled Ti bar up to 5 sites $1,985; full-arch zirconia bridge w/ gingival $3,750); TrueGuide All-on-X from $2,999. Integra's $1,700/arch and $650 lab-to-lab arch from STL are at or below the low end.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.roedentallab.com/hubfs/47353199/PDFs/Fee-Schedule-ROE.pdf",
+   "source_date": "2026 (REV100726); accessed 2026-10-12",
+   "value": "$1,999\u2013$3,750 per arch (published, out-of-area)"
+  },
+  {
+   "claim": "Patient-facing implant fees on the Eastside: Klahanie Family Dentistry (Issaquah) lists $5,700 for a posterior implant+abutment+crown, $6,500 anterior, $12,000 for 4\u20136 implants under an existing denture",
+   "detail": "Dr. Travis Howey's published price list. Indicates the dentist-side margin over a $269\u2013$299 lab implant crown package; useful for value-based selling.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://klahaniedental.com/dental-implants/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "$5,700 posterior single implant+crown"
+  },
+  {
+   "claim": "Turnaround parity in this market is 5\u20137 business days in-lab for zirconia; Integra's five-day promise is parity, not a differentiator",
+   "detail": "Integra 5 business days from file receipt; VTA 7-day zirconia; Pro-Craft 3\u20135 business days delivered; Ziemek 5-day guided surgery; ROE/Crown World 3 days in-lab plus 2\u20134 days shipping each way via USPS or overnight FedEx; Mabel 6 days digital; Smile Design (Redmond) 'Guaranteed Delivery' \u2014 free if late. Patient-facing sites generally quote ~2 weeks for a lab crown.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://vtadentallab.com/dental-lab-in-washington/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "5\u20137 in-lab days typical"
+  },
+  {
+   "claim": "How cases move: local labs use their own drivers (free pickup/delivery routes), national labs use prepaid USPS Priority or $9 FedEx Overnight, and digital cases go via 3Shape Communicate / Medit Link / iTero connections",
+   "detail": "Choice ('our drivers pick up cases'), Oasis, Seabrook, CBI (Port Orchard), Pacific Dental Arts (Thurston route; prepaid labels out of town); Glidewell shipping terms; Prime Dental Lab accepts iTero and 3Shape files; Nakanishi online case submission; Integra lists 3Shape/Medit/iTero/Planmeca connections.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.choice-lab.com/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Washington requires every dental lab doing business in the state to register with DOH (since Jan 31, 2021); new registrants after Jan 31, 2025 must employ a CDT working 30+ hours/week or operate under a licensed dentist; renewal fee $250",
+   "detail": "RCW 70.352; DOH dental laboratories FAQ; WSDLA summary. Registration number must appear on invoices and dentist work orders. Out-of-state labs serving WA dentists must also register \u2014 a compliance hurdle for mail-order competitors and for Integra's own lab-to-lab clients.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://doh.wa.gov/licenses-permits-and-certificates/facilities-z/dental-laboratories",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "$250 annual renewal"
+  },
+  {
+   "claim": "In-office milling is established on the Eastside: Bellevue Premier Dental (CEREC, iTero, 3D printer, CBCT), Sunrise Dental of Redmond (CEREC, '98% same-day crown delivery'), Lynnwood Dental Excellence (in-house 5-axis lab-grade mill), PDS (CEREC in all offices)",
+   "detail": "Bellevue Premier Dental (Dr. Nakada, 1951 152nd Pl NE #108) says its 3D printer lets it produce devices in-house 'saving the time we could have wasted engaging a third-party dental lab'. Lynnwood Dental Excellence runs its mill at an in-house lab in Federal Way for zirconia, lithium disilicate and PMMA. This caps single-unit outsourced demand among digitally advanced GPs.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.lynnwooddentalcenter.com/lynnwood-dental-implants-technology-in-house-5-axis-dental-laboratory-grade-milling.html",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Documented lab loyalty is long: Seattle Dental Arts 'lab of choice for over 20 years' (Dr. Linda Fukuda), Emerald Dental Arts 15 years (Dr. Isenberg), Paragon Dental Art 10 years, Pacific Dental Arts 13 years/~5,000 units from one dentist",
+   "detail": "Testimonials on the labs' own sites. Switching costs are relational, not contractual; most dentists describe their lab as part of the clinical team.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://seattledentalarts.com/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "The Bel-Red corridor within ~1 mile of Integra (35 148th Ave SE) holds a cluster of prosthodontists and labs: Dr. Siamak Najafi (14645 Bel-Red Rd Ste 100), Dr. Warren Libman (14595 Bel-Red Rd Ste 100), Prime Dental Lab (14595 Bel-Red Rd), Denny Dental Lab (14420 NE Bel-Red Rd), Bellevue Dental Arts (13333 Bel-Red Rd), Bellevue Premier Dental (1951 152nd Pl NE)",
+   "detail": "Addresses from practice/lab sites and the Enigma directory. Proximity enables same-day shade visits, chairside support and conversions that mail-order labs cannot offer.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://libmandds.com/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Seattle Met's 2026 peer-voted Top Dentists prosthodontics list names ~35 Puget Sound prosthodontists, including Bellevue (Russell & Michael Johnson, Warren Libman, Rosario Palacios), Mercer Island (Shiotsu), Lynnwood (Raigrodski), Federal Way (Chong; ClearChoice's Pi\u00f1eyro), Puyallup (Larson), Tacoma (Phillips) and UW faculty (Ramos, Schwedhelm)",
+   "detail": "Seattle Met directory; useful as a vetted call list of restorative specialists who buy implant and full-arch lab work.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.seattlemet.com/dentists/type/prosthodontics",
+   "source_date": "2026 list; accessed 2026-10-12",
+   "value": "~35 prosthodontists listed"
+  },
+  {
+   "claim": "WSDA's Pacific Northwest Dental Conference 2026 runs May 28\u201330 at the Summit, Seattle Convention Center, with ~150 exhibitors",
+   "detail": "Event listings (10times, Orbital, SurgiTel). Official exhibitor list at pndc2026.eventscribe.net not fetched. Historically held at Meydenbauer Center, Bellevue.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://withorbital.com/conferences/pacific-northwest-dental-conference-2026",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "~150 exhibitors; May 28\u201330, 2026"
+  },
+  {
+   "claim": "Seattle Study Club is headquartered in Kirkland (9805 NE 116th St #7316; 425-576-8000), runs 250+ affiliate clubs meeting 8\u201310 times/year, and sells an industry partner/sponsor program; Washington affiliates include Seattle Digital Dental Hub (Dr. Rooz Khosravi), Interdisciplinary Study Group Northwest (Dr. Helena; Kois-based; Tacoma/Sumner/Auburn area) and Spokane Study Club",
+   "detail": "SSC contact and directory pages; SDDH and ISGNW sites. Factoria Dental Study Club (Bellevue) and Horse Creek Study Club (Bothell) appear in AGD PACE provider listings but details are unverified.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.seattlestudyclub.com/contact",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "The Kois Center (1001 Fairview Ave N, Seattle) anchors four local Kois study groups \u2014 Western Washington Kois Study Group, MDB Kois Study Club, WACRE (full), Protea Dental Kois Study Club (Redmond) \u2014 and Kois Dentistry (Drs. John, Dean, Tara Kois) is a full-arch/implant practice",
+   "detail": "Kois Center study-group listing and Protea page; membership requires at least one Kois course. Kois alumni are high-value digital restorative dentists.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.koiscenter.com/members-alumni/kois-study-groups/",
+   "source_date": "page dated 2017-04-28 (listing may be stale); accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Seattle Implant Study Club (AAID-affiliated) meets in Lynnwood (19720 68th Ave W Ste A; 425-776-9132); 2025 president Dr. Brian Baik; 47 North Oral Surgery runs a four-session, 28-CE 'Graduate Synergy Training Program' mini-residency for restorative dentists from Kirkland/Redmond/Monroe; Puget Sound Periodontics runs the South Sound Multi-Disciplinary Study Club",
+   "detail": "Club and practice sites. 47 North lists All-on-4 among its procedures and serves King and Snohomish counties. Puget Sound Perio (Dr. Thomas Kang; West Seattle, Federal Way, Eastlake) markets 'Teeth by Tonight' and says permanent teeth are 'created in the porcelain lab' \u2014 a surgical referral source for restorative labs.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.seattleimplantstudyclub.com/",
+   "source_date": "undated (2025 president); accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Washington AGD operates a Global Learning Center in SeaTac with MasterTrack and hands-on courses (Director of Education Dr. Timothy Hess; washingtonagd.org); no Spear or ITI study club in Seattle/Bellevue/Kirkland was found",
+   "detail": "AGD MasterTrack directory and local-CE listings (2022\u20132024 dated). Spear Education is Scottsdale-based; Frank Spear and Greggory Kinzer (Spear Aesthetics, 720 Olive Way, Seattle) practice(d) in Seattle. ITI lists study clubs globally but none surfaced for Puget Sound.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.agd.org/education/awards-recognition/agd-mastership/mastertrack-programs/mastertrack-programs/washington",
+   "source_date": "Dec 15, 2022 entry; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "UW School of Dentistry is a digital-prosthodontics channel: Graduate Prosthodontics (Interim Director Dr. John Sorensen, ex-ClearChoice Portland, B4T research lab pursuing a fully digital All-on-4 workflow; lab technician Kleve Hansen; residents print models and use sintering ovens) and a CDE program with ceramics/full-arch webinars in Nov 2026",
+   "detail": "UW Graduate Prosthodontics page and CDE schedule (Nov 18, 2026 'From Single Implants to Full-Arch Cases'; Nov 13 'All-Ceramic Dentistry Cookbook'). Former Grad Pros director Dr. Ariel Raigrodski now practices in Lynnwood with TRIOS and CBCT. UW's 2015 'Implant Systems Study Club' appears dormant.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://dental.washington.edu/graduate-prosthodontics/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Eastside practices naming their scanners: Kirkland Premier Dentistry (iTero, CBCT; prosthodontist + oral surgeon in-house), Issaquah Premier Dental (Primescan, Primescan 2, iTero Lumina), Bellevue Dental Arts (iTero Lumina Pro), Redmond DDS (Primescan), Smiles By Design Kirkland (TRIOS), ARID Northwest Lynnwood (TRIOS), Blooming Dental Lynnwood/Des Moines (iTero, CBCT, guided surgery)",
+   "detail": "Practice technology pages. These are digital-ready accounts that can send files directly; several also do same-day crowns, so the opportunity is implant, esthetic and full-arch work rather than routine posterior crowns.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.issaquahpremierdental.com/technology/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Smile Design Dental Lab (Redmond) offers 'Guaranteed Delivery' (case free if delivered after the patient appointment) and references 'a big blow' to Washington dental services on its site",
+   "detail": "Lab site, 2045 152nd Ave NE, Redmond; 425-653-1294; products include Origin zirconia, e.max, Lava, digital implant restorations. The nature of the 'big blow' (likely a payer/reimbursement change) was not readable from the fetched text.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://smiledesigndl.com/bellevue-dental-lab/?mid=products",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Ziemek Dental Lab (Olympia HQ, 2310 Mottman Rd SW) runs its own milling center, lists 11 implant systems, 5-day guided-surgery turnaround, fixed hybrids in zirconia/Ti, and ships nationally (testimonial from Maryland)",
+   "detail": "Ziemek products and contact pages; serves Tacoma/Pierce dentists (testimonial from Dr. Steve Marinkovich, Tacoma). A South Sound competitor with in-house milling capacity similar to Integra's.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.ziemekdentallab.com/products-services/what-we-do/",
+   "source_date": "undated; accessed 2026-10-12",
+   "value": "n/a"
+  },
+  {
+   "claim": "Historical context: King County had 109 licensed dentists per 100,000 in 2016 (UW 2017 report); the state had 6,325 dentist licenses in 2016 and 5,819 in 2009",
+   "detail": "Patterson et al., UW CHWS, Nov 2017; UW workforce page. Shows steady growth of ~1\u20131.5%/yr in licensed dentists statewide.",
+   "kind": "historical",
+   "confidence": "high",
+   "source_url": "https://depts.washington.edu/fammed/chws/wp-content/uploads/sites/5/2017/11/Washington_State_Oral_Health_Workforce_FR_Nov_2017_Patterson.pdf",
+   "source_date": "November 2017; accessed 2026-10-12",
+   "value": "109/100k King (2016)"
+  }
+ ],
+ "unknowns": [
+  "Exact count of DOH-registered dental laboratories in King, Snohomish and Pierce counties \u2014 the DOH Provider Credential/Facility Search (Facility Type: Dental Laboratory Registration) is interactive and could not be queried; no published total was found.",
+  "Census County Business Patterns establishment/employment counts for NAICS 339116 (dental laboratories) and 621210 (offices of dentists) by county \u2014 the Census API returned 'Missing Key'; BLS QCEW CSV endpoints were blocked by content type. Without these, no lab-to-dentist ratio versus a national baseline can be stated.",
+  "Snohomish County-specific dentist ratio (only the five-county North Sound ACH figure of 62/100k is published); exact licensed dentist counts by county (UW tableau 'County Trends' not fetchable).",
+  "Pierce County Dental Society membership and penetration \u2014 its own site says >385 members (~55%), LinkedIn says >430 (~80%); neither is dated.",
+  "Whether Issaquah Dental Laboratory (640 NW Gilman Blvd) still operates and under whose ownership (PitchBook: acquired/PE-backed; former NDX page redirects).",
+  "Whether Glidewell has any milling or pickup presence in Kent, WA (a 2023 forum post claimed so; no corporate evidence).",
+  "Actual fee schedules and turnaround commitments of local labs (Nakanishi, Protea, Shama, Seattle Dental Arts, Smile Design, Prime, PNW Pros, Choice, Oasis, Seabrook, Trosvig, Emerald, Ray, Ziemek) \u2014 none publish prices; United Dental Lab mails one in its starter kit.",
+  "Which labs the named Eastside prosthodontists and full-arch practices currently use, and whether Washington State Prosthodontics (Drs. Johnson) routes work to the affiliated PNW Pros lab.",
+  "Aspen Dental and Heartland Dental office counts in Washington; whether Gentle Dental (InterDent) or Bright Now use centralized labs.",
+  "Cost of exhibiting at PNDC 2026, sponsoring SKCDS/SCDS/PCDS general membership meetings, or joining Seattle Study Club's partner program (no public rate cards found).",
+  "Current status of Seattle-area Spear or ITI study clubs (none found) and of UW's Implant Systems Study Club (last evidence 2015).",
+  "Any evidence of dentist dissatisfaction with existing local labs \u2014 none was found; claims of unmet need would be speculation."
+ ],
+ "competitors": [
+  {
+   "name": "Nakanishi Dental Laboratory",
+   "location": "2959 Northup Way, Bellevue, WA 98004",
+   "what": "Full-service lab (crown & bridge, removables, implant abutments/bars, nightguards); 'many CDTs'; ships nationwide; sponsors PCDS meetings",
+   "pricing": "Not published",
+   "turnaround": "Not published; online case submission and doctor portal",
+   "source_url": "https://www.nakanishidentallab.com/",
+   "notes": "Enigma directory revenue band $1M\u2013$5M; largest named Eastside lab by visibility"
+  },
+  {
+   "name": "Protea Dental Studio",
+   "location": "15955 NE 85th St Ste 204, Redmond, WA 98052",
+   "what": "Kois-affiliated esthetic/implant lab led by Leon Hermanides CDT (WSDLA past president); hosts Kois study club",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://www.proteadental.com/kois-study-club/",
+   "notes": "Revenue band $1M\u2013$5M (directory estimate); access to Kois alumni network"
+  },
+  {
+   "name": "PNW Pros Dental Lab",
+   "location": "1726 138th Pl NE, Bellevue, WA 98005",
+   "what": "Prosthodontist-owned lab: dentures, full-arch implant restorations, surgical planning/guides, crowns",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://pnwproslab.com/",
+   "notes": "DOH reg DLAB.FS.61146491; vertically integrated with Eastside prosthodontists"
+  },
+  {
+   "name": "Prime Dental Laboratory",
+   "location": "14595 Bel-Red Rd Bldg D Ste 200, Bellevue, WA 98007",
+   "what": "FCZ, e.max press, Katana, custom/hybrid abutments, PMMA full arch; accepts iTero and 3Shape",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://primedentalbellevue.com/services/",
+   "notes": "Same complex as prosthodontist Dr. Warren Libman"
+  },
+  {
+   "name": "Ray Dental Studio",
+   "location": "431 E Ward St, Kent, WA 98030",
+   "what": "CAD/CAM crowns, in-house milled custom Ti and hybrid abutments, 3D-printed surgical guides, dentures",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://www.raydentalstudio.net/services",
+   "notes": "Lifetime warranty on BruxZir/Origin Live FCZ; direct competitor on Ti milling"
+  },
+  {
+   "name": "Choice Dental Lab",
+   "location": "3016 Benson Rd S, Renton, WA 98055",
+   "what": "Full-service; zirconia, e.max, surgical guides, custom abutments, full-arch zirconia and Ti-reinforced 'I-Bar'; driver pickup/delivery",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://www.choice-lab.com/",
+   "notes": "NeoBiotech certified lab; accepts STL from all scanners"
+  },
+  {
+   "name": "Emerald Dental Arts",
+   "location": "529 Shattuck Ave S, Renton, WA 98057",
+   "what": "Zirconia, e.max (pressed/layered/milled), PFM, milled Ti/CoCr implant bars and bridges",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://www.emeralddentalarts.com/",
+   "notes": "25+ years; 'from picking up the case until delivery'"
+  },
+  {
+   "name": "Oasis Dental Lab",
+   "location": "16418 7th Pl W Ste B, Lynnwood, WA 98037",
+   "what": "All-ceramic, alloy, stock/custom abutments; all in-house; founded 2011",
+   "pricing": "Not published",
+   "turnaround": "Free local pickup/delivery (Seattle, Bellevue, Arlington); no rush charge",
+   "source_url": "https://www.oasisdentallabllc.com/",
+   "notes": "Sets the local service bar (free courier, free rush)"
+  },
+  {
+   "name": "Seabrook Dental Lab",
+   "location": "6101 200th St SW Ste 201, Lynnwood, WA 98036",
+   "what": "40+ year full-service lab; zirconia/e.max, implants, removables",
+   "pricing": "Not published",
+   "turnaround": "Free local pickup & delivery and nationwide shipping; prepaid USPS labels",
+   "source_url": "https://www.seabrookdentallab.com/index.php",
+   "notes": "Revenue band $250k\u2013$500k (directory estimate)"
+  },
+  {
+   "name": "Trosvig Dental Laboratory",
+   "location": "3224 Colby Ave Ste B, Everett, WA 98201",
+   "what": "Multi-technician family lab; fixed, removable, implant; digital equipment",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://trosvigdentallab.com/",
+   "notes": "Revenue band $1M\u2013$5M (directory estimate)"
+  },
+  {
+   "name": "Smile Design Dental Lab",
+   "location": "2045 152nd Ave NE, Redmond, WA 98052",
+   "what": "Origin zirconia, e.max, Lava, digital implant restorations, wax-ups",
+   "pricing": "Not published",
+   "turnaround": "'Guaranteed Delivery' \u2014 case free if late for patient appointment",
+   "source_url": "https://smiledesigndl.com/bellevue-dental-lab/?mid=products",
+   "notes": "Revenue band $500k\u2013$1M (directory estimate)"
+  },
+  {
+   "name": "First Impressions Dental Lab / Dentcron; Cox Dental Lab; Thorn Ford Dental Lab",
+   "location": "Bothell, WA (22722 29th Dr SE; 22121 17th Ave SE; 10107 Woodinville Dr)",
+   "what": "Bothell cluster of small full-service labs (crowns, implants, dentures, aligners)",
+   "pricing": "Not published",
+   "turnaround": "Dentcron claims 'quick turnaround'",
+   "source_url": "https://www.dentcron.com/",
+   "notes": "First Impressions since 1998"
+  },
+  {
+   "name": "Shama Dental Lab; Seattle Dental Arts; Swiss Dental & Technical Art; United Dental Lab",
+   "location": "Seattle (11066 5th Ave NE; 6206 Phinney Ave N; 907 N 130th St) and Tukwila (607 Industry Dr)",
+   "what": "Seattle-side labs: Shama (25+ yrs, digital), Seattle Dental Arts (e.max, Lava, Zenostar, Procera/Atlantis), Swiss Dental, United (mails price list in starter kit)",
+   "pricing": "Not published online",
+   "turnaround": "Not published",
+   "source_url": "https://seattledentalarts.com/",
+   "notes": "Shama and Seattle Dental Arts revenue band $1M\u2013$5M (directory estimate)"
+  },
+  {
+   "name": "VTA Dental Lab (Renton office)",
+   "location": "901 Rainier Ave N Ste B103, Renton, WA 98057 (also AZ, CA, TX)",
+   "what": "Multi-state full-service lab with clinical support team; crowns, implants, removables, ortho",
+   "pricing": "First case $150 promo; list not published",
+   "turnaround": "7-day zirconia crowns",
+   "source_url": "https://vtadentallab.com/dental-lab-in-washington/",
+   "notes": "Hybrid local-office/national-production model"
+  },
+  {
+   "name": "Ziemek Dental Lab",
+   "location": "2310 Mottman Rd SW, Olympia, WA 98512",
+   "what": "Full-service with own milling center; 11 implant systems; fixed hybrids; guided surgery; restorative coaching",
+   "pricing": "Not published",
+   "turnaround": "Guided surgery 5 days in-lab",
+   "source_url": "https://www.ziemekdentallab.com/products-services/what-we-do/",
+   "notes": "Serves Pierce/Thurston; ships nationally"
+  },
+  {
+   "name": "PRO-Craft Dental Laboratory",
+   "location": "25791 Jefferson Ave, Murrieta, CA (markets to Bellevue/Seattle/Redmond/Kirkland)",
+   "what": "Mail-order full-service lab with 'free iTero' scanner program and dedicated technician",
+   "pricing": "Not published; perks 'valued at over $17,000'",
+   "turnaround": "3\u20135 business days delivered (claimed); free rush",
+   "source_url": "https://www.pro-craft.com/washington-dental-lab",
+   "notes": "Aggressive WA SEO; scanner subsidy creates lock-in"
+  },
+  {
+   "name": "Glidewell",
+   "location": "Irvine, CA (no WA facility found)",
+   "what": "Largest U.S. lab; BruxZir; outsourced milling for labs; promotes chairside milling (fastmill.io)",
+   "pricing": "Not fetched for 2026",
+   "turnaround": "Shipping 2\u20134 business days each way (USPS free) or FedEx Overnight $9/way",
+   "source_url": "https://glidewelldental.com/send-case/pickup-and-delivery",
+   "notes": "Unverified 2023 forum claim of 'Glidewell Dental in Kent, WA' offering 2-day STL milling"
+  },
+  {
+   "name": "Dandy",
+   "location": "Lehi, UT and Carrollton, TX production",
+   "what": "Digital-only lab; scanner provided against lab minimum",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://www.meetdandy.com/labs/",
+   "notes": "Kirkland, WA practice (Smiles Dental Services) in testimonials"
+  },
+  {
+   "name": "National Dentex (NDX)",
+   "location": "No WA/OR lab on current directory; nearest Danville/Sacramento CA, Provo UT, Reno NV",
+   "what": "Largest North American lab network",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://nationaldentex.com/labs",
+   "notes": "Issaquah Dental Laboratory's former NDX page redirects; status unknown"
+  },
+  {
+   "name": "ClearChoice Metro-Seattle",
+   "location": "1200 112th Ave NE, Bellevue, WA 98004 (also Federal Way)",
+   "what": "Full-arch implant center with on-site lab (2\u20133 technicians per center); prosthodontists Pi\u00f1eyro and Deal",
+   "pricing": "Patient pricing on consult; lifetime zirconia warranty since 3/21/2025",
+   "turnaround": "Same-day provisional; final in-house",
+   "source_url": "https://www.clearchoice.com/locations/wa/bellevue/1200-112th-ave-ne/",
+   "notes": "Captures full-arch volume internally"
+  },
+  {
+   "name": "Nuvia Dental Implant Center Bellevue",
+   "location": "Northup Way, Bellevue, WA",
+   "what": "Full-arch chain; in-house lab at every location; permanent zirconia in 24 hours",
+   "pricing": "Not published",
+   "turnaround": "24 hours to final",
+   "source_url": "https://www.nuviasmiles.com/blog/implant-dentistry-in-bellevue",
+   "notes": "Drs. Michael Cho and Neha Rajput (prosthodontist)"
+  },
+  {
+   "name": "Willamette Dental Group (in-house lab)",
+   "location": "Admin HQ Hillsboro, OR; WA offices incl. Bellevue, Everett, Kent, Mountlake Terrace, Puyallup, Seattle, Tacoma",
+   "what": "Closed DSO with in-house lab: milled ceramic crowns, 3D-printed dentures",
+   "pricing": "n/a (closed system)",
+   "turnaround": "n/a",
+   "source_url": "https://locations.willamettedental.com/wa/",
+   "notes": "18 WA cities"
+  },
+  {
+   "name": "Light Dental Studios (in-house denture lab)",
+   "location": "30 Puget Sound offices incl. Bellevue, Kent, Lynnwood, Burien, Covington, Auburn",
+   "what": "Largest WA private dental group (self-described); in-house denture lab serving all offices",
+   "pricing": "n/a",
+   "turnaround": "n/a",
+   "source_url": "https://lightdentalstudios.com/dental-services/",
+   "notes": "Fixed crown & bridge lab sourcing not disclosed \u2014 potential account"
+  },
+  {
+   "name": "Pacific Dental Services",
+   "location": "40 WA offices (Becker's ~2023)",
+   "what": "DSO running CEREC same-day crowns in-office",
+   "pricing": "n/a",
+   "turnaround": "same-day",
+   "source_url": "https://www.beckersdental.com/dso-dpms/pacific-dental-services-network-state-by-state-breakdown/",
+   "notes": "Removes single-unit demand; specialty/full-arch sourcing unknown"
+  },
+  {
+   "name": "Lynnwood Dental Excellence (practice with in-house 5-axis mill)",
+   "location": "Lynnwood, WA; lab in Federal Way",
+   "what": "Practice-owned lab-grade 5-axis mill for zirconia, lithium disilicate, PMMA",
+   "pricing": "n/a",
+   "turnaround": "same-day/expedited",
+   "source_url": "https://www.lynnwooddentalcenter.com/lynnwood-dental-implants-technology-in-house-5-axis-dental-laboratory-grade-milling.html",
+   "notes": "Example of practice-level vertical integration"
+  }
+ ],
+ "cost_items": [
+  {
+   "item": "WA DOH dental laboratory registration renewal (per lab)",
+   "base_usd": 250,
+   "low_usd": 250,
+   "high_usd": 250,
+   "period": "annual",
+   "basis": "DOH Dental Laboratories FAQ; required for any lab doing business in WA, incl. out-of-state labs",
+   "status": "listed",
+   "source_url": "https://doh.wa.gov/licenses-permits-and-certificates/facilities-z/dental-laboratories/frequently-asked-questions",
+   "source_date": "undated; accessed 2026-10-12"
+  },
+  {
+   "item": "Mail-order shipping benchmark dentists already pay (Glidewell FedEx Overnight, round trip per box)",
+   "base_usd": 18,
+   "low_usd": 0,
+   "high_usd": 18,
+   "period": "per-shipment",
+   "basis": "Glidewell: $9 each way FedEx Overnight; prepaid USPS Priority Mail free (2\u20134 days each way)",
+   "status": "listed",
+   "source_url": "https://glidewelldental.com/send-case/pickup-and-delivery",
+   "source_date": "undated; accessed 2026-10-12"
+  },
+  {
+   "item": "Own Eastside courier route (2 pickup/delivery days per week, ~8 staff-hours, ~200 miles)",
+   "base_usd": 1100,
+   "low_usd": 900,
+   "high_usd": 1800,
+   "period": "monthly",
+   "basis": "Estimate: 8 hrs/wk x ~$17/hr WA minimum wage (verify current L&I rate) x 4.33 = ~$590 labor + 200 mi/wk x $0.70/mi x 4.33 = ~$606 mileage; competitors (Oasis, Choice, Seabrook) provide this free, so it is a cost of parity",
+   "status": "estimated",
+   "source_url": "https://www.oasisdentallabllc.com/",
+   "source_date": "derived 2026-10-12"
+  },
+  {
+   "item": "PNDC 2026 exhibitor booth (10x10), Seattle Convention Center",
+   "base_usd": 3500,
+   "low_usd": 2500,
+   "high_usd": 5000,
+   "period": "one-time",
+   "basis": "Estimate from typical regional state-association dental meeting booth rates; official PNDC exhibitor prospectus not fetched",
+   "status": "unresolved",
+   "source_url": "https://withorbital.com/conferences/pacific-northwest-dental-conference-2026",
+   "source_date": "undated; accessed 2026-10-12"
+  },
+  {
+   "item": "County dental society general-meeting sponsorship (PCDS/SKCDS/SCDS), per meeting",
+   "base_usd": 1000,
+   "low_usd": 500,
+   "high_usd": 2000,
+   "period": "per-unit",
+   "basis": "Estimate; PCDS sells corporate sponsorships for GMMs (Nakanishi and Nobel Biocare sponsored April 21, 2026 meeting; $50 member registration), but rate card not public",
+   "status": "unresolved",
+   "source_url": "https://www.pcdentists.org/",
+   "source_date": "page dated 4/28/2026; accessed 2026-10-12"
+  },
+  {
+   "item": "Seattle Study Club industry partner program (national network sponsorship)",
+   "base_usd": 10000,
+   "low_usd": 5000,
+   "high_usd": 25000,
+   "period": "annual",
+   "basis": "Estimate; SSC runs a formal partners/sponsors program for companies reaching 250+ clubs; pricing by inquiry only. Local affiliate-level meeting sponsorship likely far lower",
+   "status": "unresolved",
+   "source_url": "https://www.seattlestudyclub.com/partners",
+   "source_date": "undated; accessed 2026-10-12"
+  }
+ ],
+ "targets": [
+  {
+   "name": "Washington State Prosthodontics & Dental Implant Center (Drs. Michael W. Johnson, Russell Johnson, Lisa Thoms)",
+   "location": "1370 116th Ave NE Ste 212, Bellevue, WA 98004",
+   "type": "implant/full-arch practice",
+   "why": "Board-certified prosthodontists since 2000; All-on-4/teeth-in-a-day listed; 3D imaging; Seattle Met Top Dentists. Caveat: Dr. Russell Johnson appears affiliated with PNW Pros Dental Lab, so lab work may be captive \u2014 qualify first.",
+   "decision_maker": "Dr. Michael W. Johnson / Dr. Russell Johnson",
+   "how_to_reach": "425-455-4993; wspdic.com; Washington State Society of Prosthodontists meetings",
+   "source_url": "https://www.wspdic.com/Dental-Implants-Bellevue"
+  },
+  {
+   "name": "Bellevue Dentist \u2014 Dr. Siamak Najafi, prosthodontist",
+   "location": "14645 Bel-Red Rd Ste 100, Bellevue, WA 98007",
+   "type": "implant/full-arch practice",
+   "why": "NYU-trained prosthodontist ~1 mile from Integra; markets All-on-X, full-mouth reconstruction and 'latest technologies'; natural proximity account for shade visits and conversions",
+   "decision_maker": "Dr. Siamak Najafi",
+   "how_to_reach": "(425) 644-2205; bellevuedentist.com; walk-in visit given proximity",
+   "source_url": "https://bellevuedentist.com/prosthodontics/all-on-4-treatment-dental-implants"
+  },
+  {
+   "name": "Warren Libman DDS MSD, prosthodontist",
+   "location": "14595 Bel-Red Rd Ste 100, Bellevue, WA 98007",
+   "type": "implant/full-arch practice",
+   "why": "Referral prosthodontist for complex cases ('Top Prosthodontist', Seattle Magazine); same complex as Prime Dental Lab, so incumbent lab is next door \u2014 positioning must be on Ti milling and full-arch capacity",
+   "decision_maker": "Dr. Warren Libman",
+   "how_to_reach": "425-453-1308; libmandds.com",
+   "source_url": "https://libmandds.com/"
+  },
+  {
+   "name": "Eastside Prosthodontics \u2014 Dr. Rosario P. Palacios",
+   "location": "1800 116th Ave NE Ste 203, Bellevue, WA 98004",
+   "type": "implant/full-arch practice",
+   "why": "20+ years taking referrals from East and South King dentists; fixed/removable implant prostheses incl. teeth-in-a-day; Spanish/Portuguese speaking",
+   "decision_maker": "Dr. Rosario Palacios",
+   "how_to_reach": "425-688-7840; cosmeticdentistbellevue.org",
+   "source_url": "https://www.cosmeticdentistbellevue.org/about-us/"
+  },
+  {
+   "name": "Kirkland Premier Dentistry",
+   "location": "10601 NE 68th St, Kirkland, WA 98033",
+   "type": "implant/full-arch practice",
+   "why": "Five dentists incl. prosthodontist Dr. Udey Wirring and oral surgeon Dr. Gaurav Sharma; All-on-4/6 placed and restored in-house; iTero, CBCT, Digital Smile Design; 15 years on the Eastside",
+   "decision_maker": "Dr. Sheena Gaur (founding dentist) / Dr. Udey Wirring (prosthodontist)",
+   "how_to_reach": "(425) 284-3881; kirklandpremierdentistry.com",
+   "source_url": "https://www.kirklandpremierdentistry.com/dental-implants-kirkland-complete-guide"
+  },
+  {
+   "name": "Smiles By Design \u2014 Dr. Shawn Keller",
+   "location": "830 6th St S, Kirkland, WA 98033",
+   "type": "implant/full-arch practice",
+   "why": "All-on-4 'Same Day New Smile', digital imaging/guided placement; TRIOS scanner and in-house lab work cited on site \u2014 target for finals and overflow rather than provisionals",
+   "decision_maker": "Dr. Shawn Keller",
+   "how_to_reach": "425-558-1515; info@shawnkellerdds.com",
+   "source_url": "https://www.shawnkellerdds.com/implant-dentistry/all-on-four/"
+  },
+  {
+   "name": "Sunrise Dental of Redmond \u2014 Dr. Kunal Narang",
+   "location": "8309 165th Ave NE Ste 101, Redmond, WA 98052",
+   "type": "implant/full-arch practice",
+   "why": "Full-arch and full-mouth restorative focus, IV sedation, lifetime implant warranty; CEREC same-day crowns in-house (so sell zirconia arches, Ti bars, implant crowns, not posterior crowns)",
+   "decision_maker": "Dr. Kunal Narang",
+   "how_to_reach": "(425) 307-1317; redmonddentalstudio.com",
+   "source_url": "https://redmonddentalstudio.com/"
+  },
+  {
+   "name": "Eastside Dental Implant Center \u2014 Dr. Sidhu",
+   "location": "Issaquah, WA",
+   "type": "implant/full-arch practice",
+   "why": "Dedicated implant center marketing All-on-X with in-house CBCT; serves Issaquah, Bellevue, Sammamish, Kirkland",
+   "decision_maker": "Dr. Sidhu",
+   "how_to_reach": "(425) 526-5424; eastsidedentalimplantcenter.com",
+   "source_url": "https://eastsidedentalimplantcenter.com/dental-implants/solutions/all-on-x/"
+  },
+  {
+   "name": "Klahanie Family Dentistry \u2014 Dr. Travis M. Howey",
+   "location": "Klahanie (Issaquah), WA",
+   "type": "implant/full-arch practice",
+   "why": "All-on-4/6, hybrids, snap-in dentures, sinus lifts; CBCT-guided; UW grad, AAID member, SKCDS member; publishes patient implant price list ($5,700 single posterior implant+crown)",
+   "decision_maker": "Dr. Travis Howey",
+   "how_to_reach": "(425) 557-9900; klahaniedental.com; SKCDS meetings",
+   "source_url": "https://klahaniedental.com/dental-implants/"
+  },
+  {
+   "name": "Lifetime Smiles \u2014 Dr. Michael Beke",
+   "location": "2800 156th Ave SE Ste 201, Bellevue, WA 98007",
+   "type": "implant/full-arch practice",
+   "why": "Same-day All-on-X with 3D imaging; AGD Fellow; ~1.5 miles from Integra; final prosthesis fabricated after 4\u20136 months \u2014 direct zirconia-arch opportunity",
+   "decision_maker": "Dr. Michael Beke",
+   "how_to_reach": "(425) 747-4959; lifetimesmilesbellevue.com",
+   "source_url": "https://www.lifetimesmilesbellevue.com/services/dental-implants/all-on-x/"
+  },
+  {
+   "name": "Overlake Dental \u2014 Dr. Monika Yu",
+   "location": "2020 116th Ave NE Ste 220, Bellevue, WA 98004",
+   "type": "implant/full-arch practice",
+   "why": "Same-day All-on-4 immediate load; CBCT planning; implantology fellowship; consult-to-final in one office",
+   "decision_maker": "Dr. Monika Yu",
+   "how_to_reach": "425-453-9999; overlakedental.com",
+   "source_url": "https://overlakedental.com/services/all-on-4/"
+  },
+  {
+   "name": "Bellevue Premier Dental \u2014 Dr. Nakada",
+   "location": "1951 152nd Pl NE Unit 108, Bellevue, WA 98007",
+   "type": "dentist practice",
+   "why": "Digitally advanced (CEREC, iTero, 3D printer, CBCT, Dentrix Detect AI) and now marketing All-on-X; Japanese-speaking patient base; in-office milling means pitch is full-arch finals and implant crowns",
+   "decision_maker": "Dr. Nakada",
+   "how_to_reach": "(425) 974-8161; bellevuepremierdental.com",
+   "source_url": "https://www.bellevuepremierdental.com/dental-services/all-on-x-implant-treatment/"
+  },
+  {
+   "name": "Mercer Island Dental \u2014 Dr. Goichi Shiotsu, prosthodontist",
+   "location": "2825 80th Ave SE Ste 3, Mercer Island, WA 98040",
+   "type": "implant/full-arch practice",
+   "why": "Loma Linda prosthodontics + implant surgery training; All-on-4 with CBCT; past president Washington State Society of Prosthodontists; national lecturer \u2014 influencer among WA prosthodontists",
+   "decision_maker": "Dr. Goichi Shiotsu",
+   "how_to_reach": "206-232-3600; info@mercerislanddental.com",
+   "source_url": "https://www.mercerislanddental.com/surgical-services/all-on-4"
+  },
+  {
+   "name": "Aesthetic Restorative & Implant Dentistry Northwest \u2014 Dr. Ariel Raigrodski",
+   "location": "19020 33rd Ave W #200, Lynnwood, WA 98036",
+   "type": "implant/full-arch practice",
+   "why": "Diplomate ABP; former UW Graduate Prosthodontics Director; 500+ lectures on CAD/CAM and metal-free restorations; TRIOS and CBCT in office \u2014 technical validator and opinion leader",
+   "decision_maker": "Dr. Ariel Raigrodski",
+   "how_to_reach": "(425) 771-2022; aridentistrynorthwest.com; UW CDE circles",
+   "source_url": "https://www.aridentistrynorthwest.com/"
+  },
+  {
+   "name": "Cascadia Dental Specialists (Drs. Huda Albather, Arundhati Sengupta \u2014 periodontists; Dr. Jamshid Faghih \u2014 endodontist)",
+   "location": "14700 NE 8th St Ste 205, Bellevue, WA 98007",
+   "type": "implant/full-arch practice",
+   "why": "Surgical specialists placing All-on-X incl. NobelPearl zirconia implants with on-site CT and Simplant; ~1 mile from Integra; source of referrals to restorative GPs who need arches",
+   "decision_maker": "Dr. Huda Albather",
+   "how_to_reach": "425-644-7444; info@cascadiadental.com",
+   "source_url": "https://cascadiadental.com/services/dental-implants/"
+  },
+  {
+   "name": "Seattle Specialty Dentistry \u2014 Drs. Pavinee Chotiwannaporn and Alvarado, prosthodontists",
+   "location": "509 Olive Way Ste 1438, Seattle, WA 98101",
+   "type": "implant/full-arch practice",
+   "why": "Prosthodontists handling implant reconstructions, hybrids and immediate restoration; explicitly rely on 'advanced dental laboratory services'",
+   "decision_maker": "Dr. Pavinee Chotiwannaporn",
+   "how_to_reach": "206-682-3383; seattledentistry.com",
+   "source_url": "https://seattledentistry.com/implant-dentistry/"
+  },
+  {
+   "name": "Ko Dental \u2014 Dr. Ko, prosthodontist",
+   "location": "Seattle (600 University St area), serving Bellevue and Lynnwood",
+   "type": "implant/full-arch practice",
+   "why": "Prosthodontist placing and restoring single to full-arch implants; multi-city patient base",
+   "decision_maker": "Dr. Ko",
+   "how_to_reach": "206-624-7706; kodental.us",
+   "source_url": "https://www.kodental.us/dental-implants/"
+  },
+  {
+   "name": "Seattle Implant & Prosthetic Dentistry \u2014 Dr. Will Eunku Chung",
+   "location": "509 Olive Way Ste 711, Seattle, WA 98101",
+   "type": "implant/full-arch practice",
+   "why": "Downtown prosthodontic practice on Seattle Met Top Dentists list",
+   "decision_maker": "Dr. Will Eunku Chung",
+   "how_to_reach": "206-623-3122",
+   "source_url": "https://www.seattlemet.com/dentists/type/prosthodontics"
+  },
+  {
+   "name": "Kois Dentistry \u2014 Drs. Dean E. Kois, Tara L. Kois, John C. Kois",
+   "location": "1001 Fairview Ave N Ste 2000, Seattle, WA 98109",
+   "type": "implant/full-arch practice",
+   "why": "Implants incl. All-on-4 and full-mouth; co-located with the Kois Center, gateway to four local Kois study groups of digitally trained restorative dentists",
+   "decision_maker": "Dr. Dean Kois",
+   "how_to_reach": "206-515-9500; koisdentistry.com; Kois Center courses/study groups",
+   "source_url": "https://www.koisdentistry.com/restorative/implants/"
+  },
+  {
+   "name": "Spear Aesthetics \u2014 Dr. Greggory A. Kinzer",
+   "location": "720 Olive Way Ste 860, Seattle, WA 98101",
+   "type": "implant/full-arch practice",
+   "why": "High-end esthetic/fixed prosthodontics (Spear co-founder's Seattle practice); layered zirconia and e.max buyer",
+   "decision_maker": "Dr. Greggory Kinzer",
+   "how_to_reach": "206-223-0033",
+   "source_url": "https://www.seattlemet.com/dentists/type/prosthodontics"
+  },
+  {
+   "name": "Blooming Dental (prosthodontist-led)",
+   "location": "4215 198th St SW #205, Lynnwood, WA 98036 and 22030 7th Ave S #100, Des Moines, WA 98198",
+   "type": "implant/full-arch practice",
+   "why": "Full-arch and same-day implant solutions with CBCT, computer-guided surgery, iTero; two offices across South King and Snohomish",
+   "decision_maker": "Lead prosthodontist (name not on fetched page)",
+   "how_to_reach": "(253) 544-3429 Lynnwood new patients; bloomingdental.com",
+   "source_url": "https://www.bloomingdental.com/"
+  },
+  {
+   "name": "Premier Periodontics",
+   "location": "Bellevue, WA (multi-location)",
+   "type": "other",
+   "why": "Periodontal group offering All-on-4, immediate implants and grafting; surgical referral hub whose restorative partners need provisionals and arches",
+   "decision_maker": "Managing periodontist",
+   "how_to_reach": "premierperiodontics.com; referral-coordinator outreach",
+   "source_url": "https://premierperiodontics.com/services/dental-implant-treatments/dental-implants-bellevue-wa"
+  },
+  {
+   "name": "47 North Oral Surgery",
+   "location": "12330 120th Ave NE, Kirkland; 15955 NE 85th St Ste 104, Redmond; Monroe",
+   "type": "other",
+   "why": "Oral surgery group doing All-on-4 and running the 'Graduate Synergy Training Program' (4 sessions, 28 CE) for referring restorative dentists \u2014 a ready-made audience of implant-restoring GPs",
+   "decision_maker": "Partner surgeons / referral coordinator",
+   "how_to_reach": "425-821-7979 (Kirkland); referring-doctors page; offer lab-side session on digital conversions",
+   "source_url": "https://www.47northoralsurgery.com/referring-doctors/study-club/"
+  },
+  {
+   "name": "Puget Sound Periodontics & Implant Dentistry \u2014 Dr. Thomas Kang et al.",
+   "location": "West Seattle, Federal Way, Eastlake (Seattle)",
+   "type": "other",
+   "why": "'Teeth by Tonight' immediate-load practice whose permanent teeth are 'created in the porcelain lab'; runs the South Sound Multi-Disciplinary Study Club",
+   "decision_maker": "Dr. Thomas Kang",
+   "how_to_reach": "(206) 329-0410 Eastlake; pugetsoundperio.com referral resources",
+   "source_url": "https://www.pugetsoundperio.com/traditional-dental-implant-surgery"
+  },
+  {
+   "name": "Advanced Periodontics (seattleperio.com)",
+   "location": "Seattle and Bellevue, WA",
+   "type": "other",
+   "why": "Board-certified periodontists using Navident navigation, 3D printing, 5-year implant warranty; referral source for restorative dentists on the Eastside",
+   "decision_maker": "Managing periodontist",
+   "how_to_reach": "seattleperio.com",
+   "source_url": "https://www.seattleperio.com/"
+  },
+  {
+   "name": "Issaquah Premier Dental",
+   "location": "1740 NW Maple St, Issaquah, WA 98027",
+   "type": "dentist practice",
+   "why": "Runs three scanners (Primescan, Primescan 2, iTero Lumina) \u2014 fully digital GP that can send files directly",
+   "decision_maker": "Owner dentist (not on fetched page)",
+   "how_to_reach": "issaquahpremierdental.com",
+   "source_url": "https://www.issaquahpremierdental.com/technology/"
+  },
+  {
+   "name": "Bellevue Dental Arts \u2014 Dr. Ryan (and Dr. Norm)",
+   "location": "13333 Bel-Red Rd Ste 200, Bellevue, WA 98005",
+   "type": "dentist practice",
+   "why": "iTero Lumina Pro; family practice with early-adopter digital history; crowns, bridges and implants; ~1.5 miles from Integra",
+   "decision_maker": "Dr. Ryan",
+   "how_to_reach": "(425) 644-8445",
+   "source_url": "http://www.bellevuedentalarts.com/services/itero-lumina-pro"
+  },
+  {
+   "name": "Redmond DDS (Primescan practice)",
+   "location": "16375 NE 85th St #103, Redmond, WA 98052",
+   "type": "dentist practice",
+   "why": "Primescan user sending digital impressions to a lab for crowns and implants",
+   "decision_maker": "Owner dentist",
+   "how_to_reach": "(425) 885-4741",
+   "source_url": "https://www.redmond-dds.com/intraoral-scanner"
+  },
+  {
+   "name": "Protea Dental Studio (lab-to-lab)",
+   "location": "15955 NE 85th St Ste 204, Redmond, WA 98052",
+   "type": "dental lab",
+   "why": "Kois-affiliated esthetic lab; candidate for outsourced zirconia/Ti milling under Bear Milling if it lacks 5-axis wet milling capacity; also a channel via WSDLA and Kois study club",
+   "decision_maker": "Leon Hermanides CDT",
+   "how_to_reach": "(425) 497-9428; info@proteadental.com; WSDLA",
+   "source_url": "https://www.proteadental.com/kois-study-club/"
+  },
+  {
+   "name": "Denny Dental Laboratory",
+   "location": "14420 NE Bel-Red Rd Ste B101, Bellevue, WA 98007",
+   "type": "dental lab",
+   "why": "Small lab (directory revenue $250k\u2013$500k) a few hundred yards from Integra \u2014 likely lacks in-house Ti/5-axis milling; lab-to-lab milling prospect",
+   "decision_maker": "Owner",
+   "how_to_reach": "Walk-in; WSDLA directory",
+   "source_url": "https://www.enigma.com/directory/wa/all-cities/dental-laboratory/"
+  },
+  {
+   "name": "Bothell lab cluster (First Impressions/Dentcron, Cox Dental Lab, Thorn Ford Dental Lab)",
+   "location": "Bothell, WA 98021/98011",
+   "type": "dental lab",
+   "why": "Three small-to-mid full-service labs likely outsourcing zirconia/Ti milling; Bear Milling $22 mill-only is well below the $39\u2013$59 lab-to-lab benchmark",
+   "decision_maker": "Owners (Ron Cox at Cox Dental Lab)",
+   "how_to_reach": "(425) 402-4774 Cox; dentcron.com contact form",
+   "source_url": "https://coxdentallab.com/"
+  },
+  {
+   "name": "Lynnwood/Everett labs (Oasis, Seabrook, Trosvig, Edgewood)",
+   "location": "Lynnwood, Everett, Mukilteo, WA",
+   "type": "dental lab",
+   "why": "Snohomish labs with courier routes but unknown milling capacity; lab-to-lab prospects for full-arch zirconia from STL ($650) and Ti bars",
+   "decision_maker": "Owners (Tim/Isaac Trosvig)",
+   "how_to_reach": "Oasis (425) 835-0660; Seabrook 425-776-7718; Trosvig 425-257-1176",
+   "source_url": "https://trosvigdentallab.com/"
+  },
+  {
+   "name": "Light Dental Studios",
+   "location": "Puyallup-based; 30 Puget Sound offices",
+   "type": "DSO",
+   "why": "Largest WA private dental group with in-house denture lab but no disclosed fixed/implant lab \u2014 potential group account for zirconia and implant crowns",
+   "decision_maker": "Clinical director / procurement",
+   "how_to_reach": "lightdentalstudios.com general inquiries; PCDS sponsorships",
+   "source_url": "https://lightdentalstudios.com/dental-services/"
+  },
+  {
+   "name": "Seattle Digital Dental Hub (Seattle Study Club affiliate) \u2014 Dr. Rooz Khosravi",
+   "location": "Seattle, WA",
+   "type": "other",
+   "why": "Digital-dentistry-focused study club with UW-trained specialist advisory board; natural venue for a digital lab sponsor",
+   "decision_maker": "Dr. Rooz Khosravi (director)",
+   "how_to_reach": "seattledigitaldentalhub.com",
+   "source_url": "https://www.seattledigitaldentalhub.com/who-we-are"
+  },
+  {
+   "name": "Seattle Implant Study Club (AAID-affiliated)",
+   "location": "19720 68th Ave W Ste A, Lynnwood, WA 98036",
+   "type": "other",
+   "why": "Implant-focused club of GPs with AAID credentials; 2025 president Dr. Brian Baik",
+   "decision_maker": "Dr. Brian Baik",
+   "how_to_reach": "425-776-9132; info@seattleimplantstudyclub.com",
+   "source_url": "https://www.seattleimplantstudyclub.com/"
+  },
+  {
+   "name": "UW School of Dentistry Graduate Prosthodontics / CDE",
+   "location": "1959 NE Pacific St, Seattle, WA 98195",
+   "type": "other",
+   "why": "Residency pursuing fully digital All-on-4 workflows (Interim Director Dr. John Sorensen; technician Kleve Hansen); residents become local prosthodontists; CDE webinars on ceramics and full-arch in Nov 2026",
+   "decision_maker": "Dr. John A. Sorensen",
+   "how_to_reach": "dental.washington.edu/graduate-prosthodontics; CDE office",
+   "source_url": "https://dental.washington.edu/graduate-prosthodontics/"
+  }
+ ]
+}
