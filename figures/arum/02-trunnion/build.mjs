@@ -23,7 +23,7 @@ const H = 560;
 const AZIMUTH = 128; // viewer at the front left, as an operator at the open door
 const ELEVATION = 30;
 
-// Holder (O-type, from the dealer's photos: 157 square, 25 thick, Ø98.5 disc, P1–P5 premill bar)
+// Holder (disc cartridge frame, from the dealer's photos: 157 square, 25 thick, Ø98.5 disc, P1–P5 premill bar)
 const HALF = 78.5;
 const THICK = 12.5;
 const CHAMFER = 6.5;
@@ -107,16 +107,18 @@ T.prism({ name: "cradle.arm.left", ...CB, F: ALONG_X, polygon: backs([[WALL[0], 
 T.prism({ name: "cradle.rise.left", ...CB, F: ALONG_Y, polygon: [[ARM_L[0], BOSS_R], [ARM_L[1], BOSS_R], [ARM_L[1], TOP], [ARM_L[0] + 18, TOP], [ARM_L[0], TOP - 18]], s0: 8, s1: WALL[0], tone: "mid", material: "gold", bevel: 0.6 });
 T.prism({ name: "cradle.arm.right", ...CB, F: ALONG_X, polygon: backs([[-35, -45], [-20, -60], [WALL[0], -60], [WALL[0], TOP], [-35, TOP]]), s0: ARM_R[0], s1: ARM_R[1], tone: "mid", material: "gold", bevel: 0.8 });
 const wall = T.prism({ name: "cradle.wall", ...CB, F: ALONG_X, polygon: backs([[WALL[0], WALL_Z0], [WALL[1], WALL_Z0], [WALL[1], TOP], [WALL[0], TOP]]), s0: ARM_L[0], s1: ARM_R[1], tone: "mid", material: "gold", bevel: 0.8 });
-// the bolt circle on the wall's front face: five socket heads in counterbores and two open holes on one arc
+// the bolt circle on the wall's front face: five socket heads in counterbores and two open holes on the upper arc, and five
+// more socket heads on the lower arc, seen in ARUM's photos through the open premill bar (count, radius and angles not
+// published: measured to about ±10° and assumed on the same circle)
 const bolt = (deg) => [27.5 * Math.sin((deg * Math.PI) / 180), 27.5 * Math.cos((deg * Math.PI) / 180)];
-const wallFace = [...[-68, -34, 0, 34, 68].map((d) => { const [x, z] = bolt(d); return `<path class="iso-line" data-tone="lo" d="${shift(circle(5, 20), x, z)}"/>${socketHead(x, z, 3.4)}`; }), ...[-105, 105].map((d) => { const [x, z] = bolt(d); return `<path class="tr-hole" d="${shift(circle(2.6, 12), x, z)}"/>`; })].join("");
+const wallFace = [...[-68, -34, 0, 34, 68, 125, 150, 180, 210, 235].map((d) => { const [x, z] = bolt(d); return `<path class="iso-line" data-tone="lo" d="${shift(circle(5, 20), x, z)}"/>${socketHead(x, z, 3.4)}`; }), ...[-105, 105].map((d) => { const [x, z] = bolt(d); return `<path class="tr-hole" d="${shift(circle(2.6, 12), x, z)}"/>`; })].join("");
 T.plane({ part: wall, o: [0, -WALL[0], 0], u: [1, 0, 0], v: [0, 0, 1], normal: [0, 1, 0], svg: wallFace });
 T.prism({ name: "cradle.hat", ...CB, F: ALONG_Y, polygon: [[-45, TOP], [45, TOP], [33, TOP + 12], [-33, TOP + 12]], s0: WALL[0], s1: WALL[1], tone: "mid", material: "gold", bevel: 0.5 });
 // B knuckle on the wall's back face, flush against the stainless box behind the cradle
 const KNUCKLE = [WALL[1], WALL[1] + 6];
 T.round({ name: "cradle.b-knuckle", ...CB, F: ALONG_Y, s0: KNUCKLE[0], s1: KNUCKLE[1], r: 34, tone: "mid", material: "steel" });
 // hubs (silver): left end cap and bearing cap on the support arm, drive housing on the right arm
-T.round({ name: "hub.left.cap", ...CB, F: ALONG_X, s0: ARM_L[0] - 5, s1: ARM_L[0], r: 29.5, tone: "mid", material: "steel", details: { bolts: [{ s: ARM_L[0] - 5, r: 22, count: 4, phase: 0.4, size: 0.5 }] } });
+T.round({ name: "hub.left.cap", ...CB, F: ALONG_X, s0: ARM_L[0] - 5, s1: ARM_L[0], r: 29.5, tone: "mid", material: "steel", details: { bolts: [{ s: ARM_L[0] - 5, r: 22, count: 6, phase: 0, size: 0.5 }] } });
 T.round({ name: "hub.left.bearing", ...CB, F: ALONG_X, s0: ARM_L[1], s1: ARM_L[1] + 6, r: 30, tone: "mid", material: "steel", details: { bolts: [{ s: ARM_L[1] + 6, r: 26, count: 4, phase: 0.2, size: 0.5 }] } });
 const rimScrews = Array.from({ length: 6 }, (_, i) => { const t = (i / 6) * 2 * Math.PI + 0.3; return { at: [ARM_R[0] - 4, 42.5 * Math.cos(t), 42.5 * Math.sin(t)], normal: [0, Math.cos(t), Math.sin(t)], size: 0.55 }; });
 T.round({ name: "hub.right.drive", ...CB, F: ALONG_X, s0: 91, s1: ARM_R[0], r: 42.5, tone: "mid", material: "steel", details: { seams: [96, ARM_R[0] - 8], dots: rimScrews } });
@@ -126,7 +128,8 @@ const plate = [[-HALF + CHAMFER, -HALF], [HALF - CHAMFER, -HALF], [HALF, -HALF +
 // holder frame: u = −X, v = back, so markup reads with v toward the back wall at A = 0
 const HF = { o: [0, 0, 0], a: [0, 0, 1], u: [-1, 0, 0], v: [0, -1, 0] };
 const holder = T.prism({ name: "holder.plate", ...CA, F: HF, polygon: plate, s0: -THICK, s1: THICK, tone: "hi", crease: "lo", material: "steel" });
-// Face B (up at A = 0): black clamp ring with six screws over a polished bevel, the slot by the front edge, four blind pockets
+// Face B (up at A = 0): black clamp ring with six screws over a polished bevel, the slot by the front edge, four blind pockets,
+// and the premill bar along the back edge with five seat marks (ARUM's photos show P1–P5 on this face too)
 const ringScrews = Array.from({ length: 6 }, (_, i) => [56.5 * Math.cos((i * Math.PI) / 3), 56.5 * Math.sin((i * Math.PI) / 3)]);
 const knurled = (x, y) => `${screwHead(x, y, 3.6)}<path class="iso-line" data-tone="faint" d="${shift(circle(2.2, 12), x, y)}"/>`;
 const faceB = [
@@ -141,6 +144,8 @@ const faceB = [
   ...[[-42, -42], [42, -42], [-42, 42], [42, 42]].map(([x, y]) => `<path class="iso-line" data-tone="lo" d="${shift(circle(5.5, 20), x, y)}"/>`),
   ...[[-70, -62], [70, -62]].map(([x, y]) => knurled(x, y)),
   ...[[-70, 66], [70, 66]].map(([x, y]) => `<path class="iso-line" data-tone="lo" d="${roundRect(x - 7, y - 7, x + 7, y + 7, 1.2)}"/>${screwHead(x, y, 2.5)}`),
+  `<path class="iso-line" data-tone="lo" d="${roundRect(-56, 58, 55, 68, 2)}"/>`,
+  `<path class="iso-line" data-tone="lo" data-free="end" d="${[-42, -21, 0, 21, 42].map((x) => `M${x} 68L${x} 72`).join("")}"/>`,
 ].join("");
 T.plane({ part: holder, o: [0, 0, THICK], u: [-1, 0, 0], v: [0, -1, 0], svg: faceB });
 // Face A (down at A = 0): the disc in its bore, the recessed field, the premill groove with five engraved seat marks,
@@ -188,7 +193,11 @@ function chamber() {
   const wallTop = BOX_Z[1] + 24;
   const onWall = (x, z) => at([x, -BACK_Y, z]);
   const panelScrews = [];
-  for (const x of [-240, -160, -140, 100, 120, 176]) for (let z = FLOOR_Z + 18; z < wallTop - 10; z += 40) panelScrews.push(onWall(x, z));
+  // the window behind the tool magazine (ARUM's photo of the magazine and the dealer's photo 5): a framed opening onto
+  // the machine's interior, its lower part hidden by the magazine (size and height read from the photos, not published)
+  const WIN = { x: [-205, -130], z: [-4, 50] };
+  const inWindow = (x, z) => x > WIN.x[0] - 4 && x < WIN.x[1] + 4 && z > WIN.z[0] - 4 && z < WIN.z[1] + 4;
+  for (const x of [-240, -160, -140, 100, 120, 176]) for (let z = FLOOR_Z + 18; z < wallTop - 10; z += 40) if (!inWindow(x, z)) panelScrews.push(onWall(x, z));
   for (let x = -220; x < 180; x += 40) panelScrews.push(onWall(x, wallTop - 12));
   // the Z slide runs in a recess behind the head: its floor and right side are visible, with two rails inside
   const RX = [-62, 62];
@@ -200,16 +209,22 @@ function chamber() {
   const recessSide = k.pathOf([[RZ[0], -BACK_Y], [RZ[1], -BACK_Y], [RZ[1], -BACK_Y - DEEP], [RZ[0], -BACK_Y - DEEP]].map(([z, y]) => at([RX[1], y, z])), true);
   const rails = [-48, 30].map((x) => S(k.slabOf({ x, y: -BACK_Y - DEEP, w: 18, d: 6, r: 1 }, RZ[0], RZ[1] - RZ[0], P, 2, 0.4), { tone: "mid" })).join("");
   const recessSvg = `<g clip-path="url(#tr-recess)"><path class="tr-recess" d="${recessBack}"/><path class="iso-top" d="${recessFloor}"/><path class="iso-shade" data-shade="1" d="${recessSide}"/>${rails}</g>` + Ln(recessOutline, { tone: "lo" });
-  const seams = [-150, 110].map((x) => k.segment([x, -BACK_Y, FLOOR_Z], [x, -BACK_Y, wallTop], P)).join("");
+  // panel seams, the left one broken by the window
+  const seams = [[-150, FLOOR_Z, WIN.z[0]], [-150, WIN.z[1], wallTop], [110, FLOOR_Z, wallTop]].map(([x, z0, z1]) => k.segment([x, -BACK_Y, z0], [x, -BACK_Y, z1], P)).join("");
+  const box = ([x0, x1], [z0, z1]) => k.pathOf([onWall(x0, z0), onWall(x1, z0), onWall(x1, z1), onWall(x0, z1)], true);
+  const winOuter = box(WIN.x, WIN.z);
+  const winInner = box([WIN.x[0] + 3, WIN.x[1] - 3], [WIN.z[0] + 3, WIN.z[1] - 3]);
   const LEDGE = { x: -258, y: -BACK_Y, w: 190, d: 8, r: 1 };
-  const slot = k.pathOf(k.roundedPlan({ x: -236, y: 34, w: 150, d: 8, r: 4 }, 4).map(([x, z]) => onWall(x, z)), true);
-  const brush = k.pathOf(k.roundedPlan({ x: -234, y: 36.5, w: 146, d: 3, r: 1.5 }, 4).map(([x, z]) => onWall(x, z)), true);
+  // the brushed slot sits centred just above the stainless box (dealer's photo 3); from this high view the box mostly hides it
+  const slot = k.pathOf(k.roundedPlan({ x: -65, y: 41, w: 130, d: 8, r: 4 }, 4).map(([x, z]) => onWall(x, z)), true);
+  const brush = k.pathOf(k.roundedPlan({ x: -63, y: 43.5, w: 126, d: 3, r: 1.5 }, 4).map(([x, z]) => onWall(x, z)), true);
   const wallSvg =
     `<defs><clipPath id="tr-recess"><path d="${recessOutline}"/></clipPath></defs>` +
     S(k.slabOf(WALLP, FLOOR_Z, wallTop - FLOOR_Z, P, 2, 1), { tone: "mid" }) +
     recessSvg +
     Ln(seams, { tone: "faint" }) +
     Dots(panelScrews, { size: 0.5 }) +
+    `<path class="tr-recess" d="${winInner}"/>` + Ln(winOuter, { tone: "lo" }) + Ln(winInner, { tone: "lo" }) +
     `<path class="tr-hole" d="${slot}"/>` + Ln(slot, { tone: "lo" }) + Ln(brush, { tone: "faint" }) +
     S(k.slabOf(LEDGE, 56, 5, P, 2, 0.4), { tone: "mid" });
   put({ name: "stand.wall", layer: "back", at: [0, -BACK_Y - 7, 40], bias: -40, svg: wallSvg, shapes: [ground(A.slab(WALLP, FLOOR_Z, wallTop - FLOOR_Z)), A.slab(LEDGE, 56, 5)] });
@@ -354,7 +369,7 @@ const body =
     ],
     caption:
       `A turns the holder a full ${SPEC.aRange}° on the shaft between the support hub and the drive hub. B rolls the whole cradle up to ±${SPEC.bLimit}°; we show it about a front-to-back axis through the centre of the bolt circle in the cradle's back wall, an inference from the photos rather than published data. Together they tilt the disc under the bur, which never tilts, so undercuts, angled screw channels and the disc's back face can be reached without unclamping it. ` +
-      `Specs: ARUM 5X-200 (A 360°, B ±30°, ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks, ${SPEC.kw} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm, Ø${SPEC.disc} mm discs, five premill seats P1–P5 on the holder's back edge). Holder, cradle, hubs, nozzles and the magazine grid measured from the dealer's photos of a 5X-200; spindle head, rear box and chamber schematic; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
+      `Specs: ARUM 5X-200 (A 360°, B ±30°, ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks, DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm, five premill seats P1–P5 on the holder's back edge). Holder (Ø${SPEC.disc} mm disc), cradle, hubs, nozzles and the magazine grid measured from the dealer's photos of a 5X-200 and ARUM's product photos; spindle head, rear box and chamber schematic; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
     body: stage,
   }) +
   `</div>`;

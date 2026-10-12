@@ -1,7 +1,8 @@
 // Truth model for Fig 2: the ARUM 5X-200's two rotary axes. Pure, no DOM.
 // Specs: arumdentistry.com/eng/solution/milling1.php (5X-200): A 360°, B ±30°, 15 tools Ø6 shank,
-// 3.0 kW / 60,000 rpm spindle, O-type disc holder for Ø98.5 mm discs; the AT holder takes 5 premills (P1–P5).
-// Form: from the dealer's photos of a 5X-200 chamber (styling illustrative, not traced).
+// DC 3.0 kW / 60,000 rpm spindle, Disk Cartridge (ARUM's term), mounting of 5 pre-milled blanks (P1–P5).
+// Ø98.5 mm disc: measured from the dealer's photos; ARUM publishes no disc diameter for the 5X-200.
+// Form: from the dealer's photos of a 5X-200 chamber and ARUM's product photos (styling illustrative, not traced).
 
 export const SPEC = { aRange: 360, bLimit: 30, tools: 15, shank: 6, rpm: 60000, kw: 3.0, disc: 98.5, premills: 5 };
 
