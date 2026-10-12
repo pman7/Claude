@@ -1,0 +1,958 @@
+{
+ "topic": "Regulatory, tax and entity compliance for a Bellevue WA digital dental lab (Integra Dental Design / Nova Dental LLC) operating or selling into WA, CA, HI, TX, FL, AK, OR and ID \u2014 lab registration, FDA status (incl. abutment milling), sales/excise tax, foreign-LLC and local-license costs, payroll burdens for one remote employee, WA B&O, CDL/DAMAS, HIPAA. Desk research as of 2026-10-12 (WebSearch quota was exhausted for this turn; all sourcing done via Exa search/fetch of primary pages).",
+ "summary": "Most consequential facts first.\n\n1. Washington is now a CDT-or-dentist-supervision state, and that bites Integra directly. RCW 70.352.050(2)(a) (effective Jan 31, 2025) bars DOH from issuing/renewing a dental-lab registration unless the lab employs an NBC Certified Dental Technician working at least 30 hrs/week or operates under a WA-licensed dentist's supervision; the only carve-out is continuous same-owner operation since Jan 1, 1996, which Integra lost with the Jan 1, 2026 ownership change. Registration is $250 initial/$250 annual (renew by July 31; WAC 246-315-990), and the lab must attest to materials and point-of-origin disclosure to prescribing dentists (RCW 70.352.030(1)(e)-(f)). Whether Integra's CAD/CAM director or senior tech is the CDT of record is unverified; if neither is a CDT, the registration (permit A62926327, number format not verified against DOH lookup) is exposed. WA also asserts jurisdiction over out-of-state labs: a lab is \"doing business\" in WA if its work order originates in WA (RCW 70.352.020(2)).\n\n2. State registration elsewhere is thin. Texas (Occ. Code ch. 266; 22 TAC 116) requires registration ($125 application, $138 annual renewal per TSBDE FY2024 schedule), a CDT on premises 30 hrs/week, 12 CE hrs/yr and a jurisprudence assessment every 3 years; NADL's 2014 chart says Texas also requires out-of-state labs to register, but current TSBDE rule text confirming that was not located (medium confidence). Florida registers labs biennially at $200 (Rule 64B27-1.002; statutory cap $300) with 18 CE hrs/biennium and an inspection, but s. 466.032(5)(d)2 expressly exempts out-of-state labs serving FL dentists. California, Hawaii, Alaska, Oregon and Idaho have no lab registration (NADL list of 12 regulating states plus WA since 2019); California's materials disclosure (B&P 1648.10-.20 fact sheet) is a dentist obligation, not a lab one, and B&P 1626(e) only requires a dentist's written authorization for lab work.\n\n3. FDA: a lab making crowns/dentures from cleared materials under a dentist's prescription is exempt from establishment registration under 21 CFR 807.65(i). The line is crossed when the lab makes the implant/abutment interface: FDA treats that as manufacturing a Class II device (21 CFR 872.3630, code NHA) requiring 510(k), registration (FY2026 fee $11,423; FY2027 fee $13,785 from Oct 1, 2026) and the QMSR (ISO 13485-based 21 CFR 820, effective Feb 2, 2026). Milling the collar/post from a Ti-base or pre-milled blank by CAD/CAM is permitted only under a 510(k) holder's cleared closed workflow or by a lab operating as the holder's FDA-registered contract manufacturer (\"validated milling center\"). ARUM Dentistry's own clearance K242245 (Nov 25, 2024) states all digitally designed abutments are \"intended to be manufactured at an ARUM DENTISTRY validated milling center\" \u2014 so Integra's TRI \"certified manufacturing center\" onboarding and any ARUM abutment work are the correct legal path, and milling interfaces from Ti discs in-house without a 510(k) is not. No standalone FDA guidance on lab milling exists; the position is documented in FDA correspondence relayed by NADL/JDT (2015-2016) and IDT (2017-2021), so confidence is medium.\n\n4. Sales tax is the hidden cost of a California presence. CDTFA Reg. 1506(e): dental labs are retailers and tax applies to the entire charge to dentists (dentists are consumers). Today, below the $500k CA remote-seller threshold, Integra need not collect on SoCal sales; a physical presence (employee, office in Aliso Viejo) triggers registration and collection on all CA sales (~7.75% in Orange County, est.), i.e., about $10 on a $129 crown. By contrast, dental prostheses sold to dentists are exempt in WA (RCW 82.08.0283; WAC 458-20-151), TX (Tax Code 151.313(a)(5); Rule 3.284, no prescription needed), FL (s. 212.08(2); Rules 12A-1.020/1.021), and ID (63-3622N(a)(4); IDAPA 35.01.02.100.07); OR and AK have no state sales tax (AK locals via ARSSTC at $100k; Anchorage levies none). Hawaii is the exception: GET applies because HRS 237-24.3(6) excludes dental devices from the prosthetic exemption; rate is 0.5% if the lab-to-dentist sale qualifies as wholesale under HRS 237-4(a)(8), otherwise 4% + 0.5% Maui surcharge (estimate; unresolved). Equipment sales as an ARUM dealer are taxable everywhere except OR/AK, so dealer activity, not prosthetics, is what pushes nexus exposure.\n\n5. Entity and local costs are modest except California. Foreign-LLC: CA $70 + $800/yr minimum tax (+$900 LLC fee once CA income reaches $250k) + $20 SOI; TX $750 one-time, franchise tax $0 below $2.65M but annual PIR required; HI $51 + $15/yr + $20 GET license; FL $125 + $138.75/yr; AK $350 + $200 biennial + $50/yr business license; OR $275 + $275/yr; ID $100 + $0. Aliso Viejo and Laguna Niguel have no business license (registration/CO only); Laguna Beach taxes gross receipts (rate table not captured); Dallas needs a $375 CO; Miami-Dade needs county + city tax receipts (est. $30-$180/yr county).\n\n6. Payroll for one remote employee: CA (UI 3.4% on $7k, ETT, SDI 1.3% employee-paid, mandatory workers' comp) and HI (UI 2.4% on $64,500, TDI, mandatory Prepaid Health Care for 20+ hr/week employees \u2014 the largest single burden, est. $400-$800/month employer share) are heavy; TX (2.7% on $9k, WC optional) and FL (2.7% on $7k, WC not required under 4 employees) are light; AK UI is 1.0% employer + 0.5% employee on $54,200 with mandatory WC.\n\n7. WA B&O: manufacturing 0.484% plus retailing/wholesaling with MATC, rising to 0.5% Jan 1, 2027 (ESHB 2081). At ~$11.7k/month the $55/month small-business credit nearly zeroes Integra's B&O (est. <$100/yr). The M&E exemption (RCW 82.08.02565; WAC 458-20-151(3)(d)) lets Integra buy mills/printers/furnaces sales-tax-free, and lets WA lab customers (not dentists) buy ARUM mills from Integra tax-free.\n\n8. CDL costs $450 initial/$250 per year and needs a CDT; a Sept 2026 VA Charleston solicitation required NADL certification, so CDL is a gating item for some VA bids but not universal. DAMAS audit pricing is not published (manual $325). HIPAA: labs are health-care providers; OCR confirmed to the ADA (Mar 2017) that no BAA is needed for treatment disclosures.",
+ "findings": [
+  {
+   "claim": "WA requires every dental lab operating or doing business in WA to register with DOH; an out-of-state lab is 'doing business' in WA if its work product is prepared under a work order originating in WA.",
+   "detail": "RCW 70.352.020(1)-(2). In-office labs serving only their own dentist's patients are exempt (70.352.020(3)). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (2019 c 68)",
+   "source_url": "https://app.leg.wa.gov/RCW/default.aspx?cite=70.352.020",
+   "value": "registration required; out-of-state labs included"
+  },
+  {
+   "claim": "Since Jan 31, 2025 WA DOH may not issue a dental-lab registration unless the lab employs an NBC CDT in good standing working at least 30 hrs/week or operates under a WA-licensed dentist; only labs continuously owned/operated by the same individual since Jan 1, 1996 are exempt.",
+   "detail": "RCW 70.352.050(2)(a)-(b) and DOH Dental Laboratories page ('Effective January 31, 2025'). Integra's Jan 1, 2026 ownership change forfeits the 1996 grandfather; which staff member is CDT of record is unverified. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated; DOH page states effective Jan 31, 2025",
+   "source_url": "https://doh.wa.gov/licenses-permits-and-certificates/facilities-z/dental-laboratories",
+   "value": "CDT >=30 hrs/wk or dentist supervision"
+  },
+  {
+   "claim": "WA dental-lab registration fees: application $250, annual renewal $250 (due before July 31), late penalty $125, expired reissuance $125.",
+   "detail": "WAC 246-315-990; RCW 70.352.060 (annual renewal before July 31). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://app.leg.wa.gov/WAC/default.aspx?cite=246-315-990&pdf=true",
+   "value": "$250 initial; $250/yr"
+  },
+  {
+   "claim": "WA registration application requires the lab to attest it will disclose to the prescribing dentist (e) manufacturer/brand or FDA registration number of all patient-contact materials and (f) point of origin of manufacture incl. any third-party portion (city, state, country).",
+   "detail": "RCW 70.352.030(1)(d)-(f); WAC 246-315-030(3)-(4). Also requires a statement of OSHA/CDC infection-control compliance. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (2019 c 68)",
+   "source_url": "https://app.leg.wa.gov/RCW/default.aspx?cite=70.352.030",
+   "value": "materials + point-of-origin disclosure"
+  },
+  {
+   "claim": "Texas requires registration of any person operating a dental laboratory or providing dental laboratory services; a lab must have a CDT working on premises at least 30 hrs/week (exemptions: dentist-owned on-premises labs with <3 technicians; labs registered since Sept 1, 1987 with unchanged 51% ownership).",
+   "detail": "Tex. Occ. Code 266.151, 266.152; 22 TAC 116.5. Renewal annually by Dec 31 (TSBDE). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (statute amended 2017)",
+   "source_url": "https://statutes.capitol.texas.gov/Docs/OC/htm/OC.266.htm",
+   "value": "CDT 30 hrs/wk on premises"
+  },
+  {
+   "claim": "Texas dental-lab registration fees: $125 application; $138 annual renewal ($134 board + $4 Texas Online); late 1-90 days $207; 91-364 days $276.",
+   "detail": "TSBDE proposed FY2024 fee schedule (board meeting Feb 16, 2024); 2022 renewal form also shows $138. Current FY2026 schedule page not reachable; treat as listed figure subject to change. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "Feb 2024 (FY2024 proposed schedule)",
+   "source_url": "https://tsbde.texas.gov/78i8ljhbj/PROPOSED-FeeScheduleFY2024proposed_BM021624pdf.pdf",
+   "value": "$125 initial; $138/yr"
+  },
+  {
+   "claim": "Texas renewal requires proof the designated CDT met NBC CE requirements, or (for exempt labs) 12 CE hours in the prior 12 months incl. one infection-control course; the lab owner/manager must pass the TSBDE Jurisprudence Assessment every 3 years.",
+   "detail": "22 TAC 116.3(c)(4), 116.6; TSBDE renewal page. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://tsbde.texas.gov/licensing/dental-laboratories/dental-laboratory-renewals/",
+   "value": "12 CE hrs/yr; jurisprudence every 3 yrs"
+  },
+  {
+   "claim": "NADL's state chart lists Texas, South Carolina and Kentucky as the states requiring OUT-OF-STATE labs to register; Florida, Oklahoma, Pennsylvania, Minnesota do not. Current TSBDE rule text confirming the Texas out-of-state requirement was not located.",
+   "detail": "NADL 'Dental Laboratory Basic Minimum Standards by State' (updated Aug 2014). Occ. Code 266.102(b)(5)(D)-(E) authorizes TSBDE rules on referrals to out-of-state labs and on prostheses made out of state 'for use in this state'; 266.153 speaks of labs 'doing business in this state'. Treat as likely-yes pending TSBDE confirmation. Accessed 2026-10-12.",
+   "kind": "historical",
+   "confidence": "medium",
+   "source_date": "August 2014",
+   "source_url": "https://mediaassets.abc15.com/html/pdf/DentalLaboratoryStandardsbyStateChart%20August2014.pdf",
+   "value": "TX/SC/KY: out-of-state labs must register (per NADL 2014)"
+  },
+  {
+   "claim": "Florida requires labs operating in FL to register biennially; fee is $200 per biennium (statutory cap $300); 18 CE hours per biennium (incl. 2 hrs medical errors, 1-3 hrs laws & rules); passing inspection required before issuance; fingerprinting required since HB 975 (2024).",
+   "detail": "F.S. 466.032(1),(5); Rule 64B27-1.002 ($200 biennial), 64B27-1.003 (CE); Florida Board of Dentistry Dental Laboratory page (application fee $200). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2025 Florida Statutes; rule amended 6/13/2021",
+   "source_url": "https://www.law.cornell.edu/regulations/florida/Fla-Admin-Code-Ann-R-64B27-1-002",
+   "value": "$200 per 2 years"
+  },
+  {
+   "claim": "An out-of-state lab serving Florida dentists is not required to register in Florida and may provide services with a proper prescription.",
+   "detail": "F.S. 466.032(5)(d)2: 'A dental laboratory in another state or country which provides service to a dentist licensed under this chapter is not required to register with the state...'. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2025 Florida Statutes",
+   "source_url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0400-0499/0466/Sections/0466.032.html",
+   "value": "no FL registration for out-of-state labs"
+  },
+  {
+   "claim": "California does not license or register commercial dental laboratories; lab fabrication of crowns/bridges/dentures is exempt from the dental practice act only if a written authorization signed by a licensed dentist accompanies the work order.",
+   "detail": "B&P Code 1626(e). The patient 'Dental Materials Fact Sheet' duty (B&P 1648.10-1648.20) and denture marking (B&P 1706) fall on the dentist, not the lab. California is absent from NADL's list of regulating states. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "undated",
+   "source_url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?article=2.&chapter=4.&division=2.&lawCode=BPC&part=&title=",
+   "value": "no CA lab registration"
+  },
+  {
+   "claim": "Hawaii, Alaska, Oregon and Idaho impose no dental-lab registration, CDT or disclosure requirement; only 12 states did in 2014 (TX, MO, SC, NC, KY, IL, FL, MN, OK, OH, PA, VA), with Washington added in 2019.",
+   "detail": "NADL chart (Aug 2014) and NADL state-regulation page ('Twelve states have existing administrative or statutory laws regulating dental laboratories'); WA chapter 70.352 RCW enacted 2019 c 68. Post-2014 additions in other states were not exhaustively re-verified. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "Aug 2014 chart; NADL page dated 2013-07-18",
+   "source_url": "https://dentallabs.org/state-regulation/",
+   "value": "HI/AK/OR/ID: none"
+  },
+  {
+   "claim": "Dental laboratories whose primary responsibility is to provide a service using previously manufactured devices are exempt from FDA establishment registration under 21 CFR 807.65(i); FDA's registration table nonetheless lists 'Manufactures a custom device: register/list/pay fee'.",
+   "detail": "21 CFR 807.65(i) names 'dental laboratory' personnel expressly. FDA 'Who Must Register, List and Pay the Fee' table (undated). The exemption covers conventional crowns/dentures made per prescription from cleared materials; it does not cover a lab that manufactures a finished Class II device (e.g., abutment interface) or acts as a contract manufacturer. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (reg. last amended 2001)",
+   "source_url": "https://www.law.cornell.edu/cfr/text/21/807.65",
+   "value": "exempt unless lab becomes a manufacturer/contract manufacturer"
+  },
+  {
+   "claim": "FDA's position: anyone CAD/CAM milling the implant/abutment interface is a Class II device manufacturer (21 CFR 872.3630, product code NHA) and needs 510(k) clearance; labs may hand-mill collars/posts of blanks, but CAD/CAM milling of collar/post is allowed only under a 510(k) holder's cleared instructions (closed workflow) or by an FDA-registered contract manufacturer (validated milling center) for the 510(k) holder.",
+   "detail": "NADL/Eric Thorn, Journal of Dental Technology (Jan 2016) and NADL alert (Nov 2015) relaying FDA communications; NADL FAQ (Mar 2016); IDT articles (2017-2021) quoting FDA Dental Division. No standalone FDA guidance document on lab milling exists; FDA's 2004 Class II special-controls guidance covers abutment 510(k) content (connection characteristics, compatibility testing). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "Jan 2016 (JDT); 2015-2016 NADL",
+   "source_url": "https://artifexlab.com/wp-content/uploads/2021/04/FDA-alert-nadl-reponse.pdf",
+   "value": "interface milling = 510(k) + registration + QMS"
+  },
+  {
+   "claim": "ARUM Dentistry's 510(k) K242245 (cleared Nov 25, 2024) for 'Customized Abutment' (NHA, Ti-6Al-4V) states: 'All digitally designed abutments for use with Customized Abutment are intended to be manufactured at an ARUM DENTISTRY validated milling center.'",
+   "detail": "Directly relevant to Integra as an ARUM dealer/mill owner: in-house milling of ARUM-compatible abutments is on-label only as an ARUM-validated milling center (FDA-registered contract manufacturer under QMSR). Compatible systems listed: Neodent GM, BioHorizons Tapered Internal, Astra Tech, 3i Certain. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2024-11-25",
+   "source_url": "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242245.pdf",
+   "value": "VMC required"
+  },
+  {
+   "claim": "FDA annual establishment registration fee: $11,423 for FY2026 (Oct 1, 2025-Sep 30, 2026) and $13,785 for FY2027 (Oct 1, 2026-Sep 30, 2027); small-business hardship waivers are discretionary and exclude the initial registration.",
+   "detail": "Federal Register 90 FR 35895 (July 30, 2025); FDA MDUFA fees page. Applies if Integra registers as a contract manufacturer/VMC. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2025-07-30 (FR); FDA MDUFA page undated",
+   "source_url": "https://www.federalregister.gov/documents/2025/07/30/2025-14412/medical-device-user-fee-rates-for-fiscal-year-2026",
+   "value": "$11,423 FY2026; $13,785 FY2027"
+  },
+  {
+   "claim": "FDA's Quality Management System Regulation (revised 21 CFR 820 incorporating ISO 13485:2016) took effect Feb 2, 2026 and replaced QSIT inspections; it applies to registered device manufacturers, incl. contract manufacturers of abutments.",
+   "detail": "FDA QMSR page (update Feb 2, 2026). An IDT article quotes FDA's Dental Division that a lab using a PNP/NHA-cleared closed workflow on-label is not itself required to follow QS regulations; the 510(k) holder is. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026-02-02",
+   "source_url": "https://www.fda.gov/medical-devices/postmarket-requirements-devices/quality-management-system-regulation-qmsr",
+   "value": "effective 2026-02-02"
+  },
+  {
+   "claim": "In Washington, dental prostheses (crowns, inlays, dentures, bridges, etc.) sold by a dental lab to a dentist are exempt from retail sales tax as prosthetic devices; the lab reports Manufacturing B&O plus Retailing (or Wholesaling with reseller permit) B&O and claims the Multiple Activities Tax Credit.",
+   "detail": "RCW 82.08.0283(1)(a); WAC 458-20-151(2)(c), (3)(a)(i). Dentists are consumers, so lab-to-dentist sales are retail sales reported with a 'Prescription Drugs/Hearing Aids/Lenses/Etc.' deduction. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://apps.leg.wa.gov/wac/default.aspx?cite=458-20-151",
+   "value": "exempt"
+  },
+  {
+   "claim": "In California, dentists are consumers and dental laboratories are retailers of the plates, inlays and other products they make for dentists; tax applies to the lab's entire charge regardless of separate billing for materials vs. manufacturing.",
+   "detail": "CDTFA Reg. 1506(e). Combined Orange County rate approx. 7.75% (estimate, not fetched). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "Business Taxes Law Guide Revision 2025",
+   "source_url": "https://www.cdtfa.ca.gov/lawguides/vol1/sutr/1506.html",
+   "value": "taxable at full charge"
+  },
+  {
+   "claim": "California requires an out-of-state retailer to register and collect use tax only once combined CA deliveries exceed $500,000 in the current or prior calendar year (AB 147, RTC 6203); any physical presence (inventory, office, representatives) triggers registration regardless of volume.",
+   "detail": "CDTFA Wayfair guide. A SoCal employee or Aliso Viejo office would be physical presence. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (AB 147 effective April 25, 2019)",
+   "source_url": "https://www.cdtfa.ca.gov/industry/wayfair.htm",
+   "value": "$500,000"
+  },
+  {
+   "claim": "Texas exempts 'orthopedic, dental, or prosthetic device[s]' from sales tax; 'dental device' means an artificial replacement of one or more teeth or an appliance worn to correct irregularities, and no prescription is required.",
+   "detail": "Tax Code 151.313(a)(5); 34 TAC 3.284(a)(4), (d)(1). Lab-to-dentist crown/denture sales are exempt. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (statute amended 2023)",
+   "source_url": "https://www.law.cornell.edu/regulations/texas/34-Tex-Admin-Code-SS-3-284",
+   "value": "exempt, no prescription needed"
+  },
+  {
+   "claim": "Texas remote-seller safe harbor: no permit/collection duty if total Texas revenue in the preceding 12 months is under $500,000; franchise-tax economic nexus for foreign entities also at $500,000 Texas gross receipts.",
+   "detail": "Texas Comptroller Remote Sellers page. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://comptroller.texas.gov/taxes/sales/remote-sellers.php",
+   "value": "$500,000"
+  },
+  {
+   "claim": "Florida exempts prosthetic and orthopedic appliances (incl. dentures) sold per prescription of a licensed practitioner incl. dentists, and medical devices permanently incorporated into a patient by a licensed practitioner with an exemption certificate; the remote-sales dealer threshold is $100,000 of taxable remote sales in the prior calendar year.",
+   "detail": "Rule 12A-1.021(1)(a)-(b); Rule 12A-1.020(6)(d); F.S. 212.0596(1)(b). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "rules amended 7-12-10; statute 2025",
+   "source_url": "https://www.law.cornell.edu/regulations/florida/Fla-Admin-Code-Ann-R-12A-1-021",
+   "value": "exempt; nexus $100,000"
+  },
+  {
+   "claim": "Hawaii GET applies to dental prostheses: the prosthetic-device exemption in HRS 237-24.3(6) expressly excludes 'any auditory, ophthalmic, dental, or ocular device'. Rates: 0.5% wholesaling/manufacturing, 4% all others, plus 0.5% Maui County surcharge on 4%-rate activity since Jan 1, 2024.",
+   "detail": "HRS 237-24.3(6); DOTAX county surcharge page (updated Jan 9, 2024). Whether a lab-to-dentist sale qualifies for 0.5% wholesale treatment under HRS 237-4(a)(8) (TPP sold to a licensed seller as an identifiable element of its service, not overhead) is an open question; practitioner receipts from Medicare/Medicaid/TRICARE are GET-exempt (237-24.3(12)), complicating the analysis. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (HRS amended 2024); surcharge page 2024-01-09",
+   "source_url": "https://www.capitol.hawaii.gov/hrscurrent/Vol04_Ch0201-0257/HRS0237/HRS_0237-0024_0003.htm",
+   "value": "0.5% or 4.5% of gross"
+  },
+  {
+   "claim": "Hawaii GET nexus: $100,000 gross income or 200 transactions attributable to Hawaii in the current or preceding calendar year (Act 41, SLH 2018; HRS 237-2.5); GET license is a one-time $20 fee (HRS 237-9).",
+   "detail": "DOTAX Announcement 2018-10 (amended); HRS 237-9(a). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2018 (Act 41 effective July 1, 2018)",
+   "source_url": "https://files.hawaii.gov/tax/news/announce/ann18-10%5Famended.pdf",
+   "value": "$100,000 or 200 transactions; $20 license"
+  },
+  {
+   "claim": "Idaho exempts dental prostheses when administered/distributed by a practitioner or bought under a practitioner's prescription/work order; the Tax Commission rule states sales or purchases of dentures, partial plates, dental bridgework and orthodontic appliances by a dentist are not taxable. Remote-seller threshold $100,000 of Idaho deliveries.",
+   "detail": "Idaho Code 63-3622N(a)(4); IDAPA 35.01.02.100.01, .07; Idaho Code 63-3611(3)(h). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (statute amended 2024; nexus 2019)",
+   "source_url": "https://www.law.cornell.edu/regulations/idaho/IDAPA-35.01.02.100",
+   "value": "exempt; nexus $100,000"
+  },
+  {
+   "claim": "Oregon has no general sales/use tax; its Corporate Activity Tax applies only above $1 million of Oregon commercial activity ($250 + 0.57% of the excess). Alaska has no state sales tax; remote sellers must register with ARSSTC once statewide Alaska sales reach $100,000 (200-transaction test removed Jan 1, 2025) and collect for member municipalities.",
+   "detail": "Oregon DOR sales-tax page and CAT page; Alaska Office of the State Assessor; ARSSTC Business/Sellers page. Anchorage levies no general sales tax (widely known; not separately fetched). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://arsstc.org/business-sellers/",
+   "value": "OR none; AK local only, $100k ARSSTC threshold"
+  },
+  {
+   "claim": "Washington remote-seller nexus is $100,000 of cumulative gross receipts sourced to WA (200-transaction test dropped March 14, 2019; from Jan 1, 2020 substantial nexus under RCW 82.04.067).",
+   "detail": "RCW 82.08.052. Relevant to out-of-state labs/competitors selling into WA, and to Integra's WA customers. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (2019 c 8)",
+   "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=82.08.052",
+   "value": "$100,000"
+  },
+  {
+   "claim": "WA B&O rates: manufacturing 0.484%, wholesaling 0.484%, retailing 0.471%; ESHB 2081 (2025) raises all three to 0.5% effective Jan 1, 2027. Dental-lab fabrication is manufacturing (WAC 458-20-136) with MATC against the selling classification.",
+   "detail": "ESHB 2081 session law effective-date summary and House Bill Report; WAC 458-20-136(1)(i). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2025 session (effective dates: Oct 1, 2025 / Jan 1, 2026 / Jan 1, 2027)",
+   "source_url": "https://lawfilesext.leg.wa.gov/biennium/2025-26/Pdf/Bills/Session%20Laws/House/2081-S.sl.pdf",
+   "value": "0.484% -> 0.5% on 2027-01-01"
+  },
+  {
+   "claim": "WA small business B&O credit: $55 per month for non-service taxpayers ($160 for service); if tax exceeds the maximum credit, credit = 2x maximum minus tax, so it phases out at $110/month of B&O; rises to $125/$375 per month effective Jan 1, 2029 (2026 c 250).",
+   "detail": "RCW 82.04.4451. At Integra's ~$11,700/month gross, B&O ~$57/month before credit, leaving roughly $3-$7/month net (estimate). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (amended 2026 c 250)",
+   "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=82.04.4451",
+   "value": "$55/month max; phase-out at $110/month tax"
+  },
+  {
+   "claim": "WA manufacturers' M&E sales/use-tax exemption applies to machinery and equipment (useful life >1 year) used directly in manufacturing dental prostheses for sale, including installation/repair labor; dental labs qualify, dentists fabricating for their own patients do not.",
+   "detail": "RCW 82.08.02565; WAC 458-20-151(3)(d) and Example 3; DOR Denturists guide. Integra's mills, printers and furnace qualify (buyer gives Manufacturer's Sales and Use Tax Exemption Certificate); WA lab customers buying ARUM mills from Integra can also claim it, WA dentists cannot. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=82.08.02565",
+   "value": "sales tax exempt on lab M&E"
+  },
+  {
+   "claim": "California foreign-LLC registration (Form LLC-5) filing fee $70; every LLC registered or doing business in CA owes the $800 annual tax (first-year waiver applied only to tax years 2021-2023) plus an LLC fee of $900 at $250,000-$499,999 CA income, $2,500 at $500,000-$999,999, $6,000 at $1M-$4.99M; Statement of Information due biennially (fee $20 per secondary sources; $250 penalty for non-filing).",
+   "detail": "CA SOS Form LLC-5 (REV 11/2023); FTB LLC page. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "LLC-5 rev. 11/2023; FTB page undated",
+   "source_url": "https://www.ftb.ca.gov/file/business/types/limited-liability-company/index.html",
+   "value": "$70 one-time; $800/yr + fee tiers"
+  },
+  {
+   "claim": "Texas foreign-LLC registration (Form 304) fee $750, plus a $750 late fee per year if business was transacted >90 days before registering; no SOS annual report, but a Public Information Report must be filed each May 15 even when no franchise tax is due; no-tax-due threshold $2,650,000 for 2026 and 2027 report years (rate 0.375% retail/wholesale, 0.75% other).",
+   "detail": "Texas SOS Form 304 instructions; Comptroller Franchise Tax page. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated; Comptroller table for 2026-2027",
+   "source_url": "https://comptroller.texas.gov/taxes/franchise/",
+   "value": "$750 one-time; $0 tax under $2.65M"
+  },
+  {
+   "claim": "Hawaii foreign-LLC Application for Certificate of Authority (FLLC-1) fee $50 + $1 State Archives fee (+$25 expedite); annual report $15 per DCCA posted schedule (HRS 428-1301 lists $25 \u2014 discrepancy noted).",
+   "detail": "DCCA Business Registration Division pages. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026-01-22 (fee page)",
+   "source_url": "https://cca.hawaii.gov/breg/registration/dgp/fllc-fees/",
+   "value": "$51 one-time; $15/yr"
+  },
+  {
+   "claim": "Florida foreign-LLC registration $125 ($100 filing + $25 registered agent); annual report $138.75 (jumps to $538.75 if filed after May 1).",
+   "detail": "Florida Division of Corporations fee page. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://dos.fl.gov/sunbiz/forms/fees/",
+   "value": "$125 one-time; $138.75/yr"
+  },
+  {
+   "claim": "Alaska: Registration of Foreign LLC $350; biennial report $200 (foreign); separate Alaska business license $50 per year (AS 43.70.030).",
+   "detail": "Alaska Division of Corporations Corp Forms & Fees; Biennial Report FAQs; AS 43.70.030. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated; statute 2025",
+   "source_url": "https://www.commerce.alaska.gov/web/cbpl/Corporations/CorpFormsFees.aspx",
+   "value": "$350 + $200/2yrs + $50/yr"
+  },
+  {
+   "claim": "Oregon foreign Application for Authority $275 and annual renewal $275; Idaho Foreign Registration Statement $100 online ($120 paper) with no annual-report fee.",
+   "detail": "Oregon SOS Business Registry Fee Schedule (foreign corporation/LLC lines); Idaho SOS Foreign Registration Statement form. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "undated",
+   "source_url": "https://sos.oregon.gov/business/Documents/business-registry-forms/br-fee-schedule.pdf",
+   "value": "OR $275/$275; ID $100/$0"
+  },
+  {
+   "claim": "Aliso Viejo has no business-license program but requires a Business Registration form (PS-250) with floor plan and zoning clearance from Planning before operating in commercial space; an invoice is issued (amount not published). Laguna Niguel requires no business license but requires a Certificate of Occupancy permit for new businesses. Laguna Beach requires a business license taxed mainly on gross receipts (LBMC ch. 5.08) plus the state $4 disability-access fee.",
+   "detail": "City of Aliso Viejo Business Registration page and Form PS-250 (2/2/26); City of Laguna Niguel 'No Business License' page; Laguna Beach Municipal Code 5.08 and Avenu renewal form. Laguna Beach rate table not captured. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "Aliso Viejo form dated 2026-02-02; others undated",
+   "source_url": "https://avcity.org/442/Business-Registration",
+   "value": "AV: registration only; LN: CO only; LB: gross-receipts tax"
+  },
+  {
+   "claim": "Maui County issues no general business license (the State GET license serves as 'Hawaii's business license'); a county Certificate of Occupancy ($50 issuance fee) is required for commercial occupancy. Anchorage's Municipal Clerk licenses only specific regulated trades (not dental labs) and requires a State of Alaska business license. Dallas issues no general business license; a Certificate of Occupancy ($375 general permit fee) is required for first use or change of tenant.",
+   "detail": "Maui County 'Starting a Business in Maui County' (its GET table predates the 2024 surcharge); Maui CO permit packet; Municipality of Anchorage Clerk licensing page; Dallas CO page fee table. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://dallascityhall.com/departments/sustainabledevelopment/buildinginspection/Pages/certificate_occupancy.aspx",
+   "value": "Maui CO $50; Dallas CO $375"
+  },
+  {
+   "claim": "Miami-Dade County requires a Local Business Tax Receipt for each place of business and classification (tax year Oct 1-Sep 30); businesses inside a municipality also need the city's receipt; fees are set by ~200 classifications in Code 8A-223.1 (most service classes $30-$40; banks $180).",
+   "detail": "Miami-Dade Tax Collector LBT page; City of Miami BTR page; classification summary from a secondary code digest (2026). Exact classification fee for a dental laboratory not captured. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "undated; digest 2026-05-08",
+   "source_url": "https://mdctaxcollector.gov/services/local-business-tax-receipt",
+   "value": "county + city receipts; ~$30-$180/yr est."
+  },
+  {
+   "claim": "California payroll for one employee (2026): new-employer UI 3.4% on first $7,000; ETT 0.1% on $7,000; SDI 1.3% withheld from all wages (no cap since 2024); workers' compensation mandatory even with one employee, including out-of-state employers with employees regularly working in CA.",
+   "detail": "EDD Rates and Withholding page (2026); DIR DWC employer page. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026",
+   "source_url": "https://edd.ca.gov/en/payroll_taxes/rates_and_withholding/",
+   "value": "UI $238 + ETT $7 per employee/yr; WC required"
+  },
+  {
+   "claim": "Hawaii payroll (2026): UI new-employer rate 2.40% on $64,500 taxable wage base (Schedule C) plus 0.01% E&T; TDI coverage mandatory (employer may deduct up to 0.5% of weekly wages from the employee); Prepaid Health Care Act requires an approved health plan for employees working 20+ hrs/week earning at least 86.67x minimum wage/month, coverage starting after 4 consecutive weeks, employer paying at least 50% of premium and employee share capped at 1.5% of gross wages.",
+   "detail": "DLIR UI Tax Rate Schedule page; DLIR About TDI; DLIR About PHC. Workers' comp is also mandatory under HRS ch. 386 (page not fetched). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026 (UI table)",
+   "source_url": "https://labor.hawaii.gov/ui/tax-rate-schedule-and-weekly-benefit-amount/",
+   "value": "UI up to $1,548/yr; PHC health plan mandatory"
+  },
+  {
+   "claim": "Texas payroll (2026): entry-level UI rate 2.70% on $9,000 wage base ($243/yr per employee); no state income tax; private employers may opt out of workers' compensation (non-subscribers must file DWC notices and report injuries). Florida: reemployment tax on first $7,000 (initial rate 2.7% = $189/yr); workers' comp required only for non-construction employers with 4 or more employees.",
+   "detail": "TWC Unemployment Insurance Tax Rates page (2026); TDI Employer resources; Florida DOR Reemployment Tax page ($7,000); Florida DFS Coverage Requirements. FL 2.7% initial rate from secondary (Florida Payroll Guide, Jan 2026). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026",
+   "source_url": "https://www.twc.texas.gov/programs/unemployment-tax/tax-rates",
+   "value": "TX $243/yr; FL $189/yr; WC optional TX, not required FL <4 employees"
+  },
+  {
+   "claim": "Alaska payroll (2026): taxable wage base $54,200; all experienced rate classes 1-20 at the 1.00% statutory minimum employer rate (class 21: 5.40%); employee UI contribution 0.50% (max $271); workers' compensation mandatory, with penalties up to $1,000 per employee per day uninsured.",
+   "detail": "Alaska DOLWD 2026 Unemployment Insurance Tax Rates; Legislature memo on 2026 rates; Alaska Workers' Compensation Division home page. New-employer industry rates not captured; likely ~1.0% given uniform classes. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026",
+   "source_url": "https://labor.alaska.gov/estax/2026-experience-rates.html",
+   "value": "employer ~1.0% ($542 max); employee 0.5%"
+  },
+  {
+   "claim": "NBC Certified Dental Laboratory (CDL): initial application $450 (includes one independent review and first year), annual renewal $250, revalidation $450 on relocation/remodel; requires at least one CDT employed and a 1:15 CDT-to-technician ratio for specialty recognition; DAMAS is a separate NADL-administered quality-system program (manual $325; audit/registration fees not published online).",
+   "detail": "NBC CDL application page and CDL Handbook; NADL store. NADL lab membership is $435/yr for 1-9 employees. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://nbccert.org/certificants/certified-dental-laboratory/cdl-application.cfm",
+   "value": "$450 initial; $250/yr"
+  },
+  {
+   "claim": "Some VA dental-lab solicitations require NADL certification: VA Ralph H. Johnson HCS (Charleston SC) solicitation 36C24726Q0843 (proposals due Sept 10, 2026; ~7,865 units/yr; small-business set-aside) states 'National Association of Dental Laboratories certification for South Carolina is required' and scores Certifications as one of four equal factors. VHA Handbook 1130.01 requires FDA-approved materials and routes most fixed/implant work to the VA Central Dental Laboratory.",
+   "detail": "GovTribe summary of the VA solicitation (Sept 2026); VHA Handbook 1130.01 (2013). Requirement is solicitation-specific, not VA-wide. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "2026 (solicitation); 2013 (handbook)",
+   "source_url": "https://govtribe.com/opportunity/federal-contract-opportunity/dental-lab-services-charleston-sc-36c24726q0843",
+   "value": "CDL required in at least one 2026 VA solicitation"
+  },
+  {
+   "claim": "Dental laboratories are 'health care providers' under HIPAA; a dentist need not sign a Business Associate Agreement to disclose PHI to a lab for treatment of an individual (HHS OCR confirmed this to the ADA in March 2017); a BAA is needed only if the lab performs non-treatment functions involving PHI.",
+   "detail": "ADA FAQ on HIPAA Business Associates; BrownWinick summary of OCR correspondence (Apr 7, 2017); 45 CFR 160.103 BA definition exclusion. Labs are generally not covered entities unless they conduct HIPAA standard electronic transactions. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2017-04-07 (OCR correspondence Mar 2017)",
+   "source_url": "https://www.ada.org/resources/practice/legal-and-regulatory/faqs-on-hipaa-business-associates",
+   "value": "no BAA for treatment disclosures"
+  },
+  {
+   "claim": "Hawaii Prepaid Health Care employer premium share for one full-time lab employee is likely $400-$800 per month (single coverage).",
+   "detail": "Estimate: employer must pay at least 50% of an approved plan's premium; Hawaii small-group single-coverage premiums are not sourced here. Low confidence; obtain HMSA/Kaiser quotes before budgeting.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_date": "n/a",
+   "source_url": "https://labor.hawaii.gov/dcd/home/about-phc/",
+   "value": "$400-$800/month (est.)"
+  },
+  {
+   "claim": "Whether an out-of-state lab must hold a Texas registration (and therefore a CDT of record) before shipping to Texas dentists is unresolved.",
+   "detail": "NADL 2014 chart says yes; TSBDE's 2019 'Do I need a registration' flow is written for labs in Texas; Occ. Code 266.102(b)(5)(E) authorizes rules on out-of-state manufacture 'for use in this state'. Confirm with TSBDE before soliciting Dallas dentists.",
+   "kind": "unknown",
+   "confidence": "low",
+   "source_date": "2019 (TSBDE chart)",
+   "source_url": "https://tsbde.texas.gov/78i8ljhbj/2019/03/Do-I-Need-A-Dental-Laboratory-Registration-in-Texas.pdf",
+   "value": "unknown"
+  }
+ ],
+ "cost_items": [
+  {
+   "item": "WA DOH dental laboratory registration renewal",
+   "base_usd": 250,
+   "low_usd": 250,
+   "high_usd": 375,
+   "period": "annual",
+   "basis": "WAC 246-315-990: renewal $250 (by July 31); late penalty $125 if missed",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://app.leg.wa.gov/WAC/default.aspx?cite=246-315-990&pdf=true"
+  },
+  {
+   "item": "WA B&O tax net of small business credit at current volume (~$11,700/mo)",
+   "base_usd": 60,
+   "low_usd": 0,
+   "high_usd": 100,
+   "period": "annual",
+   "basis": "0.484% manufacturing with MATC ~ $57/mo; credit = 2x$55 - tax -> ~$3-7/mo net; rises slightly when rate becomes 0.5% on 2027-01-01",
+   "status": "estimated",
+   "source_date": "undated",
+   "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=82.04.4451"
+  },
+  {
+   "item": "CA Secretary of State foreign LLC registration (Form LLC-5)",
+   "base_usd": 70,
+   "low_usd": 70,
+   "high_usd": 75,
+   "period": "one-time",
+   "basis": "Form LLC-5 filing fee $70; optional certified copy $5",
+   "status": "listed",
+   "source_date": "rev. 11/2023",
+   "source_url": "https://bpd.cdn.sos.ca.gov/llc/forms/llc-5.pdf"
+  },
+  {
+   "item": "CA FTB annual LLC tax",
+   "base_usd": 800,
+   "low_usd": 800,
+   "high_usd": 800,
+   "period": "annual",
+   "basis": "Every LLC registered/doing business in CA; first-year waiver expired for tax years after 2023",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://www.ftb.ca.gov/file/business/types/limited-liability-company/index.html"
+  },
+  {
+   "item": "CA LLC fee (gross-receipts based)",
+   "base_usd": 0,
+   "low_usd": 0,
+   "high_usd": 900,
+   "period": "annual",
+   "basis": "$0 below $250,000 CA income; $900 at $250,000-$499,999; $2,500 at $500,000-$999,999",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://www.ftb.ca.gov/file/business/types/limited-liability-company/index.html"
+  },
+  {
+   "item": "CA Statement of Information (LLC-12)",
+   "base_usd": 20,
+   "low_usd": 20,
+   "high_usd": 20,
+   "period": "annual",
+   "basis": "$20 due every 2 years ($10/yr equivalent); $250 penalty if not filed; fee from secondary sources, SOS page confirms filing duty",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://www.sos.ca.gov/business-programs/business-entities/statements"
+  },
+  {
+   "item": "CA sales tax collected on lab sales to CA dentists once nexus exists",
+   "base_usd": 10,
+   "low_usd": 9,
+   "high_usd": 11,
+   "period": "per-unit",
+   "basis": "Reg. 1506(e) full charge taxable; ~7.75% Orange County rate (est.) on $129 zirconia crown; ~$132 on a $1,700 arch; passed to dentist but a price disadvantage vs. no-nexus shipping",
+   "status": "estimated",
+   "source_date": "Revision 2025",
+   "source_url": "https://www.cdtfa.ca.gov/lawguides/vol1/sutr/1506.html"
+  },
+  {
+   "item": "CA employer payroll taxes for one employee (UI 3.4% + ETT 0.1% on $7,000)",
+   "base_usd": 245,
+   "low_usd": 245,
+   "high_usd": 245,
+   "period": "annual",
+   "basis": "EDD 2026 new-employer UI 3.4% x $7,000 = $238; ETT 0.1% x $7,000 = $7; SDI 1.3% is employee-paid",
+   "status": "listed",
+   "source_date": "2026",
+   "source_url": "https://edd.ca.gov/en/payroll_taxes/rates_and_withholding/"
+  },
+  {
+   "item": "CA workers' compensation premium, one dental lab technician (~$60k payroll)",
+   "base_usd": 1000,
+   "low_usd": 600,
+   "high_usd": 1800,
+   "period": "annual",
+   "basis": "Mandatory for one employee (DIR); dental-lab class rates are typically ~$1-$3 per $100 payroll; no carrier quote obtained",
+   "status": "estimated",
+   "source_date": "undated",
+   "source_url": "https://www.dir.ca.gov/dwc/Employer.htm"
+  },
+  {
+   "item": "Aliso Viejo business registration (Form PS-250) review fee",
+   "base_usd": 150,
+   "low_usd": 50,
+   "high_usd": 300,
+   "period": "one-time",
+   "basis": "City invoices a processing fee after submittal; amount not published; use permit/CUP would add more",
+   "status": "unresolved",
+   "source_date": "form dated 2026-02-02",
+   "source_url": "https://avcity.org/442/Business-Registration"
+  },
+  {
+   "item": "Laguna Beach business license tax (gross-receipts based) + $4 state fee",
+   "base_usd": 200,
+   "low_usd": 100,
+   "high_usd": 400,
+   "period": "annual",
+   "basis": "LBMC 5.08 gross-receipts schedule not captured; flat-rate categories shown run $62-$145/yr; estimate for ~$150k local receipts",
+   "status": "unresolved",
+   "source_date": "undated",
+   "source_url": "https://ecode360.com/42884859"
+  },
+  {
+   "item": "Laguna Niguel Certificate of Occupancy permit (brick-and-mortar)",
+   "base_usd": 200,
+   "low_usd": 100,
+   "high_usd": 400,
+   "period": "one-time",
+   "basis": "No business license; CO permit from Building Division required; fee not published on page fetched",
+   "status": "unresolved",
+   "source_date": "undated",
+   "source_url": "https://www.cityoflagunaniguel.org/1810/No-Business-License"
+  },
+  {
+   "item": "TX Secretary of State foreign LLC registration (Form 304)",
+   "base_usd": 750,
+   "low_usd": 750,
+   "high_usd": 1500,
+   "period": "one-time",
+   "basis": "$750 statutory fee; +$750 per year late fee if transacting business >90 days before registering",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://www.sos.texas.gov/corp/instructions/304.shtml"
+  },
+  {
+   "item": "TX franchise tax / Public Information Report",
+   "base_usd": 0,
+   "low_usd": 0,
+   "high_usd": 0,
+   "period": "annual",
+   "basis": "No tax below $2,650,000 revenue (2026-2027) but PIR must be filed by May 15; cost is preparer time only (tax, not fee, is zero by statute)",
+   "status": "listed",
+   "source_date": "2026-2027 table",
+   "source_url": "https://comptroller.texas.gov/taxes/franchise/"
+  },
+  {
+   "item": "TSBDE dental laboratory registration (if operating in TX or if TSBDE requires out-of-state labs)",
+   "base_usd": 125,
+   "low_usd": 125,
+   "high_usd": 138,
+   "period": "one-time",
+   "basis": "$125 application; thereafter $138 annual renewal; requires CDT of record on premises 30 hrs/wk",
+   "status": "listed",
+   "source_date": "Feb 2024",
+   "source_url": "https://tsbde.texas.gov/78i8ljhbj/PROPOSED-FeeScheduleFY2024proposed_BM021624pdf.pdf"
+  },
+  {
+   "item": "TSBDE dental laboratory registration renewal",
+   "base_usd": 138,
+   "low_usd": 138,
+   "high_usd": 276,
+   "period": "annual",
+   "basis": "$138 by Dec 31; late $207 (1-90 days) / $276 (91-364 days)",
+   "status": "listed",
+   "source_date": "Feb 2024",
+   "source_url": "https://tsbde.texas.gov/78i8ljhbj/PROPOSED-FeeScheduleFY2024proposed_BM021624pdf.pdf"
+  },
+  {
+   "item": "TX unemployment tax, one employee (2.7% on $9,000)",
+   "base_usd": 243,
+   "low_usd": 243,
+   "high_usd": 243,
+   "period": "annual",
+   "basis": "TWC 2026 entry-level rate 2.70%; wage base $9,000; workers' comp optional",
+   "status": "listed",
+   "source_date": "2026",
+   "source_url": "https://www.twc.texas.gov/programs/unemployment-tax/tax-rates"
+  },
+  {
+   "item": "Dallas Certificate of Occupancy (general permit)",
+   "base_usd": 375,
+   "low_usd": 375,
+   "high_usd": 488,
+   "period": "one-time",
+   "basis": "CO general permit $375; validation inspection $113 if required; no general business license in Dallas",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://dallascityhall.com/departments/sustainabledevelopment/buildinginspection/Pages/certificate_occupancy.aspx"
+  },
+  {
+   "item": "FL foreign LLC registration",
+   "base_usd": 125,
+   "low_usd": 125,
+   "high_usd": 160,
+   "period": "one-time",
+   "basis": "$100 filing + $25 registered agent; optional certified copy $30 / status $5",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://dos.fl.gov/sunbiz/forms/fees/"
+  },
+  {
+   "item": "FL LLC annual report",
+   "base_usd": 138.75,
+   "low_usd": 138.75,
+   "high_usd": 538.75,
+   "period": "annual",
+   "basis": "$138.75 by May 1; $538.75 if late",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://dos.fl.gov/sunbiz/forms/fees/"
+  },
+  {
+   "item": "FL dental laboratory registration (only if operating a lab in FL)",
+   "base_usd": 100,
+   "low_usd": 100,
+   "high_usd": 120,
+   "period": "annual",
+   "basis": "$200 per biennium (Rule 64B27-1.002) = $100/yr; $40 delinquency fee if >3 months late; out-of-state labs exempt",
+   "status": "listed",
+   "source_date": "amended 2021-06-13",
+   "source_url": "https://www.law.cornell.edu/regulations/florida/Fla-Admin-Code-Ann-R-64B27-1-002"
+  },
+  {
+   "item": "FL reemployment tax, one employee (2.7% on $7,000)",
+   "base_usd": 189,
+   "low_usd": 189,
+   "high_usd": 189,
+   "period": "annual",
+   "basis": "Initial rate 2.7% (secondary) on $7,000 wage base (FL DOR); workers' comp not required for non-construction employer with <4 employees",
+   "status": "listed",
+   "source_date": "2026",
+   "source_url": "https://floridarevenue.com/taxes/taxesfees/Pages/reemployment.aspx"
+  },
+  {
+   "item": "Miami-Dade County Local Business Tax Receipt + municipal BTR",
+   "base_usd": 100,
+   "low_usd": 60,
+   "high_usd": 300,
+   "period": "annual",
+   "basis": "County fee by classification (~200 classes; most service classes $30-$40; banks $180) plus a separate city receipt if inside a municipality; dental-lab class fee not captured",
+   "status": "estimated",
+   "source_date": "undated",
+   "source_url": "https://mdctaxcollector.gov/services/local-business-tax-receipt"
+  },
+  {
+   "item": "HI foreign LLC Application for Certificate of Authority (FLLC-1)",
+   "base_usd": 51,
+   "low_usd": 51,
+   "high_usd": 76,
+   "period": "one-time",
+   "basis": "$50 filing + $1 archives; +$25 expedited",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://www.cca.hawaii.gov/breg/registration/fllc/"
+  },
+  {
+   "item": "HI LLC annual report",
+   "base_usd": 15,
+   "low_usd": 15,
+   "high_usd": 25,
+   "period": "annual",
+   "basis": "DCCA posted fee $15 (HRS 428-1301 text says $25)",
+   "status": "listed",
+   "source_date": "2026-01-22",
+   "source_url": "https://cca.hawaii.gov/breg/registration/dgp/fllc-fees/"
+  },
+  {
+   "item": "HI General Excise Tax license",
+   "base_usd": 20,
+   "low_usd": 20,
+   "high_usd": 20,
+   "period": "one-time",
+   "basis": "HRS 237-9 one-time $20",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://www.capitol.hawaii.gov/hrscurrent/Vol04_Ch0201-0257/HRS0237/HRS_0237-0009.htm"
+  },
+  {
+   "item": "HI GET on a $1,700 full-arch sold to a Maui dentist",
+   "base_usd": 76.5,
+   "low_usd": 8.5,
+   "high_usd": 76.5,
+   "period": "per-unit",
+   "basis": "4% + 0.5% Maui surcharge = $76.50 unless the sale qualifies as 0.5% wholesale under HRS 237-4(a)(8) ($8.50); dental devices excluded from prosthetic exemption",
+   "status": "estimated",
+   "source_date": "2024-01-09 (surcharge page)",
+   "source_url": "https://tax.hawaii.gov/geninfo/countysurcharge/"
+  },
+  {
+   "item": "HI unemployment insurance, one employee (2.4% on $64,500 + 0.01% E&T)",
+   "base_usd": 1554,
+   "low_usd": 1554,
+   "high_usd": 1554,
+   "period": "annual",
+   "basis": "DLIR 2026 Schedule C new-employer rate 2.40% x $64,500 = $1,548 + E&T ~$6",
+   "status": "listed",
+   "source_date": "2026",
+   "source_url": "https://labor.hawaii.gov/ui/tax-rate-schedule-and-weekly-benefit-amount/"
+  },
+  {
+   "item": "HI Prepaid Health Care employer premium share, one 20+ hr/week employee",
+   "base_usd": 7200,
+   "low_usd": 4800,
+   "high_usd": 9600,
+   "period": "annual",
+   "basis": "Employer pays >=50% of an approved plan; single-coverage premium assumed ~$800-$1,600/month total; no carrier quote obtained",
+   "status": "estimated",
+   "source_date": "undated",
+   "source_url": "https://labor.hawaii.gov/dcd/home/about-phc/"
+  },
+  {
+   "item": "HI Temporary Disability Insurance premium, one employee",
+   "base_usd": 120,
+   "low_usd": 60,
+   "high_usd": 240,
+   "period": "annual",
+   "basis": "Insured plan required; employer may deduct up to 0.5% of weekly wages from employee; premium not quoted",
+   "status": "estimated",
+   "source_date": "undated",
+   "source_url": "https://labor.hawaii.gov/dcd/home/about-tdi/"
+  },
+  {
+   "item": "Maui County Certificate of Occupancy (commercial space)",
+   "base_usd": 50,
+   "low_usd": 50,
+   "high_usd": 50,
+   "period": "one-time",
+   "basis": "Maui County Code 16.26.109.3; $50 issuance fee (effective July 1, 2008); no county business license",
+   "status": "listed",
+   "source_date": "2008-07-01 fee date",
+   "source_url": "https://energy.hawaii.gov/wp-content/uploads/2011/12/maui-20-Certificate-of-Occupancy-Permit.pdf"
+  },
+  {
+   "item": "AK foreign LLC registration",
+   "base_usd": 350,
+   "low_usd": 350,
+   "high_usd": 350,
+   "period": "one-time",
+   "basis": "Form 08-497 Registration of Foreign LLC",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://www.commerce.alaska.gov/web/cbpl/Corporations/CorpFormsFees.aspx"
+  },
+  {
+   "item": "AK biennial report (foreign LLC)",
+   "base_usd": 100,
+   "low_usd": 100,
+   "high_usd": 124,
+   "period": "annual",
+   "basis": "$200 every two years ($100/yr equivalent); $247.50 with late fee",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://www.commerce.alaska.gov/web/cbpl/Corporations/BiennialReportsFAQs.aspx"
+  },
+  {
+   "item": "AK state business license",
+   "base_usd": 50,
+   "low_usd": 50,
+   "high_usd": 50,
+   "period": "annual",
+   "basis": "AS 43.70.030(a) $50/yr; required of all businesses incl. Anchorage; no municipal general license",
+   "status": "listed",
+   "source_date": "2025 statutes",
+   "source_url": "https://law.justia.com/codes/alaska/title-43/chapter-70/section-43-70-030/"
+  },
+  {
+   "item": "AK unemployment insurance, one employee (employer share)",
+   "base_usd": 542,
+   "low_usd": 542,
+   "high_usd": 813,
+   "period": "annual",
+   "basis": "2026 wage base $54,200; employer rate 1.00% all classes 1-20 (new-employer industry rate not captured, assumed 1.0-1.5%); employee pays 0.5% ($271) via withholding",
+   "status": "estimated",
+   "source_date": "2026",
+   "source_url": "https://labor.alaska.gov/estax/2026-experience-rates.html"
+  },
+  {
+   "item": "AK workers' compensation premium, one lab technician",
+   "base_usd": 900,
+   "low_usd": 500,
+   "high_usd": 1500,
+   "period": "annual",
+   "basis": "Mandatory for 1+ employees; penalties up to $1,000/employee/day uninsured; premium not quoted",
+   "status": "estimated",
+   "source_date": "page updated 2026-09-01",
+   "source_url": "https://labor.alaska.gov/wc/home.htm"
+  },
+  {
+   "item": "OR foreign LLC Application for Authority",
+   "base_usd": 275,
+   "low_usd": 275,
+   "high_usd": 275,
+   "period": "one-time",
+   "basis": "Oregon SOS fee schedule; annual renewal also $275",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://sos.oregon.gov/business/Documents/business-registry-forms/br-fee-schedule.pdf"
+  },
+  {
+   "item": "OR foreign LLC annual renewal",
+   "base_usd": 275,
+   "low_usd": 275,
+   "high_usd": 275,
+   "period": "annual",
+   "basis": "Oregon SOS fee schedule (foreign entities renew annually at $275); CAT $0 below $1M Oregon commercial activity",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://sos.oregon.gov/business/Documents/business-registry-forms/br-fee-schedule.pdf"
+  },
+  {
+   "item": "ID Foreign Registration Statement",
+   "base_usd": 100,
+   "low_usd": 100,
+   "high_usd": 120,
+   "period": "one-time",
+   "basis": "$100 online via SOSBiz; $120 paper; annual report $0",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://archive.sos.idaho.gov/CORP/forms/FOREIGN/Foreign%20Reg%20Statement.pdf"
+  },
+  {
+   "item": "FDA establishment registration fee (only if Integra registers as contract manufacturer / validated milling center)",
+   "base_usd": 13785,
+   "low_usd": 11423,
+   "high_usd": 13785,
+   "period": "annual",
+   "basis": "FY2026 $11,423; FY2027 (Oct 1, 2026-Sep 30, 2027) $13,785; hardship waiver discretionary and not for initial registration",
+   "status": "listed",
+   "source_date": "2025-07-30 (FY2026); FDA MDUFA page (FY2027)",
+   "source_url": "https://www.fda.gov/industry/fda-user-fee-programs/medical-device-user-fee-amendments-mdufa-fees"
+  },
+  {
+   "item": "QMSR / ISO 13485-aligned quality system implementation for VMC status",
+   "base_usd": 25000,
+   "low_usd": 15000,
+   "high_usd": 50000,
+   "period": "one-time",
+   "basis": "Consultant-led QMS build, procedures, training, validation for abutment milling; no vendor quote obtained; plus ongoing internal audit/management review time",
+   "status": "estimated",
+   "source_date": "2026-02-02 (QMSR effective)",
+   "source_url": "https://www.fda.gov/medical-devices/postmarket-requirements-devices/quality-management-system-regulation-qmsr"
+  },
+  {
+   "item": "NBC Certified Dental Laboratory initial application",
+   "base_usd": 450,
+   "low_usd": 450,
+   "high_usd": 650,
+   "period": "one-time",
+   "basis": "$450 incl. one independent review and first year; additional reviews $200 each",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://nbccert.org/certificants/certified-dental-laboratory/cdl-application.cfm"
+  },
+  {
+   "item": "NBC CDL annual renewal",
+   "base_usd": 250,
+   "low_usd": 250,
+   "high_usd": 275,
+   "period": "annual",
+   "basis": "$250/yr; $25 late within one year",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://nbccert.org/pdfs/CDLApplication.pdf"
+  },
+  {
+   "item": "NADL DAMAS program (manual + audit/registration)",
+   "base_usd": 2500,
+   "low_usd": 325,
+   "high_usd": 6000,
+   "period": "one-time",
+   "basis": "DAMAS manual $325 (NADL store); audit and registration fees not published; estimate reflects third-party audit cost",
+   "status": "unresolved",
+   "source_date": "undated",
+   "source_url": "https://nadlonlinestore.payscapecommerce.com/NADL-DAMAS-Manual-p238507541"
+  },
+  {
+   "item": "NADL laboratory membership (1-9 employees)",
+   "base_usd": 435,
+   "low_usd": 435,
+   "high_usd": 435,
+   "period": "annual",
+   "basis": "NADL dues schedule by headcount",
+   "status": "listed",
+   "source_date": "undated",
+   "source_url": "https://www.nadl.org/laboratory-benefits"
+  }
+ ],
+ "unknowns": [
+  "Whether Integra currently employs an NBC CDT working 30+ hrs/week (or operates under a WA-licensed dentist) as required by RCW 70.352.050(2)(a) since the Jan 1, 2026 ownership change; permit number A62926327 was not verified against the DOH credential lookup.",
+  "Whether TSBDE actually requires an out-of-state lab to register before filling Texas dentists' prescriptions (NADL 2014 chart says yes; current rule text not located).",
+  "Exact Hawaii GET rate on lab-to-dentist prosthesis sales (0.5% wholesale under HRS 237-4(a)(8) vs 4.5% retail with Maui surcharge); no DOTAX ruling located.",
+  "Laguna Beach business-license gross-receipts rate schedule (LBMC 5.08.600 table not captured) and Aliso Viejo business-registration processing fee amount.",
+  "Miami-Dade County LBT classification and fee applicable to a dental laboratory; City of Miami (or other municipality) BTR amount.",
+  "DAMAS audit/registration pricing in the US (only the $325 manual price is published).",
+  "Hawaii Prepaid Health Care premium levels for a single employee (no carrier quote); TDI and workers' comp premiums in HI, AK and CA (no quotes).",
+  "Alaska 2026 new-employer industry UI rate (experienced classes all at 1.00%; new-employer table not captured).",
+  "Any FDA written guidance specific to dental-lab CAD/CAM abutment milling (none published; position rests on FDA correspondence relayed by NADL/JDT/IDT) and whether TRI's 'certified manufacturing center' agreement requires Integra to register with FDA as a contract manufacturer and pay the establishment fee.",
+  "California Statement of Information fee ($20) confirmed only via secondary sources; CA Orange County combined sales tax rate (~7.75%) not fetched from CDTFA.",
+  "Oregon foreign-LLC line of the SOS fee schedule was only partially legible ($275 corporate lines confirmed; LLC assumed identical per secondary sources).",
+  "Post-2014 changes to the list of states regulating dental labs beyond Washington (2019) were not exhaustively re-verified; HI/AK/OR/ID absence is based on the NADL list and the absence of any statute found."
+ ]
+}

@@ -1,0 +1,750 @@
+{
+ "topic": "South Orange County, CA (Aliso Viejo, Laguna Niguel, Laguna Beach, Laguna Hills, Mission Viejo, Dana Point, San Juan Capistrano, San Clemente, Irvine, Newport Beach) dental-lab market assessment for Integra Dental Design / Bear Milling",
+ "summary": "Bottom line: South Orange County is one of the most lab-saturated dental markets in the United States, and nothing found in this pass supports calling it underserved. The county contains the world's largest dental lab (Glidewell: ~1M sq ft in Irvine/Newport Beach, ~5,000 employees, 100,000+ units/week, 24,000 dentists sending work weekly, 3-day BruxZir, $9 FedEx overnight each way), the Irvine support center of the third-largest DSO (PDS Health, 1,381 OC employees, nearly every supported office running CEREC), Smile Brands' HQ, Western Dental's HQ, and a dense tail of independent labs in Irvine, Santa Ana, Anaheim, Garden Grove and Westminster. The most lucrative south-OC full-arch practices (W\u00f6hrle, Providence Prosthodontics, Laguna Hills Prosthodontics, Aliso Viejo Family Dental, 4M, New Life, Same Day Smile Designs) already own in-house labs or mills.\n\nFacts (sourced): Orange County Dental Society reports 2,500+ active members and is California's largest component (ocds.org, undated; third-party figure 2,530 at Jan 2025). UCLA CHPR's 2021 table puts Orange County at 5.3 dentists per 5,000 residents (2020 Dental Board data), which on ~3.17M residents implies roughly 3,300-3,400 licensed dentists; a directory lists 3,998. King County baseline: Seattle-King County Dental Society has ~1,476-1,700 members and UW CHWS reports 112 licensed dentists per 100,000 in King County (2023). State-level Census CBP (via a secondary compiler): California 734 dental-lab establishments vs Washington 175. Glidewell's published prices: BruxZir Full-Strength $109 ($89 digital model-free), screw-retained implant crown $339 (7 days in lab), BruxZir full-arch implant prosthesis $3,433 (Glidewell-affiliate price lists). Jim Glidewell (2022 interview): \"the average laboratory crown in the United States is $150... we're at $99,\" ~$79-80 model-free. LMT LAB DAY West 2026 drew 1,600+ attendees and 131 exhibitors in Garden Grove (May 15-16, 2026); 2027 is May 14-15 at the same Hyatt Regency. TRI Dental Implants USA is registered in Dover, DE but its US support (949-676-7383) and lab (949-210-3877) lines are Orange County numbers, its Area Sales Director is based in Irvine, and it runs study clubs in Irvine; no OC street address was found.\n\nEstimates (labeled): County-level CBP NAICS 339116 counts could not be retrieved (API key required; data.census.gov is script-rendered; curl blocked). Using state CBP totals and directory shares, Orange County plausibly has ~90-120 payroll lab establishments plus Glidewell's ~1,400-1,500 OC lab employees, versus ~55-70 in King County. That is roughly one independent lab per 30 dentists in OC versus one per 40 in King County, before counting Glidewell, so lab supply per dentist in OC is higher, not lower, than Integra's home market. Scraped directory listings (April 2026) show ~330 \"dental laboratory\" listings across OC cities (Anaheim 49, Irvine 31, Buena Park 25, Orange 24, Garden Grove 22, Santa Ana 21...), inflated by in-office labs and misclassification. The 10 target cities hold roughly 25% of OC population, implying ~800-1,000 dentists (estimate). In-office milling: one query surfaced ~10 independent CEREC/E4D/Roland practices in the target cities plus every PDS-supported office; PDS itself cites <10% national chairside-CAD/CAM penetration, so 10-20% of south-OC GP practices is a reasonable estimate.\n\nPricing comparison: Integra's $129 full-contour zirconia is $20-$40 above Glidewell and at the top of local independent lists ($85-$125). e.max at $149 is parity with Glidewell. Integra's implant crown package ($269-$299) undercuts Glidewell's $339 screw-retained and $432-$454 custom-abutment packages. Integra's $1,700 full-arch zirconia and $2,200 ti-bar undercut Glidewell ($3,433) and ADL ($3,750) but an Irvine lab (Avant Dental Arts) advertises full zirconia hybrid arches \"from $899\" on sale (list $3,450), and lab-to-lab price lists show full-arch zirconia at $999-$1,999 and FCZ at $39-$59, so Bear Milling's $22 mill-only and $650 full-arch are price-competitive only at the wholesale tier.\n\nTurnaround and shipping: Glidewell sets expectations at 3 days in lab (next-day available for digital cases), $9 FedEx overnight each way or free USPS Priority, plus scheduled in-office pickup. Local labs advertise 3-5 day turnaround, courier pickup (OD's, IDOC), and one Laguna Hills lab offers 4-hour same-day zirconia within 10 miles. A Bellevue lab with 3 days in-lab plus two shipping legs lands at 5-8 calendar days door-to-door for physical cases, slower than the local norm; digital-impression cases remove the inbound leg.\n\nReach channels: OCDS (Orange, CA), West Coast Study Club (Seattle Study Club affiliate, co-directors Drs. Jin Kim and Gianmarco O'Brien), Dental Implants GPS Full-Arch Study Club (South OC/North OC, quarterly, free), \"Wednesdays with the Specialists\" held at Keating Dental Lab in Irvine, Glidewell Study Club ($495/yr), Osseointegration Study Club of Southern California, Implant Study Group of Southern California, TRI USA Irvine study clubs, and LAB DAY West. Harbor Dental Society covers Long Beach/South Bay plus only the northwest OC fringe (Seal Beach, Los Alamitos, Rossmoor, Surfside), not south OC.\n\nHonest switching assessment: A dentist in Laguna Niguel has Glidewell 20 minutes away, a dozen independent labs offering courier pickup within 15 miles, and probably a CEREC down the hall. The reasons to try a Bellevue lab reduce to (1) a personal relationship, (2) an implant-crown and full-arch price that beats Glidewell by $40-$1,700, (3) a TRI matrix certification niche once completed, and (4) equipment/lab-to-lab selling to OC's small labs and in-office millers, which is a different business than selling crowns to dentists. Winning dentist accounts without a local pickup/shade/try-in presence is unlikely; the local-office idea only works if it buys courier-level service, and that cost was not researched here.",
+ "findings": [
+  {
+   "claim": "Orange County Dental Society membership and scope",
+   "value": "2,500+ active members; 50+ new members/yr; largest of California's 32 components; 10% of CDA members",
+   "detail": "OCDS serves all 10 target cities (Aliso Viejo through Newport Beach). Office: 790 The City Drive South Ste 450, Orange, CA 92868, (714) 634-8944. A third-party profile (ZoomInfo) gives 2,530 members as of Jan 2025.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://ocds.org/about-us/",
+   "source_date": "undated (accessed 2026-10-12)"
+  },
+  {
+   "claim": "Dentists per capita, Orange County",
+   "value": "5.3 dentists per 5,000 population (\u22481 per 943 residents)",
+   "detail": "UCLA Center for Health Policy Research table using 2020 Dental Licensing Board, CHIS 2018-19, CHHS and CDA data. Applied to ~3.17M residents this implies \u22483,360 licensed dentists in OC (estimate). Marin 5.1, Santa Clara 5.6, SF 6.1, LA 3.6 for comparison.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://healthpolicy.ucla.edu/publications/Documents/PDF/2021/Table-DentistsCACounty-jun2021.pdf",
+   "source_date": "June 2021 (accessed 2026-10-12)"
+  },
+  {
+   "claim": "Alternative OC dentist counts",
+   "value": "~2,460 (Dentx population-share estimate, 2026-06-08); 3,998 (FindClarity directory, undated)",
+   "detail": "Dentx explicitly derives its number by applying OC's ~8% population share to ADA HPI's 30,280 active California dentists; it is not a count. FindClarity is a consumer directory. The UCLA ratio and OCDS membership (2,500+ members, typically ~60-70% market share for tripartite societies) are more consistent with ~3,000-3,400 licensed dentists.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://dentx.ca/blog/orange-county-dental-market-report/",
+   "source_date": "2026-06-08 (accessed 2026-10-12)"
+  },
+  {
+   "claim": "Dentists in the 10 target south-OC cities",
+   "value": "\u2248800-1,000 practicing dentists (estimate)",
+   "detail": "Basis: the ten cities hold roughly 790K residents (\u224825% of OC); applying 5.3/5,000 gives \u2248840; coastal affluent cities likely run above county average. No city-level primary count found.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://healthpolicy.ucla.edu/publications/Documents/PDF/2021/Table-DentistsCACounty-jun2021.pdf",
+   "source_date": "June 2021 (accessed 2026-10-12)"
+  },
+  {
+   "claim": "King County, WA dentist baseline",
+   "value": "SKCDS \u22481,476 members (May 31, 2024, Form 990); 'almost 1,700' per website; 112 licensed dentists per 100,000 in King County (2023, UW CHWS)",
+   "detail": "112/100k on ~2.27M residents implies \u22482,500 dentists with a WA license address in King County (estimate). OC's 5.3/5,000 = 106/100k, so dentist density is similar in both counties.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://familymedicine.uw.edu/chws/resources/wohw/workforce-data/current-supply/",
+   "source_date": "undated page citing 2023 data (accessed 2026-10-12); SKCDS 990 via https://siviq.co/nonprofits/organizations/910520407/seattle-king-county-dental-society/returns/202530729349300133/2024"
+  },
+  {
+   "claim": "Census CBP NAICS 339116 county counts for Orange County CA and King County WA could not be retrieved",
+   "value": "unresolved",
+   "detail": "api.census.gov returned 'Missing Key' for 2021 and 2022 CBP queries; data.census.gov tables are script-rendered; BLS QCEW CSV fetch failed (content-type) and curl is blocked by the sandbox proxy (403). State-level CBP via a secondary compiler: California 734 establishments (15.4% of US), Washington 175 (3.7%). Older Encyclopedia.com CBP table: CA 1,046, WA 270 (c. 2002-2006).",
+   "kind": "unknown",
+   "confidence": "medium",
+   "source_url": "https://www.fairmarketvalue.com/resources/industries/339116/dental-laboratories",
+   "source_date": "undated (accessed 2026-10-12)"
+  },
+  {
+   "claim": "Estimated lab establishments: Orange County vs King County",
+   "value": "OC \u224890-120 payroll labs (plus Glidewell \u22481,400-1,500 OC lab employees); King County \u224855-70 payroll labs",
+   "detail": "Basis: CA 734 \u00d7 12-16% OC share (OC cities are ~16% of CA scraped lab listings; 8% of population) and WA 175 \u00d7 32-40% King share. Implied \u22481 independent lab per 30 dentists in OC vs \u22481 per 40 in King County, before counting Glidewell. Directory cross-checks: WhereOrg lists ~115 OC lab entries (undated); RentechDigital (Apr 1 2026) lists ~330 across OC cities (Anaheim 49, Irvine 31, Buena Park 25, Orange 24, Garden Grove 22, Santa Ana 21, Fullerton 20, Huntington Beach 20, Tustin 18, Brea 10, Westminster 10, Newport Beach 9, Lake Forest 7, Mission Viejo 7, Aliso Viejo 5, Laguna Hills 5, San Clemente 5, Dana Point 4). Scraped listings over-count (in-office labs, misclassified firms).",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://rentechdigital.com/smartscraper/business-report-details/united-states/list-of-dental-laboratories-in-california",
+   "source_date": "2026-04-01 (accessed 2026-10-12)"
+  },
+  {
+   "claim": "Glidewell scale and location",
+   "value": "~1,000,000 sq ft Irvine/Newport Beach campus; ~5,000 employees (1,381 in OC per OCBJ Aug 2026 list); 100,000+ units/week; 24,000 dentists send work every week, ~70,000/yr",
+   "detail": "HQ 4141 MacArthur Blvd, Newport Beach 92660; main campus 2201 Dupont Dr, Irvine 92612; manufactures its own BruxZir zirconia (sold to other labs) and glidewell.io chairside mills; 265 employees in Costa Rica. PDS Health passed Glidewell as OC's largest dental employer in 2026.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://glidewelldental.com/company/blog/glidewell-advantage-pillars-peerless-scale",
+   "source_date": "2025-08-12 (accessed 2026-10-12); volume metrics from https://www.groupdentistrynow.com/dso-group-blog/the-group-dentistry-now-show-the-voice-of-the-dso-industry-episode-74/ (2022-01-05); OC headcount from https://www.ocbj.com/healthcare/pds-health-becomes-ocs-largest-dental-co/ (2026-08-03)"
+  },
+  {
+   "claim": "Glidewell published crown prices and turnaround",
+   "value": "BruxZir Full-Strength $109 ($89 model-free digital); BruxZir Esthetic $119 ($99); BruxZir Radiant $149 ($129); 3 days in lab; Next-Day BruxZir for digital cases (scan by 2 p.m., receive 10:30 a.m. next day, up to 3 units)",
+   "detail": "Per-unit, excluding shipping/tax. Jim Glidewell, 2022: 'the average laboratory crown in the United States is $150... we're at $99' and ~$79-80 without model work.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://glidewelldental.com/solutions/crown-and-bridge/zirconia/bruxzir-full-strength-solid-zirconia",
+   "source_date": "page dated 2019-09-08, prices current on page (accessed 2026-10-12); digital prices confirmed in https://glidewelldental.com/company/blog/bruxzir-zirconia-restorative-dentistrys-recession-buster (2024-12-10)"
+  },
+  {
+   "claim": "Glidewell implant and full-arch prices",
+   "value": "Screw-retained crown (Ti-base) $339, 7 days in lab; BruxZir crown over custom abutment $432-$454 (13 days); BruxZir full-arch implant prosthesis $3,433 incl. up to 6 MUAs and two try-ins; screw-retained hybrid with milled Ti bar $2,335",
+   "detail": "Screw-retained price from glidewelldental.com; package and full-arch prices from Glidewell-affiliate price lists (Riverside Dental Ceramics, Crown World) that mirror Glidewell's schedule. Flat-rate applies to ~15 major implant systems; OEM-part systems cost more.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://glidewelldental.com/solutions/implant-solutions/implant-restorations/screw-retained-crowns",
+   "source_date": "page dated 2019-09-05, prices current (accessed 2026-10-12); full-arch from https://riversidelab.com/price-list/ (undated) and https://crownworlddental.com/lab-services-2025/ (2025-09-10)"
+  },
+  {
+   "claim": "How dentists ship cases to the dominant local lab",
+   "value": "FedEx Overnight $9 each way ($18 round trip) using Glidewell-preprinted labels; prepaid USPS Priority labels free (2-4 business days each way); scheduled in-office pickup; bundling multiple cases per box",
+   "detail": "Glidewell says 'most practices are moving to digital submission through My Account.' This sets south-OC expectations: shipping is effectively free and door-to-door turnaround for a 3-day crown is ~5-6 calendar days.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://glidewelldental.com/send-case/pickup-and-delivery",
+   "source_date": "2026-05-05 (accessed 2026-10-12)"
+  },
+  {
+   "claim": "Local independent lab turnaround norms in OC",
+   "value": "3 days (Creative Image, Laguna Hills; 38 Smiles, Fountain Valley); 3-5 business days (IDOC); 5 working days model-free zirconia (Artidental, Irvine); 12 business days (Pro Arts, City of Industry); same-day 4-hour posterior zirconia within 10 miles (Creative Image)",
+   "detail": "Several labs offer driver pickup (OD's Dental Laboratory pickup line 1-800-887-7073; IDOC 'free pickup from your office... local service in Orange County').",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://creativeimagedentallab.com/",
+   "source_date": "undated (accessed 2026-10-12); IDOC https://www.idocdentallab.com/; 38 Smiles https://38smileslab.com/; Artidental https://www.artidentallab.com/"
+  },
+  {
+   "claim": "Local/lab-to-lab price points for zirconia and full-arch",
+   "value": "Avant Dental Arts (Irvine) full zirconia hybrid arch 'from $899' sale (regular $3,450); ADL ZirBrux $109, implant crown package $559, full-arch zirconia bridge $3,750 (2024); Mabel lab-to-lab (Jan 2026) FCZ $59, coping $39, screw-retained FCZ $189, full-arch zirconia $999-$1,999; NDX Pacific alliance schedule (2020) FCZ $49/$44 modeless; TDL FCZ $85-$99",
+   "detail": "Mabel, ADL, TDL locations not verified as OC; included as lab-to-lab/regional benchmarks. Integra's $129 FCZ sits above Glidewell and at the top of local independents; implant crown $269-$299 is below Glidewell's $339; full-arch $1,700 is below Glidewell/ADL but above Avant's promotional $899; Bear Milling $22 mill-only is below Mabel's $39 coping and $650 full-arch is below Mabel's $999 copy-mill.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://avantdentallab.com/",
+   "source_date": "undated (accessed 2026-10-12); Mabel https://mabeldental.com/wp-content/uploads/2026/01/Mabel-Dental-Lab-to-Lab-1-2026-Fee-Schedule.pdf (Jan 2026); ADL https://adldental.com/wp-content/uploads/ADL_2024_Fee_Schedule.pdf (2024); NDX Pacific https://elitedentalalliance.com/wp-content/uploads/2024/01/Elite-Dental-Alliance-NDX-Pacific-Fee-Schedule.pdf (2020)"
+  },
+  {
+   "claim": "National labs serving OC and whether they have local facilities",
+   "value": "Glidewell: local (Irvine/Newport Beach). NDX: nearest labs NDX Pacific (Manhattan Beach), Burbank Dental Lab (NDX since Jan 2023), none in OC. Dandy: NYC HQ, Texas manufacturing, ships nationally, free scanner, 5-day zirconia; no OC facility. DDS Lab (national, Tampa): no OC facility found; 'The DDS Lab' at 434 S Euclid St #200, Anaheim is an unrelated local lab.",
+   "detail": "Keating Dental Lab (Irvine) is itself a national-scale lab ('thousands of practices across the country'). Lab-to-lab milling centers found in the region: Glidewell (sells BruxZir to labs), GIE Dental Lab Glendale (DGSHAPE DWX-53DC + DWX-52DCi + Asiga MAX UV), Digital Smile Solutions (SoCal, full-arch only, in-house milling).",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://nationaldentex.com/labs",
+   "source_date": "undated (accessed 2026-10-12); Dandy https://www.meetdandy.com/; GIE https://www.giedentallab.com/"
+  },
+  {
+   "claim": "PDS Health presence and CEREC saturation",
+   "value": "1,381 OC employees (Irvine support center, largest in network); HQ moved to Henderson NV 2024; 1,000+ supported practices in 24 states; 'nearly all' supported practices offer CEREC; 3.75M lifetime CEREC restorations, 427,000 in 2023; PDS cites <10% of US dentists offer chairside CAD/CAM",
+   "detail": "PDS affiliate lab+supply cost reported at 8.5% of collections (2012) due to CEREC. No evidence found of a PDS-owned central dental lab in OC (unresolved).",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.pdshealth.com/news/press-releases/pds-milestone-same-day-dental-restorations/",
+   "source_date": "2022-03-29 (accessed 2026-10-12); 2023 figures https://www.pdshealth.com/news/press-releases/year-in-review-pacific-dental-services-celebrates-2023-milestones-and-achievements/ (2024-01-29); OC headcount https://www.ocbj.com/healthcare/pds-health-becomes-ocs-largest-dental-co/ (2026-08-03)"
+  },
+  {
+   "claim": "Other OC-headquartered DSOs",
+   "value": "Smile Brands (Irvine): 7,500 employees, ~$1B sales, 600+ offices in 29 states (Bright Now!, Monarch, Castle). Western Dental & Orthodontics (Orange, CA): 260+ locations CA/AZ, ~1,200 dentists (2022). Envista Holdings (Brea): implant/equipment maker.",
+   "detail": "Whether Smile Brands or Western Dental operate captive labs was not confirmed (unknown). Smile Brands has an Aspire Dental office in Irvine (13234 Jamboree Rd).",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.ocbj.com/healthcare/pds-health/",
+   "source_date": "2024-08-05 (accessed 2026-10-12); Western Dental https://www.westerndental.com/en-us/ (undated); Becker's https://www.beckersdental.com/dso-dpms/smile-brands-vs-western-dental-how-2-california-based-dsos-compare/ (2022-03-28)"
+  },
+  {
+   "claim": "Dental Implants GPS / Implant Partnerships: full-arch referral group active in south OC",
+   "value": "Quarterly Full-Arch Study Club in South OC and North OC (free, 2 CE); Spear Educational Series hosted by Niguel Coast Oral & Facial Surgery; South OC Hygiene Study Club at Marbella Country Club",
+   "detail": "Drs. Eric Baker and Tim Betita; co-managed All-on-4 model where GP refers and GPS does surgery/prosthetics; network partners quoted include Viviane Stein DDS (Laguna Beach) and Nicole Kuske DDS. 2026 South OC dates: Jan 20, Apr 9, Jul 16, Oct 8.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://implantpartnerships.com/study-club/",
+   "source_date": "undated, 2026 schedule (accessed 2026-10-12)"
+  },
+  {
+   "claim": "West Coast Study Club (Seattle Study Club affiliate)",
+   "value": "Est. 1999 as Orange County Dental Implant Institute; SSC affiliate since 2019; 9-11 sessions/yr, ~43-46 CEU; 2023-24 dues $3,650 practice owner, $2,450 dental lab technician; symposium in Brea",
+   "detail": "Co-directors Dr. Jin Y. Kim (periodontist) and Dr. Gianmarco O'Brien. Lab-technician membership tier means a lab owner can join as a member rather than a sponsor.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://westcoaststudyclub.com/",
+   "source_date": "undated, 2026-2027 season page (accessed 2026-10-12)"
+  },
+  {
+   "claim": "'Wednesdays with the Specialists' Orange County Dental Study Club meets inside a competitor lab",
+   "value": "3rd Wednesday monthly, 5:30-8:00 PM, at Keating Dental Lab, 16881 Hale Ave, Irvine; $120 for 8 sessions incl. dinner; 16 CE",
+   "detail": "Run by Irvine Oral Surgery & Dental Implant Center (Drs. Daniel Hsu, Jeffrey Nguyen). 2026 speakers include prosthodontists Baldwin and Chris Marchack and Dr. Brian Goodacre (Nobel-sponsored).",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.oralsurgeonirvine.com/referring-doctors/study-club-education/study-club/",
+   "source_date": "2026 schedule (accessed 2026-10-12)"
+  },
+  {
+   "claim": "Other OC implant study clubs",
+   "value": "Glidewell Study Club ($495/yr, Thursdays, 2201 Dupont Dr Irvine, 50 dentists); Osseointegration Study Club of Southern California (est. 1985-86, ~40 active members incl. technologists); Implant Study Group of Southern California (Dr. Mark A. Cruz, Laguna Niguel, program director 2022-23); Periodontal, Implant & Restorative Study Club and Spear small group (Drs. Russo & Braga, Huntington Beach); Orange County Study Club (OC Perio, Orange) on hiatus since 2024; Pacific Coast Society for Prosthodontics (regional)",
+   "detail": "Dr. Mark Cruz (markacruzdds.com) is a long-tenured south-OC GP with memberships across nearly every regional implant/prostho study group and a Spear retreat at Monarch Beach; a natural networking node.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://glidewellstudyclub.com/",
+   "source_date": "2025-09-04 (accessed 2026-10-12); OSCSC https://oscsc.org/; Cruz CV https://www.markacruzdds.com/biographical-profile/ (2020-02-21)"
+  },
+  {
+   "claim": "Harbor Dental Society does not cover south Orange County",
+   "value": "749 dentists in 28 cities; coverage = Long Beach/South Bay LA County plus Seal Beach, Los Alamitos, Rossmoor, Surfside (northwest OC fringe)",
+   "detail": "Office: 4010 Watson Plaza Dr Ste 210, Lakewood, CA 90712. Shares an online CE forum and a Dental.com benefit with OCDS. Not a channel to Aliso Viejo-Newport Beach dentists.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://harbordentalsociety.org/menus/about-us.html",
+   "source_date": "undated (accessed 2026-10-12); coverage list https://www.harbordentalsociety.net/content.asp?contentid=175"
+  },
+  {
+   "claim": "LMT LAB DAY West dates and scale",
+   "value": "2026: May 15-16, Hyatt Regency Orange County, 11999 Harbor Blvd, Garden Grove; 1,600+ attendees, 131 exhibitors, 87 seminars. 2027: May 14-15, same venue",
+   "detail": "Largest West Coast lab show; relevant as the single densest gathering of OC/SoCal lab owners for ARUM/MillBox/hyperDENT dealer prospecting and Bear Milling lab-to-lab. Exhibitor pricing not published on fetched pages.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://lmtmag.com/articles/lab-day-west-delivers-big-on-innovation-insight-and-industry-connection",
+   "source_date": "2026-05-19 (accessed 2026-10-12)"
+  },
+  {
+   "claim": "TRI Dental Implants USA: location and OC footprint",
+   "value": "Registered: TRI Dental Implants USA Inc., 1111B S Governors Ave Ste 48081, Dover, DE 19904. US Customer Support 949-676-7383; Lab line 949-210-3877 (Orange County area code). Area Sales Director Brett Jackson based in Irvine/Orange County (ex-Neodent OC territory manager who 'supported 30+ local dental laboratories'). Study club held in Irvine (Warehouse 72, 17900 Jamboree Rd) July 24, 2025.",
+   "detail": "No OC street address found; the Delaware address is a registered-agent suite. RocketReach lists ~47 employees globally, US sales led by EVP Dereck Fandel; hiring LA, SF Bay Area and Arizona territory reps in Jan and Sept 2026 posts. Senior Director of Clinical Affairs Dr. Amir Gordji is LA-based. Conclusion: TRI's US presence in OC is a field team, not a confirmed office.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://tri-implants.swiss/en/contact/",
+   "source_date": "undated (accessed 2026-10-12); LinkedIn https://linkedin.com/in/brettjacksonn (2026-10-06); event https://sedationandimplantdentists.com/no-abutment-implant-seminar-offers-dentists-a-fully-digital-streamlined-approach/ (2025-07-15)"
+  },
+  {
+   "claim": "Publicly identified TRI-matrix users in OC",
+   "value": "None found",
+   "detail": "TRI's SoCal study-club speaker Dr. Thomas R. Gonzales (Sedation and Implant Dentists) practices in San Gabriel, LA County, not OC. No OC dentist or lab was found publicly naming TRI matrix. Treat OC TRI demand as unproven.",
+   "kind": "unknown",
+   "confidence": "medium",
+   "source_url": "https://info.tri-implants.swiss/studyclubgonzales",
+   "source_date": "undated (accessed 2026-10-12)"
+  },
+  {
+   "claim": "In-office milling (CEREC/E4D/Roland) penetration among south-OC practices",
+   "value": "\u226510 named independent practices in the target cities plus essentially every PDS-supported office; estimated 10-20% of south-OC GP practices (estimate)",
+   "detail": "Named: OC Life Smiles (Newport Beach, CEREC), Newport Smile (355 Placentia Ave, CEREC), ProSmiles OC (Laguna Hills, CEREC + in-house lab), Laguna Hills Dental (24741 Alicia Pkwy, CEREC), Dr. Loberg (23141 Moulton Pkwy, Laguna Hills, CEREC), OC Premier Dentistry (Laguna Hills, E4D), Mission Ranch Dental Aesthetics (CEREC Primemill), Dentist of Mission Viejo (same-day milling), Dr. Claire Cho (Aliso Viejo, CEREC), Aliso Viejo Family Dental (Roland DWX-53DC), Providence Prosthodontics (Newport Beach, Zirkonzahn + TRIOS), Laguna Hills Prosthodontics (in-house mill), Dr. Christina Do (Costa Mesa, 'top five producer' on Glidewell fastmill.io). National baseline per PDS/Dentsply: <10% of US dentists. Affluent coastal demographics and PDS density push south OC above baseline.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://prosmilesoc.com/services/cerec-single-visit-crowns/",
+   "source_date": "undated (accessed 2026-10-12); PDS baseline https://www.pdshealth.com/news/press-releases/pds-milestone-same-day-dental-restorations/ (2022-03-29)"
+  },
+  {
+   "claim": "Several of the highest-value south-OC implant/full-arch practices are vertically integrated with in-house labs",
+   "value": "W\u00f6hrle (Newport Beach, ceramics lab + CT + robotic placement); Providence Prosthodontics (Newport Beach, Zirkonzahn mill); Laguna Hills Prosthodontics (Dr. Garbacea, in-house lab); Aliso Viejo Family Dental (Roland mill, master ceramist); 4M Dental Implant Center (Newport Beach, in-house lab, 24-hr teeth); New Life Dental Implant Center (Irvine, in-house lab); Same Day Smile Designs (Mission Viejo, in-house lab, photogrammetry, 3D printing)",
+   "detail": "These practices are equipment/consumable prospects (ARUM dealer) rather than lab-outsourcing prospects. Aliso Viejo Family Dental explicitly markets 'no mail delays, zero lab shipping errors' and says shipping an arch to an outside lab 'turns one appointment into three.'",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://avfdentalgroup.com/dentist-in-laguna-niguel",
+   "source_date": "undated (accessed 2026-10-12); W\u00f6hrle https://www.w-clinics.com/; Providence https://guichetdental.com/state-of-the-art-dental-lab/ (2022-03-21); 4M https://4mdentalimplants.com/newport-beach/"
+  },
+  {
+   "claim": "Local full-arch fee levels (patient prices) in south OC",
+   "value": "All-on-4 $19,500-$25,000/arch (Aliso Viejo Family Dental); $19,000-$30,000/arch (Dentistry At Its Finest, Costa Mesa); from $10,000/arch (Teeth+Robots Irvine); single implant incl. crown from $1,995 (Premier Dental Implant Centers, Mission Viejo) to $3,500-$4,500 (AVFDG)",
+   "detail": "A $1,700 final zirconia arch is ~7-9% of a $19.5K-$25K patient fee, so lab cost is not the binding constraint for these practices; service, chairside support and conversion-day logistics are. The $1,995 single-implant price signals a discount tier that would value a $269-$299 implant crown package.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://avfdentalgroup.com/",
+   "source_date": "undated (accessed 2026-10-12); https://www.finestdentistry.com/all-on-x-dental-implants/ (2025-07-29); https://irvine.teethandrobots.com/; https://premierdentalimplantcenters.com/"
+  },
+  {
+   "claim": "Some south-OC full-arch GPs explicitly rely on outside labs and digital designers",
+   "value": "Newport Beach Dental Studio (Dr. Tai Ha, 1441 Avocado Ave Ste 404): 'Complex full-arch treatment is coordinated between the restorative dentist, surgeon, laboratory team'; Aria Dental (Mission Viejo): iTero Element, 'we choose only local laboratories that follow American and California standards'",
+   "detail": "Aria's statement is direct evidence that 'local USA lab' is a selling point to patients in this market; a Bellevue lab is 'USA' but not 'local.' Dr. Ha completed the Full Arch Masters curriculum and is lab-dependent, a realistic Integra target type.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://newportbeachdentalstudio.com/all-on-x-implant-supported-prostheses/",
+   "source_date": "undated (accessed 2026-10-12); Aria https://ariadentalcare.com/all-services/dental-implant/all-on-4/ (2023-02-01)"
+  },
+  {
+   "claim": "Named independent labs physically in south OC (Irvine/Newport/Laguna/Dana Point/San Clemente)",
+   "value": "Creative Image Dental Laboratory (23322 Peralta Dr Ste 1, Laguna Hills); Okon Dental Lab (24361 El Toro Rd Ste 110, Laguna Woods); Payne Dental Lab (675 Camino de los Mares #402, San Clemente; Wayne Payne MDT; veneers/e.max/zirconia/CAD-CAM/implants); SMT Dental Technologies (657 Camino de los Mares Ste 240, San Clemente); Sowle Ceramics (34163 PCH Ste 200, Dana Point); Andre Dental Studio (24422 Del Prado Ste 14, Dana Point); Tapie Dental Lab (1401 Avocado St Ste 209, Newport Beach); Ippin Dental Laboratory (20250 SW Acacia St #105, Newport Beach); Pacific Edge Dental Lab and Gnathic Concepts (Newport Beach); Avant Dental Arts (9272 Jeronimo Rd Ste 102, Irvine, full-arch specialist); Artidental Lab (2100 Main St Ste 101, Irvine, est. 2018); ADI Dental Solutions (2100 Main St Ste 103, Irvine); Killian Dental Laboratory (Irvine, est. 1983, Steve Killian CDT); Keating Dental Lab (16881 Hale Ave, Irvine, est. 2002, national); DenTech International (17781 Sky Park Cir, Irvine; also Garden Grove); BioTemps (Irvine, Glidewell brand)",
+   "detail": "Panadent's California customer list and WhereOrg are undated directories; several small-lab entries (Sowle, Andre, Okon, SMT, Tapie, Ippin) were not independently verified as currently operating. Mill ownership is unpublished for most; Creative Image's 4-hour same-day zirconia implies an in-house mill and speed-sinter furnace.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.panadent.com/html/california.html",
+   "source_date": "undated (accessed 2026-10-12); WhereOrg https://www.whereorg.com/dental-laboratories-orange-cty-ca (undated); individual lab sites as listed in competitors"
+  },
+  {
+   "claim": "Named independent labs in central/north OC (lab-to-lab and equipment prospects)",
+   "value": "Zion Dental Lab (3921 E La Palma Ave Ste B, Anaheim; mills titanium abutments in-house); Nexen Dental Studio (6552 Bolsa Ave #C, Huntington Beach; 'fully digital'); 38 Smiles Dental Lab (17165 Newhope St Unit I, Fountain Valley; 3-day zirconia); OD's Dental Laboratory (2540 S Orange Ave Unit B, Santa Ana; 20+ yrs; pickup route); Allure Dental Laboratory (2284 N Glassell St Ste C, Orange; removables; 25 technicians); Haupt Dental Lab (1220 E Birch St Ste 201, Brea); Integrity Dental Technology (1250 N Lakeview Ste F, Anaheim); Northstar Dental Lab (1800 E Garry Ave Ste 115, Santa Ana); Denton Dental Lab (1524 Brookhollow Dr Ste D, Santa Ana); Vitality Dental Lab (1228 W Shelley Ct, Orange); KTD Laboratory (705 W La Veta Ave Ste 214, Orange); Valencia Dental Laboratory (1673 W Broadway Ste 5A, Anaheim); The DDS Lab (434 S Euclid St #200, Anaheim); Mr Crown Dental Studio (Santa Ana 92704, ~20 employees); Garden Grove cluster: B & J Laboratory (11121 Dino Cir), Bite Me Dental Lab (13882 A Better Way), Custom Dental Lab (12771 Western Ave #J), New Age Dental Lab (12624 Hoover St), Paramount Dental Studio (12638 Hoover St), T M Dental Ceramics (11851 Gilbert St #202), United Dental Creation (9872 Chapman Ave); Westminster: Beach Dental Laboratory (8732 Westminster Blvd #6), Dental Design Lab (15751 Brookhurst St #112); Santa Ana: Kelly Dental Ceramics (520 N Main St), Orange County Dental Lab LLC (2835 S Bristol St), E & Q, Magic Touch, Tito; Costa Mesa: Imagine Dental Arts (1525 MacArthur Blvd Ste 14), Analia's and KAZ Dental Lab (Anaheim Ave); Tustin: Andrew Dental Lab (17502 Irvine Blvd)",
+   "detail": "Only Zion (Ti abutment milling), Nexen and Keating publish digital-manufacturing claims; 5-axis mill brands are not published for any of these. Small Garden Grove/Westminster/Santa Ana labs are the most likely Bear Milling lab-to-lab and ARUM entry-level prospects; verification of current operation needed before outreach.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://zionlab.com/product-and-services",
+   "source_date": "undated (accessed 2026-10-12); Garden Grove list https://california.health-serve.org/sic-807201-orange.htm (undated); Allure https://allurelab.com/about-allure-dental/; Mr Crown https://naicslist.com/company-profile/mr-crown-dental-studio-santa-ana-ca-92704"
+  },
+  {
+   "claim": "Labs serving OC with known 5-axis equipment (equipment-prospect intelligence)",
+   "value": "Aliso Viejo Family Dental Group: Roland DWX-53DC (dry 5-axis) in-office; Providence Prosthodontics (Newport Beach): Zirkonzahn mill + 3Shape TRIOS; GIE Dental Lab (Glendale): DGSHAPE DWX-53DC and DWX-52DCi wet mill + Asiga MAX UV; Wiand Dental Lab (markets to OC, located in Arizona): Ivoclar PM7; Rutherford Dental Lab (markets digitally): Ivoclar PM7, HeyGears printers; Glidewell: proprietary automated milling at scale",
+   "detail": "Practices running dry Roland/DGSHAPE mills cannot mill titanium bars or glass ceramics wet; that is the specific gap an ARUM 5X-200 wet mill or Bear Milling ti-bar service addresses.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://avfdentalgroup.com/dentist-in-laguna-niguel",
+   "source_date": "undated (accessed 2026-10-12); GIE https://www.giedentallab.com/; Providence https://guichetdental.com/state-of-the-art-dental-lab/ (2022-03-21); Wiand https://www.wiandlab.com/orangecounty-dental-lab/digital-dental-lab/ (2025-07-26)"
+  },
+  {
+   "claim": "Dentx characterizes OC dental competition as 'Very High' with Newport/Irvine 'Extreme'",
+   "value": "Est. Google Ads CPC $18-$30+ for cosmetic/implant keywords in Newport Beach; $12-$22 Irvine; $10-$16 South County",
+   "detail": "Marketing-vendor editorial estimate, not measured data; included only as directional evidence that implant-marketing costs in Newport/Irvine are high.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://dentx.ca/blog/orange-county-dental-market-report/",
+   "source_date": "2026-06-08 (accessed 2026-10-12)"
+  },
+  {
+   "claim": "Dentist-facing lab marketing in OC emphasizes 'USA-made, never outsourced, local'",
+   "value": "Killian ('100% American-made... never outsource'), Artidental ('all our cases are fabricated in Irvine'), Keating ('ALL of our restorations are made in the USA'), DenTech ('No outsourcing - All restorations made in U.S.A.'), PRO-Craft ('100% U.S.-Based, Family-Owned')",
+   "detail": "Jim Glidewell (2022) noted DSOs buy from Vietnam/China labs at or below his $99. 'Local' is a stronger claim than 'USA' in this market; Integra can claim USA but not local.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.killiandental.com/",
+   "source_date": "undated (accessed 2026-10-12)"
+  },
+  {
+   "claim": "Bellevue-to-south-OC shipping and turnaround for physical cases",
+   "value": "Estimate: 2 business days each way by UPS/FedEx Ground WA\u2192CA; retail small-box 2-Day/Standard Overnight \u2248$20-$45 each way without a negotiated contract; door-to-door \u22485-8 calendar days for a 3-day in-lab crown",
+   "detail": "No carrier page was fetched (fedex.com blocks crawlers); figures are experience-based estimates. Glidewell's $9 overnight each way and local labs' free courier pickup set the comparison. Digital-impression cases remove the inbound leg; only outbound applies.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://glidewelldental.com/send-case/pickup-and-delivery",
+   "source_date": "2026-05-05 comparison basis (accessed 2026-10-12)"
+  },
+  {
+   "claim": "OC dental-industry employment context",
+   "value": "OCBJ 2025 list: 5,270 OC employees across dental companies (-5% YoY); PDS 1,293; 2026 list: PDS 1,381 (No.1), Glidewell No.2",
+   "detail": "Shows the county's dental supply chain (labs, DSOs, device makers incl. Envista/Brea) is large and consolidating around a few employers.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.ocbj.com/oc-homepage/employment-in-oc-dental-industry-drops-5/",
+   "source_date": "2025-08-04 (accessed 2026-10-12)"
+  }
+ ],
+ "unknowns": [
+  "Census CBP NAICS 339116 establishment and employee counts for Orange County CA (FIPS 06059) and King County WA (53033): not retrievable here (API key required; data.census.gov script-rendered; BLS QCEW CSV and curl blocked). Needed to replace the ~90-120 vs ~55-70 estimate.",
+  "Exact number of practicing/licensed dentists in the ten target cities; only county-level ratios exist (UCLA 5.3/5,000; OCDS 2,500+ members).",
+  "TRI Dental Implants USA physical office address in Orange County (only 949 phone lines, an Irvine-based Area Sales Director and Irvine events were found; registered address is Dover, DE).",
+  "Whether PDS Health, Smile Brands or Western Dental operate captive dental laboratories in Orange County.",
+  "Which OC independent labs own 5-axis (especially wet) mills; mill brands are unpublished for nearly all labs listed.",
+  "Current operating status of several small directory-listed south-OC labs (Sowle Ceramics, Andre Dental Studio, Okon, SMT Dental Technologies, Tapie, Ippin, Pacific Edge, Gnathic Concepts).",
+  "IDOC Dental Lab street address (claims OC local pickup); PRO-Craft Dental Laboratory location (markets to OC); Mabel, ADL and TDL lab locations (used as price benchmarks).",
+  "Street address for Dr. Heldt's Newport Beach implant practice and for Niguel Coast Oral & Facial Surgery.",
+  "Actual CEREC/in-office mill penetration rate among south-OC practices (estimate 10-20%); no Dentsply Sirona locator data retrieved.",
+  "Retail FedEx/UPS cost and transit for Bellevue\u2192south OC small-box dental cases (estimate $20-$45 each way, 2 business days ground).",
+  "LMT LAB DAY West exhibitor/tabletop pricing and OCDS vendor/affiliate program costs.",
+  "Cost of a small south-OC office or courier arrangement (out of scope for this market pass; must be nonzero in any model).",
+  "Any public complaints or documented dissatisfaction by south-OC dentists with local labs: none found; do not assume it."
+ ],
+ "competitors": [
+  {
+   "name": "Glidewell",
+   "what": "World's largest dental lab; full-service crown/bridge, implants, full-arch, removables; also chairside mills (glidewell.io/fastmill.io), BruxZir material sales to other labs",
+   "location": "4141 MacArthur Blvd, Newport Beach 92660 (HQ); 2201 Dupont Dr, Irvine 92612 (campus); ~1M sq ft",
+   "pricing": "BruxZir Full-Strength $109 / $89 digital; Esthetic $119/$99; Radiant $149/$129; e.max ~$149; screw-retained implant crown $339; crown + custom abutment $432-$454; BruxZir full-arch implant prosthesis $3,433; Ti-bar hybrid $2,335; 7-yr no-fault warranty",
+   "turnaround": "3 days in lab (all BruxZir); Next-Day BruxZir for digital \u22643 units; implants 7 days; packages 13 days; FedEx overnight $9 each way or free USPS; scheduled pickup",
+   "notes": "~5,000 employees (1,381 in OC), 100,000+ units/week, 24,000 dentists/week. Runs Glidewell Study Club ($495/yr) and education center in Irvine. Price and speed anchor for the entire market.",
+   "source_url": "https://glidewelldental.com/solutions/crown-and-bridge/zirconia/bruxzir-full-strength-solid-zirconia"
+  },
+  {
+   "name": "Keating Dental Lab",
+   "what": "Large full-service lab; KDZ Bruxer zirconia, e.max, implants (Atlantis/Nobel/custom), full-arch hybrids, digital dentures; accepts TRIOS/iTero/CEREC/Medit",
+   "location": "16881 Hale Ave, Irvine, CA 92606",
+   "pricing": "Not published on fetched pages",
+   "turnaround": "Not published on fetched pages",
+   "notes": "Founded 2002 by Shaun Keating CDT; serves 'thousands of practices across the country'; hosts the monthly 'Wednesdays with the Specialists' OC study club on-site, embedding itself with Irvine specialists.",
+   "source_url": "https://www.keatingdentallab.com/dental-lab-irvine-ca/"
+  },
+  {
+   "name": "Avant Dental Arts",
+   "what": "Full-arch and implant specialist lab (Zirkor ML Pro full zirconia hybrid arches, crowns, dentures)",
+   "location": "9272 Jeronimo Rd Ste 102, Irvine, CA 92618",
+   "pricing": "Full zirconia hybrid arch 'from $899' sale (regular $3,450); nightguard $119 (sale)",
+   "turnaround": "Not stated",
+   "notes": "Direct competitor to Integra's $1,700 full-arch and Bear Milling's $650 arch; shows local labs discounting aggressively for full-arch volume.",
+   "source_url": "https://avantdentallab.com/"
+  },
+  {
+   "name": "Creative Image Dental Laboratory",
+   "what": "Zirconia and implant crowns, nightguards, dentures, full-mouth; 10-year zirconia warranty; accepts Primescan and open STL",
+   "location": "23322 Peralta Dr Ste 1, Laguna Hills, CA 92653",
+   "pricing": "Not published",
+   "turnaround": "3 days (ships within 72 hrs of scan); Express 4-hour same-day posterior zirconia for offices within 10 miles (file by noon, deliver by 4 pm)",
+   "notes": "Sits in the middle of the target cities; its same-day radius covers Laguna Hills, Laguna Niguel, Aliso Viejo, Mission Viejo, Laguna Woods.",
+   "source_url": "https://creativeimagedentallab.com/"
+  },
+  {
+   "name": "38 Smiles Dental Lab",
+   "what": "BruxZir full-contour and esthetic zirconia, e.max, implants, wax-ups, nightguards",
+   "location": "17165 Newhope St Unit I, Fountain Valley, CA 92708",
+   "pricing": "Not published",
+   "turnaround": "3-day polished zirconia; open 7 days",
+   "notes": "Small digital lab typical of the Fountain Valley/Garden Grove tier.",
+   "source_url": "https://38smileslab.com/"
+  },
+  {
+   "name": "IDOC Dental Lab",
+   "what": "Full-service digital lab; Komplett X full-arch series (9 models, flat price); zirconia/PFM/e.max milled in-house; 3D printing",
+   "location": "Orange County (street address not captured); offers free local pickup in OC and UPS nationwide",
+   "pricing": "Flat-price full-arch (amount not shown on fetched page)",
+   "turnaround": "Most cases 3-5 business days",
+   "notes": "Free local pickup is the service standard Integra cannot match from Bellevue.",
+   "source_url": "https://www.idocdentallab.com/"
+  },
+  {
+   "name": "Artidental Lab / ADI Dental Solutions",
+   "what": "Two small full-service labs in the same Irvine building; solid/layered zirconia, e.max, PFM, implants, All-on-4, model-free monolithic zirconia",
+   "location": "2100 Main St Ste 101 and Ste 103, Irvine, CA 92614",
+   "pricing": "Not published ('affordable prices')",
+   "turnaround": "Artidental model-free zirconia 5 working days",
+   "notes": "Representative of dozens of 5-15 person labs in Irvine business parks.",
+   "source_url": "https://www.artidentallab.com/"
+  },
+  {
+   "name": "Zion Dental Lab",
+   "what": "Full-contour zirconia, custom zirconia-on-Ti-base abutments, implant restorations for all major systems; mills titanium abutments in-house",
+   "location": "3921 E La Palma Ave Ste B, Anaheim, CA 92807",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "notes": "Already owns Ti-milling capability, so a lab-to-lab customer only for overflow; an ARUM/MillBox upgrade prospect.",
+   "source_url": "https://zionlab.com/product-and-services"
+  },
+  {
+   "name": "DenTech International Dental Lab",
+   "what": "Digital lab; All-on-X monolithic zirconia, digital dentures (Shofu Veracia); runs an iTero Lumina 'free scanner program' with Align",
+   "location": "17781 Sky Park Cir, Irvine, CA 92614 (also 9140 Trask Ave #100, Garden Grove)",
+   "pricing": "Digital denture intro $169/arch (June 2026)",
+   "turnaround": "Not published",
+   "notes": "Scanner-subsidy programs (DenTech/iTero, Dandy) lock in digital accounts; Integra has no equivalent.",
+   "source_url": "https://www.dentists10.com/US/Irvine/292590637443276/DenTech-International-Dental-Lab"
+  },
+  {
+   "name": "NDX Pacific (National Dentex)",
+   "what": "Full-service NDX network lab; CAD/CAM, IOS, milling, printing; group-purchasing fee schedules",
+   "location": "1601 N Sepulveda Blvd #628, Manhattan Beach, CA 90266 (nearest NDX lab to OC; Burbank Dental Lab also NDX since Jan 2023)",
+   "pricing": "2020 Elite Dental Alliance schedule: full zirconia $49 ($44 modeless), layered zirconia $65, e.max $69",
+   "turnaround": "Not stated",
+   "notes": "No NDX lab inside Orange County found.",
+   "source_url": "https://nationaldentex.com/labs"
+  },
+  {
+   "name": "Dandy",
+   "what": "Fully digital national lab; free intraoral scanner; zirconia, e.max, dentures, aligners; Carbon printer fleet in Texas",
+   "location": "New York HQ; Texas manufacturing; ships nationally, no OC facility",
+   "pricing": "Not published on fetched pages",
+   "turnaround": "5-day zirconia crowns",
+   "notes": "Competes for the same remote-digital account Integra would target, with a scanner subsidy.",
+   "source_url": "https://www.meetdandy.com/"
+  },
+  {
+   "name": "Payne Dental Lab",
+   "what": "Cosmetic lab: veneers (conventional and no-prep), e.max, feldspathic, zirconia, PFM, CAD/CAM milling, implants, wax-ups",
+   "location": "675 Camino de los Mares #402, San Clemente, CA 92673",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "notes": "Wayne Payne MDT; one of the few labs physically in the southernmost target city.",
+   "source_url": "https://www.paynedentallabs.com/"
+  },
+  {
+   "name": "In-office milling (CEREC/E4D/Roland) and PDS-supported offices",
+   "what": "Chairside single-unit crowns in the dentist's office; PDS says nearly all its supported practices run CEREC",
+   "location": "Named south-OC examples: OC Life Smiles and Newport Smile (Newport Beach), ProSmiles OC, Laguna Hills Dental, Dr. Loberg and OC Premier Dentistry (Laguna Hills), Mission Ranch Dental Aesthetics and Dentist of Mission Viejo (Mission Viejo), Dr. Claire Cho and Aliso Viejo Family Dental (Aliso Viejo)",
+   "pricing": "n/a (removes the single-crown lab fee entirely)",
+   "turnaround": "Same day",
+   "notes": "PDS: 3.75M lifetime CEREC restorations, 427K in 2023; <10% US baseline penetration; south OC estimated 10-20%.",
+   "source_url": "https://www.pdshealth.com/news/press-releases/year-in-review-pacific-dental-services-celebrates-2023-milestones-and-achievements/"
+  }
+ ],
+ "targets": [
+  {
+   "name": "Newport Beach Dental Studio (Dr. Tai Ha)",
+   "location": "1441 Avocado Ave Ste 404, Newport Beach, CA 92660",
+   "type": "implant/full-arch practice",
+   "why": "Lab-dependent full-arch GP (Full Arch Masters alumnus) who explicitly coordinates with 'laboratory team and digital designers'; no in-house lab. Fits Integra's $1,700 final arch and ti-bar offer.",
+   "decision_maker": "Dr. Tai Ha, DDS",
+   "how_to_reach": "Direct; (949) 706-7097; OCDS and Full-Arch Study Club (South OC) events",
+   "source_url": "https://newportbeachdentalstudio.com/all-on-x-implant-supported-prostheses/"
+  },
+  {
+   "name": "Design Dental Group (Dr. Tony Amini, prosthodontist)",
+   "location": "220 Newport Center Dr Ste 3, Newport Beach, CA 92660",
+   "type": "implant/full-arch practice",
+   "why": "Board-trained prosthodontist, Loma Linda implant faculty, receives referrals from area GPs; high-complexity implant cases without an advertised in-house lab.",
+   "decision_maker": "Taher 'Tony' Aminikharrazi, DMD",
+   "how_to_reach": "(949) 432-6039; Pacific Coast Society for Prosthodontics / West Coast Study Club circuit",
+   "source_url": "https://dentistnewport.com/about/"
+  },
+  {
+   "name": "Newport Beach Implant Clinic (Drs. Kabaklian and Tapaltsyan)",
+   "location": "20162 SW Birch St Ste 200, Newport Beach, CA 92660",
+   "type": "implant/full-arch practice",
+   "why": "Surgeon + restorative duo doing All-on-4/6 in-house with Straumann and full-contour zirconia, 10-year bridge warranty; no in-house lab mentioned, so zirconia arches are outsourced.",
+   "decision_maker": "Dr. Kabaklian (restorative); Dr. Vagan Tapaltsyan DDS PhD (surgeon)",
+   "how_to_reach": "(949) 873-0022",
+   "source_url": "https://www.newportbeachimplantclinic.com/"
+  },
+  {
+   "name": "Dr. Heldt, Newport Beach (doctorheldt.com)",
+   "location": "Newport Beach, CA (street address not captured)",
+   "type": "implant/full-arch practice",
+   "why": "Fully guided Nobel/DTX workflow, Morita X800 CBCT, Primescan, layered-porcelain All-on-X frameworks, direct-to-MUA and ASC designs; one-doctor surgical+prosthetic. Demands high-end lab work and 3D-printed prototypes.",
+   "decision_maker": "Dr. Heldt",
+   "how_to_reach": "Website contact; Nobel Biocare/DTX user events",
+   "source_url": "https://doctorheldt.com/allon4"
+  },
+  {
+   "name": "LALUME Dental Studio (Drs. Bakian and Saad)",
+   "location": "Newport Beach, CA",
+   "type": "implant/full-arch practice",
+   "why": "X-Guide navigated All-on-X with separate surgical and restorative doctors; restorative design outsourced.",
+   "decision_maker": "Dr. Bakian (surgical), Dr. Saad (restorative)",
+   "how_to_reach": "Website contact",
+   "source_url": "https://www.lalumedental.com/dental-implants/all-on-x-implants/"
+  },
+  {
+   "name": "JG Dental (Dr. John Gegamyan)",
+   "location": "1501 Superior Ave Ste 302, Newport Beach 92663 and 32382 Del Obispo St Ste C2, San Juan Capistrano 92675",
+   "type": "implant/full-arch practice",
+   "why": "Two offices spanning the target area; iTero Lumina and CBCT; All-on-4 marketed; digital-impression workflow suits remote lab submission.",
+   "decision_maker": "Dr. John Gegamyan, DMD",
+   "how_to_reach": "(949) 548-8218 Newport; (949) 493-6006 SJC",
+   "source_url": "https://jgdentalgroup.com/locations/newport-beach/all-on-4/"
+  },
+  {
+   "name": "The Newport Beach Dentist (Dr. Omid Haroonian)",
+   "location": "3920 Birch St Ste 101, Newport Beach, CA 92660",
+   "type": "implant/full-arch practice",
+   "why": "All-on-4/6 with CBCT and digital impressions; 'in-house milling (if applicable)' hedge suggests arches are outsourced.",
+   "decision_maker": "Dr. Omid Haroonian, DDS",
+   "how_to_reach": "(949) 832-6179",
+   "source_url": "https://thenewportbeachdentist.com/all-on-4-all-on-6-implants/"
+  },
+  {
+   "name": "SoCal Perio Implants (Dr. Nicholas Caplanis and partners)",
+   "location": "26302 La Paz Rd Ste 207, Mission Viejo 92691 and 1171 Puerta Del Sol Ste B, San Clemente 92673",
+   "type": "implant/full-arch practice",
+   "why": "Four-periodontist implant surgical group ('Teeth in a Day') serving Mission Viejo, San Clemente, Dana Point, Laguna Beach; influences which lab the restoring GPs use for conversions and finals.",
+   "decision_maker": "Dr. Caplanis; Drs. Madi, Kar, Carvelli",
+   "how_to_reach": "(949) 830-1322; referral-dentist events",
+   "source_url": "https://www.drcaplanis.com/"
+  },
+  {
+   "name": "Premier Dental Implant Centers (Drs. Riazi and Etemadi)",
+   "location": "26342 Oso Pkwy Ste 204, Mission Viejo, CA 92691",
+   "type": "implant/full-arch practice",
+   "why": "Implants and All-on-4 only, with a $1,995 single-implant-including-crown price point; lab cost matters to this model, so a $269-$299 implant crown package and $1,700 arch are relevant.",
+   "decision_maker": "Dr. Ali Riazi; Dr. Khashayar Etemadi",
+   "how_to_reach": "(949) 773-4170; info@premierdentalimplantcenters.com",
+   "source_url": "https://premierdentalimplantcenters.com/"
+  },
+  {
+   "name": "Aria Dental (Dr. Maryam Horiyat)",
+   "location": "27652 Crown Valley Pkwy, Mission Viejo, CA 92691",
+   "type": "implant/full-arch practice",
+   "why": "iTero Element digital impressions; All-on-4/6/8 with Nobel/Straumann/zirconia implants; states a preference for 'local USA laboratories' (barrier evidence, but also a lab-dependent account).",
+   "decision_maker": "Dr. Maryam Horiyat, DDS",
+   "how_to_reach": "(949) 364-9600",
+   "source_url": "https://ariadentalcare.com/all-services/dental-implant/all-on-4/"
+  },
+  {
+   "name": "Wright Perio & Implants (Dr. Raymond Wright Jr.)",
+   "location": "1001 Avenida Pico Ste K, San Clemente, CA 92673",
+   "type": "implant/full-arch practice",
+   "why": "Board-certified periodontist marketing All-on-4 in San Clemente; refers restorative work to local GPs; channel to south-county restoring dentists.",
+   "decision_maker": "Dr. Raymond Wright Jr.",
+   "how_to_reach": "(949) 264-0562",
+   "source_url": "https://www.wrightperio.com/dental-implants/full-mouth-dental-implants/"
+  },
+  {
+   "name": "Ortega Cottage Dentistry (Dr. Michael Kim)",
+   "location": "27382 Calle Arroyo, San Juan Capistrano, CA 92675",
+   "type": "implant/full-arch practice",
+   "why": "GP placing All-on-X with digital planning and custom surgical guides, same-day temporary arch; outsourced guides, PMMA and finals.",
+   "decision_maker": "Dr. Michael Kim",
+   "how_to_reach": "Website appointment/contact form",
+   "source_url": "https://www.ortegacottagedentistry.com/san-juan-capistrano-ca/all-on-x-implants"
+  },
+  {
+   "name": "Aliso Creek Dental / Advanced Dental (Aliso Viejo)",
+   "location": "6B Liberty Ste 155 and 26831 Aliso Creek Rd #202, Aliso Viejo, CA 92656",
+   "type": "implant/full-arch practice",
+   "why": "Two Aliso Viejo groups with in-house periodontists (Dr. Amir Mostaghni; Dr. Joseph Yang) marketing All-on-4 under sedation; neither advertises an in-house lab.",
+   "decision_maker": "Aliso Creek Dental owners; Dr. Chitra Tiruveedula (Advanced Dental)",
+   "how_to_reach": "(949) 362-3848; (949) 289-9993",
+   "source_url": "https://www.alisocreekdental.com/services/all-on-4"
+  },
+  {
+   "name": "Laguna Beach Dental Excellence (Dr. Fazeli)",
+   "location": "330 Park Ave Ste 10, Laguna Beach, CA 92651",
+   "type": "implant/full-arch practice",
+   "why": "Only Laguna Beach practice found marketing All-on-X (with visiting board-certified oral surgeons); the owner's father lives nearby, making in-person relationship-building feasible.",
+   "decision_maker": "Dr. Fazeli",
+   "how_to_reach": "(949) 494-1445",
+   "source_url": "https://lagunabeachdentalexcellence.com/services/all-on-x/"
+  },
+  {
+   "name": "Aliso Smiles (Dr. Hamilton Le, DMD, FACP)",
+   "location": "Aliso Viejo, CA",
+   "type": "implant/full-arch practice",
+   "why": "Board-certified prosthodontist; co-founder of Southbay Marina Study Club, Spear study-club prosthodontic consultant, former ACP California Section president; a gatekeeper to south-OC restorative dentists.",
+   "decision_maker": "Dr. Hamilton Le",
+   "how_to_reach": "Practice site; ACP California Section; Spear study club",
+   "source_url": "https://www.alisosmiles.com/our-team/hamilton-le-dmd-facp/"
+  },
+  {
+   "name": "Aliso Viejo Family Dental Group (Dr. Reza Tafreshi)",
+   "location": "15 Mareblu Ste 360, Aliso Viejo, CA 92656",
+   "type": "implant/full-arch practice",
+   "why": "Owns a Roland DWX-53DC dry mill and does All-on-4 arches in-house; not a lab customer but an ARUM wet-mill / MillBox upgrade prospect (dry mill cannot cut titanium bars or glass ceramics wet).",
+   "decision_maker": "Dr. Reza Abaei Tafreshi, DDS",
+   "how_to_reach": "(949) 360-9700",
+   "source_url": "https://avfdentalgroup.com/about-us"
+  },
+  {
+   "name": "Providence Prosthodontics Dental Group",
+   "location": "360 San Miguel Dr #204, Newport Beach, CA 92660",
+   "type": "implant/full-arch practice",
+   "why": "Prosthodontic group with on-site lab, TRIOS scanner and Zirkonzahn mill; equipment/consumables and Bear Milling ti-bar overflow prospect rather than a crown account.",
+   "decision_maker": "Practice owners (Guichet dental group)",
+   "how_to_reach": "(949) 760-6288",
+   "source_url": "https://guichetdental.com/state-of-the-art-dental-lab/"
+  },
+  {
+   "name": "Zion Dental Lab",
+   "location": "3921 E La Palma Ave Ste B, Anaheim, CA 92807",
+   "type": "dental lab",
+   "why": "Implant-focused lab already milling Ti abutments; candidate for ARUM 5X-200 upgrade/second mill, MillBox/hyperDENT licensing, and Bear Milling full-arch overflow.",
+   "decision_maker": "Owner (not named on site)",
+   "how_to_reach": "(818) 626-8020; LAB DAY West",
+   "source_url": "https://zionlab.com/product-and-services"
+  },
+  {
+   "name": "Nexen Dental Studio",
+   "location": "6552 Bolsa Ave #C, Huntington Beach, CA 92647",
+   "type": "dental lab",
+   "why": "Self-described fully digital lab run by two brothers (ex-USC school lab); strong dentist reviews; equipment and lab-to-lab (ti-bar, full-arch) prospect.",
+   "decision_maker": "Don Kim (listed author/owner)",
+   "how_to_reach": "(714) 622-5945; info@nexendentalstudio.com",
+   "source_url": "https://nexendentalstudio.com/"
+  },
+  {
+   "name": "Garden Grove / Westminster small-lab cluster (B & J Laboratory, Bite Me Dental Lab, Custom Dental Lab, New Age Dental Lab, Paramount Dental Studio, T M Dental Ceramics, United Dental Creation, Beach Dental Laboratory, Dental Design Lab)",
+   "location": "Garden Grove 92840-92843 and Westminster 92683",
+   "type": "dental lab",
+   "why": "Dense tier of small (often Vietnamese-owned) labs most likely to outsource zirconia/Ti milling and to buy entry-level 5-axis mills; the owner's Articon background fits this segment.",
+   "decision_maker": "Individual owners (e.g., Custom Dental Lab president Sujeewa Senanayake)",
+   "how_to_reach": "In-person canvassing; LMT LAB DAY West (Garden Grove); Vietnamese-language outreach",
+   "source_url": "https://california.health-serve.org/sic-807201-orange.htm"
+  },
+  {
+   "name": "Allure Dental Laboratory",
+   "location": "2284 N Glassell St Ste C, Orange, CA 92865",
+   "type": "dental lab",
+   "why": "25-technician removables lab since 1999 with no advertised fixed/CAD-CAM; candidate for lab-to-lab zirconia/ti-bar sourcing (Bear Milling) and digital denture equipment.",
+   "decision_maker": "Owner/manager",
+   "how_to_reach": "800-440-0314",
+   "source_url": "https://allurelab.com/about-allure-dental/"
+  },
+  {
+   "name": "Dental Implants GPS / Implant Partnerships",
+   "location": "Tustin and other GPS centers; study clubs in South OC and North OC",
+   "type": "DSO",
+   "why": "Full-arch specialty group that co-manages All-on-4 with a network of partner GPs; runs free quarterly Full-Arch Study Clubs in South OC, the most concentrated room of full-arch-interested dentists in the target area.",
+   "decision_maker": "Dr. Eric Baker; Dr. Tim Betita",
+   "how_to_reach": "implantpartnerships.com study-club registration; attend as a guest",
+   "source_url": "https://implantpartnerships.com/"
+  },
+  {
+   "name": "West Coast Study Club (Seattle Study Club affiliate)",
+   "location": "Orange County (symposium in Brea)",
+   "type": "other",
+   "why": "Seattle Study Club brand is already known to Integra from WA; offers a dental-laboratory-technician membership tier ($2,450 in 2023-24) giving a seat among ~40+ OC specialists and GPs for a season.",
+   "decision_maker": "Dr. Jin Y. Kim; Dr. Gianmarco O'Brien (co-directors)",
+   "how_to_reach": "westcoaststudyclub.com membership",
+   "source_url": "https://westcoaststudyclub.com/"
+  },
+  {
+   "name": "Orange County Dental Society",
+   "location": "790 The City Drive South Ste 450, Orange, CA 92868",
+   "type": "other",
+   "why": "2,500+ member tripartite society covering all ten target cities; vendor/CE sponsorship is the broadest reach channel.",
+   "decision_maker": "Executive director / membership staff",
+   "how_to_reach": "(714) 634-8944; ocds.org",
+   "source_url": "https://ocds.org/about-us/"
+  },
+  {
+   "name": "TRI Dental Implants USA field team (Orange County)",
+   "location": "Irvine-based Area Sales Director; US support 949-676-7383, lab line 949-210-3877; events at Warehouse 72, 17900 Jamboree Rd, Irvine",
+   "type": "distributor",
+   "why": "If Integra completes TRI matrix certified-manufacturing-center onboarding, TRI's OC-based team is the referral path to any SoCal matrix adopters; no OC matrix users were found publicly, so demand is unproven.",
+   "decision_maker": "Brett Jackson (Area Sales Director); Dr. Amir Gordji (Sr. Director Clinical Affairs); Dereck Fandel (EVP Sales)",
+   "how_to_reach": "949-210-3877 lab line; TRI Irvine study clubs",
+   "source_url": "https://tri-implants.swiss/en/contact/"
+  }
+ ],
+ "cost_items": [
+  {
+   "item": "Dentist-side shipping benchmark set by Glidewell (FedEx Overnight via Glidewell label)",
+   "base_usd": 9,
+   "low_usd": 0,
+   "high_usd": 18,
+   "period": "per-shipment",
+   "basis": "$9 each way; $18 round trip per box; USPS Priority prepaid labels free (2-4 business days each way)",
+   "status": "listed",
+   "source_url": "https://glidewelldental.com/send-case/pickup-and-delivery",
+   "source_date": "2026-05-05"
+  },
+  {
+   "item": "Integra outbound shipping Bellevue\u2192south OC per case (retail, no contract)",
+   "base_usd": 28,
+   "low_usd": 18,
+   "high_usd": 45,
+   "period": "per-shipment",
+   "basis": "Estimate for a small box via FedEx/UPS 2-Day or Standard Overnight at retail/small-business rates; carrier pages not fetched (fedex.com blocks crawlers). Inbound leg avoided on digital cases.",
+   "status": "estimated",
+   "source_url": "https://glidewelldental.com/send-case/pickup-and-delivery",
+   "source_date": "comparison basis 2026-05-05"
+  },
+  {
+   "item": "West Coast Study Club membership, dental laboratory technician tier",
+   "base_usd": 2450,
+   "low_usd": 2450,
+   "high_usd": 3650,
+   "period": "annual",
+   "basis": "2023-24 published dues: lab technician $2,450; practice owner $3,650; includes 11 sessions and symposium",
+   "status": "listed",
+   "source_url": "https://westcoaststudyclub.com/wcsc-2023-2024-program/",
+   "source_date": "2023-24 season"
+  },
+  {
+   "item": "Glidewell Study Club (competitor-run; attend only as market intel)",
+   "base_usd": 495,
+   "low_usd": 495,
+   "high_usd": 495,
+   "period": "annual",
+   "basis": "Published annual subscription per doctor; dentists only",
+   "status": "listed",
+   "source_url": "https://glidewellstudyclub.com/",
+   "source_date": "2025-09-04"
+  },
+  {
+   "item": "'Wednesdays with the Specialists' OC study club (held at Keating Dental Lab)",
+   "base_usd": 120,
+   "low_usd": 120,
+   "high_usd": 120,
+   "period": "annual",
+   "basis": "$120 for 8 sessions including dinner (dentist attendee fee)",
+   "status": "listed",
+   "source_url": "https://www.oralsurgeonirvine.com/referring-doctors/study-club-education/study-club/",
+   "source_date": "2026 schedule"
+  },
+  {
+   "item": "LMT LAB DAY West 2027 exhibitor/tabletop (Garden Grove, May 14-15, 2027)",
+   "base_usd": 4000,
+   "low_usd": 2500,
+   "high_usd": 8000,
+   "period": "one-time",
+   "basis": "Estimate; exhibitor pricing not published on fetched LMT pages. Range reflects typical regional lab-show tabletop vs. 10x10 booth plus travel from Bellevue. Must be confirmed with LMT.",
+   "status": "unresolved",
+   "source_url": "https://www.lmtmag.com/shows/lmt-lab-day-west-2026/seminars",
+   "source_date": "2026"
+  }
+ ]
+}

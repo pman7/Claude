@@ -1,0 +1,473 @@
+{
+ "critic:factcheck": {
+  "summary": "Of about 33 sourced claim groups checked against their primary pages through Exa, 31 are supported as written, and none of the inputs that drive the recommendation, the cost model or the ranking is contradicted; the report's sourcing is unusually sound. The two substantive errors are both prices: (1) the Glidewell crown-over-custom-abutment price is stated three different ways ($432 to $454 in Section 4.1; $454 to $486 in Sections 1 and 5) while Glidewell's current Screwmentable page lists $475 (BruxZir Full-Strength) to $486 (BruxZir Esthetic) at 13 days in lab with $40 off for model-free digital cases, so the correct range is $475 to $486 list and $435 to $446 digital, which strengthens rather than weakens the \"30 to 40 percent under Glidewell\" argument; and (2) the Alaska Air Cargo GoldStreak minimums were read from the zone-5 row: the zone-4 (Seattle and Portland) row of the October 1, 2026 chart shows a $99 minimum to Hawaii (zone 11) and $74 to Anchorage (zone 2), not $114 and $99 (the chart is symmetric: Hawaii to zone 4 is also $99). Lesser issues: the FedEx and UPS service-language quotations are verbatim but come from a January 1, 2018 FedEx Service Guide and a January 3, 2005 UPS Alaska rate sheet, so their currency is unverified; the \"Hawaii Extended ground zone 10\" claim cites UPS's 2025 Puerto Rico Rate and Service Guide, which does not classify Hawaii ZIP codes; the Section 179 figures are correct per IRS Rev. Proc. 2025-32 section 4.24, but the cited Block Advisors page as retrieved is dated January 2, 2024 and shows 2023 limits; the Florida Board link (?p=300) returns not found, although the claim is confirmed by floridasdentistry.gov/dental-laboratory-renewal/ and F.S. 466.032(1)(d)2; the Seattle Messenger zone prices assume a Downtown Seattle origin; and the 21 CFR 807.65(i) paraphrase is broader than the regulation's actual text. Verified (31): FDA FY2027 establishment fee $13,785 with no waiver for an initial registration; RCW 70.352.050 30-hour CDT or dentist-supervision rule effective Jan 31, 2025; Oregon HLO 4-2026 effective Oct 1, 2026, $250 application plus $500 authorization, $750 renewal ($250 review plus $500), 30-hour qualified employee, material-content and point-of-origin disclosures, applicability to any lab filling an Oregon dentist's work order, and enforcement waiver July 1 to Oct 31, 2026; UW CHWS King County 112 per 100,000 in 2023 (109 in 2016) with every other ACH under 70, and 6,886/7,071 WA dentist licenses; OFM King County 2,411,700 on April 1, 2025; Hawaii Data Book Table 2.36 (1,436/1,140; Oahu 855, Hawaii 115, Maui 116, Kauai 50, Molokai 3, Lanai 1); Maui GET 4.5 percent and 4.712 percent pass-through from Jan 1, 2024 through 2030; HRS 237-15 technician treatment and Act 41 $100,000/200-transaction thresholds; Hawaii foreign LLC $50 and Alaska foreign LLC $350; FedEx Priority Overnight and Standard Overnight quoted language; UPS Next Day Air quoted language and NDA Early to Anchorage by 8:30 or 9:00 a.m.; UPS 2026 AK/HI retail 1-lb Next Day Air $71.48 to $87.35; Alaska Air Cargo zones (Seattle zone 4, Hawaii zone 11) and the $12.50 minimum security screening fee; USPS Priority Mail to Hawaii 2 to 4 days from Oct 1, 2026; Glidewell BruxZir $109, three days in lab, Next-Day BruxZir with free shipping, screw-retained crown $339 at 7 days, FedEx $9 each way contiguous-US only, free USPS Priority Mail 2 to 4 days; Monster Milling (crowns from $19, abutments $65, bars $350, hybrids $580, 2 p.m. CT, free 2-day shipping on first orders); Haus Milling (HT Plus $17, ML Plus $29, ML Pro $35, e.max CAD $85, 3 p.m. CT); Alien Milling (HT $22, Multi-Layer 2.0 $34, Stardust $42, Extreme $47, 2 p.m. PST, free shipping over $99, full arch $649 and $849); CDTFA Reg. 1506(e) quotation; CDTFA Reg. 1591 dental implant systems and abutments exempt, crowns and bridges taxable; FTB $800 annual LLC tax with first-year exemption only for 2021 to 2023; Texas TSBDE $125 initial, $136 renewal, CDT on premises 30 hours a week, 12 CE hours, jurisprudence assessment; Florida out-of-state lab exemption; WA B&O manufacturing 0.484, retailing 0.471, wholesaling 0.484 percent, $55-a-month small-business credit, and 0.5 percent from Jan 1, 2027 under ESHB 2081; Bellevue B&O 0.1596 percent above $215,000 and $119 license; L&I class 3602 composite $0.4056 with $0.13195 employee share and the 3602-05 \"Dental shops, laboratories, or kiosks\" description; Section 179 2026 limits $2,560,000/$4,090,000 and permanent 100 percent bonus depreciation after Jan 19, 2025; TRI \"over 100 globally certified labs providing you same day or 24 hours delivery\" and Glidewell's April 7, 2025 certified TRI matrix manufacturing center release with \"low, special pricing\" and lifetime BruxZir warranty; Seattle Messenger listed zone prices and 20 percent fuel surcharge; UPS Store 14150 NE 20th St Air 4:30 p.m. and Ground 5:45 p.m. weekday cutoffs; CommercialCafe asking rents (Pacific Park $1.20 to $1.69, 30012 Ivy Glenn $1.95 to $2.45, 30011 Ivy Glenn $20/yr for 590 sq ft, 28052 Camino Capistrano $1.75, 15 Mareblu $3.25, Summit $3.10, Laguna Hills $25.55 average across 64 listings, Regus from $539) and Kidder Mathews Q3 2026 South County $1.71 NNN with 2.8 and 0.7 percent vacancy; LMT LAB DAY West 2026 (May 15 to 16, 131 exhibitors, 1,600-plus attendees) and 2027 (May 14 to 15, Hyatt Regency Orange County, Garden Grove); Census CBP 2023 via PlainBizBench (California 734 establishments and 9,086 employees, Washington 175 and 1,142, Texas 277 and 2,406, Florida 424); WA DOH $250 annual renewal due by July 31.",
+  "findings": [
+   {
+    "severity": "high",
+    "section": "Sections 1, 4.1 and 5 (Glidewell custom-abutment crown price)",
+    "quoted_text": "screw-retained implant crown $339 at seven days in lab, crown over a custom abutment $432 to $454 at 13 days",
+    "problem": "The custom-abutment crown price is stated inconsistently across the report ($432 to $454 in Section 4.1; $454 to $486 in Section 1 point 5 and the Section 5 table) and neither range matches Glidewell's current page. The cited screw-retained page does not list custom-abutment crown prices at all; the $454 figure appears only on an older Glidewell price-list PDF. Because the $454 to $486 range is used in the recommendation (\"$269 to $299 against Glidewell's $454 to $486 custom-abutment crown\") and the Section 5 \"30 to 40 percent under Glidewell\" comparison, the number should be made consistent and current. The correction strengthens the comparison; it does not change the conclusion.",
+    "evidence": "https://glidewelldental.com/solutions/implant-solutions/implant-restorations/screwmentable (fetched Oct 12, 2026; page dated 2025-10-02): \"$475* ... Price shown is for BruxZir Full-Strength crown with custom abutment\"; pricing table: BruxZir Full-Strength crown with custom abutment $475.00, BruxZir Esthetic $486.00, IPS e.max $519.00; \"In-Lab Working Times - Standard: 13 days\"; \"Save $40 off list price for custom abutment with model-free restoration cases produced from digital impressions.\" The cited screw-retained page (glidewelldental.com/.../screw-retained-crowns) lists only screw-retained prices ($339 at 7 days). An undated older Glidewell price list PDF (rackcdn) shows $454 for the same product, which is where the stale figure appears to originate.",
+    "suggested_fix": "Replace in Section 4.1 with \"crown over a custom abutment $475 (BruxZir Full-Strength) to $486 (BruxZir Esthetic) at 13 days in lab, $40 less for model-free digital cases ([Glidewell screwmentable page](https://glidewelldental.com/solutions/implant-solutions/implant-restorations/screwmentable))\"; change Section 1 point 5 and the Section 5 table to \"Glidewell's $475 to $486 custom-abutment crown\" so all three sections agree."
+   },
+   {
+    "severity": "medium",
+    "section": "Section 4.3 Logistics, Section 4.4 Logistics, Section 9 table (Hawaii rescue and Anchorage rows)",
+    "quoted_text": "the October 1, 2026 GoldStreak chart shows a minimum charge of about $114 for a package from zone 4 to zone 11 and $99 from zone 4 to zone 2 (Anchorage)",
+    "problem": "The figures appear to come from the zone-5 row of the GoldStreak chart, not the zone-4 (Seattle and Portland) row. On the zone-4 row the minimum to zone 11 (Hawaii) is $99 and to zone 2 (Anchorage) is $74. The report repeats the wrong Anchorage figure in Section 4.4 (\"about $99 minimum plus fees\") and Section 9 (\"GoldStreak about $99 minimum\"), and uses $114 in the Section 9 Hawaii rescue row and the \"$130-plus rescue option\" statement. The report itself flags this as \"my reading of the zone-4 row, confirm with the rate calculator\", which is appropriate, but the numbers as printed are wrong.",
+    "evidence": "https://public.alaskacargo.com/getmedia/33034730-1e1b-4764-8440-f85f4e679c15/GoldStreakShippingRates_OCT2026.pdf (effective Oct 1, 2026). Page 1 lists origin zones 1 to 4; the fourth (zone 4) block reads Letter $54 $49 $49 $49 $49 $49 $54 $54 $59 and Minimum $84 $74 $74 $69 $69 $69 $79 $79 $99 across destination zones 1,2,3,4,5,6,7,8,11, i.e. zone 4 to zone 11 = $99 and zone 4 to zone 2 = $74 (zone 4 to zone 4 = $69, the intra-zone low). The first block on page 2 (zone 5) reads Minimum $84 $99 $84 $69 $69 $69 $104 $104 $114, which matches the report's $99 (to zone 2) and $114 (to zone 11). Symmetry check: the zone-11 (Hawaii) origin row on page 3 shows $99 to zone 4 and $99 to zone 2. Zone map (Alaska-Air-Cargo-Zone-Map_2025.pdf) confirms \"ZONE 4 (Seattle and Portland only)\" and \"ZONE 11 (Hawaii)\". The $12.50 minimum security screening fee is confirmed at https://www.alaskacargo.com/services/rates/ (\"Security Screening Fee Domestic (including HI Interisland): $0.05 per lb. $12.50 minimum\"), not on the cited FAQ page.",
+    "suggested_fix": "Section 4.3: \"the October 1, 2026 GoldStreak chart shows a minimum charge of $99 for a package from zone 4 to zone 11 (Kahului) and $74 from zone 4 to zone 2 (Anchorage), plus a $12.50 minimum security-screening fee and federal excise tax\"; Section 4.4 and Section 9 Anchorage row: \"about $74 minimum plus fees\"; Section 9 Hawaii rescue row: \"About $99 minimum plus $12.50 screening and federal excise tax, one way\"; change \"$130-plus rescue option\" to \"roughly $115-plus rescue option\". Cite the fee to https://www.alaskacargo.com/services/rates/."
+   },
+   {
+    "severity": "low",
+    "section": "Section 4.3 Logistics and Section 9 Hawaii lane row (FedEx and UPS service language)",
+    "quoted_text": "FedEx's service guide language: Priority Overnight gives \"delivery in 2 business days for certain shipments to and from Alaska and Hawaii\"; Standard Overnight is \"Hawaii outbound only\"",
+    "problem": "The quotations are accurate to the cited documents, but the report does not disclose that the FedEx mirror is the January 1, 2018 FedEx Service Guide and the UPS \"Alaska NDA sheet\" is a rate sheet marked \"Domestic Effective January 3, 2005\". Whether these service commitments are current in 2026 could not be verified (FedEx's own pages blocked crawlers). The 2-business-day assumption underpins the Hawaii lane's 9-business-day door-to-door case and the $20-per-crown contribution.",
+    "evidence": "https://purchasing.idaho.gov/wp-content/uploads/2019/05/FedEx_Service_Guide.pdf: cover reads \"January 1, 2018 SERVICE GUIDE\"; text confirms Priority Overnight \"Delivery in 2 business days for certain shipments to and from Alaska and Hawaii\" and Standard Overnight \"Available throughout all 50 states (Hawaii outbound only)\". https://www.ups.com/media/en/ak_nda_x.pdf: \"Domestic Effective January 3, 2005 UPS Next Day Air ... Guaranteed on-time delivery to all 50 states and Puerto Rico by 10:30 a.m., noon or end of the next business day, depending on destination. Some shipments within Alaska and to Hawaii may require additional time in transit.\" The UPS 2025 Puerto Rico Rate and Service Guide (rate-service-guide-pr.pdf) does confirm the Anchorage NDA Early 8:30/9:00 a.m. statement.",
+    "suggested_fix": "Add the document dates: \"([FedEx Service Guide, January 1, 2018 edition, mirrored](...); [UPS Alaska Next Day Air rate sheet, effective January 3, 2005](...)); FedEx's own pages blocked crawlers on Oct 12, 2026, so current commitments should be confirmed at fedex.com/serviceguide before quoting a Maui dentist.\""
+   },
+   {
+    "severity": "low",
+    "section": "Section 4.3 Logistics and Section 9 Hawaii lane row (UPS zone claim)",
+    "quoted_text": "Kahului 96732 and Kihei 96753 are in UPS's Hawaii \"Extended\" ground zone 10",
+    "problem": "The cited \"UPS zone chart\" is the 2025 UPS Rate and Service Guide for Puerto Rico, which covers shipments to and from Puerto Rico and does not classify Hawaii ZIP codes by zone from a Washington origin. The Hawaii Extended designation for 96732 and 96753 could not be confirmed from the cited document.",
+    "evidence": "https://www.ups.com/assets/resources/webcontent/en_US/rate-service-guide-pr.pdf: title \"2025 Rate and Service Guide Puerto Rico Effective December 22, 2024\"; sections cover \"Service within Puerto Rico\", \"Services to the United States\", \"Services from the United States\"; no Hawaii ZIP zone table was found in the retrieved text. The 2026 AK/HI retail rate PDF confirms the existence of a \"Hawaii Extended\" rate column (zone 26) but does not list ZIP codes.",
+    "suggested_fix": "Either cite a UPS zone chart generated for origin ZIP 98007 (ups.com/zonecharts) or soften to \"Kahului 96732 and Kihei 96753 fall outside UPS's Hawaii Metro area and are rated at the Hawaii Extended rate (zone 26 in UPS's 2026 AK/HI retail rate table); confirm with a 98007-origin zone chart.\""
+   },
+   {
+    "severity": "low",
+    "section": "Section 6 Equipment and software demand; Section 7.2 Option M (Section 179 citation)",
+    "quoted_text": "2026 limit $2,560,000 with a $4,090,000 phase-out and permanent 100 percent bonus depreciation for property acquired after January 19, 2025",
+    "problem": "The figures are correct, but the cited Block Advisors page does not support them as retrieved: it is dated January 2, 2024 and gives the 2023 limits ($1,160,000 deduction, $2,890,000 phase-out). The report attributes the 2026 numbers to a \"Block Advisors summary of Rev. Proc. 2025-32 and the 2025 Act\", which could not be confirmed on that page.",
+    "evidence": "https://www.blockadvisors.com/resource-center/small-business-tax-prep/section-179-expensing/ (fetched Oct 12, 2026): \"Published: 2024-01-02 ... The maximum deduction for Section 179 for 2023 is $1,160,000 of expenditures. The beginning phaseout starts at $2,890,000.\" The correct 2026 figures are in IRS Rev. Proc. 2025-32 section 4.24 (https://www.irs.gov/pub/irs-drop/rp-25-32.pdf): \"For taxable years beginning in 2026 ... cannot exceed $2,560,000 ... reduced ... by the amount by which the cost of section 179 property placed in service during the 2026 taxable year exceeds $4,090,000.\" Permanent 100 percent bonus depreciation for property acquired and placed in service after January 19, 2025 is OBBBA (P.L. 119-21) section 70301, confirmed by multiple CPA summaries.",
+    "suggested_fix": "Replace the citation with \"[IRS Rev. Proc. 2025-32, sec. 4.24](https://www.irs.gov/pub/irs-drop/rp-25-32.pdf); bonus depreciation per P.L. 119-21 sec. 70301\" in both Section 6 and Section 7.2, and drop the Block Advisors link."
+   },
+   {
+    "severity": "low",
+    "section": "Section 4.5 Dallas-Fort Worth and Miami; Section 10 Florida row",
+    "quoted_text": "Florida does not require out-of-state labs to register ([Florida Board of Dentistry](https://floridasdentistry.gov/?p=300)) and exempts dental prostheses from sales tax",
+    "problem": "The cited link could not be retrieved (crawler returned not found), so the claim is not supported by the page as linked. The substance is correct and confirmed on a different Florida Board of Dentistry page and in the statute.",
+    "evidence": "Fetch of https://floridasdentistry.gov/?p=300 returned CRAWL_NOT_FOUND. https://floridasdentistry.gov/dental-laboratory-renewal/ states: \"Dental labs in another state or country which provides service to a dentist licensed under this chapter is not required to register with the state of Florida.\" Florida Statutes 466.032(1)(d)2 (https://www.flsenate.gov/Laws/Statutes/2026/466.032): \"A dental laboratory in another state or country which provides service to a dentist licensed under this chapter is not required to register with the state and may continue to provide services to such dentist with a proper prescription.\"",
+    "suggested_fix": "Replace the link in Sections 4.5 and 10 with https://floridasdentistry.gov/dental-laboratory-renewal/ and add \"(F.S. 466.032(1)(d)2)\"."
+   },
+   {
+    "severity": "low",
+    "section": "Section 9 King County own-delivery row; Section 7.2 Option A monthly costs",
+    "quoted_text": "courier zone prices Bellevue $34.97, Tukwila $31.13, Renton $37.83, Kirkland $40.06, Redmond $43.12, Issaquah $48.06, plus 20 percent fuel; rush 1.5 to 2 times",
+    "problem": "The listed prices are accurate to the page, but Seattle Messenger states that all sample prices assume a Downtown Seattle origin and that zone-to-zone prices vary; the page also warns of a pricing update (\"expect slight increases\") since March 2025. Presenting them as courier prices for Bellevue-origin deliveries to Eastside practices overstates their relevance; the model's $6/$10/$16 per-case mileage assumption is unaffected.",
+    "evidence": "https://www.seattlemessengercooperative.com/price-list: \"All listed sample prices assume delivery originates in Downtown Seattle. Zone to zone prices vary. ... We are updating our pricing structure effective March 2025 - expect slight increases in pricing. ... temporary 20% fuel surcharge ... Priority ... 1.5x listed zone price; Rush ... 2x listed zone price\"; zone list shows BELLEVUE $34.97, TUKWILA $31.13, KIRKLAND $40.06, REDMOND $43.12, RENTON $37.83, ISSAQUAH $48.06.",
+    "suggested_fix": "Add \"(sample prices from a Downtown Seattle origin; Bellevue-origin zone-to-zone quotes vary and the co-op flagged a March 2025 price update)\" after the zone prices in Section 9 and Section 7.2."
+   },
+   {
+    "severity": "low",
+    "section": "Section 10 Federal row and the FDA discussion",
+    "quoted_text": "FDA: dental laboratories making devices to a licensed practitioner's prescription are exempt from establishment registration and listing under 21 CFR 807.65(i)",
+    "problem": "The paraphrase is broader than the regulation. 807.65(i) exempts persons \"whose major responsibility is to render a service necessary to provide the consumer ... with a device\", listing \"dental laboratory\" among establishments \"whose primary responsibility to the ultimate consumer is to dispense or provide a service through the use of a previously manufactured device.\" The text does not say labs \"making devices to prescription\" are exempt; the service-on-a-previously-manufactured-device framing is precisely why milling implant-connecting geometry is the open question the report raises. The citation itself could not be opened at eCFR (bot block) and was verified via Cornell LII.",
+    "evidence": "https://www.law.cornell.edu/cfr/text/21/807.65 (eCFR returned a CAPTCHA request): \"(i) Persons who dispense devices to the ultimate consumer or whose major responsibility is to render a service necessary to provide the consumer (i.e., patient, physician, layman, etc.) with a device or the benefits to be derived from the use of a device; for example, a hearing aid dispenser, optician, clinical laboratory, assembler of diagnostic x-ray systems, and personnel from a hospital, clinic, dental laboratory, orthotic or prosthetic retail facility, whose primary responsibility to the ultimate consumer is to dispense or provide a service through the use of a previously manufactured device.\"",
+    "suggested_fix": "Reword to: \"FDA: 21 CFR 807.65(i) exempts dental laboratories whose primary responsibility is to provide a service to the dentist through the use of a previously manufactured device (the traditional prescription-lab exemption); it does not on its face cover a lab that manufactures an implant-connecting component on its own parameters, which is the clearance question below.\" Cite https://www.law.cornell.edu/cfr/text/21/807.65 as the readable copy."
+   }
+  ]
+ },
+ "critic:skeptic": {
+  "summary": "The report's regulatory and price facts hold up: I re-read the FDA FY2027 fee notice ($13,785), RCW 70.352.050, the Oregon HLO permanent rule (out-of-state scope, $250 + $500 fees, Oct 31 waiver), Glidewell's live prices, the Hawaii Data Book (Maui 116 dentists), the GoldStreak chart, Rev. Proc. 2025-32 and the WSDA PNDC dates, and all match. The recommendation itself is much weaker than the prose suggests. Option A's base case is negative after owner time (-$143), it ranks first only because of analyst judgment scores (on the four quantitative criteria alone it sits sixth, behind B, J, D, K and L), and its demand evidence is no better than the distant markets': the report's own Puget Sound research agent wrote \"there is no evidence it is underserved... claims of unmet need would be speculation,\" which the report never discloses, while using absolute lab counts to call Orange County structurally hopeless even though Washington and California have essentially identical labs-per-dentist ratios (1 per 40 vs 1 per 41). The conversion funnel in Section 12.1 does not compute (10 trial cases at the stated 15-25% trial-to-recurring rate yields 1.5-2.5 accounts, not 3-6), half of A's modeled revenue comes from $129 commodity crowns the report says cannot be sold against Glidewell/Dandy, and the model charges 30 founder hours a month while the plan schedules about 59. The same 90-day program is budgeted at $9,700, $5,650 (table sums to $5,290), $4,750, $4,200 and $5,000 in different sections. Against the brief, the report only nominally compares operating models per geography (only South OC gets all six), details a \"top three\" that is not the ranking's top three, runs four streams inside the 90 days despite the \"one complementary initiative\" rule, uses two stress tests that are vacuous or misdescribed, cites a non-existent Appendix B for switching evidence, and relies on a 2019 FedEx guide and an unquoted Pirate Ship discount for the Maui lane. The \"grow in place, no lease\" conclusion is probably still right, but mainly because every alternative is worse, not because A's case is proven; the report should say so and fix the arithmetic that currently flatters A.",
+  "findings": [
+   {
+    "severity": "high",
+    "section": "12.1 Option A, Conversion assumptions (and Section 6)",
+    "quoted_text": "Thirty conversations in eight weeks, ten trial cases accepted, three to six recurring accounts by month 6 to 9 (15 to 25 percent on warm introductions",
+    "problem": "The funnel arithmetic contradicts the report's own stated rate. Section 6 defines the 15-25 percent as a trial-to-recurring conversion. Ten trials at 15-25 percent yields 1.5 to 2.5 recurring accounts, not 3 to 6. Reaching the base case of 6 accounts at that rate requires 24-40 trial cases, which is 80-130 percent of the 30 conversations converting to a trial. Gate 3 (4 recurring from 15 cumulative trials) implies 27 percent, above the top of the range. Either the rate is conversation-to-recurring (then 10 trials to 3-6 accounts is 30-60 percent trial conversion, unsupported) or the base case is unreachable on the report's own assumptions.",
+    "evidence": "report.md Section 6: 'Expect a 15 to 25 percent trial-to-recurring conversion on warm introductions'; Section 12.1 funnel; Section 14 week 11 'Cumulative trial cases 15 or more; recurring accounts 4 or more'; model/inputs.json bellevue_grow accounts_12m [3,6,10]. 10 x 0.15-0.25 = 1.5-2.5; 6 / 0.25 = 24 trials, 6 / 0.15 = 40 trials.",
+    "suggested_fix": "Restate the funnel consistently: e.g., 40 conversations -> 20-24 trial cases -> 3-6 recurring accounts (15-25 percent trial-to-recurring), and raise the week-4/8 gate targets for trials accordingly (at least 8 trials by gate 1, 16 by gate 2), or lower the base case to 3-4 accounts and re-run the model and ranking."
+   },
+   {
+    "severity": "high",
+    "section": "11 Ranking and sensitivity; 12.1 Why it ranks first",
+    "quoted_text": "Highest fit and evidence scores. Positive after owner time at base, strongly positive at high, and the only option that reduces the Jung concentration.",
+    "problem": "Two problems. (1) 'Positive after owner time at base' is false: Section 8.3 and outputs.md show A's base year-1 profit after owner time is -$143 and the report itself calls it 'breakeven'. (2) A ranks first only because of the analyst judgment scores (fit 5, evidence 4, speed 4 = 13 points, the highest of any option; B has 10). On the four model-derived criteria alone (profit, cash, time efficiency, downside) A scores 2.86, below K/L 3.29, B 3.21, J 3.14 and D 3.00. The 30 percent of weight assigned to judgment is what produces the answer, and the profit banding is fragile: M at +$232 scores 3 while A at -$143 scores 2, a $375 gap worth a full point.",
+    "evidence": "model/ranking.py bands and J dict; model/ranking.md row 1 (A profit 2, cash 3, time 4, downside 3, fit 5, evidence 4, speed 4; base yr-1 profit -$143). Recomputed quant-only scores with the balanced weights (25/20/15/10 over 70): A 2.86, B 3.21, J 3.14, D 3.00, K/L 3.29, M 2.71.",
+    "suggested_fix": "Change 12.1 to 'Breakeven (-$143) after owner time at base'. In Section 11 add a sentence: 'On the four quantitative criteria alone A ranks sixth; it leads only after fit, evidence and speed are added, which are my judgments.' Show a quant-only column in the ranking table and justify the evidence score of 4 or lower it to 3."
+   },
+   {
+    "severity": "high",
+    "section": "1 The direct recommendation, point 3; 4.1 Puget Sound baseline",
+    "quoted_text": "The Puget Sound market you are standing in is the richest one on the list for your specific capabilities.",
+    "problem": "The demand case for growing in place is asserted, not evidenced, and is no better supported than the distant markets. The report's own Puget Sound research agent concluded the market is 'already served by roughly 30 named independent labs in King County alone... There is no evidence it is underserved' and listed 'Any evidence of dentist dissatisfaction with existing local labs: none was found; claims of unmet need would be speculation.' None of this appears in the report. The 'structural problem' used to disqualify Orange County (most lab-dense state) rests on absolute counts: per dentist, Washington (175 labs / 7,071 dentists, 1 per 40) and California (734 / 30,280, 1 per 41) are identical. Dentist density per 100,000 is not a measure of available outsourced lab demand. The only local 'evidence' is Dr. Kim (trial not yet converted; Draft 7 still asks for the second case) and Harmony Dental, an inbound remote account acquired through Medit Link, which supports the scanner-network channel rather than drop-offs.",
+    "evidence": "research/puget_market.json summary and unknowns (quoted above); research/soc_market.json unknowns: 'Any public complaints or documented dissatisfaction by south-OC dentists with local labs: none found; do not assume it.'; report.md 4.1 and 4.2 figures 175 WA labs, 734 CA labs, 7,071 WA dentists, 30,280 CA dentists; outreach/drafts.md Draft 7.",
+    "suggested_fix": "Add the agent's caveat verbatim to Sections 1 and 4.1, replace 'richest one on the list' with 'the only market where you already have relationships, no shipping cost and no new nexus', present labs-per-dentist for WA vs CA, and lower A's evidence score to 3 (same as the remote options) unless real local conversion data exists."
+   },
+   {
+    "severity": "high",
+    "section": "8.1 Formulas / 8.2 Unit economics / 12.1 The offer",
+    "quoted_text": "for option A the base mix per account is 6 zirconia crowns, 1.5 implant crowns, 0.15 full arches and 0.8 night guards a month",
+    "problem": "The model and the strategy contradict each other. Section 12.1 says the offer is implant crowns and full arches and 'Nothing else is offered in the first meeting'; Section 4.1 and Table 5 say you 'cannot win on price' and cannot win 'Commodity posterior crowns at $129 against $89 to $99 national offers'. Yet 51 percent of A's modeled revenue per account ($774 of $1,526) and about half its contribution comes from exactly those $129 crowns (6 per account per month). Full arches, the headline product, are 0.15 per account per month (about 11 arches a year across 6 accounts). If the crowns had to be priced at Glidewell's $109 to win them, contribution falls roughly $116 per account per month and A's base year-1 result drops from -$143 to about -$6,100.",
+    "evidence": "model/inputs.json bellevue_grow case_mix and products.fcz_crown price [99,129,129]; report.md 8.2 ($129 crown $70 base contribution), 12.1 ('Nothing else is offered in the first meeting'), Table 5 row 1. Arithmetic: 6 x $129 = $774 / $1,526 = 50.7 percent; 51 account-months x 6 crowns x $19.40 = about $5,900.",
+    "suggested_fix": "Either re-weight the base mix toward the products the offer actually sells (e.g., 2 crowns, 2 implant crowns, 0.3 arches) and re-run, or add a stress row 'crown price matched to $109' and state plainly that the base case depends on winning commodity crowns at $129 from practices that can get them for $89-$109 with free shipping."
+   },
+   {
+    "severity": "high",
+    "section": "13 What to run; 14 The 90-day plan; 16 What I would do; 7.4",
+    "quoted_text": "Budget about $9,700 over the first 90 days at base ($5,350 one-time including the deferred PNDC deposit and the Oregon authorization, plus $1,440 a month",
+    "problem": "The same 90-day program carries five different budgets: $9,700 (Section 13, the model's $9,670), 'about $5,650' (Section 14 totals, but the weekly cash column sums to $5,290), $4,750 (Section 14 at the $5,000 envelope), 'about $4,200' (Section 7.4) and $5,000 with a $2,750 itemization (Section 16). The $9,670 used for ranking, feasibility and the $15,000 envelope includes a $2,500 PNDC deposit the plan defers, $250 a month of loaner-scanner amortization the plan never spends, and $400 a month of rep commission from month 1 although the rep is not interviewed until week 5. So the option that was ranked and feasibility-tested is not the program being recommended, and the reader cannot tell what to fund.",
+    "evidence": "report.md Section 13 ($9,700), Section 14 ('about $5,650', weekly column: 750+900+150+240+350+150+150+150+550+1200+550+150+0 = $5,290; '$4,750'), Section 7.4 ('Total about $4,200'), Section 16 ('$5,000... $750... about $900... $200... $600... $300'); model/inputs.json bellevue_grow one_time and monthly; outputs.md A first 90 days $9,670.",
+    "suggested_fix": "Publish one 90-day cash budget table reconciled to the week-by-week schedule (about $5,300 base, with the PNDC deposit, loaner scanner and pre-hire commission shown as gated add-ons), re-run the model with the plan's actual timing, and make Sections 7.4, 13, 14 and 16 quote that single figure."
+   },
+   {
+    "severity": "high",
+    "section": "8.1 / 8.5 Capacity and distraction cost; 14 totals; 13",
+    "quoted_text": "the Bear booth (not spent), plus about 170 founder hours (about 13 a week).",
+    "problem": "The model charges A for 30 founder hours a month (Section 7.2 'Owner time 30 hours a month at $60'); Section 13 says '30 to 50 founder hours a month'; the 90-day plan schedules 176 hours in 13 weeks, about 59 a month. At the plan's own hours A's fully loaded monthly cost rises from $3,240 to about $4,980, the fully loaded break-even rises from 3.7 to about 5.8 accounts (nearly the whole base case), and if sustained for the year the base-case result after owner time falls from -$143 to roughly -$21,000, which would drop A's profit band to 1 and its balanced score below B. The distraction cost the brief asked for is therefore understated for the recommended option specifically.",
+    "evidence": "model/inputs.json bellevue_grow owner_hours_per_month [20,30,45]; report.md Section 14 owner-hours column sums to 176; Section 13 '30 to 50 founder hours a month'. Arithmetic: $1,440 + 59 x $60 = $4,980; / $864 = 5.76 accounts; (59-30) x $60 x 12 = $20,880.",
+    "suggested_fix": "Set A's base owner hours to what the plan requires (about 55 for the first quarter, 40 thereafter), re-run model.py and ranking.py, and report the revised break-even and year-1 figures; or cut the plan's hours and say what is dropped."
+   },
+   {
+    "severity": "medium",
+    "section": "8.3 Twelve-month results (and Section 1 strongest argument against)",
+    "quoted_text": "Together A plus C at base put the lab near $17,000 a month collected by late 2027, which is your stated system breakeven including living costs",
+    "problem": "The sentence adds contribution to revenue. The $17,000 is $11,700 collected plus A's $3,750 and C's $1,500 of month-12 cash contribution. Measured in collected revenue, A adds 6 x $1,526 = $9,156 and C adds 3 x $992 = $2,976, so the lab would be near $23,800 a month, not $17,000. Comparing a contribution-augmented number to a revenue breakeven ($16,500 collected) is invalid either way, and Section 1's '$17,000 to $22,000 a month' range is inconsistent with the same model.",
+    "evidence": "report.md 8.3 month-12 figures ($3,750, $1,500) and 8.3 table (A $1,526 and C $992 revenue per account); outputs.md A base 6.0 accounts, C base 3.0 accounts. 11,700 + 9,156 + 2,976 = 23,832.",
+    "suggested_fix": "Rewrite: 'A plus C at base add about $12,100 a month of revenue and about $5,250 of contribution by month 12, taking collected revenue to roughly $23,800; after existing operating income and your draws, that is the first time the records would show the owner paid.' Align Section 1's range."
+   },
+   {
+    "severity": "medium",
+    "section": "1 Three compliance facts; 7.2 Option C; 10 Federal row; 11 sensitivity",
+    "quoted_text": "TRI requires certified manufacturing centers to hold their own FDA establishment registration as a contract manufacturer (your own Notion task, October 7, 2026)",
+    "problem": "The single input that moved C from second to ninth is labeled a 'fact' in Section 1 but its source is the client's own Notion task, and Section 7.2 calls the same point 'Unknown and material: whether the registration is truly a hard condition'; the low case sets it to $0. The report also paraphrases 21 CFR 807.65(i) as exempting 'dental laboratories making devices to a licensed practitioner's prescription', but the rule text exempts persons 'whose primary responsibility to the ultimate consumer is to dispense or provide a service through the use of a previously manufactured device', which cuts against a lab milling a patient-specific abutment-crown. Primary evidence the report did not cite points the same way: TRI's 510(k) summary K203660 describes the matrix Crown Abutment as a patient-specific abutment manufactured at TRI facilities from a design file, and FDA has told the industry that validated milling centers for abutments are contract manufacturers responsible for registration and listing. The registration is therefore probably a real requirement, so the low case and the 'C returns to second if TRI waives' sentence are unlikely scenarios presented as live possibilities.",
+    "evidence": "law.cornell.edu/cfr/text/21/807.65 (paragraph (i) text); accessdata.fda.gov/cdrh_docs/pdf20/K203660.pdf ('The manufacture of these abutments and restorations will be at TRI Dental Implant Int. AG facilities after receipt of the digital design file'); evo820.com FDA statement on validated milling centers; federalregister.gov 2026-15335 ($13,785, waiver excludes initial registration). report.md Sections 1, 7.2, 10, 11.",
+    "suggested_fix": "Relabel the TRI condition as 'historical (client record), unverified'; quote 807.65(i) accurately; cite K203660 and FDA's validated-milling-center position in Section 10; set C's low case to include the fee or label the $0 as 'unlikely'; and soften Section 11 to 'if TRI waives, which FDA practice makes unlikely'."
+   },
+   {
+    "severity": "medium",
+    "section": "12 The top three in detail; 12.3",
+    "quoted_text": "Why it is third. It fills idle spindles with the lowest shipping cost of any lane and no new nexus",
+    "problem": "The brief required a detailed top three. The ranking's top three are A, B and J (Alaska remote, 3.05). Section 12 instead details A, C (ranked ninth) and B, and calls B 'third' when the table ranks it second. J, the actual number three, gets no target accounts or decision-maker path anywhere.",
+    "evidence": "report.md Section 11 table (B rank 2, J rank 3, C rank 9); Section 12.2 heading 'Option C... ranks ninth'; Section 12.3 'Why it is third'; model/ranking.md rank order A > B > J.",
+    "suggested_fix": "Either detail A, B and J (naming two Anchorage implant practices and the Alaska Dental Society contact as the brief requires) and move C to a 'gated wedge inside A' subsection, or explain explicitly why C replaces J, and change 'Why it is third' to 'Why it is second'."
+   },
+   {
+    "severity": "medium",
+    "section": "3 How the options were evaluated; 7.1",
+    "quoted_text": "Operating models compared separately for each geography where they apply: remote service from Bellevue; periodic sales visits and partnerships",
+    "problem": "The brief asked for the six operating models to be compared separately per geography. Only South Orange County gets all six (D, E, F, G, N plus remote). Puget Sound gets one model (grow in place); there is no Bellevue equipment demo/training room using the A3 unit already in the building, no Seattle or Tacoma consultation/pickup office, no Puget Sound staffed satellite. Maui gets two (remote, office), Alaska, DFW and Miami one each. 'Where they apply' is the report's own judgment, not a comparison, so the requirement is met only nominally.",
+    "evidence": "report.md Section 7.1 lists fourteen options: A, B, C (no geography models), D-G and N for South OC, H and I for Maui, J, K, L remote only, M national; model/inputs.json has no Puget Sound office/satellite/showroom option.",
+    "suggested_fix": "Add at minimum a Bellevue/Eastside equipment demo-and-training room (the demo A3 is already there), a Seattle or Tacoma pickup office, and a Maui finishing satellite to inputs.json so each geography shows the lease-based models failing on its own numbers, or state in Section 3 which model-geography pairs were excluded and why, in a table."
+   },
+   {
+    "severity": "medium",
+    "section": "8.4 Stress tests",
+    "quoted_text": "| Option | Base | Half the accounts | Remake rate doubles | Rent and staff +25% | Lose the largest new account |",
+    "problem": "Two of the four stresses are not what they say. 'Rent and staff +25%' is identically zero for every option without rent or staff (A, B, C, D, H, J, K, L, M), so nine of the fourteen rows show a non-test. 'Remake rate doubles' is implemented as a flat 5 percent of revenue haircut, not a doubling of the remake rate through the unit economics; the code comment admits the approximation. There is no price-pressure stress (matching $109 crowns), no ramp-delay stress (accounts arriving three months later), and the Jung-loss stress is discussed but not modeled.",
+    "evidence": "model/model.py stress(): 'remake rate doubles: approximate contribution hit... use 5pp hit on contribution margin'; rent_staff uses monthly rent and staff keys, absent for remote options; outputs.md stress table shows identical Base and Rent+staff values for all remote options.",
+    "suggested_fix": "Replace 'Rent and staff +25%' with 'All monthly option costs +25%' so it bites everywhere; implement the remake doubling by re-running unit_contribution with remake_rate x2; add 'crown price $109' and 'ramp +3 months' columns; add a company-level row for losing Dr. Jung."
+   },
+   {
+    "severity": "medium",
+    "section": "1 point 5; 5 Competition map; 4.1",
+    "quoted_text": "an implant crown package at $269 to $299 against Glidewell's $454 to $486 custom-abutment crown",
+    "problem": "The comparison is unlike-for-unlike and internally inconsistent. Integra's package is a crown on a stock or OEM abutment; Glidewell's $454-$486 is a crown over a custom abutment. The like-for-like Glidewell product is the screw-retained crown at $339 (or crown over stock abutment at $136-$147 plus the abutment), so the package is about 16 percent under, not '30 to 40 percent under Glidewell' (Table 5, Section 6). The report also gives the custom-abutment figure as '$432 to $454' in 4.1 and '$454 to $486' in Sections 1 and 5; Glidewell's live screwmentable page shows $475 (Full-Strength) and $486 (Esthetic), and the $454 comes from an older PDF price list.",
+    "evidence": "glidewelldental.com/solutions/implant-solutions/implant-restorations/screwmentable ($475 / $486); screw-retained-crowns page ($339); older Glidewell price-list PDF ($454 / $465); report.md 1, 4.1, 5, 6.",
+    "suggested_fix": "Use one current figure ($475-$486, read Oct 12, 2026) everywhere, and state the price advantage against the comparable product: 'about 16 percent under Glidewell's $339 screw-retained crown; 40 percent under its $475 custom-abutment crown, a different product.'"
+   },
+   {
+    "severity": "medium",
+    "section": "1 The direct recommendation, point 2; 7.4; 11",
+    "quoted_text": "every office, satellite, showroom or production option in the model is infeasible on either cash-to-open or worst-case drawdown, and all of them are negative in the base case after owner time",
+    "problem": "Two summary claims the body does not support. (1) The model marks E (South OC office) feasible at $30,000 in its low and base cases ('yes' in outputs.md), and Section 7.4 says so, contradicting 'every office... is infeasible'. (2) 'Negative in the base case after owner time' is used to disqualify leases, but D, H, J, K and L are also negative after owner time at base (-$15,253, -$16,935, -$8,922, -$9,921, -$10,022) and A itself is -$143, yet J and D are ranked third and fourth and A first. The criterion is applied selectively.",
+    "evidence": "model/outputs.md feasibility rows for E low ($6,274 / $17,595: yes at $30,000) and E base ($13,100 / $15,580: yes at $30,000); demand table year-1 profit after owner time for D, H, J, K, L; report.md 7.4 '$30,000 ... E only in its low and base cases on cash'.",
+    "suggested_fix": "Rewrite point 2: 'No lease-based option is positive after owner time in any scenario, and none fits the $5,000 or $15,000 envelopes; only the South OC office fits $30,000 on cash, and it still loses $40,000 in year one.' Acknowledge that the remote options are also negative at base and that A is at breakeven."
+   },
+   {
+    "severity": "medium",
+    "section": "outreach/drafts.md Draft 13; report 1 and 14 week 1",
+    "quoted_text": "if no employee works 30 hours a week as a CDT, the application cannot be completed as written",
+    "problem": "This misstates the Oregon rule and misses the cheapest compliance path. OAR 331-765-0005(2)(d), as filed, accepts any of: a 30-hour employee with 12 approved CE hours in the prior 12 months, a 30-hour CDT, or a dentist; the CDT-only requirement does not begin until January 1, 2030. inputs.json describes Edward at about 160 CAM and mill hours a month (full time), so Edward plus 12 NBC-approved CE hours satisfies Oregon without raising Young's hours or pausing Oregon work. Section 1's 'the same 30-hour CDT rule' repeats the error (Section 4.6 states it correctly).",
+    "evidence": "oregon.gov HLO 4-2026 permanent rule PDF, OAR 331-765-0005(2)(d)(A)-(C) and 331-765-0007 (2030 change); model/inputs.json capacity note 'Edward ~160 h CAM/mill'; report.md Section 1 and Section 14 week 1 'or pause Oregon work'.",
+    "suggested_fix": "Correct Draft 13 and Section 1: 'Oregon accepts a 30-hour employee with 12 approved CE hours until 2030; enroll Edward in 12 NBC-approved CE hours (about $300-$600, a few evenings) and file.' Remove 'or pause Oregon work' from week 1."
+   },
+   {
+    "severity": "medium",
+    "section": "13 What to run; 14 weeks 5, 7, 9, 13",
+    "quoted_text": "Complementary initiative (at most one): equipment, inbound and the two open quotes only",
+    "problem": "The brief limits the plan to one primary engine plus at most one complementary initiative. The 90-day schedule runs A (drop-offs, CE evening, rep hire), the TRI certification stream (CAD/CAM training, test crowns, a TRI joint visit, a registration decision), the equipment stream (two quotes, year-end push, Oahu conversation), and in week 7 'call ten named PNW labs with the Pacific-cutoff pitch' for Bear Milling, plus Alaska pilot planning at gate 3. Labeling TRI as 'inside A' and Bear as 'postponed' does not change that four revenue streams compete for the same founder hours the report says are the binding constraint.",
+    "evidence": "report.md Section 14 week 5 (TRI training, simulation, test crowns), week 7 ('Bear: ... call ten named PNW labs'), week 9 ('TRI joint visit'), week 11 ('Year-end equipment push'), week 13 ('plan the Alaska pilot'); Section 13 'Postpone... Bear Milling relaunch (B): after on-time shipping is at or above 90 percent for four consecutive weeks'.",
+    "suggested_fix": "Move the Bear calls and the TRI joint visit out of the first 90 days (to the gate-3 decision), keep equipment as the single complementary initiative, and restate Section 13 as 'A plus inbound equipment; TRI training only as a free background task; Bear and Alaska not before January 15.'"
+   },
+   {
+    "severity": "medium",
+    "section": "9 Logistics evidence by lane; 4.3 Logistics",
+    "quoted_text": "Pirate Ship or a UPS small-business account typically cuts retail air rates by half or more (estimate), which is what the base figures assume.",
+    "problem": "The brief asked for route-specific carrier evidence for Maui and the remote lanes. The FedEx evidence is a 2019 service-guide PDF mirrored on an Idaho procurement site, the Hawaii base cost ($95 round trip) rests on an unquoted 'half or more' discount off a UPS retail chart, no live SEA-to-OGG or SEA-to-SNA quote for a 1-pound box was obtained, and the Anchorage lane simply reuses the Hawaii numbers ('same lane assumption as Hawaii'). The Maui crown economics (+$20 base, -$91 pessimistic) are therefore built on an assumed discount, not a rate.",
+    "evidence": "report.md Section 9 table: FedEx link purchasing.idaho.gov/.../2019/05/FedEx_Service_Guide.pdf; Anchorage row '$55 / $95 / $150 (same lane assumption as Hawaii)'; model/inputs.json shipping_lanes.overnight_hi_ak [55,95,150].",
+    "suggested_fix": "Obtain and cite dated published rates for a 1-lb, 8x6x4 box Bellevue 98007 to Kahului 96732 and Kihei 96753 (UPS 2nd Day Air and Next Day Air published daily rates, FedEx 2Day and Priority Overnight list rates) and the current FedEx Service Guide, and give Anchorage its own lane cost."
+   },
+   {
+    "severity": "medium",
+    "section": "6 Why a customer would switch to you",
+    "quoted_text": "see the switching evidence the agents compiled in Appendix B when it lands; the pattern is consistent across ADA, LMT and Dentaltown sources",
+    "problem": "The report cites an appendix that does not exist in report.md, and the ADA, LMT and Dentaltown switching evidence has no link or date anywhere, so the central behavioral assumption (why an Eastside dentist would switch) is unsourced. Meanwhile all three market agents reported finding no evidence of dentist dissatisfaction with current labs (Puget Sound, South OC, Maui), which the report does not disclose. The brief required current dated primary sources with links and a clear separation of facts from estimates.",
+    "evidence": "grep of report.md for 'Appendix B' returns only this sentence; build/appendix_b.py exists but its output is not in the report; research/puget_market.json, soc_market.json and maui_market.json unknowns each state no dissatisfaction evidence was found.",
+    "suggested_fix": "Either include Appendix B (or the switching-evidence citations with URLs and dates) in the report, or delete the reference and write: 'No agent found evidence of dissatisfaction with incumbent labs in any market; the switching rates below are estimates.' Lower A's evidence score accordingly."
+   },
+   {
+    "severity": "medium",
+    "section": "11 Ranking and sensitivity",
+    "quoted_text": "Under the pure cash-constrained profile, J, K, L and D rise above A because they cost almost nothing to start; that profile rewards cheapness, not value",
+    "problem": "The client's binding constraint, by the report's own account, is cash (balance touched $4.73 and $2,421 this year; brief envelopes start at $5,000). The one weighting profile built around that constraint ranks A fifth, and the report dismisses it in a clause rather than explaining why 'balanced' is the right profile for this client. Choosing the profile that produces A, then calling the alternative 'cheapness', is the ranking baking in the answer. The robust conclusion (no lease option is ever in the top half) is well supported; A-first is not.",
+    "evidence": "model/ranking.md rank order 'Cash-constrained ($5k): J > K > L > D > A > B > H > M...'; model/ranking.py PROFILES; report.md Section 1 point 1 (cash figures) and Section 11.",
+    "suggested_fix": "State explicitly which profile fits the client's situation and why, show that A's cash score would improve to 4 if the plan's real $5,300 90-day budget were used (which moves A to the top under the cash profile too), and present that reconciled result rather than dismissing the cash profile."
+   },
+   {
+    "severity": "medium",
+    "section": "12.1 Why it ranks first; 4.1 What this means",
+    "quoted_text": "Zero lease, zero new nexus, uses idle mills and the one thing competitors cannot copy (distance).",
+    "problem": "Distance is not something competitors cannot copy: the report's own Section 4.1 lists roughly 50 King County lab entities including Nakanishi, Masterpiece, Novus, Legend and Pacific Northwest Prosthodontics Laboratory in Bellevue itself, and Table 5 notes 'Oasis, Choice and Seabrook include free courier pickup'. The Puget Sound agent's summary says Integra's edge is 'not scarcity of competitors'. The claimed uniqueness is really the combination (5-axis chain plus pending TRI certification plus proximity), which is asserted and depends on a certification the report says to gate.",
+    "evidence": "report.md Section 4.1 competition paragraph and Table 5 row 1; research/puget_market.json summary ('Integra's realistic edge is proximity to a Bel-Red corridor cluster... not scarcity of competitors').",
+    "suggested_fix": "Replace '(distance)' with 'proximity combined with an in-house arch protocol and (if certified) TRI matrix capability; several Bellevue labs share the proximity', and name the two or three local labs that most directly compete for implant and full-arch work."
+   },
+   {
+    "severity": "low",
+    "section": "2 Reality check table; 8.1 Capacity check; 15 item 7",
+    "quoted_text": "Design capacity is the binding production constraint: one senior designer at about 20 hours a week does all design.",
+    "problem": "Section 2 calls design the binding constraint at 20 hours a week (about 87 hours a month), yet the model assumes 'Young about 80 design hours' of spare capacity within a 220-hour spare pool and flags capacity only in the high cases; Section 15 assumes 'about 80 spare design hours a month'. If current work (about 43 units a month) already uses roughly 40 design hours, spare design time is closer to 45 hours, and A's high case (202 labor hours) and B's base case would hit the design ceiling well before the model says.",
+    "evidence": "report.md Section 2 row 'Two 5X-200 mills...'; model/inputs.json capacity note 'Young ~80 h design... minus ~70 h used by current 43 units/mo'; Section 8.5 'In the high case of A... you are at the 220-hour ceiling'.",
+    "suggested_fix": "Model design hours as a separate constraint (Young's total hours minus current usage) and report the month in which each option's base and high cases exhaust design time; reconcile Section 2 with Section 8.1."
+   },
+   {
+    "severity": "low",
+    "section": "7.4 What a $5,000 envelope buys",
+    "quoted_text": "A at the low spend ($2,400 one-time without the PNDC deposit or loaner scanner, about $340 a month) plus the Oregon authorization ($750)",
+    "problem": "The description of the low case does not match inputs.json. A's low one-time is $300 samples + $0 listings + $1,500 PNDC booth deposit + $600 CE + $0 Oregon = $2,400, so it includes a $1,500 PNDC deposit (which the plan defers) and excludes Oregon (which the plan requires); the text says the opposite. The arithmetic ($2,400 + $750 + 3 x $340 = $4,170) happens to work, but the reader is told the $5,000 program excludes a booth deposit that is in fact 62 percent of its one-time spend.",
+    "evidence": "model/inputs.json bellevue_grow one_time low values: 300, 0, 1500, 600, 0; report.md 7.4 $5,000 row.",
+    "suggested_fix": "Define the $5,000 program explicitly (samples $300, listings $300, Oregon $750, lunch-and-learn $300, about $340 a month = about $2,700 over 90 days) and either add that as a fourth scenario in inputs.json or correct the sentence."
+   },
+   {
+    "severity": "low",
+    "section": "4.3 Maui Verdict; 4.2 South OC Verdict",
+    "quoted_text": "at base case it loses about $4,000 a month after owner time and needs $19,900 in the first 90 days for three accounts",
+    "problem": "The -$4,029 figure in outputs.md is the Maui office's month-12 cash flow before owner time; after owner time it is -$6,129 (Section 8.4 table). Similarly, the South OC verdict says an office 'adds $13,000 to $35,000 of first-90-day cash' while Table 7.1 gives E's first 90 days as $6,274 / $13,100 / $30,190. Both verdicts understate or misstate the model.",
+    "evidence": "model/outputs.md I base 'Month-12 monthly cash flow -$4,029' and stress table 'Base -$6,129'; report.md 7.1 row E; 4.2 and 4.3 verdicts.",
+    "suggested_fix": "Change 4.3 to 'loses about $6,100 a month after owner time (about $4,000 before it)'; change 4.2 to 'adds $6,000 to $30,000 of first-90-day cash ($13,100 at base)'."
+   },
+   {
+    "severity": "low",
+    "section": "7.2 Option A itemized stack",
+    "quoted_text": "commission to a canvasser or rep at 5 to 8 percent of new revenue $400 (est.;",
+    "problem": "Commission is modeled as a fixed $400 a month from month 1, but the rep is not interviewed until week 5 and the posted structure is 6-8 percent of collected new revenue plus a 3 percent year-two residual. At base month 12 ($9,156 of new revenue) commission is $550-$730, so A's steady-state cost is understated by $150-$330 a month while early months are overstated; the brief asked for commissions to be itemized as what they are.",
+    "evidence": "model/inputs.json bellevue_grow monthly commission [0,400,900]; report.md 12.1 '$1,526 a month of revenue' x 6 accounts; Draft 9 '6 to 8 percent of collected revenue... then 3 percent residual'.",
+    "suggested_fix": "Model commission as a percentage of new revenue in model.py (e.g., 7 percent of revenue from rep-sourced accounts, starting month 3), and show the month-12 figure in 7.2."
+   },
+   {
+    "severity": "low",
+    "section": "4.1 Puget Sound Demand",
+    "quoted_text": "a conservative count is 500 to 700 practice locations (estimate from the UW density figure and Eastside population share",
+    "problem": "Applying 112 dentists per 100,000 to the roughly 600,000 residents of the listed Eastside cities gives about 680 licensed dentists, not practice locations; at the typical 1.5-2 dentists per location that is roughly 350-450 locations. The figure counts the wrong unit and is labeled 'conservative' in the wrong direction, which inflates the apparent target pool for the drop-off plan.",
+    "evidence": "report.md 4.1 (112 per 100,000; cities listed: Bellevue, Kirkland, Redmond, Issaquah, Sammamish, Mercer Island, Renton, Bothell, combined population about 600,000 per OFM); UW CHWS caveat that the ratio is license mailing addresses.",
+    "suggested_fix": "Restate as 'roughly 600-700 licensed dentists, perhaps 350-450 practice locations (estimate)', and base the 90-day list on the named practices rather than the aggregate."
+   },
+   {
+    "severity": "low",
+    "section": "6 Equipment and software demand; 7.2 Option M",
+    "quoted_text": "the Section 179 calendar (2026 limit $2,560,000 with a $4,090,000 phase-out and permanent 100 percent bonus depreciation for property acquired after January 19, 2025",
+    "problem": "The figures are correct, but the cited source does not support them: the Block Advisors page is dated January 2, 2024 and shows the 2023 limits ($1,160,000 / $2,890,000). The brief required current dated primary sources with links; the primary source is Rev. Proc. 2025-32 section 4.24 and OBBBA section 70306.",
+    "evidence": "blockadvisors.com page as fetched Oct 12, 2026 (published 2024-01-02, '$1,160,000 ... $2,890,000'); irs.gov/pub/irs-drop/rp-25-32.pdf section 4.24 ($2,560,000 / $4,090,000).",
+    "suggested_fix": "Replace the Block Advisors link with Rev. Proc. 2025-32 (https://www.irs.gov/pub/irs-drop/rp-25-32.pdf, section 4.24) in Sections 6, 7.2 and Draft 5."
+   }
+  ]
+ },
+ "critic:model": {
+  "summary": "The model's arithmetic is sound: running model.py and ranking.py in a scratch copy reproduces outputs.md and ranking.md byte for byte, and four hand recomputations match exactly (option A base monthly cash $1,440; option E base first 90 days $13,099.5 \u2192 $13,100; option C base year-1 profit after owner time \u2212$22,850; zirconia crown on the Hawaii lane $20.36 \u2192 $20). Every number in the report's tables in Sections 7.1, 8.3, 8.4 and 11 matches outputs.md and ranking.md, as do the itemized stacks in 7.2 and the pairwise comparisons in 8.6. The problems are in definitions, assumptions and narrative rather than in the formulas. Logic issues: option A charges King County delivery twice (a $300/month \"mileage and courier\" line plus $10 per case inside contribution, about $332/month at six accounts), which alone moves A's base-case year-1 profit from \u2212$143 to +$3,457 and its profit band from 2 to 3; the \"remake rate doubles\" stress is a flat 5%-of-revenue haircut (2.6x the true effect) and Section 8.1 misdescribes remakes as a percent of price; maximum drawdown ignores the pre-revenue startup outlay (M high shows a positive \"drawdown\"); lease options count the prepaid rent month twice; option I's exit exposure omits the pass-through the stated definition includes. Assumption issues: the Hawaii lane ($55/$95/$150) contradicts the report's own cited FedEx One Rate table, where 2Day small box to Hawaii is $19.55 each way (and USPS Priority Mail small flat-rate is $12.95\u201314.65), so the headline \"$20 crown\" would be about $53 and H's contribution per account about $529 rather than $320 (the Maui verdict still holds); the model charges all technician labor at $40/hour as variable while the capacity note assumes 290\u2013360 hours of already-paid staff time (payroll of $3,360/month buys 84 hours at that rate); founder hours are 30/month in the model but about 59/month in the 90-day plan; receivables lag and the dealer's machine-purchase float are set to zero although the report names both as risks. Narrative mismatches: Section 11 says the South OC remote option is \"fifth\" and the office \"tenth\" under the lifestyle weighting when ranking.md has D tied for first (3.70) and E eighth; Section 12 calls B \"third\" and treats C as a top-three option while Section 11 ranks B second, J third and C ninth; the Section 14 budget table sums to $5,290, not $5,650, and three different 90-day figures are given for the $5,000 envelope ($4,200, $4,750, about $2,750 plus reserve); gate 3 demands four recurring accounts by month 3 when the base-case ramp delivers 2.25; \"A plus C near $17,000 collected\" adds cash flows to revenue (revenue would be about $23,800). The ranking is transparent and A and B remain the top two under every weighting and under five alternative constructions I tested, but A's 0.05 edge over B rests entirely on analyst judgment (A beats B only on fit/evidence/speed; one point less on A's evidence score puts B first), third place (J) is a cheapness artifact of using exit exposure as \"downside,\" and C ties A for first (3.35) rather than \"sits second\" when the FDA fee is removed. Fixing the courier double count makes A's lead robust (3.60 vs 3.30), so the recommendation survives review, but the report should correct the mismatches and state the hour and lane assumptions it actually relies on.",
+  "findings": [
+   {
+    "severity": "high",
+    "section": "11. Ranking and sensitivity",
+    "quoted_text": "the best South OC option is still the remote one, at fifth place, and the office rises only to tenth",
+    "problem": "The lifestyle-profile rank order stated in the text does not match the generated ranking. Under the lifestyle weighting D (South OC remote) ties A for first at 3.70 and E (South OC office) is eighth, not tenth. The same paragraph also says 'A and B are the top two under the balanced, growth-max and lifestyle weightings' while its own parenthetical gives 'A > D > B' for lifestyle.",
+    "evidence": "/home/user/Claude/integra-growth-analysis/model/ranking.md, rank-order line: 'Lifestyle (be near family in OC): A > D > B > J > M > C > H > E > K > L > N > F > G > I'; lifestyle totals A 3.70, D 3.70, B 3.45, E 2.50. Reproduced in scratch run (V0 lifestyle).",
+    "suggested_fix": "Replace with: 'Under the lifestyle profile ... the best South OC option is still the remote one, which ties A for first at 3.70; the office rises only to eighth (2.50).' and change the sensitivity sentence to 'A and B are the top two under the balanced and growth-max weightings; under lifestyle the top three are A, D and B.'"
+   },
+   {
+    "severity": "medium",
+    "section": "8.2 Unit economics / 9 Logistics (Hawaii lane)",
+    "quoted_text": "A single crown shipped by air each way earns $20 at base and loses money whenever anything goes wrong, so Maui and Alaska only work for implant and full-arch cases, batched.",
+    "problem": "The Hawaii lane in inputs.json ($55/$95/$150 round trip) is inconsistent with the report's own cited sources. The FedEx One Rate April 20 2026 table the report cites for Alaska puts Hawaii in the same national-zone table: 2Day small box $19.55 each way (only Standard/Priority Overnight are 'Hawaii outbound only'), i.e. about $39 round trip; USPS Priority Mail small flat-rate box is $12.95 commercial / $14.65 retail with the 2\u20134 day Hawaii standard the report itself quotes (Glidewell uses it free to Hawaii). At a $39 round trip the base zirconia crown contribution on the Hawaii lane is about $53, not $20, and H's contribution per account is about $529 rather than $320. H stays negative at base (year-1 about \u2212$13,800 instead of \u2212$16,935; month-12 about \u2212$700 after owner time), so the Maui verdict holds, but the 'shipping kills single-unit margin' headline is overstated by 2.6x.",
+    "evidence": "Fetched https://www.shipscience.com/wp-content/uploads/FedEx-2026-04-20-OneRate-Pricing_2026.pdf: 'National zone (zones 5\u20138, and Alaska and Hawaii shipments) ... Shipments from the contiguous U.S. and Alaska to Hawaii' row FedEx Small Box: Express Saver n/a (footnote 6), 2Day $19.55, Standard Overnight $101.75 (footnote 7 Hawaii outbound only), Priority Overnight $148.20. Fetched https://www.usps.com/ship/priority-mail.htm: Small Flat Rate Box $12.95 commercial, $14.65 at Post Office. inputs.json shipping_lanes.overnight_hi_ak = [55, 95, 150]. Hand calc: 129 \u2212 11 \u2212 36 \u2212 39.1/1.8 \u2212 3.87 \u2212 0.05\u00d7(11+36+21.7) = $53.0.",
+    "suggested_fix": "Add a lane 'hawaii_2day_flat_rate' at about [26, 39, 95] (USPS flat-rate both ways / FedEx 2Day One Rate both ways / one overnight leg) and use it for H and I, or at minimum lower overnight_hi_ak to about [39, 60, 150]; then restate 8.2 as 'a single crown to Hawaii earns about $50 at base on a 2-day flat-rate lane and about $20 if either leg goes overnight'."
+   },
+   {
+    "severity": "medium",
+    "section": "7 and 7.2 (Option A cost stack) / 8 contribution",
+    "quoted_text": "Shipping both ways, remakes and payment fees are charged per unit inside the contribution margins (Section 8), not here, so they are not double counted.",
+    "problem": "Option A does double count delivery. Its monthly cash cost includes 'mileage_and_courier_king_county' $150/$300/$500, and every unit is also charged the king_county lane ($6/$10/$16 per case round trip, 'mileage, batched'). At six base accounts A ships about 33 cases a month, so about $332 of per-case delivery cost is charged in contribution on top of the $300 monthly line. Removing the monthly line lifts A's base year-1 profit after owner time from \u2212$143 to +$3,457 and A's ranking profit band from 2 to 3 (balanced score 3.35 \u2192 3.60).",
+    "evidence": "inputs.json options.bellevue_grow.monthly['mileage_and_courier_king_county (est.)'] = [150,300,500] and shipping_lanes.king_county.round_trip_cost = [6,10,16]; model.py line 55 ship_per_unit = ship_rt/units_per_case. Scratch run: cases/month at month 12 = 33.2 \u00d7 $10 = $332; year-1 profit without the monthly line = $3,457; balanced ranking with that change A 3.60 > B 3.30 > J 3.20.",
+    "suggested_fix": "Either relabel and resize the monthly line as prospecting mileage only (for example [75,150,250], 'drop-off and sales mileage, not case delivery') or set the king_county lane to zero for option A; update 7.2, 8.3 (A base year-1 profit about +$1,700 to +$3,500) and the ranking table (A profit 3, balanced 3.60)."
+   },
+   {
+    "severity": "medium",
+    "section": "13 and 14 (founder hours) vs 7.2 and 8",
+    "quoted_text": "30 to 50 founder hours a month, no lease, no hire until the gates in Section 14 are passed.",
+    "problem": "The model charges option A 30 owner hours a month at base (45 high), but the Section 14 plan budgets 176 founder hours over 13 weeks, about 59 hours a month, above the model's own high case. If 59 hours persisted for the year, A's year-1 profit after owner time would be about \u2212$21,000 (\u2212143 \u2212 12 \u00d7 29 \u00d7 $60), its ranking profit band would fall from 2 to 1 and its balanced score to 3.10, below B (3.30) and J (3.20). The report never reconciles the two figures.",
+    "evidence": "inputs.json options.bellevue_grow.owner_hours_per_month = [20,30,45]; report Section 14 owner-hours column sums to 176 (14+14+16+16+16+14+16+12+14+16+12+8+8) and the text says 'about 170 founder hours (about 13 a week)'. Scratch arithmetic: 176/3 = 58.7 h/month.",
+    "suggested_fix": "State explicitly that the 59 hours a month is a launch-quarter figure and set A's owner hours to something like [30, 45, 60] with the first quarter at 60; show the resulting A base year-1 profit (about \u2212$10,900 at 45 h, or about \u2212$7,400 after the courier fix) and confirm the ranking order still holds."
+   },
+   {
+    "severity": "medium",
+    "section": "14. The 90-day validation plan",
+    "quoted_text": "Totals for the 90 days at base: about $5,650 of cash spend, including the $750 Oregon authorization and excluding the PNDC deposit (deferred to gate 3)",
+    "problem": "The cash-budget column of the Section 14 table sums to $5,290, not $5,650 (750 + 900 + 150 + 240 + 350 + 150 + 150 + 150 + 550 + 1,200 + 550 + 150 + 0). The derived $5,000-envelope figure ($5,650 \u2212 $900 = $4,750) inherits the error, and 'skip the loaner scanner' saves nothing because no loaner-scanner line appears in the table. Section 7.4 gives yet another 90-day figure for the $5,000 envelope ($4,200) and Section 16 a fourth (about $2,750 spent plus about $2,250 reserve).",
+    "evidence": "report.md Section 14 table, 'Cash budget' column, summed by hand and in the scratch script (5,290); Section 7.4 row '$5,000 ... Total about $4,200 over 90 days'; Section 16 '$750 ... about $900 ... $200 ... $600 ... $300 ... and the balance held as the reserve'.",
+    "suggested_fix": "Change to 'about $5,300 of cash spend'; at the $5,000 envelope say 'run the CE evening as a lunch-and-learn ($300) and defer the rep commission accrual, which brings the quarter to about $3,600'; align 7.4 and 16 to the same number or explain why each differs."
+   },
+   {
+    "severity": "medium",
+    "section": "7.4 What a $5,000, $15,000 or $30,000 envelope buys",
+    "quoted_text": "A at the low spend ($2,400 one-time without the PNDC deposit or loaner scanner, about $340 a month) plus the Oregon authorization ($750) and the free TRI training. Total about $4,200 over 90 days.",
+    "problem": "The $2,400 low-case one-time figure is not 'without the PNDC deposit': in inputs.json the low case is $300 samples + $0 listings + $1,500 PNDC booth deposit + $600 CE evening + $0 Oregon. So the $5,000 plan as described would spend $1,500 on the booth deposit the report says to defer, and the Oregon $750 is then added on top of a case that already excludes it. Without the booth the low one-time is $900 and the 90-day total about $2,700.",
+    "evidence": "inputs.json options.bellevue_grow.one_time: PNDC_2027_booth_deposit [1500, 2500, 4000]; Oregon_HLO [0, 750, 750]; scanner listings [0, 300, 800]; samples [300, 600, 1200]; CE evening [600, 1200, 2000]. Sum of low values = 2,400 (outputs.md 'Startup expenses' A low $2,400).",
+    "suggested_fix": "Rewrite as: 'A at the low spend without the PNDC deposit ($900 one-time: samples $300, CE evening $600; about $340 a month) plus the Oregon authorization ($750) and the free TRI training. Total about $2,700 over 90 days.'"
+   },
+   {
+    "severity": "medium",
+    "section": "14 (gate 3) vs 8.1/8.3 (ramp)",
+    "quoted_text": "Gate 3: at least 4 new recurring accounts, new revenue run rate at or above $4,000 a month, Jung below 45 percent of LMS revenue",
+    "problem": "Gate 3 falls at about month 3 (January 15, 2027), but the model's base case for A has 2.25 accounts and $3,434 of monthly revenue at month 3 and does not reach 4 accounts until month 6 (ramp 8 months to 6 accounts). The base case therefore fails gate 3, which would trigger the 'if gate 3 fails' fallback (Bear Milling as primary) under the report's own central assumptions. Section 12.1 is consistent with the model ('three to six recurring accounts by month 6 to 9'), so Section 14 is the outlier.",
+    "evidence": "inputs.json options.bellevue_grow.demand: accounts_12m [3,6,10], ramp_months [10,8,6]; model.py line 139 accts = accts12 \u00d7 min(m/ramp, 1). Scratch run: month 3 accounts 2.25, revenue $3,434; first month with \u22654 accounts = 6.",
+    "suggested_fix": "Either set gate 3 to 'at least 2 recurring accounts and $3,000 or more of new monthly revenue' (the base ramp) and state that 4 accounts is the high case, or state that the gate is deliberately set above the base case and explain why failing it should change the recommendation."
+   },
+   {
+    "severity": "medium",
+    "section": "8.1 Formulas and 8.4 Stress tests",
+    "quoted_text": "payment fee (0 / 3 / 3.5 percent) \u2212 remake allowance (3 / 5 / 8 percent of price). Pessimistic contribution uses the low price with high costs",
+    "problem": "Two mismatches between the text and the code. (1) model.py charges remakes as remake_rate \u00d7 (materials + labor + shipping), not as a percent of price: for the $129 King County crown the charge is $2.63, not $6.45. (2) The 'Remake rate doubles' stress is not a doubling of the remake rate; it subtracts a flat 5 percent of month-12 revenue. For A that is $458 a month, whereas actually doubling the rate from 5 to 10 percent costs about $176 a month at six accounts. The stress is conservative but mislabeled, and a reader recomputing from the stated formula will not reproduce the tables. The 8.4 column 'Lose the largest new account' is also the average account (contrib_per_acct), not the largest.",
+    "evidence": "model.py line 59: cost += remake[i] * (mat[i] + labor_hours[i]*labor_rate[i] + ship_per_unit); line 185: base['steady_monthly_cf_full'] - 0.05 * base['steady_monthly_revenue']; line 194 uses contrib_per_acct. Scratch run: true remake-doubling hit for A = $176 vs model $458.",
+    "suggested_fix": "In 8.1 write 'remake allowance (3 / 5 / 8 percent of materials, labor and shipping)'. Rename the stress column 'Contribution \u22125% of revenue (proxy for remakes, delays and discounts)' or recode it to recompute contribution at 2\u00d7 remake_rate; rename 'Lose the largest new account' to 'Lose one average account'."
+   },
+   {
+    "severity": "medium",
+    "section": "12. The top three in detail (12.3)",
+    "quoted_text": "Why it is third. It fills idle spindles with the lowest shipping cost of any lane and no new nexus, and the prices are verified.",
+    "problem": "Section 12 is titled 'The top three in detail' and covers A, C and B, calling B 'third', but Section 11 and ranking.md rank B second (3.30), J third (3.20) and C ninth (2.30). The report explains why C is included as a gated wedge but never says why J, the actual third-ranked option, is omitted, and the 'third' label contradicts the table two pages earlier.",
+    "evidence": "/home/user/Claude/integra-growth-analysis/model/ranking.md rows 2 and 3: B 3.30, J 3.20; C row 9 at 2.30. report.md Section 11 table shows the same.",
+    "suggested_fix": "Retitle Section 12 'The recommended engine, its wedge, and the first fallback' (or add a 12.5 for J), and change 12.3 to 'Why it is second in the ranking and the first fallback in the plan.'"
+   },
+   {
+    "severity": "medium",
+    "section": "8.3 Twelve-month results",
+    "quoted_text": "Together A plus C at base put the lab near $17,000 a month collected by late 2027, which is your stated system breakeven including living costs",
+    "problem": "The $17,000 is $11,700 of current collections plus A's and C's month-12 option cash flows ($3,747 + $1,502), i.e. net cash flow added to gross revenue. On a like-for-like revenue basis the lab would collect about $23,800 a month at month 12 ($11,700 + $9,157 + $2,978), and the correct comparison with the $16,500 'system breakeven collected' is either revenue ($23,800) or owner-available cash (current operating income about $2,300 a month plus $5,250 of option cash flow before owner pay).",
+    "evidence": "outputs.md: A base month-12 cash flow $3,747, revenue per account $1,526 \u00d7 6 = $9,157; C base month-12 cash flow $1,502, revenue $992 \u00d7 3 = $2,978. Scratch run: 11,700 + 9,157 + 2,978 = 23,835; 11,700 + 3,747 + 1,502 = 16,949.",
+    "suggested_fix": "Replace with: 'Together A plus C at base add about $12,100 a month of revenue by month 12, taking collections to roughly $23,800 a month, and about $5,250 a month of cash flow before your time, which is the first time the records would show the business paying its owner.'"
+   },
+   {
+    "severity": "medium",
+    "section": "8.1 (capacity check) and 8.5",
+    "quoted_text": "220 spare production hours a month (Young about 80 design hours, Edward about 160 CAM and mill hours, part-time finishing about 120 hours, less about 70 hours used by current work",
+    "problem": "Two inconsistencies. (1) The arithmetic in the parenthesis gives 290 spare hours (80 + 160 + 120 \u2212 70), not 220. (2) More importantly, the model treats every technician hour as a variable cost at $32/$40/$48 (model.py line 57) while the capacity note assumes 220\u2013290 hours a month of staff time already on payroll and idle. Gusto payroll of $26,900 for January to August is about $3,360 a month, which at $40 an hour buys 84 hours, not the 360 hours described. Either the per-unit labor charge double counts hours the lab already pays for (understating contribution on every lab option, most for the 5-hour full arch) or the spare capacity is overstated several-fold and the HIRE flag fires far too late.",
+    "evidence": "inputs.json capacity._note and spare_production_hours_per_month 220; model.py lines 57 and 164; report Section 2 table 'payroll ($26,900 Gusto Jan to Aug 28)'. Scratch arithmetic: 80+160+120\u221270 = 290; 26,900/8 = 3,362; 360 h \u00d7 $40 = $14,400.",
+    "suggested_fix": "Reconcile the team's paid hours with payroll (state who is salaried, hourly or unpaid). If the 290 hours are genuinely paid and idle, charge only incremental labor above that threshold (or show contribution with labor at $0 up to capacity as a sensitivity); if they are not, lower spare_production_hours to the paid figure (about 80\u2013120) and rerun the capacity flags. Fix the parenthesis to sum to the number used."
+   },
+   {
+    "severity": "medium",
+    "section": "7.3 and 7.2 (Option M cash requirement)",
+    "quoted_text": "Ascentium and Geneva fund at acceptance after installation, so the dealer carries the float",
+    "problem": "The report identifies the dealer float as a risk, but option M's cash numbers contain none of it: first 90 days $10,160 and worst drawdown $1,564 at base assume no machine is bought before it is paid for. One financed A3 sale requires the dealer to pay ARUM about $17,500 (dealer cost, fact) before the lender funds at acceptance, so the real cash exposure of M is two to three times the modeled figure and M's 'cash' ranking score (2) is flattered. The same applies to N.",
+    "evidence": "outputs.md option M: Cash to open $5,000, First 90 days $10,160, Max cash drawdown base \u2212$1,564; inputs.json products.machine_sale.materials [19000,22000,30000] is treated as a per-unit cost realized in the month of sale (model.py line 57), never as an advance purchase.",
+    "suggested_fix": "Add a 'float_per_financed_sale' line to M and N (about $17,500 for 30 to 60 days) and either include one unit of float in cash to open / first 90 days or state in 7.2 and the ranking that M's cash need is about $28,000 for the first financed sale."
+   },
+   {
+    "severity": "medium",
+    "section": "8.1 Formulas (cash flow and payback)",
+    "quoted_text": "Option cash flow(t) = \u03a3 units \u00d7 contribution \u2212 monthly option cash cost. Fully loaded cash flow subtracts owner hours \u00d7 $40 / $60 / $100.",
+    "problem": "Contribution is booked as cash in the month of production; there is no receivables lag. Dental accounts pay on 30- to 60-day statements (the report's own Section 2 contrasts invoiced and collected revenue). For A at base, month-12 revenue of about $9,160 a month implies $9,000 to $18,000 of working capital tied up in receivables, larger than the modeled worst drawdown (\u2212$6,285) and the $5,000 envelope. Payback (month 7) and the feasibility verdicts for A, B and D are therefore optimistic by one to two months of revenue.",
+    "evidence": "model.py lines 139\u2013149 (cf = contrib \u2212 monthly_cash, cum_cf += cf; no lag); outputs.md A base Max cash drawdown \u2212$6,285, Payback month 7.",
+    "suggested_fix": "Add a 'collection_lag_months' input (base 1.5) and compute cash flow on revenue lagged by that amount; report the adjusted drawdown and payback, and note in 7.4 that the $5,000 envelope does not cover A's receivables build unless accounts are put on card or prepayment."
+   },
+   {
+    "severity": "medium",
+    "section": "11. Ranking and sensitivity (method)",
+    "quoted_text": "Profit, cash, time efficiency and downside are banded from the model's base case; fit, evidence and speed are analyst judgments",
+    "problem": "The method is transparent, but three features deserve disclosure. (1) A's 0.05 lead over B comes entirely from judgment: on the four banded criteria B scores 13 (3,3,4,3) and A 12 (2,3,4,3); A wins on fit/evidence/speed (13 vs 10). One point less on A's evidence score (4 is generous when the report itself says conversion 'has not actually been run') gives A 3.25, below B's 3.30. (2) 'Downside' is exit exposure only, so options that lose money every month but have no lease (H \u2212$1,116, K \u2212$453, L \u2212$641 at month 12) score 4\u20135 on downside, which is why K and L tie M at 2.80 and why J is third; replacing downside with worst drawdown or low-case profit keeps A > B > J but moves M above D. (3) Band edges are untested: A's base profit (\u2212$143) sits at the 0 cut, so a few hundred dollars either way changes its band. Removing judgment entirely (quant-only) ranks J, K, L first, showing the quantitative criteria reward cheapness. The top two are nevertheless robust across balanced, equal, run-rate and expected-value variants, and the courier fix makes the A>B order robust.",
+    "evidence": "ranking.py lines 207\u2013214 (bands) and 219\u2013222 (weights); ranking.md totals A 3.35, B 3.30, J 3.20, M/K/L 2.80. Scratch variants: V3 drawdown-downside A 3.35 > B 3.30 > J 3.20 > M 2.90; V7 equal weights A 3.57 > B 3.29 > J 3.14; V8 quant-only J/K/L 3.50 > B 3.25; A with evidence 3 = 3.25.",
+    "suggested_fix": "Add one paragraph: 'A leads B only on judgment scores; a one-point change in A's evidence score reverses the order unless the courier double count is removed (then A 3.60). Downside measures lease exposure only; a drawdown-based downside leaves A, B, J unchanged but lifts M to fourth. K and L rank sixth and seventh because doing nothing is cheap, not because they are good.' Consider adding a low-case-profit criterion."
+   },
+   {
+    "severity": "low",
+    "section": "11. Ranking and sensitivity",
+    "quoted_text": "in its low case, without that fee, it scores 3.35 and sits second, which is why the written answer from TRI is the first thing to get",
+    "problem": "Removing the FDA fee and QMSR setup from C's base case gives exactly 3.35, which ties A (3.35) for first rather than sitting second; the order then depends on sort stability. The same tie issue affects M, K and L (all 2.80) and F and G (1.25), whose displayed rank order is an artifact of dictionary insertion order.",
+    "evidence": "Scratch run V2 (C one_time FDA and QMSR set to 0): A 3.35 > C 3.35 > B 3.30. ranking.py sorts with key \u2212total and no tiebreaker.",
+    "suggested_fix": "Write 'it scores 3.35 and ties A for first' and add a tiebreaker (e.g. base profit) or mark ties with '=' in the table."
+   },
+   {
+    "severity": "low",
+    "section": "7.2 (Option C) and 12.2",
+    "quoted_text": "FDA establishment registration $13,785 (fact: FY2027 annual fee, October 1, 2026 to September 30, 2027, payable before the registration is effective, no waiver for an initial registration",
+    "problem": "The fee is correctly sourced ($13,785 confirmed on FDA's MDUFA fee page), but the model carries one fee in year 1. FDA annual registration must be renewed between October 1 and December 31 each year; a lab that first registers at gate 2 (December 11, 2026) pays the FY2027 fee and must pay the FY2028 fee (MDUFA VI rate, not yet set) between October 1 and December 31, 2027, inside a 12-month plan window that starts in December 2026. FDA's small-business hardship waiver excludes the initial registration, consistent with the report.",
+    "evidence": "Fetched https://www.fda.gov/industry/fda-user-fee-programs/medical-device-user-fee-amendments-mdufa-fees ('Annual Establishment Registration Fee: $13,785') and https://www.fda.gov/medical-devices/device-registration-and-listing/when-register-and-list ('Registration information must be submitted each year between October 1 and December 31'). inputs.json options.tri_certified_national.one_time FDA line [0, 13785, 13785].",
+    "suggested_fix": "Add to 7.2 and 12.2: 'If the registration is made in December 2026, a second annual fee (FY2028, rate not yet published) falls due between October and December 2027, so a 12-month view from the registration date can contain about $27,600 of registration fees.'"
+   },
+   {
+    "severity": "low",
+    "section": "9. Logistics evidence by lane (Anchorage) and 8.2",
+    "quoted_text": "FedEx One Rate 2Day small box $19.55, Standard Overnight $101.75, Priority Overnight $148.20 (Alaska included, no Saturday delivery)",
+    "problem": "The lane's own note does not reproduce its values: 2Day both ways is $39.10 (matches the $40 low), 2Day out plus overnight back is $121.30 (the $70 base implies only about half the returns go overnight, which is not stated), and overnight both ways is $203.50, not the $150 high. Separately, the 8.2 rows 'Implant crown package, Hawaii or Alaska air' (\u2212$61/$91/$192) and 'Full-arch zirconia final, Hawaii or Alaska air' ($465/$1,024/$1,285) are Hawaii-lane figures; on the Alaska lane the model actually uses for J they are \u2212$61/$112/$203 and $465/$1,050/$1,300. The crown Alaska row (\u2212$91/$35/$79) is correct but cannot be checked in outputs.md because fcz_crown's 'lanes' list omits alaska_2day_air.",
+    "evidence": "inputs.json shipping_lanes.alaska_2day_air = [40, 70, 150] with _note; FedEx One Rate PDF national-zone small box 2Day $19.55, Standard Overnight $101.75. Scratch run unit_contribution on alaska_2day_air: implant crown [\u221261, 112, 203], full arch [465, 1050, 1300], crown [\u221291.15, 34.95, 78.96].",
+    "suggested_fix": "Set the Alaska lane to [40, 80, 205] or reword the note to 'base assumes half of returns go overnight'; relabel the two 8.2 rows 'Hawaii air' and add Alaska rows (implant $112, arch $1,050 at base); add 'alaska_2day_air' to the lanes lists of fcz_crown, implant_crown and full_arch_zr so outputs.md shows them."
+   },
+   {
+    "severity": "low",
+    "section": "7. Side-by-side cost models (exit exposure definition) and 7.1 row I",
+    "quoted_text": "\"Exit exposure\" is startup spend plus the longer of the lease term or notice period times the committed monthly items (rent and pass-throughs)",
+    "problem": "Option I's committed_monthly_keys list contains only 'rent', so its exposure ($17,950 = $2,350 + 12 \u00d7 $1,300) omits the $250 a month GET/CAM pass-through that the stated definition includes and that E, F, G and N do include. Consistent treatment gives about $20,950.",
+    "evidence": "inputs.json options.maui_office.committed_monthly_keys = ['rent'] vs soc_office ['rent', 'NNN_CAM_or_opex_passthrough (est.)']; model.py lines 97\u201398; outputs.md I exit exposure $11,220 / $17,950 / $28,750.",
+    "suggested_fix": "Add 'GET_on_rent_passthrough_and_CAM (est.)' to I's committed_monthly_keys and update I's exposure to about $12,660 / $20,950 / $33,550 in 7.1 and ranking.md (downside band unchanged at 2)."
+   },
+   {
+    "severity": "low",
+    "section": "7.2 (Option E) and 7.1 first-90-days / first-year columns",
+    "quoted_text": "Refundable deposit one month $1,000 (est.) and one month prepaid rent $1,000, both in cash to open.",
+    "problem": "If the prepaid month is the first month of occupancy, first_90_days (startup_cash + 3 \u00d7 monthly cash) charges four months of rent and first_year_cash thirteen, because the prepaid month sits in startup cash and rent is also in every month's cash cost. Overstatement: E $1,000, I $1,300, N $2,250, F $2,500, G $4,500 in the first 90 days. No verdict changes.",
+    "evidence": "model.py line 93 startup_cash includes prepaid_rent_months \u00d7 rent; line 94 first90 = startup_cash + 3 \u00d7 m_cash where m_cash includes rent; inputs.json prepaid_rent_months = 1 for E, F, G, I, N.",
+    "suggested_fix": "Either state that the prepaid month is the last month of the term (so it is not a double count) or compute first90 as startup_cash + 3 \u00d7 m_cash \u2212 prepaid_rent_months \u00d7 rent (and year1 analogously)."
+   },
+   {
+    "severity": "low",
+    "section": "8.1 Formulas (drawdown) and feasibility table",
+    "quoted_text": "Maximum drawdown = the most negative cumulative cash position in the twelve months.",
+    "problem": "The code takes the minimum over month-end positions only, so the pre-revenue outlay of startup cash is not a candidate. When month 1 cash flow exceeds startup cash the 'drawdown' is reported as a positive number: option M high shows max cash drawdown +$10,690 and feasibility 'Need: worst drawdown \u2212$10,690', although $9,200 is spent before the first sale.",
+    "evidence": "model.py lines 135 and 158: cum_cf starts at \u2212startup_cash but min() is taken over months[]; outputs.md M high: Max cash drawdown $10,690; feasibility table M high 'Need: worst drawdown \u2212$10,690'.",
+    "suggested_fix": "Compute min_cum = min([\u2212startup_cash] + [x['cum_cash'] for x in months]); M high drawdown becomes \u2212$9,200."
+   },
+   {
+    "severity": "low",
+    "section": "7.3 Equipment and 14 (hiring gate)",
+    "quoted_text": "the model flags a hiring or capacity constraint only in the high cases of options A and B at 200 to 280 production hours a month",
+    "problem": "outputs.md flags HIRE for B high (279 h) and G high (270 h), not for A high (202 h, below the 220 threshold, flagged 'ok'). Section 14's hiring gate also cites 'production hours above 200 a month (model capacity flag)' while the model threshold is 220.",
+    "evidence": "outputs.md Capacity column: A high 'ok' (139 u / 202 h), B high 'HIRE' (795 u / 279 h), G high 'HIRE' (176 u / 270 h); inputs.json capacity.spare_production_hours_per_month = 220.",
+    "suggested_fix": "Write 'the model flags a hiring constraint in the high cases of B and G (270 to 280 hours); A's high case, at about 200 hours, is within 10 percent of the 220-hour ceiling' and change the Section 14 gate to 220 hours."
+   },
+   {
+    "severity": "low",
+    "section": "4.3 Maui and Hawaii (verdict)",
+    "quoted_text": "at base case it loses about $4,000 a month after owner time and needs $19,900 in the first 90 days for three accounts",
+    "problem": "\u2212$4,029 is option I's month-12 cash flow before owner time; after owner time (35 hours at $60) it is \u2212$6,129.",
+    "evidence": "outputs.md option I base: Month-12 monthly cash flow \u2212$4,029; stress table base (after owner time) \u2212$6,129.",
+    "suggested_fix": "Change to 'it loses about $4,000 a month before your time and about $6,100 after it'."
+   },
+   {
+    "severity": "low",
+    "section": "7.2 (Option M) and 8.2 (machine sale, service day)",
+    "quoted_text": "Owner time 50 hours a month, the most of any non-lease option.",
+    "problem": "Machine sales carry 24/36/60 labor hours and service days 10/11/12 hours at the $32/$40/$48 technician rate, but the report says the owner is the only installer and operator-salesman. At base that is about 17 hours a month charged at $40 that may also sit inside the 50 owner hours charged at $60. If so, M's base year-1 profit is understated by about $8,200 (12 \u00d7 17 \u00d7 $40), though its profit band (3) does not change.",
+    "evidence": "inputs.json products.machine_sale.labor_hours [24,36,60], field_service_day [10,11,12]; outputs.md M base 'Units & labor hrs at month 12: 1 u / 17 h'; report Section 6 'your lack of a stocked spare-parts kit and a second installer'.",
+    "suggested_fix": "State whether the 50 owner hours include installation and training. If they do, set machine_sale and field_service_day labor_hours to the hours of non-owner staff only (or to zero) and note M's base year-1 profit at about $8,400."
+   },
+   {
+    "severity": "low",
+    "section": "12.1 Option A",
+    "quoted_text": "Positive after owner time at base, strongly positive at high, and the only option that reduces the Jung concentration.",
+    "problem": "Section 8.3 reports A's base year-1 profit after owner time as \u2212$143 and calls it breakeven; only the month-12 run rate ($1,947 after owner time) is positive. The two sections should use the same characterization.",
+    "evidence": "outputs.md A base: Year-1 profit after owner time \u2212$143; stress table base (month-12 after owner time) $1,947.",
+    "suggested_fix": "Write 'Breakeven after owner time in year one at base (positive by month 5 on a monthly basis), strongly positive at high'."
+   }
+  ]
+ }
+}

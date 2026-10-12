@@ -1,0 +1,704 @@
+{
+ "topic": "Cost of growing in place in Puget Sound (Bellevue / Eastside / South King County) for Integra Dental Design: rent, WA taxes, payroll loads, wages, sales-rep comp, incremental equipment, local marketing, shipping/courier",
+ "summary": "Bottom line for a skeptical reader: growing in place is cheap on taxes and payroll loads, expensive on rent-per-foot and on the one thing Integra actually lacks (sales capacity). The numbers below are as of 2026-10-12.\n\nFACTS (primary sources). Rent: Integra's $2,300/mo for ~600 SF is $3.83/SF/mo all-in, well above market for flex. The Tukwila Seattle Exchange park (Lee & Associates, CBA listings modified 8/14 and 9/22/2026) is asking $2.10/SF/mo blended, modified gross ($2,961/mo for 1,410 SF; $4,450/mo for 2,119 SF) with a published promo of $1.00/SF/mo for the first year on eligible suites. Redmond Willows flex asks $1.80-$2.04/SF/mo NNN with 2026 NNN of $0.57 (95th Street Tech Center) or $2.40/SF gross on a short-term sublease (WillowsFlex, Sept 2026-Oct 2027). Kent Valley small bays go for $1.55 NNN; Kidder Mathews Q2 2026 puts Eastside direct asking at $1.88 NNN vs Southend $1.01-$1.05, with Eastside vacancy 6.0% and regional 9.5% (tenant-favorable; landlords trading concessions for occupancy). Bellevue office/retail small suites on 148th Ave SE run $34/SF/yr + ~$10.80 NNN (about $3.73/SF/mo).\n\nTaxes: WAC 458-20-151 classifies lab fabrication as manufacturing (0.484%) plus retailing (0.471%, sales to dentists) or wholesaling (0.484%, lab-to-lab with reseller permit), with the MATC so tax is paid once; rates rise to 0.50% on 1/1/2027 (ESHB 2081). Dental prostheses are sales-tax exempt (RCW 82.08.0283) and mills/furnaces/printers qualify for the M&E exemption (RCW 82.08.02565), worth 10.3% in Bellevue. The small-business B&O credit ($55/mo for non-service filers, RCW 82.04.4451) wipes out state B&O at Integra's current ~$140k/yr and phases out around $280k/yr. Bellevue adds a city B&O of 0.1596% above $215,000 taxable receipts, a square-footage tax of $0.3297475/sq ft/quarter on support/out-of-city-sales space, and a $119 license. Service revenue (training, design-only) is 1.5%.\n\nPayroll: L&I class 3602 (dental labs) 2026 composite is $0.4056/hr, of which $0.13195 is the employee deduction, so the employer's net is about $0.27/hr ($570/FTE/yr). PFML is 1.13% but the employer share applies only at 50+ employees; WA Cares (0.58%) is employee-paid. State minimum wage is $17.13 (2026) and $17.73 (2027); Bellevue has no local minimum, while Seattle ($21.30), Tukwila ($21.65) and Renton ($20.57-$21.57) do. The 2026 exempt-salary floor is $80,168.40, which constrains a salaried CAD/CAM director, and the noncompete floor is $126,858.83, so a sales rep's noncompete is unenforceable.\n\nWages: BLS OEWS May 2025 (via BLS-derived mirrors) shows WA dental lab techs at $56,400 median ($27.12/hr), P10 $39,970 to P90 $78,340, with 670 jobs statewide and 380 in the Seattle MSA (median $57,610). Live King County postings cluster at $20-$25/hr entry (Novus, Nuvia), $22-$35 (MicroDental/DiMartino, Renton) and $25-$38 (Bellevue removables).\n\nSales reps: posted structures are $60-$75k base plus 5-6% of net sales (DCS, MRM), $60k base plus $250-$750 per new account (Ziemek), or 100% commission at 8% year-one and 3% residual (Ultra Core). LMT's 40/60 fixed/commission guideline is 2011-vintage. Expect $85-$110k loaded year one for a Puget Sound rep, before any sales.\n\nEquipment list prices: Dekema 674i $14,582-$15,999; used Programat P710 $5,700-$6,000; Asiga MAX UV $8,990, MAX 2 UV $9,990-$10,990; a third ARUM mill $51,000 list (A3L) or $17,500 at demo/dealer cost, versus Versamill 5X200 at $103,600 with install/training.\n\nMarketing: LMT LAB DAY West (May 14-15, 2027) does not publish booth prices. The WSDLA/Oregon labs' Pacific Northwest Conference (2027 in Seattle) sells tables at $1,050-$1,250 and program sponsorship at $1,200. SKCDS and WSDA PNDC do not publish rates. WordStream's 2026 benchmark CPC for dentists is $8.00 (no dental-lab-specific CPC exists). Marketing Mail letters cost $0.339-$0.372 postage; small-run postcards cost $0.85-$1.50 all-in.\n\nShipping: nearest UPS Store (14150 NE 20th St) Air cutoff 4:30 PM M-F; FedEx Office 40 Bellevue Way Express pickup 4:35 PM M-F; Crossroads/Factoria FedEx Office cutoffs unconfirmed. Seattle Messenger Co-op zone prices (from downtown): Bellevue $34.97, Tukwila $31.13, Renton $37.83, Redmond $43.12 standard, 1.5x priority, 2x rush, +20% fuel.\n\nESTIMATES (labeled): lab build-out $10-60k; personal property tax ~$1.4-1.7k/yr; dental-lab Google CPC $3-$8; trade-show 10x10 $2.5-4k; dedicated courier route $12-35/stop.\n\nUNKNOWNS: LMT and PNDC booth prices, SUTA rate, Bellevue square-footage tax applicability to production floor, CAM license cost for a third mill, FedEx Ship Center late cutoff, and actual OEWS percentile table for the Seattle MSA (BLS pages blocked crawlers; mirrors used).\n\nJudgment: the binding constraints are not occupancy or tax. At $11,700/mo revenue the state B&O is already zero and L&I is a rounding error; adding 1,000-1,500 SF of flex space costs $1,900-$5,700/mo, which is 16-49% of current monthly collections, so it only makes sense after volume, not before. The single largest incremental cost of growing in place is a salesperson ($85-110k/yr loaded), and the mills' 90% idle time means no equipment spend is justified until utilization exceeds roughly 50%.",
+ "findings": [
+  {
+   "claim": "Seattle Exchange @ Southcenter (Tukwila) current asking rent is $2.10/SF/mo blended, modified gross, listed by Lee & Associates",
+   "detail": "CBA listing #710417 (Building F, 659-677 Strander Blvd, suite 671, 1,410 SF industrial) shows Blended Rent $2.10, Total Monthly Rent $2,961, Lease Type Modified Gross, last modified 9/22/2026; CBA #710433 (Building 26, 950-964 Industry Dr, suite 952, 2,119 SF) shows $2.10 blended, $4,449.90/mo, modified 8/14/2026. Listing agent sdurkin@lee-associates.com, office 425-454-4242. LoopNet shows 64 spaces 228-112,072 SF, rates 'Upon Request'. Realmo (698 Industry Dr, 2,396 SF) lists CAM $1.80/SF/yr. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.commercialmls.com/Search/ListingDetailsFull/710417",
+   "source_date": "2026-09-22",
+   "value": "$2.10/SF/mo modified gross; 1,410 SF = $2,961/mo; 2,119 SF = $4,450/mo"
+  },
+  {
+   "claim": "Seattle Exchange is running a promotional rate of $1.00/SF/mo for the first full year on eligible spaces",
+   "detail": "CBA listing #686672 (Building 28, 970-998 Industry Dr, 882 SF office, modified 8/14/2026) and Realmo listing for 698 Industry Dr both quote: 'LIMITED TIME LEASING PROMOTION: Now offering a promotional lease rate of $1.00/SF/month for the first full year of lease term on eligible spaces.' Park offers 200-10,000 SF suites, on-site management, owner Investcorp per LoopNet. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.commercialmls.com/Search/ListingDetailsFull/686672",
+   "source_date": "2026-08-14",
+   "value": "$1.00/SF/mo year 1 promo"
+  },
+  {
+   "claim": "Eastside industrial direct asking rent averaged $1.88/SF/mo NNN in Q2 2026 with 6.0% vacancy; Southend $1.01-$1.05 with 10.4% vacancy; regional 9.5%",
+   "detail": "Kidder Mathews Seattle Industrial Market Report Q2 2026: Eastside inventory 22.04M SF, vacancy 6.0% (down from 6.3% Q1), 34 leases signed, median lease 2,537 SF, average $1.88 PSF through Q2; Southend blended ~$1.05 with shell $0.80-$1.00 and office components $1.00-$1.35; Puget Sound blended $1.06; vacancy 9.5% regionally. Market described as tenant-favorable, landlords favor occupancy over rent growth. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://kidder.com/wp-content/uploads/market_report/industrial-market-research-seattle-2026-2q.pdf",
+   "source_date": "2026 Q2 (July 2026)",
+   "value": "Eastside $1.88 NNN/mo; Southend $1.01-1.05; vacancy 6.0% / 10.4%"
+  },
+  {
+   "claim": "Cushman & Wakefield Q2 2026 Eastside weighted asking rents: Bellevue $1.58, Kirkland $1.86, Redmond $1.76-$1.89, Issaquah/East I-90 $1.51, Eastside overall $1.26 NNN/mo",
+   "detail": "Puget Sound-Eastside Industrial MarketBeat Q2 2026 submarket table (overall weighted avg net rent $psf/month): Bellevue 3,528,543 SF inventory, 9.8% vacancy, $1.58; Kirkland 3.0% vacancy, $1.86; Redmond (Willows) 7.0%, $1.89; Redmond (East) 3.6%, $1.76; Redmond (Overlake) 2.8%, $1.89; Issaquah/East I-90 6.3%, $1.51. Eastside average $1.26, +4.8% YoY. Notes landlords offering flexible structures and even 3-year termination options. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://upgrade-uat-www.cushmanwakefield.com/-/media/cw/marketbeat-pdfs/2026/q2/us-reports/industrial/puget-sound-eastside_americas_marketbeat_industrial_q22026.pdf",
+   "source_date": "2026 Q2",
+   "value": "Bellevue $1.58; Kirkland $1.86; Redmond $1.76-1.89 ($/SF/mo NNN)"
+  },
+  {
+   "claim": "Redmond Willows small flex asks $1.80-$2.04/SF/mo NNN, with 2026 NNN of $0.57/SF/mo at one park; short-term gross sublease bays at $2.40/SF/mo",
+   "detail": "95th Street Tech Center flyer (14921 NE 95th St, 5,668 SF, HVAC throughout): Lease Rate $1.80 PSF NNN, '2026 NNN $0.57 PSF'. Willows Industrial Park Bldg 5 flyer (15165 NE 90th St, 2,500 SF): $5,100/mo ($2.04/SF + NNN), available Aug 2025. CBRE Willows Industrial Park: Building 8 7,500 SF at $1.85/SF/mo + NNN; a 2,52x SF suite at $2.04/sqft/mo. WillowsFlex sublease (14700 NE 95th St, Sept 2026-Oct 2027): bays $2.40/SF and offices $2.50/SF monthly gross (500 SF = $1,200/mo; 1,000 SF = $2,400/mo). Willow Ridge (12320 134th Ct NE) flex $25/SF/yr + CAM $3.75/SF/yr. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://cbaimage.commercialmls.com/content/upload/photos/pdf/FL/6a7df26957d81058c977e74a_95th_street_tech_center_flyer.pdf",
+   "source_date": "2026 (flyer, undated day)",
+   "value": "$1.80-2.04 NNN + $0.57 NNN; $2.40 gross sublease"
+  },
+  {
+   "claim": "Renton/Tukwila all-inclusive small industrial bays (ReadySpaces) list at $27.60 and $25.80/SF/yr ($2.30 and $2.15/SF/mo) for 300-5,000 SF, 90-day minimum terms",
+   "detail": "CityFeet Tukwila industrial search: 801 SW 16th St, Renton (ReadySpaces, built 1997) $27.60 USD/SF/YR, 300-5,000 SF, 7 spaces; 18255 Segale Park Drive B, Tukwila (ReadySpaces Southcenter) $25.80 USD/SF/YR, 300-5,000 SF, 9 spaces. ReadySpaces site: units 140-2,000 SF available Oct 2026, 24/7 access, shared forklifts/docks, terms from 90 days, 'contact for pricing'. Kent Valley flyer (3/2/26): 1,703 SF warehouse/office at $1.55/SF NNN. Century Commerce Center Kent (Nov 2025): 3,098 SF, estimated monthly NNN $1,301 ($0.42/SF/mo). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.cityfeet.com/cont/tukwila-wa/industrial-space-for-lease",
+   "source_date": "undated (accessed 2026-10-12)",
+   "value": "$2.15-2.30/SF/mo all-in; Kent $1.55 NNN + ~$0.42 NNN"
+  },
+  {
+   "claim": "Bellevue small office/retail suites near 148th Ave SE ask $20-$34/SF/yr plus $8-$15.38 NNN (about $2.58-$3.78/SF/mo all-in)",
+   "detail": "1600 148th Ave SE (Cannon Commercial flyer): $34/SF/yr + NNN approx $10.80/SF/yr, suites 839-1,689 SF, NNN includes electricity/water/sewer/garbage. Kelsey Creek Center 2nd-floor office (CBA #689828, modified 2/9/2026): $20/SF/yr + $11 NNN, 3,202 SF. Eastgate Building 15500 SE 30th Pl (CBRE/CBA, modified 9/30/2026): $30/SF/yr NNN, NNN $15.38. Bel-East Shopping Center (4/16/2026 flyer): $34 + $9.40 NNN retail. 41 148th St SE (2021): $34 + $8 NNN. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://cbaimage.commercialmls.com/content/upload/photos/pdf/FL/66f1c82d07ce72572499806b_1600_148th_ave_se_for_lease.pdf",
+   "source_date": "undated flyer; CBA records modified 2026-02-09 to 2026-09-30",
+   "value": "$2.58-3.78/SF/mo all-in"
+  },
+  {
+   "claim": "Dental lab fabrication is a manufacturing activity for WA B&O; sales also taxed under retailing or wholesaling with the Multiple Activities Tax Credit; prostheses are sales-tax exempt",
+   "detail": "WAC 458-20-151(3)(a): 'The production or fabrication of dental appliances, devices, restorations, substitutes, or other dental laboratory products by dental laboratories and dental technicians is a manufacturing activity. RCW 82.04.120.' Labs must report under manufacturing and under wholesaling or retailing; MATC may be claimed (WAC 458-20-19301). Sales of prostheses meeting the 'prosthetic device' definition are exempt from retail sales tax (crowns, inlays, dentures etc. listed). Dentists' in-house fabrication is not manufacturing. DOR denturist guide: report sales to dentists under Retailing B&O and Retail Sales tax, then take the 'Prescription Drugs/Hearing Aids/Lenses/Etc.' deduction when the dentist supplies the Sales Tax Exemption Certificate for Health Care Providers with 'Dental prostheses' checked; wholesale sales to other labs need a reseller permit. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://app.leg.wa.gov/wac/default.aspx?cite=458-20-151",
+   "source_date": "undated (current WAC)",
+   "value": "Manufacturing + Retailing/Wholesaling with MATC"
+  },
+  {
+   "claim": "2026 WA B&O rates: Manufacturing 0.484%, Wholesaling 0.484%, Retailing 0.471%, Service & Other 1.5% (<$1M), 1.75% ($1M-$5M), 2.1% ($5M+)",
+   "detail": "DOR 'Business & occupation tax classifications' table: Manufacturing .00484, Retailing .00471, Wholesaling .00484, Service & other activities .015/.0175/.021 by prior-year taxable income. DOR special notice (issued July 25, 2025) confirms the three service tiers effective Oct 1, 2025. Integra's training/installation/design-only revenue would fall under Service & Other at 1.5%. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://dor.wa.gov/taxes-rates/business-occupation-tax/business-occupation-tax-classifications",
+   "source_date": "undated (current DOR page)",
+   "value": "0.484% / 0.484% / 0.471% / 1.5%"
+  },
+  {
+   "claim": "Manufacturing, wholesaling and retailing B&O rates rise to 0.50% effective January 1, 2027 (ESHB 2081, 2025 session)",
+   "detail": "BDO, Greenberg Traurig, Moss Adams and Ballard Spahr summaries of ESHB 2081 (Chapter 240, Laws of 2025) state retailing moves from 0.471% to 0.50% and manufacturing/wholesaling from 0.484% to 0.50% on 1/1/2027 (permanent). DOR special-notice page for the 2027 change not located; law-firm summaries used. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.bdo.com/insights/tax/washington-governor-signs-biennial-operating-budget-and-transportation-funding-bills",
+   "source_date": "2025-05",
+   "value": "0.50% from 2027-01-01"
+  },
+  {
+   "claim": "Small Business B&O Tax Credit: max $55/month for non-service filers ($165/qtr, $660/yr) and $160/month for service filers, fully offsetting B&O at or below the cap and phasing out at 2x the cap",
+   "detail": "DOR notice 'Business and occupation tax credit increase for small businesses' (filing periods on/after Jan 1, 2023): $160/month max for businesses with 50%+ of income in Service & Other Activities etc.; $55/month for all other classifications; auto-calculated when filing electronically; RCW 82.04.4451. For Integra (manufacturing/retailing/wholesaling), $55/mo covers B&O on about $11,400-$11,700/mo of receipts at 0.471-0.484% and phases out when monthly B&O reaches $110 (~$23,000/mo revenue). SB 6346 (signed 3/30/2026) would raise caps to $125/$375 on 1/1/2029 only if the new >$1M income tax survives litigation and Initiative 645 (Nov 3, 2026 ballot). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://dor.wa.gov/node/151433",
+   "source_date": "2022-12 (effective 2023-01-01)",
+   "value": "$55/mo (non-service); $160/mo (service)"
+  },
+  {
+   "claim": "Dental prostheses sold to dentists are exempt from WA retail sales tax under RCW 82.08.0283 (prosthetic devices)",
+   "detail": "RCW 82.08.0283(1)(a): sales tax does not apply to 'prosthetic devices prescribed, fitted, or furnished for an individual by a person licensed under the laws of this state to prescribe, fit, or furnish prosthetic devices, and the components of such prosthetic devices'; (4)(a) defines prosthetic device as a replacement, corrective or supportive device worn on or in the body. WAC 458-20-18801 also referenced by WAC 458-20-151. Bellevue combined sales tax is 10.3% (SalesTaxHandbook 2026), so the exemption is material on $129-$2,200 units. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=82.08.0283",
+   "source_date": "undated (current RCW; last amended 2007)",
+   "value": "Exempt (0% vs 10.3% Bellevue rate)"
+  },
+  {
+   "claim": "Mills, furnaces and printers used directly in manufacturing qualify for the WA manufacturer's machinery & equipment sales/use tax exemption (RCW 82.08.02565 / WAC 458-20-13601)",
+   "detail": "RCW 82.08.02565(1)(a): no sales tax on sales to a manufacturer of machinery and equipment used directly in a manufacturing operation, including installation/repair labor; M&E must have useful life of one year or more; buyer gives seller a Manufacturer's Sales and Use Tax Exemption Certificate. DOR denturist guide confirms: 'You do not have to pay sales or use tax on machinery and equipment used to make dentures and other products that you sell.' Note: when Integra sells an ARUM mill to a dentist, the dentist is not a manufacturer (WAC 458-20-151(3)(b)) and sales tax applies; sales to other labs can be exempt with certificate. On a $51,000 A3L at 10.3% the exemption is worth ~$5,250. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=82.08.02565",
+   "source_date": "undated (current RCW)",
+   "value": "0% sales tax on qualifying lab equipment (saves 10.3%)"
+  },
+  {
+   "claim": "City of Bellevue levies its own B&O tax: 0.1596% of gross receipts above $215,000 taxable receipts, a square footage tax of $0.3297475/sq ft/quarter on qualifying office/support space, and a $119 business license registration (2026)",
+   "detail": "Bellevue 2026 B&O Tax Guide (Jan 1, 2026) per city PDF: gross receipts rate .1596%, tax due for businesses with annual taxable receipts over $215,000. City square footage page: 2026 rate $0.3297475 per taxable square foot per quarter ($329.74/qtr per 1,000 SF), applies to administrative/support space and space supporting sales delivered outside the city, with exemption for offices of 250 sq ft or less and deduction for the share of space supporting in-city gross-receipts-taxed activity. Business license fee for 2026: $119 (no annual renewal). Integra at ~$140k/yr is below the $215k gross-receipts threshold today; crossing it would add ~$480/yr per $300k of receipts. Applicability of the square footage tax to production floor (vs office) and interaction with the threshold should be confirmed with the Tax Division (tax@bellevuewa.gov). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://bellevuewa.gov/sites/default/files/media/pdf_document/2025/fam-2026-26745-botaxguide-v01.pdf",
+   "source_date": "2026-01-01",
+   "value": "0.1596% above $215k; $0.3297475/sq ft/qtr; $119 license"
+  },
+  {
+   "claim": "WA L&I risk class 3602 ('Electronic Products, Jewelry and Instrument Mfg, Dental Labs'; subclass 3602-05 dental laboratories) 2026 composite base rate is $0.4056 per hour worked, up 6% from $0.3826 in 2025",
+   "detail": "L&I 2026 Rates by Business Type and Class Code: class 3602, 11,799 FTEs, 2025 composite $0.3826, 2026 $0.4056 (+6%). L&I 2026 Hourly Rates by Class Code and Fund: 3602 Accident Fund $0.1417, Stay-at-Work $0.0021, Medical Aid $0.0706, Supplemental Pension $0.1912, composite $0.4056, employee payroll deduction $0.13195/hr. Employer net \u2248 $0.2737/hr \u2248 $569/yr per 2,080-hr FTE (employee pays \u2248 $274). WAC 296-17A-3602-05 covers 'Dental shops, laboratories, or kiosks' making dentures, artificial teeth, braces, retainers. Comparators: 4904 clerical $0.2223/hr; 6303 outside sales $0.3019/hr; 6109 physicians/dental clinics $0.5139. Statewide average increase 4.9%; base rates assume experience factor 1.0. Proposed 2027 rates are posted on L&I site. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://lni.wa.gov/insurance/_docs/2026RatesByClassCodeFund.pdf",
+   "source_date": "2026 (adopted Nov 26, 2025)",
+   "value": "$0.4056/hr composite; employer net ~$0.274/hr; employee $0.13195/hr"
+  },
+  {
+   "claim": "WA Paid Family & Medical Leave 2026 premium is 1.13% of wages (up from 0.92%), split 28.57% employer / 71.43% employee, but employers under 50 employees owe no employer share",
+   "detail": "ESD release Oct 29, 2025: 'The premium rate will be 1.13%... Employers will pay 28.57% of the total premium and employees will pay 71.43%... Businesses classified by Employment Security as having fewer than 50 employees are not required to pay the employer portion of the premium, unless they opt to do so. However, they must still collect the employee premium or pay employees' premiums on their behalf.' Wage cap $184,500 (Social Security base). For Integra (6 people): employer cost $0 unless it chooses to cover the 0.807% employee share. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://esd.wa.gov/node/1109",
+   "source_date": "2025-10-29",
+   "value": "1.13% total; employer share 0.323% only if 50+ employees; employee share 0.807%"
+  },
+  {
+   "claim": "WA Cares Fund premium is 0.58% of gross wages, employee-paid, no wage cap, employer remits only",
+   "detail": "WA Cares employer page: 'The premium is 0.58% of an employee's gross wages... You won't pay any share of these contributions for your employees; you may, however, elect to pay some or all of your employees' share on their behalf.' Not capped at the Social Security maximum. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://wacaresfund.wa.gov/employers",
+   "source_date": "undated",
+   "value": "0.58% employee-paid"
+  },
+  {
+   "claim": "WA minimum wage is $17.13/hr in 2026 and $17.73/hr in 2027; Bellevue, Kirkland and Redmond have no local minimum, while Seattle ($21.30), Tukwila ($21.65), Renton ($21.57 large / $20.57 then $21.57 mid-size from 7/1/2026), Burien and unincorporated King County ($18.32-$20.82) exceed it",
+   "detail": "L&I minimum wage page: 2026 $17.13; 2027 $17.73 (effective Jan 1, 2027). Miller Nash 2026 roundup (Oct 17, 2025) lists Bellingham, Burien, Everett, Renton, SeaTac, Seattle, Tukwila and unincorporated King County; Bellevue, Kirkland and Redmond are absent from every 2026 local-wage list found (Miller Nash, Mondaq, Perkins Coie), so the state rate applies there. Renton: employers with 15-500 employees OR >$2M Renton gross revenue pay $20.57 (Jan-Jun 2026) then $21.57; <15 employees and <$2M pay state rate. 2026 exempt salary threshold $1,541.70/wk ($80,168.40/yr) for all employer sizes; noncompete enforceability floor $126,858.83 annualized comp. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://lni.wa.gov/workers-rights/wages/minimum-wage/",
+   "source_date": "2026 (page shows 2026 and 2027 rates)",
+   "value": "$17.13 (2026) / $17.73 (2027); Bellevue = state rate; Seattle $21.30; Tukwila $21.65"
+  },
+  {
+   "claim": "BLS OEWS May 2025: Washington dental laboratory technicians (51-9081) median $56,400/yr ($27.12/hr), mean $58,080, P10 $39,970, P25 $47,830, P75 $67,810, P90 $78,340, 670 jobs; Seattle-Tacoma-Bellevue MSA median $57,610 with 380 jobs",
+   "detail": "BLS HTML/data pages blocked the crawler; figures taken from two independent BLS-derived mirrors (americabynumbers.com and clema.ai/wagedex.com) that cite 'BLS OEWS May 2025'. National May 2025: median $49,610 ($23.85/hr), mean $54,290, 34,410 jobs. For reference, the directly fetched BLS May 2023 profile showed Seattle MSA mean $29.16/hr ($60,640) with 550 jobs, among the top-10 paying metros. Treat Seattle percentile detail as medium confidence until verified at https://data.bls.gov/oes/#/area/0042660/2025. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://americabynumbers.com/salary/dental-laboratory-technicians-salary-in-washington/",
+   "source_date": "May 2025 data (released 2026)",
+   "value": "WA median $27.12/hr; P10-P90 $19.22-$37.66/hr; Seattle MSA median $57,610"
+  },
+  {
+   "claim": "Current King County dental lab postings pay $20-$25/hr entry/model work, $22-$35/hr denture/fixed techs, and $25-$38/hr for experienced removables technicians",
+   "detail": "Paragon Dental Arts LLC (Renton): Dental Lab Technician/CDT (model, wax/metal, zirconia fitting, ceramist) from $25/hr, full-time. Novus Dental Lab (Bellevue): model-work technician from $20/hr. Confidential Bellevue removables/dentures lab: $25-$38/hr full-time (SimplyHired). MicroDental/Modern Dental 'DiMartino Dental Lab' (Renton): Denture Technician $22-$35/hr, posted 2026-08-04 and 2026-10-07. Nuvia Dental Implant Center (Bellevue): entry articulator $20/hr training then $25/hr, posted 2026-09-17. Shama Dental Lab (Seattle): $22-$30/hr part-time. ZipRecruiter Seattle average $31.63/hr (range $22.98-$39.66, Aug 28, 2026); Indeed WA average $26.61/hr (27 postings, Sept 15, 2026). Integra's own July 2026 posting (part-time model/finishing/glazing) listed no pay. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.dentalofficejobs.com/jobs/473666754-dental-lab-technician-cdt",
+   "source_date": "2026 (postings Jul-Oct 2026)",
+   "value": "$20-$38/hr; market center ~$25-$32/hr"
+  },
+  {
+   "claim": "Posted dental-lab outside sales compensation: $60-$75k base plus 5-6% of net sales, or $60k base plus $250-$750 per new account, or 100% commission at 8% year one and 3% residual",
+   "detail": "DCS Dental Lab (SF Bay Area): base $70,000-$75,000, 6% commission on net sales, uncapped, expenses covered. MRM field sales: base $60,000-$65,000 with 5% bonus commission. Ziemek Dental Laboratory (Katy TX): $60,000 base; $250/new customer for first 20, $500 for next 20, $750 thereafter. Ultra Core Dental Labs (Dallas, posted Aug 10, 2026): 100% commission, 8% of collected gross revenue year 1, 3% residual years 2-4. Apex Dental Lab Group: $65k base + uncapped commission; Indeed Livermore CA: $50-65k base + uncapped; World Lab USA Irvine: $69-80k base + commission. ZipRecruiter US average $93,694 (Jul 30, 2026), most $61.5k-$74.5k. Benco equipment specialist: $75k annualized draw + allowance, commission less draw (draw model). 8&9 Consulting (Aug 2023) warns against giving reps price authority. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://app.loxo.co/job/MTM0MTYtMmZtODltazZ1MmZ6Z2R4YQ==",
+   "source_date": "undated postings; Ultra Core 2026-08-10",
+   "value": "Base $60-75k + 5-6% net sales; or 8% yr1 / 3% residual commission-only"
+  },
+  {
+   "claim": "LMT's historical guideline: outside lab sales reps averaged $48-52k total comp with ~40% fixed salary / 60% commission",
+   "detail": "LMT magazine article 'Outside Vs. Inside Sales Reps: How Compensation Packages Differ' (Oct 7, 2011): 'the average annual compensation package--including salary and commission--is $48,000 to $52,000; out-of-pocket expenses are additional. Typically, an outside rep is guaranteed 40% of his annual income in fixed salary; the remaining 60% is earned through commission', with a scale-down salary suggested for the first 12 months. 15 years old; use only for structure, not dollar level. Accessed 2026-10-12.",
+   "kind": "historical",
+   "confidence": "high",
+   "source_url": "https://www.lmtmag.com/articles/outside_vs_inside_sales_reps__how_compensation_packages_differ",
+   "source_date": "2011-10-07",
+   "value": "40% fixed / 60% commission; $48-52k (2011 dollars)"
+  },
+  {
+   "claim": "Dekema Austromat 674i sintering furnace lists at $14,582-$15,999 new in the US; Austromat 624 porcelain furnace $10,246.50; used Ivoclar Programat P710 $5,700-$6,000; used P310 ~$3,000-$4,500",
+   "detail": "AP Dental: 674i $14,581.82; Articon and Smart Dentistry Solutions: $14,900; Proto3000: $15,240; Voxel Dental: $15,999; Dental Direkt (EU) \u20ac11,990. Garland Dental: Austromat 624 $10,246.50 (ordered from manufacturer, air freight from Germany). Atlas Resell: used 2015 Programat P710 $6,000 (sold out); eBay pre-owned P710 $5,700/$6,000 OBO. Bimedis: P310 average $3,005, range $1,452-$4,558; 2017 P310 from France \u20ac3,900 posted 6/21/2026. No used Dekema 674 listings found. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.apdental.net/product-page/austromat-674-i-by-dekema",
+   "source_date": "undated listings (accessed 2026-10-12)",
+   "value": "674i new $14,582-$15,999; used P710 $5,700-6,000"
+  },
+  {
+   "claim": "Asiga MAX UV lists at $8,990-$8,995; Asiga MAX 2 UV at $9,990-$10,990 (up to $14,640 with Otoflash curing add-ons)",
+   "detail": "Dentcore: MAX UV $8,990; Gro3X: $8,995. MAX 2 UV: Dental Axess $9,990 (in stock); Voxel Dental and Dentcore $10,990; Articon $10,990-$14,640 (Otoflash w/o N2 +$2,950, with N2 +$3,650); Harris Discount bundle $10,782.08 incl. tray and cure unit. MAX 2: 119x67x75 mm build, 62 \u00b5m pixel, 385 nm. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://articon.com/product/asiga-max-2-uv-3d-printer/",
+   "source_date": "undated listings (accessed 2026-10-12)",
+   "value": "MAX UV $8,990; MAX 2 UV $9,990-$10,990"
+  },
+  {
+   "claim": "A third mill ranges from $17,500 (A3 at ARUM dealer cost, per business context) to ~$51,000 (A3L list) to $103,600 (Versamill/ARUM 5X200 with install and training); a 2015 used 5X-200 sold at auction for $6,000 in Dec 2022",
+   "detail": "Blue Sky Bio store: 'Versamill 5X200 (not including freight) $103,600.00' including 3 days training in Wixom MI, 2 days on-site install, 1-year warranty. Dental Dynamics (Australia): ARUM 5X-200 AUD $167,000 incl. cabinet, PC, water tank and hyperDENT. 777 Auction Co.: Versamill ARUM 5X-200 (mfd 11/20/2015) closed at $6,000, 27 bids, Dec 16, 2022 (as-is, no CAM/warranty; outlier). Minosec listed '$24,600' for a 5X-200 (unverified reseller). No public US ARUM list price found; ARUM A3L ~$51,000 list and A3 demo $17,500 dealer cost taken from business context. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://blueskybio.com/store/versamill-5x200",
+   "source_date": "undated listing; auction 2022-12-16",
+   "value": "$17,500 dealer cost / $51,000 list / $103,600 turnkey 5X200"
+  },
+  {
+   "claim": "LMT LAB DAY West 2027 is May 14-15 at Hyatt Regency Orange County (Garden Grove); booth pricing is not published and must be requested from LMT (Tiffany Hurley); 2026 show booking/payment deadline was Nov 24, 2025",
+   "detail": "lmtmag.com/lmtlabdaywest: 36th annual LAB DAY West May 14-15, 2027; two exhibit halls; attendee entry free; 'For info about exhibiting, please contact Tiffany Hurley (tiffany@lmtmag.com)'; registration opens March 2027. LMT exhibitor portal (west26): 35th annual show May 15-16, 2026, booking & payment due November 24, 2025, Royal and Grand halls, set-up Thu 3-6 PM / Fri 7:30-10 AM. ~200 exhibitors (10times). No dollar figures anywhere public. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://exhibitorportal.labday.com/west26/intro/",
+   "source_date": "2025-2026",
+   "value": "Booth price unpublished; dates May 14-15, 2027"
+  },
+  {
+   "claim": "The WSDLA/Oregon Association of Dental Labs 'Pacific Northwest Conference' sells exhibitor tables at $1,050 (standard) and $1,250 (premium), program sponsorship $1,200 (mailed to 120 PNW labs), coffee hour $1,000, lunch buffet $2,000, tote bags $2,000; 2026 in Portland (Sept 11-12), 2027 in Seattle",
+   "detail": "The Hub AMC events page: co-hosted by Washington State Dental Lab Association and Oregon Association of Dental Labs; 'Hosted this year in Portland, Oregon and next year in Seattle, Washington'; Standard Booth $1,050 (6-ft table, 2 chairs, lunch for two, foyer, 13 tables); Premium Booth $1,250 (Grand Ballroom Friday, lecture halls Saturday); additional exhibitor lunch $50; Friday Night Social $3,500 (sold out); notebooks $2,500 (sold out); wine tour $7,500. This is a lab-technician audience (relevant for Bear Milling lab-to-lab and ARUM/MillBox dealer sales), not dentists. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.thehubamc.com/events",
+   "source_date": "2026",
+   "value": "$1,050-$1,250 table; $1,000-$2,000 sponsorships"
+  },
+  {
+   "claim": "Seattle-King County Dental Society publishes no sponsor/vendor rate card (application-based); WSDA took over SKCDS association management effective Sept 24, 2026; WSDA's Pacific Northwest Dental Conference (May 28-30, 2026, Seattle Convention Center Summit, 150+ exhibitors) does not publish booth rates",
+   "detail": "skcds.org/about/skcds-corporate-partners: 'Submit your sponsorship application today!' with current partners (Big Sky Northwest, Omni Practice Group, WSDA, Financial Freedom for Dentists) and no pricing. SKCDS contact 206-443-7607, 126 NW Canal St Ste 300, Seattle. WSDA page states its Executive Council selected WSDA for management services for one year effective Sept 24, 2026 (date per WSDA page; confirm). PNDC exhibitor page lists attendee fees only; third-party aggregator Orbital says exhibitor cost 'under $5,000' (not a rate card). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.skcds.org/about/skcds-corporate-partners",
+   "source_date": "undated",
+   "value": "Unpublished; must request"
+  },
+  {
+   "claim": "Google Ads 2026 benchmarks: average search CPC $5.42 across 23 industries; Dentists & Dental Services $8.00 CPC, 5.66% CTR; overall CPL $66.69; no published CPC exists for dental-lab B2B keywords",
+   "detail": "WordStream/LocaliQ 2026 Google Ads Benchmarks (13,000+ campaigns, Apr 2025-Mar 2026; published May 18, 2026, updated Sept 16, 2026): overall CPC $5.42 (vs $2.32 in 2016), dentists among the three highest CPCs at $8.00 alongside legal ($9.87) and home improvement ($8.33); Dentists & Dental Services CTR 5.66%. Dental-lab marketing agencies (Buzzbox Media Mar 2026, DDS Web Solutions, Trazalab Feb 2026) cite 'dental lab near me', 'zirconia crown lab' etc. as target terms and claim far less competition than consumer dental terms, but none publish CPC; Trazalab suggests $100-$200/mo basic and $300-$500/mo targeted Google Ads budgets for small labs. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.wordstream.com/blog/2026-google-ads-benchmarks",
+   "source_date": "2026-05-18 (updated 2026-09-16)",
+   "value": "$5.42 avg CPC; $8.00 dentist CPC; dental-lab CPC unpublished"
+  },
+  {
+   "claim": "USPS Marketing Mail letter postage is $0.339 (5-digit automation) to $0.391 (Mixed AADC) effective Jan 2026, rising ~5-6% on July 12, 2026 (~$0.372 at 5-digit); First-Class single-piece letter $0.73 and postcard $0.56 (Jan 2026); Marketing Mail minimum 200 pieces",
+   "detail": "DirectMail.io 2026 rate sheet (effective Jan 2026): Marketing Mail letters 5-digit $0.339, 3-digit $0.378, Mixed AADC $0.391; flats $0.659-$0.872; First-Class letter single-piece $0.730, postcard single-piece $0.560, presort postcard $0.418. DirectMail.io blog (Apr 21, 2026): USPS adjustment effective July 12, 2026, Marketing Mail letters +5-6%; post-change 5-digit ~$0.372, AADC ~$0.404, Mixed AADC ~$0.433 (citing Postmarkr). All-in per piece (print + postage + data) under 5,000 pieces/month: postcards $0.85-$1.50; #10 letter $0.55-$0.85 at 10K-50K volume; padded mailer/sample kit $2.50-$5.00. Vendor figures, not USPS Notice 123; verify before budgeting. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://directmail.io/blog/direct-mail-cost-pricing-2026/",
+   "source_date": "2026-04-21",
+   "value": "Postage $0.34-0.43/letter; all-in $0.85-1.50/postcard small runs"
+  },
+  {
+   "claim": "Nearest UPS Store to 35 148th Ave SE (14150 NE 20th St Ste F1, 98007): UPS Air last pickup 4:30 PM Mon-Fri, 2:00 PM Sat; Ground 5:45 PM Mon-Fri; other Bellevue UPS Stores: 15600 NE 8th St Air 5:00 PM M-F / Ground 5:30 PM; 1100 Bellevue Way NE Air 4:30 PM / Ground 5:15 PM",
+   "detail": "The UPS Store location pages (live schedule). 14150 NE 20th St: (425) 643-3630, open 7 days, Air pickup M-F 4:30 PM, Sat 2:00 PM, Sun none; Ground M-F 5:45 PM, no weekend. 15600 NE 8th St Ste B1 (Crossroads): Air M-F 5:00 PM, Sat 1:30 PM; Ground M-F 5:30 PM, Sat 3:00 PM. 1100 Bellevue Way NE Ste 8A: Air M-F 4:30 PM, Sat 2:00 PM; Ground M-F 5:15 PM. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://locations.theupsstore.com/wa/bellevue/14150-ne-20th-st/ups-shipping",
+   "source_date": "live page, accessed 2026-10-12",
+   "value": "UPS Air cutoff 4:30-5:00 PM M-F in Bellevue"
+  },
+  {
+   "claim": "FedEx in Bellevue: FedEx Office 40 Bellevue Way NE shows Express pickup 4:35 PM weekdays / 4:00 PM Saturday and Ground 6:00-6:30 PM; FedEx Office 1299 156th Ave NE (Crossroads, nearest to 148th Ave SE) and 3632 Factoria Blvd SE are open M-F 8 AM-7 PM but their Express cutoffs were not retrievable; FedEx Ship Center 651 S Alaska St, Seattle offers 'Express drop off (extended West Coast service)'",
+   "detail": "local.fedex.com Bellevue list: FedEx Office at 1299 156th Ave NE Ste 100 (425-957-4415), 336 116th Ave NE, 3632 Factoria Blvd SE (425-641-1174), 40 Bellevue Way NE (425-451-1055); FedEx Authorized ShipCenters Goin Postal 14725 NE 20th St Ste D (Express + Ground drop off) and Pony Express 1915 140th Ave NE; FedEx at Walgreens 15585 NE 24th St. The 4:35 PM Express figure comes from the 40 Bellevue Way page's pickup table (search snippet; dynamic hours block not in fetched text) and third-party Mapdoor; treat as medium confidence and confirm by phone. FedEx Ship Center Seattle (BFIA) lists extended West Coast Express drop off but no time on page; typically the latest overnight tender in the metro. 24/7 FedEx Drop Box at 11811 NE 1st St. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://local.fedex.com/en-us/wa/bellevue",
+   "source_date": "live page, accessed 2026-10-12",
+   "value": "FedEx Office Express ~4:35 PM M-F (40 Bellevue Way); Crossroads/Factoria cutoffs unconfirmed"
+  },
+  {
+   "claim": "Seattle Messenger Cooperative publishes standard same-day courier zone prices (origin downtown Seattle): Bellevue $34.97, Tukwila $31.13, Southcenter $34.83, Renton $37.83, Kirkland $40.06, Redmond $43.12, Issaquah $48.06, Kent $51.03, Sammamish $49.52; Priority (<4 hr) 1.5x, Rush (<2 hr) 2x, ASAP 2.5x; plus temporary 20% fuel surcharge",
+   "detail": "seattlemessengercooperative.com/price-list: standard = delivered within 4+ hours or by close of business at listed zone price; pricing structure updated March 2025 ('expect slight increases'); zone-to-zone prices vary; 20% fuel surcharge on base price except bicycle jobs; wait-time and oversize fees extra; office 1522 Western Ave, Seattle, (206) 250-6349. Other King County couriers found (Pacific Northwest Couriers in Tukwila; AMCO Delivery in Burien with 12 PM same-day cutoff; Cordova Courier with cheaper 'routed same-day'; DAGO Express 'Urban from $17', 60-120 min pickup) quote-only. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.seattlemessengercooperative.com/price-list",
+   "source_date": "2025-03 (pricing update noted)",
+   "value": "$31-$51 standard per Eastside/South King run; x1.5-2 for rush; +20% fuel"
+  },
+  {
+   "claim": "Lee & Associates' Q2 2026 Puget Sound report shows regional industrial vacancy 10.1% and average NNN asking $14.83/SF/yr (~$1.24/mo); Newmark shows 10.4% vacancy, $12.73/SF/yr NNN; all brokerages describe tenants holding leverage with concessions and flexible terms",
+   "detail": "Lee & Associates Pacific Northwest Q2 2026 market report: 12-month net absorption (2.01M SF), vacancy 10.1% (up from 9.7%), avg NNN asking $14.83 PSF/yr, under construction 1.93M SF. Newmark 2Q26: vacancy 10.4% (highest since 2005), asking $12.73 NNN flat, 83% of vacancy rise from spec deliveries. Cushman: Seattle $1.04/SF/mo NNN, vacancy 9.4%, effective rents under pressure from concessions, shorter terms and termination rights. Implication: a 1,000-2,000 SF flex tenant can negotiate free rent/TI in 2026. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.lee-associates.com/northwest/wp-content/uploads/sites/74/2026/07/Q2-2026-Puget-Sound-Market-Report.pdf",
+   "source_date": "2026-07",
+   "value": "Vacancy 10.1%; $14.83/SF/yr NNN regional avg"
+  },
+  {
+   "claim": "Integra's current occupancy cost ($2,300/mo for ~600 SF, month-to-month) equals $3.83/SF/mo all-in, roughly 1.6-2.0x Eastside flex asking rents on a per-foot basis but with no lease commitment",
+   "detail": "Derived from business context ($2,300 \u00f7 600 SF) versus Kidder Eastside $1.88 NNN + estimated $0.40-0.57 NNN \u2248 $2.30-2.45 all-in, and Tukwila $2.10 modified gross. The premium buys flexibility (month-to-month) and landlord-as-client alignment; small suites under 1,000 SF generally price above market averages. Analyst derivation, 2026-10-12.",
+   "kind": "estimate",
+   "confidence": "high",
+   "source_url": "https://kidder.com/market-reports/seattle-industrial-market-report/",
+   "source_date": "2026 Q2",
+   "value": "$3.83/SF/mo vs $2.10-2.45 market"
+  },
+  {
+   "claim": "Estimated fully loaded employer cost of a full-time dental technician in Bellevue is about 1.10x base wage (FICA 7.65% + L&I ~$0.27/hr + state UI est. ~1.3% on first ~$78k), excluding benefits",
+   "detail": "Basis: FICA 7.65%; L&I class 3602 employer net $0.2737/hr (fact); PFML employer share $0 (<50 employees, fact); WA Cares $0 employer (fact); FUTA 0.6% on $7,000; WA unemployment insurance new-employer rate not researched (typical ~1.0-1.5% of wages up to the 2026 taxable wage base, estimated). At $28/hr: \u2248 $30.80/hr \u2248 $64,000/yr for 2,080 hours. Analyst estimate, 2026-10-12.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://lni.wa.gov/insurance/_docs/2026RatesByClassCodeFund.pdf",
+   "source_date": "2026",
+   "value": "~1.10x base; $28/hr \u2192 ~$64k/yr loaded"
+  },
+  {
+   "claim": "Estimated Google Ads CPC for dental-lab B2B terms ('dental lab near me', 'zirconia crown lab', 'dental lab Seattle') is $3-$8 per click",
+   "detail": "No tool or agency publishes a CPC for these terms. Basis: WordStream 2026 dentist CPC $8.00 as an upper bound (consumer dental terms are heavily contested by practices), overall cross-industry CPC $5.42, and dental-lab agencies' claim of 'far less competition for dental lab keywords.' Low volume means a $300/mo budget buys roughly 40-100 clicks. Verify in Google Keyword Planner before budgeting. Analyst estimate, 2026-10-12.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://www.buzzboxmedia.com/blog/dental-lab-seo/",
+   "source_date": "2026-03-14",
+   "value": "$3-$8 CPC (estimate)"
+  },
+  {
+   "claim": "Estimated LMT LAB DAY West 10x10 inline booth cost is $2,500-$4,000, with total participation (booth, travel from Seattle, two nights at the Hyatt room block, shipping) of $5,000-$9,000",
+   "detail": "LMT does not publish rates. Basis: comparable regional dental meetings publish $1,550-$1,800 (Southwest Dental Conference, inline/corner 10x10) and association shows $2,450 (ICCFA 2025); Trazalab's small-lab guidance cites 'dental show booth/table $500-2,000 per event'; LAB DAY West's ~200 exhibitors and hotel-ballroom format suggest mid-range pricing. Travel: SEA-SNA airfare and Garden Grove hotel estimated at $1,500-$2,500 for two people. Analyst estimate, 2026-10-12.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://lmtmag.com/lmtlabdaywest",
+   "source_date": "2026",
+   "value": "$2,500-$4,000 booth; $5,000-$9,000 all-in (estimate)"
+  },
+  {
+   "claim": "Estimated tenant improvements to make 1,000-1,500 SF of shell/flex space lab-ready (208V circuits for mills/furnaces, compressed-air lines, sink/plumbing, dust collection venting, benches, HVAC balance) are $10,000-$60,000",
+   "detail": "Not researched as a sourced number; order-of-magnitude estimate based on the equipment list (two 5X-200 wet mills, Austromat furnace, two Asiga printers, scanner) and typical Puget Sound electrician/plumber rates. Shell industrial space (Kent $1.55 NNN) needs the most work; second-generation office/flex (Tukwila Seattle Exchange, Redmond Willows with HVAC) needs least. Landlords in a 10% vacancy market may fund part via TI allowance. Also budget rigging/recalibration to move each mill (estimated $1,500-$5,000 per machine). Analyst estimate, 2026-10-12.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://warecre.com/cre-insights/market-property-insights/seattle-warehouse-market-report/",
+   "source_date": "2026 Q2",
+   "value": "$10k-$60k one-time (estimate)"
+  },
+  {
+   "claim": "Estimated King County personal property tax on ~$150-$200k of lab equipment is about $1,400-$1,900 per year",
+   "detail": "WA personal property tax on business equipment is assessed by the county (DOR denturist guide notes it applies to tools/equipment, not inventory). Basis: Bellevue-area aggregate levy rates are typically ~$8-$10 per $1,000 of assessed value; assessed value follows depreciation schedules. Levy rate not researched for 2026; label estimate. Accessed 2026-10-12.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://dor.wa.gov/education/industry-guides/denturists",
+   "source_date": "undated",
+   "value": "~$1,400-$1,900/yr (estimate)"
+  },
+  {
+   "claim": "Washington unemployment insurance (ESD) employer rate and 2026 taxable wage base were not researched; this is a real payroll load that must be added",
+   "detail": "Not sourced in this pass. New-employer rates in WA are industry-based and typically ~1.0-1.5% of wages up to the annual taxable wage base (~$78k range for 2026); Integra's actual rate is on its ESD rate notice. Listed as unknown with a labeled estimate used in the loaded-wage calculation.",
+   "kind": "unknown",
+   "confidence": "low",
+   "source_url": "https://esd.wa.gov/",
+   "source_date": "undated",
+   "value": "unknown (est. ~1.0-1.5% on first ~$78k)"
+  }
+ ],
+ "cost_items": [
+  {
+   "item": "Additional flex/light-industrial lab space, 1,500 SF, all-in rent (base + NNN/CAM)",
+   "base_usd": 3750,
+   "low_usd": 2850,
+   "high_usd": 5700,
+   "period": "monthly",
+   "basis": "Low = Kent Valley small bay $1.55 NNN + ~$0.35-0.42 NNN \u2248 $1.90/SF/mo; Base = Tukwila Seattle Exchange $2.10 modified gross or Redmond Willows $2.04 + NNN \u2248 $2.50/SF/mo all-in; High = Redmond $1.80 + $0.57 NNN to Bellevue 148th Ave SE office/retail $34 + $10.80 NNN \u2248 $3.73-3.80/SF/mo. Seattle Exchange year-1 promo $1.00/SF/mo would cut base to ~$1,500/mo in year one. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://www.commercialmls.com/Search/ListingDetailsFull/710417",
+   "source_date": "2026-09-22"
+  },
+  {
+   "item": "Current Integra occupancy (reference): ~600 SF month-to-month all-in",
+   "base_usd": 2300,
+   "low_usd": 2300,
+   "high_usd": 2300,
+   "period": "monthly",
+   "basis": "Business context; equals $3.83/SF/mo all-in, above Eastside flex market ($2.10-2.45) but with no term commitment.",
+   "status": "quoted",
+   "source_url": "",
+   "source_date": "2026"
+  },
+  {
+   "item": "Lab build-out / tenant improvements for 1,000-1,500 SF (power, air, plumbing, benches) plus mill rigging",
+   "base_usd": 25000,
+   "low_usd": 10000,
+   "high_usd": 60000,
+   "period": "one-time",
+   "basis": "Analyst estimate (not sourced): dedicated 208V circuits, compressed air, sink, dust collection venting, benches, HVAC; second-generation flex needs least, shell most; rigging/recalibration $1,500-$5,000 per mill. Negotiate TI allowance given 9.5-10% regional vacancy.",
+   "status": "estimated",
+   "source_url": "https://kidder.com/wp-content/uploads/market_report/industrial-market-research-seattle-2026-2q.pdf",
+   "source_date": "2026 Q2"
+  },
+  {
+   "item": "WA state B&O tax (manufacturing + retailing/wholesaling with MATC), net of small-business credit, at current ~$140k/yr revenue",
+   "base_usd": 0,
+   "low_usd": 0,
+   "high_usd": 120,
+   "period": "annual",
+   "basis": "0.471-0.484% of gross = ~$660-680/yr; $55/mo non-service credit ($660/yr) offsets essentially all of it; residual shown as high case for months above the cap. Rate rises to 0.50% on 1/1/2027. Zero is the computed net after credit, not an unknown. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://dor.wa.gov/node/151433",
+   "source_date": "2023-01-01 (credit); rates current"
+  },
+  {
+   "item": "WA state B&O tax at a growth case of $300k/yr lab + milling revenue (credit fully phased out above ~$280k)",
+   "base_usd": 1452,
+   "low_usd": 1413,
+   "high_usd": 1500,
+   "period": "annual",
+   "basis": "Low = 0.471% retailing to dentists; Base = 0.484% manufacturing/wholesaling mix; High = 0.50% from 2027. Service revenue (training/design-only) would be 1.5% instead. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://dor.wa.gov/taxes-rates/business-occupation-tax/business-occupation-tax-classifications",
+   "source_date": "current"
+  },
+  {
+   "item": "City of Bellevue B&O (gross receipts 0.1596% above $215k taxable receipts) at $300k/yr, plus $119 one-time license; square-footage tax if applicable",
+   "base_usd": 479,
+   "low_usd": 0,
+   "high_usd": 2770,
+   "period": "annual",
+   "basis": "Low = below $215k threshold (today). Base = 0.1596% \u00d7 $300k = $479. High = $479 + square footage tax on 1,500 SF of qualifying support/out-of-city-sales space at $0.3297475/sq ft/qtr ($1,978/yr) + $119 license + FileLocal fees; applicability to production floor must be confirmed with Bellevue Tax Division. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://bellevuewa.gov/sites/default/files/media/pdf_document/2025/fam-2026-26745-botaxguide-v01.pdf",
+   "source_date": "2026-01-01"
+  },
+  {
+   "item": "WA sales tax saved via M&E exemption on a $51,000 third mill (Bellevue 10.3%)",
+   "base_usd": 5253,
+   "low_usd": 1803,
+   "high_usd": 10671,
+   "period": "one-time",
+   "basis": "Low = $17,500 A3 at dealer cost \u00d7 10.3%; Base = $51,000 A3L list; High = $103,600 Versamill 5X200 turnkey. Requires Manufacturer's Sales and Use Tax Exemption Certificate (RCW 82.08.02565 / WAC 458-20-13601). Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=82.08.02565",
+   "source_date": "current"
+  },
+  {
+   "item": "L&I workers' comp, class 3602 dental laboratories, employer net per full-time technician (2,080 hrs)",
+   "base_usd": 569,
+   "low_usd": 512,
+   "high_usd": 626,
+   "period": "annual",
+   "basis": "2026 composite $0.4056/hr less employee deduction $0.13195/hr = $0.2737/hr employer; low/high reflect experience factor ~0.9-1.1. Full composite $844/FTE/yr. Outside sales class 6303 would be $0.3019/hr composite; clerical 4904 $0.2223. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://lni.wa.gov/insurance/_docs/2026RatesByClassCodeFund.pdf",
+   "source_date": "2026"
+  },
+  {
+   "item": "WA Paid Family & Medical Leave employer share (fewer than 50 employees)",
+   "base_usd": 0,
+   "low_usd": 0,
+   "high_usd": 1680,
+   "period": "annual",
+   "basis": "Employer share (28.57% of 1.13%) is not required under 50 employees; zero is the statutory amount, not an unknown. High = voluntary payment of employees' 0.807% share on ~$208k payroll (6 people). WA Cares 0.58% is employee-paid. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://esd.wa.gov/node/1109",
+   "source_date": "2025-10-29"
+  },
+  {
+   "item": "Full-time dental lab technician / CAD designer, Puget Sound, base wage",
+   "base_usd": 28,
+   "low_usd": 22,
+   "high_usd": 38,
+   "period": "per-unit",
+   "basis": "Per hour. Low = Bellevue/Renton model-work and entry postings ($20-$25). Base = OEWS WA median $27.12 (May 2025) and Renton $25 from / MicroDental $22-35 midpoint. High = Bellevue removables posting $38 and OEWS P90 $37.66. Loaded cost \u2248 1.10x (FICA, L&I, UI), so $28/hr \u2248 $64k/yr. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://www.dentalofficejobs.com/jobs/473666754-dental-lab-technician-cdt",
+   "source_date": "2026"
+  },
+  {
+   "item": "Salaried CAD/CAM director minimum to remain overtime-exempt in WA (2026)",
+   "base_usd": 80168,
+   "low_usd": 80168,
+   "high_usd": 80168,
+   "period": "annual",
+   "basis": "WA 2026 exempt salary threshold $1,541.70/week ($80,168.40/yr), same for all employer sizes; below this the role must be hourly/overtime-eligible. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://www.millernash.com/industry-news/washington-state-minimum-wage-2026-update-including-jurisdictions-exceeding-the-states-minimum-wage",
+   "source_date": "2025-10-17"
+  },
+  {
+   "item": "Outside dental-lab sales representative, year-one fully loaded cost (base + commission on modest sales + payroll load + expenses/mileage)",
+   "base_usd": 95000,
+   "low_usd": 60000,
+   "high_usd": 125000,
+   "period": "annual",
+   "basis": "Low = commission-heavy ($50k base or 8% commission-only model with draw) plus expenses. Base = $65-70k base + 6% of ~$150k incremental net sales ($9k) + ~10% payroll load + $8-10k auto/expenses. High = $75-80k base + 6% + car allowance + expenses, per DCS/World Lab/Dallas postings. Noncompete unenforceable below $126,858.83 total comp (2026). Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://app.loxo.co/job/MTM0MTYtMmZtODltazZ1MmZ6Z2R4YQ==",
+   "source_date": "undated posting (2025-2026)"
+  },
+  {
+   "item": "Second sintering/ceramic furnace",
+   "base_usd": 14900,
+   "low_usd": 6000,
+   "high_usd": 15999,
+   "period": "one-time",
+   "basis": "Low = used Ivoclar Programat P710 ($5,700-$6,000, eBay/Atlas). Base = new Dekema Austromat 674i at Articon/Smart Dentistry Solutions $14,900 (AP Dental $14,582). High = Voxel $15,999. Alternative Austromat 624 porcelain furnace $10,246.50. Sales-tax exempt under M&E. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://www.apdental.net/product-page/austromat-674-i-by-dekema",
+   "source_date": "undated listings"
+  },
+  {
+   "item": "Third Asiga printer",
+   "base_usd": 10990,
+   "low_usd": 8990,
+   "high_usd": 14640,
+   "period": "one-time",
+   "basis": "Low = Asiga MAX UV $8,990 (Dentcore). Base = MAX 2 UV $10,990 (Voxel/Dentcore/Articon; Dental Axess $9,990). High = MAX 2 UV with Otoflash N2 curing $14,640 (Articon). Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://articon.com/product/asiga-max-2-uv-3d-printer/",
+   "source_date": "undated listings"
+  },
+  {
+   "item": "Third 5-axis mill (only if utilization ever exceeds ~50%; mills are ~90% idle today)",
+   "base_usd": 51000,
+   "low_usd": 17500,
+   "high_usd": 103600,
+   "period": "one-time",
+   "basis": "Low = ARUM A3 at dealer cost $17,500 (own dealership, business context). Base = ARUM A3L list ~$51,000 (business context). High = Versamill/ARUM 5X200 $103,600 incl. install and training (Blue Sky Bio). Add CAM license seat (hyperDENT/MillBox) \u2014 cost not sourced. Used 2015 5X-200 auctioned at $6,000 (Dec 2022) is an as-is outlier. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://blueskybio.com/store/versamill-5x200",
+   "source_date": "undated listing"
+  },
+  {
+   "item": "LMT LAB DAY West 2027 10x10 booth (May 14-15, 2027, Garden Grove)",
+   "base_usd": 3200,
+   "low_usd": 2500,
+   "high_usd": 4000,
+   "period": "one-time",
+   "basis": "LMT does not publish booth prices (contact Tiffany Hurley). Estimate benchmarked to comparable dental meetings ($1,550-$2,450 for 10x10) scaled for a 200-exhibitor national lab show. Add $1,500-$2,500 travel/hotel for two and $500-$1,500 booth shipping/graphics. Accessed 2026-10-12.",
+   "status": "estimated",
+   "source_url": "https://lmtmag.com/lmtlabdaywest",
+   "source_date": "2026"
+  },
+  {
+   "item": "Pacific Northwest Conference (WSDLA + Oregon labs; 2027 in Seattle) exhibitor table and program sponsorship",
+   "base_usd": 1250,
+   "low_usd": 1050,
+   "high_usd": 2450,
+   "period": "one-time",
+   "basis": "Standard table $1,050; premium $1,250 (includes 2 lunches); high = premium table + $1,200 full-page program sponsorship mailed to 120 PNW labs. Audience is lab owners/technicians (Bear Milling and ARUM/MillBox dealer prospects), not dentists. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://www.thehubamc.com/events",
+   "source_date": "2026"
+  },
+  {
+   "item": "Seattle-King County Dental Society sponsorship / WSDA PNDC exhibit booth (dentist audience)",
+   "base_usd": 3500,
+   "low_usd": 1500,
+   "high_usd": 5000,
+   "period": "one-time",
+   "basis": "Neither SKCDS (application-based) nor WSDA PNDC publishes rates. Estimate based on typical state/local dental meeting 10x10 rates ($1,500-$1,800 regional, up to ~$5,000 at a 150-exhibitor state convention per aggregator). Must request rate card from SKCDS (206-443-7607) / WSDA. Accessed 2026-10-12.",
+   "status": "estimated",
+   "source_url": "https://www.skcds.org/about/skcds-corporate-partners",
+   "source_date": "undated"
+  },
+  {
+   "item": "Google Ads local campaign for dentist-facing lab terms",
+   "base_usd": 300,
+   "low_usd": 100,
+   "high_usd": 1000,
+   "period": "monthly",
+   "basis": "Trazalab small-lab guidance $100-$200/mo basic, $300-$500/mo targeted; WordStream 2026 dentist CPC $8.00 and overall $5.42 imply ~40-100 clicks/month at $300. Dental-lab-specific CPC unpublished (est. $3-$8). Accessed 2026-10-12.",
+   "status": "estimated",
+   "source_url": "https://www.wordstream.com/blog/2026-google-ads-benchmarks",
+   "source_date": "2026-05-18"
+  },
+  {
+   "item": "Direct mail to dental practices, per piece all-in (print + postage + list), small runs under 5,000 pieces",
+   "base_usd": 1.25,
+   "low_usd": 0.85,
+   "high_usd": 5,
+   "period": "per-unit",
+   "basis": "DirectMail.io (Apr 21, 2026): postcards $0.85-$1.50 all-in under 5,000 pieces/month; Marketing Mail letter postage $0.339-$0.391 (Jan 2026) rising ~5-6% July 12, 2026; First-Class postcard single-piece $0.56; dimensional sample-kit mailer $2.50-$5.00. A 1,000-practice King County drop \u2248 $850-$1,500; a 200-practice sample-kit drop \u2248 $500-$1,000. Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://directmail.io/blog/direct-mail-cost-pricing-2026/",
+   "source_date": "2026-04-21"
+  },
+  {
+   "item": "On-demand same-day courier run within King County (Eastside / South King)",
+   "base_usd": 42,
+   "low_usd": 17,
+   "high_usd": 90,
+   "period": "per-unit",
+   "basis": "Low = DAGO Express 'Urban from $17' (from-price). Base = Seattle Messenger Cooperative standard zone prices Bellevue $34.97 / Tukwila $31.13 / Renton $37.83 / Redmond $43.12 plus 20% fuel surcharge \u2248 $37-$52. High = Rush (2x) Redmond/Issaquah $86-$96 + fuel. Origin assumed downtown Seattle; Eastside-origin zone-to-zone pricing varies (quote). Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://www.seattlemessengercooperative.com/price-list",
+   "source_date": "2025-03"
+  },
+  {
+   "item": "Scheduled/routed daily pickup-and-delivery, per stop (dental offices on a fixed route)",
+   "base_usd": 20,
+   "low_usd": 12,
+   "high_usd": 35,
+   "period": "per-unit",
+   "basis": "Estimate: routed same-day service is priced below on-demand (Cordova, AMCO, PNW Couriers quote-only); SMC standard zones $31-$51 as ceiling; typical routed-stop discounts 40-60%. Alternative in-house driver at $17.13-$21/hr + mileage. Accessed 2026-10-12.",
+   "status": "estimated",
+   "source_url": "https://www.cordovacourier.com/blog/seattle-same-day-courier-delivery",
+   "source_date": "2026-08-04"
+  },
+  {
+   "item": "King County personal property tax on lab equipment (~$150-200k assessed)",
+   "base_usd": 1600,
+   "low_usd": 1400,
+   "high_usd": 1900,
+   "period": "annual",
+   "basis": "Estimate: county-assessed business personal property at ~$8-$10 per $1,000 assessed value (Bellevue-area levy rates typical); 2026 levy rate not researched. Accessed 2026-10-12.",
+   "status": "estimated",
+   "source_url": "https://dor.wa.gov/education/industry-guides/denturists",
+   "source_date": "undated"
+  },
+  {
+   "item": "Bellevue business license registration (one-time, no renewal) and FileLocal fees",
+   "base_usd": 119,
+   "low_usd": 119,
+   "high_usd": 130,
+   "period": "one-time",
+   "basis": "City of Bellevue 2026 registration fee $119; credit card +2.49% or ACH +$1; $4 FileLocal fee per transaction ($5 minimum). Accessed 2026-10-12.",
+   "status": "listed",
+   "source_url": "https://bellevuewa.gov/city-government/departments/finance/business-taxes",
+   "source_date": "2026"
+  }
+ ],
+ "competitors": [
+  {
+   "name": "MicroDental Laboratories / Modern Dental Lab USA (DiMartino Dental Lab)",
+   "location": "Renton, WA",
+   "what": "National lab group's Renton center (fixed, implant, digital dentures); labor-market competitor for technicians",
+   "pricing": "Posting pay $22-$35/hr denture technician (Aug 4 and Oct 7, 2026)",
+   "turnaround": "n/a",
+   "notes": "25+ North American locations; competes for the same King County technician pool with benefits packages Integra cannot match.",
+   "source_url": "https://jobs.smartrecruiters.com/moderndentallaboratories/744000141564853"
+  },
+  {
+   "name": "Paragon Dental Arts LLC",
+   "location": "Renton, WA",
+   "what": "Independent full-service lab (model, wax/metal, zirconia fitting, ceramist)",
+   "pricing": "Posting pay from $25/hr, full-time",
+   "turnaround": "n/a",
+   "notes": "Direct labor-market comparator for Integra's technician wage setting.",
+   "source_url": "https://www.dentalofficejobs.com/jobs/473666754-dental-lab-technician-cdt"
+  },
+  {
+   "name": "Novus Dental Lab",
+   "location": "Bellevue, WA",
+   "what": "Bellevue crown & bridge lab hiring model-work technician with CAD familiarity",
+   "pricing": "Posting pay from $20/hr",
+   "turnaround": "n/a",
+   "notes": "Same city as Integra; sets the entry-level floor locally.",
+   "source_url": "https://www.dentalofficejobs.com/jobs/422914658-dental-lab-technician-model-work"
+  },
+  {
+   "name": "Nuvia Dental Implant Center (in-house lab)",
+   "location": "Bellevue, WA",
+   "what": "DSO-style full-arch implant center with in-house Bellevue lab",
+   "pricing": "Entry articulator $20/hr training, $25/hr after (posted Sept 17, 2026)",
+   "turnaround": "n/a",
+   "notes": "Illustrates that full-arch providers in Bellevue internalize lab work; both a labor competitor and a signal that large full-arch accounts are not available to outside labs.",
+   "source_url": "https://www.jobsparx.com/Job/B14641829/Dr-Blair-Alexander-Isom-Pllc-Entry-Level-Bilingual-Dental-Lab-Technician-Articulator-Bellevue-WA"
+  },
+  {
+   "name": "Shama Dental Lab",
+   "location": "Seattle, WA",
+   "what": "Seattle lab hiring part-time technician who scans cases into design software",
+   "pricing": "$22-$30/hr part-time",
+   "turnaround": "n/a",
+   "notes": "Comparable small digital lab; pay range brackets Integra's likely part-time offers.",
+   "source_url": "https://www.ziprecruiter.com/Jobs/Dental-Laboratory-Technician/-in-Seattle,WA"
+  }
+ ],
+ "targets": [],
+ "unknowns": [
+  "LMT LAB DAY West 2027 booth price (not published; request from Tiffany Hurley, tiffany@lmtmag.com; 2026 booking deadline was Nov 24, 2025, so 2027 deadline likely ~Nov 2026).",
+  "SKCDS sponsorship tiers and WSDA PNDC 2027 exhibitor booth rates (application/rate-card only; WSDA now manages SKCDS).",
+  "Google Ads CPC for dental-lab B2B keywords ('dental lab near me', 'zirconia crown lab Seattle'); only dentist-practice benchmarks ($8.00) exist. Check Google Keyword Planner.",
+  "BLS OEWS May 2025 percentile table for 51-9081 in the Seattle-Tacoma-Bellevue MSA (BLS pages blocked the crawler; WA state percentiles and MSA median $57,610 came from BLS-derived mirrors). Verify at data.bls.gov/oes/#/area/0042660/2025.",
+  "Whether Bellevue's square footage B&O tax ($0.3297475/sq ft/qtr) applies to Integra's production floor as 'support space' for out-of-city sales (lab-to-lab shipments to NY/CA/OR/HI), and whether it is owed while below the $215,000 gross-receipts threshold. Confirm with tax@bellevuewa.gov.",
+  "Washington unemployment insurance (ESD) rate and 2026 taxable wage base for Integra's account (estimated ~1.0-1.5% on first ~$78k; see rate notice).",
+  "King County 2026 personal property tax levy rate applicable to the Bellevue lab (estimated $8-$10 per $1,000 assessed).",
+  "CAM license cost (hyperDENT or MillBox seat/post-processor) for a third mill; not sourced.",
+  "FedEx Express cutoff times at FedEx Office 1299 156th Ave NE (Crossroads) and 3632 Factoria Blvd SE, and the latest Express tender time at FedEx Ship Center 651 S Alaska St, Seattle ('extended West Coast service'); only store hours (M-F 8 AM-7 PM) were retrievable. Call 425-957-4415 / 425-641-1174.",
+  "Eastside-origin (Bellevue pickup) courier zone pricing; Seattle Messenger Cooperative publishes downtown-Seattle-origin zones only; PNW Couriers, AMCO, Cordova and DAGO are quote-based.",
+  "Actual NNN/CAM for a specific Tukwila or Redmond suite (modified-gross vs NNN terms vary by building; observed range $0.15/SF/mo CAM at Seattle Exchange to $0.57/SF/mo NNN at 95th Street Tech Center).",
+  "Public US list price for ARUM 5X-200 / A3L (dealer-confidential; only Blue Sky Bio's $103,600 turnkey Versamill 5X200 and an Australian AUD $167,000 package are public).",
+  "Dentist/practice counts in King County and Bellevue for sizing direct-mail drops (ADA HPI/WA DOH license counts not pulled in this pass)."
+ ]
+}

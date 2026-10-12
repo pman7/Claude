@@ -1,0 +1,1030 @@
+{
+ "topic": "Dallas-Fort Worth (TX) and Miami / South Florida as candidate remote-served markets for Integra Dental Design (Bellevue, WA): dentist and lab supply, full-arch/DSO demand structure, state lab regulation, tax and entity costs, labor, real estate, flights and parcel logistics; conclusion on obtainable accounts in 12 months",
+ "summary": "Bottom line: neither Dallas-Fort Worth nor South Florida gives a Bellevue lab a structural edge over local labs or national mail-order labs. Of the two, DFW is the less-bad option, and only as a lab-to-lab milling and equipment-dealer play; South Florida has no structural case and should be deprioritized behind Southern California, where Integra already has accounts and family presence.\n\nFACTS. (1) Regulation is asymmetric. Texas Occupations Code 266.151 requires a registration certificate for any person who \"provide[s] or offer[s] to provide dental laboratory services,\" and 266.153 covers \"each dental laboratory doing business in this state\"; nothing in ch. 266, 22 TAC ch. 116, or TSBDE's \"Do I Need a Dental Laboratory Registration\" chart exempts an out-of-state lab, and 266.102(b)(5)(D)-(E) gives the Board rulemaking power over prescriptions referred to out-of-state labs. Registration is $125 initial / $136 annual (TSBDE 2022 application form; current schedule page would not render) but requires a Certified Dental Technician \"employed by and working on the premises\" at least 30 hours/week (22 TAC 116.5) and a jurisprudence assessment. The brief does not say whether Integra employs a CDT; if it does not, Texas is a compliance problem before it is a sales problem. Florida is the opposite: Fla. Stat. 466.032(5)(d)2 states an out-of-state lab serving a Florida dentist \"is not required to register\"; voluntary registration costs $200 (Board page) with 18 CE hours biennially. Both states exempt dental prostheses from sales tax (Tex. Tax Code 151.313(a)(5) \"dental, or prosthetic device\"; Fla. Stat. 212.08(2)(a) \"dentures... prosthetic and orthopedic appliances,\" Rule 12A-1.021). Foreign-LLC registration is $750 in Texas (BOC 4.152(3) via 4.154) plus an annual franchise report (no tax below the $2.65M 2026-27 threshold) and $125 plus $138.75/yr in Florida.\n\n(2) Lab supply is the decisive asymmetry. Census CBP 2023 (via two secondary tabulations) shows Florida with 424 dental-lab establishments, second in the nation, versus Texas 277 and Washington 175. BLS OEWS May 2023 shows the Miami metro with 800 dental lab technicians at a location quotient of 1.31 versus DFW 670 at 0.75 (Texas statewide LQ 0.57, Florida 1.12). South Florida is over-supplied with lab capacity relative to the U.S.; DFW is under-supplied and already imports lab work. A directory count (poidata, June 2026) lists 97 labs in Miami and 42 in Hialeah alone. South Florida labs advertise 48-hour zirconia with free pickup across Miami-Dade and Broward (Rivfor), 24-hour rush (Esthetic Dental Laboratory), 3-day standard (Vita), and same-day printed immediate-load arches for Broward/Palm Beach surgeons (Dental Lab Miami). DFW labs are fewer and advertise slower service (American Dental Laboratory 10 days in lab; Luna Labs 5-7 business days).\n\n(3) Dentist counts are comparable. Texas DSHS (Sept 2020): Dallas 1,678, Tarrant 1,093, Collin 884, Denton 450 (4,105). Florida DOH 2019-20 survey: Miami-Dade 1,783, Broward 1,476, Palm Beach 1,110 (4,369, with some dual-county reporting). Newer official counts exist (DSHS 2024 dashboard; FL 2023-24 report) but were not machine-readable.\n\n(4) Demand structure works against a remote full-arch lab. Most full-arch centers in both metros run in-house labs (DFW: Advanced Dentistry, ARCHPOINT, Texas Implant & Dental Center, Forte, The Dental Implant Place at 98% in-house, Innate, Dallas All-on-4 Center; South Florida: Nuvia Miami, OneSolution, Done In One, In A Day Smile, Smiland, Boca Dental, Art Dental Studio). They are overflow or titanium-bar targets at best. DFW is a DSO headquarters hub (MB2 850+ practices, Jefferson 60+, DECA/Ideal, MINT with a \"MINT-owned dental lab,\" Community Dental Partners 70+, Apex Dental Partners 50+, Rodeo 50+), but MB2 runs lab spend through a Procurement Lab Manager who owns a \"preferred lab strategy,\" and Leixir maintains an MB2 landing page and a Carrollton, TX center. A $140k/yr lab will not displace that in 12 months. South Florida's largest DSO is Sage Dental (Boca Raton, 150+ offices); its lab sourcing is unknown.\n\n(5) Logistics and price. SEA-DFW: about 100 nonstops a week (American, Alaska, Delta), 4 hours, Kayak 12-month average round trip $392. SEA-MIA: 21-25 nonstops a week (one daily each on American, Alaska, Delta), about 6 hours, average round trip $438, 3-hour time difference. UPS 2026 list rates: 2nd Day Air 1 lb $45.75 (zone 7, Dallas) / $46.67 (zone 8, Miami); Ground $14.83 / $15.03 but 4-5 business days (zones are my estimate from mileage; fuel surcharge and account discounts not included). National labs already ship into both metros at $89-$122 for monolithic zirconia in 3 days (Crown World $89 digital, ROE zRc $93), so Integra's $129 dentist price is not an edge. Its lab-to-lab prices ($22 mill-only crown, $650 full-arch from STL, $299 ti-bar) are well below Mabel ($39-59 crown; $999 copy-mill to $1,999 full package) and ROE ($2,420 final arch), so the only credible wedge is selling idle 5-axis capacity to other labs, with $15-47 freight per case eroding it.\n\nESTIMATES. DFW: 2-5 obtainable accounts in 12 months, realistically 1-2 lab-to-lab milling customers among small DFW labs lacking wet 5-axis mills, plus 1-3 dentist accounts from personal or ARUM-dealer relationships; incremental revenue perhaps $1-4k/month, contingent on resolving TSBDE registration and the CDT requirement. The stronger DFW angle is the ARUM dealership (no territory restriction) into a lab-short metro, which can create captive milling and training customers. South Florida: 0-2 accounts and no structural reason to win: lab-dense, price-aggressive (a Hialeah lab itself cites $35-80 offshore crowns), same-day local service, thinnest flight schedule, and no existing relationships.\n\nUNKNOWNS that matter: county-level CBP lab counts; whether TSBDE actually enforces registration on out-of-state labs; whether Integra has a CDT; latest county dentist counts; Sage Dental's lab sourcing; negotiated parcel discounts.",
+ "findings": [
+  {
+   "claim": "Texas requires a registration certificate to provide or offer dental laboratory services; statute applies to each lab 'doing business in this state' with no express out-of-state exemption",
+   "detail": "Tex. Occ. Code 266.151(b): a person may not operate or offer to operate a dental laboratory or provide or offer to provide dental laboratory services without a registration certificate. 266.153 requires an application for each laboratory 'doing business in this state.' 266.102(b)(5)(D)-(E) authorizes Board rules on referral of prescriptions to out-of-state labs and on devices manufactured out of state. 266.102(e): Board annually sends every Texas dentist the list of registered labs. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (statute current through 2017 amendments)",
+   "source_url": "https://statutes.capitol.texas.gov/Docs/OC/htm/OC.266.htm",
+   "value": "registration required; no geographic carve-out"
+  },
+  {
+   "claim": "Texas-registered labs must employ a Certified Dental Technician on premises at least 30 hours/week",
+   "detail": "22 TAC 116.5(a): all dental laboratories must have a CDT 'employed by and working on the premises of the dental laboratory a minimum of 30 hours per week'; exemptions only for dentist-owned on-premises labs (<3 technicians) and labs registered continuously since Sept 1, 1987. Material for Integra: unknown whether any Bellevue staff holds CDT. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://www.law.cornell.edu/regulations/texas/22-Tex-Admin-Code-SS-116-5",
+   "value": "CDT on premises >=30 hrs/wk"
+  },
+  {
+   "claim": "TSBDE dental lab registration fee $125 initial; $136 annual renewal; renew by Dec 31; jurisprudence assessment every 3 years",
+   "detail": "From TSBDE 'Initial Dental Lab 2022' application PDF: 'FEE: $125'; renewal fee $136; late penalty one-half of initial fee. TSBDE's current fee-schedule page is JavaScript-only and did not render, so the 2022 figures are the best available and should be verified. Accessed 2026-10-12.",
+   "kind": "historical",
+   "confidence": "medium",
+   "source_date": "2022 (form date)",
+   "source_url": "https://tsbde.texas.gov/78i8ljhbj/Initial-Dental-Lab_2022.pdf",
+   "value": "$125 initial; $136/yr renewal"
+  },
+  {
+   "claim": "TSBDE's 'Do I Need a Dental Laboratory Registration in Texas' decision chart contains no exemption based on the lab's location",
+   "detail": "Chart exempts only dental students, dentist-owned on-premises labs serving own patients, and component manufacturers; anyone else making prosthetic appliances 'is required to hold a dental lab registration with the TSBDE.' Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2019-03 (file path)",
+   "source_url": "https://tsbde.texas.gov/78i8ljhbj/2019/03/Do-I-Need-A-Dental-Laboratory-Registration-in-Texas.pdf",
+   "value": "no out-of-state exemption"
+  },
+  {
+   "claim": "Texas CE rule: exempt labs' designated employee needs 12 CE hours/yr; otherwise proof the designated CDT maintains certification",
+   "detail": "22 TAC 116.6(a)-(d); at least one regulatory-compliance course annually; max one business course; max 4 self-study hours. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (amended eff. 2009-02-26)",
+   "source_url": "https://www.law.cornell.edu/regulations/texas/22-Tex-Admin-Code-SS-116-6",
+   "value": "12 CE hrs/yr (exempt labs) or current CDT"
+  },
+  {
+   "claim": "Texas-registered labs must label or certify whether a prosthesis was made entirely by them, by another domestic lab, or by a foreign lab (with country)",
+   "detail": "22 TAC 116.10(f); relevant if a DFW lab outsources milling to Integra (domestic) - disclosure to the dentist is required. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (amended eff. 2010-12-22)",
+   "source_url": "https://www.law.cornell.edu/regulations/texas/22-Tex-Admin-Code-SS-116-10",
+   "value": "origin disclosure required"
+  },
+  {
+   "claim": "Florida: out-of-state labs serving Florida dentists are not required to register",
+   "detail": "Fla. Stat. 466.032(5)(d)2: 'A dental laboratory in another state or country which provides service to a dentist licensed under this chapter is not required to register with the state and may continue to provide services to such dentist with a proper prescription... may voluntarily comply.' In-state labs register biennially, fee not to exceed $300; owner or one employee completes 18 CE hours biennially; $40 delinquency fee. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (history through ch. 2016-230)",
+   "source_url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0400-0499/0466/Sections/0466.032.html",
+   "value": "exempt; in-state fee cap $300 biennial; 18 CE hrs"
+  },
+  {
+   "claim": "Florida Board of Dentistry dental laboratory registration application fee is $200 (non-refundable); rules in F.A.C. chapter 64B27",
+   "detail": "Board page lists Application Fee $200.00; application PDF 'Dental Laboratory Registration $200.00'; Rule 64B27-1.002 Dental Laboratory Biennial Registration (latest version effective 2021-06-13). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2025-04-29 (page); 2021-06-13 (rule)",
+   "source_url": "https://floridasdentistry.gov/dental-laboratory/",
+   "value": "$200 application fee (voluntary for out-of-state)"
+  },
+  {
+   "claim": "Texas exempts dental and prosthetic devices from sales and use tax",
+   "detail": "Tex. Tax Code 151.313(a)(5) exempts 'a brace; hearing aid or audio loop; orthopedic, dental, or prosthetic device... or supplies or replacement parts for the listed items.' Mirror text used because statutes.capitol.texas.gov Tax Code page is JS-rendered; mirror cites source accessed 2025-05-26. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (last amended eff. 2023-09-01)",
+   "source_url": "https://texas.public.law/statutes/tex._tax_code_section_151.313",
+   "value": "exempt"
+  },
+  {
+   "claim": "Florida exempts dentures and prescription prosthetic appliances from sales tax",
+   "detail": "Fla. Stat. 212.08(2)(a): exempt 'dentures; hearing aids; crutches; prosthetic and orthopedic appliances'; (2)(b)1 defines prosthetic appliances and ties exemption to prescription by practitioners incl. ch. 466 dentists. Implemented by Rule 12A-1.021 (Prosthetic and Orthopedic Appliances), effective 2010-07-12. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (statute); rule eff. 2010-07-12",
+   "source_url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0200-0299/0212/Sections/0212.08.html",
+   "value": "exempt"
+  },
+  {
+   "claim": "Texas foreign LLC registration fee is $750",
+   "detail": "Tex. Bus. Orgs. Code 4.154 applies for-profit corporation fees to LLCs; 4.152(3): 'for filing an application of a foreign corporation for registration to transact business in this state, $750.' SOS site returned HTTP 403 to the crawler; statute mirror used. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (verified by mirror 2025-05-26)",
+   "source_url": "https://texas.public.law/statutes/tex._bus._orgs._code_section_4.152",
+   "value": "$750 one-time"
+  },
+  {
+   "claim": "Texas franchise tax: no tax due below $2,650,000 total revenue for 2026-2027 reports, but an annual Public Information Report is still required; $50 late-filing penalty",
+   "detail": "Comptroller page: 2026 and 2027 No Tax Due Threshold $2,650,000; rate 0.375% retail/wholesale, 0.75% other; report due May 15; '$50 penalty is assessed on each report filed after the due date.' Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (shows 2026 notices)",
+   "source_url": "https://comptroller.texas.gov/taxes/franchise/",
+   "value": "$0 tax at Integra's scale; filing required"
+  },
+  {
+   "claim": "Florida foreign LLC qualification $125 ($100 filing + $25 registered agent); annual report $138.75 (due by May 1; $538.75 if late)",
+   "detail": "Sunbiz fee table: New Florida/Foreign LLC Filing Fee $100, Registered Agent Fee $25, Annual Report (with supplemental fee) $138.75, after May 1 $538.75. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://dos.fl.gov/sunbiz/forms/fees/",
+   "value": "$125 one-time; $138.75/yr"
+  },
+  {
+   "claim": "Shipping finished prostheses into Texas or Florida from Washington, with no in-state employees or property, likely does not require foreign qualification",
+   "detail": "Estimate based on the general interstate-commerce exclusions in state 'transacting business' statutes (e.g., Tex. BOC ch. 9 list of activities not constituting transacting business); not fetched or verified in this research. Registration becomes necessary if Integra leases space or hires staff in-state. Verify with counsel.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_date": "n/a",
+   "value": "likely not required for ship-in sales"
+  },
+  {
+   "claim": "DFW dentist supply (official, 2020): Dallas 1,678; Tarrant 1,093; Collin 884; Denton 450 = 4,105 four-county",
+   "detail": "Texas DSHS HPRC 'Dentists by County - September 2020': Collin 85.1 per 100k (rank 2 statewide), Dallas 61.4, Tarrant 51.0, Denton 50.1. Newer years are on a Tableau dashboard that could not be read; 2022-2024 table URLs returned not-found/timeout. Accessed 2026-10-12.",
+   "kind": "historical",
+   "confidence": "high",
+   "source_date": "2020-09",
+   "source_url": "https://www.dshs.texas.gov/health-professions-resource-center-hprc/health-professions/county-supply-distribution-tables-8/dentists-2020",
+   "value": "4,105 dentists (2020)"
+  },
+  {
+   "claim": "South Florida dentist supply (official survey, 2019-20): Miami-Dade 1,783; Broward 1,476; Palm Beach 1,110 = 4,369 tri-county",
+   "detail": "Florida DOH Workforce Survey Report of Dentists 2019-2020: the five counties with most practicing dentists were Miami-Dade (1,783), Broward (1,476), Palm Beach (1,110), Hillsborough (830), Orange (694); some dentists reported multiple counties. Specialists: Broward 445, Miami-Dade 429, Palm Beach 343 (prosthodontists 49/47/47). The 2023-2024 report PDF exists (uploaded 2026-02) but did not parse. Accessed 2026-10-12.",
+   "kind": "historical",
+   "confidence": "high",
+   "source_date": "2019-2020 survey (report undated)",
+   "source_url": "https://www.floridahealth.gov/wp-content/uploads/2025/08/florida-workforce-survey-report-of-dentists-2019-2020.pdf",
+   "value": "4,369 dentists (2019-20)"
+  },
+  {
+   "claim": "Directory-based practice counts (not dentists) for context, 2026",
+   "detail": "dental.me directory: Dallas County 2,095 practice records; Tarrant 1,614; Collin 1,237; Denton 709; Miami-Dade 1,755; Broward 1,245; Palm Beach 959. Groundwork (citing CBP 2023) shows 1,543 payroll establishments classed as offices of dentists in Miami-Dade, up 13% from 2019. These are listings/establishments, not licensed dentists. Accessed 2026-10-12.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_date": "2026-06-14 (dental.me FL page)",
+   "source_url": "https://dental.me/dental-market-data/dental-practice-profiles-by-county/",
+   "value": "DFW ~5,655 practice listings; S FL ~3,959"
+  },
+  {
+   "claim": "State-level dental lab establishments (CBP 2023, NAICS 339116): Florida 424 (2,569 employees), Texas 277 (2,406), Washington 175 (1,142); U.S. 4,782",
+   "detail": "Two independent secondary tabulations of Census County Business Patterns 2023 (PlainBizBench and Fair Market Value) agree. Florida ranks #2 nationally by establishments despite having fewer dentists than Texas - South Florida is lab-dense. County-level 339116 counts require a Census API key and could not be retrieved. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "CBP 2023 (released 2025)",
+   "source_url": "https://plainbizbench.com/industry/339116/",
+   "value": "FL 424 vs TX 277 vs WA 175 establishments"
+  },
+  {
+   "claim": "Directory count of dental labs in Florida: 847 statewide; Miami 97, Hialeah 42, Fort Lauderdale 19, Sunrise 17, West Palm Beach 16 (named cities only)",
+   "detail": "poidata.io Google-listing scrape, June 2026; counts include some dentist offices and duplicates and exclude labs in unnamed cities, so tri-county total is understated at 191+. Accessed 2026-10-12.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_date": "2026-07-18 (page); data as of June 2026",
+   "source_url": "https://poidata.io/index.php/report/dental-laboratory/united-states/florida",
+   "value": ">=191 listed labs in Miami-Dade/Broward/Palm Beach cities"
+  },
+  {
+   "claim": "The same directory's Texas count (249 statewide; Dallas 8) is inconsistent with CBP (277 payroll labs) and under-counts DFW",
+   "detail": "poidata.io Texas page (Aug 2025) lists El Paso 22, Houston 14, Dallas 8; this research alone identified 10+ DFW labs by website, so the Texas directory figure is unreliable and is not used for density. Accessed 2026-10-12.",
+   "kind": "unknown",
+   "confidence": "low",
+   "source_date": "2025-08",
+   "source_url": "https://poidata.io/index.php/report/dental-laboratory/united-states/texas",
+   "value": "DFW lab count: not reliably countable from directories"
+  },
+  {
+   "claim": "Lab-technician supply: Miami metro has far higher concentration (LQ 1.31) than DFW (LQ 0.75); Texas statewide LQ 0.57 vs Florida 1.12 (OEWS May 2023)",
+   "detail": "BLS OEWS May 2023 occupation profile 51-9081: Miami-Fort Lauderdale-West Palm Beach 800 employed, 0.30 per 1,000 jobs, LQ 1.31, mean $26.65/hr ($55,430); Dallas-Fort Worth-Arlington 670, LQ 0.75, mean $23.82 ($49,550); Seattle-Tacoma-Bellevue 550, LQ 1.17, mean $29.16 ($60,640); Florida 2,410 employed LQ 1.12 ($26.05); Texas 1,750 LQ 0.57 ($23.35). National mean $25.19, median $22.93. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "May 2023 (released 2024)",
+   "source_url": "https://www.bls.gov/oes/2023/may/oes519081.htm",
+   "value": "Miami 800 techs LQ 1.31; DFW 670 LQ 0.75"
+  },
+  {
+   "claim": "DFW dental lab technician wages, OEWS May 2025: median $23.08/hr ($48,010); mean $25.27/hr ($52,550); employment 610",
+   "detail": "Mirror of BLS May 2025 metro estimates (txlaborintel.com): 10th pct $16.50, 25th $17.00, 75th $31.05, 90th $35.99. Bellevue comparison: Seattle metro mean $29.16 (May 2023), i.e., DFW techs cost roughly 15-20% less than Seattle. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "May 2025",
+   "source_url": "https://txlaborintel.com/wages/dental-laboratory-technicians/area-dallas-fort-worth-arlington-tx-19100/",
+   "value": "median $23.08/hr; mean $52,550/yr"
+  },
+  {
+   "claim": "Miami metro dental lab technician wages, OEWS May 2025: median $59,940/yr; employment 590 (secondary mirror); estimates for this metro swing widely year to year",
+   "detail": "WageDex (compiling BLS May 2025) ranks Miami-Fort Lauderdale-West Palm Beach #17 by median at $59,940 (employment 590). Prior BLS releases: May 2022 1,040 employed at $22.70 mean; May 2023 800 at $26.65 mean. Treat Miami tech wages as roughly $23-29/hr with high sampling variance. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "May 2025",
+   "source_url": "https://wagedex.com/jobs/dental-laboratory-technicians",
+   "value": "median ~$59,940/yr (May 2025); mean $22.70-26.65/hr (2022-23)"
+  },
+  {
+   "claim": "Most DFW full-arch/All-on-X centers operate in-house labs, limiting them to overflow or component (ti-bar) targets",
+   "detail": "Advanced Dentistry, Lewisville ('on-site lab... final teeth made under our roof'; same-day from $10,500/arch); ARCHPOINT Implant Dentistry, Dallas/Southlake/Fort Worth ('On-Site State-of-the-Art Lab'); Texas Implant & Dental Center, Fort Worth (surgery suite + dental lab + restorative in one location; 3-4 cases/week); Forte Implant Center, Plano ('in-house laboratory', $15,500 nano-ceramic / $19,500 zirconia per arch); The Dental Implant Place, Fort Worth ('98% of all implant prosthetics... made in-house', CAD + 3D milling); Innate Dental Solutions, Plano ('laboratory is in the building'; fixed full arch $13,000/arch); Dallas All on 4 Dental Implant Center, Irving ('full in-house lab'; single arch from $9,500, zirconia full mouth $24,400). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026-02-10 (ARCHPOINT page date); others undated",
+   "source_url": "https://www.archpointid.com/",
+   "value": "7 of 9 named DFW centers in-house"
+  },
+  {
+   "claim": "DFW full-arch centers that disclose using outside/partner labs or no in-house lab: 10 Day Smiles (Arlington/Coppell) and R. David Brumbaugh DDS (Dallas)",
+   "detail": "10 Day Smiles: 'Our in-house and partner labs...'; All-on-4 $9,995/arch; digital planning. Brumbaugh: single-provider All-on-4 with CBCT, no in-house lab mentioned. These are the realistic DFW full-arch lab prospects. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "2026-02-27 (10 Day Smiles page)",
+   "source_url": "https://10daysmiles.com/our-services/restorative-dentistry/all-on-4-implants/",
+   "value": "2 named prospects"
+  },
+  {
+   "claim": "Most South Florida full-arch centers also run in-house labs, including the chains",
+   "detail": "Nuvia Dental Implant Center Miami (6262 Sunset Dr): 'Teeth Created By In-House Lab', permanent zirconia in 24 hours. OneSolution Dental Implant Centers (Miami + S FL): 'state-of-the-art digital lab... on-site technicians, not outsourced'. Done In One (Boca Raton): in-house lab, zirconia final in one week. In A Day Smile (Fort Lauderdale): in-house lab with 3Shape scanners, 3D printing, three lab techs, in-house milling. Smiland Dental (Fort Lauderdale): in-house lab technician, zirconia finals. Boca Dental (Boca Raton): in-house lab, PiC photogrammetry, X-Nav. Art Dental Studio (Hialeah/Kendall/Cooper City): in-house master ceramist. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2025-12-05 (In A Day Smile post); others undated",
+   "source_url": "https://www.nuviasmiles.com/locations/dental-implants-miami-florida",
+   "value": "7 of 9 named S FL centers in-house"
+  },
+  {
+   "claim": "South Florida full-arch practices without a disclosed in-house lab: ADW Center and DG Dental, both Fort Lauderdale",
+   "detail": "ADW Center (Dr. Boris Lipovetskiy): All-on-4 from $13,999/arch incl. CBCT and PRP; zirconia finals; no lab mentioned. DG Dental (Dr. Dory Green): same-day temporaries, porcelain/zirconia finals; no lab mentioned. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "undated",
+   "source_url": "https://adwcenter.com/procedures/all-on-4-fort-lauderdale/",
+   "value": "2 named prospects"
+  },
+  {
+   "claim": "MB2 Dental (Carrollton, TX) supports 850+ practices and centralizes lab purchasing under a Procurement Lab Manager who owns the 'preferred lab strategy'",
+   "detail": "MB2 job posting (Sept 2026): 'Procurement Lab Manager... own and lead our laboratory category strategy... manage lab spend, relationships, contracts, performance... preferred lab strategy to drive savings, quality, service, and doctor adoption.' MB2 HQ 2403 Lacy Lane, Carrollton, TX 75006; partners typically have >$1.25M revenue and 5+ ops. Implication: lab access is via corporate procurement, not individual office outreach. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026-09-16",
+   "source_url": "https://www.tealhq.com/job/procurement-lab-manager_7ea1a12f0502fbb4b00ca622b4358100a2047",
+   "value": "850+ practices; centralized lab procurement"
+  },
+  {
+   "claim": "Leixir Dental Laboratory Group maintains an MB2-specific landing page and a Texas 'Global Center of Excellence' (Care 1st Dental Institute) in Carrollton, TX, with a DSO lab program",
+   "detail": "leixir.com/mb2/ offers MB2 practices a 'global lab partner'; leixir.com/service-area/texas/ describes the Carrollton education/center and service to Dallas, Fort Worth, Plano, Arlington; DSO page cites 15+ years with large DSOs. This is the incumbent for DFW DSO lab spend. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "2025-05-09 (MB2 page); 2024-03-24 (Texas page)",
+   "source_url": "https://www.leixir.com/mb2/",
+   "value": "incumbent DSO lab partner in DFW"
+  },
+  {
+   "claim": "MINT dentistry (Dallas-founded DSO) states it operates a 'MINT owned dental lab'",
+   "detail": "MINT recruiting PDF: 'DIGITAL IMPRESSIONS USING INTRAORAL SCANNERS; MINT OWNED DENTAL LAB WHERE WE CONTROL THE QUALITY.' A captive DSO lab is a possible ARUM mill or overflow-milling prospect rather than a lab-services account. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "undated",
+   "source_url": "https://assets.mintdentistry.com/Images/Sites/C/CM-Portal/MasterPage/1230802.pdf",
+   "value": "captive lab"
+  },
+  {
+   "claim": "Other DFW-headquartered DSOs: Jefferson Dental & Orthodontics (Dallas; 60+ Texas offices), DECA Dental Group/Ideal Dental (Dallas; ~$100M revenue), Community Dental Partners (Denton; 70+ locations), Apex Dental Partners (Dallas; 50+ practices), Rodeo Dental (50+ locations TX/CO/AZ incl. Dallas, Fort Worth, Irving), Smile Doctors (ortho; 580+ locations), Allied OMS (Southlake), U.S. Oral Surgery Management (Irving)",
+   "detail": "Sources: Jefferson and DECA LinkedIn company profiles; CDP locations page (support center 5800 N I-35, Denton); Arini 'List of DSOs in Fort Worth 2026' for Apex (15660 Dallas Pkwy), Smile Doctors, Allied OMS, USOSM; Rodeo about page. Specialized Dental Partners (450+ specialists, 275+ locations) lists a Franklin, TN address with a 469 (Dallas) phone; The Org shows Irving, TX HQ - headquarters location ambiguous. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_date": "2026-02-17 (Arini); others undated",
+   "source_url": "https://www.arini.ai/blog/list-dsos-fort-worth",
+   "value": "8+ DSO HQs in DFW"
+  },
+  {
+   "claim": "Sage Dental (Boca Raton) is the largest DSO in South Florida with 150+ locations in FL/GA; its lab sourcing was not found",
+   "detail": "Sage press releases: 100th practice June 2023 (Kendall Dental Care acquisition), 122 locations Oct 2023, 'largest DSO operating in south Florida'; location pages now say '150+ locations'. No public evidence of an in-house Sage lab. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2023-10-25 (release); location page undated",
+   "source_url": "https://mysagedental.com/sage-dental-increases-its-presence-in-florida-and-georgia/",
+   "value": "150+ locations; lab sourcing unknown"
+  },
+  {
+   "claim": "National Dentex (NDX) is headquartered in Palm Beach Gardens, FL; its Texas lab (NDX Stern Empire) is in Houston, not DFW",
+   "detail": "NDX contact page: HQ 4400 PGA Blvd, Palm Beach Gardens, FL 33410; labs page lists NDX Stern Empire, 1805 W 34th St, Houston. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated",
+   "source_url": "https://nationaldentex.com/contact-us",
+   "value": "NDX HQ in S FL; no NDX lab in DFW found"
+  },
+  {
+   "claim": "National mail-order lab price benchmarks that Integra must beat in both metros (2026): monolithic zirconia crown $89-$122 in 3 days; full-arch zirconia final $2,420-$2,888",
+   "detail": "ROE Fee Schedule 2026 (rev 10/07/26): zRc zirconia $93 model-free 3 days; TLZ with MiYO $122; e.max monolithic $134; TLZ-SR screw-retained implant crown $299; TLZ-IB full-arch zirconia final $2,420 (10 days); NobelProcera $2,888; analog full-arch package (5 implants) $4,309. Crown World 2025: BruxZir Full-Strength $89 digital / $99 conventional, 3 days; e.max posterior $119/$129. Maverick (DSN 2025): digital posterior zirconia $71.95. Integra's dentist price ($129 FCZ, $149 e.max) is at or above these. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026 (ROE rev 2026-10-07); 2025-09-10 (Crown World)",
+   "source_url": "https://www.roedentallab.com/hubfs/47353199/PDFs/Fee-Schedule-ROE.pdf",
+   "value": "$89-$122 crown; $2,420 arch"
+  },
+  {
+   "claim": "Lab-to-lab benchmarks (Jan 2026): Mabel Dental Lab full-contour zirconia $39-$59, screw-retained full zirconia $189, full-arch zirconia prosthesis $1,999 (incl. up to 6 MUAs and 2 try-ins), copy-mill full-arch zirconia $999, zirconia over Ti bar $2,999; 6-8 in-lab days",
+   "detail": "Integra's Bear Milling prices ($22 mill-only crown; $650 full arch from STL; $299/$399 ti-bar) undercut these materially; the gap is the only structural price wedge identified, and it is eroded by $15-47/case parcel cost and 2-5 day transit. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026-01",
+   "source_url": "https://mabeldental.com/wp-content/uploads/2026/01/Mabel-Dental-Lab-to-Lab-1-2026-Fee-Schedule.pdf",
+   "value": "$39-59 FCZ; $999-1,999 full arch"
+  },
+  {
+   "claim": "South Florida local labs compete on speed and pickup, not just price",
+   "detail": "Rivfor Dental Lab (Hialeah): zirconia 'as fast as 48 hours', standard 3-5 business days, free pickup/delivery across Miami-Dade and Broward; its own blog cites national labs at $89-150, local labs $130-220, offshore $35-80 per unit. Esthetic Dental Laboratory (Miami 33186): 24-hour rush, in-clinic pickup. Vita Dental Lab (Pompano Beach): 3-day standard, in-house CAD/CAM implant milling center. Dental Lab Miami (Deerfield Beach): same-day printed immediate-load All-on-X temps for Broward/Palm Beach dentists, two DOF 5-axis mills, 3-hour microwave sintering. Smile Dental Lab (Pompano Beach): free pickup in Palm Beach/Broward/Miami-Dade, free shipping 50 states, 5-year warranty. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026-08-26 (Rivfor price blog); 2026-03-04 (Rivfor 48-hr blog); others undated",
+   "source_url": "https://rivfordental.com/blog/zirconia-dental-crown-price",
+   "value": "48-hr local turnaround with free pickup"
+  },
+  {
+   "claim": "DFW local labs advertise slower turnaround than South Florida labs",
+   "detail": "American Dental Laboratory (Richardson; 40+ years; CDTs; 5-year warranty): '10 Days in the Lab', 98-99% on-time; Luna Labs (Fort Worth): 5-7 business days standard; Hopetown Dental Lab (Fort Worth, since 2012): All-on-X temp delivered next day or within 48 hours, 90-degree milling for zirconia hybrids; Dental Plus Laboratory (Dallas): driver pickup/delivery in the metroplex, All-on-X; Apex Dental Lab of Texas: fixed-cost Basic/Advanced/Elite monolithic zirconia tiers (prices not published). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2025-01-20 (ADL zirconia page); others undated",
+   "source_url": "https://adldp.com/zirconia/",
+   "value": "5-10 day local turnaround typical"
+  },
+  {
+   "claim": "Small flex/office-warehouse space in the DFW inner-north submarkets asks roughly $9.50-$14.78/SF/yr; all-in micro-units $1,000-$3,000/month",
+   "detail": "LoopNet: 1321 Valwood Pkwy Bldg 2, Carrollton - 2,330 SF flex, $14.78/SF/yr ($2,870/mo), 100% HVAC, sublease through Jun 2026, listed 2025-06-02. Showcase: 3151 Skylane Dr, Carrollton - 3,500 SF, $9.50/SF/yr ($2,771/mo), 3-5 yr term. LoopNet: 1746-1764 Jay Ell Dr, Richardson - 2,115 SF flex $12.00/SF/yr ($2,115/mo), listed 2025-03-20. Crexi: WareSpace Addison, 14621 Inwood Rd - private flex/warehouse units 253-2,874 SF, $1,000-$3,000/mo flat incl. utilities, 6-12 month terms. Randolph Industrial Park, Carrollton: 975 SF office/warehouse suites, rate on request. For reference Integra pays ~$46/SF/yr all-in in Bellevue ($2,300/mo for ~600 SF). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2025-06-02; 2025-03-20; others undated",
+   "source_url": "https://www.loopnet.com/Listing/1321-Valwood-Pky-Carrollton-TX/36081539/",
+   "value": "$9.50-$14.78/SF/yr"
+  },
+  {
+   "claim": "Small flex units in Doral/Medley (Miami-Dade) ask roughly $19-$25/SF/yr; 1,350-1,727 SF units at $2,800-$3,485/month",
+   "detail": "Doral Flex II Condominium, 7311 NW 12th St #3 - 1,350 SF warehouse-office, $2,800/mo, 10x12 roll-up door, 20 ft clear, 110/220V (MLS A11918432; 210 days on market; page 2026-06-20). 8000 NW 31st St #1, Doral - 1,727 SF two-story flex, $3,485/mo ($2.02/SF/mo ~ $24/SF/yr), MLS A12089455 (pending). 6020 NW 99th Ave #205, Doral - 1,655 SF flex with mezzanine, $3,400/mo NNN (MLS A12042629). Medley Industrial Center, 9949 NW 89th Ave - 3,136 SF $19.00/SF/yr ($4,965/mo), 1,300-1,357 SF units $19.50/SF/yr. 3557 NW 79th Ave, Doral - 3,850 SF flex $25/SF/yr (Crexi). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026-06-20 (Doral Flex II page); others undated/2025",
+   "source_url": "https://winsomerealty.net/property_40ac0709_commercial_industrial_miami_7A11918432/",
+   "value": "$19-$25/SF/yr; ~$2,800-3,485/mo for 1,350-1,727 SF"
+  },
+  {
+   "claim": "SEA-DFW: about 98-105 nonstops per week on American, Alaska and Delta; 3h50m-4h14m; 1,658-1,667 miles; average round trip ~$392 (Kayak 12-month), cheapest nonstop RT ~$277",
+   "detail": "Google Flights: American 51, Alaska 36, Delta 14 weekly nonstops SEA-DFW (plus Southwest 7 to DAL); cheapest nonstop RT $277 (Delta). Kayak: RT typically $291-$488, 12-month average $392; 13-15 nonstops/day. 2LNR schedule (confirmed 2026-10-04): 104 nonstops/week. Trip.com: average RT next 30 days $408-415. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026-10-04 (2LNR schedule); Kayak/Google undated",
+   "source_url": "https://www.kayak.com/flight-routes/Seattle-Tacoma-Intl-SEA/Dallas-Ft-Worth-other-airports-DFW",
+   "value": "~100 nonstops/wk; avg RT $392"
+  },
+  {
+   "claim": "SEA-MIA: only 21-25 nonstops per week (one daily each on American AA1471, Alaska AS305, Delta DL506), 5h39m-6h13m, 2,721-2,736 miles; average round trip ~$438 (Kayak 12-month), range $343-$572",
+   "detail": "2LNR (schedule confirmed 2026-10-04): 21 nonstops/week; FlightsFrom: 21/week, approx RT $400 (monthly $246-$686); Directflights (updated 2026-09-28): 25 weekly incl. AA 11/week; Kayak: 3-4/day, 12-month average $438; Alaska Saver one-way from $214-$249. Three-hour time difference vs two for Dallas. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026-10-04 (2LNR); 2026-09-28 (Directflights)",
+   "source_url": "https://2lnr.com/routes/sea-mia",
+   "value": "21-25 nonstops/wk; avg RT $438"
+  },
+  {
+   "claim": "UPS 2026 published daily list rates for a 1-2 lb case box: Ground zone 7 $14.83/$17.18, zone 8 $15.03/$17.40; 2nd Day Air zone 207 $45.75/$62.06, zone 208 $46.67/$64.62; Next Day Air Saver zone 107 $94.00, zone 108 $103.50; Next Day Air zone 107 $112.57, zone 108 $115.30",
+   "detail": "Quadient summary of UPS 2026 daily commercial rates, cross-checked against UPS 2026 preview rate PDF (Next Day Air 1 lb: 45.06/67.38/86.64/95.84/101.09/112.57/115.30 for zones 102-108). Zone assignment is my estimate from UPS mileage bands (Seattle-Dallas ~1,660 mi = zone 7; Seattle-Miami ~2,730 mi = zone 8). Excludes fuel surcharge (~15-20%, estimate), residential/delivery-area fees, and any account discount (small shippers commonly get 20-50% off list via account programs - estimate). FedEx pages block crawlers; FedEx 2Day is typically within a few dollars of UPS 2nd Day Air (estimate). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "2026 (UPS rates effective 2026-05-10 per guide; Quadient page undated)",
+   "source_url": "https://www.quadient.com/en-us/postage-rates/ups",
+   "value": "2-Day ~$46 list; Ground ~$15 list per 1 lb box"
+  },
+  {
+   "claim": "Ground transit Seattle to Dallas ~4 business days and to Miami ~5 business days",
+   "detail": "Given in the brief and consistent with UPS/FedEx ground time-in-transit maps for a 980xx origin; not independently retrieved in this research (carrier map pages are interactive). Air-cargo via Alaska Air Cargo (Integra's Known Shipper status) is not yet operational per the brief.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_date": "n/a",
+   "value": "4 days DFW; 5 days MIA"
+  },
+  {
+   "claim": "Retail full-arch pricing in both metros has compressed to roughly $9,500-$19,500 per arch, pressuring what practices will pay labs",
+   "detail": "DFW: Dallas All on 4 Center single arch from $9,500 (zirconia full mouth $24,400 incl. 8 implants); 10 Day Smiles $9,995/arch; Advanced Dentistry same-day from $10,500/arch; Innate $13,000 fixed full arch ($27,500 standard Malo bridge); Forte $15,500 nano-ceramic / $19,500 zirconia. South Florida: ADW Center All-on-4 from $13,999/arch, All-on-6 from $16,999; OneSolution financing from $289/mo per arch. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_date": "undated (2026 pages)",
+   "source_url": "https://dallasallon4dentalimplantcenter.com/",
+   "value": "$9,500-$19,500 per arch retail"
+  }
+ ],
+ "unknowns": [
+  "County-level Census CBP counts of NAICS 339116 dental laboratories for Dallas, Tarrant, Collin, Denton, Miami-Dade, Broward and Palm Beach (Census API requires a key; data.census.gov tables are JavaScript-rendered). Only state-level 2023 figures (FL 424, TX 277, WA 175) and directory counts were obtainable.",
+  "Whether TSBDE in practice requires or enforces registration for out-of-state laboratories that ship to Texas dentists; the statute and TSBDE chart contain no exemption, but no enforcement record or Board FAQ on out-of-state labs was found.",
+  "Whether any Integra employee holds CDT certification (required on-premises 30 hrs/week under 22 TAC 116.5 if Integra registers in Texas).",
+  "Current (FY2026) TSBDE dental laboratory fees; the fee-schedule page is JavaScript-only and did not render, so 2022 application figures ($125/$136) are used.",
+  "Most recent official county dentist counts: Texas DSHS 2022-2024 county supply tables are on a Tableau dashboard that could not be read; the Florida DOH 2023-2024 dentist workforce PDF (uploaded Feb 2026) did not parse. ADA HPI county-level counts were not retrieved.",
+  "Sage Dental's (and Dental Care Alliance's) laboratory sourcing model and whether any South Florida DSO operates a captive lab.",
+  "Terms and incumbents of DSO lab contracts in DFW (MB2's preferred labs beyond the Leixir landing page; Jefferson, DECA/Ideal, CDP, Apex Dental Partners, Rodeo sourcing).",
+  "ClearChoice DFW and South Florida centers' lab arrangement (ClearChoice Fort Lauderdale page confirmed; in-center lab status not verified in this research).",
+  "Exact UPS/FedEx zones from ZIP 98007 to Dallas/Miami ZIPs, applicable fuel surcharge, and Integra's negotiated discount; FedEx list rates could not be fetched (fedex.com blocks crawlers).",
+  "Whether milling/lab capacity actually constrains any specific DFW lab (the lab-to-lab thesis assumes some small DFW labs lack wet 5-axis mills; no lab publicly states this).",
+  "Spanish-language service expectations and referral networks in Miami-Dade dentistry (not researched; could matter for a remote English-only lab).",
+  "Whether shipping finished prostheses into TX/FL without staff or property triggers foreign-qualification or franchise-tax nexus (statutory interstate-commerce exclusions not fetched; verify with counsel)."
+ ],
+ "competitors": [
+  {
+   "name": "American Dental Laboratory (ADL)",
+   "what": "Full-service lab: zirconia, e.max, PFM, dentures, implants, full-arch; CDT-made; 5-year warranty; ships nationwide",
+   "location": "1702 N. Collins Blvd Ste 260, Richardson, TX 75080",
+   "pricing": "Not published (request quote)",
+   "turnaround": "10 days in lab; 98-99% on-time",
+   "source_url": "https://adldp.com/zirconia/",
+   "notes": "40+ years in DFW; established incumbent for Dallas/Richardson/Plano GPs. Accessed 2026-10-12."
+  },
+  {
+   "name": "Apex Dental Lab of Texas (Apex Lab Group)",
+   "what": "Monolithic zirconia in three fixed-cost tiers (Basic/Advanced/Elite ZR), crown & bridge, implants",
+   "location": "Dallas-Fort Worth, TX",
+   "pricing": "'Fixed cost' tiers; amounts not published",
+   "turnaround": "Not published",
+   "source_url": "https://www.apexlabgroup.com/apex-of-texas-dfw/fixed/monolithic-zirconia/",
+   "notes": "Multi-lab group with a DFW facility. Accessed 2026-10-12."
+  },
+  {
+   "name": "Hopetown Dental Lab",
+   "what": "Digital lab since 2012; All-on-X digital workflow, printed provisionals, zirconia hybrids on 90-degree milling, guided surgery services",
+   "location": "5725 Jacksboro Hwy, Fort Worth, TX 76114",
+   "pricing": "Not published",
+   "turnaround": "All-on-X provisional next day or within 48 hours",
+   "source_url": "https://hopetowndentallab.com/all-on-x/",
+   "notes": "Direct competitor for DFW full-arch lab work; serves dentists nationally. Accessed 2026-10-12."
+  },
+  {
+   "name": "Signature Dental Lab",
+   "what": "Digital-scan-only lab: all-ceramics, implants, All-on-X, PFM, full cast",
+   "location": "520 Central Pkwy E Ste 301, Plano, TX 75074",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://signaturedentallabtx.com/",
+   "notes": "Site dated 2026; markets to GPs and implant practices nationally. Accessed 2026-10-12."
+  },
+  {
+   "name": "Destiny Dental Laboratory ('The Implant Guys')",
+   "what": "Implant-focused full-service lab: custom abutments, zirconia (Diazir), e.max, PFM, removables",
+   "location": "Carrollton, TX 75006",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://www.destinydentallab.com/services--products.html",
+   "notes": "Serves Carrollton, Plano, Lewisville, Colleyville. Possible lab-to-lab milling prospect if it lacks 5-axis wet milling (unknown). Accessed 2026-10-12."
+  },
+  {
+   "name": "Dental Plus Laboratory",
+   "what": "Crown & bridge (zirconia, e.max, PFZ/PFM, PMMA), single/multi/All-on-X implants; driver pickup and delivery in the metroplex",
+   "location": "11886 Greenville Ave Ste 120, Dallas, TX 75243",
+   "pricing": "'Affordable prices' - not published",
+   "turnaround": "Not published",
+   "source_url": "https://www.dentalpluslab.com/",
+   "notes": "Local pickup is a service Integra cannot match remotely. Accessed 2026-10-12."
+  },
+  {
+   "name": "Luna Labs",
+   "what": "Crowns, fixed, removables, implant hybrids, emergency repairs; CAD/CAM and 3D printing",
+   "location": "Fort Worth, TX",
+   "pricing": "Not published",
+   "turnaround": "5-7 business days standard; same-day emergency on request",
+   "source_url": "https://www.lunalabsdfw.com/",
+   "notes": "16 years; serves Fort Worth, Arlington, Irving, Grand Prairie. Accessed 2026-10-12."
+  },
+  {
+   "name": "Cowboy Dental Laboratory",
+   "what": "Crowns, implants, partials, dentures, custom appliances",
+   "location": "Dallas-Fort Worth, TX",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://cowboydentallaboratory.com/",
+   "notes": "Small independent; details thin. Accessed 2026-10-12."
+  },
+  {
+   "name": "Leixir Dental Laboratory Group (Care 1st Dental Institute)",
+   "what": "National lab network with DSO lab program, IOS training; Texas Global Center of Excellence in Carrollton; MB2-specific landing page",
+   "location": "Carrollton, TX (center); labs nationwide + international",
+   "pricing": "Not published; DSO volume pricing",
+   "turnaround": "Not published",
+   "source_url": "https://www.leixir.com/service-area/texas/",
+   "notes": "Incumbent for DFW DSO lab spend; largest IOS-trained sales force per its site. Accessed 2026-10-12."
+  },
+  {
+   "name": "NDX Stern Empire (National Dentex)",
+   "what": "Full-service national lab serving all 50 states; NDX HQ in Palm Beach Gardens, FL",
+   "location": "1805 W 34th St, Houston, TX 77018 (TX lab); NDX HQ 4400 PGA Blvd, Palm Beach Gardens, FL",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://nationaldentex.com/labs",
+   "notes": "No NDX lab found in DFW; NDX corporate presence in South Florida. Accessed 2026-10-12."
+  },
+  {
+   "name": "YGL Dental Laboratory",
+   "what": "All-on-4 monolithic zirconia frameworks (digitally milled, <10 micron), zirconia crowns; works with Nobel, Straumann, Neodent, BioHorizons",
+   "location": "7100 W 20th Ave Ste 304, Hialeah, FL 33016",
+   "pricing": "Not published (quote)",
+   "turnaround": "'Aggressive timelines' - not quantified",
+   "source_url": "https://ygldentallab.com/all-on-4-with-zirconia.html",
+   "notes": "Serves Miami, Fort Lauderdale, West Palm Beach, Tampa, Orlando. Accessed 2026-10-12."
+  },
+  {
+   "name": "Rivfor Dental Lab",
+   "what": "Zirconia-only CAD/CAM lab (ArgenZ 850-1250 MPa): crowns, bridges, implants, veneers; free pickup/delivery Miami-Dade and Broward",
+   "location": "3750 W 16th Ave Ste 242-U, Hialeah, FL 33012",
+   "pricing": "Not published; positions 'to compete directly with the big national labs' ($89-$109 FCZ); cites local labs $130-220, offshore $35-80",
+   "turnaround": "As fast as 48 hours; standard 3-5 business days; full-arch 3-5 days",
+   "source_url": "https://rivfordental.com/services",
+   "notes": "Explicit speed + pickup + national-lab-price positioning; the archetype Integra cannot beat remotely. Accessed 2026-10-12."
+  },
+  {
+   "name": "Esthetic Dental Laboratory Inc.",
+   "what": "Crowns, layered zirconia/e.max, implants (custom Ti/Zr abutments, screw-retained), ortho; CAD/CAM, 3D printing, milling; accepts iTero, Medit, 3Shape, Sirona, Planmeca",
+   "location": "13200 SW 128th St Ste E-3, Miami, FL 33186",
+   "pricing": "'Competitive' - not published",
+   "turnaround": "24-hour rush on select restorations; in-clinic pickup in Miami",
+   "source_url": "https://estheticdentallabinc.com/",
+   "notes": "Accessed 2026-10-12."
+  },
+  {
+   "name": "Dental Lab Miami",
+   "what": "Digital All-on-X/full-arch lab: photogrammetry (DOF PIM, PANDA), DentaFab SEGA PRO printing, two DOF CRAFT 5X mills, Upcera/Aevra zirconia, 3-hour microwave sintering, titanium bars",
+   "location": "1300 E Hillsboro Blvd Ste 104, Deerfield Beach, FL 33441",
+   "pricing": "Not published",
+   "turnaround": "Same-day design and print of immediate-load temps for Broward and Palm Beach dentists",
+   "source_url": "https://www.dentallabmiami.com/all-on-x",
+   "notes": "Owner Milos Miladinov; serves dentists nationally. Direct full-arch competitor. Accessed 2026-10-12."
+  },
+  {
+   "name": "Smile Dental Lab",
+   "what": "Full-service: fixed, implants/hybrids (All-on-4/6), removables; 5-year warranty; free shipping to all 50 states",
+   "location": "480 S Andrews Ave Ste 107, Pompano Beach, FL 33069 (also Boca Raton, Tampa, Marietta GA, Charlotte NC)",
+   "pricing": "Not published",
+   "turnaround": "Not published; free pickup/delivery Palm Beach, Broward, Miami-Dade",
+   "source_url": "https://smiledentallab.com/",
+   "notes": "Multi-state small network headquartered in Broward. Accessed 2026-10-12."
+  },
+  {
+   "name": "Florida Dental Lab",
+   "what": "Family-owned full-service lab (FL license DL 11481): full zirconia, layered zirconia/e.max, screw-retained implant crowns, all-zirconia screw-retained hybrids, hybrid PMMA temps, dentures",
+   "location": "2114 N University Dr, Sunrise, FL 33322",
+   "pricing": "Price list on site (amounts not rendered); $10 shipping per case",
+   "turnaround": "10 working days",
+   "source_url": "https://fdentallab.com/",
+   "notes": "Slower, analog-friendly lab; a plausible lab-to-lab prospect if it outsources milling (unknown). Accessed 2026-10-12."
+  },
+  {
+   "name": "Next Dental Lab (Florida facility)",
+   "what": "Full-service: zirconia/e.max, PFM, full cast, implants, hybrids, clear aligners; tiered Classic/Plus/Elite pricing",
+   "location": "402 SW 12th Ave, Deerfield Beach, FL 33442",
+   "pricing": "2024 fee schedule: full-contour zirconia Classic tier ~$99 (Plus $149); full zirconia All-on-4 with titanium bar $1,935 (parts excluded); custom abutments from $125",
+   "turnaround": "Not published",
+   "source_url": "https://www.nextdentallab.com/wp-content/uploads/2023/11/Next-Dental-Lab-Fee-Schedule-2024.pdf",
+   "notes": "Low-price local/national hybrid; local pickup for South Florida. Accessed 2026-10-12."
+  },
+  {
+   "name": "Vita Dental Lab",
+   "what": "Implant-specialist lab: All-on-4/6 hybrids, zirconia screw-retained bridges, bars, custom abutments; in-house CAD/CAM milling center",
+   "location": "480 S Andrews Ave #107, Pompano Beach, FL 33069",
+   "pricing": "Not published",
+   "turnaround": "3-day standard; rush available",
+   "source_url": "https://vitadentallabusa.com/products/dental-implants/",
+   "notes": "Markets as '#1 implant lab in Florida'; ships nationwide. Accessed 2026-10-12."
+  },
+  {
+   "name": "Oral Architect Dental Lab",
+   "what": "100% digital lab: zirconia hybrids with integrated Ti bar, direct-to-MUA zirconia, Ti bars, custom abutments, multilayer zirconia crowns, splints",
+   "location": "West Palm Beach, FL",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://oralarchitectlab.com/",
+   "notes": "Palm Beach County digital full-arch competitor. Accessed 2026-10-12."
+  },
+  {
+   "name": "Dentallab.com",
+   "what": "Full-service lab: crowns, bridges, veneers, implants, All-on-X, dentures; in-house design, milling, finishing by certified technicians",
+   "location": "3752 SW 30th Ave, Fort Lauderdale, FL 33312",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://dentallab.com/",
+   "notes": "Accessed 2026-10-12."
+  },
+  {
+   "name": "Peterson Dental Laboratory / Precision Esthetics / Dental Tecks / Palm Beach Smile Design Dental Lab",
+   "what": "Independent Palm Beach County labs (Delray Beach x2, West Palm Beach, Royal Palm Beach)",
+   "location": "601 N Congress Ave Delray Beach; 4912 S Dixie Hwy West Palm Beach; 2100 Lake Ida Rd Delray Beach; 11440 Okeechobee Blvd #202 Royal Palm Beach",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://exa.ai/library/places?q=7b4100954bad9ac3",
+   "notes": "From place listings (ratings 4.5-5.0); websites not reviewed. Accessed 2026-10-12."
+  },
+  {
+   "name": "ROE Dental Laboratory (national)",
+   "what": "National digital lab: zRc zirconia $93 (3 days), TLZ $122, e.max $134, TLZ-SR implant crown $299, TLZ-IB full-arch zirconia final $2,420 (10 days), photogrammetry design $287-335",
+   "location": "Independence, OH (ships nationally)",
+   "pricing": "2026 fee schedule as listed",
+   "turnaround": "3 days monolithic model-free; 10 days full arch",
+   "source_url": "https://www.roedentallab.com/hubfs/47353199/PDFs/Fee-Schedule-ROE.pdf",
+   "notes": "Benchmark Integra's $129/$1,700 dentist pricing is measured against in both metros. Accessed 2026-10-12."
+  },
+  {
+   "name": "Crown World Dental (national)",
+   "what": "BruxZir Full-Strength $89 digital / $99 conventional (3 days); e.max posterior $119/$129; screw-retained implant crowns $339",
+   "location": "National mail-order",
+   "pricing": "2025 price list as listed",
+   "turnaround": "3-5 days in lab",
+   "source_url": "https://crownworlddental.com/lab-services-2025/",
+   "notes": "Accessed 2026-10-12."
+  },
+  {
+   "name": "Mabel Dental Lab (lab-to-lab, national)",
+   "what": "Lab-to-lab outsourcing: full-contour zirconia $39-$59, e.max $69, screw-retained full zirconia $189, full-arch zirconia prosthesis $1,999, copy-mill arch $999, zirconia over Ti bar $2,999",
+   "location": "National",
+   "pricing": "Jan 2026 lab-to-lab list",
+   "turnaround": "6 in-lab days digital, 8 physical",
+   "source_url": "https://mabeldental.com/wp-content/uploads/2026/01/Mabel-Dental-Lab-to-Lab-1-2026-Fee-Schedule.pdf",
+   "notes": "Direct comparison set for Bear Milling ($22 crown; $650 arch). Accessed 2026-10-12."
+  },
+  {
+   "name": "Keating Dental Lab (national; markets 'North Texas')",
+   "what": "Full-service national lab (Irvine, CA) running a dedicated North Texas landing page; KDZ Bruxer zirconia, e.max, implants",
+   "location": "16881 Hale Ave, Irvine, CA (ships to DFW)",
+   "pricing": "Not published",
+   "turnaround": "Not published",
+   "source_url": "https://www.keatingdentallab.com/north-texas-dental-lab/",
+   "notes": "Evidence that out-of-state labs actively target DFW. Accessed 2026-10-12."
+  }
+ ],
+ "cost_items": [
+  {
+   "item": "Texas dental laboratory registration (TSBDE) - initial",
+   "base_usd": 125,
+   "period": "one-time",
+   "basis": "TSBDE 2022 initial dental lab application form fee; current FY2026 schedule not retrievable (JS page). Requires on-premises CDT 30 hrs/wk and jurisprudence assessment.",
+   "status": "listed",
+   "low_usd": 125,
+   "high_usd": 150,
+   "source_url": "https://tsbde.texas.gov/78i8ljhbj/Initial-Dental-Lab_2022.pdf",
+   "source_date": "2022"
+  },
+  {
+   "item": "Texas dental laboratory registration - annual renewal (due Dec 31)",
+   "base_usd": 136,
+   "period": "annual",
+   "basis": "TSBDE 2022 application packet states renewal fee $136; penalty one-half of initial fee if late.",
+   "status": "listed",
+   "low_usd": 136,
+   "high_usd": 160,
+   "source_url": "https://tsbde.texas.gov/78i8ljhbj/Initial-Dental-Lab_2022.pdf",
+   "source_date": "2022"
+  },
+  {
+   "item": "Florida dental laboratory registration (voluntary for out-of-state labs)",
+   "base_usd": 200,
+   "period": "biennial",
+   "basis": "Florida Board of Dentistry page and application: $200 non-refundable application fee; statute caps at $300 biennial. Mandatory cost for Integra is $0 because Fla. Stat. 466.032(5)(d)2 exempts out-of-state labs.",
+   "status": "listed",
+   "low_usd": 0,
+   "high_usd": 300,
+   "source_url": "https://floridasdentistry.gov/dental-laboratory/",
+   "source_date": "2025-04-29"
+  },
+  {
+   "item": "Texas foreign LLC registration (Form 304) - only if Integra establishes in-state presence",
+   "base_usd": 750,
+   "period": "one-time",
+   "basis": "Tex. BOC 4.152(3) via 4.154; SOS site blocked crawler, statute mirror used.",
+   "status": "listed",
+   "low_usd": 750,
+   "high_usd": 750,
+   "source_url": "https://texas.public.law/statutes/tex._bus._orgs._code_section_4.152",
+   "source_date": "undated"
+  },
+  {
+   "item": "Texas franchise tax report + Public Information Report (if registered)",
+   "base_usd": 0,
+   "period": "annual",
+   "basis": "No tax due below $2,650,000 revenue (2026-27); report still required by May 15; $50 penalty if late; registered-agent service typically $100-300/yr (estimate).",
+   "status": "listed",
+   "low_usd": 0,
+   "high_usd": 350,
+   "source_url": "https://comptroller.texas.gov/taxes/franchise/",
+   "source_date": "2026"
+  },
+  {
+   "item": "Florida foreign LLC qualification - only if Integra establishes in-state presence",
+   "base_usd": 125,
+   "period": "one-time",
+   "basis": "Sunbiz: $100 filing + $25 registered agent designation.",
+   "status": "listed",
+   "low_usd": 125,
+   "high_usd": 160,
+   "source_url": "https://dos.fl.gov/sunbiz/forms/fees/",
+   "source_date": "undated"
+  },
+  {
+   "item": "Florida LLC annual report (due May 1)",
+   "base_usd": 138.75,
+   "period": "annual",
+   "basis": "Sunbiz: $138.75; $538.75 if received after May 1.",
+   "status": "listed",
+   "low_usd": 138.75,
+   "high_usd": 538.75,
+   "source_url": "https://dos.fl.gov/sunbiz/forms/fees/",
+   "source_date": "undated"
+  },
+  {
+   "item": "Outbound parcel, finished case, 1 lb, UPS 2nd Day Air to Dallas (zone 207 est.)",
+   "base_usd": 45.75,
+   "period": "per-shipment",
+   "basis": "UPS 2026 daily list rate; zone estimated from ~1,660 mi; excludes fuel surcharge (~15-20% est.) and account discounts (20-50% est.). 2 lb = $62.06.",
+   "status": "listed",
+   "low_usd": 28,
+   "high_usd": 62,
+   "source_url": "https://www.quadient.com/en-us/postage-rates/ups",
+   "source_date": "2026"
+  },
+  {
+   "item": "Outbound parcel, finished case, 1 lb, UPS 2nd Day Air to Miami (zone 208 est.)",
+   "base_usd": 46.67,
+   "period": "per-shipment",
+   "basis": "UPS 2026 daily list rate; zone estimated from ~2,730 mi; excludes fuel surcharge and discounts. 2 lb = $64.62.",
+   "status": "listed",
+   "low_usd": 28,
+   "high_usd": 65,
+   "source_url": "https://www.quadient.com/en-us/postage-rates/ups",
+   "source_date": "2026"
+  },
+  {
+   "item": "Outbound parcel, 1 lb, UPS Ground to Dallas / Miami (4-5 business days)",
+   "base_usd": 14.83,
+   "period": "per-shipment",
+   "basis": "UPS 2026 list: zone 7 $14.83, zone 8 $15.03 (1 lb); 2 lb $17.18/$17.40; transit 4 (Dallas) to 5 (Miami) business days (estimate).",
+   "status": "listed",
+   "low_usd": 12,
+   "high_usd": 18,
+   "source_url": "https://www.quadient.com/en-us/postage-rates/ups",
+   "source_date": "2026"
+  },
+  {
+   "item": "Overnight parcel, 1 lb, UPS Next Day Air Saver to Dallas / Miami",
+   "base_usd": 94,
+   "period": "per-shipment",
+   "basis": "UPS 2026 list zone 107 $94.00 / zone 108 $103.50; Next Day Air (10:30) $112.57 / $115.30.",
+   "status": "listed",
+   "low_usd": 60,
+   "high_usd": 116,
+   "source_url": "https://www.quadient.com/en-us/postage-rates/ups",
+   "source_date": "2026"
+  },
+  {
+   "item": "Round-trip airfare SEA-DFW (sales visit)",
+   "base_usd": 392,
+   "period": "per-unit",
+   "basis": "Kayak 12-month average round trip; typical range $291-$488; cheapest nonstop RT seen $277 (Google Flights). ~100 nonstops/week.",
+   "status": "listed",
+   "low_usd": 277,
+   "high_usd": 488,
+   "source_url": "https://www.kayak.com/flight-routes/Seattle-Tacoma-Intl-SEA/Dallas-Ft-Worth-other-airports-DFW",
+   "source_date": "undated (12-month trailing)"
+  },
+  {
+   "item": "Round-trip airfare SEA-MIA (sales visit)",
+   "base_usd": 438,
+   "period": "per-unit",
+   "basis": "Kayak 12-month average round trip; range $343-$572; FlightsFrom approx $400 with monthly lows $246-$686; only 21-25 nonstops/week.",
+   "status": "listed",
+   "low_usd": 343,
+   "high_usd": 572,
+   "source_url": "https://www.kayak.com/flight-routes/Seattle-Tacoma-Intl-SEA/Miami-MIA",
+   "source_date": "undated (12-month trailing)"
+  },
+  {
+   "item": "Dental lab technician wage, DFW (if a satellite were staffed)",
+   "base_usd": 52550,
+   "period": "annual",
+   "basis": "BLS OEWS May 2025 mean annual $52,550; median $48,010 ($23.08/hr); 10th-90th $34,320-$74,870. Excludes payroll taxes/benefits (~20-30% est.).",
+   "status": "listed",
+   "low_usd": 34320,
+   "high_usd": 74870,
+   "source_url": "https://txlaborintel.com/wages/dental-laboratory-technicians/area-dallas-fort-worth-arlington-tx-19100/",
+   "source_date": "May 2025"
+  },
+  {
+   "item": "Dental lab technician wage, Miami metro",
+   "base_usd": 55430,
+   "period": "annual",
+   "basis": "BLS OEWS May 2023 mean annual $55,430 ($26.65/hr); May 2025 median $59,940 (WageDex mirror, n=590); May 2022 mean $47,210. High sampling variance.",
+   "status": "listed",
+   "low_usd": 47210,
+   "high_usd": 59940,
+   "source_url": "https://www.bls.gov/oes/2023/may/oes519081.htm",
+   "source_date": "May 2023 / May 2025"
+  },
+  {
+   "item": "Small flex space, DFW inner-north (Carrollton/Richardson/Addison), ~2,000-2,500 SF",
+   "base_usd": 2870,
+   "period": "monthly",
+   "basis": "1321 Valwood Pkwy, Carrollton: 2,330 SF at $14.78/SF/yr = $2,870/mo (sublease); Jay Ell Dr, Richardson 2,115 SF at $12.00 = $2,115/mo; Skylane Dr 3,500 SF at $9.50 = $2,771/mo; WareSpace Addison micro-units $1,000-$3,000/mo all-in. Rates may exclude NNN/utilities.",
+   "status": "listed",
+   "low_usd": 1000,
+   "high_usd": 3500,
+   "source_url": "https://www.loopnet.com/Listing/1321-Valwood-Pky-Carrollton-TX/36081539/",
+   "source_date": "2025-06-02"
+  },
+  {
+   "item": "Small flex space, Doral/Medley (Miami-Dade), ~1,350-1,750 SF",
+   "base_usd": 2800,
+   "period": "monthly",
+   "basis": "Doral Flex II 1,350 SF $2,800/mo; 8000 NW 31st St 1,727 SF $3,485/mo; 6020 NW 99th Ave 1,655 SF $3,400/mo NNN; Medley Industrial Center $19.00-19.50/SF/yr (1,300-3,136 SF).",
+   "status": "listed",
+   "low_usd": 2100,
+   "high_usd": 4965,
+   "source_url": "https://winsomerealty.net/property_40ac0709_commercial_industrial_miami_7A11918432/",
+   "source_date": "2026-06-20"
+  }
+ ],
+ "targets": [
+  {
+   "name": "10 Day Smiles (Dr. Abazie)",
+   "location": "2212 S Cooper St, Arlington, TX 76013; also Coppell, TX",
+   "type": "implant/full-arch practice",
+   "why": "All-on-4 at $9,995/arch using 'in-house and partner labs' - one of few DFW full-arch practices that discloses outsourcing; digital planning workflow fits STL-based full-arch zirconia at Integra's $650 lab-to-lab / $1,700 dentist price.",
+   "decision_maker": "Dr. Abazie (owner; Fellow in Oral Implantology)",
+   "how_to_reach": "Website contact; Coppell (469) 218-8545, Arlington (682) 895-4240 - desk research only, no contact made",
+   "source_url": "https://10daysmiles.com/our-services/restorative-dentistry/all-on-4-implants/"
+  },
+  {
+   "name": "R. David Brumbaugh, DDS",
+   "location": "4514 Cole Ave #920, Dallas, TX 75205",
+   "type": "implant/full-arch practice",
+   "why": "Single-provider All-on-4 (places and restores) with CBCT planning; no in-house lab mentioned, so a remote digital lab is plausible for finals.",
+   "decision_maker": "Dr. R. David Brumbaugh",
+   "how_to_reach": "214-369-5159; website",
+   "source_url": "https://www.drdavidbrumbaugh.com/services/dental-implants/all-on-4"
+  },
+  {
+   "name": "Advanced Dentistry (Dr. Fadi Farawati, Dr. Ricci)",
+   "location": "2702 Lake Vista Dr #1, Lewisville, TX 75067",
+   "type": "implant/full-arch practice",
+   "why": "High-volume full-arch center (20,000+ implants claimed) with on-site lab; only an overflow or titanium-bar/mill-only prospect (Bear Milling $299 ti-bar), not a full lab account.",
+   "decision_maker": "Dr. Fadi Farawati / Dr. Ricci",
+   "how_to_reach": "(214) 585-5786; website",
+   "source_url": "https://www.dallasdentistryanddentalimplants.com/teeth-in-a-day/"
+  },
+  {
+   "name": "ARCHPOINT Implant Dentistry",
+   "location": "8070 Park Lane #100, Dallas 75231; Southlake; 4255 Bryant Irvin #111, Fort Worth 76109",
+   "type": "implant/full-arch practice",
+   "why": "Three-location oral surgeon + prosthodontist group with on-site lab; overflow/ti-bar or ARUM equipment prospect rather than lab account.",
+   "decision_maker": "Practice leadership (prosthodontists/oral surgeons; names not listed)",
+   "how_to_reach": "(844) 281-6446; info@archpointid.com",
+   "source_url": "https://www.archpointid.com/"
+  },
+  {
+   "name": "Texas Implant & Dental Center (Dr. Clark Damon, Dr. Diana Mohr)",
+   "location": "3455 Locke Ave Ste 250, Fort Worth, TX 76107 (also Richardson)",
+   "type": "implant/full-arch practice",
+   "why": "3-4 All-on-4 cases per week with in-house surgery suite and lab; 1,000+ cases since 2013; potential customer for ARUM mill or zirconia overflow milling.",
+   "decision_maker": "Dr. Clark Damon",
+   "how_to_reach": "(817) 336-2121; website",
+   "source_url": "https://www.texasdentureclinic.com/service/all-on-4-dental-implants/"
+  },
+  {
+   "name": "Forte Implant Center (Dr. Fitzgerald)",
+   "location": "424 Maplelawn Dr, Plano, TX 75075",
+   "type": "implant/full-arch practice",
+   "why": "In-house lab, $15,500-$19,500/arch, lifetime warranty on zirconia; a possible mill-only (zirconia arch from STL) overflow prospect.",
+   "decision_maker": "Dr. Fitzgerald (implant Diplomate; teaches implants)",
+   "how_to_reach": "972-612-7800",
+   "source_url": "https://www.forteimplantcenter.com/"
+  },
+  {
+   "name": "The Dental Implant Place (DIP)",
+   "location": "500 8th Ave #110, Fort Worth, TX 76104",
+   "type": "implant/full-arch practice",
+   "why": "98% of prosthetics made in-house with CAD and 3D milling; 10-14 implants per zirconia arch; equipment/consumables (ARUM, MillBox, hyperDENT) prospect more than lab account.",
+   "decision_maker": "Practice owners (not named on page)",
+   "how_to_reach": "(817) 560-0414",
+   "source_url": "https://thedentalimplantplace.com/dental-implant-services/"
+  },
+  {
+   "name": "Innate Dental Solutions (Dr. Panos)",
+   "location": "4708 W Plano Pkwy Ste 200, Plano, TX 75093",
+   "type": "implant/full-arch practice",
+   "why": "Implant-only surgical practice with lab in the building, mills provisionals in-house; candidate for high-B-axis mill sale or overflow zirconia.",
+   "decision_maker": "Dr. Panos (surgeon-owner; surname truncated on page)",
+   "how_to_reach": "Website consult form",
+   "source_url": "https://innatedentalsolutions.com/dental-implants/dallas-tx"
+  },
+  {
+   "name": "Dallas All on 4 Dental Implant Center",
+   "location": "6225 N State Hwy 161 Ste 425, Irving, TX 75038",
+   "type": "implant/full-arch practice",
+   "why": "Price-led center ($9,500/arch; $24,400 zirconia full mouth) with 'full in-house lab' - price pressure makes $650 lab-to-lab arches interesting as overflow only.",
+   "decision_maker": "Not named",
+   "how_to_reach": "262-425-5664",
+   "source_url": "https://dallasallon4dentalimplantcenter.com/"
+  },
+  {
+   "name": "Destiny Dental Laboratory ('The Implant Guys')",
+   "location": "Carrollton, TX 75006",
+   "type": "dental lab",
+   "why": "Implant-focused independent lab; if it lacks wet 5-axis milling it is a Bear Milling prospect ($22 crown, $299 ti-bar, $650 arch); also an ARUM dealer prospect.",
+   "decision_maker": "Owner (not named)",
+   "how_to_reach": "Website contact",
+   "source_url": "https://www.destinydentallab.com/services--products.html"
+  },
+  {
+   "name": "Dental Plus Laboratory",
+   "location": "11886 Greenville Ave Ste 120, Dallas, TX 75243",
+   "type": "dental lab",
+   "why": "Price-positioned local lab with driver pickup; candidate to outsource zirconia/ti-bar milling to a lower-cost mill-only partner; also mill-sale prospect.",
+   "decision_maker": "Owner (not named)",
+   "how_to_reach": "(972) 271-3399; Contact@DentalPlusLab.com",
+   "source_url": "https://www.dentalpluslab.com/"
+  },
+  {
+   "name": "Luna Labs",
+   "location": "Fort Worth, TX",
+   "type": "dental lab",
+   "why": "16-year independent with 5-7 day turnaround and digital intake; plausible lab-to-lab milling or MillBox/hyperDENT software prospect.",
+   "decision_maker": "Owner (not named)",
+   "how_to_reach": "682-208-3752",
+   "source_url": "https://www.lunalabsdfw.com/"
+  },
+  {
+   "name": "MINT dentistry",
+   "location": "Dallas, TX (DSO HQ)",
+   "type": "DSO",
+   "why": "Operates a 'MINT-owned dental lab'; a captive DSO lab is a prospect for ARUM mills, CAM software and overflow milling, not for Integra's dentist-facing lab services.",
+   "decision_maker": "Dr. Field Harrison (founder); Chief Clinical Officer Dr. Kweik per recruiting PDF",
+   "how_to_reach": "Corporate site; no public lab contact found",
+   "source_url": "https://assets.mintdentistry.com/Images/Sites/C/CM-Portal/MasterPage/1230802.pdf"
+  },
+  {
+   "name": "MB2 Dental",
+   "location": "2403 Lacy Lane, Carrollton, TX 75006",
+   "type": "DSO",
+   "why": "850+ practices but lab spend is run by a Procurement Lab Manager with preferred national labs (Leixir has an MB2 page); realistic only as a long-shot pilot via an individual MB2 owner-dentist relationship, not a contract.",
+   "decision_maker": "Procurement Lab Manager (role posted Sept 2026)",
+   "how_to_reach": "(972) 869-3789; info@mb2dental.com",
+   "source_url": "https://mb2dental.com/about/"
+  },
+  {
+   "name": "Community Dental Partners",
+   "location": "5800 N I-35 Ste 205, Denton, TX 76207",
+   "type": "DSO",
+   "why": "70+ mostly Medicaid/pediatric locations (Smile Magic, Family Smiles) in DFW; low-fee restorative mix suits $22 mill-only crowns if they use an outside lab - sourcing unknown.",
+   "decision_maker": "Dr. Nawaz Lalani (founder)",
+   "how_to_reach": "Website; careers@cdp.dental listed",
+   "source_url": "https://www.communitydentalpartners.com/locations-and-brands/"
+  },
+  {
+   "name": "ADW Center (Dr. Boris Lipovetskiy)",
+   "location": "104 SE 1st Ave, Fort Lauderdale, FL 33301",
+   "type": "implant/full-arch practice",
+   "why": "All-on-4 from $13,999 with zirconia finals and no in-house lab mentioned; the most plausible South Florida full-arch lab prospect found.",
+   "decision_maker": "Dr. Boris Lipovetskiy",
+   "how_to_reach": "954-525-5662; info@adwcenter.com",
+   "source_url": "https://adwcenter.com/procedures/all-on-4-fort-lauderdale/"
+  },
+  {
+   "name": "DG Dental (Dr. Dory Green)",
+   "location": "646 N Federal Hwy, Fort Lauderdale, FL 33304",
+   "type": "implant/full-arch practice",
+   "why": "All-on-4 with same-day temps and zirconia finals; no in-house lab disclosed.",
+   "decision_maker": "Dr. Dory Green, DMD, FAGD",
+   "how_to_reach": "954-524-2300; smile@dgdentalfl.com",
+   "source_url": "https://dgdentalfl.com/all-on-4-dental-implants/"
+  },
+  {
+   "name": "Nuvia Dental Implant Center - Miami",
+   "location": "6262 Sunset Dr, Miami, FL 33143",
+   "type": "implant/full-arch practice",
+   "why": "Chain center with in-house lab delivering permanent zirconia in 24 hours; not a lab prospect; listed to show the full-arch segment is captive.",
+   "decision_maker": "Corporate (Nuvia); local prosthodontists Dr. Elana Laks, Dr. Alex Jelicich",
+   "how_to_reach": "786-348-2884",
+   "source_url": "https://www.nuviasmiles.com/locations/dental-implants-miami-florida"
+  },
+  {
+   "name": "OneSolution Dental Implant Centers",
+   "location": "1717 N Bayshore Dr #235, Miami, FL 33132 (multiple S FL locations)",
+   "type": "implant/full-arch practice",
+   "why": "In-house digital lab with on-site technicians; competes directly with ClearChoice/Nuvia; overflow or equipment prospect only.",
+   "decision_maker": "Oral-surgeon-led ownership (not named)",
+   "how_to_reach": "(877) 421-0584",
+   "source_url": "https://www.onesolutionnow.com/dental-implant-cost/implant-comparison/"
+  },
+  {
+   "name": "In A Day Smile Dental Implant Centers (Dr. Burak Taskonak)",
+   "location": "1212 E Broward Blvd #200, Fort Lauderdale, FL 33301",
+   "type": "implant/full-arch practice",
+   "why": "In-house lab with 3Shape scanners, printing, in-house milling and three technicians; ARUM mill / MillBox software prospect, not a lab account.",
+   "decision_maker": "Dr. Burak Taskonak (founder)",
+   "how_to_reach": "954-466-7737",
+   "source_url": "https://www.inadaysmiledentalimplantcenter.com/"
+  },
+  {
+   "name": "Florida Dental Lab",
+   "location": "2114 N University Dr, Sunrise, FL 33322",
+   "type": "dental lab",
+   "why": "Family lab with 10-working-day turnaround and analog/digital intake; if it outsources zirconia or ti-bar milling, Bear Milling prices ($22/$299/$650) are competitive - but Mabel and local 48-hour labs are the incumbents.",
+   "decision_maker": "Family owners (husband/wife/daughter per site)",
+   "how_to_reach": "(954) 895-0613; floridadentallab@hotmail.com",
+   "source_url": "https://fdentallab.com/"
+  },
+  {
+   "name": "Sage Dental Management",
+   "location": "Boca Raton, FL (DSO HQ; 150+ offices FL/GA)",
+   "type": "DSO",
+   "why": "Largest DSO in South Florida; lab sourcing unknown; a 6-person Bellevue lab is not a credible contract bidder in 12 months - listed for completeness.",
+   "decision_maker": "Corporate procurement (not identified)",
+   "how_to_reach": "(855) 697-2439 corporate line",
+   "source_url": "https://mysagedental.com/sage-dental-increases-its-presence-in-florida-and-georgia/"
+  }
+ ]
+}

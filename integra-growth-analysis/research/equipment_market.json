@@ -1,0 +1,542 @@
+{
+ "topic": "Equipment and CAM-software dealer economics for an ARUM dealer with no territory protection plus MillBox/hyperDENT reseller (Integra Dental Design, Bellevue WA)",
+ "summary": "Bottom line for a skeptical reader: the ARUM dealership, as structured (15-unit first-year commitment, no territory, one A3 demo bought at $17,500 against a ~$51,000 list), is competing in a channel that already has four US sellers of the same machines, including the manufacturer's own new subsidiary, and against competitor mills whose published street prices make the A3's list price unachievable. The realistic gross margin per compact dry mill is roughly $10,000\u2013$20,000 before install, training, travel and warranty labor, and the realistic close volume for a six-person lab with zero closes in six months is a handful of units per year, not 15.\n\nFACTS (sourced, access date 2026-10-12). Channel: ARUM Dentistry USA Inc. is a manufacturer-owned subsidiary at 17952 Sky Park Circle, Suite 45-C, Irvine, CA (arumdentistry.com; Hinman 2026 exhibitor booth #1901), led by CEO Howard Kim since Dec 2025/Jan 2026, four employees, publicly recruiting \"strong dealer partners\" (LinkedIn, 2026-03-06) and hiring nationwide implant sales reps (2026-08). DECSTA (15375 Barranca Pkwy, Irvine) is an \"official distributor of Arum Dentistry in the US\" running Lab Day \"Chicago Specials\" on 5X-500/5X-300Pro (Feb 2025). Doowon USA / Dental Solution USA (Lansdale PA, Torrance CA) sells 5X-200 through 5X-500L. Axsys Dental Solutions (Wixom MI) has sold ARUM-built \"Versamill\" mills since at least 2014; its 5X-200 is listed at $103,600 including 3 days training in Michigan plus 2 days on-site installation and a 1-year warranty (Blue Sky Bio store, undated) and was quoted at a $94,500 US base price by Axsys on Dental Lab Network (May 2024); Axsys's PersonalCARE Gold support plan is $2,500/yr. So Integra's planned South Orange County expansion lands in the same city as the manufacturer and its official distributor.\n\nCompetitor price anchors (authorized US dealer pages, undated unless noted): vhf E5 $28,990, N4+ $34,990, Z4 $39,990, K5+ $40,990, S5 $51,990, R5 $84,990 (R5 manual-load $69,990), and vhf ships dentalcam CAM with no license fee. Roland/DGSHAPE DWX-52D MSRP $25,995; DWX-52DCi $34,995 US (Roland DGA ROI calculator, which also prices CAM at $8,000 and a dust extractor at $1,995). imes-icore CORiTEC 350i PRO+ \u20ac59,450 (Dental Direkt, Nov 2023). Used anchors: vhf Z4 (2019) $32,000; inLab MC X5 (2017) $16,000; Ivoclar PM7 (2022) hammered at $19,250 + 10% premium (Sept 2023); Zirkonzahn M1 (2020) $4,250. Several \"new PM7 for $17,900\u2013$21,000\" and \"DWX-52D $9,200\" web listings show scam-site patterns and are not price anchors.\n\nCAM software: MillBox new license $8,450 (Standard) up to ~$16,500 (Expert multi-postprocessor) with annual updates at $1,200/yr (Denteon, Elemental Dental Supply, Kodent); CIMsystem routes technical support through the reseller. hyperDENT Compact 4X $3,640 (US Dental Depot), Compact $6,900 (Kodent), an Implant Light bundle $11,230 (Dentcore); labs report hyperDENT maintenance invoices of $6,750/yr plus $2,600 support (DLN, Jan 2023) and Compact renewal quotes of $1,500\u2013$2,500 (DLN, 2020). hyperDENT V10 replaces Classic and Compact; reseller margins are not published.\n\nDealer margin norms: the In re Dental Supplies antitrust complaint (E.D.N.Y. 1:16-cv-00696) alleges the big distributors held equipment gross margins at or above 32% (Patterson floor 32% on equipment, 28\u201330% supplies, 2011\u20132015) while discounters ran 15\u201325%; these are allegations, not findings. The Sirona\u2013Patterson CAD/CAM distributorship (SEC exhibit, 2012) shows standard obligations: demo equipment in every branch, spare-parts stock, installation capability, factory-trained technicians, and the distributor paying training costs.\n\nMarket: Census CBP 2023 counts 4,782 US dental-lab establishments (42,188 employees), down 146 from 2022; CA 734, FL 424, TX 277, WA 175. Establishments fell 15.8% from 2017 to 2022. LMT's Nov 2023 poll: two-thirds of labs offer milled restorations and 45% of those do all milling in-house (about 30% of all labs); among in-house millers 67% own two or more mills. Dentists milling in-house fell from 14% (2023) to 12% (2024) while intraoral-scanner use rose to 57% (Inside Dentistry, Dec 2024). Lab Day Chicago 2026 drew 5,100+ attendees and 297 exhibitors; Lab Day West 2026 drew 1,600+ attendees and 131 exhibitors, with an educator publicly noting registration \"well below\" prior years.\n\nTax and finance: for 2026 the Section 179 cap is $2,560,000 with a $4,090,000 phase-out (Rev. Proc. 2025-32) and 100% bonus depreciation is permanent for property acquired after Jan 19, 2025; the placed-in-service date governs. Dental lenders price qualified borrowers at 6\u20139% with 36\u201384 month terms; vendors are paid after a signed delivery/acceptance (Geneva Capital), with next-day funding and a 100% prefunding option for qualified vendors (Ascentium).\n\nESTIMATES: A3 street price $28,000\u2013$38,000 (bracketed by DWX-52D/E5 below and 52DCi/Z4 above), yielding $10,500\u2013$20,500 gross and roughly $6,000\u2013$15,000 contribution after ~$3,500 install/training/travel, ~$600 freight and a ~$1,000 warranty reserve. Demo-unit carrying cost ~$5,000/yr. Sales cycle 4\u201312 months with 8\u201312 touches and ~20\u201325% demo-to-close (manufacturing benchmarks). UNKNOWNS: ARUM's dealer price list beyond the A3, ARUM USA's direct-sale policy and whether it will undercut dealers, warranty-labor reimbursement, LMT booth rates, OR/HI/AK lab counts, share of labs with 5-axis mills, and MillBox/hyperDENT reseller discounts.",
+ "findings": [
+  {
+   "claim": "ARUM Dentistry has its own US subsidiary in Irvine, CA (ARUM Dentistry USA Inc.) that is actively recruiting dealers and building a direct sales team",
+   "detail": "arumdentistry.com lists 'USA Subsidiary: ARUM Dentistry USA Inc.' at Sky Park Circle, Irvine (two suite numbers appear: 17952 Suite 45-C and 18005 Suite 54-E), tel 949-340-2971. The Hinman 2026 exhibitor directory lists ARUM Dentistry USA Inc., booth #1901, 17952 Sky Park Cir Suite 45-C. LinkedIn: Howard Kim, CEO ARUM Dentistry USA since Dec 2025/Jan 2026, 'Established U.S. legal entity, banking, logistics, and service infrastructure... Built dealer and distributor network'; post 2026-03-06 'ARUM USA is fully prepared and looking for strong dealer partners'; post 2026-08-20 hiring 'Dental Implant Sales Specialist \u2013 Nationwide'. LinkedIn company page shows 4 employees. Whether ARUM USA sells machines direct to labs at prices below dealer street price is not stated.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://arumdentistry.com/eng/about/location.php",
+   "source_date": "undated (LinkedIn posts dated 2026-01-10, 2026-03-06, 2026-08-20)",
+   "value": "ARUM USA: 4 employees, Irvine CA, est. Dec 2025/Jan 2026"
+  },
+  {
+   "claim": "At least three other US companies sell ARUM machines: Axsys (Versamill), DECSTA (Irvine) and Doowon USA/Dental Solution USA",
+   "detail": "Axsys Dental Solutions, 29627 West Tech Dr, Wixom MI, markets ARUM-built mills as Versamill AX200/5X-200, 5X-300D, 5X-400, 5X-450, 5X-500; on DLN (2019) Axsys called itself 'the world's #1 distributor of ARUM Mills' and says it makes proprietary internal changes (spindle drives, probe calibration, fixtures). DECSTA, 15375 Barranca Pkwy Ste C102, Irvine CA 92618, is described on LMTmag as 'an official distributor of Arum Dentistry in the US' selling 5X-300 Pro, 5X-500, 5X-500L and NB implants; at Lab Day Chicago 2025 (booth C-53) it advertised 'exclusive Chicago Specials on the ARUM 5X-500 and 5X-300Pro'. Doowon USA (dentalsolutionusa.com), 2131 N Broad St, Lansdale PA with a Torrance CA office, lists 5X-200, 5X-500L, 5X-500, 5X-450, 5X-400, 5X-300PRO, 5X-300. Integra's own integra.dental pages list A3/A3L, A3 Pro, A5 Pro, 5X-500 series and A7/A7L ('New for 2026'), all quote-based.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://lmtmag.com/digitalstomusa",
+   "source_date": "undated (DECSTA Lab Day posts Feb 19-20, 2025)",
+   "value": "4+ US sellers of ARUM machines incl. manufacturer subsidiary"
+  },
+  {
+   "claim": "Axsys Versamill 5X-200 (ARUM 5X-200 derivative) is priced at $94,500\u2013$103,600 in the US, and the price includes 3 days of factory training plus 2 days of on-site installation",
+   "detail": "Blue Sky Bio store listing: 'Versamill 5X200 (not including freight) $103,600.00... Includes 3 days of training at the Wixom Corporate Training Center in Michigan. Price also includes mill engineers on-site for 2 days of installation and follow-up training, part run-off. 1 year limited warranty on machine and spindle... One year after purchase Axsys will... offer PersonalCARE Support Programs. The Gold package is $2,500 a year.' Axsys ('Steve') on Dental Lab Network, table last edited May 15, 2024: 'USA base-price USD Versamill: $94,500' for ax200/Arum 5X-200 and $74,500 for the Versamill ax726DW. Axsys archive promo pages: 'Starting at Only $70,500* Save over $22,000' and 'Starting at Only $92,500* Save over $17,000' (models not identified in snippet).",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://blueskybio.com/store/versamill-5x200",
+   "source_date": "undated; DLN table edited 2024-05-15",
+   "value": "$94,500\u2013$103,600; +$2,500/yr Gold support after year 1"
+  },
+  {
+   "claim": "Historical ARUM/Versamill US price points for smaller models: 5X-300 ~$38,000 (2019 quote), 5X-450 'just under $60K' (Axsys, ~2019-2020), a 2014-era Versamill described by its owner as an '$85,000 machine'",
+   "detail": "Dental Lab Network thread 'Coritec 250i vs Arum 5x-300 for small lab' (June 2019): a buyer 'was offered for a Versa mill 5x300 for $38k and 250i for a bit less'; Axsys rep: 'Check out the new 5X450... We sell the machine in the USA for just under $60K.' Thread 'Arum Versamill 5x software help' (Jan 2022): owner bought a 2014 floor-model Versamill and refers to 'buying a $85,000 machine'. Australian dealer Dental Dynamics lists 5X-200 at AUD 167,000 incl. cabinet, PC, water tank and hyperDENT, and 5X-500L at AUD 164,000 incl. PC, dust extractor and hyperDENT (page dated 2020-12-29) \u2014 not US prices.",
+   "kind": "historical",
+   "confidence": "medium",
+   "source_url": "https://dentallabnetwork.com/forums/threads/coritec-250i-vs-arum-5x-300-for-small-lab.29794/page-2",
+   "source_date": "2019-06-16 (thread), 2022-01-25 (thread)",
+   "value": "5X-300 ~$38K (2019); 5X-450 <$60K (2019-20)"
+  },
+  {
+   "claim": "No US dealer publishes an A3/A3L/A5 PRO/A7 price; all are quote-based. The given $51,000 list vs $17,500 dealer cost implies a 2.9x list markup that competitor street prices will not support",
+   "detail": "DECSTA product pages show '$0.00 Price / Out of Stock' for 5X300 PRO and 5X500; Integra's pages say 'Quote-based'; Dental Dynamics AU says 'Request Pricing'. ARUM's own A3 spec: 5-axis dry, stepping motors, 0.45 kW continuous / 0.8 kW max spindle, 60,000 rpm, 97 kg; A3L adds 7-disc cartridge loader (145 kg). Comparable published US prices: DWX-52D $25,995 (manual), vhf E5 $28,990 (5-axis dry, 16 tools), DWX-52DCi $34,995 (6-disc changer), vhf Z4 $39,990, vhf S5 $51,990 (8-disc changer, wet+dry). Estimate: an A3 transacts at $28,000\u2013$38,000 and an A3L at $34,000\u2013$45,000; at $32,000 the A3 gross margin is $14,500 (45% of price) before install, training, travel, freight and warranty labor.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://arumdentistry.com/eng/solution/aseries4.php",
+   "source_date": "undated",
+   "value": "A3 realistic street $28K\u2013$38K; gross $10.5K\u2013$20.5K"
+  },
+  {
+   "claim": "vhf US authorized-dealer prices (2026 pages): E3 $20,990; E4 $24,990; E5 $28,990; N4+ $34,990; Z4 $39,990; K5+ $40,990; S5 $51,990; R5 $84,990; R5 with manual blank change $69,990 \u2014 and vhf includes its dentalcam CAM software with no license fee",
+   "detail": "Dentcore (Chantilly VA, 'Authorized dealer') publishes a spec/price table for E3\u2013R5; Elemental Dental Supply (Tempe AZ) lists the same prices with schema.org priceValidUntil 2027-10-08; Esthetic Professionals and Voxel Dental also list R5 at $84,990. Dentcore S5 page: 'Ships with dentalcam software (no license fees). Estimated shipping time 2-3 weeks.' Implication: an ARUM A3 bundled with a paid MillBox license competes against a vhf E5 that includes CAM.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://dentcore.com/products/vhf-r5",
+   "source_date": "undated (price valid through 2027-10-08 per Elemental schema)",
+   "value": "vhf E5 $28,990; S5 $51,990; R5 $84,990"
+  },
+  {
+   "claim": "Roland/DGSHAPE: DWX-52D MSRP $25,995; DWX-52DCi $34,995 (US), with Roland's own ROI calculator budgeting CAM software at $8,000 and a dust extractor at $1,995",
+   "detail": "Roland DGA DWX-52Di page: 'DWX-52D MSRP $25,995 US'. Roland DGA DWX-52DCi ROI calculator: 'DWX-52DCi* 34995; CAM software 8000; Dust extractor 1995; *U.S. only.' Roland DGA press release May 29, 2019: DWX-42W/DWX-52D bundle list $55,440 (sale $49,995) and DWX-42W/DWX-52DCi bundle list $64,440 (sale $58,995), implying a DWX-42W list of about $29,445 in 2019 (a Lebanese Roland dealer lists DWX-42W at $28,995 and DWX-52DCi at $34,495 in USD, undated). Note: Roland sells through dealers (e.g., Zahn/Henry Schein), with a 1-year DGSHAPE warranty extendable by dealers.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.rolanddga.com/applications/dental-cad-cam/dwx52dci-roi-calculator",
+   "source_date": "undated (press release 2019-05-29)",
+   "value": "DWX-52D $25,995; DWX-52DCi $34,995; CAM $8,000"
+  },
+  {
+   "claim": "imes-icore CORiTEC pricing anchors are European: 350i PRO+ \u20ac59,450 and 350i Loader PRO+ \u20ac65,283\u2013\u20ac69,450 ex-VAT; US Dental Depot stocks CORiTEC in the US but does not publish prices and notes 4\u20136 week German parts lead times",
+   "detail": "Dental Direkt GmbH shop: 'CORiTEC 350i PRO+ series \u20ac59.450,00' (page dated 2023-11-20). x-dentaldepot.com: 'Imes-Icore CORITEC 350i Loader PRO+ \u20ac65,283.00 (was \u20ac69,450.00) zzgl. MwSt.' US Dental Depot landing page: 'USDD warehouses every CORiTEC model. 2-3 week installs instead of 8-12 weeks from Germany... German parts lead times can stretch 4-6 weeks if not stocked U.S. Premium price vs. Asian alternatives.' Used-market and forum anchors for 250i: 2019 DLN buyer offered '250i for a bit less' than a $38K Versamill 5X-300.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://shop.dentaldirekt.de/en/products/milling-machine-coritec-350i-pro-serie",
+   "source_date": "2023-11-20",
+   "value": "350i PRO+ \u20ac59,450; Loader PRO+ \u20ac65,283\u201369,450"
+  },
+  {
+   "claim": "Ivoclar PrograMill PM7, Dentsply inLab MC X5, Zirkonzahn and Amann Girrbach do not publish US list prices; credible used/auction anchors: PM7 (2022) $19,250 + 10% buyer premium at auction (Sept 2023); inLab MC X5 (2017) $16,000; Zirkonzahn M1 (2020) $4,250; Sirona MC XL used $8,075 (Aug 2026)",
+   "detail": "Rosen Systems auction lot 8 (closed 2023-09-15): 2022 Ivoclar PrograMill PM7 with suction unit, compressor and PC, 55 bids, $19,250 + 10% premium. Atlas Resell Management: Sirona inLab MC X5 (2017) $16,000, tested; Zirkon Zahn M1 (2020) $4,250 (listed 2026-04-28); vhf S5.8 (2022) without spindle $5,225 (2025-11). DOTmed: Sirona MC XL used-good $8,075 (listing dated 2026-08-19). eBay via grelly: vhf Z4 (2019) $32,000 (Thousand Oaks CA); vhf S5 used $28,000; Amann Girrbach Ceramill Motion 2 used $6,900 (seller in Poland). Henry Schein equipment catalog lists Ceramill Motion 3 with 'Financing Options Available' and no price. WARNING: multiple sites list 'new' PM7 at $17,900\u2013$21,000, DWX-52D at $9,200, DWX-52DCi at $10,999 and vhf R5 at $20,999 (anuncioya.com, adpostman, EC21, bestdentalplanusa, shinodadental, perkasamedical); these show scam-site patterns (crypto/wire only, offshore sellers, prices far below dealer cost) and must not be used as anchors.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://auction.rosensystems.com/auctions/10067/lot/28357-dental-milling-system-ivoclar-vivadent-2022-progra-mill-pm7-s-n-9105001091-with-suction-unit-1-ingersoll-rand-mdl-d25in-sr-15-cfm-1-hp-z2-pc-core-i7-with-phillips-monitor-hp-keyboard-and-mouse",
+   "source_date": "auction closed 2023-09-15",
+   "value": "PM7 used $19,250+10%; MC X5 used $16,000"
+  },
+  {
+   "claim": "Large dental distributors have historically targeted ~32% gross margin on equipment (28\u201330% on supplies); discounters operated at 15\u201325%; these figures come from a class-action complaint and are allegations, not adjudicated facts",
+   "detail": "In re Dental Supplies Antitrust Litigation, E.D.N.Y. No. 1:16-cv-00696, consolidated complaint (filed 2016): a former Patterson employee 'was not permitted to go below set minimum thresholds for his gross margins, of 32% on equipment and 28-30% on supplies' (2011-2015), 'it was known throughout Patterson's sales division that Henry Schein also would not go below 32% on equipment'; a recorded Henry Schein regional manager: 'North of 32 [percent margins]... I know guys that actually get 34'; Archer & White/Dynamic Dental 'offered discounted margins ranging from 15% to 25%'; a manufacturer email asked a discounter to price for '28-30% margin'. Henry Schein's 2025 10-K reports dental equipment at 13.6% of consolidated sales and 127 equipment sales and service centers worldwide, but does not disclose equipment gross margin.",
+   "kind": "historical",
+   "confidence": "medium",
+   "source_url": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.381357/gov.uscourts.nyed.381357.49.0.pdf",
+   "source_date": "filed 2016-03-11",
+   "value": "alleged 32% equipment margin floor; discounters 15\u201325%"
+  },
+  {
+   "claim": "Typical CAD/CAM distributor obligations (from a public Sirona\u2013Patterson agreement): stock product and spare parts, keep demo equipment in showrooms/training centers, maintain installation capability and factory-trained technicians, and bear training costs in the distributor's lab market",
+   "detail": "Amended and Restated U.S. CAD-CAM Distributorship Agreement (Sirona\u2013Patterson, SEC exhibit 10.2, 2012): Patterson shall 'maintain appropriate equipment relating to the Contractual Products in every branch showroom and appropriate training centers' (2.1.2), 'provide adequate technical service... including first line technical support, and maintain a stock of spare parts sufficient to satisfy customer demand' (2.1.4), 'maintain adequate installation, assembly and commissioning capabilities' (2.1.5), 'purchase sufficient demonstration equipment to equip appropriate branches' (2.1.6 of companion agreement), 'take responsibility for state of the art installation... repair defective Contractual Products promptly' (9.1), and 'Patterson shall be responsible for conducting training sessions for the inLab Products in the Patterson Lab Market and shall pay all costs' (1.4.4). A 2023 Paltop implant distributor agreement (SEC EX-10.10) similarly: 'Distributor shall be responsible for all installation, training and service to his customers... at its own cost.' Integra's ARUM agreement terms (demo requirement, warranty labor reimbursement, parts stocking) are not public.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1014507/000119312512261786/d363113dex102.htm",
+   "source_date": "2012 (exhibit filed 2012-06)",
+   "value": "demo units + parts stock + install + trained techs + training costs on distributor"
+  },
+  {
+   "claim": "MillBox US pricing: new license $8,450 (Standard) to about $16,500 (Expert multi-postprocessor); annual updates $1,200/yr with a 3-year ($3,600) cap to reinstate lapsed licenses; a new license includes the current year plus one year of updates",
+   "detail": "Denteon: 'MillBox Dental CAM $8,450.00... Annual Updates & Support $1,200 per year. If your system is out of date, a maximum of 3 years ($3,600) is required to bring your software current.' Elemental Dental Supply (Tempe AZ): new license $8,450 with options Standard / Expert / Multi-postprocessing Expert, schema.org AggregateOffer lowPrice 8450, highPrice 16500; 'Each New License comes with the current year plus 1 year of annual updates access.' Kodent: Millbox 5A $8,450. UK reference (Bristol CadCam, 2018): Eco \u00a34,900, Standard \u00a36,700, Expert \u00a37,600. Articon (Integra owner's former employer) listed MillBox bundles at $2,360\u2013$10,000 (2018 page). CIMsystem: four versions (Clinic/One, Eco, Standard, Expert); core revisions ~every 3 weeks; 'direct technical support... is provided by your MillBox reseller'.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://denteon.com/products/millbox-dental-cam",
+   "source_date": "undated (Elemental price valid through 2027-09-26)",
+   "value": "$8,450\u2013$16,500 license; $1,200/yr updates"
+  },
+  {
+   "claim": "hyperDENT US pricing: Compact 4X + PP + 1 year $3,640; Compact $6,900; Implant Light bundle (Compact 5X + maintenance + implant module + dongle + tools) $11,230; labs report annual maintenance invoices of $6,750 (full CAM, via Axsys, 2023) and $1,500\u2013$2,500 for Compact (2020)",
+   "detail": "US Dental Depot: 'HYPERDENT - Compact 4X + PP + 1 year $3,640.00' (compatible with DWX-42W). Kodent: hyperDENT Compact 'Price: 6900 USD'. Dentcore: 'hyperDENT Implant Light Bundle Price: 11230 USD' (Compact 5X, maintenance, PP, FM-NA templates, multi-instance, Implant Module Light, WiBu dongle, 3 vhf tools). x-dentaldepot (DE): Compact 5x \u20ac6,390 ex-VAT. DLN Jan 3, 2023: 'Annual maintenance for hyperdent alone = $6,750.00... Add that to the ongoing tech support fee of $2600'; Axsys replied the fee is 'dictated by... Hyperdent... simply passed on to the customer'. DLN Jan 2020: Compact update quotes '$1500-2000' and '$2500 US'. FOLLOW-ME! says hyperDENT V10 replaces Classic (15-year life) and Compact (New); hyperDENT Express is the simplified bundle product; a Reseller Portal tracks licenses, modules and maintenance expiry per reseller. Reseller discount/margin: not published.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://usdentaldepot.com/hyperdent-compact-4x-pp-1-year-hyperdent-x4-2",
+   "source_date": "undated (DLN threads 2023-01-03 and 2020-01-30)",
+   "value": "$3,640\u2013$11,230 licenses/bundles; maintenance $1.5K\u2013$6.75K/yr"
+  },
+  {
+   "claim": "US dental laboratories: 4,782 establishments with 42,188 employees in 2023 (Census CBP), down 146 establishments and 351 employees from 2022; establishments fell 15.8% from 2017 to 2022",
+   "detail": "PlainBizBench (rendering Census CBP 2023, released June 2025): 4,782 establishments, 42,188 employees, 8.8 per location, $54,943 average pay; 'Employment decreased by 351; establishment count decreased by 146' vs CBP 2022. State table (CBP 2023): California 734 est./9,086 emp.; Florida 424/2,569; Texas 277/2,406; New York 299/2,217; Illinois 202/1,528; Utah 111/1,321; Washington 175/1,142; Georgia 175 (emp. not published). FairMarketValue (Q1 2026 update, citing CBP): '5-Year Growth -15.8% Establishment count, 2017\u20132022'; 'Establishments 4,847 2025 annual average' (source [1] not identified). Vertical IQ: ~4,566 firms, 38,900 workers, $6.3B revenue; top 50 companies >46% of revenue; dealmaking peaked at 18 transactions in 2021, 8 announced through June 2026 (Ion Analytics). Oregon, Hawaii and Alaska counts and 2019 state baselines were not retrievable (Census API requires a key; data.census.gov tables are JS-rendered).",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://plainbizbench.com/industry/339116/",
+   "source_date": "CBP 2023 (released June 2025); page updated Aug 2026",
+   "value": "4,782 labs (2023); WA 175; CA 734; TX 277; FL 424"
+  },
+  {
+   "claim": "Roughly 30% of US labs mill in-house (two-thirds offer milled restorations and 45% of those do all milling in-house), and two-thirds of in-house millers own two or more mills; the share owning a 5-axis mill specifically is not published",
+   "detail": "LMT 'Milling Market Facts' (Nov 17, 2023 reader poll): 'Two-thirds of our respondents... offer milled restorations; 45% handle all the scanning and milling in-house; 34% have a scanner and outsource the milling; 15% outsource the entire case; 6% outsource some of the milling... Among those who have mills in house, 33% have one mill, 24% have two, 17% have three and the remaining 26% have four or more.' Inside Dental Technology (Oct 2019): 'more than 60% of laboratories own or lease a CAD/CAM system, and another 14% plan to buy or lease one in the next 5 years' (CAD/CAM includes scanners). NADL 2019 Business Survey: 78.8% independently owned; 49% under $250K annual sales; 49.8% of members aged 55+. NADL 2025 Dental Technology Survey (363 responses, 9.0% response rate): 72% of labs use 3D printers; labs with >50% of cases from intraoral scans rose from 12% (2019) to 47% (2025). Estimate: 0.67 x 0.45 = ~30% of ~4,800 labs = ~1,400\u20131,500 labs with in-house mills; most entry mills sold since 2015 are 5-axis, so 5-axis owners are plausibly 1,000\u20131,400 labs (estimate).",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://www.lmtmag.com/articles/milling-market-facts",
+   "source_date": "2023-11-17",
+   "value": "~30% of labs mill in-house; 67% of those have 2+ mills"
+  },
+  {
+   "claim": "Dentist in-office milling is small and flat-to-declining: 12% of surveyed dentists milled restorations in-house in 2024 (14% in 2023), while intraoral scanner use jumped to 57%",
+   "detail": "Inside Dentistry 'Trends in Dentistry 2024' (Dec 1, 2024, readership survey): 'the percentage of respondents who reported milling restorations in house decreased slightly from 14% in 2023 to 12% in 2024, the percentage who reported that they 3D print permanent restorations in house increased from 2% in 2023 to 4%... digital impression systems surged from 48% to 57%'; 3D printer use 12% to 15%; 58% spend 10% or less of budget on new technology (up from 48%). Dental Products Report 2024 Tech Census: 'While chairside mills seem to have lost some of their appeal, 3D printers saw growing adoption.' DPR 2020 census: 32% had intraoral scanners; 'More than two-thirds of clinicians said they do not plan to invest in chairside CAD/CAM'. AACD 2022 State of the Industry (cosmetic dentists, skewed sample): 36% use chairside CAD/CAM (members 40%, non-members 31%), unchanged 34% not interested since 2017.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://insidedentistry.net/2024/12/trends-in-dentistry-2024/",
+   "source_date": "2024-12-01",
+   "value": "12% of dentists mill in-house (2024); 57% use IOS"
+  },
+  {
+   "claim": "2026 Section 179: $2,560,000 deduction cap, phase-out beginning at $4,090,000 (fully phased out at $6,650,000); 100% bonus depreciation is permanent for qualifying property acquired after January 19, 2025; the placed-in-service date determines the tax year",
+   "detail": "U.S. Bank: 'Section 179 maximum deduction... 2025 $2,500,000, 2026 $2,560,000; Phase-out threshold 2025 $4,000,000, 2026 $4,090,000; Bonus depreciation 2025 100%, 2026 100%; new and used.' Harness (2026-07-27): 'the IRS's 2026 inflation adjustment (Rev. Proc. 2025-32) pushed the actual numbers slightly higher... $2,560,000... $4,090,000'; '100% bonus depreciation is now permanent... for qualifying property acquired after January 19, 2025' under IRC 168(k). Iowa State CALT (2025-07-09): OBBBA 'permanently increases bonus depreciation to 100 percent of basis for property acquired after January 19, 2025'; Section 179 'permanently increases the maximum... to $2,500,000 and... phaseout threshold to $4,000,000 for property placed in service in taxable years beginning after 2024... indexed for inflation after 2025.' CRI (2025-09-17): bonus applies to new and used property with MACRS life of 20 years or less. Section 179 is limited to business taxable income; bonus is not. OBBBA = P.L. 119-21, signed July 4, 2025. Note: Henry Schein's financing page still cites an outdated '$1,050,000' figure.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.usbank.com/corporate-and-commercial-banking/insights/credit-finance/equipment/maximize-deductions-section-179.html",
+   "source_date": "undated (Harness article 2026-07-27; CALT 2025-07-09)",
+   "value": "$2,560,000 / $4,090,000; 100% bonus permanent"
+  },
+  {
+   "claim": "Dental equipment financing norms (2026): qualified established borrowers 6\u20139% at specialty lenders, 7.5\u201318% overall range, 36\u201384 month terms, 100% financing (including soft costs) common for established practices, 10\u201320% down for startups; captive/manufacturer programs run periodic 0% promos",
+   "detail": "Dental Practice Insider (2026-06-29): 'conventional dental lender rates running 6-9%, SBA 7(a) at approximately 9.00-9.50% (WSJ Prime at 6.75% as of December 2025, plus 2.25-2.75%)... Loan amount: 80-100% of invoice price (some lenders require 10-20% down); Term: 2-7 years'; equipment-only loans close in 2-3 weeks (BofA), 1-2 weeks captive. eBoost Partners (2026-06-11): '5\u20137% for established practices with 720+ credit... 7\u201310%... 10\u201318% for startups'; 'Terms typically run 36\u201384 months'; Henry Schein/Patterson 'frequently offer 0% or sub-market financing for 12\u201324 months'. Dental Practice Loan Guide (2026-05-29): 'Rates: 7.5\u201318% APR... 100% financing is standard for established practices'; BofA Practice Solutions 'From 8.5%... 680+ FICO', equipment loans $25K\u2013$1M, 3\u20137 years. Henry Schein Financial Services: 'finance up to 100%... no money down, up to six month payment deferrals, and terms up to 7 years'; 'Route 66': no payments 6 months, $99/month next 6 months. Ascentium Capital: 'No down payment, deferred payments & up to 84 month repayment... Finance up to $2MM... Application-only for up to $250,000'.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://dentalpracticeinsider.org/dental-equipment-financing/",
+   "source_date": "2026-06-29",
+   "value": "6\u20139% qualified; 36\u201384 mo; 0\u201320% down"
+  },
+  {
+   "claim": "Vendor-pay-at-acceptance is the norm: lenders pay the dealer after delivery is confirmed and the customer signs a delivery/acceptance form; funding is typically next-day to 48 hours after signed documents, and some lenders offer 100% prefunding to qualified vendors",
+   "detail": "Geneva Capital (Axsys's finance partner; Lab Day West 2026 exhibitor): 'Once your new equipment delivers, our team will contact you to confirm it's all there and in working order. We'll have you sign a delivery form... We pay the vendor for the equipment'; vendor program offers 'fast approvals up to $250,000', terms 'typically 24-60 months', 'determine the deposit needed', '$0 down and roll shipping/install into financing', 'at a trade show it's just a matter of minutes'. Ascentium Capital vendor program: 'Prompt payment, including a 100% prefunding option for qualified vendors... Fast credit decisions & next day funding'. Elevex Capital: 'Most transactions fund within 24\u201348 hours of signed documents. Your vendor gets paid'. Mehmi Financial Group (2026-08-31) guidance for used-equipment dealers: 'Do not release equipment on approval alone. Wait for confirmed funding instructions'; funding packages require final invoice, serial numbers, proof of customer deposit, confirmation of delivery/acceptance.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://gogc.com/lease-process/",
+   "source_date": "2021-12-08 (vendor page 2025-05-19)",
+   "value": "paid after signed D&A; 24\u201348 hr; prefunding available"
+  },
+  {
+   "claim": "LMT Lab Day attendance: Chicago 2026 drew 5,100+ attendees and 297 exhibitors (6,096 registered); Lab Day West 2026 drew 1,600+ attendees and 131 exhibitors (1,968 registered), down from 1,765 attendees/~140 exhibitors in 2024 and 1,700+/156 in 2023",
+   "detail": "LMTmag (2026-02-23): 'More than 5,100 dental laboratory owners, managers, technicians and dentists and 297 exhibiting companies gathered for our 41st annual event'; show page shows '6,096 Registered'. Lab Day Chicago 2025: '297 Exhibitors - including over 50 NEW Exhibitors'. LMTmag (2026-05-19): Lab Day West 'more than 1,600... 131 exhibitors in two Exhibit Halls... 87 concurrent seminars'; show page '1,968 Registered' (2025: 2,050 registered; 2023: 2,080 registered). LMTmag (2024-05-21): West 2024 '1,765 attendees... nearly 140 companies'. West 2023: 'Over 1,700... 156 companies'. A posted educator comment on the West 2026 page (May 21): 'our registration numbers looked down... room totals and pre-reg numbers running well below'. Exhibitor portal: Chicago 2027 booking & payment due Aug 18, 2026; West 2026 booking due Nov 24, 2025; booth prices are behind the exhibitor login and not published.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.lmtmag.com/articles/lab-day-chicago-2026-the-industry-s-biggest-weekend-delivers-big-time",
+   "source_date": "2026-02-23 (West article 2026-05-19)",
+   "value": "Chicago 5,100+/297; West 1,600+/131"
+  },
+  {
+   "claim": "Sales-cycle benchmarks for $25K\u2013$100K capital equipment: ~120 days seller-visible cycle (manufacturing), dental capital equipment 6\u201312 months with 8\u201312 touchpoints, demo-to-close ~20\u201325%; no dental-lab-mill-specific close-rate data exists publicly",
+   "detail": "SUPPLYCO (2025-06-18, citing aggregated CRM data): seller-visible cycle '$50K\u2013$100K: ~120 days', '<$10K: ~55 days', '$100K\u2013$250K: ~170 days'; full buyer journey ~379 days; 'win rates down 18% YoY'. Pulse RevOps (2026-06-26, dental dealer staffing): 'Capital-equipment reps selling $80K\u2013$150K systems need 2\u20133 hours per appointment for demonstrations... multi-visit sales cycles that stretch 6\u201312 months'; 'each capital sale required 8\u201312 touchpoints over 9 months'; a fully ramped dental equipment rep produces ~$1.0\u20131.2M/yr. Optifai benchmarks (undated): average demo-to-close 25%, manufacturing 20%. Buzzbox Media (2026-05-04): dental 'capital equipment (scanners, mills, CBCT)... sales cycles run 6 to 18 months'. RepVue: Dentsply Sirona capital equipment reps median base $70K, OTE $200K, average deal $26K. Applied estimate: to close 15 mills/yr at a 20\u201325% demo-to-close rate requires 60\u201375 qualified demos/yr, i.e., 5\u20136 per month \u2014 not credible for a six-person lab with ~20 hrs/wk of owner selling time.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://www.supplyco.ai/blog/industrial-equipment-sales-cycle-guide",
+   "source_date": "2025-06-18 (Pulse RevOps 2026-06-26)",
+   "value": "~120 days visible cycle; 8\u201312 touches; 20\u201325% demo-to-close"
+  },
+  {
+   "claim": "Trade-show lead economics (CEIR): an exhibition-sourced prospect costs ~$96 to meet vs ~$1,039 in the field and ~$2,188 to close vs ~$3,102; 54% of exhibition-initiated sales close in 3 or fewer calls; ~39% of captured leads qualify; cost per trade-show lead benchmarks range $283 (Exhibit Surveys, older) to $811 (2024)",
+   "detail": "Exhibitor Online (CEIR 'Cost Effectiveness of Exhibition Participation'): '$96 for an exhibition lead; whereas, without an exhibition lead, that figure is $1,039... it costs $2,188 to close a sale with an exhibition lead... In comparison, it costs $3,102'. CEIR Industry Insights (2015 study, 568 exhibitors): 'exhibitors that qualify leads... 39 percent turn out to be qualified'; example CPL $500 ($25,000/50 leads). AUA exhibitor ROI worksheet: 'average cost of a trade show lead is $283 (Source: Exhibit Surveys)'; field sales call $596\u2013$1,114. Contentmation (secondary, citing Exhibit Surveys 2024): $811 per lead; 70% of leads never followed up. CEIR figures are dated (1990s-2015 studies) and not inflation-adjusted.",
+   "kind": "historical",
+   "confidence": "medium",
+   "source_url": "https://www.exhibitoronline.com/topics/article.asp?ID=1224",
+   "source_date": "undated (CEIR study; Industry Insights 2015)",
+   "value": "$2,188 to close an exhibition lead; CPL $283\u2013$811"
+  },
+  {
+   "claim": "Install-travel cost basis: GSA FY2026 standard per diem is $110 lodging + $68 M&IE = $178/day (California average lodging $167.52, M&IE $86); BTS average domestic itinerary fare Q2 2026 $436\u2013$445 (Seattle origin $453.69, Los Angeles $499.60)",
+   "detail": "GSA Per Diem Bulletin FTR 26-01 (effective 2025-10-01 to 2026-09-30): 'standard lodging rate also remains unchanged at $110... standard M&IE rate remains at $68'; FederalPay FY2026 state averages: California 32 destinations, average M&IE $86.00, average lodging $167.52. BTS: 'The average U.S. domestic air fare increased in the first quarter of 2026 to $428'; Q2 2026 release (BTS 26-73, Sept 2026; two versions published, $436.36 then revised to $445): round-trip $535\u2013$549; BTS TranStats Q2 2026 by origin: SEA $453.69, LAX $499.60; 2025 annual average $387; Q4 2025 $405.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.gsa.gov/policy-regulations/regulations/federal-travel-regulation/ftr-and-related-files/gsa-per-diem-bulletin-ftr-2601",
+   "source_date": "FY2026 (effective 2025-10-01); BTS Q2 2026 release 2026-09",
+   "value": "$178/day per diem; ~$450 SEA round trip"
+  },
+  {
+   "claim": "Spindle and service cost anchors: J\u00e4ger replacement spindles for Amann Girrbach Motion 2 list $5,133\u2013$6,665 (sale $4,492\u2013$5,831); Roland DWX-50 spindle ~$2,000\u2013$2,300; Ivoclar Zenotec Mini spindle $2,700 new / $1,800 rebuilt; Axsys quotes $2,000\u2013$3,000 for an on-site re-homing service call and ~3-month spindle lead time (2022); Sycotec 3 kW spindle price not published",
+   "detail": "US Dental Depot: 'J\u00e4ger Spindle MOTION 2 DNA M2i #179323 $5,133.50 / $4,491.81' and 'Jaeger spindle Ceramill Motion 2 CLASSIC #179212 $6,664.50 / $5,831.44'. DLN (2015): 'replacement spindle for the DWX50 is around $2,000 - $2,300... 2 year warranty'; J\u00e4ger 'back ordered from Germany... 20 weeks'. DLN (Dec 2021): Zenotec Mini 'rebuilt spindle... around $1800... new one from Ivoclar $2700'. DLN Axsys application engineer (Jan 2022): encoder batteries 'should be replaced every 6 months'; powering off during swap turns 'a 50$ battery change... into a 2000$-3000$ on site service call'; 'if you requested a new spindle from us today you'd be waiting roughly 3 months'; software re-clone/support quoted at $2,400 by the owner. Tauschspindel.com offers Sycotec dental spindle repair/exchange with up to 36-month warranty (prices on request). UP3D marketing guide (uncited): spindle replacement $800\u2013$2,500+, life 3\u20135 years. Estimate for an ARUM A-series dealer spare kit (0.8 kW Sycotec spindle, encoder batteries, sensors, clamps): $6,000\u2013$10,000; a 3 kW Sycotec spindle for 5X-200/A7 class likely $8,000\u2013$12,000 (estimate scaled from J\u00e4ger pricing).",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://usdentaldepot.com/jager-spindle-m2i-amann-girrbach-179323",
+   "source_date": "undated (DLN threads 2015-01-12, 2021-12-15, 2022-01-25)",
+   "value": "spindles $2,000\u2013$6,665; service call $2,000\u2013$3,000"
+  },
+  {
+   "claim": "ARUM reputation among US labs is mixed: praised for metal-milling rigidity and value versus Datron/DCS-class machines, but with documented complaints about calibration drift, probe reliability, spindle lead times, encoder-battery crashes, support fees and channel confusion between Axsys-modified Versamills and ARUM-direct machines",
+   "detail": "Positive (DLN): 'our 5x400 has been flawless. The 5x200 is even more robust for metal' (2021); 'great machine for the price! Its like getting a two for one if your other option is Datron' (2017); a lab that returned a $170,000 DCS DC-7 'replaced that mill with a 5x200 from Axsys... Saved about half the cost too'; 'I own a 5x-300 and its doing pretty well... two years down the line'. Negative (DLN): 'Axsys/Arum 5X500 losing calibration' (Nov 2022) \u2014 Axsys: 'Cameron found an inconsistency in the PLC of the mill, and Arum took a while to figure out what could be done'; another user: '5x200 is a complete nightmare, calibration process is a kick in the ass'; a 2014 Versamill owner: spindle replaced 'after a year and half... with less than 100 hours', mill down 'over 3 months', '$60,000 in outsourcing fees', $2,400 support quote; Axsys: 'we found the [probe calibrations] coming direct from Arum to be less than entirely reliable'. Channel: Axsys (2017) 'a Versamill is not the same machine as an Arum or TruMILL... makes me mad enough to eat fried chicken'; a buyer who went Doowon-direct: 'Doowon Rep made it sound like everything was no problem... That was not the experience'; Axsys policy: 'Axsys doesn't send techs out unless parts need replacement AND you are up to date with your service agreement'; ARUM 'made it clear they are only to be contacted when your first tier support - i.e. Axsys - cannot solve your issue'. Doowon USA ran an LMT webinar titled 'The Most Reliable Dental Milling Machine: ARUM'. Five ex-SmileDirectClub Versamill 5X-200s surfaced at auction in 2024 (DLN), adding used supply.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://dentallabnetwork.com/forums/threads/arum-versamill-5x-software-help.33294/",
+   "source_date": "2022-01-25 (other threads 2017-06-29, 2021-02-11, 2022-11-14, 2024-09-17)",
+   "value": "mixed; calibration/support complaints documented 2017\u20132024"
+  },
+  {
+   "claim": "Per-machine economics (estimate): an A3 sold at $32,000 yields ~$14,500 gross and ~$9,000\u2013$10,000 contribution after dealer-absorbed install, training, travel, freight and warranty reserve; at 3\u20135 units/yr the dealership contributes ~$30,000\u2013$50,000 before demo carrying, trade-show and marketing costs of ~$15,000\u2013$25,000/yr",
+   "detail": "Inputs: dealer cost $17,500 (given); street $28,000\u2013$38,000 (bracketed by vhf E5 $28,990, DWX-52D $25,995, DWX-52DCi $34,995, vhf Z4 $39,990); dealer-absorbed install/training ~5 person-days (Axsys includes 3 training + 2 install days) at $400\u2013$600/day = $2,000\u2013$3,000 plus West Coast travel ~$1,100\u2013$1,500 (BTS SEA fare $454; GSA CA lodging $168 x 2 nights; M&IE $86 x 3 days; ground $150); LTL freight for 97 kg mill + table ~$400\u2013$800; first-year warranty labor reserve ~$1,000 (one service visit at Axsys's quoted $2,000\u2013$3,000 x ~40% incidence). CAM: if MillBox is bundled, retail $8,450 with unknown reseller cost; if the buyer compares against vhf's included dentalcam, the bundle must be discounted. Volume: Integra closed zero machines Mar\u2013Sep 2026; realistic run-rate 3\u20135/yr given a 20\u201325% demo-to-close rate and owner capacity. 15 units/yr would need 60\u201375 qualified demos.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://dentcore.com/products/vhf-r5",
+   "source_date": "undated; inputs accessed 2026-10-12",
+   "value": "~$9K\u2013$10K contribution per A3; $30K\u2013$50K/yr at 3\u20135 units"
+  },
+  {
+   "claim": "Lab consolidation is real but the industry remains fragmented; M&A activity is re-accelerating in 2026",
+   "detail": "Vertical IQ (citing Ion Analytics): 'Dealmaking involving North American dental labs and dental equipment manufacturers peaked at 18 transactions in 2021 before tapering off... eight deals were announced through June [2026]'; 'top 50 companies account for over 46% of industry revenue'; large firms: Glidewell, Modern Dental Labs, Dental Services Group, National Dentex. Inside Dental Technology (Oct 2019): 'even the largest laboratories' market shares are only a couple percent'; average zirconia crown price fell from $218 (2010) to $143 (2019). Acquisera (2022 SUSB): ~5,034 firms (339114+339116), 442 firms with 20+ employees, 29 firms over 500 employees; 'Dental laboratories over-index in the Mountain West and Pacific Northwest (Utah, Washington, and Idaho)'. CBP: -146 establishments 2022\u21922023; -15.8% 2017\u21922022.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://verticaliq.com/product/dental-laboratories/",
+   "source_date": "undated (page content references June 2026)",
+   "value": "18 deals (2021); 8 through Jun 2026; top-50 = 46% revenue"
+  }
+ ],
+ "cost_items": [
+  {
+   "item": "Demo unit carrying cost (ARUM A3 at $17,500 dealer cost): cost of capital plus depreciation/obsolescence",
+   "base_usd": 5075,
+   "low_usd": 3000,
+   "high_usd": 7000,
+   "period": "annual",
+   "basis": "9% cost of capital on $17,500 = $1,575/yr (dental equipment lender rates 6\u20139%; Integra has no credit line so opportunity cost is higher) plus 20% annual depreciation = $3,500/yr; used 5-axis dry mills resell at 40\u201360% of new within 3\u20135 years (vhf Z4 2019 asking $32,000 vs $39,990 new). Low case 10% depreciation; high case 25% plus financing at 12%.",
+   "status": "estimated",
+   "source_url": "https://dentalpracticeinsider.org/dental-equipment-financing/",
+   "source_date": "2026-06-29"
+  },
+  {
+   "item": "Installation and training travel per machine, West Coast customer (SEA to SNA/LAX/FAT), 2 days on site, 1 technician",
+   "base_usd": 1250,
+   "low_usd": 600,
+   "high_usd": 2500,
+   "period": "per-unit",
+   "basis": "BTS Q2 2026 average itinerary fare from Seattle $453.69; GSA FY2026 California average lodging $167.52 x 2 nights = $335; M&IE $86 x 3 days (first/last at 75%) \u2248 $215; rental car/ground $150; parking/misc $100. Low: drive-in Puget Sound/Portland install. High: Hawaii/East Coast (Buffalo) with 3 nights and $600+ airfare.",
+   "status": "estimated",
+   "source_url": "https://www.transtats.bts.gov/averagefare/",
+   "source_date": "Q2 2026 (GSA FY2026 effective 2025-10-01)"
+  },
+  {
+   "item": "Dealer-absorbed installation and operator training labor per machine (industry norm ~5 person-days: Axsys includes 3 days training + 2 days install)",
+   "base_usd": 2500,
+   "low_usd": 1600,
+   "high_usd": 4000,
+   "period": "per-unit",
+   "basis": "Axsys Versamill 5X-200 price 'Includes 3 days of training at the Wixom Corporate Training Center... mill engineers on-site for 2 days of installation and follow-up training, part run-off' (Blue Sky Bio listing). Loaded cost of a CAD/CAM director/senior tech at $40\u2013$60/hr x 8 hrs x 5 days = $1,600\u2013$2,400; high case adds a second visit or remote follow-up time. Opportunity cost: these are production hours lost at a lab collecting ~$11,700/month.",
+   "status": "estimated",
+   "source_url": "https://blueskybio.com/store/versamill-5x200",
+   "source_date": "undated"
+  },
+  {
+   "item": "Spare-parts kit for an A-series ARUM mill (spindle, encoder batteries, probe/sensors, clamps, belts/fuses)",
+   "base_usd": 8000,
+   "low_usd": 6000,
+   "high_usd": 12000,
+   "period": "one-time",
+   "basis": "Comparable listed spindle prices: J\u00e4ger spindle for Amann Girrbach Motion 2 $4,491.81\u2013$5,831.44 (US Dental Depot); Roland DWX-50 spindle ~$2,000\u2013$2,300 (DLN 2015); Ivoclar Zenotec Mini spindle $2,700 new (DLN 2021). ARUM A3 uses a 0.8 kW max Sycotec-class spindle; ARUM's own spindle price is not published. Axsys cited ~3-month spindle lead time (2022) and J\u00e4ger 20-week backorders (2015), which is why stocking one spindle is prudent. A 3 kW spindle for 5X-200/A7 class would raise the kit to $10,000\u2013$15,000 (estimate).",
+   "status": "estimated",
+   "source_url": "https://usdentaldepot.com/jager-spindle-m2i-amann-girrbach-179323",
+   "source_date": "undated"
+  },
+  {
+   "item": "Out-of-warranty on-site service call (benchmark the dealer may need to absorb under warranty or can charge after year 1)",
+   "base_usd": 2500,
+   "low_usd": 2000,
+   "high_usd": 3000,
+   "period": "per-unit",
+   "basis": "Axsys application engineer on DLN (Jan 2022): a mis-handled encoder battery swap 'turns into a 2000$-3000$ on site service call where we have to manually get your mill into the home position'. Travel per the install-travel line is included in that range for a West Coast visit.",
+   "status": "quoted",
+   "source_url": "https://dentallabnetwork.com/forums/threads/arum-versamill-5x-software-help.33294/",
+   "source_date": "2022-01-25"
+  },
+  {
+   "item": "Annual support/maintenance plan benchmark (revenue opportunity and competitor price point): Axsys PersonalCARE Gold",
+   "base_usd": 2500,
+   "low_usd": 1500,
+   "high_usd": 6750,
+   "period": "annual",
+   "basis": "Axsys: 'The Gold package is $2,500 a year' (Blue Sky Bio Versamill listing). Lab-reported CAM maintenance: hyperDENT $6,750/yr plus $2,600 support (DLN 2023); hyperDENT Compact renewals $1,500\u2013$2,500 (DLN 2020); MillBox updates $1,200/yr (Denteon). Labs on DLN openly resent these fees, so attach and renewal rates are a churn risk.",
+   "status": "listed",
+   "source_url": "https://blueskybio.com/store/versamill-5x200",
+   "source_date": "undated"
+  },
+  {
+   "item": "MillBox CAM license (reseller product): new license retail",
+   "base_usd": 8450,
+   "low_usd": 8450,
+   "high_usd": 16500,
+   "period": "per-unit",
+   "basis": "Denteon, Elemental Dental Supply and Kodent list MillBox Standard new license at $8,450; Elemental's Expert / Multi-postprocessing Expert options reach $16,500 (schema.org highPrice). New license includes current year + 1 year of updates. Reseller cost from CIMsystem is not published; Roland's own ROI calculator budgets generic CAM at $8,000.",
+   "status": "listed",
+   "source_url": "https://elementaldentalsupply.com/millbox-cam-software-new-license/",
+   "source_date": "undated (price valid through 2027-09-26)"
+  },
+  {
+   "item": "MillBox annual updates (recurring reseller revenue per installed seat)",
+   "base_usd": 1200,
+   "low_usd": 1200,
+   "high_usd": 1200,
+   "period": "annual",
+   "basis": "Denteon: 'MillBox updates and support are available at $1,200 per year. If your system is out of date, a maximum of 3 years ($3,600) is required to bring your software current.' Reseller share unknown.",
+   "status": "listed",
+   "source_url": "https://denteon.com/products/millbox-annual-updates",
+   "source_date": "undated"
+  },
+  {
+   "item": "hyperDENT license (reseller product): Compact 4X+PP 1 yr to Implant Light bundle",
+   "base_usd": 6900,
+   "low_usd": 3640,
+   "high_usd": 11230,
+   "period": "per-unit",
+   "basis": "US Dental Depot: Compact 4X + PP + 1 year $3,640. Kodent: hyperDENT Compact $6,900. Dentcore: hyperDENT Implant Light Bundle $11,230 (Compact 5X + maintenance + implant module light + dongle + 3 tools). hyperDENT V10/Express US retail not published.",
+   "status": "listed",
+   "source_url": "https://dentcore.com/products/hyperdent-implant-light-bundle",
+   "source_date": "undated"
+  },
+  {
+   "item": "Trade show: LMT Lab Day Chicago 10x10 inline booth plus freight/drayage, travel and lodging for 2 people, 3 nights",
+   "base_usd": 12000,
+   "low_usd": 8000,
+   "high_usd": 18000,
+   "period": "annual",
+   "basis": "LMT does not publish booth rates (exhibitor portal login required; booking and payment due Aug 18 for the February show). Estimate: 10x10 inline booth $4,500\u2013$7,500 (typical US trade-show rates of $45\u2013$75/sq ft for a hotel-based show), electrical/furniture/drayage $1,000\u2013$2,500, freight for a 97 kg demo mill round trip $800\u2013$1,500, airfare 2 x $450 (BTS Q2 2026 avg), Chicago lodging 3 nights x 2 rooms at $200\u2013$300, M&IE. Attendance 5,100+ with 297 competing exhibitors incl. Axsys, DECSTA, Doowon USA, vhf, DGSHAPE, imes-icore dealers, CIMsystem and FOLLOW-ME!.",
+   "status": "estimated",
+   "source_url": "https://exhibitorportal.labday.com/chicago27/intro/",
+   "source_date": "undated (Chicago 2027 booking due 2026-08-18)"
+  },
+  {
+   "item": "Trade show: LMT Lab Day West (Garden Grove, CA) 10x10 booth plus travel; relevant to the South Orange County shortlist",
+   "base_usd": 8000,
+   "low_usd": 5000,
+   "high_usd": 12000,
+   "period": "annual",
+   "basis": "Booth rates not published (booking due Nov 24 for the May show). Estimate: booth $3,500\u2013$6,000, services $800\u2013$1,500, freight $600\u2013$1,200, airfare 2 x $450, 2 nights lodging at GSA Orange County-class rates ~$170\u2013$220. Attendance 1,600+ (2026) with 131 exhibitors; registrations fell from 2,050 (2025) to 1,968 (2026); DECSTA exhibited at West 2025 and Geneva Capital at West 2026.",
+   "status": "estimated",
+   "source_url": "https://lmtmag.com/articles/lab-day-west-delivers-big-on-innovation-insight-and-industry-connection",
+   "source_date": "2026-05-19"
+  },
+  {
+   "item": "Demo/show freight for one A3-class mill (97 kg + 48 kg table, crated), LTL within West Coast, one leg",
+   "base_usd": 600,
+   "low_usd": 350,
+   "high_usd": 1200,
+   "period": "per-shipment",
+   "basis": "ARUM A3 weight 97 kg machine (A3L 145 kg) per arumdentistry.com; crated ~180\u2013250 kg, class 85\u2013100 LTL, 1 pallet, liftgate both ends. Range reflects regional vs cross-country lanes and crating. No carrier quote obtained (desk research only).",
+   "status": "estimated",
+   "source_url": "https://arumdentistry.com/eng/solution/aseries4.php",
+   "source_date": "undated"
+  },
+  {
+   "item": "Marketing cost per qualified lead (trade-show benchmark) and cost to close an exhibition-sourced sale",
+   "base_usd": 2188,
+   "low_usd": 283,
+   "high_usd": 3102,
+   "period": "per-unit",
+   "basis": "CEIR (via Exhibitor Online): $96 to meet an exhibition prospect vs $1,039 in the field; $2,188 to close an exhibition lead (3.5 sales calls) vs $3,102 (4.5 calls) for a non-exhibition lead; Exhibit Surveys cost per trade-show lead $283 (older) and $811 (2024, secondary citation). CEIR 2015: 39% of captured leads qualify. Figures are historical and not inflation-adjusted.",
+   "status": "listed",
+   "source_url": "https://www.exhibitoronline.com/topics/article.asp?ID=1224",
+   "source_date": "undated (CEIR study; 2015 metrics study)"
+  },
+  {
+   "item": "Customer financing payment benchmark for a $35,000 A3 package at 8.5% over 60 months (what the buyer sees)",
+   "base_usd": 718,
+   "low_usd": 660,
+   "high_usd": 850,
+   "period": "monthly",
+   "basis": "Standard amortization: $35,000 at 8.5%/60 mo \u2248 $718/mo; at 6% \u2248 $677; at 14% (newer practice) \u2248 $814. Rates per Dental Practice Insider (6\u20139% conventional qualified, 2026-06) and eBoost (10\u201318% startups). Dealers can roll shipping/install/tax into the finance agreement (Geneva Capital).",
+   "status": "estimated",
+   "source_url": "https://gogc.com/vendors/",
+   "source_date": "2025-05-19"
+  },
+  {
+   "item": "Warranty labor reserve per machine sold (first year), if ARUM does not reimburse dealer labor",
+   "base_usd": 1000,
+   "low_usd": 500,
+   "high_usd": 3000,
+   "period": "per-unit",
+   "basis": "One on-site visit at $2,000\u2013$3,000 (Axsys quote) times an assumed 30\u201350% first-year incidence; forum evidence of early failures (spindle at <100 hrs, PLC calibration drift, X-axis servo faults, encoder battery crashes). ARUM's dealer warranty-labor reimbursement terms are not public.",
+   "status": "estimated",
+   "source_url": "https://dentallabnetwork.com/forums/threads/axsys-arum-5x500-losing-calibration.34205/",
+   "source_date": "2022-11-14"
+  }
+ ],
+ "competitors": [
+  {
+   "name": "ARUM Dentistry USA Inc. (manufacturer subsidiary)",
+   "location": "17952 Sky Park Circle, Suite 45-C, Irvine, CA 92614 (also listed 18005 Sky Park Circle, Suite 54-E)",
+   "what": "ARUM's own US entity (est. Dec 2025/Jan 2026, CEO Howard Kim, 4 employees) selling ARUM mills, NB implants, zirconia, resins and premills; exhibited at Hinman 2026 (booth #1901); recruiting dealers and hiring nationwide implant sales reps",
+   "pricing": "Not published; A3L list ~$51,000 (given); A3 dealer cost $17,500 (given)",
+   "turnaround": "n/a",
+   "notes": "Direct competitor/channel conflict risk in the exact Orange County market Integra is considering. LinkedIn (2026-03-06): 'ARUM USA is fully prepared and looking for strong dealer partners'; self-reported 'Achieved 50% sales growth in the U.S.' Whether it sells direct to labs below dealer street price is unknown.",
+   "source_url": "https://arumdentistry.com/eng/about/location.php"
+  },
+  {
+   "name": "Axsys Dental Solutions (Versamill)",
+   "location": "29627 West Tech Dr, Wixom, MI 48393",
+   "what": "Longest-standing US ARUM channel (since at least 2014); sells ARUM-built mills as Versamill 5X-200/300D/400/450/500 with proprietary modifications, fixtures, hyperDENT/MillBox, training center, PersonalCARE support plans; Lab Day Chicago exhibitor (booths G-30/H-31 in 2024)",
+   "pricing": "Versamill 5X-200 $94,500 base / $103,600 listed incl. 3 days training + 2 days install; ax726DW $74,500; 5X-450 'just under $60K' (2019-20); 5X-300 ~$38K (2019); Gold support $2,500/yr",
+   "turnaround": "Spindle lead time ~3 months (2022 statement); techs dispatched only with current service agreement and when parts are needed",
+   "notes": "Publicly asserts Versamill is 'not the same machine as an Arum' and that ARUM-direct probe calibration is 'less than entirely reliable'; forum reviews of its service are mixed (praised for US-based support; criticized for fees and a 3-month down mill).",
+   "source_url": "https://dentallabnetwork.com/forums/threads/redon-gtr-vs-coritec-350i-x-pro-vs-arum-5x200-5x500.35541/"
+  },
+  {
+   "name": "DECSTA (DigitalStomUSA LLC)",
+   "location": "15375 Barranca Pkwy, Ste C102, Irvine, CA 92618",
+   "what": "'Official distributor of Arum Dentistry in the US'; sells 5X-300 Pro, 5X-500, 5X-500L, ARUM NB implants, consumables; offers personalized milling templates; Lab Day Chicago 2025 booth C-53 and Lab Day West 2025 exhibitor",
+   "pricing": "Quote-based ($0.00 on product pages); ran 'exclusive Chicago Specials on the ARUM 5X-500 and 5X-300Pro' at Lab Day Chicago 2025",
+   "turnaround": "n/a",
+   "notes": "Sits in the same Irvine market as ARUM USA and Integra's South Orange County shortlist; discounting at shows signals price competition inside the ARUM channel.",
+   "source_url": "https://lmtmag.com/digitalstomusa"
+  },
+  {
+   "name": "Doowon USA, Inc. (Dental Solution USA)",
+   "location": "2131 N Broad St STE 201, Lansdale, PA 19446; California office in Torrance, CA 90501",
+   "what": "ARUM distributor tied to ARUM's parent Doowon; lists 5X-200, 5X-500L, 5X-500, 5X-450, 5X-400, 5X-300PRO, 5X-300; ran LMT webinar 'The Most Reliable Dental Milling Machine: ARUM'; Lab Day Chicago 2024 exhibitor (booth C-43)",
+   "pricing": "Not published",
+   "turnaround": "n/a",
+   "notes": "A 2017 DLN poster who bought Doowon-direct reported support 'was not the experience' promised.",
+   "source_url": "https://www.dentalsolutionusa.com/dental-milling-machine"
+  },
+  {
+   "name": "vhf Inc. dealer network (Dentcore, Elemental Dental Supply, Voxel Dental, Esthetic Professionals)",
+   "location": "Chantilly VA; Tempe AZ; nationwide",
+   "what": "German 4/5-axis mills with CAM (dentalcam) included at no license fee; ships in 2\u20133 weeks",
+   "pricing": "E3 $20,990; E4 $24,990; E5 $28,990; N4+ $34,990; Z4 $39,990; K5+ $40,990; S5 $51,990; R5 $84,990 (manual-load R5 $69,990)",
+   "turnaround": "2\u20133 weeks",
+   "notes": "Primary price benchmark for ARUM A3 (vs E5) and A3L/A5 (vs S5). Included CAM undercuts a MillBox-attached ARUM bundle.",
+   "source_url": "https://dentcore.com/products/vhf-r5"
+  },
+  {
+   "name": "DGSHAPE (Roland DGA) dealer network (e.g., Zahn Dental/Henry Schein)",
+   "location": "Roland DGA, Irvine, CA; dealers nationwide",
+   "what": "DWX-52D / 52Di / 52DCi dry mills and DWX-42W wet mill; 'industry's best-selling dental mill'; 1-year factory warranty, dealer extensions",
+   "pricing": "DWX-52D MSRP $25,995; DWX-52DCi $34,995 US; DWX-42W ~$28,995\u2013$29,445 (2019 bundle math); Roland budgets CAM $8,000 and dust extractor $1,995",
+   "turnaround": "n/a",
+   "notes": "Price ceiling for compact dry mills; Roland DGA is also headquartered in Irvine.",
+   "source_url": "https://www.rolanddga.com/applications/dental-cad-cam/dwx52dci-roi-calculator"
+  },
+  {
+   "name": "imes-icore CORiTEC via US Dental Depot (and others)",
+   "location": "US Dental Depot, 522 NW 77th St, Boca Raton, FL 33487",
+   "what": "German 5-axis mills (One, 150i, 250i Loader PRO, 350i X PRO, 650i) stocked in the US with service, financing, training",
+   "pricing": "350i PRO+ \u20ac59,450 (DE); 350i Loader PRO+ \u20ac65,283\u2013\u20ac69,450 ex-VAT (DE); US prices on request",
+   "turnaround": "2\u20133 week installs from US stock; German parts 4\u20136 weeks if not stocked",
+   "notes": "USDD itself flags 'Premium price vs. Asian alternatives' \u2014 the positioning gap ARUM dealers sell into.",
+   "source_url": "https://usdentaldepot.com/lp/imes-icore/"
+  },
+  {
+   "name": "MillBox and hyperDENT resellers (Denteon, Elemental Dental Supply, Kodent, US Dental Depot, Dentcore, 3D Prime Technologies, Axsys)",
+   "location": "Nationwide (online)",
+   "what": "Resell CIMsystem MillBox licenses/updates and FOLLOW-ME! hyperDENT licenses/maintenance; provide first-line CAM support",
+   "pricing": "MillBox $8,450\u2013$16,500 new, $1,200/yr updates; hyperDENT Compact $3,640\u2013$6,900, Implant Light bundle $11,230",
+   "turnaround": "Dongle/online license delivery",
+   "notes": "Price transparency online means Integra cannot earn above-market margin on software; value must come from attach to mill sales and support.",
+   "source_url": "https://elementaldentalsupply.com/millbox-cam-software-new-license/"
+  }
+ ],
+ "targets": [
+  {
+   "name": "ARUM Dentistry USA Inc. (principal) \u2014 renegotiation target",
+   "location": "Irvine, CA",
+   "type": "other",
+   "why": "The 15-unit commitment and lack of territory are the core economic risks; ARUM USA is publicly recruiting dealers (Mar 2026) and expanding direct sales, so dealer protection, demo-unit support, warranty-labor reimbursement and show co-op funding should be negotiated before further investment.",
+   "decision_maker": "Howard Kim, CEO, ARUM Dentistry USA Inc.",
+   "how_to_reach": "949-340-2971; hjkim626@arumdentistry.com (listed on arumdentistry.com); Hinman/Lab Day exhibitor contacts",
+   "source_url": "https://arumdentistry.com/eng/about/worldwide.php?b_cate=34"
+  },
+  {
+   "name": "Geneva Capital LLC (vendor finance partner)",
+   "location": "Alexandria, MN (national niche lender; exhibited at Lab Day West 2026 and Lab Day Chicago 2024)",
+   "type": "other",
+   "why": "Dental-lab-focused direct lender used by Axsys; offers vendor program with approvals to $250K, $0-down structures, show-floor approvals, and pays the vendor after signed delivery form \u2014 solves Integra's cash-poor position when a customer buys a $30K+ mill.",
+   "decision_maker": "Vendor relations team (dedicated 4\u20135 person vendor PODs)",
+   "how_to_reach": "gogc.com/vendors; present at LMT Lab Day booths",
+   "source_url": "https://gogc.com/vendors/"
+  },
+  {
+   "name": "Ascentium Capital (vendor program with 100% prefunding option)",
+   "location": "Kingwood, TX (national)",
+   "type": "other",
+   "why": "Offers qualified vendors 100% prefunding and next-day funding, application-only to $250K, up to 84 months and no down payment \u2014 relevant if Integra must pay ARUM for a machine before the customer's lender funds.",
+   "decision_maker": "Vendor program sales",
+   "how_to_reach": "ascentiumcapital.com/offer-financing; 866-722-8500",
+   "source_url": "https://ascentiumcapital.com/offer-financing"
+  },
+  {
+   "name": "In-house milling labs in WA/OR/CA with 2+ mills (upgrade/replacement cycle)",
+   "location": "Washington (175 lab establishments), Oregon (count unknown), California (734)",
+   "type": "dental lab",
+   "why": "LMT 2023: 67% of in-house millers own 2+ mills; replacement/expansion buyers are the realistic ARUM prospects (metal-capable A5 PRO/A7 vs zirconia A3), and Lab Day West (Garden Grove) is the regional gathering (1,600+ attendees).",
+   "decision_maker": "Lab owner / CAD-CAM manager",
+   "how_to_reach": "LMT Lab Day West exhibiting, LMTmag lab directory, Medit Link/3Shape Communicate connections, lab-to-lab milling customers (Bear Milling) as the demo funnel",
+   "source_url": "https://www.lmtmag.com/articles/milling-market-facts"
+  }
+ ],
+ "unknowns": [
+  "ARUM's US dealer price list for A3L, A3 PRO, A5 PRO, A7/A7L and 5X-500 series (only the A3 dealer cost of $17,500 and ~$51,000 A3L list are known from context); whether ARUM USA sells direct to labs and at what price relative to dealer street price",
+  "ARUM dealer agreement terms beyond the 15-unit commitment: required demo inventory, warranty-labor reimbursement rates, parts-stocking requirements, co-op marketing/show funding, payment terms (deposit vs pay-on-shipment), and whether prefunding by a lender is accepted",
+  "LMT Lab Day Chicago and West exhibitor booth rates (behind exhibitor-portal login); estimate used in cost_items",
+  "Census CBP 2019 state baselines and 2023 counts for Oregon, Hawaii and Alaska dental labs (NAICS 339116); Census API requires a key and data.census.gov tables are JS-rendered; Hawaii DBEDT posts CBP files but as spreadsheets not read here",
+  "Share of US labs owning a 5-axis mill specifically (NADL Materials & Equipment Surveys 2022\u20132025 are paywalled); only the ~30% in-house-milling share (LMT 2023) and 2+ mill ownership distribution are public",
+  "MillBox (CIMsystem) and hyperDENT (FOLLOW-ME!) reseller discount/margin schedules and minimums; whether MillBox OEM 'Eco' licenses bundled with ARUM mills carry reseller margin",
+  "Dental-lab-mill-specific close rates, demos per close and average sales-cycle length; only cross-industry capital-equipment and dental-dealer staffing benchmarks were found",
+  "Current US price of a Sycotec 3 kW (5X-200/A7-class) or 0.8 kW (A3-class) replacement spindle and ARUM's parts price list",
+  "Whether the 2016 dental-supplies antitrust allegations about 32% equipment margins reflect current practice at large distributors; small lab-equipment dealer margins (20\u201335%) remain an estimate",
+  "Actual booth-level or exhibitor-level outcomes at Lab Day for mill sellers (leads per show, closes per show); LMT publishes attendance but not exhibitor results",
+  "2026 Section 179/bonus conformity in Washington (no income tax, n/a), California (does not conform to bonus; CA Section 179 limit remains $25,000) and Oregon \u2014 state treatment not researched here",
+  "Whether ARUM USA's Hinman 2026 and Lab Day presence included direct machine sales to labs/clinics in Southern California (would confirm channel conflict)"
+ ]
+}

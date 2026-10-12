@@ -1,0 +1,560 @@
+{
+ "topic": "TRI Dental Implants matrix abutment-free system as a niche demand funnel for a certified lab (Integra Dental Design, Bellevue WA)",
+ "summary": "TRI matrix is real, FDA-cleared, and still small in the US; certification is worth finishing but is not a national demand engine for Integra in 6-12 months.\n\nFACTS. matrix is TRI Dental Implants Int. AG's (Hunenberg, CH; founded 2011 by ex-Straumann/Implant Direct exec Tobias Richter) implant connection on which a CAD/CAM zirconia or titanium \"Crown Abutment\" screws directly to the implant with no Ti-base, abutment or cement. CE mark Oct 2020; FDA 510(k) K203660 cleared 21 Dec 2021; US-only line extension matrix X-Force (K242661) cleared 8 Jan 2025 and launched Dec 2025. TRI's own lead-user survey: 2,334 matrix implants placed worldwide Oct 2020-Dec 2022 (99.7% success). LinkedIn lists ~43 employees, ~10 in the US; investors are SHS Capital (since Sept 2014) and Geistlich Pharma (minority stake Sept 2025, CEO on TRI's board). The US entity \"TRI Dental Implants USA Inc.\" is published at a Dover, DE registered-agent address; US phone lines use the 949 (Orange County) area code, including a dedicated lab line (949-210-3877), and RocketReach shows a sales employee in Irvine, but no Orange County street address or \"TRI Digital Hub\" address is published anywhere I could find. Patterson Dental became authorized US distributor in March 2023; TRI reports a direct US sales structure since Oct 2024 and was hiring reps for Boston, NJ/Philadelphia, SF Bay, LA (Jan 2026) and Arizona (Sept 2026). US leadership: Dereck Fandel (EVP Sales & Operations), David Gentile (Director of Sales), Corey Kabot (Eastern US Area Sales Director), Brett Jackson (Area Sales Director), Amir Gordji DDS (Sr Director Clinical Affairs). A competitor (Gerald Niznick, Dec 2023) cited $325 per matrix implant.\n\nCERTIFICATION. TRI publishes no requirements, fee or lab count; the certified-lab list is behind a request form. What is public: the IFU requires TRI interface files (free on request), specified screws, zirconia with at least 1,200 MPa three-point bending strength, verification of every suprastructure with TRI verification tools (VTool-P37/P45) and \"appropriate measuring equipment\"; the matrix Academy has a technician certification track \"from CAD installation to CAM strategies\" (free registration code). Regulatory nuance: the 510(k) states patient-specific crown abutments are manufactured \"at TRI Dental Implants Int. AG facilities\" from design files, and a separate Talladium 510(k) (K241170, Oct 2024) for TRI-matrix screws describes manufacturing \"at a Talladium-validated milling center.\" In FDA terms a validated milling center is a contract manufacturer that must register its establishment (FY2026 fee $11,423), list devices and run a quality system. Integra should confirm with TRI whether \"certified manufacturing center\" carries these obligations.\n\nHOW DEMAND IS ROUTED. TRI's Tooth-in-a-Box / Bridge-in-a-Box / Arch-in-a-Box bundles include the final zirconia \"designed and manufactured by the TRI lab network\"; TRI coordinates, bills one fixed price and the partner lab gives a 10-year warranty. TRI also sells Scan & Smile \"Prosthetic Services for Labs\" and co-brands full-arch bundles with InstaRisa (Dr. Art Mirelez, Clovis CA). So TRI is itself the aggregator: certified labs are suppliers to TRI's bundle as much as recipients of dentist referrals. Glidewell (Irvine CA) is the publicly announced US certified manufacturing center (Apr 2025) with \"special pricing\" and a lifetime BruxZir warranty; Rutherford Dental Lab (Livermore CA) advertises TRI matrix workflows nationwide; JB Dental Lab (Tempe AZ) hosts TRI FP1 courses. The 3-on-6 FP1 movement (Smile Systems, Utah; providers in UT, MA, CO, AZ, OK, AK, MI, FL, NM, ID) runs on TRI implants but is restored exclusively by Smile Systems' own lab. Several TRI US KOLs run in-house labs (Mirelez/Clovis, Azam Saeed/Chicago ~100 arches per month, Chris Winterholler/Scottsdale). No Washington, Oregon, Alaska or Hawaii TRI KOL, course, certified lab or practice advertising matrix surfaced.\n\nESTIMATES (labeled). US dentists actively placing matrix: unknown; 150-500 accounts is my estimate from 5-7 field reps at 25-75 active accounts each (low confidence). US matrix implants per year: unknown; low thousands is plausible given 2,334 worldwide in the first 27 months. Integra's plausible matrix lab volume: 0-5 units/month at 6 months and 3-15 units/month at 12 months if certified, listed and actively marketed; upside only if Integra becomes a Tooth-in-a-Box subcontractor (price set by TRI) or lands one of the ~20 identifiable US TRI practices that lacks an in-house lab. At Integra's $129-$299 per unit that is roughly $1,000-$4,000/month, useful but not transformative against ~$11,700/month revenue.\n\nDEPENDENCIES AND RISKS. Certification not yet complete (Oct 2026). Possible FDA contract-manufacturer obligations. Glidewell's scale, pricing and warranty. TRI's small US footprint and unproven volume (its German subsidiary posted losses every year 2018-2024; LinkedIn's sub-$1M revenue estimate is unreliable either way). KOL in-house labs and Smile Systems' captive lab remove the highest-volume users from the open market. TRI's own lab services compete for the same work. Single-brand dependency. Clinical debate (Niznick's screw-loosening critique; a 2025 FEA paper found higher stresses in the abutment-free model) could slow adoption.\n\nVERDICT. Finish the certification because it is cheap and strategically useful: it positions Integra as the Pacific Northwest's only certified matrix lab if TRI ever sells there, gives a credible reason to court TRI's California KOLs (Mirelez, Dunlop, Wasserstein, Shah), and dovetails with the ARUM/MillBox business, since TRI's \"mill locally\" pitch creates equipment demand. Do not model it as a demand engine; model it as 3-15 units/month at month 12 with meaningful probability of zero.",
+ "findings": [
+  {
+   "claim": "matrix is an implant connection for direct-to-implant CAD/CAM zirconia or titanium restorations with no abutment, Ti-base or cement; CE-marked Oct 2020, first shown at IDS 2019",
+   "detail": "Dental Tribune report of CE certification; TRI says restorations from single screw-retained crowns to multi-unit bars/bridges are planned directly on the implant; no cementation; patient-individual emergence profiles.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.dental-tribune.com/news/worlds-first-digital-implant-receives-european-ce-mark-certification/",
+   "source_date": "2020-10-20",
+   "value": "CE mark Oct 2020"
+  },
+  {
+   "claim": "FDA 510(k) K203660 for the TRI-matrix Implant Line was cleared 21 Dec 2021; the 'Crown Abutment' is a patient-specific CAD/CAM part that also serves as the final restoration",
+   "detail": "510(k) summary: Crown Abutments in Y-TZP zirconia (ISO 13356) or Ti-6Al-4V ELI, platforms 3.7 and 4.5 mm; design limits include max angulation correction 15 deg, abutment diameter 4-13 mm, max height 15 mm, min post height 4 mm. The summary states manufacture of these abutments/restorations 'will be at TRI Dental Implant Int. AG facilities after receipt of the digital design file' from the dentist or lab. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K203660.pdf",
+   "source_date": "2021-12-21",
+   "value": "K203660; decision 2021-12-21"
+  },
+  {
+   "claim": "matrix X-Force (immediacy/high primary stability line extension) was FDA-cleared 8 Jan 2025 (K242661) and is sold exclusively in the United States",
+   "detail": "FDA database shows decision 01/08/2025, same prosthetic interface as K203660. TRI LinkedIn 1 Dec 2025 announced launch 'available exclusively in the United States'; SHS Capital 28 Jan 2026 framed X-Force and Scan&Smile-in-15-Minutes (TRI AI Crown) as US growth products.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPMN/pmn.cfm?ID=K242661",
+   "source_date": "2025-01-08",
+   "value": "K242661"
+  },
+  {
+   "claim": "TRI's lead-user survey: 2,334 matrix implants placed worldwide Oct 2020-Dec 2022 with 99.7% success; a second survey was run Dec 2024 (4.5 years)",
+   "detail": "TRI matrix overview catalog (US version, Feb 2026) and the 2024-06 version both cite the Dec 2022 lead-user survey (27 months). The 2026 catalog adds a Dec 2024 survey but the result text was not legible in the fetch. This is the only published volume figure; it covers lead users only, not total sales.",
+   "kind": "historical",
+   "confidence": "medium",
+   "source_url": "https://tri-implants.swiss/download/2026-02-tri_-matrix-overview-en-01_web.pdf",
+   "source_date": "2026-02 (catalog code)",
+   "value": "2,334 implants in 27 months, 99.7% success"
+  },
+  {
+   "claim": "TRI publishes no certified-lab list, requirements or fees; the 'matrix Certified Lab List' is available only by submitting a contact form",
+   "detail": "info.tri-implants.swiss/matrixlabsoverview: 'Fill out the following contact form and receive more information about our matrix certified labs all over the globe.' Research rules prohibited submitting the form. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://info.tri-implants.swiss/matrixlabsoverview",
+   "source_date": "undated",
+   "value": "gated"
+  },
+  {
+   "claim": "Lab-side requirements in the TRI IFU: TRI interface files (free on request), specified screws, zirconia >=1200 MPa, verification of every suprastructure with a TRI verification tool (VTool-P37 / VTool-P45) and 'appropriate measuring equipment'; warnings against worn CAM tools, inappropriate CAM strategies and inappropriate machines",
+   "detail": "IFU section 8.7.2: 'Request the digital libraries files at digital@tri-implants.com'; Table 4: zirconia minimal three-point bending strength 1200 MPa, screw SCRW-2.8, interface file EN (single, engaging) or NE (multi-unit), torque 35 Ncm; metal min tensile 860 MPa. 'Do not proceed if you do not have appropriate measuring equipment to verify the specified production tolerances.' Hosted copy of the English IFU (TRI distributor site); accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.adm1stchoicemedicals.com/wp-content/uploads/2021/04/1-TRI-IMPLANT-SYSTEM_IFU_ENG.pdf",
+   "source_date": "undated (uploaded 2021-04)",
+   "value": "zirconia >=1200 MPa; VTool-P37/P45"
+  },
+  {
+   "claim": "TRI's matrix Academy offers a certification program for dental technicians covering 'surgical procedures, CAD installations and CAM strategies', with a free registration code",
+   "detail": "German Academy page: 'Treten Sie unserem Zertifizierungsprogramm bei ... von CAD-Installationen bis hin zu CAM-Strategien'; registration code for technicians matrix-lab-901603. No fee shown. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://tri-implants.swiss/de/academy/matrix-academy/",
+   "source_date": "undated",
+   "value": "free registration code"
+  },
+  {
+   "claim": "A 'certified manufacturing center' / 'validated milling center' is, in FDA terms, a contract manufacturer for the 510(k) holder and must register its establishment, list devices and operate under quality-system regulations",
+   "detail": "Inside Dental Technology CE article quoting FDA's Andrew Steen: 'Validated Milling Center is a dental implant/abutment industry term for what the FDA considers ... a contract manufacturer ... responsible for registration/listing of the facility and devices produced as well as implementation of manufacturing procedures in line with quality system regulations.' Relevant because K203660 says crown abutments are made at TRI facilities and K241170 (Talladium, Oct 2024) references TRI-matrix screws and manufacture at a 'Talladium-validated milling center'.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://idt.cdeworld.com/courses/5414-in-house-custom-abutment-manufacturing-options",
+   "source_date": "undated",
+   "value": "n/a"
+  },
+  {
+   "claim": "FDA annual medical-device establishment registration fee for FY2026 (Oct 1 2025-Sep 30 2026) is $11,423; no small-business reduction applies to registration except hardship waivers",
+   "detail": "Federal Register notice 'Medical Device User Fee Rates for Fiscal Year 2026'. Relevant only if TRI certification requires Integra to register as a contract manufacturer; Integra should ask TRI.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.govinfo.gov/content/pkg/FR-2025-07-30/pdf/2025-14412.pdf",
+   "source_date": "2025-07-30",
+   "value": "$11,423 per year"
+  },
+  {
+   "claim": "TRI itself aggregates final-restoration demand: Tooth-in-a-Box / Bridge-in-a-Box / Arch-in-a-Box bundle the implant, screw and final zirconia 'designed and manufactured by the TRI lab network' at one fixed price, with TRI coordinating and a 10-year partner-lab warranty",
+   "detail": "tri-implants.swiss single-crown workflow page: 'Every Tooth-in-a-Box restoration is crafted by a certified TRI lab partner ... TRI coordinates everything. You scan, we handle the rest.' Scan & Smile T&C (2024-08): 'The partner laboratory offers a 10-year warranty'; prices 'outlined in a separate document available upon request'; service exclusively for TRI matrix jobs. Implication: certified labs are suppliers to TRI's bundles as much as recipients of referrals.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://tri-implants.swiss/en/workflow/single-crown/",
+   "source_date": "undated",
+   "value": "fixed price not published"
+  },
+  {
+   "claim": "Glidewell (Irvine/Newport Beach, CA) was designated a certified TRI matrix manufacturing center in April 2025 with 'low, special pricing' and a lifetime BruxZir warranty; it publishes a TRI Matrix Implant Rx",
+   "detail": "Glidewell press release 7 Apr 2025 ('validated milling partner'); Glidewell Rx GL-5046262 (dated 09/30/24) states 'Glidewell is a certified TRI Matrix manufacturing center.' The matrix price is not published; Glidewell's standard screw-retained BruxZir crown is $339 and lifetime warranty applies to BruxZir screw-retained crowns.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.accessnewswire.com/newsroom/en/healthcare-and-pharmaceutical/glidewell-dental-laboratory-partners-with-swiss-implant-company-tri-1009131",
+   "source_date": "2025-04-07",
+   "value": "matrix price unpublished; reference $339 screw-retained BruxZir"
+  },
+  {
+   "claim": "Rutherford Dental Lab (Livermore, CA) markets 'TRI Matrix Workflows: abutment-free, direct-to-implant restorations' to practices nationwide",
+   "detail": "Homepage lists TRI alongside OptiSplint and photogrammetry; exocad CAD, Ivoclar PM7 milling, 5-axis titanium, 40 arches/month capacity, NADL certified. Certification status with TRI not stated. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://rutherforddentallab.com/",
+   "source_date": "undated",
+   "value": "n/a"
+  },
+  {
+   "claim": "JB Dental Lab (Tempe, AZ) hosted TRI's free 3-CE FP1 abutment-free course with Dr. Josh Nagao (Jan 2026); its matrix certification status is not stated",
+   "detail": "TRI LinkedIn post 30 Jan 2026: course location 'Tempe, AZ | JB Dental Lab'. JB Dental Lab site: founded 2013, full-arch digital specialist, 1403 W 10th Pl #B104, Tempe AZ 85281.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.linkedin.com/posts/tri-dental-implants-int-ag_fullarchimplantology-fp1-abutmentfree-activity-7422941660822757376-kYxo",
+   "source_date": "2026-01-30",
+   "value": "n/a"
+  },
+  {
+   "claim": "The 3-on-6 FP1 concept (Smile Systems, American Fork UT) adopted TRI implants, but its restorations are made exclusively by Smile Systems' own Dental Studio, which 'only works with 3 on 6 providers'",
+   "detail": "Implant Practice US cover story (reposted by TRI): Dr. Randy Roberts chose TRI for abutment-free FP1 bridges. Smile Clinic USA: 'Our dedicated lab is the only lab in the world authorized to design and manufacture 3 on 6 smiles.' Provider footprint: 8th provider July 2020 (UT, MA, CO, AZ, OK, AK), first Florida provider Oct 2023 (Tampa), New Mexico Jun 2025, Idaho Oct 2025; 8 new providers trained Sept 2025; 'dozens' total. This TRI-driven FP1 volume is captive and not available to Integra.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.smileclinicusa.com/what-is-3-on-6",
+   "source_date": "undated",
+   "value": "captive lab; 'dozens' of providers"
+  },
+  {
+   "claim": "TRI's US legal entity is 'TRI Dental Implants USA Inc.' at a Dover, Delaware registered-agent address; US phone lines (customer 949-676-7383, lab 949-210-3877) use the Orange County area code, but no Orange County street address or 'TRI Digital Hub' address is published",
+   "detail": "tri-implants.swiss/en/contact lists TRI USA: 1111B S Governors Ave, Suite 48081, Dover, DE 19904 (a suite-numbered virtual/registered-agent address). The 2024-06 catalog gave Infoline USA (636) 486-7334 (St. Louis area code). RocketReach shows a TRI sales employee located in Irvine, CA and one in Las Vegas. The 'Orange County / TRI Digital Hub' belief is therefore plausible but unverified.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://tri-implants.swiss/en/contact/",
+   "source_date": "undated",
+   "value": "Dover DE address; 949 phones"
+  },
+  {
+   "claim": "TRI's US leadership and scale: Dereck Fandel (EVP Sales & Operations), David Gentile (Director of Sales), Corey Kabot (Eastern US Area Sales Director), Brett Jackson (Area Sales Director), Amir Gordji DDS (Sr Director Clinical Affairs); LinkedIn shows ~43 employees total, 10 in the US, 13 in sales globally",
+   "detail": "LinkedIn company-page summary (third-party scrape) and TRI job PDF (applications to Dereck.Fandel@tri-implants.com; reps report to an Area Sales Director; Salesforce CRM; car allowance). Headcount figures are LinkedIn-derived and approximate.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://linkedin.com/company/tri-dental-implants-int-ag",
+   "source_date": "undated (accessed 2026-10-12)",
+   "value": "~43 employees; ~10 US"
+  },
+  {
+   "claim": "TRI was hiring US 'Digital Implant Sales Specialists' for Boston/New England, New Jersey/Philadelphia, SF Bay Area and Los Angeles (27 Jan 2026) and Arizona (7 Sept 2026); none for the Pacific Northwest",
+   "detail": "TRI LinkedIn posts. Hiring is a growth signal and also shows the territories TRI prioritizes; Washington/Oregon are not among them.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.linkedin.com/posts/tri-dental-implants-int-ag_matrix-wearetri-digitaldentistry-activity-7421939182631137280-rOXP",
+   "source_date": "2026-01-27",
+   "value": "5 open territories in 2026"
+  },
+  {
+   "claim": "Patterson Dental became TRI's authorized US distributor for matrix in March 2023; TRI reports a direct US sales structure since Oct 2024",
+   "detail": "SHS Capital news items (TRI's PE investor). Patterson's catalog lists matrix bone-level and tissue-level implants (prices behind login).",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.shs-capital.eu/partnership-in-the-usa-with-patterson-dental/",
+   "source_date": "2023-03-23",
+   "value": "n/a"
+  },
+  {
+   "claim": "Investors: SHS Gesellschaft fuer Beteiligungsmanagement (Early VC, Sept 2014) and Geistlich Pharma AG (strategic minority stake, Sept 2025; Geistlich CEO Diego Gabathuler joined TRI's board); 3Shape co-founder Rune Fisker is also a board member",
+   "detail": "TRI press release Sept 2025 and TRI team page. Dealroom lists only these two rounds, amounts undisclosed. Geistlich also distributes TRI in Australia.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://tri-implants.swiss/media/2025-09-tri_welcomes_geistlich_pharma_ag_final.pdf",
+   "source_date": "2025-09",
+   "value": "2 funding rounds, undisclosed"
+  },
+  {
+   "claim": "TRI's German subsidiary (TRI Dental Implants Direct GmbH, Freiburg) reported net losses every year 2018-2024 (2024: -EUR 141k; total assets EUR 3.42M; EUR 3.29M deficit not covered by equity)",
+   "detail": "German commercial-register financials via unternehmen24. This is the EU service/sales subsidiary, not the Swiss parent, so it does not describe group finances, but it is the only audited-style data available and indicates a thinly capitalized operating entity.",
+   "kind": "historical",
+   "confidence": "medium",
+   "source_url": "https://www.unternehmen24.info/Firmeninformationen/Deutschland/Firma/3900092",
+   "source_date": "filing for FY2024 published 2026-07-27",
+   "value": "FY2024 loss EUR -141,096"
+  },
+  {
+   "claim": "A matrix implant fixture was quoted at $325 in the US (Dec 2023) by a competitor; Patterson lists matrix implants but prices are login-gated",
+   "detail": "Gerald Niznick (ZimVie Screw-Vent inventor, launching competing GEN5) LinkedIn post criticizing matrix: 'At $325 per implant, the Matrix, even without an abutment, does not represent an economical benefit' and predicting screw loosening under non-vertical loading. Hostile source; treat as indicative only.",
+   "kind": "historical",
+   "confidence": "low",
+   "source_url": "https://www.linkedin.com/posts/gerald-niznick-dmd-msd-a141905_tri-implant-is-new-to-the-american-market-activity-7139314543012286464-8vGZ",
+   "source_date": "2023-12-09",
+   "value": "$325 per implant (claimed)"
+  },
+  {
+   "claim": "TRI's US KOL roster (from its webinar archive and 2026 US MasterClass) is concentrated in California, Arizona, Utah, Michigan, Illinois and Florida; none identified in Washington, Oregon, Alaska or Hawaii",
+   "detail": "Webinar speakers and verified locations: Art Mirelez (Clovis/Fresno CA, InstaRisa co-founder, in-house Zirkonzahn lab), Ryan Dunlop (Fresno CA), Jack Wasserstein (periodontist, Valencia CA), Kianor Shah (Palm Desert CA), Vishy Broumand (OMS, Phoenix AZ), Chris Winterholler (Scottsdale AZ, on-site milling lab), Josh Nagao (course in Tempe AZ), Randy Roberts and Logan Locke (3-on-6, Utah), Bruce Smoler (Westland MI, Yomi robotics), Azam Saeed (Chicago IL, ~100 arches/month, in-house lab), Shivam Patel (Orlando FL), Paul Fugazzotto, John Bigler, Cody Mugleston, Gavin Ewing, Mike Costa (locations not verified). 2026 US MasterClass dates: May 21, Jun 3, Jul 8, Jul 29, Aug 19, Sep 16, Oct 21, Nov 18, Dec 10.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://tri-implants.swiss/en/academy/webinars/",
+   "source_date": "undated (webinar dates 2024-2026)",
+   "value": "~17 named US KOLs"
+  },
+  {
+   "claim": "InstaRisa Technologies (Dr. Art Mirelez, Clovis CA) and TRI announced a partnership on 11 Apr 2025: InstaRisa designs full-arch restorations for TRI USA customers via 'TRI USA co-branded full arch bundles' sold to US dentists",
+   "detail": "InstaRisa press release; TRI quote: 'offering final zirconia arches at the best case cost price in the industry.' Mirelez's practice has a full in-house lab (Zirkonzahn mill), so he is an equipment/software prospect for Integra more than a lab client; the manufacturing partner for the bundles is not named.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.instarisa.com/blogs/news/instarisa-technologies-and-tri-dental-implants-partner-to-deliver-enhanced-digital-workflows",
+   "source_date": "2025-04-11",
+   "value": "n/a"
+  },
+  {
+   "claim": "Comparable manufacturer lab programs in the US give labs a license/library plus a public directory, but not guaranteed case flow: ZimVie Encode Empowered Lab (non-exclusive license, EEL directory, OEM components mandatory, RealGUIDE or 3Shape Abutment Designer), Dentsply Atlantis Super Elite (annual volume tier), BioHorizons Authorized Milling Center (CMC Arvada CO; Core3dcentres), Nobel Partner Program (dentist discounts 5-18%) and NobelProcera outsourced production with 10-year warranty",
+   "detail": "ZimVie EEL program page and directory; D&S Dental (Atlantis Super Elite seven consecutive years); IDT/LMT items on BioHorizons authorized milling centers; Nobel Partner Program benefits grid (as of 06-23); Nobel Procera labs page (10-year warranty for products bought after 1 Feb 2023). Neodent Zi (Straumann) is the closest closed analogue: digitally designed Zi copings/crowns 'are intended to be sent to Straumann for manufacture at a validated milling center.'",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.zimvie.com/en/dental/digital-solutions/encode-empowered-laboratories.html",
+   "source_date": "undated",
+   "value": "n/a"
+  },
+  {
+   "claim": "Sterngold's Lab Partnership Program is the closest 'lab-as-channel' precedent: implant + components + crown bundled for under $500 with co-marketing templates for the lab",
+   "detail": "Inside Dental Technology interview with Sterngold CEO Gordon Craig (Aug 2021). Shows manufacturers use labs to push bundles; it does not report account counts gained by any lab.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://insidedentaltech.com/2021/08/empowering-laboratories-to-win-more-business/",
+   "source_date": "2021-08-01",
+   "value": "<$500 implant-to-crown bundle"
+  },
+  {
+   "claim": "Trade-press evidence that small labs win non-local accounts comes from niche focus, DSO follow-on and social media, not from manufacturer certification: Absolute Dental Services (NC) went from ~90% of revenue within 90 minutes to ~45% national accounts in three years (2021); Pink Dental (VA) built an international base via social media in two years",
+   "detail": "Inside Dental Technology 'Think Bigger' (Sept 2022). No LMT/IDT article was found crediting an implant-manufacturer certification with a quantified gain in out-of-state accounts; BioHorizons/Atlantis announcements describe capability, not volume.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://insidedentaltech.com/2022/09/think-bigger/",
+   "source_date": "2022-09-01",
+   "value": "45% national sales (Absolute Dental, 2021)"
+  },
+  {
+   "claim": "Clinical debate exists: a 2025 finite-element study found the abutment-free (matrix) model generated the highest stresses on fixture, screw and cortical bone under oblique loading; a 2022 Mainz case report notes clinical data were missing",
+   "detail": "FEA paper (Mugri et al., 2025) compares abutment-free TRI matrix to three abutment systems; Medicina 2022 case report (Hoelken et al.). TRI counters with 5-year lead-user data (99.7%) and 177 kg static load test. Adoption-pace risk, not a safety finding.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://exa.ai/library/publication/kkxrn3tkxr9",
+   "source_date": "2025-10-02",
+   "value": "n/a"
+  },
+  {
+   "claim": "Estimate: 150-500 US dentists actively place matrix as of late 2026",
+   "detail": "Basis: ~5-7 US field reps implied by LinkedIn (10 US staff, 13 sales globally) plus five 2026 hires; a challenger implant brand's rep typically carries 25-75 active accounts; Patterson channel adds some. No TRI disclosure exists. Wide range, low confidence.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://linkedin.com/company/tri-dental-implants-int-ag",
+   "source_date": "undated",
+   "value": "150-500 accounts (estimate)"
+  },
+  {
+   "claim": "Estimate: Integra could plausibly produce 0-5 matrix units/month at 6 months and 3-15 units/month at 12 months after certification, i.e., roughly $1,000-$4,000/month at Integra's $129-$299 unit pricing",
+   "detail": "Basis: certification still incomplete (Oct 2026); no identified TRI users in WA/OR/AK/HI; Glidewell (national, lifetime warranty, special pricing) and TRI's own Tooth-in-a-Box network already serve matrix dentists; the highest-volume TRI users (Smile Systems, Saeed, Winterholler, Mirelez) have captive or in-house labs; ~15-20 identifiable US KOL practices remain, mostly in CA/AZ/FL. Upside scenario (becoming a Tooth-in-a-Box subcontractor or landing one high-volume CA account) could double this but at TRI-set pricing. Probability of zero at 12 months is material.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://tri-implants.swiss/en/workflow/single-crown/",
+   "source_date": "undated",
+   "value": "3-15 units/month at month 12 (estimate)"
+  },
+  {
+   "claim": "Unknown: the price TRI charges US dentists for Tooth-in-a-Box and what it pays certified labs per unit",
+   "detail": "Box Packages page lists Tooth/Bridge/Arch-in-a-Box with no prices; T&C says prices are in a separate document available on request. Glidewell's 'special pricing' for matrix is also unpublished. The only public comparables are Glidewell's standard $339 screw-retained BruxZir and Integra's own $129-$299.",
+   "kind": "unknown",
+   "confidence": "high",
+   "source_url": "https://info.tri-implants.swiss/box-packages",
+   "source_date": "undated",
+   "value": "unpublished"
+  },
+  {
+   "claim": "Unknown: number of TRI-certified labs in the US and in WA, CA, HI, TX, FL, AK",
+   "detail": "List is gated. Publicly identifiable: Glidewell (CA, confirmed certified), Rutherford (CA, advertises matrix workflows), JB Dental Lab (AZ, hosts TRI courses), Smile Systems Dental Studio (UT, captive). Australia's public list shows 7 certified labs/milling centers for comparison (tri-implants.com.au/matrix-labs-1). No Washington, Hawaii, Texas, Florida or Alaska lab surfaced.",
+   "kind": "unknown",
+   "confidence": "high",
+   "source_url": "https://www.tri-implants.com.au/matrix-labs-1",
+   "source_date": "undated",
+   "value": "1 confirmed US certified center (Glidewell)"
+  }
+ ],
+ "unknowns": [
+  "TRI's written certification requirements, fee (if any), validated mill/CAM list, and whether 'certified manufacturing center' requires FDA establishment registration as a contract manufacturer (K203660 says crown abutments are made at TRI facilities) - ask TRI directly before finishing onboarding",
+  "Number and identity of TRI-certified labs in the US and in WA/CA/HI/TX/FL/AK (list is gated behind a form)",
+  "US price of Tooth-in-a-Box bundles, the per-unit fee TRI pays network labs, and Glidewell's 'special pricing' for matrix crowns",
+  "Number of US dentists placing matrix and US matrix implants sold per year (no disclosure; LinkedIn revenue estimates are unreliable)",
+  "Physical US office address (only a Dover, DE registered-agent address is published; 949 area code and an Irvine-based employee suggest Orange County) and whether a 'TRI Digital Hub' exists",
+  "Whether TRI's lab line (949-210-3877) or reps actually refer dentists to certified labs versus routing cases into TRI's own Tooth-in-a-Box / Scan & Smile network",
+  "Cost of TRI verification tools VTool-P37/P45 and any required measuring equipment",
+  "Which lab manufactures the TRI USA / InstaRisa co-branded full-arch bundles",
+  "Results of TRI's Dec 2024 (4.5-year) lead-user survey (text not legible in the fetched catalog)",
+  "Whether any Washington, Oregon, Alaska or Hawaii dentist currently places matrix (no evidence found; absence of evidence, not proof of absence)"
+ ],
+ "competitors": [
+  {
+   "name": "Glidewell Dental (certified TRI matrix manufacturing center)",
+   "what": "National lab; validated milling partner for TRI matrix since Apr 2025; TRI Matrix Implant Rx; 'low, special pricing' and lifetime BruxZir warranty; 4M+ implant cases restored",
+   "location": "Irvine / Newport Beach, CA",
+   "pricing": "matrix price unpublished; standard screw-retained BruxZir $339/unit; model-free BruxZir crown $89",
+   "turnaround": "7 days in lab for screw-retained (standard)",
+   "source_url": "https://glidewelldental.com/content/dam/digital/websites/document-library/GL-5046262.pdf.coredownload.inline.pdf",
+   "notes": "Primary incumbent for any US dentist seeking a matrix lab; Glidewell is also Integra's price anchor."
+  },
+  {
+   "name": "TRI Tooth-in-a-Box / Scan & Smile lab network",
+   "what": "TRI's own bundles (implant + screw + final zirconia) made by 'certified TRI lab partners', TRI coordinates and bills; Scan & Smile also sells design and 'Prosthetic Services for Labs'",
+   "location": "Hunenberg CH / US portal",
+   "pricing": "fixed price, unpublished; 10-year partner-lab warranty",
+   "turnaround": "not published",
+   "source_url": "https://info.tri-implants.swiss/box-packages",
+   "notes": "TRI is the aggregator; a certified lab may be a subcontractor at TRI-set prices rather than a referral recipient."
+  },
+  {
+   "name": "Rutherford Dental Lab",
+   "what": "Implant/All-on-X lab serving practices nationwide; advertises 'TRI Matrix Workflows'; exocad, Ivoclar PM7, 5-axis titanium; 40 arches/month capacity",
+   "location": "Livermore, CA",
+   "pricing": "not published",
+   "turnaround": "2-hour scan review claimed",
+   "source_url": "https://rutherforddentallab.com/",
+   "notes": "Second California lab positioned on matrix; certification status not stated."
+  },
+  {
+   "name": "JB Dental Lab",
+   "what": "Full-service digital full-arch lab; hosted TRI's FP1 abutment-free course (Jan 2026)",
+   "location": "Tempe, AZ",
+   "pricing": "not published",
+   "turnaround": "not published",
+   "source_url": "https://www.jbdentallab.com/",
+   "notes": "Likely the Arizona matrix lab given TRI's AZ rep hiring (Sept 2026)."
+  },
+  {
+   "name": "Smile Systems Dental Studio",
+   "what": "Exclusive lab for 3-on-6 FP1 providers (TRI implants); 'only lab in the world authorized to design and manufacture 3 on 6 smiles'",
+   "location": "American Fork, UT",
+   "pricing": "not published",
+   "turnaround": "not published",
+   "source_url": "https://www.smilesystems.com/dental-studio",
+   "notes": "Captures the largest identifiable TRI FP1 volume; not addressable by Integra."
+  },
+  {
+   "name": "In-house labs of TRI KOLs (Mirelez/Revitalize Clovis CA; Chicago Smile Clinic/Saeed; Winterholler/Scottsdale)",
+   "what": "High-volume TRI users with on-site milling (Zirkonzahn at Mirelez; Saeed ~100 arches/month; Winterholler on-site CT design and milling)",
+   "location": "Clovis CA; Chicago IL; Scottsdale AZ",
+   "pricing": "n/a",
+   "turnaround": "same-day",
+   "source_url": "https://revitalizeimplantcenter.com/",
+   "notes": "They are equipment/CAM prospects (ARUM, MillBox, hyperDENT), not lab prospects."
+  },
+  {
+   "name": "ZimVie Encode Empowered Lab program",
+   "what": "Non-exclusive license of the BellaTek Encode library to labs; public EEL directory; OEM components required; RealGUIDE or 3Shape Abutment Designer",
+   "location": "US / Canada / ANZ",
+   "pricing": "license fee not published",
+   "turnaround": "n/a",
+   "source_url": "https://www.zimvie.com/en/dental/digital-solutions/encode-empowered-laboratories.html",
+   "notes": "Analogous 'certified lab + locator' model; shows what TRI's program could look like at scale."
+  },
+  {
+   "name": "Dentsply Sirona Atlantis (Super Elite lab tier) and BioHorizons Authorized Milling Centers (CMC, Core3dcentres)",
+   "what": "Volume-based lab recognition tiers and authorized milling partners for OEM abutments",
+   "location": "US",
+   "pricing": "n/a",
+   "turnaround": "Atlantis 2 business days",
+   "source_url": "https://insidedentaltech.com/news/?newsID=92256",
+   "notes": "Certification confers capability and marketing status; no public evidence of guaranteed referral volume."
+  },
+  {
+   "name": "Nobel Biocare Partner Program / Procera",
+   "what": "Dentist loyalty tiers (5-18% discounts) and Procera outsourced production with 10-year warranty for labs",
+   "location": "Yorba Linda, CA (Nobel Biocare USA)",
+   "pricing": "discount tiers published; product prices not",
+   "turnaround": "n/a",
+   "source_url": "https://info.nobelbiocare.com/hubfs/NOBEL%20BIOCARE/US-EN/GMT85606_r20_Partner_Benefits_Grid_as-of_06-23_MKT-0997_pw%201.pdf",
+   "notes": "Illustrates that major OEMs route custom work to their own validated production rather than certify small labs."
+  },
+  {
+   "name": "Neodent Zi (Straumann) validated milling center model",
+   "what": "Digitally designed Zi copings/crowns must be sent to Straumann for manufacture at a validated milling center",
+   "location": "US",
+   "pricing": "n/a",
+   "turnaround": "n/a",
+   "source_url": "https://www.straumann.com/neodent/us/en/professionals/products-and-solutions/implant-systems/zi.html",
+   "notes": "Closed model; confirms no competing open 'abutment-free certified lab' program exists in the US."
+  }
+ ],
+ "cost_items": [
+  {
+   "item": "FDA annual medical-device establishment registration (only if TRI certification requires Integra to act as contract manufacturer / validated milling center)",
+   "base_usd": 11423,
+   "low_usd": 11423,
+   "high_usd": 11423,
+   "period": "annual",
+   "basis": "FY2026 fee set in Federal Register notice 2025-14412; FY2027 may differ",
+   "status": "listed",
+   "source_url": "https://www.govinfo.gov/content/pkg/FR-2025-07-30/pdf/2025-14412.pdf",
+   "source_date": "2025-07-30"
+  },
+  {
+   "item": "TRI matrix implant fixture (dentist cost, context for case economics)",
+   "base_usd": 325,
+   "low_usd": 275,
+   "high_usd": 375,
+   "period": "per-unit",
+   "basis": "Competitor's (Niznick) Dec 2023 claim of $325 per implant; Patterson lists matrix but prices are login-gated; range widened for uncertainty",
+   "status": "estimated",
+   "source_url": "https://www.linkedin.com/posts/gerald-niznick-dmd-msd-a141905_tri-implant-is-new-to-the-american-market-activity-7139314543012286464-8vGZ",
+   "source_date": "2023-12-09"
+  },
+  {
+   "item": "TRI matrix lab certification fee",
+   "base_usd": 1000,
+   "low_usd": 0,
+   "high_usd": 2500,
+   "period": "one-time",
+   "basis": "Not published; Academy registration is free by code; comparable OEM library licenses (ZimVie EEL) do not publish fees; estimate labeled, confirm with TRI",
+   "status": "unresolved",
+   "source_url": "https://tri-implants.swiss/de/academy/matrix-academy/",
+   "source_date": "undated"
+  },
+  {
+   "item": "TRI verification tools VTool-P37 and VTool-P45 plus inspection microscope time",
+   "base_usd": 500,
+   "low_usd": 250,
+   "high_usd": 1000,
+   "period": "one-time",
+   "basis": "IFU requires verification of every suprastructure with both tools; prices not published; estimate based on typical OEM gauge/try-in component pricing",
+   "status": "unresolved",
+   "source_url": "https://www.adm1stchoicemedicals.com/wp-content/uploads/2021/04/1-TRI-IMPLANT-SYSTEM_IFU_ENG.pdf",
+   "source_date": "undated"
+  },
+  {
+   "item": "Quality-system documentation to meet contract-manufacturer expectations (SOPs, device listing, complaint handling) if required",
+   "base_usd": 10000,
+   "low_usd": 5000,
+   "high_usd": 25000,
+   "period": "one-time",
+   "basis": "Consultant-assisted 21 CFR 820-style QMS setup for a small lab; estimate, not quoted; may be unnecessary if TRI treats certification as training only",
+   "status": "estimated",
+   "source_url": "https://idt.cdeworld.com/courses/5414-in-house-custom-abutment-manufacturing-options",
+   "source_date": "undated"
+  },
+  {
+   "item": "Glidewell screw-retained BruxZir crown (competitor reference price for matrix dentists)",
+   "base_usd": 339,
+   "low_usd": 339,
+   "high_usd": 339,
+   "period": "per-unit",
+   "basis": "Published list price; Glidewell's matrix 'special pricing' is lower but unpublished",
+   "status": "listed",
+   "source_url": "https://glidewelldental.com/solutions/implant-solutions/implant-restorations/screw-retained-crowns",
+   "source_date": "undated"
+  },
+  {
+   "item": "Implant-library licensing across all major systems (for comparison; TRI's library is free on request)",
+   "base_usd": 35000,
+   "low_usd": 25000,
+   "high_usd": 45000,
+   "period": "annual",
+   "basis": "Peak Dental Studio (Utah lab) states licensing every major implant library costs $25k-$45k/yr; single-lab claim, not verified",
+   "status": "estimated",
+   "source_url": "https://peakdentalstudio.com/implant-library-compatibility-guide/",
+   "source_date": "2026-05-21"
+  }
+ ],
+ "targets": [
+  {
+   "name": "TRI Dental Implants USA Inc. (Dereck Fandel, EVP Sales & Operations; Amir Gordji DDS, Sr Director Clinical Affairs; lab line 949-210-3877)",
+   "location": "Dover DE (registered); phones 949 area code (Orange County); Irvine-based staff",
+   "type": "other",
+   "why": "Gatekeeper for certification completion, inclusion on the gated certified-lab list, Tooth-in-a-Box network subcontracting, and co-marketing with reps hiring into SF Bay/LA; also a channel for ARUM/MillBox sales to TRI dentists pursuing chairside milling",
+   "decision_maker": "Dereck Fandel (dereck.fandel@tri-implants.com per TRI job posting)",
+   "how_to_reach": "TRI USA lab line 949-210-3877; customer support 949-676-7383; info@tri.swiss; US MasterClass webinars (Oct 21, Nov 18, Dec 10, 2026)",
+   "source_url": "https://tri-implants.swiss/en/contact/"
+  },
+  {
+   "name": "Dr. Art Mirelez / InstaRisa Technologies (Revitalize Dental Implant Center)",
+   "location": "Clovis / Fresno, CA",
+   "type": "implant/full-arch practice",
+   "why": "Existing Integra prospect; TRI partner (Apr 2025 co-branded full-arch bundles; TRI webinars 2024-2026); has in-house Zirkonzahn lab so the fit is a high-B-axis ARUM mill and MillBox/hyperDENT, with matrix certification as credibility",
+   "decision_maker": "Dr. J. Art Mirelez Jr., DDS (co-founder/CEO InstaRisa)",
+   "how_to_reach": "Existing relationship; InstaRisa HQ Clovis CA; TRI/InstaRisa webinar Aug 19, 2026",
+   "source_url": "https://www.instarisa.com/blogs/news/instarisa-technologies-and-tri-dental-implants-partner-to-deliver-enhanced-digital-workflows"
+  },
+  {
+   "name": "Dr. Ryan Dunlop, Better Life Center for Implant and General Dentistry",
+   "location": "6535 N Palm Ave, Fresno, CA",
+   "type": "implant/full-arch practice",
+   "why": "TRI webinar speaker (Oct 2024) and matrix case-book contributor; same metro as Mirelez; no in-house lab identified",
+   "decision_maker": "Dr. Ryan Dunlop, DMD (owner)",
+   "how_to_reach": "Practice website / phone; introduction via Mirelez or TRI rep",
+   "source_url": "https://tri-implants.swiss/en/matrix-line/cases/"
+  },
+  {
+   "name": "Dr. Jack E. Wasserstein, DDS (periodontist)",
+   "location": "Valencia, CA (LA County)",
+   "type": "implant/full-arch practice",
+   "why": "TRI webinar speaker (Aug 2024, 'Breaking the Barriers with NO-Abutment matrix'); periodontist who refers restorative work, i.e., can influence restorative dentists' lab choice in Southern California",
+   "decision_maker": "Dr. Jack Wasserstein",
+   "how_to_reach": "Practice website; LinkedIn",
+   "source_url": "https://linkedin.com/in/jack-wasserstein-7125b9160"
+  },
+  {
+   "name": "Dr. Kianor Shah (Desert Dream Dentistry; traveling implant provider in 300+ offices)",
+   "location": "Palm Desert, CA",
+   "type": "implant/full-arch practice",
+   "why": "2026 US MasterClass speaker (Jun 3); works across many Southern California offices, so one relationship could touch multiple restorative dentists",
+   "decision_maker": "Dr. Kianor Shah, DMD, MBA",
+   "how_to_reach": "kianorshah.com; TRI MasterClass",
+   "source_url": "https://kianorshah.com/"
+  },
+  {
+   "name": "Dr. Vishtasb (Vishy) Broumand, Desert Ridge Oral Surgery Institute",
+   "location": "20950 N Tatum Blvd, Phoenix, AZ",
+   "type": "implant/full-arch practice",
+   "why": "Oral surgeon who lectured for TRI on full-arch matrix (Oct 2024); surgeons refer restorative phase to GPs who need a matrix-capable lab; Arizona is a TRI growth territory (rep hiring Sept 2026)",
+   "decision_maker": "Dr. Vishtasb Broumand, DMD, MD",
+   "how_to_reach": "Practice phone (480) 284-8087; Pikos Institute faculty",
+   "source_url": "https://www.drvishybroumand.com/"
+  },
+  {
+   "name": "Dr. Shivam Patel (TRI CE host, Orlando)",
+   "location": "Orlando, FL",
+   "type": "implant/full-arch practice",
+   "why": "Hosted TRI's 2-CE abutment-free evening (Jun 23, 2026); indicates an active matrix user in Florida, one of Integra's candidate markets",
+   "decision_maker": "Dr. Shivam Patel",
+   "how_to_reach": "Via TRI event listing; practice lookup required",
+   "source_url": "https://www.linkedin.com/posts/tri-dental-implants-int-ag_matrix-abutmentfree-digitaldentistry-activity-7468633950962388993-08YH"
+  },
+  {
+   "name": "Rutherford Dental Lab (Adam / Paul, CDTs)",
+   "location": "3025 Independence Dr Ste C, Livermore, CA",
+   "type": "dental lab",
+   "why": "Already markets TRI matrix workflows; potential Bear Milling lab-to-lab partner for overflow or titanium work, and a peer to benchmark certification steps",
+   "decision_maker": "Owners Adam and Paul (first names per site)",
+   "how_to_reach": "(925) 833-8080; 15-minute Zoom consult offered on site",
+   "source_url": "https://rutherforddentallab.com/"
+  },
+  {
+   "name": "JB Dental Lab",
+   "location": "1403 W 10th Pl #B104, Tempe, AZ",
+   "type": "dental lab",
+   "why": "Hosts TRI FP1 courses; likely Arizona matrix lab; candidate Bear Milling lab-to-lab customer or peer",
+   "decision_maker": "Owner (not named on site)",
+   "how_to_reach": "(480) 567-4720; jbdentallab.com",
+   "source_url": "https://www.jbdentallab.com/"
+  },
+  {
+   "name": "Patterson Dental implant reps (TRI authorized distributor)",
+   "location": "US (branch-based)",
+   "type": "distributor",
+   "why": "Patterson sells matrix implants; its reps know which local dentists buy TRI; a certified lab can be the restorative partner Patterson reps name when selling matrix",
+   "decision_maker": "Regional Patterson implant specialists",
+   "how_to_reach": "Patterson branch (Seattle/Kent WA; Orange County CA)",
+   "source_url": "https://www.pattersondental.com/Supplies/surgical-products/implants/matrix-bone-level-implants-for-tri-dental-implant-system/PIF_1067011?mc=0"
+  }
+ ]
+}
