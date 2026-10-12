@@ -18,5 +18,7 @@ export const reach = (want) => {
 };
 
 const deg = (v) => `${v >= 0 ? "" : "−"}${Math.abs(v).toFixed(1)}°`;
-export const readoutOf = (a, b) => `A ${deg(wrap(a))} · B ${deg(b)} of ±${SPEC.bLimit}°`;
-export const wordsOf = (a, b) => `Disc turned ${Math.round(wrap(a))} degrees on A, tilted ${Math.round(b)} degrees on B, of plus or minus ${SPEC.bLimit}`;
+// A reads in (−180°, 180°]: a half turn is 180°, never −180°
+const half = (v) => { const w = wrap(v); return w <= -179.95 ? 180 : w; };
+export const readoutOf = (a, b) => `A ${deg(half(a))} · B ${deg(b)} of ±${SPEC.bLimit}°`;
+export const wordsOf = (a, b) => `Disc turned ${Math.round(half(a))} degrees on A, tilted ${Math.round(b)} degrees on B, of plus or minus ${SPEC.bLimit}`;
