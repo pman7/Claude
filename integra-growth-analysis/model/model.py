@@ -38,17 +38,17 @@ def rng(t, nd=0):
 # ---------------------------------------------------------------------------
 # 1. Unit economics (contribution per unit sold, by product and channel)
 # ---------------------------------------------------------------------------
-def unit_contribution(product, shipping_lane="king_county"):
+def unit_contribution(product, shipping_lane="king_county", remake_mult=1.0, price_override=None):
     p = INP["products"][product]
     lane = INP["shipping_lanes"][shipping_lane]
-    price = tri(p["price"])
+    price = tri(p["price"]) if price_override is None else tri(price_override)
     mat = tri(p["materials"])
     labor_hours = tri(p["labor_hours"])
     labor_rate = tri(INP["labor"]["loaded_tech_rate"])
     # per-case shipping both ways, divided by units per case
     units_per_case = tri(p.get("units_per_case", 1))
     ship_rt = tri(lane["round_trip_cost"])  # per case round trip (outbound + inbound label)
-    remake = tri(p.get("remake_rate", INP["ops"]["remake_rate"]))
+    remake = tuple(r * remake_mult for r in tri(p.get("remake_rate", INP["ops"]["remake_rate"])))
     fee = tri(INP["ops"]["payment_fee_pct"])
     out = []
     for i in range(3):
@@ -91,12 +91,13 @@ def option_costs(opt):
         startup_exp = s(one_time, i)
         startup_dep = s(deposits, i)
         startup_cash = startup_exp + startup_dep + o.get("prepaid_rent_months", 0) * monthly.get("rent", (0,0,0))[i]
-        first90 = startup_cash + 3 * m_cash
+        prepaid = o.get("prepaid_rent_months", 0) * monthly.get("rent", (0,0,0))[i]
+        first90 = startup_cash + 3 * m_cash - prepaid          # prepaid month of rent is in startup_cash, so month 1 rent is not charged again
         reserve = o.get("reserve_months", 3) * m_cash
-        year1 = startup_cash + 12 * m_cash
+        year1 = startup_cash + 12 * m_cash - prepaid
         exposure = startup_exp + max(term_months, notice_months) * monthly.get("rent", (0,0,0))[i] \
                    + max(term_months, notice_months) * sum(v[i] for k, v in monthly.items() if k in o.get("committed_monthly_keys", ["rent"]) and k != "rent")
-        res[name] = dict(startup_expenses=startup_exp, refundable_deposits=startup_dep, startup_cash=startup_cash,
+        res[name] = dict(startup_expenses=startup_exp, refundable_deposits=startup_dep, startup_cash=startup_cash, prepaid_rent=prepaid,
                          monthly_cash=m_cash, monthly_owner_time=owner_cost, monthly_fully_loaded=m_full,
                          first_90_days=first90, first_year_cash=year1, reserve=reserve,
                          first_year_plus_reserve=year1 + reserve, exit_exposure=exposure)
@@ -105,23 +106,26 @@ def option_costs(opt):
 # ---------------------------------------------------------------------------
 # 3. Demand / acquisition model for an option
 # ---------------------------------------------------------------------------
-def demand_model(opt):
-    """Accounts ramp linearly from 0 to accounts_12m over ramp_months; each account sends cases_per_month
-    of mix; contribution per case computed from unit economics on the option's shipping lane."""
+def demand_model(opt, remake_mult=1.0, price_override=None, ramp_shift=0, accounts_mult=1.0):
+    """Accounts ramp linearly from 0 to accounts_12m over ramp_months; each account sends units per month
+    of mix; contribution per unit computed from unit economics on the option's shipping lane.
+    remake_mult, price_override ({product: price}), ramp_shift (months) and accounts_mult are stress hooks."""
     o = INP["options"][opt]
     d = o["demand"]
     lane = o.get("shipping_lane", "king_county")
+    comm_pct = tri(o.get("commission_pct_of_revenue", 0))
     out = {}
     for i, name in enumerate(["low", "base", "high"]):
-        accts12 = tri(d["accounts_12m"])[i]
-        ramp = tri(d.get("ramp_months", 9))[i]
+        accts12 = tri(d["accounts_12m"])[i] * accounts_mult
+        ramp = tri(d.get("ramp_months", 9))[i] + ramp_shift
         mix = d["case_mix"]  # product -> cases per account per month (tri)
         contrib_per_acct = 0.0
         rev_per_acct = 0.0
         labor_hours_per_acct = 0.0
         units_per_acct = 0.0
         for prod, n in mix.items():
-            c, price = unit_contribution(prod, lane)
+            po = (price_override or {}).get(prod)
+            c, price = unit_contribution(prod, lane, remake_mult=remake_mult, price_override=po)
             n_i = tri(n)[i]                      # units per account per month
             contrib_per_acct += n_i * c[i]
             rev_per_acct += n_i * price[i]
@@ -139,8 +143,10 @@ def demand_model(opt):
             accts = accts12 * min(m / ramp, 1.0)
             rev = accts * rev_per_acct
             contrib = accts * contrib_per_acct
-            cf = contrib - cst["monthly_cash"]            # cash view (owner time excluded)
-            cf_full = contrib - cst["monthly_fully_loaded"]
+            comm = comm_pct[i] * rev                           # sales commission as a percentage of revenue
+            addback = cst.get("prepaid_rent", 0) if m == 1 else 0  # month-1 rent was prepaid in startup cash
+            cf = contrib - comm - cst["monthly_cash"] + addback   # cash view (owner time excluded)
+            cf_full = contrib - comm - cst["monthly_fully_loaded"] + addback
             cum_cf += cf
             if breakeven_month is None and cf_full >= 0:
                 breakeven_month = m
@@ -153,13 +159,14 @@ def demand_model(opt):
         yr_cf_full = sum(x["cash_flow_full"] for x in months) - cst["startup_cash"]
         # steady-state (month 12) numbers
         ss = months[-1]
-        be_accounts = cst["monthly_fully_loaded"] / contrib_per_acct if contrib_per_acct > 0 else float("inf")
-        be_accounts_cash = cst["monthly_cash"] / contrib_per_acct if contrib_per_acct > 0 else float("inf")
-        min_cum = min(x["cum_cash"] for x in months)
+        net_contrib_per_acct = contrib_per_acct - comm_pct[i] * rev_per_acct
+        be_accounts = cst["monthly_fully_loaded"] / net_contrib_per_acct if net_contrib_per_acct > 0 else float("inf")
+        be_accounts_cash = cst["monthly_cash"] / net_contrib_per_acct if net_contrib_per_acct > 0 else float("inf")
+        min_cum = min([-cst["startup_cash"]] + [x["cum_cash"] for x in months])   # includes the pre-revenue outlay
         cap = INP["capacity"]
         hours_m12 = accts12 * labor_hours_per_acct
         units_m12 = accts12 * units_per_acct
-        out[name] = dict(accounts_12m=accts12, rev_per_acct=rev_per_acct, contrib_per_acct=contrib_per_acct,
+        out[name] = dict(accounts_12m=accts12, rev_per_acct=rev_per_acct, contrib_per_acct=net_contrib_per_acct, gross_contrib_per_acct=contrib_per_acct,
                          labor_hours_month12=hours_m12, units_month12=units_m12,
                          capacity_flag=("HIRE" if hours_m12 > cap["spare_production_hours_per_month"] else "ok"),
                          year1_revenue=yr_rev, year1_contribution=yr_contrib, year1_cash_after_all=yr_cf,
@@ -174,24 +181,32 @@ def demand_model(opt):
 # 4. Stress tests on base case
 # ---------------------------------------------------------------------------
 def stress(opt):
+    """Base-case stresses. Month-12 monthly cash flow after owner time unless noted."""
     base = demand_model(opt)["base"]
     costs, o = option_costs(opt)
     cst = costs["base"]
     res = {}
-    # slow acquisition: half the accounts
-    half = base["steady_monthly_revenue"] * 0.5 * (base["contrib_per_acct"] / base["rev_per_acct"]) - cst["monthly_fully_loaded"]
-    res["slow_acquisition_half_accounts_month12_cf_full"] = half
-    # remake rate doubles: approximate contribution hit = remake delta x (mat+labor+ship)... use 5pp hit on contribution margin
-    res["remake_rate_doubles_month12_cf_full"] = base["steady_monthly_cf_full"] - 0.05 * base["steady_monthly_revenue"]
-    # rent/staffing +25%
-    res["rent_staff_plus_25pct_month12_cf_full"] = base["steady_monthly_cf_full"] - 0.25 * (tri(o.get("monthly", {}).get("rent", 0))[1] + tri(o.get("monthly", {}).get("staff", 0))[1])
-    # shipping delay: lose 1 account-equivalent of base
+    # slow acquisition: half the accounts at month 12 (recomputed through the model)
+    res["half_accounts"] = demand_model(opt, accounts_mult=0.5)["base"]["steady_monthly_cf_full"]
+    # remake rate doubles: recomputed through unit economics (remakes cost materials, labor and shipping again)
+    res["remake_doubles"] = demand_model(opt, remake_mult=2.0)["base"]["steady_monthly_cf_full"]
+    # all monthly option costs +25% (rent, pass-throughs, staff, marketing, travel): bites on every option
+    res["monthly_costs_plus_25pct"] = base["steady_monthly_cf_full"] - 0.25 * cst["monthly_cash"]
+    # crown price pressure: zirconia crown matched to Glidewell's $109 list (options that sell fcz_crown)
+    if "fcz_crown" in o["demand"]["case_mix"]:
+        res["crown_price_109"] = demand_model(opt, price_override={"fcz_crown": [99, 109, 109]})["base"]["steady_monthly_cf_full"]
+    else:
+        res["crown_price_109"] = None
+    # ramp three months slower: year-1 profit after owner time (month-12 cash flow is unchanged by timing)
+    res["ramp_plus_3_year1"] = demand_model(opt, ramp_shift=3)["base"]["year1_profit_after_owner_time"]
+    res["base_year1"] = base["year1_profit_after_owner_time"]
+    # lose one average account (or, for equipment options, one unit of the key product averaged over a year)
     lose_unit = o["demand"].get("stress_lose_unit")
     if lose_unit:
         c, _ = unit_contribution(lose_unit, o.get("shipping_lane", "none"))
-        res["lose_one_account_month12_cf_full"] = base["steady_monthly_cf_full"] - c[1] / 12.0
+        res["lose_one_account"] = base["steady_monthly_cf_full"] - c[1] / 12.0
     else:
-        res["lose_one_account_month12_cf_full"] = base["steady_monthly_cf_full"] - base["contrib_per_acct"]
+        res["lose_one_account"] = base["steady_monthly_cf_full"] - base["contrib_per_acct"]
     return res
 
 # ---------------------------------------------------------------------------
@@ -246,12 +261,13 @@ def render():
             d = dm[name]
             L.append(f"| {o['label']} | {name} | {d['accounts_12m']:.1f} | {money(d['rev_per_acct'])} | {money(d['contrib_per_acct'])} | {money(d['year1_revenue'])} | {money(d['year1_cash_after_all'])} | {money(d['year1_profit_after_owner_time'])} | {money(d['steady_monthly_cf'])} | {d['breakeven_accounts_cash']:.1f} / {d['breakeven_accounts_fully_loaded']:.1f} | {d['month_positive_cf_full'] or 'not in 12 mo'} | {d['payback_month'] or 'not in 12 mo'} | {money(d['max_cash_drawdown'])} | {d['units_month12']:.0f} u / {d['labor_hours_month12']:.0f} h | {d['capacity_flag']} |")
     L.append("")
-    L.append("## Stress tests (base case, month-12 monthly cash flow after owner time)\n")
-    L.append("| Option | Base | Half the accounts | Remake rate doubles | Rent+staff +25% | Lose one account |")
-    L.append("|---|---|---|---|---|---|")
+    L.append("## Stress tests (base case; month-12 monthly cash flow after owner time unless noted)\n")
+    L.append("| Option | Base month-12 | Half the accounts | Remake rate doubles | All monthly option costs +25% | Crown price matched to $109 | Lose one average account | Year-1 profit after owner time: base | Year-1 profit: ramp 3 months slower |")
+    L.append("|---|---|---|---|---|---|---|---|---|")
     for opt in INP["options"]:
-        s = stress(opt); b = demand_model(opt)["base"]
-        L.append(f"| {INP['options'][opt]['label']} | {money(b['steady_monthly_cf_full'])} | {money(s['slow_acquisition_half_accounts_month12_cf_full'])} | {money(s['remake_rate_doubles_month12_cf_full'])} | {money(s['rent_staff_plus_25pct_month12_cf_full'])} | {money(s['lose_one_account_month12_cf_full'])} |")
+        st = stress(opt); b = demand_model(opt)["base"]
+        cp = money(st["crown_price_109"]) if st["crown_price_109"] is not None else "n/a"
+        L.append(f"| {INP['options'][opt]['label']} | {money(b['steady_monthly_cf_full'])} | {money(st['half_accounts'])} | {money(st['remake_doubles'])} | {money(st['monthly_costs_plus_25pct'])} | {cp} | {money(st['lose_one_account'])} | {money(st['base_year1'])} | {money(st['ramp_plus_3_year1'])} |")
     L.append("")
     L.append("## Feasibility by expansion-cash envelope\n")
     L.append("Feasible = envelope covers both (a) cash to open plus 90 days of option costs with zero revenue and (b) the worst cumulative drawdown in the ramp scenario.\n")

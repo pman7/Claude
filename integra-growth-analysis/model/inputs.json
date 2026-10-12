@@ -47,7 +47,7 @@
    ]
   },
   "overnight_hi_ak": {
-   "label": "Overnight/2-day air both ways (HI/AK)",
+   "label": "Overnight/2-day air both ways (Hawaii or Alaska, carrier list rates)",
    "round_trip_cost": [
     55,
     95,
@@ -86,6 +86,15 @@
     150
    ],
    "_note": "FedEx One Rate small box 2Day $19.55 each way (Alaska included, Apr 20 2026); Standard Overnight $101.75; GoldStreak $74 min one way (Oct 1 2026). Low = 2Day both ways; base = 2Day out and overnight back on average; high = overnight both ways."
+  },
+  "hawaii_2day_flat_rate": {
+   "label": "2-day flat-rate both ways (Hawaii: USPS Priority flat rate / FedEx One Rate 2Day)",
+   "round_trip_cost": [
+    28,
+    42,
+    110
+   ],
+   "_note": "USPS Priority Mail small flat-rate box $12.95 commercial / $14.65 retail, 2-4 days to Hawaii (Oct 1 2026 standard); FedEx One Rate 2Day small box $19.55 each way includes Hawaii; Standard Overnight $101.75 is Hawaii outbound only. Low = USPS both ways; base = FedEx 2Day both ways plus packaging; high = one overnight leg."
   }
  },
  "products": {
@@ -115,7 +124,9 @@
     "king_county",
     "ups_ground_2day",
     "overnight_hi_ak",
-    "two_day_national"
+    "hawaii_2day_flat_rate",
+    "two_day_national",
+    "alaska_2day_air"
    ]
   },
   "implant_crown": {
@@ -143,7 +154,9 @@
    "lanes": [
     "king_county",
     "ups_ground_2day",
-    "overnight_hi_ak"
+    "overnight_hi_ak",
+    "hawaii_2day_flat_rate",
+    "alaska_2day_air"
    ]
   },
   "full_arch_zr": {
@@ -171,7 +184,9 @@
    "lanes": [
     "king_county",
     "ups_ground_2day",
-    "overnight_hi_ak"
+    "overnight_hi_ak",
+    "hawaii_2day_flat_rate",
+    "alaska_2day_air"
    ]
   },
   "night_guard": {
@@ -433,20 +448,10 @@
    },
    "refundable_deposits": {},
    "monthly": {
-    "commission_rep_or_canvasser (5-8% of new revenue, est.)": [
-     0,
-     400,
-     900
-    ],
     "marketing_google_ads_print (est.)": [
      150,
      400,
      800
-    ],
-    "mileage_and_courier_king_county (est.)": [
-     150,
-     300,
-     500
     ],
     "study_club_and_society_dues (est.)": [
      40,
@@ -457,15 +462,20 @@
      0,
      250,
      600
+    ],
+    "prospecting_and_drop_off_mileage_not_case_delivery (est.; case delivery is charged per unit in the King County lane)": [
+     75,
+     150,
+     250
     ]
    },
    "annual": {},
    "per_trip": {},
    "trips_per_month": 0,
    "owner_hours_per_month": [
-    20,
     30,
-    45
+    45,
+    60
    ],
    "min_term_months": 0,
    "exit_notice_months": 0,
@@ -483,27 +493,35 @@
     ],
     "case_mix": {
      "fcz_crown": [
-      3,
-      6,
-      9
+      2,
+      4,
+      7
      ],
      "implant_crown": [
       0.5,
-      1.5,
-      3
+      2.0,
+      3.5
      ],
      "full_arch_zr": [
       0.05,
-      0.15,
-      0.4
+      0.2,
+      0.5
      ],
      "night_guard": [
       0.3,
       0.8,
       1.5
      ]
-    }
-   }
+    },
+    "_mix_note": "Units per account per month. Weighted toward the implant and full-arch work the offer leads with; crowns are the overflow a won account sends."
+   },
+   "commission_pct_of_revenue": [
+    0.05,
+    0.07,
+    0.08
+   ],
+   "_commission_note": "Commission to a 1099 rep at 5-8 percent of collected new revenue, charged as a percentage of modeled revenue (posted structures: $60-75k base plus 5-6 percent, or 8 percent year one and 3 percent residual commission-only).",
+   "_owner_hours_note": "Launch quarter in the 90-day plan is about 59 hours a month; base assumes 45 averaged over the year, high 60 sustained."
   },
   "bear_milling_national": {
    "label": "B. Lab-to-lab milling (Bear Milling) sold remotely nationwide",
@@ -1277,7 +1295,7 @@
   },
   "maui_remote": {
    "label": "H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year",
-   "shipping_lane": "overnight_hi_ak",
+   "shipping_lane": "hawaii_2day_flat_rate",
    "one_time": {
     "island_shipping_SOP_and_known_shipper_cargo_setup (est.)": [
      100,
@@ -1371,7 +1389,7 @@
   },
   "maui_office": {
    "label": "I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits",
-   "shipping_lane": "overnight_hi_ak",
+   "shipping_lane": "hawaii_2day_flat_rate",
    "one_time": {
     "furniture_signage_setup (est.)": [
      800,
@@ -1477,7 +1495,8 @@
    "exit_notice_months": 2,
    "reserve_months": 3,
    "committed_monthly_keys": [
-    "rent"
+    "rent",
+    "GET_on_rent_passthrough_and_CAM (est.)"
    ],
    "demand": {
     "accounts_12m": [

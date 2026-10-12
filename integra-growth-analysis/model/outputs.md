@@ -8,14 +8,20 @@ Owner opportunity cost used: $40 / $60 / $100 per hour. Loaded technician rate: 
 |---|---|---|---|---|
 | Full-contour zirconia crown (dentist, $129 list) | King County own delivery | $99 / $129 / $129 | $5 / $70 / $95 | 54% |
 | Full-contour zirconia crown (dentist, $129 list) | UPS Ground/2-Day both ways (West Coast) | $99 / $129 / $129 | -$19 / $57 / $86 | 44% |
-| Full-contour zirconia crown (dentist, $129 list) | Overnight/2-day air both ways (HI/AK) | $99 / $129 / $129 | -$91 / $20 / $72 | 16% |
+| Full-contour zirconia crown (dentist, $129 list) | Overnight/2-day air both ways (Hawaii or Alaska, carrier list rates) | $99 / $129 / $129 | -$91 / $20 / $72 | 16% |
+| Full-contour zirconia crown (dentist, $129 list) | 2-day flat-rate both ways (Hawaii: USPS Priority flat rate / FedEx One Rate 2Day) | $99 / $129 / $129 | -$62 / $51 / $85 | 40% |
 | Full-contour zirconia crown (dentist, $129 list) | 2-Day air both ways (TX/FL) | $99 / $129 / $129 | -$48 / $41 / $79 | 32% |
+| Full-contour zirconia crown (dentist, $129 list) | FedEx One Rate 2Day / overnight both ways (Anchorage) | $99 / $129 / $129 | -$91 / $35 / $79 | 27% |
 | Implant crown package ($269-299) | King County own delivery | $269 / $284 / $299 | $83 / $165 / $226 | 58% |
 | Implant crown package ($269-299) | UPS Ground/2-Day both ways (West Coast) | $269 / $284 / $299 | $47 / $146 / $214 | 51% |
-| Implant crown package ($269-299) | Overnight/2-day air both ways (HI/AK) | $269 / $284 / $299 | -$61 / $91 / $192 | 32% |
+| Implant crown package ($269-299) | Overnight/2-day air both ways (Hawaii or Alaska, carrier list rates) | $269 / $284 / $299 | -$61 / $91 / $192 | 32% |
+| Implant crown package ($269-299) | 2-day flat-rate both ways (Hawaii: USPS Priority flat rate / FedEx One Rate 2Day) | $269 / $284 / $299 | -$18 / $137 / $211 | 48% |
+| Implant crown package ($269-299) | FedEx One Rate 2Day / overnight both ways (Anchorage) | $269 / $284 / $299 | -$61 / $112 / $203 | 40% |
 | Full-arch zirconia final ($1,700/arch) | King County own delivery | $1,500 / $1,700 / $1,700 | $610 / $1,114 / $1,335 | 66% |
 | Full-arch zirconia final ($1,700/arch) | UPS Ground/2-Day both ways (West Coast) | $1,500 / $1,700 / $1,700 | $573 / $1,090 / $1,317 | 64% |
-| Full-arch zirconia final ($1,700/arch) | Overnight/2-day air both ways (HI/AK) | $1,500 / $1,700 / $1,700 | $465 / $1,024 / $1,285 | 60% |
+| Full-arch zirconia final ($1,700/arch) | Overnight/2-day air both ways (Hawaii or Alaska, carrier list rates) | $1,500 / $1,700 / $1,700 | $465 / $1,024 / $1,285 | 60% |
+| Full-arch zirconia final ($1,700/arch) | 2-day flat-rate both ways (Hawaii: USPS Priority flat rate / FedEx One Rate 2Day) | $1,500 / $1,700 / $1,700 | $508 / $1,080 / $1,313 | 64% |
+| Full-arch zirconia final ($1,700/arch) | FedEx One Rate 2Day / overnight both ways (Anchorage) | $1,500 / $1,700 / $1,700 | $465 / $1,050 / $1,300 | 62% |
 | Night guard (printed/milled) | King County own delivery | $79 / $89 / $99 | -$0 / $38 / $70 | 43% |
 | Night guard (printed/milled) | UPS Ground/2-Day both ways (West Coast) | $79 / $89 / $99 | -$37 / $15 / $52 | 17% |
 | Lab-to-lab zirconia crown mill-only ($22) | Lab-to-lab ground, labs pay inbound | $19 / $22 / $24 | -$8 / $6 / $16 | 28% |
@@ -31,55 +37,55 @@ Owner opportunity cost used: $40 / $60 / $100 per hour. Loaded technician rate: 
 
 | Option | Startup expenses | Refundable deposits | Cash to open | Monthly cash cost | Owner time / mo | Monthly fully loaded | First 90 days | First-year cash | Reserve | Year 1 + reserve | Min commitment / exit exposure |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | $2,400 / $5,350 / $8,750 | $0 | $2,400 / $5,350 / $8,750 | $340 / $1,440 / $2,950 | $800 / $1,800 / $4,500 | $1,140 / $3,240 / $7,450 | $3,420 / $9,670 / $17,600 | $6,480 / $22,630 / $44,150 | $680 / $2,880 / $5,900 | $7,160 / $25,510 / $50,050 | 0 mo term; $2,400 / $5,350 / $8,750 |
+| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | $2,400 / $5,350 / $8,750 | $0 | $2,400 / $5,350 / $8,750 | $265 / $890 / $1,800 | $1,200 / $2,700 / $6,000 | $1,465 / $3,590 / $7,800 | $3,195 / $8,020 / $14,150 | $5,580 / $16,030 / $30,350 | $530 / $1,780 / $3,600 | $6,110 / $17,810 / $33,950 | 0 mo term; $2,400 / $5,350 / $8,750 |
 | B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | $3,305 / $6,305 / $10,505 | $0 | $3,305 / $6,305 / $10,505 | $190 / $580 / $1,350 | $600 / $1,500 / $4,000 | $790 / $2,080 / $5,350 | $3,875 / $8,045 / $14,555 | $5,585 / $13,265 / $26,705 | $380 / $1,160 / $2,700 | $5,965 / $14,425 / $29,405 | 0 mo term; $3,305 / $6,305 / $10,505 |
 | C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | $1,480 / $18,665 / $25,765 | $0 | $1,480 / $18,665 / $25,765 | $100 / $450 / $1,100 | $400 / $1,200 / $3,500 | $500 / $1,650 / $4,600 | $1,780 / $20,015 / $29,065 | $2,680 / $24,065 / $38,965 | $200 / $900 / $2,200 | $2,880 / $24,965 / $41,165 | 0 mo term; $1,480 / $18,665 / $25,765 |
 | D. South Orange County served remotely from Bellevue + periodic visits | $200 / $900 / $2,300 | $0 | $200 / $900 / $2,300 | $245 / $868 / $2,189 | $480 / $1,440 / $4,000 | $725 / $2,308 / $6,189 | $935 / $3,504 / $8,867 | $3,140 / $11,316 / $28,568 | $490 / $1,736 / $4,378 | $3,630 / $13,052 / $32,946 | 0 mo term; $200 / $900 / $2,300 |
-| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | $1,290 / $2,940 / $5,740 | $600 / $1,000 / $1,800 | $2,490 / $4,940 / $9,340 | $1,261 / $2,720 / $6,950 | $800 / $2,100 / $5,500 | $2,061 / $4,820 / $12,450 | $6,274 / $13,100 / $30,190 | $17,624 / $37,578 / $92,738 | $3,783 / $8,159 / $20,850 | $21,408 / $45,738 / $113,588 | 12 mo term; $8,490 / $15,840 / $30,940 |
-| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | $14,600 / $28,000 / $47,000 | $3,600 / $5,000 / $8,000 | $20,000 / $35,500 / $59,000 | $5,687 / $9,519 / $15,869 | $1,200 / $3,000 / $8,000 | $6,887 / $12,519 / $23,869 | $37,061 / $64,057 / $106,607 | $88,244 / $149,728 / $249,428 | $17,061 / $28,557 / $47,607 | $105,305 / $178,285 / $297,035 | 24 mo term; $65,000 / $102,400 / $167,000 |
-| G. South OC production lab (mill + furnace + printer + staff) | $39,000 / $82,700 / $157,500 | $6,000 / $9,000 / $14,000 | $48,000 / $96,200 / $178,500 | $12,474 / $21,128 / $34,045 | $2,400 / $5,400 / $14,000 | $14,874 / $26,528 / $48,045 | $85,421 / $159,584 / $280,635 | $197,684 / $349,736 / $587,040 | $37,421 / $63,384 / $102,135 | $235,105 / $413,120 / $689,175 | 36 mo term; $165,000 / $277,100 / $463,500 |
+| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | $1,290 / $2,940 / $5,740 | $600 / $1,000 / $1,800 | $2,490 / $4,940 / $9,340 | $1,261 / $2,720 / $6,950 | $800 / $2,100 / $5,500 | $2,061 / $4,820 / $12,450 | $5,674 / $12,100 / $28,390 | $17,024 / $36,578 / $90,938 | $3,783 / $8,159 / $20,850 | $20,808 / $44,738 / $111,788 | 12 mo term; $8,490 / $15,840 / $30,940 |
+| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | $14,600 / $28,000 / $47,000 | $3,600 / $5,000 / $8,000 | $20,000 / $35,500 / $59,000 | $5,687 / $9,519 / $15,869 | $1,200 / $3,000 / $8,000 | $6,887 / $12,519 / $23,869 | $35,261 / $61,557 / $102,607 | $86,444 / $147,228 / $245,428 | $17,061 / $28,557 / $47,607 | $103,505 / $175,785 / $293,035 | 24 mo term; $65,000 / $102,400 / $167,000 |
+| G. South OC production lab (mill + furnace + printer + staff) | $39,000 / $82,700 / $157,500 | $6,000 / $9,000 / $14,000 | $48,000 / $96,200 / $178,500 | $12,474 / $21,128 / $34,045 | $2,400 / $5,400 / $14,000 | $14,874 / $26,528 / $48,045 | $82,421 / $155,084 / $273,635 | $194,684 / $345,236 / $580,040 | $37,421 / $63,384 / $102,135 | $232,105 / $408,620 / $682,175 | 36 mo term; $165,000 / $277,100 / $463,500 |
 | H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | $270 / $670 / $1,520 | $0 | $270 / $670 / $1,520 | $403 / $855 / $1,696 | $320 / $900 / $2,500 | $723 / $1,755 / $4,196 | $1,480 / $3,235 / $6,608 | $5,112 / $10,930 / $21,871 | $807 / $1,710 / $3,392 | $5,919 / $12,640 / $25,263 | 0 mo term; $270 / $670 / $1,520 |
-| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | $1,020 / $2,350 / $4,750 | $850 / $1,300 / $2,000 | $2,720 / $4,950 / $8,750 | $2,265 / $4,988 / $8,905 | $800 / $2,100 / $5,500 | $3,065 / $7,088 / $14,405 | $9,514 / $19,915 / $35,465 | $29,897 / $64,810 / $115,610 | $6,794 / $14,965 / $26,715 | $36,691 / $79,775 / $142,325 | 12 mo term; $11,220 / $17,950 / $28,750 |
+| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | $1,020 / $2,350 / $4,750 | $850 / $1,300 / $2,000 | $2,720 / $4,950 / $8,750 | $2,265 / $4,988 / $8,905 | $800 / $2,100 / $5,500 | $3,065 / $7,088 / $14,405 | $8,664 / $18,615 / $33,465 | $29,047 / $63,510 / $113,610 | $6,794 / $14,965 / $26,715 | $35,841 / $78,475 / $140,325 | 12 mo term; $12,660 / $20,950 / $33,550 |
 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | $200 / $1,200 / $2,550 | $0 | $200 / $1,200 / $2,550 | $213 / $383 / $930 | $320 / $900 / $2,500 | $533 / $1,283 / $3,430 | $838 / $2,348 / $5,340 | $2,752 / $5,794 / $13,710 | $425 / $766 / $1,860 | $3,177 / $6,559 / $15,570 | 0 mo term; $200 / $1,200 / $2,550 |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | $150 / $425 / $725 | $0 | $150 / $425 / $725 | $192 / $455 / $1,016 | $320 / $900 / $2,500 | $512 / $1,355 / $3,516 | $724 / $1,790 / $3,773 | $2,448 / $5,885 / $12,918 | $383 / $910 / $2,032 | $2,831 / $6,795 / $14,950 | 0 mo term; $150 / $425 / $725 |
 | L. Miami / South Florida served remotely (2-Day air) | $150 / $300 / $600 | $0 | $150 / $300 / $600 | $116 / $372 / $930 | $240 / $720 / $2,000 | $356 / $1,092 / $2,930 | $497 / $1,416 / $3,390 | $1,537 / $4,764 / $11,760 | $231 / $744 / $1,860 | $1,768 / $5,508 / $13,620 | 0 mo term; $150 / $300 / $600 |
 | M. ARUM / MillBox equipment dealer motion, national, no new premises | $1,700 / $5,000 / $9,200 | $0 | $1,700 / $5,000 / $9,200 | $680 / $1,720 / $4,100 | $1,200 / $3,000 / $8,000 | $1,880 / $4,720 / $12,100 | $3,740 / $10,160 / $21,500 | $9,860 / $25,640 / $58,400 | $1,360 / $3,440 / $8,200 | $11,220 / $29,080 / $66,600 | 0 mo term; $1,700 / $5,000 / $9,200 |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | $4,900 / $9,900 / $19,000 | $3,000 / $4,500 / $7,000 | $9,400 / $16,650 / $29,500 | $2,607 / $5,899 / $10,919 | $1,200 / $3,000 / $8,000 | $3,807 / $8,899 / $18,919 | $17,221 / $34,347 / $62,257 | $40,684 / $87,438 / $160,528 | $7,821 / $17,697 / $32,757 | $48,505 / $105,135 / $193,285 | 24 mo term; $46,900 / $75,900 / $124,600 |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | $4,900 / $9,900 / $19,000 | $3,000 / $4,500 / $7,000 | $9,400 / $16,650 / $29,500 | $2,607 / $5,899 / $10,919 | $1,200 / $3,000 / $8,000 | $3,807 / $8,899 / $18,919 | $15,721 / $32,097 / $58,757 | $39,184 / $85,188 / $157,028 | $7,821 / $17,697 / $32,757 | $47,005 / $102,885 / $189,785 | 24 mo term; $46,900 / $75,900 / $124,600 |
 
 ## Demand, break-even, payback (12-month view)
 
 | Option | Scenario | Accounts at month 12 | Revenue / account / mo | Contribution / account / mo | Year-1 revenue | Year-1 cash after startup & option costs | Year-1 profit after owner time | Month-12 monthly cash flow | Break-even accounts (cash / fully loaded) | First month positive (fully loaded) | Payback month | Max cash drawdown | Units & labor hrs at month 12 | Capacity |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | low | 3.0 | $530 | $88 | $11,930 | -$4,496 | -$14,096 | -$75 | 3.9 / 12.9 | not in 12 mo | not in 12 mo | -$4,496 | 12 u / 9 h | ok |
-| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | base | 6.0 | $1,526 | $864 | $77,836 | $21,457 | -$143 | $3,747 | 1.7 / 3.7 | 5 | 7 | -$6,285 | 51 u / 51 h | ok |
-| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | high | 10.0 | $2,886 | $2,171 | $274,218 | $162,116 | $108,116 | $18,762 | 1.4 / 3.4 | 3 | 3 | -$8,081 | 139 u / 202 h | ok |
+| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | low | 3.0 | $431 | $61 | $9,702 | -$4,201 | -$18,601 | -$81 | 4.3 / 23.9 | not in 12 mo | not in 12 mo | -$4,201 | 9 u / 7 h | ok |
+| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | base | 6.0 | $1,495 | $758 | $76,255 | $22,628 | -$9,772 | $3,658 | 1.2 / 4.7 | 7 | 6 | -$5,671 | 42 u / 46 h | ok |
+| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | high | 10.0 | $2,948 | $1,992 | $280,060 | $158,899 | $86,899 | $18,121 | 0.9 / 3.9 | 3 | 3 | -$8,750 | 125 u / 194 h | ok |
 | B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | low | 3.0 | $355 | -$74 | $7,985 | -$7,241 | -$14,441 | -$411 | inf / inf | not in 12 mo | not in 12 mo | -$7,241 | 31 u / 5 h | ok |
-| B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | base | 8.0 | $1,328 | $585 | $90,304 | $26,523 | $8,523 | $4,101 | 1.0 / 3.6 | 4 | 6 | -$6,300 | 211 u / 50 h | ok |
-| B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | high | 15.0 | $2,899 | $2,012 | $413,108 | $260,000 | $212,000 | $28,829 | 0.7 / 2.7 | 2 | 2 | -$6,825 | 795 u / 279 h | HIRE |
+| B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | base | 8.0 | $1,328 | $585 | $90,304 | $26,523 | $8,523 | $4,101 | 1.0 / 3.6 | 4 | 6 | -$6,305 | 211 u / 50 h | ok |
+| B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | high | 15.0 | $2,899 | $2,012 | $413,108 | $260,000 | $212,000 | $28,829 | 0.7 / 2.7 | 2 | 2 | -$10,505 | 795 u / 279 h | HIRE |
 | C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | low | 1.0 | $478 | $147 | $3,110 | -$1,727 | -$6,527 | $47 | 0.7 / 3.4 | not in 12 mo | not in 12 mo | -$1,840 | 2 u / 2 h | ok |
 | C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | base | 3.0 | $992 | $651 | $23,820 | -$8,450 | -$22,850 | $1,502 | 0.7 / 2.5 | 8 | not in 12 mo | -$18,914 | 8 u / 10 h | ok |
-| C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | high | 8.0 | $2,505 | $2,087 | $190,380 | $119,665 | $77,665 | $15,598 | 0.5 / 2.2 | 2 | 5 | -$24,082 | 42 u / 81 h | ok |
+| C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | high | 8.0 | $2,505 | $2,087 | $190,380 | $119,665 | $77,665 | $15,598 | 0.5 / 2.2 | 2 | 5 | -$25,765 | 42 u / 81 h | ok |
 | D. South Orange County served remotely from Bellevue + periodic visits | low | 1.0 | $378 | $2 | $2,454 | -$3,125 | -$8,885 | -$243 | 109.2 / 323.1 | not in 12 mo | not in 12 mo | -$3,125 | 3 u / 2 h | ok |
 | D. South Orange County served remotely from Bellevue + periodic visits | base | 3.0 | $1,112 | $556 | $26,688 | $2,027 | -$15,253 | $800 | 1.6 / 4.2 | not in 12 mo | 10 | -$2,519 | 17 u / 18 h | ok |
 | D. South Orange County served remotely from Bellevue + periodic visits | high | 6.0 | $1,946 | $1,382 | $105,111 | $46,044 | -$1,956 | $6,101 | 1.6 / 4.5 | 6 | 4 | -$3,305 | 52 u / 81 h | ok |
-| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | low | 2.0 | $378 | $2 | $4,908 | -$17,595 | -$27,195 | -$1,257 | 562.0 / 918.5 | not in 12 mo | not in 12 mo | -$17,595 | 5 u / 4 h | ok |
-| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | base | 5.0 | $1,112 | $556 | $44,480 | -$15,340 | -$40,540 | $60 | 4.9 / 8.7 | not in 12 mo | not in 12 mo | -$15,580 | 28 u / 30 h | ok |
-| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | high | 9.0 | $1,946 | $1,382 | $157,666 | $19,179 | -$46,821 | $5,485 | 5.0 / 9.0 | not in 12 mo | 9 | -$19,531 | 79 u / 121 h | ok |
-| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | low | 3.0 | $506 | -$5 | $9,877 | -$88,350 | -$102,750 | -$5,703 | inf / inf | not in 12 mo | not in 12 mo | -$88,350 | 11 u / 8 h | ok |
-| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | base | 7.0 | $1,326 | $668 | $74,256 | -$112,344 | -$148,344 | -$4,846 | 14.3 / 18.8 | not in 12 mo | not in 12 mo | -$112,344 | 47 u / 50 h | ok |
-| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | high | 12.0 | $2,160 | $1,534 | $233,334 | -$83,757 | -$179,757 | $2,539 | 10.3 / 15.6 | not in 12 mo | not in 12 mo | -$98,990 | 118 u / 180 h | ok |
-| G. South OC production lab (mill + furnace + printer + staff) | low | 4.0 | $506 | -$5 | $13,169 | -$197,826 | -$226,626 | -$12,495 | inf / inf | not in 12 mo | not in 12 mo | -$197,826 | 14 u / 11 h | ok |
-| G. South OC production lab (mill + furnace + printer + staff) | base | 10.0 | $1,326 | $668 | $99,450 | -$299,668 | -$364,468 | -$14,452 | 31.6 / 39.7 | not in 12 mo | not in 12 mo | -$299,668 | 66 u / 72 h | ok |
-| G. South OC production lab (mill + furnace + printer + staff) | high | 18.0 | $2,160 | $1,534 | $330,556 | -$352,340 | -$520,340 | -$6,433 | 22.2 / 31.3 | not in 12 mo | not in 12 mo | -$352,340 | 176 u / 270 h | HIRE |
-| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | low | 1.0 | $378 | -$199 | $2,454 | -$6,405 | -$10,245 | -$602 | inf / inf | not in 12 mo | not in 12 mo | -$6,405 | 3 u / 2 h | ok |
-| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | base | 2.0 | $1,112 | $320 | $16,680 | -$6,135 | -$16,935 | -$216 | 2.7 / 5.5 | not in 12 mo | not in 12 mo | -$6,135 | 11 u / 12 h | ok |
-| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | high | 4.0 | $1,946 | $1,233 | $66,181 | $20,065 | -$9,935 | $3,238 | 1.4 / 3.4 | 7 | 6 | -$3,062 | 35 u / 54 h | ok |
-| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | low | 2.0 | $378 | -$199 | $4,908 | -$32,484 | -$42,084 | -$2,663 | inf / inf | not in 12 mo | not in 12 mo | -$32,484 | 5 u / 4 h | ok |
-| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | base | 3.0 | $1,112 | $320 | $25,020 | -$57,618 | -$82,818 | -$4,029 | 15.6 / 22.2 | not in 12 mo | not in 12 mo | -$57,618 | 17 u / 18 h | ok |
-| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | high | 5.0 | $1,946 | $1,233 | $82,726 | -$63,190 | -$129,190 | -$2,738 | 7.2 / 11.7 | not in 12 mo | not in 12 mo | -$63,190 | 44 u / 67 h | ok |
+| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | low | 2.0 | $378 | $2 | $4,908 | -$16,995 | -$26,595 | -$1,257 | 562.0 / 918.5 | not in 12 mo | not in 12 mo | -$16,995 | 5 u / 4 h | ok |
+| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | base | 5.0 | $1,112 | $556 | $44,480 | -$14,340 | -$39,540 | $60 | 4.9 / 8.7 | not in 12 mo | not in 12 mo | -$14,580 | 28 u / 30 h | ok |
+| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | high | 9.0 | $1,946 | $1,382 | $157,666 | $20,979 | -$45,021 | $5,485 | 5.0 / 9.0 | not in 12 mo | 9 | -$17,731 | 79 u / 121 h | ok |
+| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | low | 3.0 | $506 | -$5 | $9,877 | -$86,550 | -$100,950 | -$5,703 | inf / inf | not in 12 mo | not in 12 mo | -$86,550 | 11 u / 8 h | ok |
+| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | base | 7.0 | $1,326 | $668 | $74,256 | -$109,844 | -$145,844 | -$4,846 | 14.3 / 18.8 | not in 12 mo | not in 12 mo | -$109,844 | 47 u / 50 h | ok |
+| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | high | 12.0 | $2,160 | $1,534 | $233,334 | -$79,757 | -$175,757 | $2,539 | 10.3 / 15.6 | not in 12 mo | not in 12 mo | -$94,990 | 118 u / 180 h | ok |
+| G. South OC production lab (mill + furnace + printer + staff) | low | 4.0 | $506 | -$5 | $13,169 | -$194,826 | -$223,626 | -$12,495 | inf / inf | not in 12 mo | not in 12 mo | -$194,826 | 14 u / 11 h | ok |
+| G. South OC production lab (mill + furnace + printer + staff) | base | 10.0 | $1,326 | $668 | $99,450 | -$295,168 | -$359,968 | -$14,452 | 31.6 / 39.7 | not in 12 mo | not in 12 mo | -$295,168 | 66 u / 72 h | ok |
+| G. South OC production lab (mill + furnace + printer + staff) | high | 18.0 | $2,160 | $1,534 | $330,556 | -$345,340 | -$513,340 | -$6,433 | 22.2 / 31.3 | not in 12 mo | not in 12 mo | -$345,340 | 176 u / 270 h | HIRE |
+| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | low | 1.0 | $378 | -$118 | $2,454 | -$5,882 | -$9,722 | -$522 | inf / inf | not in 12 mo | not in 12 mo | -$5,882 | 3 u / 2 h | ok |
+| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | base | 2.0 | $1,112 | $518 | $16,680 | -$3,154 | -$13,954 | $182 | 1.6 / 3.4 | not in 12 mo | not in 12 mo | -$3,777 | 11 u / 12 h | ok |
+| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | high | 4.0 | $1,946 | $1,363 | $66,181 | $24,456 | -$5,544 | $3,754 | 1.2 / 3.1 | 7 | 5 | -$2,868 | 35 u / 54 h | ok |
+| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | low | 2.0 | $378 | -$118 | $4,908 | -$30,587 | -$40,187 | -$2,502 | inf / inf | not in 12 mo | not in 12 mo | -$30,587 | 5 u / 4 h | ok |
+| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | base | 3.0 | $1,112 | $518 | $25,020 | -$51,845 | -$77,045 | -$3,433 | 9.6 / 13.7 | not in 12 mo | not in 12 mo | -$51,845 | 17 u / 18 h | ok |
+| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | high | 5.0 | $1,946 | $1,363 | $82,726 | -$55,701 | -$121,701 | -$2,092 | 6.5 / 10.6 | not in 12 mo | not in 12 mo | -$55,701 | 44 u / 67 h | ok |
 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | low | 1.0 | $378 | -$199 | $2,454 | -$4,045 | -$7,885 | -$412 | inf / inf | not in 12 mo | not in 12 mo | -$4,045 | 3 u / 2 h | ok |
 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | base | 3.0 | $1,112 | $413 | $26,688 | $4,128 | -$6,672 | $857 | 0.9 / 3.1 | not in 12 mo | 8 | -$1,552 | 17 u / 18 h | ok |
-| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | high | 6.0 | $1,946 | $1,305 | $105,111 | $56,769 | $26,769 | $6,901 | 0.7 / 2.6 | 4 | 3 | -$2,361 | 52 u / 81 h | ok |
+| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | high | 6.0 | $1,946 | $1,305 | $105,111 | $56,769 | $26,769 | $6,901 | 0.7 / 2.6 | 4 | 3 | -$2,550 | 52 u / 81 h | ok |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | low | 0.0 | $378 | -$78 | $0 | -$2,448 | -$6,288 | -$192 | inf / inf | not in 12 mo | not in 12 mo | -$2,448 | 0 u / 0 h | ok |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | base | 2.0 | $1,112 | $451 | $16,680 | $879 | -$9,921 | $447 | 1.0 / 3.0 | not in 12 mo | 11 | -$1,347 | 11 u / 12 h | ok |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | high | 4.0 | $1,946 | $1,305 | $66,181 | $31,457 | $1,457 | $4,205 | 0.8 / 2.7 | 6 | 3 | -$1,089 | 35 u / 54 h | ok |
@@ -87,30 +93,30 @@ Owner opportunity cost used: $40 / $60 / $100 per hour. Loaded technician rate: 
 | L. Miami / South Florida served remotely (2-Day air) | base | 1.0 | $1,112 | $451 | $8,340 | -$1,382 | -$10,022 | $79 | 0.8 / 2.4 | not in 12 mo | not in 12 mo | -$1,653 | 6 u / 6 h | ok |
 | L. Miami / South Florida served remotely (2-Day air) | high | 3.0 | $1,946 | $1,305 | $49,636 | $21,522 | -$2,478 | $2,985 | 0.7 / 2.2 | 6 | 4 | -$1,041 | 26 u / 40 h | ok |
 | M. ARUM / MillBox equipment dealer motion, national, no new premises | low | 1.0 | $3,550 | -$170 | $42,600 | -$11,905 | -$26,305 | -$850 | inf / inf | not in 12 mo | not in 12 mo | -$11,905 | 0 u / 5 h | ok |
-| M. ARUM / MillBox equipment dealer motion, national, no new premises | base | 1.0 | $12,900 | $5,156 | $154,800 | $36,232 | $232 | $3,436 | 0.3 / 0.9 | 1 | 2 | -$1,564 | 1 u / 17 h | ok |
-| M. ARUM / MillBox equipment dealer motion, national, no new premises | high | 1.0 | $38,400 | $23,990 | $460,800 | $229,485 | $133,485 | $19,890 | 0.2 / 0.5 | 1 | 1 | $10,690 | 2 u / 56 h | ok |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | low | 1.0 | $4,475 | -$107 | $53,700 | -$41,967 | -$56,367 | -$2,714 | inf / inf | not in 12 mo | not in 12 mo | -$41,967 | 1 u / 6 h | ok |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | base | 1.0 | $16,275 | $6,693 | $195,300 | -$7,120 | -$43,120 | $794 | 0.9 / 1.3 | not in 12 mo | not in 12 mo | -$15,856 | 3 u / 21 h | ok |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | high | 1.0 | $46,100 | $29,114 | $553,200 | $188,837 | $92,837 | $18,195 | 0.4 / 0.6 | 1 | 2 | -$11,305 | 6 u / 70 h | ok |
+| M. ARUM / MillBox equipment dealer motion, national, no new premises | base | 1.0 | $12,900 | $5,156 | $154,800 | $36,232 | $232 | $3,436 | 0.3 / 0.9 | 1 | 2 | -$5,000 | 1 u / 17 h | ok |
+| M. ARUM / MillBox equipment dealer motion, national, no new premises | high | 1.0 | $38,400 | $23,990 | $460,800 | $229,485 | $133,485 | $19,890 | 0.2 / 0.5 | 1 | 1 | -$9,200 | 2 u / 56 h | ok |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | low | 1.0 | $4,475 | -$107 | $53,700 | -$40,467 | -$54,867 | -$2,714 | inf / inf | not in 12 mo | not in 12 mo | -$40,467 | 1 u / 6 h | ok |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | base | 1.0 | $16,275 | $6,693 | $195,300 | -$4,870 | -$40,870 | $794 | 0.9 / 1.3 | 1 | not in 12 mo | -$16,650 | 3 u / 21 h | ok |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | high | 1.0 | $46,100 | $29,114 | $553,200 | $192,337 | $96,337 | $18,195 | 0.4 / 0.6 | 1 | 2 | -$29,500 | 6 u / 70 h | ok |
 
-## Stress tests (base case, month-12 monthly cash flow after owner time)
+## Stress tests (base case; month-12 monthly cash flow after owner time unless noted)
 
-| Option | Base | Half the accounts | Remake rate doubles | Rent+staff +25% | Lose one account |
-|---|---|---|---|---|---|
-| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | $1,947 | -$647 | $1,489 | $1,947 | $1,082 |
-| B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | $2,601 | $260 | $2,070 | $2,601 | $2,016 |
-| C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | $302 | -$674 | $153 | $302 | -$349 |
-| D. South Orange County served remotely from Bellevue + periodic visits | -$640 | -$1,474 | -$807 | -$640 | -$1,196 |
-| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | -$2,040 | -$3,430 | -$2,318 | -$2,290 | -$2,596 |
-| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | -$7,846 | -$10,182 | -$8,310 | -$9,371 | -$8,514 |
-| G. South OC production lab (mill + furnace + printer + staff) | -$19,852 | -$23,190 | -$20,515 | -$23,352 | -$20,520 |
-| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | -$1,116 | -$1,435 | -$1,227 | -$1,116 | -$1,435 |
-| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | -$6,129 | -$6,609 | -$6,296 | -$6,454 | -$6,449 |
-| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | -$43 | -$663 | -$209 | -$43 | -$456 |
-| K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | -$453 | -$904 | -$564 | -$453 | -$904 |
-| L. Miami / South Florida served remotely (2-Day air) | -$641 | -$867 | -$697 | -$641 | -$1,092 |
-| M. ARUM / MillBox equipment dealer motion, national, no new premises | $436 | -$2,142 | -$209 | $436 | -$1,006 |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | -$2,206 | -$5,552 | -$3,020 | -$2,768 | -$3,648 |
+| Option | Base month-12 | Half the accounts | Remake rate doubles | All monthly option costs +25% | Crown price matched to $109 | Lose one average account | Year-1 profit after owner time: base | Year-1 profit: ramp 3 months slower |
+|---|---|---|---|---|---|---|---|---|
+| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | $958 | -$1,316 | $790 | $736 | $526 | $200 | -$9,772 | -$16,594 |
+| B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | $2,601 | $260 | $2,333 | $2,456 | n/a | $2,016 | $8,523 | $1,501 |
+| C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | $302 | -$674 | $257 | $189 | n/a | -$349 | -$22,850 | -$25,778 |
+| D. South Orange County served remotely from Bellevue + periodic visits | -$640 | -$1,474 | -$715 | -$857 | -$873 | -$1,196 | -$15,253 | -$17,755 |
+| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | -$2,040 | -$3,430 | -$2,165 | -$2,720 | -$2,428 | -$2,596 | -$39,540 | -$43,710 |
+| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | -$7,846 | -$10,182 | -$8,052 | -$10,226 | -$8,525 | -$8,514 | -$145,844 | -$152,853 |
+| G. South OC production lab (mill + furnace + printer + staff) | -$19,852 | -$23,190 | -$20,147 | -$25,134 | -$20,822 | -$20,520 | -$359,968 | -$369,982 |
+| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | -$718 | -$1,237 | -$771 | -$932 | -$873 | -$1,237 | -$13,954 | -$15,509 |
+| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | -$5,533 | -$6,311 | -$5,613 | -$6,780 | -$5,766 | -$6,051 | -$77,045 | -$79,378 |
+| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | -$43 | -$663 | -$138 | -$138 | -$275 | -$456 | -$6,672 | -$8,532 |
+| K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | -$453 | -$904 | -$513 | -$567 | -$608 | -$904 | -$9,921 | -$11,274 |
+| L. Miami / South Florida served remotely (2-Day air) | -$641 | -$867 | -$671 | -$734 | -$719 | -$1,092 | -$10,022 | -$10,699 |
+| M. ARUM / MillBox equipment dealer motion, national, no new premises | $436 | -$2,142 | $436 | $6 | n/a | -$1,006 | $232 | -$7,502 |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | -$2,206 | -$5,552 | -$2,221 | -$3,681 | n/a | -$3,648 | -$40,870 | -$50,910 |
 
 ## Feasibility by expansion-cash envelope
 
@@ -118,36 +124,36 @@ Feasible = envelope covers both (a) cash to open plus 90 days of option costs wi
 
 | Option | Scenario | Need: open + 90 days | Need: worst drawdown | $5,000 | $15,000 | $30,000 |
 |---|---|---|---|---|---|---|
-| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | low | $3,420 | $4,496 | yes | yes | yes |
-| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | base | $9,670 | $6,285 | no | yes | yes |
-| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | high | $17,600 | $8,081 | no | no | yes |
+| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | low | $3,195 | $4,201 | yes | yes | yes |
+| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | base | $8,020 | $5,671 | no | yes | yes |
+| A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | high | $14,150 | $8,750 | no | yes | yes |
 | B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | low | $3,875 | $7,241 | no | yes | yes |
-| B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | base | $8,045 | $6,300 | no | yes | yes |
-| B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | high | $14,555 | $6,825 | no | yes | yes |
+| B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | base | $8,045 | $6,305 | no | yes | yes |
+| B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | high | $14,555 | $10,505 | no | yes | yes |
 | C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | low | $1,780 | $1,840 | yes | yes | yes |
 | C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | base | $20,015 | $18,914 | no | no | yes |
-| C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | high | $29,065 | $24,082 | no | no | yes |
+| C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | high | $29,065 | $25,765 | no | no | yes |
 | D. South Orange County served remotely from Bellevue + periodic visits | low | $935 | $3,125 | yes | yes | yes |
 | D. South Orange County served remotely from Bellevue + periodic visits | base | $3,504 | $2,519 | yes | yes | yes |
 | D. South Orange County served remotely from Bellevue + periodic visits | high | $8,867 | $3,305 | no | yes | yes |
-| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | low | $6,274 | $17,595 | no | no | yes |
-| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | base | $13,100 | $15,580 | no | no | yes |
-| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | high | $30,190 | $19,531 | no | no | no |
-| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | low | $37,061 | $88,350 | no | no | no |
-| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | base | $64,057 | $112,344 | no | no | no |
-| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | high | $106,607 | $98,990 | no | no | no |
-| G. South OC production lab (mill + furnace + printer + staff) | low | $85,421 | $197,826 | no | no | no |
-| G. South OC production lab (mill + furnace + printer + staff) | base | $159,584 | $299,668 | no | no | no |
-| G. South OC production lab (mill + furnace + printer + staff) | high | $280,635 | $352,340 | no | no | no |
-| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | low | $1,480 | $6,405 | no | yes | yes |
-| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | base | $3,235 | $6,135 | no | yes | yes |
-| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | high | $6,608 | $3,062 | no | yes | yes |
-| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | low | $9,514 | $32,484 | no | no | no |
-| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | base | $19,915 | $57,618 | no | no | no |
-| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | high | $35,465 | $63,190 | no | no | no |
+| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | low | $5,674 | $16,995 | no | no | yes |
+| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | base | $12,100 | $14,580 | no | yes | yes |
+| E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | high | $28,390 | $17,731 | no | no | yes |
+| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | low | $35,261 | $86,550 | no | no | no |
+| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | base | $61,557 | $109,844 | no | no | no |
+| F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | high | $102,607 | $94,990 | no | no | no |
+| G. South OC production lab (mill + furnace + printer + staff) | low | $82,421 | $194,826 | no | no | no |
+| G. South OC production lab (mill + furnace + printer + staff) | base | $155,084 | $295,168 | no | no | no |
+| G. South OC production lab (mill + furnace + printer + staff) | high | $273,635 | $345,340 | no | no | no |
+| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | low | $1,480 | $5,882 | no | yes | yes |
+| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | base | $3,235 | $3,777 | yes | yes | yes |
+| H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | high | $6,608 | $2,868 | no | yes | yes |
+| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | low | $8,664 | $30,587 | no | no | no |
+| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | base | $18,615 | $51,845 | no | no | no |
+| I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | high | $33,465 | $55,701 | no | no | no |
 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | low | $838 | $4,045 | yes | yes | yes |
 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | base | $2,348 | $1,552 | yes | yes | yes |
-| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | high | $5,340 | $2,361 | no | yes | yes |
+| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | high | $5,340 | $2,550 | no | yes | yes |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | low | $724 | $2,448 | yes | yes | yes |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | base | $1,790 | $1,347 | yes | yes | yes |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | high | $3,773 | $1,089 | yes | yes | yes |
@@ -155,8 +161,8 @@ Feasible = envelope covers both (a) cash to open plus 90 days of option costs wi
 | L. Miami / South Florida served remotely (2-Day air) | base | $1,416 | $1,653 | yes | yes | yes |
 | L. Miami / South Florida served remotely (2-Day air) | high | $3,390 | $1,041 | yes | yes | yes |
 | M. ARUM / MillBox equipment dealer motion, national, no new premises | low | $3,740 | $11,905 | no | yes | yes |
-| M. ARUM / MillBox equipment dealer motion, national, no new premises | base | $10,160 | $1,564 | no | yes | yes |
-| M. ARUM / MillBox equipment dealer motion, national, no new premises | high | $21,500 | -$10,690 | no | no | yes |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | low | $17,221 | $41,967 | no | no | no |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | base | $34,347 | $15,856 | no | no | no |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | high | $62,257 | $11,305 | no | no | no |
+| M. ARUM / MillBox equipment dealer motion, national, no new premises | base | $10,160 | $5,000 | no | yes | yes |
+| M. ARUM / MillBox equipment dealer motion, national, no new premises | high | $21,500 | $9,200 | no | no | yes |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | low | $15,721 | $40,467 | no | no | no |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | base | $32,097 | $16,650 | no | no | no |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | high | $58,757 | $29,500 | no | no | no |

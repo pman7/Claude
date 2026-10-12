@@ -101,7 +101,7 @@ Subject: Your two-mill quote, and the December 31 placed-in-service deadline
 
 Hello [name],
 
-In March we quoted two ARUM A3L mills at $87,900 installed. I want to make sure you have what you need to decide before year end, because the 2026 Section 179 deduction (limit $2,560,000 this year, with 100 percent bonus depreciation) requires the equipment to be placed in service by December 31, and our install lead time from order is about [X] weeks. Please confirm the lead time with your CPA's deadline in mind.
+In March we quoted two ARUM A3L mills at $87,900 installed. I want to make sure you have what you need to decide before year end, because the 2026 Section 179 deduction (limit $2,560,000 this year per IRS Rev. Proc. 2025-32, with 100 percent bonus depreciation) requires the equipment to be placed in service by December 31, and our install lead time from order is about [X] weeks. Please confirm the lead time with your CPA's deadline in mind.
 
 Three options:
 1. Proceed on the March quote, which I will hold through October 31. I can introduce you to a financing partner the same day.
@@ -187,7 +187,7 @@ Reply with two sentences on which Eastside practices you already know.
 
 ---
 
-## Draft 10. Pacific Northwest labs: Bear Milling relaunch call script (week 7, only after four weeks at 90 percent on time)
+## Draft 10. Pacific Northwest labs: Bear Milling relaunch call script (week 5, only after four weeks at 90 percent on time)
 
 To: the owner of [lab name].
 Purpose: a first lab-to-lab order.
@@ -198,7 +198,7 @@ Good outcome: one STL within a week. Log the lab, the CAM they use and the curre
 
 ---
 
-## Draft 11. Alaska Dental Society: remote pilot inquiry (hold until the Alaska gate, Q2 2027)
+## Draft 11. Alaska Dental Society: remote pilot inquiry (hold until gate 3; note the 2027 annual meeting is February 18 to 19 in Waikoloa, Hawaii, with sponsorship commitments due in December 2026)
 
 To: Alaska Dental Society, executive director.
 Purpose: a vendor listing or newsletter mention, and the two Anchorage implant practices to approach first.
@@ -235,7 +235,7 @@ Phillip Manchik, Integra Dental Design, Bellevue
 
 This is an application, not a letter; the HLO accepts applications once its permanent rules are effective (filed October 1, 2026). What you will need on the form, per OAR 331-765 as filed: the lab's name, mailing and physical address, phone and email; the responsible person (you) or supervising dentist; an attestation that the lab meets OSHA and CDC infection-control requirements; an attestation that every Oregon work order will receive a scannable material-content disclosure and a point-of-origin disclosure naming any third-party manufacturing by city, state and country; documentation that an employee working at least 30 hours a week is a CDT in good standing or completed 12 approved CE hours in the last 12 months; and fees of $250 (application) plus $500 (authorization). Renewal is $250 plus $500 a year.
 
-Decision before filing: if no employee works 30 hours a week as a CDT, the application cannot be completed as written. Either raise Young Kim's schedule to 30 hours, document dentist supervision if the rule permits it for an out-of-state lab (ask the HLO), or pause Oregon work orders after October 31 until it is resolved.
+Decision before filing: the qualified-person test (OAR 331-765-0005(2)(d) as filed) is met until 2030 by any employee working 30 hours a week who completed 12 NBC-approved continuing-education hours in the prior 12 months, or by a 30-hour CDT, or by a dentist. Edward Petruk is full time, so the cheapest path is to enroll Edward in 12 approved CE hours (about $300 to $600, a few evenings) and file; Young Kim's hours do not need to change for Oregon.
 
 Cover note to the HLO, if a question is needed first:
 
@@ -243,7 +243,7 @@ Subject: Out-of-state dental laboratory authorization, question before applying
 
 Hello,
 
-Integra Dental Design (Nova Dental LLC) is a dental laboratory in Bellevue, Washington, registered with the Washington Department of Health (DLAB.FS.70096007). We receive work orders from at least one Oregon-licensed dentist and intend to apply for authorization under the new Dental Laboratory Program. Two questions before we file: (1) does the qualified-person requirement in OAR 331-765-0010(2)(d) accept a laboratory operating under the supervision of a licensed Washington dentist, or must the 30-hour employee be a CDT or hold the CE hours; and (2) is the application form available now that the permanent rules are filed, and is the enforcement waiver through October 31, 2026 extended for out-of-state laboratories awaiting the form?
+Integra Dental Design (Nova Dental LLC) is a dental laboratory in Bellevue, Washington, registered with the Washington Department of Health (DLAB.FS.70096007). We receive work orders from at least one Oregon-licensed dentist and intend to apply for authorization under the new Dental Laboratory Program. Two questions before we file: (1) for the qualified-person requirement in OAR 331-765-0005(2)(d), will documentation that a full-time employee completed 12 NBC-approved continuing-education hours within the prior 12 months be accepted if the hours are completed in the weeks before filing; and (2) is the application form available now that the permanent rules are filed, and is the enforcement waiver through October 31, 2026 extended for out-of-state laboratories awaiting the form?
 
 Thank you,
 Phillip Manchik, Integra Dental Design, Bellevue, WA

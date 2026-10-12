@@ -1,0 +1,794 @@
+{
+ "topic": "Carrier logistics from Bellevue, WA 98007 to candidate markets (SoCal, Maui/Honolulu, Anchorage, Dallas, Miami, Eugene, Spokane, Boise): transit commitments, 2026 published rates, surcharges, drop-off/return-leg logistics, Alaska Air Cargo GoldStreak, discounts, claims, disruption risk",
+ "summary": "Facts first. (1) \"Overnight\" to Hawaii is not overnight for most of the lab's realistic options. FedEx's 2026 list-rate tables carry separate Alaska/Hawaii zones (9/10 metro, 11/12 rural) and footnotes: Express Saver is not offered to AK/HI at all; Standard Overnight is \"Alaska metro only\"; 2Day A.M. is \"Alaska only\"; Priority Overnight and 2Day are the Hawaii-inbound workhorses, and the FedEx service guide language is \"delivery in 2 business days for certain shipments to and from Alaska and Hawaii\" (Priority Overnight) and \"3 business days for certain shipments\" (2Day). UPS's 2026 zone files confirm the mirror image: from the 48 states, only Next Day Air, 2nd Day Air and Ground are offered to AK/HI (zones 124/224/44 metro; 126/226/46 extended); Next Day Air Saver, 2nd Day Air A.M. and 3 Day Select are not. Kahului 96732, Kihei 96753 and Lahaina 96761 fall in UPS's extended tier; Honolulu 968xx and Anchorage 995xx are metro. UPS's own guide says Next Day Air to Hawaii \"may require additional time in transit\"; Next Day Air Early is explicitly committed to Anchorage by 8:30/9:00 a.m. Saturday delivery in Hawaii (FedEx) is Oahu-only, select ZIPs.\n\n(2) Published 2026 list prices for a 1 lb crown box, with the fuel surcharge in force the week of Oct 5, 2026 (FedEx Express 31.75%, Ground 29.25%; UPS Air 32.25%, Ground 29.75%): Bellevue to Maui, UPS Next Day Air ~$169 (list) or ~$101 under UPS's published Small Business Rates; UPS 2nd Day Air ~$108 list / ~$71 SBR; FedEx Priority Overnight ~$172-177; FedEx 2Day ~$90 (metro) to ~$115 (rural). Bellevue to Anchorage is priced identically to Hawaii metro at both carriers (FedEx PO ~$172, UPS NDA ~$168, UPS 2DA ~$89). Within the contiguous states the same box runs FedEx Priority Overnight ~$88 (zone 3, Eugene/Spokane est.) to ~$150 (zone 8, Miami); UPS 2nd Day Air ~$38-62; Ground ~$16-20. The cheapest credible expedited options to the islands are flat-rate products that bundle fuel: FedEx One Rate 2Day small box is $19.55 nationwide including AK/HI (FedEx packaging only; 2Day to HI/AK can be 3 business days and carries no money-back guarantee); UPS Simple Rate 2nd Day Air extra-small box is $48.80 to metro AK/HI and $90.05 to remote AK/HI, no fuel surcharge.\n\n(3) Alaska Air Cargo GoldStreak is the only true same-day product. Oct 1, 2026 tariff: SEA (zone 4) to OGG/HNL (zone 11) letter $59, minimum $99 (1-3 lb all pay the minimum at $3.44/lb); SEA to ANC (zone 2) letter $49, minimum $74; SEA to Orange County (SNA, zone 6) letter $49, minimum $69; DFW/MIA $79. Tender 60 minutes before departure, pickup 60 minutes after arrival, airport-to-airport only; the consignee (dentist or courier) must collect at the cargo building (OGG: 871 Haleakala Hwy, M-F 6:00 am-7:30 pm, Sat-Sun 6:00 am-1:00 pm; ANC and SEA GoldStreak 24/7). Alaska runs four SEA-OGG nonstops daily (first 08:07) and roughly 10+ SEA-ANC, so a case tendered by ~7 am can be in a Maui dentist's hands early afternoon HST. Known Shipper status is mandatory and Integra already holds it. Caveats: the guarantee requires pre-booking and only refunds up to 50% of the charge; the public rules tariff caps pieces at 100 lb while the website says 150 lb; prepaid only; rates rose ~$5 per minimum between January and October 2026.\n\n(4) Cutoffs matter more than rates. Nearest FedEx Office (1299 156th Ave NE) last Express pickup 4:00 pm M-F per a June 2026 aggregator; The UPS Store at Crossroads (15600 NE 8th St) 5:00-5:30 pm air pickup; the UPS Customer Center in Redmond shows conflicting open/closed status. Return legs are the trap: FedEx Ship Center Kahului last Express drop-off is noon M-F; FedEx Anchorage 2:30 pm; Lahaina OfficeMax 11:00 am; UPS Stores on Maui 5:00 pm M-F with no weekend air pickup. Return-leg list rates are lower than outbound (FedEx Priority Overnight from AK/HI 1 lb $78.45 list, ~$103 with fuel; FedEx/UPS 2Day/2DA ~$58-60).\n\n(5) Money-back guarantees: FedEx reinstated its guarantee Jan 13, 2026 only for First/Priority/Standard Overnight and 2Day A.M.; 2Day, Express Saver and Ground remain unguaranteed. UPS's guarantee covers only Next Day Air Early/NDA/NDA Saver/2DA A.M.; 2nd Day Air, 3 Day Select and Ground are suspended (UPS's own year-end notice). So the two services most likely to be used to Maui (FedEx 2Day, UPS 2nd Day Air) carry no refund if late. Default liability is $100 per package; declared value above that costs FedEx $4.95 ($100.01-300) then $1.65 per $100; UPS $5.10-5.11 then $1.70 per $100 (a $1,700 arch: ~$28-29). Damage claims must be noticed within 60 days at both carriers.\n\nEstimates: Eugene/Spokane assumed zone 3 (zone 4 possible), Dallas zone 7 (8 possible), Aliso Viejo UPS zone 5 (published from the reverse 926 chart; FedEx zone 5 assumed), Boise zone 4, Miami zone 8. UPS Hawaii-origin pages were not retrieved; Alaska-origin tables are used as proxy because FedEx and UPS AK/HI figures match to the cent. Pirate Ship publishes no AK/HI rate table (\"up to 75% off Daily Rates\" for air; AK/HI \"may incur UPS surcharges\"); the UPS Small Business Rate Guide is used as the proxy for a discounted small-shipper tier.\n\nUnknowns: whether the Maui ZIPs are FedEx \"Hawaii rural\" (zone 12), whether they sit on either carrier's Alaska/Hawaii delivery-area-surcharge list (FedEx $16.25 HI/$46.00 AK; UPS $16.50/$48.25), exact UPS zones from 980 (file not retrievable), the nearest FedEx Ship Center to Bellevue, and GoldStreak pricing for Boise/Eugene/Spokane (zone 9 is absent from the GoldStreak chart). Disruption record for the Hawaii lanes is real but episodic: Maui wildfire flight delays (Aug 2023), Aloha Air Cargo weather suspensions at OGG/KOA (Mar 2026), Hurricane Lala (Aug 2026), the UPS Louisville MD-11 crash (Nov 2025) that suspended guarantees, and USPS pushing Hawaii Ground Advantage to 10+ days from Oct 1, 2026.",
+ "findings": [
+  {
+   "claim": "FedEx 2026 list-rate footnotes restrict Express service to Alaska/Hawaii",
+   "detail": "Standard Overnight 'is available to Alaska metro only'; 2Day A.M. 'is available to Alaska only. Service is not available to Hawaii'; FedEx One Rate footnote: Express Saver 'Not available for Alaska and Hawaii shipments'; First Overnight to Alaska 'select ZIP codes only, commitment 9 a.m. to 2 p.m.'. Hawaii inbound commitments in the 2026 table read next day by 12 p.m. / next day by 5 p.m. / 2nd day by 5 p.m. (8:30 p.m. residences) for First Overnight / Priority Overnight / 2Day (column mapping inferred from table order).",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Effective January 5, 2026; accessed 2026-10-12",
+   "value": "Express Saver: not to AK/HI; SO: AK metro only; 2Day AM: AK only"
+  },
+  {
+   "claim": "FedEx service guide: Priority Overnight is 2 business days and 2Day is 3 business days for 'certain shipments' to/from Alaska and Hawaii; Ground 3-7 business days",
+   "detail": "Standard FedEx U.S. service guide language (2024 guide mirror, consistent across years): Priority Overnight 'Delivery in 2 business days for certain shipments to and from Alaska and Hawaii'; 2Day 'Delivery in 3 business days for certain shipments to Alaska and Hawaii'; Express Saver 'Available throughout all states except Alaska and Hawaii'; Ground/Home Delivery '3-7 business days to and from Alaska and Hawaii'. Hawaii Saturday delivery is Oahu-only, select PM ZIP codes.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.leegov.com/procurement/Project%20Documents/PB220082JJB%20-%20Courier%20Services/FedEx%202024%20U.S.%20Service%20Guide.pdf",
+   "source_date": "2024 guide (undated page); abcdocz Hawaii/Alaska commitment sheet undated; accessed 2026-10-12",
+   "value": "PO: 2 business days (certain AK/HI); 2Day: 3 business days (certain AK/HI)"
+  },
+  {
+   "claim": "UPS offers only Next Day Air, 2nd Day Air and Ground from the 48 states to Alaska/Hawaii; zone 124/224/44 = AK/HI metro, 126/226/46 = AK/HI extended, 125/225/45 = Puerto Rico",
+   "detail": "UPS origin zone file (926) footnotes: 'For Hawaii, the following Postal Codes are Zone 44 for Ground, Zone 124 for Next Day Air and Zone 224 for 2nd Day Air' (metro list) and 'Zone 46 / 126 / 226' (extended list); Puerto Rico 006-009 shows 45/225/125. 3 Day Select, 2nd Day Air A.M. and Next Day Air Saver columns show '-' for 967-968 and 995-999. UPS 2026 CWT table confirms 'Service Not Available' for Saver/2DA AM/3DS AK-HI zones.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.ups.com/media/us/currentrates/zone-txt/926.txt",
+   "source_date": "undated (current rates); accessed 2026-10-12",
+   "value": "NDA Saver, 2DA A.M., 3 Day Select: not available to AK/HI"
+  },
+  {
+   "claim": "Kahului 96732, Kihei 96753 and Lahaina 96761 are UPS 'extended' Hawaii ZIPs; Honolulu 968xx and Anchorage 995xx are metro",
+   "detail": "UPS Guaranteed Ground zone chart lists 96732-33, 96745-57 (Kihei) and 96760-61 (Lahaina) in the higher tier (10) and 96801-28, 96830-63 Honolulu in the lower tier (9); Anchorage 99501-24 are 'Area A'/metro. By the same metro/extended split used in the 48-state zone files, Maui ZIPs price at zones 126/226/46 and Honolulu/Anchorage at 124/224/44.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.ups.com/assets/resources/webcontent/en_US/ak-hi_retail_rates.pdf",
+   "source_date": "2022 guide zone charts (effective Dec 27, 2021); accessed 2026-10-12",
+   "value": "Maui = extended; Honolulu, Anchorage = metro"
+  },
+  {
+   "claim": "UPS 2026 Daily Rates, 1 lb / 3 lb, by zone (list, before fuel)",
+   "detail": "Next Day Air: z103 $67.38/$75.18, z104 $86.64/$104.81, z105 $95.84/$117.60, z107 $112.57/$139.05, z108 $115.30/$143.58, z124 (AK/HI metro) $127.35/$150.63, z126 (AK/HI extended) $127.45/$172.75. Next Day Air Early z124 $157.35/$180.63. NDA Saver z133 $56.28/$63.71, z135 $83.72/$104.63, z137 $98.24/$123.36, z138 $102.87/$130.37. 2nd Day Air: z203 $28.38/$30.49, z204 $29.42/$32.34, z205 $35.76/$42.53, z207 $45.75/$62.06, z208 $46.67/$64.62, z224 $67.08/$85.46, z226 $81.57/$104.23. 3 Day Select z303 $19.57/$21.81, z305 $27.27/$33.50, z307 $36.57/$45.82, z308 $40.83/$54.75. Ground z3 $12.38/$14.91, z4 $13.51/$16.08, z5 $14.10/$16.93, z7 $14.83/$18.28, z8 $15.03/$19.14, z44 $43.25/$52.28, z46 $56.96/$65.82.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "2026 Daily Rates effective Dec 22, 2025 (guide re-issued May 10, 2026); accessed 2026-10-12",
+   "value": "see detail"
+  },
+  {
+   "claim": "UPS publishes a separate 2026 'Small Business Rates' tariff that is roughly 40-60% below Daily Rates, including to AK/HI",
+   "detail": "For 'UPS account holders with agreements providing for UPS Small Business Rates' (effective Jan 26, 2026). 1 lb / 3 lb: NDA z105 $31.58/$38.93, z107 $33.19/$43.56, z124 $70.69/$79.45, z126 $76.34/$82.65; 2nd Day Air z205 $17.43/$20.40, z207 $22.05/$27.35, z224 $47.13/$52.96, z226 $53.61/$58.43; NDA Saver z135 $30.09/$37.08; 3 Day Select z305 $16.59/$18.30; Ground z5 $11.01/$11.24, z44 $33.66/$37.46, z46 $52.04/$56.73. Next Day Air Early billed as NDA Early rate plus a $30.00 surcharge.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://assets.ups.com/adobe/assets/urn%3Aaaid%3Aaem%3Abbf2553c-15e5-4b2d-abcd-b7445b13daa0/original/as/small-business-rate-guide-us-en.pdf",
+   "source_date": "Updated January 26, 2026; accessed 2026-10-12",
+   "value": "NDA 1 lb to Maui (z126): $76.34 SBR vs $127.45 Daily"
+  },
+  {
+   "claim": "UPS Simple Rate (flat, no fuel surcharge) prices to Alaska/Hawaii",
+   "detail": "48-state Extra Small box: Ground $12.20, 3 Day Select $20.80, 2nd Day Air $24.55, NDA Saver $35.45 (Small: $15.80/$26.00/$29.25/$45.00). From the 48 states to Metro AK/HI: Extra Small Ground $42.05, 2nd Day Air $48.80; Small $45.35/$52.15. To Remote AK/HI: Extra Small Ground $55.25, 2nd Day Air $90.05; Small $58.10/$97.30. Guide states fuel surcharges do not apply to Simple Rate.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "2026 Daily Rates; accessed 2026-10-12",
+   "value": "2DA XS box: $48.80 metro HI/AK, $90.05 remote HI/AK"
+  },
+  {
+   "claim": "FedEx 2026 Standard List Rates, 1 lb / 3 lb (before fuel) by zone",
+   "detail": "Priority Overnight: z3 $67.03/$74.79, z4 $85.63/$103.55, z5 $94.68/$116.19, z6 $99.68/$124.94, z7 $110.55/$137.19, z8 $113.48/$142.07. Standard Overnight: z3 $56.69/$64.17 (Quadient shows $59.69 for 1 lb), z4 $73.11/$93.25, z5 $81.00/$101.23, z6 $87.80/$108.02, z7 $95.41/$119.15, z8 $99.65/$126.28. 2Day: z3 $27.74/$30.04, z4 $29.44/$32.39, z5 $35.94/$42.99, z6 $42.80/$55.20, z7 $46.04/$61.77, z8 $46.97/$64.38. Express Saver: z3 $24.33/$27.51, z4 $24.83/$28.07, z5 $31.04/$35.04, z7 $37.51/$46.77, z8 $41.41/$54.32. First Overnight z5 $125.68/$147.19, z8 $144.48/$173.07. Ground: z3 $12.21/$14.84, z4 $13.26/$15.99, z5 $14.00/$16.81, z6 $14.47/$17.49, z7 $14.75/$18.21, z8 $15.01/$19.11.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Effective January 5, 2026 (mirror of fedex.com PDF, which blocks crawlers); cross-checked against quadient.com; accessed 2026-10-12",
+   "value": "see detail"
+  },
+  {
+   "claim": "FedEx 2026 list rates to Alaska/Hawaii metro (zones 9/10) and rural (11/12), and Ground to AK/HI",
+   "detail": "To AK/HI metro, envelope/1 lb/3 lb: First Overnight $116.09/$161.21/$183.97; Priority Overnight $85.09/$130.21/$152.97; 2Day $68.03/$68.03/$85.61. To AK/HI rural: First Overnight $125.42/$165.58/$213.45; Priority Overnight $94.42/$134.58/$182.45; 2Day $86.96/$86.96/$108.12. Alaska metro only: Standard Overnight 1 lb $107.13, 3 lb $135.61; 2Day A.M. $75.48/$97.78. FedEx Ground to Alaska or to Hawaii: 1 lb $43.41, 2 lb $48.28, 3 lb $52.47, 5 lb $62.45 (1-7 business days). Alaska rural Priority Overnight is next day by 12 p.m. only to direct-served towns (Fairbanks, Juneau, Kodiak, Homer, Kenai area etc.), otherwise 2nd day.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Effective January 5, 2026; accessed 2026-10-12",
+   "value": "PO 1 lb to HI/AK metro $130.21 list; 2Day $68.03; Ground $43.41"
+  },
+  {
+   "claim": "FedEx and UPS return-leg (from Alaska/Hawaii to the 48 states) list rates are lower than outbound and match each other to the cent",
+   "detail": "FedEx 'From Alaska/Hawaii' (zones 13-16), 1 lb / 3 lb: First Overnight $109.45/$122.06, Priority Overnight $78.45/$91.06, Standard Overnight $65.38/$69.02, 2Day A.M. $49.35/$62.80, 2Day $44.34/$54.82; envelope PO $47.90, 2Day ~$44.34. FedEx Ground from Alaska/Hawaii 1 lb $15.12-$15.60, 3 lb $19.19-$19.73. UPS 2026 Alaska-origin Daily Rates: NDA to the 48 (zone 24) 1 lb $78.45, 3 lb $91.06; NDA Saver (zone 20) $65.38/$69.02; 2nd Day Air (zone 14) $45.34/$56.07; 2DA A.M. (zone 18) $49.35/$62.80. UPS Hawaii-origin pages not retrieved; assumed equal.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:c7a3d067-725a-4b33-887a-586753b3e615/original/as/preview-ak-hi-rates-us-en.pdf",
+   "source_date": "UPS 2026 AK/HI Daily Rates preview (eff. Dec 22, 2025); FedEx list rates eff. Jan 5, 2026; accessed 2026-10-12",
+   "value": "Return PO/NDA 1 lb $78.45 list; 2Day/2DA ~$44-45"
+  },
+  {
+   "claim": "FedEx One Rate (flat, fuel and DAS included) covers Alaska/Hawaii at the National zone and is the cheapest published 2-day option to Maui",
+   "detail": "Effective Apr 20, 2026 (FedEx packaging required, no account discounts): Envelope: 2Day $12.75, Standard Overnight $55.60, Priority Overnight $81.95, First Overnight $135.95 (National). Extra Small Box: 2Day $13.40, SO $66.30, PO $97.10. Small Box: 2Day $19.55, SO $101.75, PO $148.20, FO $202.20. Pak: 2Day $16.30, PO $132.40. Regional (zones 3-4) PO small box $107.85; Local (zone 2) $61.45. PDF states One Rate 'includes any applicable residential surcharges, delivery area surcharges, and fuel surcharge'; Express Saver not available for AK/HI; 'Hawaii service is outbound only' footnote attaches to Standard Overnight/2Day A.M.; a shippinglabel.co blog claims fuel is added on top (contradicts FedEx PDF).",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.shipscience.com/wp-content/uploads/FedEx-2026-04-20-OneRate-Pricing_2026.pdf",
+   "source_date": "Effective April 20, 2026; accessed 2026-10-12",
+   "value": "2Day small box $19.55 to HI/AK; PO small box $148.20"
+  },
+  {
+   "claim": "Fuel surcharges in force week of Oct 5-11, 2026",
+   "detail": "FedEx: Express package 31.75%, Ground/Home Delivery 29.25% (prior week 33.00%/29.75%). UPS: Domestic Air 32.25%, Ground 29.75% (prior week 33.50%/30.25%). Both reset Mondays off EIA jet fuel (air) and diesel (ground) indexes and apply to the net transportation charge plus most surcharges. Range since July 2026: air 24.5%-33.5%.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.oilpriceapi.com/fuel-surcharge/ups",
+   "source_date": "Effective October 5, 2026 (also kadimalogistics.com Oct 5, 2026; ebblogistics.com tracker); accessed 2026-10-12",
+   "value": "FedEx Express 31.75% / Ground 29.25%; UPS Air 32.25% / Ground 29.75%"
+  },
+  {
+   "claim": "2026 Alaska/Hawaii delivery area surcharges apply to select ZIPs",
+   "detail": "FedEx 2026 (eff. Jan 5, 2026): Alaska delivery area $46.00, Hawaii $16.25 per package (Express and Ground); FedEx 2027 list raises to $48.75/$17.50. UPS (eff. Dec 22, 2025): Alaska $48.25, Hawaii $16.50. Applied after discount and before fuel. Whether 96732/96753/96761/99503 are on the lists was not verified.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://ebblogistics.com/tools/das-lookup/",
+   "source_date": "undated page citing FedEx list eff. Jul 20, 2026 and UPS rates eff. Dec 22, 2025; accessed 2026-10-12",
+   "value": "HI $16.25-16.50; AK $46.00-48.25 per package"
+  },
+  {
+   "claim": "2026 declared value charges",
+   "detail": "FedEx: $0-100 included; $100.01-$300 flat $4.95; over $300 $1.65 per $100 (2025 was $4.50/$1.50). UPS: $0-100 included; $100.01-$300 $5.10-$5.11; over $300 $1.70 per $100 or fraction, counted from the first dollar. Example $1,700 full-arch: FedEx ~$28.05, UPS ~$28.90; $300 crown: $4.95 / $5.10. Pirate Ship UPS labels include $100 UPS liability.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.darrigoconsulting.com/blog/what-does-ups-declared-value-charge-mean",
+   "source_date": "2026-01-22 (UPS); shipaid.com 2026 FedEx table; 3plcenter.com 2026-02-12; accessed 2026-10-12",
+   "value": "FedEx $1.65/$100; UPS $1.70/$100 above $300"
+  },
+  {
+   "claim": "Pirate Ship (Integra's current tool) advertises up to 75% off UPS Daily Rates on air services but publishes no AK/HI rate table and warns of AK/HI surcharges",
+   "detail": "UPS 2nd Day Air, Next Day Air and Next Day Air Saver 'up to 75% off Daily Rates'; Next Day Air Early up to 68%; Ground up to 85%. Residential surcharge is bundled; Ground labels avoid fuel surcharge; $100 UPS insurance included. Support article: 'Shipping to destinations like Alaska or Hawaii from any of the contiguous 48 states may incur UPS surcharges, since UPS considers those destinations remote areas.' No actual AK/HI price examples found; UPS Small Business Rates (40-60% below Daily) are the best published proxy.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.pirateship.com/ups/discounted-ups-shipping-rates",
+   "source_date": "undated; support article updated 2026-06-08; accessed 2026-10-12",
+   "value": "up to 75% off NDA/NDAS/2DA Daily Rates"
+  },
+  {
+   "claim": "Alaska Air Cargo GoldStreak rates effective Oct 1, 2026: SEA (zone 4) to Hawaii (zone 11) minimum $99; to Anchorage (zone 2) $74; to Orange County (zone 6) $69; to Dallas/Miami (zones 7/8) $79",
+   "detail": "Zone map: Zone 4 = Seattle and Portland only; Zone 2 = Anchorage and Fairbanks only; Zone 11 = Hawaii (Honolulu, Kahului, Kona, Lihue, Hilo); Zone 6 includes Los Angeles, Orange County (SNA), San Diego; Zone 7 Dallas/Fort Worth; Zone 8 Miami. From zone 4: letter $49 (to 2), $49 (to 6), $54 (to 7/8), $59 (to 11); minimum 1 lb $74 @ $2.56/lb (to 2), $69 @ $2.35 (to 6), $79 (to 7/8), $99 @ $3.44/lb (to 11); 30 lb $2.09-2.86/lb. Return: zone 11 to 4 letter $59, min $99, $3.40/lb; zone 2 to 4 letter $47, min $72, $2.43/lb; zone 6 to 4 letter $49, min $69. Prior chart (Jan 10, 2026) was $5 lower per minimum. Dim weight L\u00d7W\u00d7H/194. Zone 9 (Spokane, Boise, Eugene) is not a column in the GoldStreak chart.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://public.alaskacargo.com/getmedia/33034730-1e1b-4764-8440-f85f4e679c15/GoldStreakShippingRates_OCT2026.pdf",
+   "source_date": "Rates effective October 1, 2026; zone map updated Spring 2025; accessed 2026-10-12",
+   "value": "SEA-OGG $99 min (1-3 lb); SEA-ANC $74; SEA-SNA $69"
+  },
+  {
+   "claim": "GoldStreak operating rules",
+   "detail": "Next-available-flight, U.S. domestic, no pre-booking required; tender at cargo facility 60 minutes before departure; available for consignee pickup 60 minutes after arrival at the destination airport cargo office; airport-to-airport only (no delivery). Guarantee: if not available within 2 hours of arrival, up to 50% of the service charge refunded, but only if booked in advance; weather/ATC excluded; claims within 7 days. Rules tariff: pieces over 100 lb not accepted, max 70 in. length, 90 linear inches; website says up to 150 lb per piece (conflict). Minimum charge = letter rate. GoldStreak shipments must be prepaid. All stations cashless. Shipper must be a TSA Known Shipper or use a TSA-approved forwarder; Alaska requires an annual physical site verification (fees apply) to maintain individual Known Shipper status.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.alaskacargo.com/getmedia/f7fed36c-086b-4224-b158-5f4550fc3b87/GoldStreak_Rules_and_Regulations_for_Carriage.pdf",
+   "source_date": "undated tariff; service page undated; known-shipper page undated; accessed 2026-10-12",
+   "value": "60 min before / 60 min after; 100 lb (tariff) vs 150 lb (web)"
+  },
+  {
+   "claim": "Alaska Air Cargo facility hours relevant to same-day use",
+   "detail": "SEA: 2600 S 165th St, Seattle 98158; GoldStreak drop-off 24/7; cargo counter M-F 4:30 am-10 pm, Sat 9 am-10 pm (drop-off), Sun 1 pm-10 pm; GoldStreak inbound pickup 24/7 (self-service lockers introduced 2022). OGG: 871 Haleakala Hwy, Kahului 96732; pickup and drop-off M-F 6:00 am-7:30 pm, Sat-Sun 6:00 am-1:00 pm; Alaska and Hawaiian cargo co-located but 'operations will remain separate for the time being'. ANC: 4100 Old International Airport Rd 99502; GoldStreak 24/7; air freight M-F 5 am-10 pm, Sat 9 am-5 pm, Sun closed. Holiday hours differ (e.g., OGG 6 am-1 pm on Memorial Day 2026).",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.alaskacargo.com/network-locations/maui-kahului",
+   "source_date": "undated station pages (SeaTac, Maui/Kahului, Anchorage); accessed 2026-10-12",
+   "value": "OGG M-F 6:00-19:30, Sat-Sun 6:00-13:00"
+  },
+  {
+   "claim": "Flight frequency supports same-day SEA-OGG and SEA-ANC GoldStreak",
+   "detail": "Alaska operates 4 daily SEA-OGG nonstops (week of Oct 19, 2026: AS245 08:07, AS929 10:05, AS223 13:59, AS202 18:59; ~6 h block) plus Delta 1 daily; OGG-SEA ~28 Alaska departures/week. SEA-ANC: Alaska ~10-18 daily departures from 08:22 to 22:55 (Oct 9-11, 2026 schedule), ~3h50m. A GoldStreak piece tendered at SEA by ~07:00 on AS245 is collectable at OGG roughly 12:30-13:00 HST the same day.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.flightsfrom.com/SEA-OGG",
+   "source_date": "Schedule week Oct 19-25, 2026; 2lnr.com SEA-ANC schedule confirmed Oct 4, 2026; accessed 2026-10-12",
+   "value": "SEA-OGG 4/day; SEA-ANC 10+/day"
+  },
+  {
+   "claim": "Hawaiian Airlines cargo has been folded into Alaska Air Cargo; no separate small-package product is published for SEA origins",
+   "detail": "hawaiianaircargo.com now serves Alaska Air Cargo content; combined booking on one air waybill with network access 'determined by the origin station'; FAQ: 'To ship on Alaska or Hawaiian Air Cargo, you must be a Known Shipper'. At OGG and SEA the two operations are co-located but separate. For a Seattle origin the applicable product is GoldStreak on the legacy Alaska network.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.alaskacargo.com/faq",
+   "source_date": "undated; rate-calculator note anticipates intra-Hawaii calculator improvements May 2026; accessed 2026-10-12"
+  },
+  {
+   "claim": "Origin drop-off cutoffs near 35 148th Ave SE, Bellevue",
+   "detail": "FedEx Office Print & Ship Center, 1299 156th Ave NE Ste 100, Bellevue 98007 (~1.5 mi): hours M-F 8-7, Sat 10-6, Sun 12-6; last Express pickup M-F 4:00 pm, Sat 1:00 pm; Ground 4:00 pm (third-party listing, Jun 2026). FedEx Office 40 Bellevue Way NE: Express 4:35 pm M-F, Sat 4:00 pm, offers 'Express drop off (extended West Coast service)'. FedEx Authorized ShipCenter Goin Postal, 14725 NE 20th St (98007) and Pony Express, 1915 140th Ave NE. The UPS Store #4156, 15600 NE 8th St Ste B1 (Crossroads, ~1 mi): M-F 8:30-7, Sat 9:30-3, Sun 12-5; air pickup shown as 5:00-5:30 pm. The UPS Store, 14150 NE 20th St Ste F1: air pickup M-F 4:30 pm, Sat 2:00 pm; Ground 5:45 pm. UPS Customer Center, 18001 NE Union Hill Rd, Redmond: listings conflict (MapQuest 'permanently closed'; others show M-F 10-6 and a 5:15 pm air/ground drop box). Nearest FedEx Ship Center (Express station) not identified.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://mapdoor.com/us/wa/bellevue/fedex-office/156th-ave-ne",
+   "source_date": "Mapdoor updated 2026-06-04; theupsstore.com pages dated 2026-07-27/2026-08-21; accessed 2026-10-12",
+   "value": "FedEx Office Express 4:00 pm; UPS Store air 4:30-5:30 pm"
+  },
+  {
+   "claim": "Maui return-leg cutoffs are early (noon at the FedEx Ship Center)",
+   "detail": "FedEx Ship Center, 400 Hana Hwy, Kahului 96732: M-F 8 am-5 pm, closed weekends; last Express drop-off M-F 12:00 pm (Mapdoor); offers 'Express drop off (extended West Coast service)' and dangerous-goods acceptance. FedEx OnSite at OfficeMax 270 Dairy Rd Kahului (cutoff not captured); OfficeMax Lahaina 335 Keawe St: latest Express drop-off 11:00 am M-F; FedEx Authorized ShipCenter Island Pack and Ship, 3350 Lower Honoapiilani Rd, Lahaina; FedEx ASC 3700 Wailea Alanui Dr; FedEx drop boxes 1215 and 1280 S Kihei Rd. The UPS Store Kahului, 153 E Kamehameha Ave Ste 104: M-F 7:30-5:30, Sat 7:30/8:30-3:30, Sun 10-3; air pickup 5:00 pm M-F (no weekend air pickup indicated). The UPS Store Kihei, 1215 S Kihei Rd Ste O: air pickup M-F 5:00 pm, none Sat/Sun; hours M-F 8-6, Sat 9-5. The UPS Store Lahaina, 910 Honoapiilani Hwy Ste 7: M-F 8-6, Sat 9-5 (pickup time not captured).",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://mapdoor.com/us/hi/kahului/fedex-ship-center/hana-hwy",
+   "source_date": "Mapdoor undated; theupsstore.com Kihei page 2026-08-24, Kahului 2026-07-27; placeslookup undated; accessed 2026-10-12",
+   "value": "FedEx Kahului Express cutoff 12:00 pm; UPS Stores 5:00 pm M-F"
+  },
+  {
+   "claim": "Aliso Viejo / Laguna Niguel return-leg locations",
+   "detail": "The UPS Store Aliso Viejo Town Center, 26895 Aliso Creek Rd Ste B, 92656: air pickup M-F 5:20-5:30 pm, Sat 2:30 pm; Ground 5:20-5:30 pm. FedEx Office Print & Ship Center, 27221 La Paz Rd Ste A, Laguna Niguel 92677: M-F 8 am-8 pm, Sat 9-6, Sun 12-6; last Express pickup M-F 5:15 pm, Sat 3:30 pm; Ground 6:00 pm. FedEx at Walgreens 26531 Aliso Creek Rd; FedEx ASC PostalAnnex 23986 Aliso Creek Rd; UPS Access Point Aliso Viejo cutoff 12:45 pm. Alaska Airlines serves SNA (Orange County) nonstop from SEA; GoldStreak SNA-SEA minimum $69.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://mapdoor.com/us/ca/laguna-niguel/fedex-office/la-paz-rd",
+   "source_date": "Mapdoor undated; theupsstore.com 2026-07-17; accessed 2026-10-12",
+   "value": "FedEx Express 5:15 pm; UPS air 5:20-5:30 pm"
+  },
+  {
+   "claim": "Anchorage return-leg locations have early FedEx Express cutoffs",
+   "detail": "FedEx Ship Center, 3800 Postmark Dr, Anchorage 99502 (and FedEx Air Freight Center 6050 Rockwell Ave): M-F 8 am-7 pm, Sat 10-3; last Express drop-off M-F 2:30 pm, Sat 3:00 pm; Ground 5:15 pm. UPS: The UPS Store 200 W 34th Ave (99503), 2440 E Tudor Rd and four others; UPS Authorized Shipping Outlet The Mail Cache, 3705 Arctic Blvd 99503: air drop-off 12:00 pm M-F, Ground 4:00 pm. No UPS Customer Center is listed on the UPS Anchorage locations page. Alaska Air Cargo ANC accepts GoldStreak 24/7.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://mapdoor.com/us/ak/anchorage/fedex-ship-center/postmark-dr",
+   "source_date": "Mapdoor undated; locations.ups.com undated; accessed 2026-10-12",
+   "value": "FedEx Express 2:30 pm M-F; UPS ASO air 12:00 pm"
+  },
+  {
+   "claim": "Money-back guarantee status, October 2026",
+   "detail": "FedEx suspended its guarantee Dec 1, 2025 (MD-11 fleet reviews) and reinstated it Jan 13, 2026 only for First Overnight, Priority Overnight, Standard Overnight, 2Day A.M. and Extra Hours contract services (international Feb 12, 2026); FedEx 2Day, Express Saver, Ground and Home Delivery remain unguaranteed 'until further notice' (Service Guide eff. Feb 12, 2026). UPS Service Guarantee is 'in effect for select Air and International services but is otherwise suspended' (UPS year-end notice); third-party summary: covers Next Day Air Early, Next Day Air, Next Day Air Saver, 2nd Day Air A.M.; NDA residential commitment extended to 12:00 pm and Saver to end of day. Refund requests must be filed within 15 days at both carriers.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.parcelmanagementgroup.com/blog/ups-fedex-late-delivery-refunds/",
+   "source_date": "2026-09-06 (also shipkeep.com undated; UPS year-end schedule PDF; legalclarity.org 2026-03-14); accessed 2026-10-12",
+   "value": "FedEx 2Day and UPS 2nd Day Air: no guarantee"
+  },
+  {
+   "claim": "Claims windows and norms",
+   "detail": "UPS Tariff 55.3: notice of loss/damage within 60 days of delivery or scheduled delivery; claim filed within 9 months (domestic); UPS pays, declines or offers within 120 days; payment documents due within 9 months; typical processing 8-15 business days after documents; original packaging must be retained for inspection; three photos required; serial numbers for electronics over $500. FedEx: damage/missing-contents claims within 60 calendar days (U.S.), non-delivery within 9 months of tender; typical resolution 5-7 business days; default liability $100/package; FedEx Ground declared value max $1,000, Express up to $50,000. Carriers exclude consequential damages (lost chair time) in all cases.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.ups.com/assets/resources/webcontent/en_US/claims_legal_action.pdf",
+   "source_date": "UPS Tariff undated (current); corepiper.com 2026-04-13; accessed 2026-10-12",
+   "value": "60-day damage notice; 9-month filing; $100 default"
+  },
+  {
+   "claim": "UPS 2026 holiday operations and 2025-26 peak transit changes",
+   "detail": "UPS closed Thanksgiving Nov 26, 2026, Christmas Dec 25, Jan 1, 2027; Dec 24 and Dec 31 air delivery only with pickups prearranged by Dec 18/Dec 28. 2025-26 year-end notice: Nov 28-Dec 31 Next Day Air Early extended 90 minutes; NDA/2DA A.M. commercial commitments extended to 3:00 pm; NDA residential to end of day; some 2nd Day Air (tendered Dec 15-17) and 3 Day Select packages need an extra day; Ground extra transit Nov 17, 2025-Jan 9, 2026. FedEx 2026 holiday schedule PDFs exist but fedex.com blocked retrieval.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:e8548535-8096-4fa9-9cef-2b81aef7c26c/original/as/year-end-holiday-schedule-us-en.pdf",
+   "source_date": "UPS 2025 year-end schedule (undated PDF) and 2026 Holiday Operations Schedule; accessed 2026-10-12"
+  },
+  {
+   "claim": "Documented Hawaii/Alaska lane disruptions (2023-2026)",
+   "detail": "Aug 10, 2023 Maui wildfires: Alaska Air delayed flights, United cancelled OGG flights; FedEx could not ship palletized freight into Maui and routed via Honolulu. Mar 9-14, 2026: Aloha Air Cargo suspended operations and cancelled all OGG/KOA flights for severe weather; Hilo closed for volcanic ash. Aug 19, 2026 Hurricane Lala: Hawaii Island post offices closed, deliveries paused. Sep 24-25, 2026 tropical storm: Big Island port closed to vessels. Nov 4, 2025 UPS MD-11 crash at Louisville (Honolulu-bound) triggered suspension of the UPS guarantee. Dec 2024: Alaska Air Cargo temporarily suspended OGG and LIH cargo stations (since restored). Mar 13, 2026: SEA winter weather delays for Alaska Air Cargo. Oct 1, 2026: USPS extended Ground Advantage to Hawaii to 10+ days (sub-pound parcels moved by sea).",
+   "kind": "historical",
+   "confidence": "high",
+   "source_url": "https://www.alohaaircargo.com/2026/03/09/advisory-aloha-air-cargo-severe-weather-update-march-9-2026/",
+   "source_date": "2026-03-09 (Aloha); Reuters 2023-08-10; Hawaii News Now 2026-08-19; Star-Advertiser 2025-11-07; Hawaii Business 2026-10-07; accessed 2026-10-12"
+  },
+  {
+   "claim": "UPS zone from Bellevue 980 to Orange County 926 is zone 5 (published, by symmetry); other contiguous-US zones are estimated",
+   "detail": "UPS 926 origin file lists destination prefixes 970-994 as zone 5 (3 Day Select 305, 2DA 205, 2DA AM 245, NDA Saver 135, NDA 105); UPS zones are symmetric. The 980 origin file could not be fetched (content-type block). Estimates by UPS/FedEx distance bands: Eugene 974 and Spokane 992 zone 3 (zone 4 possible), Boise 837 zone 4, Dallas 750/752 zone 7 (zone 8 possible), Miami 331/Doral 331 zone 8. FedEx assumed to match UPS (zone 5 for Aliso Viejo; zone 6 possible).",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://www.ups.com/media/us/currentrates/zone-txt/926.txt",
+   "source_date": "undated current chart; accessed 2026-10-12",
+   "value": "926<->980 = zone 5"
+  },
+  {
+   "claim": "UPS Hawaii transit expectation from the West Coast",
+   "detail": "UPS guide: Next Day Air 'by 10:30 a.m., noon or end of the next business day, depending on destination. Some shipments within Alaska and to Hawaii may require additional time in transit'; 2nd Day Air 'some postal codes in Alaska and Hawaii may require additional time in transit'; Next Day Air Early to Anchorage by 8:30/9:00 a.m. Secondary tests (Jul 27, 2026, Los Angeles to Honolulu, 5 lb) quoted UPS 2nd Day Air 2-3 business days, UPS Ground 3-4 business days, Ground Saver 5 days; a 2024 guide cites UPS Ground 3-7 business days to Hawaii with neighbor islands 'an extra day or two'. Expect Next Day Air to Maui to be a 2-business-day product in practice (estimate).",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://www.ups.com/media/en/ak_nda_x.pdf",
+   "source_date": "UPS Alaska NDA sheet undated; smklog.com benchmark 2026-07-27; marketingscoop 2024-04-21; accessed 2026-10-12",
+   "value": "NDA to Maui: likely 2 business days; 2DA 2-3; Ground 5-8"
+  },
+  {
+   "claim": "FedEx residential and other 2026 accessorials relevant to lab-to-dentist shipping",
+   "detail": "FedEx 2026: Residential delivery $6.45 Ground/Home Delivery, ~$6.95 Express; Delivery Area Surcharge $4.45 commercial / $6.60 residential (extended $5.55/$8.80; remote $16.75); FedEx One Rate increased 7% Apr 20, 2026. UPS 2026: residential ground $6.50, air $7.00; DAS $4.50/$6.55; remote $16.50. Dental offices are commercial addresses, so residential surcharges should not apply on the outbound leg.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.quadient.com/en-us/postage-rates/fedex",
+   "source_date": "undated 2026 page; 3plcenter.com 2026-02-12; accessed 2026-10-12"
+  }
+ ],
+ "cost_items": [
+  {
+   "item": "Bellevue->Maui (Kahului/Kihei/Lahaina) UPS Next Day Air, 1 lb box, zone 126, incl. 32.25% air fuel",
+   "base_usd": 168.55,
+   "low_usd": 100.96,
+   "high_usd": 250.28,
+   "period": "per-shipment",
+   "basis": "Base = 2026 Daily Rate $127.45 x 1.3225. Low = UPS Small Business Rate $76.34 x 1.3225. High = 3 lb Daily $172.75 x 1.3225 + Hawaii DAS $16.50 x 1.3225 if ZIP is listed.",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Rates eff. Dec 22, 2025; fuel week of Oct 5, 2026"
+  },
+  {
+   "item": "Bellevue->Maui UPS 2nd Day Air, 1 lb, zone 226, incl. fuel",
+   "base_usd": 107.88,
+   "low_usd": 70.9,
+   "high_usd": 159.66,
+   "period": "per-shipment",
+   "basis": "Daily $81.57 x 1.3225; low = SBR $53.61 x 1.3225; high = 3 lb $104.23 x 1.3225 + DAS $16.50 x 1.3225. No service guarantee on 2nd Day Air.",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Rates eff. Dec 22, 2025; fuel week of Oct 5, 2026"
+  },
+  {
+   "item": "Bellevue->Maui UPS Ground, 1 lb, zone 46, incl. 29.75% ground fuel",
+   "base_usd": 73.91,
+   "low_usd": 67.52,
+   "high_usd": 106.81,
+   "period": "per-shipment",
+   "basis": "Daily $56.96 x 1.2975; low = SBR $52.04 x 1.2975; high = 3 lb $65.82 x 1.2975 + DAS. Ocean/air mix, est. 5-8 business days.",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Rates eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Maui UPS Simple Rate 2nd Day Air, Extra Small box (1-100 cu in), Remote AK/HI tier, no fuel surcharge",
+   "base_usd": 90.05,
+   "low_usd": 48.8,
+   "high_usd": 97.3,
+   "period": "per-shipment",
+   "basis": "Remote AK/HI XS $90.05 (Small $97.30); low = Metro AK/HI XS $48.80 (applies if the Maui ZIP is treated as metro, which the zone files suggest it is not). Fuel surcharge does not apply to Simple Rate.",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "2026 Daily Rates guide"
+  },
+  {
+   "item": "Bellevue->Maui FedEx Priority Overnight, 1 lb, incl. 31.75% Express fuel",
+   "base_usd": 171.55,
+   "low_usd": 148.2,
+   "high_usd": 261.79,
+   "period": "per-shipment",
+   "basis": "Hawaii metro (zone 10) list $130.21 x 1.3175; low = FedEx One Rate PO small box $148.20 (fuel included); high = Hawaii rural (zone 12) 3 lb $182.45 x 1.3175 + Hawaii DAS $16.25 x 1.3175. Commitment: next day by 12 p.m./5 p.m., or 2 business days for certain ZIPs.",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026; fuel week of Oct 5, 2026"
+  },
+  {
+   "item": "Bellevue->Maui FedEx 2Day, 1 lb, incl. fuel",
+   "base_usd": 89.63,
+   "low_usd": 19.55,
+   "high_usd": 163.86,
+   "period": "per-shipment",
+   "basis": "Hawaii metro list $68.03 x 1.3175; low = FedEx One Rate 2Day small box $19.55 all-in (FedEx packaging; may be 3 business days to HI; no money-back guarantee); high = Hawaii rural 3 lb $108.12 x 1.3175 + DAS.",
+   "status": "listed",
+   "source_url": "https://www.shipscience.com/wp-content/uploads/FedEx-2026-04-20-OneRate-Pricing_2026.pdf",
+   "source_date": "One Rate eff. Apr 20, 2026; list rates eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Maui FedEx First Overnight, 1 lb, incl. fuel",
+   "base_usd": 212.39,
+   "low_usd": 202.2,
+   "high_usd": 302.63,
+   "period": "per-shipment",
+   "basis": "Metro list $161.21 x 1.3175; low = One Rate FO small box $202.20; high = rural 3 lb $213.45 x 1.3175 + DAS. Availability to Hawaii inbound not confirmed in 2026 table (First Overnight to Alaska is select ZIPs only).",
+   "status": "estimated",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Maui or Honolulu FedEx Ground, 1 lb, incl. 29.25% ground fuel",
+   "base_usd": 56.11,
+   "low_usd": 56.11,
+   "high_usd": 89.22,
+   "period": "per-shipment",
+   "basis": "To-Hawaii Ground list $43.41 x 1.2925; high = 3 lb $52.47 x 1.2925 + Hawaii DAS $16.25 x 1.2925. 3-7 business days.",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Maui Alaska Air Cargo GoldStreak same-day (airport-to-airport SEA-OGG), 1-3 lb",
+   "base_usd": 99,
+   "low_usd": 59,
+   "high_usd": 129,
+   "period": "per-shipment",
+   "basis": "Zone 4->11 minimum $99 (1 lb, $3.44/lb thereafter; 3 lb still pays minimum); low = GoldStreak letter $59; high = minimum plus ~$30 estimated local courier from OGG cargo (871 Haleakala Hwy) to a Kihei/Lahaina office (courier rate not researched). Known Shipper required; prepaid; dentist must collect with ID if no courier.",
+   "status": "quoted",
+   "source_url": "https://public.alaskacargo.com/getmedia/33034730-1e1b-4764-8440-f85f4e679c15/GoldStreakShippingRates_OCT2026.pdf",
+   "source_date": "Rates effective October 1, 2026"
+  },
+  {
+   "item": "Maui->Bellevue GoldStreak same-day return (OGG-SEA), 1-3 lb",
+   "base_usd": 99,
+   "low_usd": 59,
+   "high_usd": 99,
+   "period": "per-shipment",
+   "basis": "Zone 11->4 minimum $99, $3.40/lb; letter $59. OGG cargo drop-off M-F 6:00 am-7:30 pm, Sat-Sun 6:00 am-1:00 pm; collect at SEA 24/7.",
+   "status": "quoted",
+   "source_url": "https://public.alaskacargo.com/getmedia/33034730-1e1b-4764-8440-f85f4e679c15/GoldStreakShippingRates_OCT2026.pdf",
+   "source_date": "Rates effective October 1, 2026"
+  },
+  {
+   "item": "Maui/Honolulu/Anchorage->Bellevue FedEx Priority Overnight return, 1 lb, incl. fuel",
+   "base_usd": 103.36,
+   "low_usd": 63.11,
+   "high_usd": 119.97,
+   "period": "per-shipment",
+   "basis": "From-AK/HI list $78.45 x 1.3175; low = envelope rate $47.90 x 1.3175 (if a crown fits a FedEx envelope under 3 in. thick); high = 3 lb $91.06 x 1.3175. Kahului Ship Center Express cutoff 12:00 pm M-F.",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Maui/Honolulu/Anchorage->Bellevue FedEx 2Day return, 1 lb, incl. fuel",
+   "base_usd": 58.42,
+   "low_usd": 19.55,
+   "high_usd": 72.23,
+   "period": "per-shipment",
+   "basis": "From-AK/HI list $44.34 x 1.3175; low = One Rate 2Day small box $19.55; high = 3 lb $54.82 x 1.3175.",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Alaska/Hawaii->Bellevue UPS Next Day Air return, 1 lb, incl. fuel",
+   "base_usd": 103.75,
+   "low_usd": 60,
+   "high_usd": 120.43,
+   "period": "per-shipment",
+   "basis": "Alaska-origin Daily Rate zone 24 $78.45 x 1.3225; high = 3 lb $91.06 x 1.3225; low = assumed ~45% small-business/Pirate Ship discount (SBR AK/HI-origin table not retrieved). Hawaii-origin pages not fetched; assumed equal to Alaska-origin (FedEx and UPS AK/HI figures match).",
+   "status": "estimated",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:c7a3d067-725a-4b33-887a-586753b3e615/original/as/preview-ak-hi-rates-us-en.pdf",
+   "source_date": "2026 AK/HI Daily Rates eff. Dec 22, 2025"
+  },
+  {
+   "item": "Alaska/Hawaii->Bellevue UPS 2nd Day Air return, 1 lb, incl. fuel",
+   "base_usd": 59.96,
+   "low_usd": 35,
+   "high_usd": 74.15,
+   "period": "per-shipment",
+   "basis": "Alaska-origin zone 14 $45.34 x 1.3225; high = 3 lb $56.07 x 1.3225; low = assumed ~45% discount. UPS Stores on Maui: air pickup 5:00 pm M-F only.",
+   "status": "estimated",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:c7a3d067-725a-4b33-887a-586753b3e615/original/as/preview-ak-hi-rates-us-en.pdf",
+   "source_date": "2026 AK/HI Daily Rates eff. Dec 22, 2025"
+  },
+  {
+   "item": "Alaska/Hawaii->Bellevue FedEx Ground return, 1 lb, incl. fuel",
+   "base_usd": 19.55,
+   "low_usd": 19.55,
+   "high_usd": 25.5,
+   "period": "per-shipment",
+   "basis": "From-Alaska/Hawaii Ground list $15.12-$15.60 x 1.2925; high = 3 lb $19.73 x 1.2925. 3-7 business days.",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Honolulu 96813 UPS Next Day Air, 1 lb, zone 124, incl. fuel",
+   "base_usd": 168.42,
+   "low_usd": 93.49,
+   "high_usd": 199.21,
+   "period": "per-shipment",
+   "basis": "Daily $127.35 x 1.3225; low = SBR $70.69 x 1.3225; high = 3 lb $150.63 x 1.3225. Honolulu is UPS metro; DAS unlikely.",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Honolulu UPS 2nd Day Air, 1 lb, zone 224, incl. fuel",
+   "base_usd": 88.71,
+   "low_usd": 48.8,
+   "high_usd": 113.02,
+   "period": "per-shipment",
+   "basis": "Daily $67.08 x 1.3225; low = UPS Simple Rate 2DA XS box metro AK/HI $48.80 (no fuel) or SBR $47.13 x 1.3225 = $62.33; high = 3 lb $85.46 x 1.3225.",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Honolulu UPS Ground, 1 lb, zone 44, incl. fuel",
+   "base_usd": 56.12,
+   "low_usd": 42.05,
+   "high_usd": 67.83,
+   "period": "per-shipment",
+   "basis": "Daily $43.25 x 1.2975; low = Simple Rate Ground XS metro AK/HI $42.05 (no fuel) or SBR $33.66 x 1.2975 = $43.67; high = 3 lb $52.28 x 1.2975.",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Honolulu FedEx Priority Overnight / 2Day, 1 lb, Hawaii metro zone 10, incl. fuel",
+   "base_usd": 171.55,
+   "low_usd": 89.63,
+   "high_usd": 201.54,
+   "period": "per-shipment",
+   "basis": "PO list $130.21 x 1.3175 = $171.55 (3 lb $152.97 x 1.3175 = $201.54); 2Day list $68.03 x 1.3175 = $89.63 (3 lb $112.79); One Rate alternatives PO small box $148.20, 2Day $19.55. GoldStreak SEA-HNL same zone 11: $99 minimum.",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Anchorage 99503 UPS Next Day Air, 1 lb, zone 124, incl. fuel",
+   "base_usd": 168.42,
+   "low_usd": 93.49,
+   "high_usd": 263.03,
+   "period": "per-shipment",
+   "basis": "Daily $127.35 x 1.3225; low = SBR $70.69 x 1.3225; high = 3 lb $150.63 x 1.3225 + Alaska DAS $48.25 x 1.3225 if ZIP listed (unlikely for central Anchorage). NDA Early to Anchorage by 8:30/9:00 a.m.: Daily $157.35 x 1.3225 = $208.10.",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Anchorage UPS 2nd Day Air, 1 lb, zone 224, incl. fuel",
+   "base_usd": 88.71,
+   "low_usd": 48.8,
+   "high_usd": 113.02,
+   "period": "per-shipment",
+   "basis": "Daily $67.08 x 1.3225; low = Simple Rate 2DA XS metro $48.80; high = 3 lb $85.46 x 1.3225.",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Anchorage FedEx Priority Overnight, 1 lb, Alaska metro zone 9, incl. fuel",
+   "base_usd": 171.55,
+   "low_usd": 148.2,
+   "high_usd": 201.54,
+   "period": "per-shipment",
+   "basis": "List $130.21 x 1.3175; low = One Rate PO small box $148.20; high = 3 lb $152.97 x 1.3175. Commitment next business day by 10:30 a.m. (Alaska metro).",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Anchorage FedEx Standard Overnight (Alaska metro only), 1 lb, incl. fuel",
+   "base_usd": 141.14,
+   "low_usd": 101.75,
+   "high_usd": 178.67,
+   "period": "per-shipment",
+   "basis": "List $107.13 x 1.3175; low = One Rate SO small box $101.75; high = 3 lb $135.61 x 1.3175. Next day by 5 p.m.",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Anchorage FedEx 2Day, 1 lb, incl. fuel",
+   "base_usd": 89.63,
+   "low_usd": 19.55,
+   "high_usd": 112.79,
+   "period": "per-shipment",
+   "basis": "List $68.03 x 1.3175; low = One Rate 2Day small box $19.55; high = 3 lb $85.61 x 1.3175. 2Day A.M. (Alaska only) 1 lb $75.48 x 1.3175 = $99.44.",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Anchorage FedEx or UPS Ground, 1 lb, incl. fuel",
+   "base_usd": 56.11,
+   "low_usd": 43.67,
+   "high_usd": 67.83,
+   "period": "per-shipment",
+   "basis": "FedEx to-Alaska Ground $43.41 x 1.2925 = $56.11 (3 lb $67.82); UPS zone 44 $43.25 x 1.2975 = $56.12; low = UPS SBR $33.66 x 1.2975 or Simple Rate Ground XS $42.05.",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Anchorage GoldStreak same-day (SEA-ANC), 1-3 lb",
+   "base_usd": 74,
+   "low_usd": 49,
+   "high_usd": 74,
+   "period": "per-shipment",
+   "basis": "Zone 4->2 minimum $74 at $2.56/lb; letter $49. Return ANC->SEA letter $47, minimum $72. ANC and SEA GoldStreak counters 24/7; ~10+ daily nonstops.",
+   "status": "quoted",
+   "source_url": "https://public.alaskacargo.com/getmedia/33034730-1e1b-4764-8440-f85f4e679c15/GoldStreakShippingRates_OCT2026.pdf",
+   "source_date": "Rates effective October 1, 2026"
+  },
+  {
+   "item": "Bellevue->Aliso Viejo/Laguna Niguel UPS Next Day Air, 1 lb, zone 105, incl. fuel",
+   "base_usd": 126.75,
+   "low_usd": 41.76,
+   "high_usd": 155.53,
+   "period": "per-shipment",
+   "basis": "Daily $95.84 x 1.3225; low = SBR $31.58 x 1.3225; high = 3 lb $117.60 x 1.3225. Zone 5 per UPS 926 chart (symmetric). NDA Saver zone 135: $83.72 x 1.3225 = $110.72 (SBR $39.79).",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Aliso Viejo UPS 2nd Day Air, 1 lb, zone 205, incl. fuel",
+   "base_usd": 47.29,
+   "low_usd": 23.05,
+   "high_usd": 56.25,
+   "period": "per-shipment",
+   "basis": "Daily $35.76 x 1.3225; low = SBR $17.43 x 1.3225 (Simple Rate XS 2DA $24.55 no fuel); high = 3 lb $42.53 x 1.3225. 3 Day Select zone 305: $27.27 x 1.3225 = $36.06 (SBR $21.94).",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Aliso Viejo UPS Ground, 1 lb, zone 5, incl. fuel",
+   "base_usd": 18.29,
+   "low_usd": 12.2,
+   "high_usd": 21.97,
+   "period": "per-shipment",
+   "basis": "Daily $14.10 x 1.2975; low = Simple Rate Ground XS $12.20 (no fuel) or SBR $11.01 x 1.2975 = $14.28; high = 3 lb $16.93 x 1.2975. Transit 2 business days (est.).",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Aliso Viejo FedEx Priority Overnight, 1 lb, zone 5 (zone 6 possible), incl. fuel",
+   "base_usd": 124.74,
+   "low_usd": 107.85,
+   "high_usd": 164.61,
+   "period": "per-shipment",
+   "basis": "Zone 5 list $94.68 x 1.3175; low = One Rate PO small box Regional $107.85 (if zone 4) else National $148.20; high = zone 6 3 lb $124.94 x 1.3175. Standard Overnight z5 $81.00 x 1.3175 = $106.72 (One Rate SO small box $101.75).",
+   "status": "estimated",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Aliso Viejo FedEx 2Day / Express Saver, 1 lb, zone 5, incl. fuel",
+   "base_usd": 47.35,
+   "low_usd": 19.55,
+   "high_usd": 72.73,
+   "period": "per-shipment",
+   "basis": "2Day z5 $35.94 x 1.3175 = $47.35; Express Saver z5 $31.04 x 1.3175 = $40.90; low = One Rate 2Day/Express Saver small box $19.55; high = zone 6 3 lb 2Day $55.20 x 1.3175. Neither service currently carries a FedEx money-back guarantee.",
+   "status": "estimated",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Aliso Viejo FedEx Ground, 1 lb, zone 5, incl. fuel",
+   "base_usd": 18.1,
+   "low_usd": 15.78,
+   "high_usd": 22.6,
+   "period": "per-shipment",
+   "basis": "Zone 5 list $14.00 x 1.2925; low = zone 3 1 lb; high = zone 6 3 lb $17.49 x 1.2925. 2 business days (est.).",
+   "status": "estimated",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Orange County GoldStreak same-day (SEA-SNA), 1-3 lb",
+   "base_usd": 69,
+   "low_usd": 49,
+   "high_usd": 69,
+   "period": "per-shipment",
+   "basis": "Zone 4->6 minimum $69 at $2.35/lb; letter $49; return SNA->SEA letter $49, minimum $69. Airport-to-airport; recipient collects at SNA cargo (hours not researched).",
+   "status": "quoted",
+   "source_url": "https://public.alaskacargo.com/getmedia/33034730-1e1b-4764-8440-f85f4e679c15/GoldStreakShippingRates_OCT2026.pdf",
+   "source_date": "Rates effective October 1, 2026"
+  },
+  {
+   "item": "Bellevue->Dallas/Plano UPS Next Day Air, 1 lb, zone 107 (108 possible), incl. fuel",
+   "base_usd": 148.87,
+   "low_usd": 43.89,
+   "high_usd": 189.88,
+   "period": "per-shipment",
+   "basis": "Daily z107 $112.57 x 1.3225; low = SBR $33.19 x 1.3225; high = z108 3 lb $143.58 x 1.3225. NDA Saver z137 $98.24 x 1.3225 = $129.92.",
+   "status": "estimated",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Dallas/Plano UPS 2nd Day Air, 1 lb, zone 207, incl. fuel",
+   "base_usd": 60.5,
+   "low_usd": 24.55,
+   "high_usd": 85.46,
+   "period": "per-shipment",
+   "basis": "Daily $45.75 x 1.3225; low = Simple Rate XS 2DA $24.55 (SBR $22.05 x 1.3225 = $29.16); high = z208 3 lb $64.62 x 1.3225. 3 Day Select z307 $36.57 x 1.3225 = $48.36. Ground z7 $14.83 x 1.2975 = $19.24 (4 business days est.).",
+   "status": "estimated",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Dallas/Plano FedEx Priority Overnight, 1 lb, zone 7 (8 possible), incl. fuel",
+   "base_usd": 145.65,
+   "low_usd": 148.2,
+   "high_usd": 187.18,
+   "period": "per-shipment",
+   "basis": "Zone 7 list $110.55 x 1.3175; low = One Rate PO small box National $148.20 (not lower at 1 lb; becomes lower above ~2 lb); high = zone 8 3 lb $142.07 x 1.3175. Standard Overnight z7 $95.41 x 1.3175 = $125.70; 2Day z7 $46.04 x 1.3175 = $60.66 (One Rate $19.55); Express Saver z7 $37.51 x 1.3175 = $49.42; Ground z7 $14.75 x 1.2925 = $19.06.",
+   "status": "estimated",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Dallas or Miami GoldStreak same-day (SEA-DFW / SEA-MIA), 1-3 lb",
+   "base_usd": 79,
+   "low_usd": 54,
+   "high_usd": 79,
+   "period": "per-shipment",
+   "basis": "Zone 4->7 and 4->8 minimum $79, letter $54. Alaska flies SEA-DFW and SEA-MIA nonstop (MIA frequency is seasonal).",
+   "status": "quoted",
+   "source_url": "https://public.alaskacargo.com/getmedia/33034730-1e1b-4764-8440-f85f4e679c15/GoldStreakShippingRates_OCT2026.pdf",
+   "source_date": "Rates effective October 1, 2026"
+  },
+  {
+   "item": "Bellevue->Miami/Doral UPS Next Day Air, 1 lb, zone 108, incl. fuel",
+   "base_usd": 152.48,
+   "low_usd": 45.02,
+   "high_usd": 189.88,
+   "period": "per-shipment",
+   "basis": "Daily $115.30 x 1.3225; low = SBR $34.04 x 1.3225; high = 3 lb $143.58 x 1.3225. NDA Saver z138 $102.87 x 1.3225 = $136.05; 2nd Day Air z208 $46.67 x 1.3225 = $61.72 (3 lb $85.46; SBR $29.60); 3 Day Select z308 $40.83 x 1.3225 = $54.00; Ground z8 $15.03 x 1.2975 = $19.50 (5 business days est.).",
+   "status": "listed",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Miami/Doral FedEx Priority Overnight, 1 lb, zone 8, incl. fuel",
+   "base_usd": 149.51,
+   "low_usd": 148.2,
+   "high_usd": 187.18,
+   "period": "per-shipment",
+   "basis": "List $113.48 x 1.3175; low = One Rate PO small box $148.20; high = 3 lb $142.07 x 1.3175. Standard Overnight $99.65 x 1.3175 = $131.29; 2Day $46.97 x 1.3175 = $61.88 (One Rate $19.55); Express Saver $41.41 x 1.3175 = $54.56; Ground $15.01 x 1.2925 = $19.40.",
+   "status": "listed",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Eugene or Spokane UPS Next Day Air, 1 lb, zone 103 (104 possible), incl. fuel",
+   "base_usd": 89.11,
+   "low_usd": 31.67,
+   "high_usd": 138.61,
+   "period": "per-shipment",
+   "basis": "Daily z103 $67.38 x 1.3225; low = SBR $23.95 x 1.3225; high = z104 3 lb $104.81 x 1.3225. NDA Saver z133 $56.28 x 1.3225 = $74.43; 2nd Day Air z203 $28.38 x 1.3225 = $37.53 (SBR $18.61); 3 Day Select z303 $19.57 x 1.3225 = $25.88; Ground z3 $12.38 x 1.2975 = $16.06 (1-2 business days).",
+   "status": "estimated",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Eugene or Spokane FedEx Priority Overnight, 1 lb, zone 3 (4 possible), incl. fuel",
+   "base_usd": 88.31,
+   "low_usd": 61.45,
+   "high_usd": 136.43,
+   "period": "per-shipment",
+   "basis": "Zone 3 list $67.03 x 1.3175; low = One Rate PO small box Local $61.45 (zone 2 only; Regional $107.85 applies to zones 3-4); high = zone 4 3 lb $103.55 x 1.3175. Standard Overnight z3 $56.69 x 1.3175 = $74.69; 2Day z3 $27.74 x 1.3175 = $36.55; Express Saver z3 $24.33 x 1.3175 = $32.05; Ground z3 $12.21 x 1.2925 = $15.78.",
+   "status": "estimated",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Bellevue->Boise UPS Next Day Air, 1 lb, zone 104, incl. fuel",
+   "base_usd": 114.58,
+   "low_usd": 39.98,
+   "high_usd": 138.61,
+   "period": "per-shipment",
+   "basis": "Daily $86.64 x 1.3225; low = SBR $30.23 x 1.3225; high = 3 lb $104.81 x 1.3225. NDA Saver z134 $75.58 x 1.3225 = $99.95; 2nd Day Air z204 $29.42 x 1.3225 = $38.91; 3 Day Select z304 $20.96 x 1.3225 = $27.72; Ground z4 $13.51 x 1.2975 = $17.53 (2 business days est.).",
+   "status": "estimated",
+   "source_url": "https://assets.ups.com/adobe/assets/urn:aaid:aem:a4030115-44a0-4935-b953-e8f65732ef9f/original/as/preview-daily-rates-us-en.pdf",
+   "source_date": "Eff. Dec 22, 2025"
+  },
+  {
+   "item": "Bellevue->Boise FedEx Priority Overnight, 1 lb, zone 4, incl. fuel",
+   "base_usd": 112.82,
+   "low_usd": 107.85,
+   "high_usd": 136.43,
+   "period": "per-shipment",
+   "basis": "Zone 4 list $85.63 x 1.3175; low = One Rate PO small box Regional $107.85; high = 3 lb $103.55 x 1.3175. Standard Overnight z4 $73.11 x 1.3175 = $96.32; 2Day z4 $29.44 x 1.3175 = $38.79; Express Saver z4 $24.83 x 1.3175 = $32.71; Ground z4 $13.26 x 1.2925 = $17.14. GoldStreak to Boise not priced (zone 9 absent from chart).",
+   "status": "estimated",
+   "source_url": "https://mailomg.com/wp-content/uploads/2026/01/FedEx_Standard_List_Rates_2026.pdf",
+   "source_date": "Eff. Jan 5, 2026"
+  },
+  {
+   "item": "Declared value add-on for a $1,700 full-arch case (either direction)",
+   "base_usd": 28.05,
+   "low_usd": 4.95,
+   "high_usd": 37.4,
+   "period": "per-shipment",
+   "basis": "FedEx $1.65 per $100 x 17 = $28.05; UPS $1.70 x 17 = $28.90; low = $300 crown ($4.95 FedEx / $5.10 UPS); high = $2,200 ti-bar case at UPS $1.70 x 22 = $37.40. First $100 included at both carriers; Pirate Ship includes $100.",
+   "status": "listed",
+   "source_url": "https://www.shipaid.com/blogs/ecommerce-shipping/understanding-fedex-insurance-charges-and-declared-value-in-2026",
+   "source_date": "2026 schedules (FedEx eff. Jan 5, 2026; UPS eff. Dec 22, 2025)"
+  },
+  {
+   "item": "Alaska/Hawaii delivery area surcharge exposure per package (if destination ZIP is on carrier list)",
+   "base_usd": 16.25,
+   "low_usd": 0,
+   "high_usd": 48.25,
+   "period": "per-shipment",
+   "basis": "FedEx Hawaii $16.25 / Alaska $46.00; UPS Hawaii $16.50 / Alaska $48.25; fuel surcharge applies on top. Low = ZIP not listed. ZIP-level applicability for 96732/96753/96761/99503 unverified.",
+   "status": "unresolved",
+   "source_url": "https://ebblogistics.com/tools/das-lookup/",
+   "source_date": "2026 amounts; accessed 2026-10-12"
+  }
+ ],
+ "unknowns": [
+  "UPS origin zone chart for ZIP prefix 980 (ups.com zone-txt/980.txt) could not be fetched; Eugene/Spokane (zone 3 vs 4), Dallas/Plano (7 vs 8) and Boise (4) zones are estimated; Aliso Viejo zone 5 is inferred by symmetry from the published 926 chart.",
+  "Whether Kahului 96732, Kihei 96753 and Lahaina 96761 are FedEx 'Hawaii metro' (zone 10) or 'Hawaii rural' (zone 12); the 2026 list-rate PDF text does not include the ZIP assignment. Rural adds ~$4-30 per shipment and may change the commitment from next-day to 2nd-day.",
+  "Whether any of the Maui ZIPs or Anchorage 99503 appear on the FedEx/UPS Alaska-Hawaii delivery area surcharge ZIP lists ($16.25-$16.50 HI; $46.00-$48.25 AK).",
+  "Actual Pirate Ship label prices for UPS Next Day Air / 2nd Day Air to Hawaii and Alaska (no published AK/HI table; 'up to 75% off' is a ceiling). The UPS Small Business Rate Guide was used as the proxy for discounted pricing; Integra's actual Pirate Ship quotes should be pulled for 96732 and 99503 at 1 lb and 3 lb.",
+  "UPS Hawaii-origin Daily Rate pages (return-leg Maui->Bellevue) were not retrieved; Alaska-origin figures were used as the proxy because FedEx and UPS AK/HI tables match to the cent.",
+  "Exact FedEx Hawaii-inbound commitment per service in 2026 (the table shows next day by 12 p.m., next day by 5 p.m., 2nd day by 5 p.m. for First Overnight/Priority Overnight/2Day, with column mapping inferred); FedEx First Overnight availability to Maui ZIPs unconfirmed.",
+  "Nearest FedEx Ship Center (Express station with late cutoff) to Bellevue 98007 was not identified; only FedEx Office (4:00 pm) and Authorized ShipCenters were found. Status of the UPS Customer Center at 18001 NE Union Hill Rd, Redmond is contradictory across listings.",
+  "FedEx Office/OnSite Express cutoffs on Maui other than the Kahului Ship Center (12:00 pm) and Lahaina OfficeMax (11:00 am) were not captured; The UPS Store Lahaina air pickup time not captured; Honolulu return-leg locations not researched.",
+  "GoldStreak pricing for Boise, Eugene and Spokane: these cities sit in Alaska Air Cargo zone 9, which is not a column in the GoldStreak rate chart; whether zone 4 rates apply is unknown. Local courier cost from OGG cargo to Kihei/Lahaina offices was not researched (estimated ~$30).",
+  "Conflict between GoldStreak web copy (up to 150 lb per piece) and the published Rules tariff (pieces over 100 lb not accepted); immaterial for dental cases but noted.",
+  "Whether the UPS Daily Rate guide re-issued May 10, 2026 changed any base rates versus the Dec 22, 2025 tables used here (mid-year re-issues usually change surcharges, not base rates).",
+  "FedEx's own 2026 Service Guide, fuel-surcharge page, holiday schedule and One Rate pages block automated retrieval (HTTP 'System Down'); figures were taken from an exact mirror of the FedEx list-rate PDF and from consultant trackers that cite fedex.com.",
+  "Hawaii Saturday delivery availability for the specific Maui ZIPs (FedEx states Oahu-only select PM ZIPs; UPS Saturday service on Maui not verified).",
+  "Empirical on-time performance on the Seattle-Maui lane for FedEx 2Day/Priority Overnight and UPS Next Day Air (carriers do not publish lane-level reliability)."
+ ]
+}
