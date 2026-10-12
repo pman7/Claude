@@ -17,7 +17,7 @@ Thank you for approving our TRI Academy registration on October 8. Our starter k
 
 We have started the TRI Academy CAD modules under the lab registration code you sent on October 6. To complete the milling-strategy support form and plan the rest of the onboarding, I need the following from TRI:
 
-1. The validated milling parameters and tool list for the matrix crown on 5X-200 class machines, or the CAM strategy file if TRI distributes one, so your lab team can run the simulation before we mill the three test crowns.
+1. The validated milling parameters and tool list for the matrix crown on 5X-200 class machines, or the CAM strategy file if TRI distributes one, so your lab team can run the simulation before we mill the three test crowns. Our CIMsystem ticket on the TRI replace strategy has been open since June 22 and the test samples still do not mill cleanly; I would like to close that in the support session.
 2. FDA establishment registration. My notes say TRI requires a certified manufacturing center to hold its own FDA establishment registration as a contract manufacturer. Is that a firm condition, or can a dental laboratory that manufactures to a dentist's prescription under the 21 CFR 807.65(i) exemption be certified without registering? The FY2027 registration fee is $13,785 a year, so I need to budget for it deliberately if it is required.
 3. Confirmation of how certified labs are covered on the clearance side: do certified labs manufacture the matrix crown under TRI's FDA clearance and TRI-validated parameters, and is there documentation we should keep on file?
 4. Certified-lab pricing for matrix abutments, scan bodies and analogs, and the lead time from Santa Ana to Bellevue.
@@ -26,15 +26,16 @@ Two commercial questions, so I can plan capacity honestly:
 
 5. Does TRI refer dentists to certified labs by territory, and is there a public listing we would appear on once certified?
 6. Roughly how many matrix users does TRI have in Washington and Oregon today, and would your regional lead be open to joint visits with us to implant practices on the Eastside of Seattle once we are certified?
+7. Some US certified centers mill matrix crowns for other, non-certified laboratories (one lab we work with buys that service at $55 a unit plus $20 an analog). Does TRI permit a certified lab to offer matrix milling to other labs, and under whose registration and clearance does that work sit?
 
-Our relevance to TRI: we are the lab for Smiles By Design in Kirkland (Dr. Shawn Keller, a current TRI user), we have an in-house mill, sinter and print chain, and we can deliver a matrix crown within 24 hours to Bellevue, Kirkland, Redmond and Seattle, which no national certified lab can do.
+Our relevance to TRI: we are the lab for Smiles By Design in Kirkland (Dr. Shawn Keller, a current matrix user who hosted your June seminar; we have not yet restored a matrix case for him, which is what certification would change), we have an in-house mill, sinter and print chain, and we can deliver a matrix crown within 24 hours to Bellevue, Kirkland, Redmond and Seattle, which no national certified lab can do.
 
 Thank you,
 Phillip Manchik
 Nova Dental LLC dba Integra Dental Design
 35 148th Ave SE, Suite 10, Bellevue, WA 98007
 
-Good reply: parameters or a strategy file, a clear yes or no on the FDA registration condition, a clear answer on clearance coverage, a referral listing, and a named regional lead willing to do joint visits. Note for you: the registration is the gate; do not pay it on the strength of a verbal answer.
+Good reply: parameters or a strategy file, a clear yes or no on the FDA registration condition, a clear answer on clearance coverage, a referral listing, a named regional lead willing to do joint visits, and a yes or no on lab-to-lab matrix milling. Note for you: the registration is the gate; do not pay it on the strength of a verbal answer.
 
 ---
 
@@ -58,14 +59,14 @@ Phillip Manchik, Integra Dental Design, Bellevue
 
 ## Draft 3. Dr. Shawn Keller, Smiles By Design: one introduction (week 2)
 
-To: Dr. Shawn Keller (your second-largest account, a TRI user, paid in full and ahead on account per your August reconciliation).
-Purpose: one warm introduction to a Kirkland All-on-4 practice; and his TRI volume on certification.
+To: Dr. Shawn Keller (your second-largest account, a TRI matrix user who hosted TRI's June seminar at his clinic; none of his matrix crowns have come to Integra yet; paid in full and ahead on account per your August reconciliation).
+Purpose: one warm introduction to a Kirkland All-on-4 practice; his monthly matrix count and who restores it today, which is half of the TRI registration decision.
 
 Subject: Two small asks, and a thank you
 
 Dr. Keller,
 
-Thank you for the steady work this year and for the TRI referral; our TRI Academy registration was approved on October 8 and the starter kit is in. Once certification is complete I would like to move your matrix cases fully to us, with 24-hour delivery to the office.
+Thank you for the steady work this year and for the TRI referral; our TRI Academy registration was approved on October 8 and the starter kit is in. Once certification is complete I would like to move your matrix cases fully to us, with 24-hour delivery to the office. So I can plan capacity and the certification cost honestly: roughly how many matrix implants do you place a month, and who makes the matrix crowns for you today?
 
 One ask: if there is one colleague in Kirkland doing All-on-4 or implant restorations who would value a local lab with an in-house full-arch protocol, would you be willing to introduce me by text or email? I would bring a sample arch and the cooldown protocol, not a price list. Kirkland Dental Excellence or Seattle's Best Smiles are the two I have in mind if you know either doctor.
 
@@ -95,7 +96,7 @@ Phillip
 ## Draft 5. Vital Dental: decide the two-A3L quote (week 1)
 
 To: your contact at Vital Dental (quote of two A3L mills, $87,900, March 24, 2026; stalled).
-Purpose: a yes, a no, or a date.
+Purpose: a yes, a no, or a date on the mills; and Vital's monthly TRI matrix volume, which is the other half of the TRI registration decision.
 
 Subject: Your two-mill quote, and the December 31 placed-in-service deadline
 
@@ -109,6 +110,8 @@ Three options:
 3. Tell me it is not the year, and I will stop following up.
 
 If it would help, I can run one of your full-arch files on our demo A3 and send the arch so your team sees the output before deciding.
+
+One separate question. I understand you send TRI matrix milling to Spectrum Killian at about $55 a unit plus $20 an analog. Roughly how many matrix units a month is that, and if Integra completes TRI certification this quarter, would you route that milling to us at the same price with a Pacific-time cutoff? The answer decides whether the certification is worth its cost to us, so a rough number is enough.
 
 Thank you,
 Phillip Manchik, Integra Dental Design, ARUM authorized dealer

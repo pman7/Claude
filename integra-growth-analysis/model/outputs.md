@@ -32,6 +32,7 @@ Owner opportunity cost used: $40 / $60 / $100 per hour. Loaded technician rate: 
 | ARUM 5-axis mill sale (A3/A3L class) | No shipping (service/equipment) | $28,000 / $35,000 / $42,000 | -$5,860 / $10,510 / $22,232 | 30% |
 | MillBox CAM license resale | No shipping (service/equipment) | $6,000 / $8,450 / $12,000 | -$1,690 / $3,456 / $8,472 | 41% |
 | On-site CAD/CAM service day ($1,500 + expenses) | No shipping (service/equipment) | $1,000 / $1,500 / $2,000 | $239 / $935 / $1,640 | 62% |
+| TRI matrix crown, mill-only for another lab (certified-center service; Vital pays Spectrum Killian $55 plus $20 per analog) | Lab-to-lab ground, labs pay inbound | $45 / $55 / $65 | -$2 / $27 / $50 | 49% |
 
 ## Option cost stacks
 

@@ -54,13 +54,14 @@ UE = [('fcz_crown', 'king_county', 'Zirconia crown, delivered in King County'),
       ('bear_crown', 'lab_to_lab_ground', 'Lab-to-lab crown mill-only, labs pay inbound'),
       ('bear_arch', 'lab_to_lab_ground', 'Lab-to-lab full arch from STL'),
       ('ti_bar', 'lab_to_lab_ground', 'Lab-to-lab titanium bar'),
+      ('tri_matrix_mill_lab', 'lab_to_lab_ground', 'TRI matrix crown milled for another lab at $55 (certified center only; Vital\'s price from Spectrum Killian)'),
       ('tri_matrix_crown', 'ups_ground_2day', 'TRI matrix crown, West Coast ground'),
       ('machine_sale', 'none', 'ARUM mill sale'), ('millbox_license', 'none', 'MillBox license resale'), ('field_service_day', 'none', 'On-site CAD/CAM service day')]
 def t_unit_econ():
     L = ['| Product and lane | Price (base) | Contribution per unit (pessimistic / base / optimistic) | Base margin |', '|---|---|---|---|']
     for prod, lane, label in UE:
         c, p = unit_contribution(prod, lane)
-        est = ' (est.)' if prod == 'tri_matrix_crown' else ''
+        est = ' (est.)' if prod == 'tri_matrix_crown' else (' (your record)' if prod == 'tri_matrix_mill_lab' else '')
         L.append(f"| {label} | {money(p[1])}{est} | {neg(c[0])} / {neg(c[1])} / {neg(c[2])} | {c[1]/p[1]*100:.0f}% |")
     return '\n'.join(L)
 

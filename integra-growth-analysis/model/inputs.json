@@ -415,6 +415,33 @@
    "lanes": [
     "none"
    ]
+  },
+  "tri_matrix_mill_lab": {
+   "label": "TRI matrix crown, mill-only for another lab (certified-center service; Vital pays Spectrum Killian $55 plus $20 per analog)",
+   "price": [
+    45,
+    55,
+    65
+   ],
+   "materials": [
+    7,
+    10,
+    14
+   ],
+   "labor_hours": [
+    0.2,
+    0.3,
+    0.4
+   ],
+   "units_per_case": [
+    3,
+    5,
+    8
+   ],
+   "lanes": [
+    "lab_to_lab_ground"
+   ],
+   "_note": "Price anchor from the owner's own record (Oct 12, 2026): Vital Dental Lab (Buffalo NY) pays Spectrum Killian (Santa Ana CA) $55 per matrix unit plus $20 per analog. Materials = zirconia share (as bear_crown, ~$4.50) plus matrix T-tool and toric wear and packaging (est. $3-9). Labor as bear_crown plus interface check and sintering; no design (client lab supplies the design). Batched shipments of 3-8 units; labs pay inbound. Analog revenue and cost excluded. Only sellable after TRI certification and whatever FDA registration TRI requires; not in any option's demand mix, reported as unit economics only."
   }
  },
  "options": {
