@@ -312,7 +312,7 @@ const body =
     ],
     caption:
       `A ball-end bur leaves a small ridge between neighbouring passes. Its theoretical height, as milled and before sintering, is h = r − √(r² − (s/2)²) for ball radius r and stepover s, so it grows with roughly the square of the stepover: a Ø1.0 mm ball at 0.10 mm leaves ${(ridge(1, 0.1) * 1000).toFixed(1)} µm, at 0.05 mm only ${(ridge(1, 0.05) * 1000).toFixed(2)} µm, but twice as many passes. The passes cover an 8 × 8 mm patch, one at each edge and one every stepover between. ` +
-      "The block and burs are drawn to scale (10 units per millimetre); the bench, spindle and profilometer are schematic. The trace is magnified vertically (full scale 12 µm), as profilometer traces are. Tool shown: Ø4 mm shank, as on the ARUM A3 (60,000 rpm). Product data from ARUM Dentistry (A3 & A3L catalog, Dec 2025), used with permission; form and styling illustrative.",
+      "The block and burs are drawn to scale (10 units per millimetre); the bench, spindle and profilometer are schematic. The trace is magnified vertically (full scale 12 µm), as profilometer traces are. Tool shown: Ø4 mm shank, as on the ARUM A3 (60,000 rpm). Product data from ARUM Dentistry (A3 & A3L catalog, Ver. 2025-Nov-EN), used with permission; form and styling illustrative.",
     body: `<div class="iso-stage so-stage" tabindex="0" role="slider" aria-label="Stepover. Left and right arrows change the stepover, Shift for bigger steps; 1 and 2 choose a 1 or 2 millimetre ball; Home and End go to the ends of the range." aria-valuemin="0.05" aria-valuemax="0.3" aria-valuenow="0.3" aria-valuetext="${wordsOf(...START)}">${svg}<span class="so-sr" role="status" aria-live="polite" data-status></span></div>`,
   }) +
   `</div>`;

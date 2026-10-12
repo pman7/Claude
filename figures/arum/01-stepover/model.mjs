@@ -1,7 +1,7 @@
 // Truth model for Fig 1: scallop (ridge) height left by a ball-end bur.
 // Pure, no DOM. Lengths in mm unless a name says otherwise.
 
-// ARUM A3: Ø4 shank, 60,000 rpm max (arumdentistry.com aseries4; ARUM A3 & A3L catalog, Dec 2025).
+// ARUM A3: Ø4 shank (ARUM A3 & A3L catalog, Ver. 2025-Nov-EN), 60,000 rpm max (the same catalog and arumdentistry.com aseries4).
 export const A3 = { shank: 4, rpm: 60000 };
 
 // Ball-end finishing tools shown, and the stepover range each one is drawn over.
