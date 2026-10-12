@@ -8,14 +8,14 @@ Scores 1-5. profit = year-1 incremental profit after all option costs and owner 
 | 2 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | 2 | 5 | 3 | 4 | 3 | 3 | 2 | 3.36 | 3.20 | 3.70 | 2.70 | 3.15 | $-6,672 | $2,348 | $1,200 |
 | 3 | A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | 2 | 3 | 3 | 3 | 5 | 3 | 4 | 2.64 | 3.10 | 3.05 | 3.15 | 3.55 | $-9,772 | $8,020 | $5,350 |
 | 4 | D. South Orange County served remotely from Bellevue + periodic visits | 2 | 4 | 2 | 5 | 3 | 3 | 2 | 3.00 | 2.95 | 3.35 | 2.55 | 3.70 | $-15,253 | $3,504 | $900 |
-| 5 | M. ARUM / MillBox equipment dealer motion, national, no new premises | 3 | 2 | 3 | 3 | 4 | 2 | 2 | 2.71 | 2.80 | 2.65 | 2.95 | 3.10 | $232 | $10,160 | $5,000 |
-| 6 | H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | 2 | 4 | 2 | 5 | 2 | 3 | 2 | 3.00 | 2.80 | 3.25 | 2.35 | 2.65 | $-13,954 | $3,235 | $670 |
-| 7 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | 2 | 5 | 2 | 5 | 1 | 3 | 1 | 3.29 | 2.80 | 3.50 | 2.10 | 2.40 | $-9,921 | $1,790 | $425 |
-| 8 | L. Miami / South Florida served remotely (2-Day air) | 2 | 5 | 2 | 5 | 1 | 3 | 1 | 3.29 | 2.80 | 3.50 | 2.10 | 2.40 | $-10,022 | $1,416 | $300 |
+| 5 | H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | 2 | 4 | 2 | 5 | 2 | 3 | 2 | 3.00 | 2.80 | 3.25 | 2.35 | 2.65 | $-13,954 | $3,235 | $670 |
+| 6 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | 2 | 5 | 2 | 5 | 1 | 3 | 1 | 3.29 | 2.80 | 3.50 | 2.10 | 2.40 | $-9,921 | $1,790 | $425 |
+| 7 | L. Miami / South Florida served remotely (2-Day air) | 2 | 5 | 2 | 5 | 1 | 3 | 1 | 3.29 | 2.80 | 3.50 | 2.10 | 2.40 | $-10,022 | $1,416 | $300 |
+| 8 | M. ARUM / MillBox equipment dealer motion, national, no new premises | 2 | 2 | 2 | 3 | 4 | 2 | 2 | 2.14 | 2.40 | 2.35 | 2.45 | 2.80 | $-13,008 | $10,160 | $5,000 |
 | 9 | C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national) | 1 | 1 | 3 | 2 | 5 | 3 | 3 | 1.57 | 2.30 | 2.05 | 2.55 | 2.90 | $-22,850 | $20,015 | $18,665 |
 | 10 | E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel) | 1 | 2 | 2 | 2 | 2 | 3 | 1 | 1.64 | 1.80 | 1.95 | 1.65 | 2.50 | $-39,540 | $12,100 | $15,840 |
 | 11 | I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | 1 | 2 | 1 | 2 | 1 | 3 | 1 | 1.43 | 1.50 | 1.70 | 1.30 | 1.35 | $-77,045 | $18,615 | $20,950 |
-| 12 | N. South OC equipment demo/training room (flex unit) using the A3 demo mill | 1 | 1 | 2 | 1 | 2 | 2 | 1 | 1.21 | 1.40 | 1.35 | 1.45 | 2.20 | $-40,870 | $32,097 | $75,900 |
+| 12 | N. South OC equipment demo/training room (flex unit) using the A3 demo mill | 1 | 1 | 1 | 1 | 2 | 2 | 1 | 1.00 | 1.25 | 1.20 | 1.30 | 2.10 | $-56,759 | $32,097 | $75,900 |
 | 13 | F. South OC staffed finishing/QC satellite (flex unit, 1 part-time tech) | 1 | 1 | 1 | 1 | 2 | 2 | 1 | 1.00 | 1.25 | 1.20 | 1.30 | 2.10 | $-145,844 | $61,557 | $102,400 |
 | 14 | G. South OC production lab (mill + furnace + printer + staff) | 1 | 1 | 1 | 1 | 2 | 2 | 1 | 1.00 | 1.25 | 1.20 | 1.30 | 2.10 | $-359,968 | $155,084 | $277,100 |
 
@@ -25,10 +25,10 @@ Scores 1-5. profit = year-1 incremental profit after all option costs and owner 
 - **J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year** — Seattle is Alaska's hub, overnight is real, highest dentists per capita; but Anchorage has several digital labs; no relationships yet
 - **A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus)** — Uses existing capacity, relationships (Jung, Keller, Study Club HQ 15 min away), no lease; implant/full-arch practices named; evidence held at 3 because no agent found evidence the Eastside is underserved and the only local conversion data is one trial account; main risk is founder attention and ops reliability
 - **D. South Orange County served remotely from Bellevue + periodic visits** — Most lab-saturated county in the US (CA 734 labs; Glidewell HQ; TRI USA in Santa Ana); family visits make travel cheap; one existing account
-- **M. ARUM / MillBox equipment dealer motion, national, no new premises** — Dealer rights real, 0 of 15 closed in 7 months, long cycles, cash-float risk on financed deals; one close = ~$17K gross
 - **H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year** — 116 dentists on Maui, no standalone lab found, but Oahu has 25+ labs and mainland labs already ship 2-day; shipping kills single-unit margin; warm leads exist
 - **K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips** — No structural advantage; TX lab registration/CDT questions; many local labs and milling centers (Monster, Haus are in DFW)
 - **L. Miami / South Florida served remotely (2-Day air)** — Full-arch centers mostly have in-house labs; dense low-price lab market; 5-day ground
+- **M. ARUM / MillBox equipment dealer motion, national, no new premises** — Dealer rights real, 0 of 15 closed in 7 months, long cycles, cash-float risk on financed deals; one A3 close is about $10,500 of contribution at a realistic $35,000 street price, and four US sellers carry the same machines
 - **C. TRI matrix certified lab, serving TRI dentists remotely (WA/CA/national)** — Certification in progress, local TRI users (Keller) and TRI USA relationship; Glidewell is also certified, so moat is local same-day service, not certification itself; TRI requires FDA establishment registration ($13,785/yr FY2027) as a condition, which is now in the cost stack
 - **E. South OC private consultation/pickup office (Aliso Viejo / Laguna Niguel)** — Office adds nexus, $800/yr tax, 12-mo lease, and no production; conversion lift over remote is speculative
 - **I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits** — Lease + GET + travel for 2-5 accounts; negative in every scenario
@@ -38,8 +38,8 @@ Scores 1-5. profit = year-1 incremental profit after all option costs and owner 
 
 ## Rank order under each weighting profile
 
-- **Balanced (recommended):** B > J > A > D > M > H > K > L > C > E > I > N > F > G
+- **Balanced (recommended):** B > J > A > D > H > K > L > M > C > E > I > N > F > G
 - **Cash-constrained ($5k):** J > K > L > D > B > H > A > M > C > E > I > N > F > G
-- **Growth-max ($30k, risk ok):** B > A > M > J > C > D > H > K > L > E > N > I > F > G
-- **Lifestyle (be near family in OC):** D > A > B > J > M > C > H > E > K > L > N > F > G > I
-- **Quantitative criteria only (no fit, evidence or speed judgments):** J 3.36 > K 3.29 > L 3.29 > B 3.21 > D 3.00 > H 3.00 > M 2.71 > A 2.64 > E 1.64 > C 1.57 > I 1.43 > N 1.21 > F 1.00 > G 1.00
+- **Growth-max ($30k, risk ok):** B > A > J > C > D > M > H > K > L > E > N > I > F > G
+- **Lifestyle (be near family in OC):** D > A > B > J > C > M > H > E > K > L > N > F > G > I
+- **Quantitative criteria only (no fit, evidence or speed judgments):** J 3.36 > K 3.29 > L 3.29 > B 3.21 > D 3.00 > H 3.00 > A 2.64 > M 2.14 > E 1.64 > C 1.57 > I 1.43 > N 1.00 > F 1.00 > G 1.00

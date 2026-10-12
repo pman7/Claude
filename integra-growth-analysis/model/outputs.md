@@ -29,8 +29,8 @@ Owner opportunity cost used: $40 / $60 / $100 per hour. Loaded technician rate: 
 | Lab-to-lab titanium bar mill-only ($299 std / $399 rush) | Lab-to-lab ground, labs pay inbound | $299 / $320 / $399 | -$108 / $84 / $261 | 26% |
 | TRI matrix crown (certified lab, est. $299-399) | UPS Ground/2-Day both ways (West Coast) | $269 / $329 / $399 | $79 / $217 / $338 | 66% |
 | TRI matrix crown (certified lab, est. $299-399) | 2-Day air both ways (TX/FL) | $269 / $329 / $399 | $35 / $194 / $328 | 59% |
-| ARUM 5-axis mill sale (A3/A3L class) | No shipping (service/equipment) | $35,000 / $42,000 / $51,000 | $895 / $17,300 / $31,232 | 41% |
-| MillBox CAM license resale | No shipping (service/equipment) | $4,500 / $6,000 / $9,000 | -$3,138 / $1,080 / $5,472 | 18% |
+| ARUM 5-axis mill sale (A3/A3L class) | No shipping (service/equipment) | $28,000 / $35,000 / $42,000 | -$5,860 / $10,510 / $22,232 | 30% |
+| MillBox CAM license resale | No shipping (service/equipment) | $6,000 / $8,450 / $12,000 | -$1,690 / $3,456 / $8,472 | 41% |
 | On-site CAD/CAM service day ($1,500 + expenses) | No shipping (service/equipment) | $1,000 / $1,500 / $2,000 | $239 / $935 / $1,640 | 62% |
 
 ## Option cost stacks
@@ -92,12 +92,12 @@ Owner opportunity cost used: $40 / $60 / $100 per hour. Loaded technician rate: 
 | L. Miami / South Florida served remotely (2-Day air) | low | 0.0 | $378 | -$78 | $0 | -$1,537 | -$4,417 | -$116 | inf / inf | not in 12 mo | not in 12 mo | -$1,537 | 0 u / 0 h | ok |
 | L. Miami / South Florida served remotely (2-Day air) | base | 1.0 | $1,112 | $451 | $8,340 | -$1,382 | -$10,022 | $79 | 0.8 / 2.4 | not in 12 mo | not in 12 mo | -$1,653 | 6 u / 6 h | ok |
 | L. Miami / South Florida served remotely (2-Day air) | high | 3.0 | $1,946 | $1,305 | $49,636 | $21,522 | -$2,478 | $2,985 | 0.7 / 2.2 | 6 | 4 | -$1,041 | 26 u / 40 h | ok |
-| M. ARUM / MillBox equipment dealer motion, national, no new premises | low | 1.0 | $3,550 | -$170 | $42,600 | -$11,905 | -$26,305 | -$850 | inf / inf | not in 12 mo | not in 12 mo | -$11,905 | 0 u / 5 h | ok |
-| M. ARUM / MillBox equipment dealer motion, national, no new premises | base | 1.0 | $12,900 | $5,156 | $154,800 | $36,232 | $232 | $3,436 | 0.3 / 0.9 | 1 | 2 | -$5,000 | 1 u / 17 h | ok |
-| M. ARUM / MillBox equipment dealer motion, national, no new premises | high | 1.0 | $38,400 | $23,990 | $460,800 | $229,485 | $133,485 | $19,890 | 0.2 / 0.5 | 1 | 1 | -$9,200 | 2 u / 56 h | ok |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | low | 1.0 | $4,475 | -$107 | $53,700 | -$40,467 | -$54,867 | -$2,714 | inf / inf | not in 12 mo | not in 12 mo | -$40,467 | 1 u / 6 h | ok |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | base | 1.0 | $16,275 | $6,693 | $195,300 | -$4,870 | -$40,870 | $794 | 0.9 / 1.3 | 1 | not in 12 mo | -$16,650 | 3 u / 21 h | ok |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | high | 1.0 | $46,100 | $29,114 | $553,200 | $192,337 | $96,337 | $18,195 | 0.4 / 0.6 | 1 | 2 | -$29,500 | 6 u / 70 h | ok |
+| M. ARUM / MillBox equipment dealer motion, national, no new premises | low | 1.0 | $3,140 | -$566 | $37,680 | -$16,653 | -$31,053 | -$1,246 | inf / inf | not in 12 mo | not in 12 mo | -$16,653 | 0 u / 5 h | ok |
+| M. ARUM / MillBox equipment dealer motion, national, no new premises | base | 1.0 | $11,762 | $4,053 | $141,150 | $22,992 | -$13,008 | $2,333 | 0.4 / 1.2 | not in 12 mo | 3 | -$5,000 | 1 u / 17 h | ok |
+| M. ARUM / MillBox equipment dealer motion, national, no new premises | high | 1.0 | $34,800 | $20,390 | $417,600 | $186,285 | $90,285 | $16,290 | 0.2 / 0.6 | 1 | 1 | -$9,200 | 2 u / 56 h | ok |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | low | 1.0 | $3,925 | -$638 | $47,100 | -$46,836 | -$61,236 | -$3,245 | inf / inf | not in 12 mo | not in 12 mo | -$46,836 | 1 u / 6 h | ok |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | base | 1.0 | $14,910 | $5,369 | $178,920 | -$20,759 | -$56,759 | -$530 | 1.1 / 1.7 | not in 12 mo | not in 12 mo | -$20,759 | 3 u / 21 h | ok |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | high | 1.0 | $41,600 | $24,614 | $499,200 | $138,337 | $42,337 | $13,695 | 0.4 / 0.8 | 1 | 2 | -$29,500 | 6 u / 70 h | ok |
 
 ## Stress tests (base case; month-12 monthly cash flow after owner time unless noted)
 
@@ -115,8 +115,8 @@ Owner opportunity cost used: $40 / $60 / $100 per hour. Loaded technician rate: 
 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | -$43 | -$663 | -$138 | -$138 | -$275 | -$456 | -$6,672 | -$8,532 |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | -$453 | -$904 | -$513 | -$567 | -$608 | -$904 | -$9,921 | -$11,274 |
 | L. Miami / South Florida served remotely (2-Day air) | -$641 | -$867 | -$671 | -$734 | -$719 | -$1,092 | -$10,022 | -$10,699 |
-| M. ARUM / MillBox equipment dealer motion, national, no new premises | $436 | -$2,142 | $436 | $6 | n/a | -$1,006 | $232 | -$7,502 |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | -$2,206 | -$5,552 | -$2,221 | -$3,681 | n/a | -$3,648 | -$40,870 | -$50,910 |
+| M. ARUM / MillBox equipment dealer motion, national, no new premises | -$667 | -$2,694 | -$667 | -$1,097 | n/a | -$1,543 | -$13,008 | -$19,087 |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | -$3,530 | -$6,214 | -$3,546 | -$5,005 | n/a | -$4,406 | -$56,759 | -$64,812 |
 
 ## Feasibility by expansion-cash envelope
 
@@ -160,9 +160,9 @@ Feasible = envelope covers both (a) cash to open plus 90 days of option costs wi
 | L. Miami / South Florida served remotely (2-Day air) | low | $497 | $1,537 | yes | yes | yes |
 | L. Miami / South Florida served remotely (2-Day air) | base | $1,416 | $1,653 | yes | yes | yes |
 | L. Miami / South Florida served remotely (2-Day air) | high | $3,390 | $1,041 | yes | yes | yes |
-| M. ARUM / MillBox equipment dealer motion, national, no new premises | low | $3,740 | $11,905 | no | yes | yes |
+| M. ARUM / MillBox equipment dealer motion, national, no new premises | low | $3,740 | $16,653 | no | no | yes |
 | M. ARUM / MillBox equipment dealer motion, national, no new premises | base | $10,160 | $5,000 | no | yes | yes |
 | M. ARUM / MillBox equipment dealer motion, national, no new premises | high | $21,500 | $9,200 | no | no | yes |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | low | $15,721 | $40,467 | no | no | no |
-| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | base | $32,097 | $16,650 | no | no | no |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | low | $15,721 | $46,836 | no | no | no |
+| N. South OC equipment demo/training room (flex unit) using the A3 demo mill | base | $32,097 | $20,759 | no | no | no |
 | N. South OC equipment demo/training room (flex unit) using the A3 demo mill | high | $58,757 | $29,500 | no | no | no |

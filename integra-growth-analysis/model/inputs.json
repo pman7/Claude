@@ -324,9 +324,9 @@
   "machine_sale": {
    "label": "ARUM 5-axis mill sale (A3/A3L class)",
    "price": [
+    28000,
     35000,
-    42000,
-    51000
+    42000
    ],
    "materials": [
     19000,
@@ -350,14 +350,15 @@
    ],
    "lanes": [
     "none"
-   ]
+   ],
+   "_price_note": "A3 street price bracketed by vhf E5 $28,990 / Roland DWX-52D $25,995 below and DWX-52DCi $34,995 / vhf Z4 $39,990 above (equipment agent, Oct 12 2026); the $51,000 list is not achievable."
   },
   "millbox_license": {
    "label": "MillBox CAM license resale",
    "price": [
-    4500,
     6000,
-    9000
+    8450,
+    12000
    ],
    "materials": [
     3400,
@@ -381,7 +382,8 @@
    ],
    "lanes": [
     "none"
-   ]
+   ],
+   "_price_note": "MillBox new license $8,450 Standard to ~$16,500 Expert; annual updates $1,200 (Denteon/Elemental, Oct 12 2026); reseller margin unpublished."
   },
   "field_service_day": {
    "label": "On-site CAD/CAM service day ($1,500 + expenses)",
