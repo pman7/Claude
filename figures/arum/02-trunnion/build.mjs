@@ -40,7 +40,7 @@ const FLOOR_Z = -128;
 const BACK_Y = 150;
 // Spindle head (fixed in this figure; Z parked above the holder's swing)
 const TIP_Z = 112;
-const S0 = TIP_Z + 30; // nose-ring bottom face
+const S0 = TIP_Z + 43; // nose-ring bottom face (tool sticks out 43, as in the photos)
 const BOX = { x: -56, y: -68, w: 113, d: 110, r: 4 }; // spindle 42 behind the box front
 const BOX_Z = [S0 + 41, S0 + 150];
 // Tool magazine (15 pockets, 32 mm grid), beside the left arm
@@ -123,13 +123,11 @@ const holder = T.prism({
   ...CA,
   F: HF,
   polygon: plate,
-  round: 1.2,
   s0: -THICK,
   s1: THICK,
   tone: "hi",
   crease: "lo",
   material: "steel",
-  bevel: 0.6,
   details: {
     seams: [0],
     dots: [...barDots, ...barScrews],
@@ -196,7 +194,7 @@ function chamber() {
     Ln(recess, { tone: "lo" }) +
     Ln(seams, { tone: "faint" }) +
     Dots(panelScrews, { size: 0.55 }) +
-    Ln([0, 1].map((i) => k.segment([-258, -BACK_Y, 34 + i * 8], [194, -BACK_Y, 34 + i * 8], P)).join(""), { tone: "lo" });
+    Ln(k.pathOf(k.roundedPlan({ x: -236, y: 34, w: 410, d: 8, r: 4 }, 4).map(([x, z]) => onWall(x, z)), true), { tone: "lo" });
   put({ name: "stand.wall", layer: "back", at: [0, -BACK_Y - 7, 40], bias: -40, svg: wallSvg, shapes: [ground(A.slab(WALLP, FLOOR_Z, wallTop - FLOOR_Z))] });
 }
 function bBearing() {
@@ -217,6 +215,7 @@ function head() {
   ];
   // the bur: Ø6 shank, neck, Ø2 ball-end cutter
   const bur = [[TIP_Z, 0], [TIP_Z + 0.4, 0.8, 1], [TIP_Z + 1, 1], [TIP_Z + 7, 1], [TIP_Z + 9, 0.8], [TIP_Z + 12, 0.8], [TIP_Z + 18, 3], [S0 - 17, 3]];
+  if (!(S0 - 17 > TIP_Z + 18)) throw new Error("tool: shank shorter than its taper");
   stack.push({ name: "tool.bur", svg: S(G.solidOf(bur, F, P, {}), { tone: "hi", crease: "lo" }), shape: A.solid(F, bur), at: [0, 0, TIP_Z + 12] });
   for (const part of stack) put({ name: part.name, layer: "front", at: part.at, svg: part.svg, shapes: [part.shape] });
   // carriage arm from the head box back to the Z slide on the chamber wall
@@ -226,15 +225,15 @@ function head() {
 function nozzles() {
   const aim = [0, 0, S0 - 29];
   for (const side of [-1, 1]) {
-    const block = { x: side * 45 - 6, y: 16, w: 12, d: 14, r: 1.5 };
+    const block = { x: side * 54 - 6, y: 16, w: 12, d: 14, r: 1.5 };
     const z1 = BOX_Z[0];
     const z0 = z1 - 10;
-    put({ name: `nozzle.block.${side}`, layer: "front", at: [side * 45, 23, z0 + 5], svg: S(k.slabOf(block, z0, 10, P, 3, 0.4), { tone: "mid" }), shapes: [A.slab(block, z0, 10)] });
-    const from = [side * 45, 23, z0];
+    put({ name: `nozzle.block.${side}`, layer: "front", at: [side * 54, 23, z0 + 5], svg: S(k.slabOf(block, z0, 10, P, 3, 0.4), { tone: "mid" }), shapes: [A.slab(block, z0, 10)] });
+    const from = [side * 54, 23, z0];
     const dir = G.unit3(G.sub3(aim, from));
     const tipAt = G.add3(from, G.mul3(dir, G.len3(G.sub3(aim, from)) - 16));
     const hose = [from, G.add3(tipAt, G.mul3(dir, -8))];
-    const pieces = tubePieces(hose, 2.2, P, { maxLength: 18, caps: [false, false], rings: { pitch: 3.2, fade: [0.1, 0.55], tone: "lo" } });
+    const pieces = tubePieces(hose, 2.2, P, { maxLength: 7, caps: [false, false], rings: { pitch: 3.2, fade: [0.1, 0.55], tone: "lo" } });
     pieces.forEach((piece, index) => put({ name: `nozzle.hose.${side}:${index}`, layer: "front", at: piece.mid, svg: tubeSvg(piece, { tone: "mid" }), shapes: [A.tube(piece.points, piece.radii)] }));
     const TF = frameOf(hose[1], dir, [0, 0, 1]);
     put({ name: `nozzle.tip.${side}`, layer: "front", at: G.add3(hose[1], G.mul3(dir, 4)), svg: `<g class="tr-black">${S(G.solidOf([[0, 3], [5, 3], [8, 1.6]], TF, P, {}), { tone: "lo" })}</g>`, shapes: [A.solid(TF, [[0, 3], [5, 3], [8, 1.6]])] });
