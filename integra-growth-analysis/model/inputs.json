@@ -77,6 +77,15 @@
     0,
     0
    ]
+  },
+  "alaska_2day_air": {
+   "label": "FedEx One Rate 2Day / overnight both ways (Anchorage)",
+   "round_trip_cost": [
+    40,
+    70,
+    150
+   ],
+   "_note": "FedEx One Rate small box 2Day $19.55 each way (Alaska included, Apr 20 2026); Standard Overnight $101.75; GoldStreak $74 min one way (Oct 1 2026). Low = 2Day both ways; base = 2Day out and overnight back on average; high = overnight both ways."
   }
  },
  "products": {
@@ -1502,7 +1511,7 @@
   },
   "alaska_remote": {
    "label": "J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year",
-   "shipping_lane": "overnight_hi_ak",
+   "shipping_lane": "alaska_2day_air",
    "one_time": {
     "AK_business_license (fact $50) + foreign_LLC_if_required (est.)": [
      50,

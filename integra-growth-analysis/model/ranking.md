@@ -6,7 +6,7 @@ Scores 1-5. profit = year-1 incremental profit after all option costs and owner 
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | A. Grow in place: Puget Sound dentist accounts (implant/full-arch focus) | 2 | 3 | 4 | 3 | 5 | 4 | 4 | 3.35 | 3.30 | 3.40 | 3.70 | $-143 | $9,670 | $5,350 |
 | 2 | B. Lab-to-lab milling (Bear Milling) sold remotely nationwide | 3 | 3 | 4 | 3 | 4 | 3 | 3 | 3.30 | 3.25 | 3.35 | 3.45 | $8,523 | $8,045 | $6,305 |
-| 3 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | 2 | 5 | 2 | 4 | 3 | 3 | 2 | 3.05 | 3.55 | 2.55 | 3.05 | $-8,922 | $2,348 | $1,200 |
+| 3 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | 2 | 5 | 3 | 4 | 3 | 3 | 2 | 3.20 | 3.70 | 2.70 | 3.15 | $-6,672 | $2,348 | $1,200 |
 | 4 | D. South Orange County served remotely from Bellevue + periodic visits | 2 | 4 | 2 | 5 | 3 | 3 | 2 | 2.95 | 3.35 | 2.55 | 3.70 | $-15,253 | $3,504 | $900 |
 | 5 | M. ARUM / MillBox equipment dealer motion, national, no new premises | 3 | 2 | 3 | 3 | 4 | 2 | 2 | 2.80 | 2.65 | 2.95 | 3.10 | $232 | $10,160 | $5,000 |
 | 6 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | 2 | 5 | 2 | 5 | 1 | 3 | 1 | 2.80 | 3.50 | 2.10 | 2.40 | $-9,921 | $1,790 | $425 |
@@ -40,5 +40,5 @@ Scores 1-5. profit = year-1 incremental profit after all option costs and owner 
 
 - **Balanced (recommended):** A > B > J > D > M > K > L > H > C > E > I > N > F > G
 - **Cash-constrained ($5k):** J > K > L > D > A > B > H > M > C > E > I > N > F > G
-- **Growth-max ($30k, risk ok):** A > B > M > C > D > J > H > K > L > E > N > I > F > G
-- **Lifestyle (be near family in OC):** A > D > B > M > J > C > H > E > K > L > N > F > G > I
+- **Growth-max ($30k, risk ok):** A > B > M > J > C > D > H > K > L > E > N > I > F > G
+- **Lifestyle (be near family in OC):** A > D > B > J > M > C > H > E > K > L > N > F > G > I

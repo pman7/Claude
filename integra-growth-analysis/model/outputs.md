@@ -78,8 +78,8 @@ Owner opportunity cost used: $40 / $60 / $100 per hour. Loaded technician rate: 
 | I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | base | 3.0 | $1,112 | $320 | $25,020 | -$57,618 | -$82,818 | -$4,029 | 15.6 / 22.2 | not in 12 mo | not in 12 mo | -$57,618 | 17 u / 18 h | ok |
 | I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | high | 5.0 | $1,946 | $1,233 | $82,726 | -$63,190 | -$129,190 | -$2,738 | 7.2 / 11.7 | not in 12 mo | not in 12 mo | -$63,190 | 44 u / 67 h | ok |
 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | low | 1.0 | $378 | -$199 | $2,454 | -$4,045 | -$7,885 | -$412 | inf / inf | not in 12 mo | not in 12 mo | -$4,045 | 3 u / 2 h | ok |
-| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | base | 3.0 | $1,112 | $320 | $26,688 | $1,878 | -$8,922 | $576 | 1.2 / 4.0 | not in 12 mo | 9 | -$1,709 | 17 u / 18 h | ok |
-| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | high | 6.0 | $1,946 | $1,233 | $105,111 | $52,894 | $22,894 | $6,470 | 0.8 / 2.8 | 4 | 3 | -$2,423 | 52 u / 81 h | ok |
+| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | base | 3.0 | $1,112 | $413 | $26,688 | $4,128 | -$6,672 | $857 | 0.9 / 3.1 | not in 12 mo | 8 | -$1,552 | 17 u / 18 h | ok |
+| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | high | 6.0 | $1,946 | $1,305 | $105,111 | $56,769 | $26,769 | $6,901 | 0.7 / 2.6 | 4 | 3 | -$2,361 | 52 u / 81 h | ok |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | low | 0.0 | $378 | -$78 | $0 | -$2,448 | -$6,288 | -$192 | inf / inf | not in 12 mo | not in 12 mo | -$2,448 | 0 u / 0 h | ok |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | base | 2.0 | $1,112 | $451 | $16,680 | $879 | -$9,921 | $447 | 1.0 / 3.0 | not in 12 mo | 11 | -$1,347 | 11 u / 12 h | ok |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | high | 4.0 | $1,946 | $1,305 | $66,181 | $31,457 | $1,457 | $4,205 | 0.8 / 2.7 | 6 | 3 | -$1,089 | 35 u / 54 h | ok |
@@ -106,7 +106,7 @@ Owner opportunity cost used: $40 / $60 / $100 per hour. Loaded technician rate: 
 | G. South OC production lab (mill + furnace + printer + staff) | -$19,852 | -$23,190 | -$20,515 | -$23,352 | -$20,520 |
 | H. Maui/Hawaii served remotely (2-day air / Alaska Air Cargo) + 2-3 visits per year | -$1,116 | -$1,435 | -$1,227 | -$1,116 | -$1,435 |
 | I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | -$6,129 | -$6,609 | -$6,296 | -$6,454 | -$6,449 |
-| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | -$324 | -$803 | -$491 | -$324 | -$644 |
+| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | -$43 | -$663 | -$209 | -$43 | -$456 |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | -$453 | -$904 | -$564 | -$453 | -$904 |
 | L. Miami / South Florida served remotely (2-Day air) | -$641 | -$867 | -$697 | -$641 | -$1,092 |
 | M. ARUM / MillBox equipment dealer motion, national, no new premises | $436 | -$2,142 | -$209 | $436 | -$1,006 |
@@ -146,8 +146,8 @@ Feasible = envelope covers both (a) cash to open plus 90 days of option costs wi
 | I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | base | $19,915 | $57,618 | no | no | no |
 | I. Maui case-coordination/pickup office (Kahului/Kihei) + monthly visits | high | $35,465 | $63,190 | no | no | no |
 | J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | low | $838 | $4,045 | yes | yes | yes |
-| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | base | $2,348 | $1,709 | yes | yes | yes |
-| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | high | $5,340 | $2,423 | no | yes | yes |
+| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | base | $2,348 | $1,552 | yes | yes | yes |
+| J. Alaska (Anchorage) served remotely with overnight air + 2 visits per year | high | $5,340 | $2,361 | no | yes | yes |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | low | $724 | $2,448 | yes | yes | yes |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | base | $1,790 | $1,347 | yes | yes | yes |
 | K. Dallas-Fort Worth served remotely (2-Day air) + equipment-sales trips | high | $3,773 | $1,089 | yes | yes | yes |
