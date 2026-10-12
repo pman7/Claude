@@ -374,6 +374,34 @@ const body =
   }) +
   `</div>`;
 const page = k.pageHtml({ title: "Two rotary axes", theme: THEME, body, script: turnScript() + modelScript + (verify ? `window.__isoVerify = ${JSON.stringify(out.verify)};\n` : "") + LIVE, width: 680 });
+// A claude.ai Artifact page (--artifact=path): no document skeleton of its own (the host adds it), and the figure follows
+// the viewer's theme: an explicit data-theme on <html>, else the system setting
+const THEME_HOST = `{
+  const root = document.documentElement;
+  const host = document.querySelector(".tr-host");
+  const dark = matchMedia("(prefers-color-scheme: dark)");
+  const apply = () => { const t = root.getAttribute("data-theme"); host.setAttribute("data-theme", t === "light" || t === "dark" ? t : dark.matches ? "dark" : "light"); };
+  apply();
+  dark.addEventListener("change", apply);
+  new MutationObserver(apply).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+}
+`;
+const artifactPage = () =>
+  `<title>ARUM 5X-200 Axes</title><style>${k.ISO_CSS}
+:root{--page:#0b0b0b;color-scheme:dark}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--page:#f2f2ef;color-scheme:light}}
+:root[data-theme="light"]{--page:#f2f2ef;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.tr-host{background:var(--anatomy-page);color:var(--anatomy-text);padding-inline:16px;padding-block:40px 64px}
+.tr-host .iso-page{width:min(680px,100%);margin:0 auto}
+</style><div class="iso tr-host" data-theme="dark"><main class="iso-page">${body}</main></div><script type="module">${(THEME_HOST + turnScript() + modelScript + LIVE).replace(/<\/(script)/gi, "<\\/$1")}</script>`;
+const artifactOut = argv.find((a) => a.startsWith("--artifact="))?.slice("--artifact=".length);
+if (artifactOut && process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  const html = artifactPage();
+  writeFileSync(artifactOut, html);
+  console.log(`wrote ${artifactOut} · ${(html.length / 1024).toFixed(0)} KB (artifact page)`);
+}
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const name = `trunnion${verify ? "-verify" : ""}${THEME === "light" ? "-light" : ""}.html`;
   writeFileSync(join(HERE, name), page);
