@@ -1,0 +1,362 @@
+{
+ "topic": "Quantitative demand inputs for Integra Dental Design client-acquisition model: dentist supply by state/county, GP economics and lab spend, implant/full-arch and digital adoption shares, lab-switching behavior, sales-rep and lab-industry benchmarks, DSO share, and an illustrative obtainable-accounts estimate per target county (desk research, accessed 2026-10-12)",
+ "summary": "Research mode note: the WebSearch budget was exhausted before this task began, so all discovery and reading used Exa search/fetch only. Primary sources (ADA HPI PDFs, state workforce agencies, Straumann/Envista investor files, LMT, ADA 2008 lab survey) were read directly; a few spreadsheets (KFF, ADA XLSX, FL DOH 2023-24 PDF) could not be parsed and are flagged.\n\nFACTS WITH HIGH CONFIDENCE. (1) Supply: ADA HPI counts 205,088 professionally active US dentists in 2025 (60.0 per 100k); 78.8% are GPs (2024). 2024 state ratios per 100k: WA 70.3, CA 76.6, HI 78.1, TX 53.3, FL 52.4, AK 78.4, OR 64.4 versus US 59.5. The target counties are all above the US average on an NPI/AHRF-based count: King ~2,729 dentists (120/100k), Orange CA ~4,034 (127/100k), Honolulu ~1,047 (103/100k), Anchorage ~390 (134/100k), Dallas ~2,526 (97/100k); Snohomish, Pierce, Collin, Miami-Dade, Broward, Lane and Maui sit at 69-91/100k. Licensure-based state sources run 10-35% lower for several counties (Texas HPRC 2020: Dallas 1,678, Tarrant 1,093; FL DOH 2019-20: Miami-Dade 1,783, Broward 1,476; UW CHWS 2024: Pierce 55/100k vs 87/100k NPI-based), so the model carries both. None of these counties is \"underserved\" by national standards; several are among the most dentist-dense in the country, which means lab competition is also dense. (2) GP economics: ADA Survey of Dental Practice 2025 gives average GP gross billings of $965,660 and net income $215,320; pooled 2021-25 inflation-adjusted average revenue per GP is $913,633 against expenses of $615,361, with expenses growing 8.1% vs revenue 4.9% between pooled periods (the \"fiscal squeeze\"). Lab fees as a share of gross: Cain Watters client cohorts 5.4-6.6% (2023), Dental Accounting Group WA practices 5.04% (2023), Dental Economics guidance 8%. Formula: lab spend per GP = gross billings x lab share = $965,660 x 5.5%/6.5%/8.0% = $53k / $63k / $77k per year. At Integra's $129 zirconia price that is roughly 400-600 units per GP per year of total lab wallet, of which a new lab would typically win a fraction, because the ADA 2008 survey found dentists use three labs on average (90% use two or more) and Dandy's 2022 survey found most practices use 2-3 labs with 42% of relationships older than six years. (3) Switching: LMT/Dental Economics 2019 found 46% of dentists switched their primary lab in the prior five years (about 11.6%/yr if independent); 61% had switched at least once in ten years (2011). Quality inconsistency and technical problems are the stated drivers. (4) Implants: Inside Dentistry's GP survey shows 61% place implants (2022), 23% perform All-on-X (up from 19% in 2019) and 40% deliver overdentures; the 2024 wave shows 49% place none and 69% use screw-retained restorations. (5) Digital: the same survey series shows intraoral-scanner use rising from 37% (2020) to 57% (2024) while in-office milling fell from 14% to 12%; ADA's 2021 clinical panel found 53% scanner use. So roughly 88% of GPs still send all indirect work out, and over half can send STL files, which is exactly Integra's intake path. (6) DSO share (ADA HPI 2024): US 16.1%; WA 14%, CA 11%, HI 2%, TX 25%, FL 23%, AK 4%, OR 13%. Texas and Florida have the most centralized lab purchasing; Hawaii and Alaska the least. (7) Lab industry: LMT 2024 remake survey gives external remake rates of 2.5% C&B, 2.2% implants, 2.8% dentures, 3.6% partials, with over 80% attributed to dentist error; Kentley Insights puts 2024 industry sales at $7B across 5,488 companies, $1.2M per facility and $144,803 revenue per employee; NADL-reported data show most-experienced technicians averaging $96,165 (2023) and over half of 2025 survey respondents at net profit above 15%. (8) Rep pay from live postings: $60-75k base plus 3-6% of sales (DCS Lab SF $70-75k + 6%; MRM NJ $60-65k + 5%; Apex $65k base), ERI average $74,261.\n\nESTIMATES (labeled). Full-arch volume: no primary source publishes US arches per year. Triangulating ~1.5-1.75M implant patients/procedures per year (Envista 2021 estimate; GlobalData 2022 count), 23% of GPs offering All-on-X, ClearChoice's 200,000 patients over 20 years, and Straumann/iData's projection of +45% fixed full-arch cases in North America by 2029 (~6.4% CAGR), I estimate 100k-250k arches per year (base ~150k), low confidence; Envista's 2023 annual report and LMT's 2025 fee survey both note a recent slowdown in full-arch demand. Trial-case-to-recurring conversion: no quantified survey exists; marketing-agency claims and the 11-12%/yr switching rate suggest a 12-month win rate of 2-7% of GPs actually contacted. Cost per acquired account: no benchmark; a fully loaded rep at ~$100k opening 2-4 recurring accounts per month implies $2-4.5k per account, while owner-led outreach with ~$95 Meta leads implies $1-2k plus trial-case discounts. Revenue per technician: consultant benchmarks of $15-25k per tech per month; Integra's own ~$35k per FTE-equivalent per year is a fraction of that. Lab A/R days (25-50) and lab revenue per square foot are unknown; Integra's own figure is $234/sq ft/yr.\n\nOBTAINABLE ACCOUNTS (illustrative, estimate). Formula: dentists x 78.8% GP x 88% no in-office mill x (1 - state DSO share) x contactable share (market-specific low/base/high) x 12-month win rate (2%/4%/7%). Results, low/base/high recurring accounts in 12 months: King 8/26/68; Pierce 2/7/17; Snohomish 2/6/14; Orange CA 3/12/35; Honolulu 1/3/10; Maui 1/2/4; Dallas 1/3/9; Miami-Dade 1/2/8; Broward 0/2/7; Tarrant 0/2/5; Anchorage 1/2/6; Lane 0/1/4; Collin 0/1/3. The home King-Pierce-Snohomish market alone offers a base case of ~39 new accounts, more than any remote county combination, because reach, not dentist count, is the binding constraint; remote counties only reach the \"high\" column if someone is physically calling on offices. The base-case lab wallet in King County GPs without mills is ~$119M/yr, so Integra's current ~$140k/yr lab revenue is well under 0.2% share; the growth problem is sales execution, not market size.\n\nKEY UNKNOWNS: GP share by county, in-office-mill share in each county, actual trial-to-recurring conversion, NADL survey internals (paywalled), FL 2023-24 county dentist counts (PDF unreadable), and any demand evidence for Maui beyond anecdote.",
+ "findings": [
+  {
+   "claim": "US professionally active dentists and dentist-to-population ratio (national)",
+   "value": "205,088 dentists in 2025; 60.0 per 100,000 (2025); 59.5 per 100,000 in 2024 (202,485 dentists); 78.8% of dentists are GPs (2024); 21.2% practice in an ADA-recognized specialty (2025)",
+   "detail": "ADA Health Policy Institute, Dentist Workforce page and 'U.S. Dentist Workforce - 2025 update' slide deck (data as of August 2025). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.ada.org/resources/research/health-policy-institute/dentist-workforce",
+   "source_date": "2025 (page undated; deck states 'as of August 2025')"
+  },
+  {
+   "claim": "Dentists per 100,000 population by target state, 2024 (ADA HPI)",
+   "value": "WA 70.3; CA 76.6; HI 78.1; TX 53.3; FL 52.4; AK 78.4; OR 64.4; US 59.5; range AR 40.2 to DC 103.2",
+   "detail": "Read directly from the ADA HPI 'U.S. Dentist Workforce - 2025 update' PDF state map. Change in dentists per 100k 2014-2024: WA -1.1%, CA 0.0%, HI +3.6%, TX +5.3%, FL +3.0%, AK -1.8%, OR -5.5%. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.ada.org/-/media/project/ada-organization/ada/ada-org/files/resources/research/hpi/us_dentist_workforce_2025.pdf",
+   "source_date": "2025 (August 2025 data)"
+  },
+  {
+   "claim": "Professionally active dentist counts by target state, 2024 (secondary tabulation of ADA HPI data)",
+   "value": "WA 5,597; CA 30,201; HI 1,130; TX 16,692; FL 12,252; AK 580; OR 2,750",
+   "detail": "DentistEmailList 'Dentist Density Map' table states counts are ADA HPI 2024 supply data cross-checked against KFF, divided by Census Vintage 2024 population. Ratios on that table match the ADA PDF exactly, so counts are consistent with ADA; treat as secondary because the ADA XLSX itself could not be parsed. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.dentistemaillist.com/dental-density",
+   "source_date": "undated (cites ADA HPI 2024 and Census 2024)"
+  },
+  {
+   "claim": "County dentist counts and computed dentists per 100,000 for the 13 target counties (NPI/AHRF-based aggregator)",
+   "value": "King WA 2,729 (120/100k, pop 2,269,675); Snohomish WA 683 (82.5); Pierce WA 800 (86.8); Orange CA 4,034 (126.6); Maui HI 113 (68.6); Honolulu HI 1,047 (103.0); Dallas TX 2,526 (96.7); Tarrant TX 1,454 (68.9); Collin TX 881 (82.8); Miami-Dade FL 2,254 (83.4); Broward FL 1,761 (90.6); Anchorage AK 390 (133.9); Lane OR 295 (77.0)",
+   "detail": "RHT Compass county health profiles (VisionWrights), which state they integrate County Health Rankings, HRSA, CMS and Census data; County Health Rankings' 'Dentists' measure is built from the Area Health Resource File/NPI file, which counts registered NPIs and can include non-practicing or out-of-county dentists, so these run high versus licensure counts (see cross-checks). Per-100k ratios computed by me from the page's dentist and population figures. Pages undated; accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://rhtcompass.com/wa/counties/king",
+   "source_date": "undated"
+  },
+  {
+   "claim": "Washington cross-check: licensed dentists per 100,000 by county, December 2024",
+   "value": "King 111 per 100k (highest non-rural county); Pierce 55 per 100k (9th among non-rural); statewide 75 per 100k; non-rural average 82; rural average 43; 5,756 dentist licenses with WA mailing address in 2022; King County ACH 130/100k in 2022 and 112/100k in 2023",
+   "detail": "University of Washington Center for Health Workforce Studies, Washington Oral Health Workforce Tracking Program briefs (licensure mailing address; may not equal practice location). Implies ~2,500 licensed dentists in King County vs 2,729 NPI-based, and ~510 in Pierce vs 800 NPI-based. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://familymedicine.uw.edu/chws/wp-content/uploads/sites/5/2025/08/WOHW_RuralOralHealthWorkforce_Brief_Aug2025.pdf",
+   "source_date": "August 2025 (data Dec 2024)"
+  },
+  {
+   "claim": "California cross-check: Orange County share of active dentist licenses",
+   "value": "Orange County = 8.0% of CA population but 12.5% of CA active dentist licenses; CA total 32,585 active dentist licenses (81.6 per 100k) as of April 1, 2022 -> ~4,070 licensed dentists in Orange County",
+   "detail": "HCAI Health Workforce Research Data Center Annual Report, January 2023, Figure C-1 and regional share table. Consistent with the 4,034 NPI-based count. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://hcai.ca.gov/wp-content/uploads/2023/02/Research-Data-Center-Annual-Report-January-2023-FINAL-1.pdf",
+   "source_date": "January 2023"
+  },
+  {
+   "claim": "Hawaii cross-check: dentists by island and per 100,000",
+   "value": "Licensed dentists by place of address, Sept 30 2024: Oahu 855, Maui 116, Hawaii Island 115, Kauai 50, Molokai 3, Lanai 1 (1,140 in-state; 291 mainland addresses). 2025 rate: state 90 per 100k; Honolulu 101; Maui 69; Kauai 68; Hawaii 63. DCCA active licenses June 30 2025: Oahu 959, Maui 161 (includes non-practicing).",
+   "detail": "Hawaii DBEDT State Data Book Table 2.36 (2024); Hawaii Health Data Warehouse 'Oral Health in Hawaii 2026 Fact Sheet'; DCCA PVL Geographic Report. Maui's ~115 dentists is a very small addressable base; Hawaii has the highest net in-migration of new dentists 2019-24 per ADA HPI. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://files.hawaii.gov/dbedt/economic/databook/2024-individual/02/023624.pdf",
+   "source_date": "September 30, 2024"
+  },
+  {
+   "claim": "Texas cross-check: licensed dentists by county (Health Professions Resource Center)",
+   "value": "Sept 2020: Dallas 1,678 (61.4 per 100k); Tarrant 1,093 (51.0); Collin 884 (85.1). Sept 2019: Dallas 1,581, Tarrant 1,111, Collin 810",
+   "detail": "Texas DSHS HPRC county supply tables (licensure with Texas practice/mailing address). The NPI-based Dallas (2,526) and Tarrant (1,454) counts are ~50% and ~33% higher; Collin matches. Newer HPRC year pages were not reachable. Accessed 2026-10-12.",
+   "kind": "historical",
+   "confidence": "high",
+   "source_url": "https://www.dshs.texas.gov/health-professions-resource-center-hprc/health-professions/county-supply-distribution-tables-8/dentists-2020",
+   "source_date": "September 2020"
+  },
+  {
+   "claim": "Florida cross-check: dentists practicing by county (FL DOH workforce survey)",
+   "value": "2019-2020: Miami-Dade 1,783; Broward 1,476; Palm Beach 1,110 (survey respondents; some report multiple counties). Specialists by county: Miami-Dade 429, Broward 445. Statewide general dentists per 100k (NPPES Sept 2025): 58.1",
+   "detail": "Florida Department of Health 'Florida Workforce Survey Report of Dentists 2019-2020'; the 2023-2024 report exists (floridahealth.gov, Feb 2026 upload) but the PDF could not be parsed by the fetch tool. America's Health Rankings FL value from NPPES. Accessed 2026-10-12.",
+   "kind": "historical",
+   "confidence": "high",
+   "source_url": "https://www.floridahealth.gov/wp-content/uploads/2025/08/florida-workforce-survey-report-of-dentists-2019-2020.pdf",
+   "source_date": "2019-2020 survey cycle"
+  },
+  {
+   "claim": "Oregon cross-check: Lane County dentist FTE and statewide supply",
+   "value": "Lane County: ~175 direct-patient-care FTE dentists (1 FTE per 2,010 residents; county pop 351,715 in profile). Oregon 2024: 3,735 licensed dentists; 0.47 dentist patient-care FTE per 1,000 (0.55 urban, 0.31 rural); more than half of OR dentists do not accept Medicaid (OHP)",
+   "detail": "Oregon Health Authority Health Care Workforce Reporting Program State and County Profiles PDF (text extraction fragmentary) and 2025 Health Care Workforce Needs Assessment. Lane FTE of 175 vs 295 NPI-based headcount. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.oregon.gov/oha/HPA/HP-HCW/Documents/2025-Health-Care-Workforce-Need-Assessment-report-final.pdf",
+   "source_date": "2025 (data 2024)"
+  },
+  {
+   "claim": "Alaska cross-check: employed general dentists and Anchorage concentration",
+   "value": "320 general dentists employed statewide (2023 OEWS, mean wage $201,720); 330 in 2023 QCEW-type count; Anchorage area holds 64% of all Alaska healthcare jobs; ADA count 580 professionally active dentists (78.4/100k); NPPES general dentists 97.7 per 100k (highest state)",
+   "detail": "Alaska Hospital & Healthcare Association 'Alaska Health Care Workforce Development 2024' citing Alaska DOL OEWS 2023; America's Health Rankings (NPPES Sept 2025). Implies roughly 350-390 dentists in Anchorage, consistent with the 390 NPI-based count. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.alaskahha.org/_files/ugd/ab2522_be6e457556e94e8286eb7d0e99585ae4.pdf",
+   "source_date": "2024 (data 2023)"
+  },
+  {
+   "claim": "GP average gross billings and net income (ADA Survey of Dental Practice)",
+   "value": "2025: GP average gross billings $965,660 (specialists $1,213,040); GP average net income $215,320 (specialists $346,520); BLS GP mean $191,350. Pooled 2021-25 inflation-adjusted GP averages: revenue per dentist $913,633, expenses $615,361, income $272,469 vs 2016-20 pooled $816,458 / $522,200 / $272,864 (revenue +4.9%, expenses +8.1%)",
+   "detail": "ADA HPI Dental Practice Research FAQ page and 'Trends in Dentists' Income, Revenue, and Hours Worked' (2026 SDP update). Expenses outpacing revenue is the 'fiscal squeeze'; GP net income has declined in real terms over 15 years. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.ada.org/-/media/project/ada-organization/ada/ada-org/files/resources/research/hpi/trends_in_dentists_income_revenue_hours_worked_2026.pdf",
+   "source_date": "2026 update (2025 survey data)"
+  },
+  {
+   "claim": "Dental laboratory fees as a share of GP practice gross receipts/collections",
+   "value": "Cain Watters client benchmark 2023: 5.41%-6.60% of gross receipts across practice-size cohorts (e.g., $78,083 = 5.87% on $1.33M; $374,371 = 6.59% on $5.68M); Dental Accounting Group (WA practices, YE2023): lab 5.04% of collections; Dental Economics budgeting guidance 8% of collections, falling to 2-3% with CAD/CAM; Reciprocity Accounting band 5-7% of net production; consultant blogs 6-10% of collections",
+   "detail": "CWA 'How Does Your Dental Practice Compare?' 2023-24 (June 2024); 2024 DAG Survey (July 2024); Dental Signal article citing Dental Economics and ADA HPI Table 17 (April 2026); Reciprocity Accounting (undated). Measured CPA-client data cluster at 5-6.6%; the 8% figure is a budgeting rule of thumb. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.cainwatters.com/wp-content/uploads/2024/06/CWA_HDYDPC_202324-6.4.24-vF.pdf",
+   "source_date": "June 4, 2024 (2023 data)"
+  },
+  {
+   "claim": "Derived annual outside-lab spend per GP practice",
+   "value": "$53,100 (5.5%) / $62,800 (6.5%) / $77,300 (8.0%) per GP per year",
+   "detail": "Formula: lab spend per GP = ADA 2025 average GP gross billings $965,660 x lab share. Using pooled inflation-adjusted average revenue $913,633 instead gives $50k/$59k/$73k. At Integra's $129 full-contour zirconia price, $63k equals ~490 crown-equivalents per GP per year of total lab wallet, split across the ~3 labs a typical dentist uses. Computed 2026-10-12.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://www.ada.org/resources/research/health-policy-institute/dental-practice-research",
+   "source_date": "2025 data"
+  },
+  {
+   "claim": "Share of general practitioners who place implants, restore implants and do full-arch (survey series)",
+   "value": "Inside Dentistry 2022 survey: 61% of GPs place implants (71% of GPs <=10 yrs out; 58% >10 yrs); 19% of placers do >5 implant cases/month; 23% perform All-on-X (19% 2019, 16% 2020, 18% 2021, 23% 2022); 40% deliver overdentures; 71% place screw-retained, 50% cement-retained. 2024 wave: 49% place no implants; 10% place 6-10/month; 69% screw-retained, 49% cement-retained; in-house milling 12%",
+   "detail": "Inside Dentistry 'Trends in Dentistry 2022' (Dec 2022), 'By the Numbers' (June 2023), Inside Dental Technology 'Trends in Dentistry 2025' (Feb 2025, 2024 survey). Reader-panel surveys skew toward engaged, tech-forward dentists; treat 51-61% as an upper bound for implant placement. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.insidedentistry.net/2022/12/trends-in-dentistry-2022/",
+   "source_date": "December 1, 2022 and February 1, 2025"
+  },
+  {
+   "claim": "Independent estimates of GP surgical implant placement (lower-bound sources)",
+   "value": "32.8% of general dentists surgically place implants (2016 survey, n=602); 61% of GPs provide at least some implant procedures, surgical or prosthetic (National Dental PBRN, n=2,367, 2013); 16% (Virginia 2007), 9% (AGD 2003), 20% (AAFE 2013)",
+   "detail": "Compendium (Jan 2018) and BMC Oral Health (Jan 2015). Together with Inside Dentistry, the defensible range is: ~35-60% of GPs place at least some implants; ~60%+ restore implants; ~15-25% do any full-arch. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.compendiumlive.com/2018/01/investigation-of-dental-implant-referral-patterns-amongst-general-dentists-and-dental-specialists-a-survey-approach/",
+   "source_date": "January 2, 2018"
+  },
+  {
+   "claim": "US dental implant volume and market size",
+   "value": "Envista: est. >1.5 million US patients in 2021, ~3 million implants (avg 1.5-2 implants per treatment); GlobalData: 1,746,962 US dental implant/abutment procedures in 2022; Straumann CMD Nov 2025: global implantology market CHF 6.0bn growing mid-single-digit 2026-30, Straumann 35% share, 16M patients treated per year vs 220M potential; iData (via secondary): US implant & abutment market ~$2.1B 2024, ~5.9% CAGR to 2031",
+   "detail": "Envista 2022 Corporate Overview (iData/management estimates); GlobalData US procedures databook (Jan 2023); Straumann Capital Markets Day media release (Nov 25, 2025). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://filecache.investorroom.com/mr5ir_envista/222/Envista%20Overview%20Presentation_2022_FINAL.pdf",
+   "source_date": "2022; GlobalData Jan 31, 2023; Straumann Nov 25, 2025"
+  },
+  {
+   "claim": "Full-arch (fixed full-arch / All-on-X) demand growth and volume indicators",
+   "value": "North America fixed full-arch cases needed projected +45% by 2029 (Straumann citing iData) = ~6.4% CAGR; US overdenture and implant-supported bridge market to $1.2B by 2031 at 6.4% CAGR with fixed hybrid the fastest-growing segment (iData, Jan 2025); ClearChoice: >200,000 patients since 2005, >1 million implants, ~90 centers, target '1 million smiles by 2030'; Envista 2023 annual report: 'noticeable slowdown in demand for ... full arch implant restorations' in 2023; LMT 2025 Fee Survey: Oregon lab reports AO4 case volume 'way down' as patients choose cheaper options",
+   "detail": "Straumann RD360/ClearChoice whitepapers (undated, cite iData); Dental Tribune/iData (Jan 28, 2025); Becker's Dental (Apr 4, 2025); Envista 2023 10-K annual report; LMT (Sept 3, 2025). No primary source publishes US arches per year. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.straumann.com/content/dam/media-center/straumann/en/documents/clearchoice-pilot-whitepaper-global/clearchoice-pilot-whitepaper-global.pdf",
+   "source_date": "undated (pilot Nov 2024); Dental Tribune Jan 28, 2025"
+  },
+  {
+   "claim": "Estimated US full-arch prosthetic volume per year (no primary count exists)",
+   "value": "100,000-250,000 arches/yr; base ~150,000; growth ~6%/yr",
+   "detail": "Basis: ~1.5-1.75M implant patients/procedures per year (Envista 2021; GlobalData 2022); if 5-10% of implant patients are full-arch and ~1.3 arches per patient, that is ~100k-230k arches; sanity checks: ClearChoice alone averaged ~10k patients/yr over 20 years and is accelerating; 23% of surveyed GPs offer All-on-X and a vendor survey (Nexus-type eBook 2024) found 58% of All-on-X providers do 1-4 cases/month. Growth from Straumann/iData +45% by 2029. Low confidence; label as estimate in any model.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://www.globaldata.com/store/report/usa-dental-implants-and-abutments-procedures-market-analysis/",
+   "source_date": "January 31, 2023"
+  },
+  {
+   "claim": "Share of US dental practices with intraoral scanners (2020-2026)",
+   "value": "Inside Dentistry/IDT survey: digital impression systems 37% (2020) -> ~50% (2022) -> 48% (2023) -> 57% (2024); ADA Clinical Evaluators Panel 2021: 53% of 369 respondents use an IOS, 34% of non-users planned purchase within a year, 66% of non-owners cited cost; Envista 2020 investor deck: US IOS/3D imaging penetration <5% ten years earlier to est. 20-30% in 2018; NADL 2025: 47% of labs get >50% of cases from intraoral scans (12% in 2019)",
+   "detail": "IDT 'Trends in Dentistry 2025' (Feb 1, 2025); ADA CEP 2021 via Dental Signal (Jan 2026); Envista JPM Jan 15, 2020; NADL/JDT Dec 2025. A 2026 blog claim of 67% is extrapolation, not survey data. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.insidedentaltech.com/2025/02/trends-in-dentistry-2025/",
+   "source_date": "February 1, 2025 (2024 survey)"
+  },
+  {
+   "claim": "Share of practices with in-office (chairside) milling and in-office permanent 3D printing",
+   "value": "In-house milling 14% (2023) -> 12% (2024); 3D-printed permanent restorations in-house 2% (2023) -> 4% (2024); DPR 2024 Technology Census: 'chairside mills seem to have lost some of their appeal' while 3D printers and AI grew",
+   "detail": "IDT 'Trends in Dentistry 2025' (Feb 2025); Dental Products Report 2024 Technology Census (Aug 2, 2024; numeric chart values not in page text). Implies ~88% of GPs outsource all indirect restorations. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.dentalproductsreport.com/view/high-tech-takeover-the-2024-dental-products-report-technology-census-reveals-the-start-of-the-industry-s-true-shift-to-digital-solutions-",
+   "source_date": "August 2, 2024"
+  },
+  {
+   "claim": "Number of laboratories a typical dentist uses",
+   "value": "ADA 2008 Survey on Use of Dental Labs (n=1,112): average 3 labs; 90.3% of lab users use >=2; 77.8% use 2-4; 12.5% use >=5. Dandy 2022 Dental Industry Report: majority of practices use 2-3 labs; 84% use product-specialized labs; 42% have relationships >6 years, 22% >10 years, 12% 1-2 years. Dentaltown poll (n=165): 56% use two or fewer, 37% three to five",
+   "detail": "ADA Survey Center 2009 PDF hosted by dentallabs.org; Dandy 2022 report PDF; Dentaltown poll (undated). Key implication: a new lab usually enters as a second or third lab for a specific product, not by displacing the primary. Accessed 2026-10-12.",
+   "kind": "historical",
+   "confidence": "high",
+   "source_url": "http://dentallabs.org/media/2017/06/ADA-Survey-on-Dental-Labs.pdf",
+   "source_date": "2008 survey (published 2009); Dandy 2022"
+  },
+  {
+   "claim": "Annual rate at which dentists switch their primary laboratory",
+   "value": "46% switched primary lab in the past 5 years (2019) -> ~11.6%/yr if independent [1-(1-0.46)^(1/5)]; 61% switched at least once in 10 years (2011); top triggers: inconsistent quality, inaccurate fit, shade mismatch, prescriptions not followed",
+   "detail": "LMT/Dental Economics joint dentist surveys, LMT articles March 5, 2019 and April 28, 2011. Half of dentists did NOT switch in five years, so the pool in play each year is roughly 1 in 9 primary-lab relationships plus secondary-lab additions. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.lmtmag.com/articles/why-dentists-switch-laboratories-102773",
+   "source_date": "March 5, 2019"
+  },
+  {
+   "claim": "Trial-case-to-recurring-account conversion rate for dental labs",
+   "value": "No quantified survey found. Estimate: 30-50% of dentists who send a trial case become repeat senders; 2-7% of GPs actually contacted in a year become recurring accounts",
+   "detail": "Searched LMT, NADL, JDT, Dandy, lab marketing agencies. Only qualitative or promotional data exist: TrazaLab (Feb 2026) claims direct outreach yields '2-5 new clients within 3-6 months' and 'convert trial to recurring within 14 days'; DentalLabs.buzz reports 304 dentist leads in 90 days across 8 lab ad accounts at $94.77 per lead (a lead is a form fill, not an account); LMT Marketing Survey (Apr 2026): 68% of labs market, 29% set a budget, most spend 1-2% of revenue. Basis for estimate: ~11.6%/yr primary switching plus secondary-lab additions, and Dandy's long relationship tenures. Label as estimate.",
+   "kind": "unknown",
+   "confidence": "low",
+   "source_url": "https://www.dentallabs.buzz/",
+   "source_date": "undated (last-90-day figures)"
+  },
+  {
+   "claim": "Dental laboratory outside sales rep compensation (live postings and aggregates)",
+   "value": "DCS Lab (SF Bay Area, 2026): $70-75k base + 6% of net sales, uncapped, expenses covered; multi-state lab (LA/FL/MD, Feb 2025): $40-60k base + 3% of new-client revenue yr 1, 2.5% yr 2, 1.5% yr 3; MRM Dental Lab (NJ): $60-65k + 5% bonus commission, company car; Apex Dental Laboratory Group (Lompoc CA, 2026): $65k base + uncapped commission; ROE Dental Lab (Cleveland): base + commission, 60% new business/40% account management; ERI average $74,261 (range $43,443-$91,192) for 'Sales Representative Dental Laboratories'; Indeed: Prodirect sales rep $61,973, BonaDent $62,450",
+   "detail": "Job postings on Loxo/Vaia (DCS), getjob mirror (Feb 11, 2025), Indeed (MRM, BonaDent, Prodirect), Career.com (Apex, Apr 2026), ERI (2026). Fully loaded cost of a W-2 rep with car and benefits is therefore ~$90-120k/yr; commission-only 1099 structures ($15-50/hr or % of invoices) also exist (PULSEops UT; US Dental Depot supplies). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://app.loxo.co/job/MTM0MTYtMmZtODltazZ1MmZ6Z2R4YQ==",
+   "source_date": "undated (2026 posting); Feb 11, 2025; Apr 2026"
+  },
+  {
+   "claim": "New-account acquisition cost and months to steady state for a lab rep",
+   "value": "No published benchmark. Estimate: $2,000-4,500 per recurring account via a salaried rep; $1,000-2,000 via owner-led outreach plus paid leads; 3-6 months from first contact to steady monthly volume",
+   "detail": "Basis: fully loaded rep ~$100k/yr opening 2-4 recurring accounts/month (24-48/yr) -> $2.1-4.2k each; Meta lead cost ~$95 x 10-20 leads per won account -> $0.95-1.9k plus trial-case discount ($100-300); ramp evidence: US Dental Depot (supplies, not lab) says reps carry their weight by month three; TrazaLab says direct outreach yields trial cases in 2-4 weeks and clients in 3-6 months; World Dental Lab onboarding guide describes 20-30 cases over the first month before a dentist decides to expand. Label as estimate.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://trazalab.com/dental-lab-marketing-get-clients.html",
+   "source_date": "February 26, 2026"
+  },
+  {
+   "claim": "US dental laboratory industry size, firm count and productivity",
+   "value": "2024 industry sales $7 billion; 5,488 companies; average sales per facility $1.2 million; employee productivity (revenue per employee) $144,803; payroll per employee $48,474; 3-yr growth 3.1%/yr; 2024 PPI +5.5%. BLS: 41,548 dental lab employees in 2024, 16% below the 2004 peak; lab count down an estimated 50-60% in 25 years",
+   "detail": "Kentley Insights 2025 Dental Laboratories report summary on MarketResearch.com (Jan 2, 2025); FDLA Focus Q1 2026 article by Travis Zick (Apex Dental Laboratory Group) citing BLS. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.marketresearch.com/Kentley-Insights-v4035/Dental-Laboratories-Research-Updated-Forecasts-39139495/",
+   "source_date": "January 2, 2025 (2024 data)"
+  },
+  {
+   "claim": "Revenue per technician benchmark for dental labs",
+   "value": "Consultant benchmark $15,000-25,000 per FTE technician per month ($180k-300k/yr); small labs (1-3 techs) $12-18k/month; <$12k/month flagged as underpricing/low utilization. Industry-wide revenue per employee (all staff) $144,803 (2024). Integra at ~$140k/yr collected over ~4 FTE-equivalents is ~$35k per FTE per year",
+   "detail": "TrazaLab KPI guide (Feb 2026; consultant figures, no survey citation); Kentley Insights (2024); FDLA Focus (2026) notes revenue per technician 'has never been higher' with fewer, better-paid technicians. NADL Cost of Doing Business Survey holds the authoritative figure but is paywalled. Estimate band for a digital C&B lab: $150k-250k per technician per year.",
+   "kind": "estimate",
+   "confidence": "medium",
+   "source_url": "https://trazalab.com/dental-lab-kpis-metrics.html",
+   "source_date": "February 21, 2026"
+  },
+  {
+   "claim": "Dental lab remake rates",
+   "value": "LMT 2024 Remake Survey external remake rates: crown & bridge 2.5%; complete dentures 2.8%; partials 3.6%; orthodontics 3.0%; implants 2.2%; >80% of external remakes attributed to dentist error (inadequate impressions, wrong shades), consistent since 2011; Spear Education: national average ~4% (range 1% to 6-7%); 42% of milling labs say milling reduced remakes",
+   "detail": "LMT 'Operations' Q&A (Feb 23, 2026) citing LMT 2024 Remake Survey; LMT Remake Survey report (Feb 15, 2024); Spear (Nov 9, 2020); LMT Milling Market Facts (Nov 2023). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://lmtmag.com/articles/operations",
+   "source_date": "February 23, 2026 (LMT 2024 Remake Survey)"
+  },
+  {
+   "claim": "Dental lab profitability benchmarks (NADL-derived)",
+   "value": "Over half of respondents to NADL's 2025 business survey reported net profit above 15%; the share of labs with net profit >=10% and >=20% was essentially unchanged between NADL's 2020 and 2023 surveys; consultant net-margin bands 5-10% (1-3 techs) to 10-18% (11+ techs); gross margin: no public NADL figure (estimate 50-60% after direct labor and materials)",
+   "detail": "FDLA Focus Q1 2026 (Travis Zick, NADL past president); Inside Dental Technology 'Feeling the Crunch' (Feb 1, 2024) citing NADL surveys; TrazaLab KPI guide (2026). Gross margin is an estimate based on lab cost structure where direct labor is the largest COGS item. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.fdla.net/assets/docs/Focus26/1stQ26/Focus_1stQtr_2026_WEB.pdf",
+   "source_date": "Q1 2026"
+  },
+  {
+   "claim": "Dental lab accounts receivable / days sales outstanding",
+   "value": "No published NADL/LMT figure found. Consultant benchmark: A/R days 35-50 (small labs), 28-42 (mid), 25-35 (large), <25 top performers; net-30 terms are the industry norm",
+   "detail": "TrazaLab KPI guide (Feb 2026), not survey-based. NADL Cost of Doing Business Survey Module 2 (fees, sales/profits) is paywalled at nadlonlinestore.payscapecommerce.com. Treat 30-45 days as a planning estimate for a small lab selling to private GPs.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://trazalab.com/dental-lab-kpis-metrics.html",
+   "source_date": "February 21, 2026"
+  },
+  {
+   "claim": "Dental lab revenue per square foot",
+   "value": "No industry benchmark found. Reference points: Integra ~$234 per sq ft per year ($11,700 x 12 / 600 sq ft); Kentley average sales per facility $1.2M (facility size not published)",
+   "detail": "Searched LMT, NADL, IBISWorld/Kentley summaries, lab brokers (DealStream rules of thumb value labs at $60-100k per FTE technician instead). Mark as unknown; do not use a zero.",
+   "kind": "unknown",
+   "confidence": "low",
+   "source_url": "https://dealstream.com/industry-guides/dental-laboratories/rules-of-thumb",
+   "source_date": "undated"
+  },
+  {
+   "claim": "Lab technician wages, DSO exposure and lab fee inflation (NADL/ADA data)",
+   "value": "NADL: mean hourly wage of least-experienced technicians $15.44 (2020) -> $18.84 (2023); mean salary of most-experienced technicians $84,500 (2020) -> $96,165 (2023); DSOs = 9% of NADL members' sales in 2023, 35% of members do some DSO work. ADA HPI Aug 2023: 47% of dentists saw lab fees rise 1-10% and 34% saw >=11% in the prior 12 months, while reimbursement was flat or down for 37%",
+   "detail": "Inside Dental Technology 'Feeling the Crunch' (Feb 1, 2024) citing NADL 2020/2023 surveys and ADA HPI Aug 2023 poll. Relevant to Integra's pricing headroom and payroll planning. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://insidedentaltech.com/2024/02/feeling-the-crunch/",
+   "source_date": "February 1, 2024"
+  },
+  {
+   "claim": "DSO affiliation share of dentists by state, 2024 (ADA HPI)",
+   "value": "US 16.1% (7.2% in 2015); WA 14%; CA 11%; HI 2%; TX 25%; FL 23%; AK 4%; OR 13%; highest NV/CO 27%; 27% of dentists <=10 years out of school are DSO-affiliated vs 9% of those >25 years",
+   "detail": "ADA HPI 'Distribution of Dentists According to Size of Dental Practice and Affiliation with a DSO, 2024' as reported by Becker's Dental Review (Aug 29, 2025) and ADA HPI practice-modality page/ADA News (Nov 17, 2025). DSO-affiliated offices typically have centralized lab contracts and are unlikely targets for a 6-person lab. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.beckersdental.com/benchmarking/16-of-us-dentists-affiliated-with-a-dso-state-by-state-breakdown/",
+   "source_date": "August 29, 2025 (2024 data)"
+  },
+  {
+   "claim": "Practice ownership and group-practice structure (context for who buys lab work)",
+   "value": "72.5% of US dentists were private-practice owners in 2023 (84.7% in 2005); about 2 in 3 dentists in group practice; roughly 178,000 active US dental practice locations vs ~205,000 dentists (~0.87 locations per dentist)",
+   "detail": "ADA HPI Dental Practice Research page and 2025 workforce deck; practice-location count from DentistEmailList (low confidence, vendor estimate). Use ~0.85-0.9 to convert dentist counts to practice locations. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "medium",
+   "source_url": "https://www.ada.org/resources/research/research/health-policy-institute/dental-practice-research",
+   "source_date": "2023-2025"
+  },
+  {
+   "claim": "Lab-side digital inflow and 3D printing adoption (NADL Dental Technology Survey 2025)",
+   "value": "72% of labs use 3D printers (11% in 2014); 47% of labs report >50% of cases arrive as intraoral scans (12% in 2019); 67% of printing labs produce >=10 printed cases/day; 55% cite clinician resistance to change as the top barrier",
+   "detail": "NADL/Valmont Research 2025 Dental Technology Survey (n=363, July 14-Sept 2, 2025), published in JDT December 2025 (hosted by Carbon). Confirms Integra's STL-intake model is now mainstream, not a differentiator. Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://res.cloudinary.com/carbon3d/image/upload/NADL_REPORT_2025.pdf",
+   "source_date": "December 2025"
+  },
+  {
+   "claim": "Illustrative obtainable recurring accounts in 12 months by county (low / base / high)",
+   "value": "King WA 8 / 26 / 68; Snohomish WA 2 / 6 / 14; Pierce WA 2 / 7 / 17; Orange CA 3 / 12 / 35; Maui HI 1 / 2 / 4; Honolulu HI 1 / 3 / 10; Dallas TX 1 / 3 / 9; Tarrant TX 0 / 2 / 5; Collin TX 0 / 1 / 3; Miami-Dade FL 1 / 2 / 8; Broward FL 0 / 2 / 7; Anchorage AK 1 / 2 / 6; Lane OR 0 / 1 / 4",
+   "detail": "Formula: obtainable = dentists (NPI-based county count) x 0.788 GP share (ADA 2024) x 0.88 without in-office mill (IDT 2024) x (1 - state DSO share, ADA 2024) x contactable share x 12-month win rate. Contactable share (low/base/high) by market: King 25/40/60%; Snohomish & Pierce 20/35/50%; Orange CA (family presence, periodic visits) 5/12/20%; Maui (small island, visited) 30/50/70%; Honolulu 5/10/20%; TX and FL counties (no presence) 2/5/10%; Anchorage (Alaska Air Cargo, known shipper) and Lane (Harmony Dental anchor) 10/20/35%. Win rate 2/4/7% of contacted GPs (basis: ~11.6%/yr primary-lab switching, 3 labs per dentist, trial-case offers). Non-DSO GP-without-mill pools: King 1,627; Orange 2,490; Dallas 1,314; Miami-Dade 1,204; Broward 940; Honolulu 712; Tarrant 756; Pierce 477; Collin 458; Snohomish 407; Anchorage 260; Lane 178; Maui 77. Base-case total lab wallet of GPs without mills (at $62.8k/GP): King $119M, Orange $176M, Dallas $110M, Miami-Dade $98M. Using licensure counts instead of NPI counts would reduce Dallas/Tarrant/Miami-Dade/Broward/Pierce results by roughly 20-40%. ESTIMATE; every factor other than dentist counts, GP share, mill share and DSO share is an assumption.",
+   "kind": "estimate",
+   "confidence": "low",
+   "source_url": "https://rhtcompass.com/ca/counties/orange",
+   "source_date": "computed 2026-10-12 from sources above"
+  },
+  {
+   "claim": "Dentist interstate migration (relevant to Hawaii and Pacific Northwest targeting)",
+   "value": "~8% of US dentists changed practice state 2019-2024; 17% of new dentists (<10 yrs) vs 4% of established; Hawaii had the largest net gain of new dentists relative to its 2019 base; Florida gained 269 new dentists (9% net migration rate)",
+   "detail": "ADA HPI 'Dentist Migration Across State Lines' (2019-2024 masterfile comparison). Accessed 2026-10-12.",
+   "kind": "fact",
+   "confidence": "high",
+   "source_url": "https://www.ada.org/resources/research/health-policy-institute/dentist-workforce/dentist-migration-across-state-lines",
+   "source_date": "undated (2019-2024 data)"
+  }
+ ],
+ "unknowns": [
+  "GP vs specialist split at county level (only the national 78.8% GP share is published; ADA state-level specialty data are 'available upon request')",
+  "Share of dentists with in-office milling by county or state; only national survey figures (12% in 2024) exist and they come from a self-selected reader panel",
+  "Hard count of US full-arch (All-on-X) arches per year; no iData, Straumann, Envista or ZimVie document read gives an absolute number, only growth rates and market dollars",
+  "Quantified trial-case-to-recurring conversion rates, cost per acquired account and months-to-steady-state for dental labs; NADL/LMT publish no such metric and agency figures are promotional",
+  "NADL Cost of Doing Business Survey internals (average sales per technician, gross margin, A/R aging, fees) are paywalled; only second-hand summaries were available",
+  "Florida 2023-2024 dentist workforce county counts (PDF returned binary content and could not be parsed); 2019-2020 figures used instead",
+  "Texas HPRC dentist county tables newer than September 2020 could not be reached (page URLs for 2023/2024 not found)",
+  "Lane County and Anchorage dentist headcounts rely on FTE or employment proxies; licensure headcounts by county were not located",
+  "Dental lab revenue per square foot benchmark does not appear to be published anywhere accessible",
+  "Whether NPI-based county counts (RHT Compass/County Health Rankings) include retired or out-of-county dentists; divergence from licensure counts is 10-50% in TX and FL counties",
+  "Actual GP lab-fee share for the specific case mix Integra sells (implant and full-arch heavy practices run 8-15% lab share; hygiene-heavy run under 5%)",
+  "Any evidence of recurring demand on Maui beyond the owner's September-October 2026 trip (113-116 dentists total; nothing found indicating unmet lab capacity)"
+ ]
+}
