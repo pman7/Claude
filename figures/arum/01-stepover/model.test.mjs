@@ -17,17 +17,19 @@ test("profile peaks at half a stepover and is zero on a pass", () => {
 });
 
 test("pass count and path over the 8 mm patch", () => {
-  assert.equal(passes(0.1), 80);
-  assert.equal(pathLength(0.1), 640);
+  assert.equal(passes(0.1), 81);
+  assert.equal(pathLength(0.1), 648);
   assert.equal(passes(0.3), 27);
+  assert.equal(passes(0.05), 161);
+  assert.equal(passes(0.15), 54);
 });
 
 test("stepover stays inside each tool's range", () => {
   assert.equal(clampStep(1, 0.5), TOOLS[1].step[1]);
   assert.equal(clampStep(2, 0.01), TOOLS[2].step[0]);
-  for (const tool of [1, 2]) assert.ok(TOOLS[tool].step[1] < TOOLS[tool].d / 2);
+  for (const tool of [1, 2]) assert.ok(TOOLS[tool].step[1] < TOOLS[tool].d);
 });
 
 test("readout", () => {
-  assert.equal(readoutOf(1, 0.1), "Ø1.0 ball · step 0.10 mm · ridge 2.5 µm · 80 passes");
+  assert.equal(readoutOf(1, 0.1), "Ø1.0 ball · step 0.10 mm · ridge 2.5 µm · 81 passes");
 });

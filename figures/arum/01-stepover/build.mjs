@@ -18,14 +18,14 @@ const AZIMUTH = 38;
 const MM = 10; // world units per millimetre
 
 // Bench
-const PLATE = { x: -176, y: -96, w: 326, d: 168, r: 8 };
+const PLATE = { x: -176, y: -96, w: 306, d: 172, r: 8 };
 const PLATE_H = 10;
 const FOOT_H = 5;
 
-// Vise and coupon (8 x 5.6 x 3 mm of pre-sintered zirconia cut from a disc)
-const VISE = { x: -84, y: -46, w: 168, d: 80, r: 2 };
+// Vise and coupon (12 x 8 x 3 mm of pre-sintered zirconia cut from a disc); the passes cover 8 x 8 mm of it
+const VISE = { x: -84, y: -48, w: 168, d: 94, r: 2 };
 const VISE_H = 10;
-const COUPON = { x: -60, y: -40, w: 12 * MM, d: 70, r: 0.6 };
+const COUPON = { x: -60, y: -42, w: 12 * MM, d: 8 * MM, r: 0.6 };
 const TOP = VISE_H + 30;
 const JAW_H = 24;
 
@@ -36,7 +36,7 @@ const SHANK_TOP = 126;
 const NUT = [132, 148];
 const COLLAR = [162, 178];
 const HOUSING_TOP = 198;
-const COLUMN = [40, -82];
+const COLUMN = [40, -78];
 
 // Profilometer (drive unit with a sliding detector rod)
 const DRIVE = { x: -166, y: 4, w: 72, d: 32, r: 3 };
@@ -56,7 +56,7 @@ const P = k.fitProjection(
   [...k.boxCorners(PLATE, -PLATE_H - FOOT_H, 0), [COLUMN[0], COLUMN[1], HOUSING_TOP + 6], [SP[0], SP[1] + 40, HOUSING_TOP + 4], [SP[0] + 40, SP[1], HOUSING_TOP]],
   W,
   H,
-  { pad: 26, azimuth: AZIMUTH },
+  { pad: 38, azimuth: AZIMUTH },
 );
 const V = G.viewOf(P);
 const KS = G.scaleOf(P);
@@ -109,7 +109,7 @@ back.push(S(k.slabOf(STRIP, 0, 0.6, P, 3), { tone: "lo", crease: "none" }));
 const ticks = k.topTicks(STRIP.x + 4, STRIP.x + STRIP.w - 4, 4, 5, STRIP.y, 0.6, [1.8, 3.4], P);
 back.push(Ln(ticks.minor, { tone: "lo" }), Ln(ticks.major, { tone: "mid" }));
 back.push(Dots([at([STRIP.x + 2, STRIP.y + 3, 0.6]), at([STRIP.x + STRIP.w - 2, STRIP.y + 3, 0.6])], { size: 0.45 }));
-const LABEL = { x: 92, y: PLATE.y + PLATE.d - 30, w: 30, d: 13, r: 1.2 };
+const LABEL = { x: 80, y: PLATE.y + PLATE.d - 30, w: 30, d: 13, r: 1.2 };
 back.push(S(k.slabOf(LABEL, 0, 0.8, P, 3), { tone: "lo", crease: "none" }));
 back.push(Ln(k.planOutline(k.insetPlan(LABEL, 1.6), 0.8, P, 3), { tone: "faint" }));
 back.push(Ln([20, 14, 17].map((w, i) => k.lineOnTop([LABEL.x + 4, LABEL.y + 3.6 + i * 2.9], [LABEL.x + 4 + w, LABEL.y + 3.6 + i * 2.9], 0.8, P)).join(""), { tone: "lo", free: true }));
@@ -139,7 +139,7 @@ put("coupon", [0, COUPON.y + COUPON.d / 2, (VISE_H + TOP) / 2], S(k.slabOf(COUPO
 
 // ---------- column, arm and spindle ----------
 const colF = up(COLUMN[0], COLUMN[1]);
-disc("column.foot", colF, 0, 4, 16, { tone: "mid" }, { owner: "spindle", bevel: 0.6, extra: Dots(G.dotsOf(colF, 4, 12, 6, P, { all: true, phase: 0.3 }), { size: 0.45 }) });
+disc("column.foot", colF, 0, 4, 13, { tone: "mid" }, { owner: "spindle", bevel: 0.6, extra: Dots(G.dotsOf(colF, 4, 10.6, 6, P, { all: true, phase: 0.3 }), { size: 0.45 }) });
 disc("column.post", colF, 4, COLLAR[0] + 1, 9, { tone: "mid" }, { owner: "spindle", inner: Ln(G.arcOf(colF, 60, 9, P) + G.arcOf(colF, 120, 9, P), { tone: "faint" }) });
 disc("column.top", colF, COLLAR[1] - 1, COLLAR[1] + 12, 9, { tone: "mid" }, { owner: "spindle" });
 disc("column.cap", colF, COLLAR[1] + 12, COLLAR[1] + 15, 10.4, { tone: "mid" }, { owner: "spindle", bevel: 0.5 });
@@ -156,26 +156,25 @@ turned("collet", spF, [[SHANK_TOP, SHANK_R], [SHANK_TOP + 2, 22.5], [NUT[0], 23.
 // the cutting part (ball and fluted body) and the neck, taper and shank sitting on its shoulder.
 function burProfiles(d) {
   const rb = (d / 2) * MM;
-  const arc = Array.from({ length: 10 }, (_, i) => {
-    const t = ((i + 1) / 10) * (Math.PI / 2);
-    return [TOP + rb - Math.cos(t) * rb, Math.sin(t) * rb, 1];
-  });
   const flute = TOP + rb + 1.5 * d * MM;
   const neck = flute + 6;
   const taper = neck + 20;
   if (!(taper < SHANK_TOP)) throw new Error(`bur ${d}: taper ends above the shank top`);
-  return { rb, flute, cut: [[TOP, 0], ...arc, [flute, rb]], shank: [[flute, rb * 0.86], [neck, rb * 0.86], [taper, SHANK_R], [SHANK_TOP, SHANK_R]] };
+  return { rb, flute, body: [[TOP + rb, rb], [flute, rb]], shank: [[flute, rb * 0.86], [neck, rb * 0.86], [taper, SHANK_R], [SHANK_TOP, SHANK_R]] };
 }
 const BURS = { 1: burProfiles(TOOLS[1].d), 2: burProfiles(TOOLS[2].d) };
+
 // One item per tool and part; the page shows one tool's pair at a time.
 for (const tool of [1, 2]) {
-  const { rb, flute, cut, shank } = BURS[tool];
+  const { rb, flute, body, shank } = BURS[tool];
   const hide = tool === 2 ? "" : ' style="display:none"';
+  // the ball is a true sphere; the fluted body's bottom rim lands on its equator
+  const ballAt = [SP[0], SP[1], TOP + rb];
   put(
     `bur.cut${tool}`,
-    [SP[0], SP[1], TOP + rb],
-    `<g data-tool="${tool}"${hide}>${S(G.solidOf(cut, spF, P, {}), { tone: "mid", inner: Ln(G.arcOf(spF, TOP + rb, rb, P), { tone: "faint" }) })}${Faded(G.ribsOf(spF, TOP + rb, flute, rb, 6, P, { twist: 1.6, fade: [0.1, 0.55] }), { tone: "lo" })}</g>`,
-    [record(A.solid(spF, cut, { name: `bur.cut${tool}`, owner: "spindle" }))],
+    ballAt,
+    `<g data-tool="${tool}"${hide}>${S(G.sphereOf(ballAt, rb, P, { steps: 48 }), { tone: "mid" })}${S(G.solidOf(body, spF, P, {}), { tone: "mid" })}${Faded(G.ribsOf(spF, TOP + rb, flute, rb, 6, P, { twist: 1.6, fade: [0.1, 0.55] }), { tone: "lo" })}</g>`,
+    [record(A.ball(ballAt, rb, { name: `bur.ball${tool}`, owner: "spindle" })), record(A.solid(spF, body, { name: `bur.cut${tool}`, owner: "spindle" }))],
   );
   put(
     `bur.shank${tool}`,
@@ -238,7 +237,7 @@ box("gauge.drive", DRIVE, DRIVE_Z[0], DRIVE_Z[1], { tone: "mid" }, {
   owner: "gauge",
   steps: 6,
   bevel: 1,
-  inner: Ln(k.sideSeam(DRIVE, DRIVE_Z[0] + 4, P, 6), { tone: "faint" }),
+  inner: Ln(k.sideSeam(DRIVE, DRIVE_Z[0] + 1.6, P, 6), { tone: "faint" }),
   extra: screen + buttons + Ln(k.planOutline(k.insetPlan(DRIVE, 4), DRIVE_Z[1], P, 4), { tone: "faint" }),
 });
 const rodF = alongX(GLAND_X, ROD_Y, ROD_Z);
@@ -250,7 +249,7 @@ const ROD = G.rodOut(rodF, 2, ROD_TO, 2.2, P, { stroke: TRAVEL });
 put(
   "gauge.rod",
   G.pointOf(rodF, ROD_TO / 2, 0, 0),
-  `<clipPath id="so-rod"><path data-hold d="${ROD.clip}"/></clipPath><g clip-path="url(#so-rod)">${S(ROD.paths, { tone: "hi", crease: "lo" })}</g>`,
+  `<clipPath id="so-rod"><path data-hold d="${ROD.clip}"/></clipPath><g clip-path="url(#so-rod)">${S(ROD.paths, { tone: "mid" })}</g>`,
   [record(A.slide(rodF, 2, ROD_TO, 2.2, { name: "gauge.rod", owner: "gauge" }))],
   { move: MOVE, attrs: ' data-move=""' },
 );
@@ -271,6 +270,7 @@ const LABEL_TEXT =
 const svg = k.figureSvg({ width: W, height: H, label: LABEL_TEXT, body: [...back, ...groups] });
 
 const DATA = {
+  PATCH: 8 * MM,
   P,
   MM,
   TOP,
@@ -293,6 +293,7 @@ const CSS = `
 .so-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
 .so-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (max-width:480px){.so-plate .iso-plate-corner[data-corner="readout"]{font-size:9px;letter-spacing:0}}
+@media (max-width:360px){.so-plate .iso-plate-corner[data-corner="readout"]{font-size:8px}}
 `;
 const modelScript = readFileSync(join(HERE, "model.mjs"), "utf8").replace(/^export /gm, "");
 const LIVE = readFileSync(join(HERE, "live.js"), "utf8").replace("__DATA__", JSON.stringify(DATA));
@@ -307,11 +308,11 @@ const body =
     readout: readoutOf(...START),
     keys: [
       { mark: "lit", label: "Profilometer trace: the ridge left between two passes, magnified vertically" },
-      { mark: "raised", label: "Zirconia block: pass lines spaced one stepover apart" },
+      { mark: "raised", label: "Zirconia block: one line per pass, one stepover apart (lighter where they crowd)" },
     ],
     caption:
-      `A ball-end bur leaves a small ridge between neighbouring passes. Its height is h = r − √(r² − (s/2)²) for ball radius r and stepover s, so it grows with roughly the square of the stepover: a Ø1.0 mm ball at 0.10 mm leaves ${(ridge(1, 0.1) * 1000).toFixed(1)} µm, at 0.05 mm only ${(ridge(1, 0.05) * 1000).toFixed(2)} µm, but twice as many passes. Pass count and path are for one pass per stepover across an 8 × 8 mm patch. ` +
-      "The block, burs and bench are drawn at 10 units per millimetre; the trace is magnified vertically (full scale 12 µm), as profilometer traces are. Tool shown: Ø4 mm shank, as on the ARUM A3 (60,000 rpm, finest tool 0.3 mm). Specs from ARUM published data; form and styling illustrative, not traced from the product. Not affiliated with or endorsed by ARUM Dentistry.",
+      `A ball-end bur leaves a small ridge between neighbouring passes. Its theoretical height, as milled and before sintering, is h = r − √(r² − (s/2)²) for ball radius r and stepover s, so it grows with roughly the square of the stepover: a Ø1.0 mm ball at 0.10 mm leaves ${(ridge(1, 0.1) * 1000).toFixed(1)} µm, at 0.05 mm only ${(ridge(1, 0.05) * 1000).toFixed(2)} µm, but twice as many passes. The passes cover an 8 × 8 mm patch, one at each edge and one every stepover between. ` +
+      "The block and burs are drawn to scale (10 units per millimetre); the bench, spindle and profilometer are schematic. The trace is magnified vertically (full scale 12 µm), as profilometer traces are. Tool shown: Ø4 mm shank, as on the ARUM A3 (60,000 rpm). Product data from ARUM Dentistry (A3 & A3L catalog, Dec 2025), used with permission; form and styling illustrative.",
     body: `<div class="iso-stage so-stage" tabindex="0" role="slider" aria-label="Stepover. Left and right arrows change the stepover, Shift for bigger steps; 1 and 2 choose a 1 or 2 millimetre ball; Home and End go to the ends of the range." aria-valuemin="0.05" aria-valuemax="0.3" aria-valuenow="0.3" aria-valuetext="${wordsOf(...START)}">${svg}<span class="so-sr" role="status" aria-live="polite" data-status></span></div>`,
   }) +
   `</div>`;
