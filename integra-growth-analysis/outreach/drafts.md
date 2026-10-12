@@ -247,3 +247,30 @@ Integra Dental Design (Nova Dental LLC) is a dental laboratory in Bellevue, Wash
 
 Thank you,
 Phillip Manchik, Integra Dental Design, Bellevue, WA
+
+
+---
+
+## Draft 14. ARUM Dentistry: dealer listing and the validated milling center question (week 2)
+
+To: your ARUM Dentistry dealer contact (the person who countersigned the March 2026 dealer agreement), copy ARUM Dentistry USA in Irvine.
+Purpose: two facts the report cannot settle by desk research. (1) Whether ARUM will list Integra on its published US dealer page, which today names Axsys, Doowon USA, Megacis, DECSTA, Imagine USA and ARUM Dentistry USA and no dealer in the Pacific Northwest, the Mountain West, Texas or Florida. (2) What ARUM's validated milling center program requires of a lab. ARUM's customized-abutment clearance (FDA 510(k) K242245, November 25, 2024) states that all digitally designed abutments "are intended to be manufactured at an ARUM DENTISTRY validated milling center"; if a dealer-lab can qualify, custom abutments become a legal product for Integra, and if the program requires FDA establishment registration ($13,785 a year in FY2027) and an ISO 13485-aligned quality system, that is the same decision the TRI certification raises and should be made once, not twice.
+
+Subject: Integra Dental Design: dealer page listing, and the validated milling center program
+
+Hello [name],
+
+Two requests from Integra Dental Design, your authorized dealer in Bellevue, Washington.
+
+1. Dealer listing. ARUM's worldwide dealer page (arumdentistry.com, "worldwide") lists six US dealers, all in California, Michigan and Pennsylvania. Labs in Washington, Oregon, Idaho, Utah and Montana who look for an ARUM dealer today find no one in their region. Would ARUM add Integra Dental Design (35 148th Ave SE, Suite 10, Bellevue, WA 98007) to that page as the Pacific Northwest dealer, with our demo A3 noted as available for in-person evaluation? If there is a form or minimum for listing, please send it.
+
+2. Validated milling center program. The 510(k) summary for ARUM's Customized Abutment (K242245) states that digitally designed abutments are intended to be manufactured at an ARUM Dentistry validated milling center. We run two 5X-200 wet mills with MillBox and hyperDENT and are being asked by lab and dentist customers for custom titanium abutments. Could you tell me: (a) whether a dealer-lab in the United States can become a validated milling center, and the steps and cost; (b) whether the program requires the lab to hold its own FDA establishment registration as a contract manufacturer and to operate a quality system under 21 CFR 820, or whether validated centers operate under ARUM's registration; (c) which implant connections are covered today (the summary lists Neodent GM, BioHorizons Tapered Internal, Astra Tech and 3i Certain) and whether additions are planned; and (d) the price of ARUM's pre-milled abutment blanks to a validated center.
+
+Separately, we would like to discuss the 15-unit first-year commitment in our March agreement in light of the four other US sellers of the same machines; a realistic number for a dealer that also operates a lab would help both of us plan.
+
+Thank you,
+Phillip Manchik
+Nova Dental LLC dba Integra Dental Design
+35 148th Ave SE, Suite 10, Bellevue, WA 98007
+
+Good reply: a yes on the listing with a date; a written description of the validated milling center program, including whether the center or ARUM holds the FDA registration; blank pricing. Note for you: if ARUM's answer is that the center registers with FDA, the custom-abutment question and the TRI question collapse into one decision on registration, which the report gates behind TRI's referral volume (Section 13); do not register for either until a count of real users exists.
