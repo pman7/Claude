@@ -35,14 +35,15 @@ const WALL_T = 14;
 const FRONT_Y = 250; // the floor reaches the door, so the cradle can come forward its full X stroke
 // Spindle head: with Y at 0 the spindle axis is over the magazine's far column; Z at 0 parks the bur above everything
 const HX = GEO.SPINDLE_X0;
+const HY = GEO.SPINDLE_Y; // the spindle's line, in front of the B axis
 const S0 = TIP_Z + GEO.TOOL; // nose-ring bottom face (tool sticks out 43, as in the photos)
-const BOX = { x: HX - 56, y: -68, w: 113, d: 110, r: 4 }; // spindle 42 behind the box front
+const BOX = { x: HX - 56, y: HY - 68, w: 113, d: 110, r: 4 }; // spindle 42 behind the box front
 const BOX_Z = [S0 + 41, S0 + 200];
 const WALL_TOP = BOX_Z[1] + 24;
 // Openings in the chamber's back wall: the magazine window (with its flap), the ram behind the cradle, and the slot the
 // spindle column's tongue runs in
 const WIN = { x: [MAG.x - 6, MAG.x + MAG.w + 6], z: [MAG_TOP - 40, 35] };
-const RAM = { x: [-77.5, 77.5], z: [WALL_Z0, 35], len: 200 };
+const RAM = GEO.RAM;
 const SLOT = { x: [HX - 30, HX + TRAVEL.y + 30], z: [325, 345] };
 // Flap: hinged along its bottom edge just in front of the wall; open, it lies flat at the window sill and the magazine
 // slides over it; shut, it stands against the wall over the window
@@ -157,7 +158,7 @@ T.prism({ name: "cradle.hat", ...CB, F: ALONG_Y, polygon: [[-45, TOP], [45, TOP]
 T.round({ name: "cradle.b-knuckle", ...CB, F: ALONG_Y, s0: KNUCKLE[0], s1: KNUCKLE[1], r: 34, tone: "mid", material: "steel" });
 // hubs (silver): left end cap and bearing cap on the support arm, drive housing on the right arm
 T.round({ name: "hub.left.cap", ...CB, F: ALONG_X, s0: ARM_L[0] - 5, s1: ARM_L[0], r: 29.5, tone: "mid", material: "steel", details: { bolts: [{ s: ARM_L[0] - 5, r: 22, count: 6, phase: 0, size: 0.5 }] } });
-T.round({ name: "hub.left.bearing", ...CB, F: ALONG_X, s0: ARM_L[1], s1: ARM_L[1] + 6, r: 30, tone: "mid", material: "steel", details: { bolts: [{ s: ARM_L[1] + 6, r: 26, count: 4, phase: 0.2, size: 0.5 }] } });
+T.round({ name: "hub.left.bearing", ...CB, F: ALONG_X, s0: ARM_L[1], s1: ARM_L[1] + 6, r: 31.5, tone: "mid", material: "steel", details: { bolts: [{ s: ARM_L[1] + 6, r: 27, count: 4, phase: 0.2, size: 0.5 }] } });
 const rimScrews = Array.from({ length: 6 }, (_, i) => { const t = (i / 6) * 2 * Math.PI + 0.3; return { at: [ARM_R[0] - 4, 42.5 * Math.cos(t), 42.5 * Math.sin(t)], normal: [0, Math.cos(t), Math.sin(t)], size: 0.55 }; });
 T.round({ name: "hub.right.drive", ...CB, F: ALONG_X, s0: 91, s1: ARM_R[0], r: 42.5, tone: "mid", material: "steel", details: { seams: [96, ARM_R[0] - 8], dots: rimScrews } });
 
@@ -229,6 +230,9 @@ function chamber() {
   const drains = [[120, 60], [150, -60], [60, 190]];
   const drainSvg = drains.map(([x, y]) => S(k.cylinder(x, y, 18, FLOOR_Z, 1.2, P, 40, 0.3), { tone: "mid" }) + Ln(k.ring(x, y, 12, FLOOR_Z + 1.2, P, 36), { tone: "lo" }) + Dots(k.dotGrid(x - 6, y - 6, 4, 4, 4, FLOOR_Z + 1.2, P), { size: 0.45, tone: "lo" }) + Dots([0, 1, 2, 3, 4, 5].map((j) => at([x + 15 * Math.cos(j * 1.047 + 0.3), y + 15 * Math.sin(j * 1.047 + 0.3), FLOOR_Z + 1.2])), { size: 0.45 })).join("");
   put({ name: "stand.floor", layer: "back", at: [0, 0, FLOOR_Z - 4], bias: -50, svg: floorSvg + joints + drainSvg, shapes: [ground(A.slab(FLOOR, FLOOR_Z - 8, 8))] });
+  // the floor carries on under the side housing behind the wall, so the housing stands on something
+  const STRIP = { x: WALL_X[0] - 8, y: WY[0] - 181, w: 8, d: 181, r: 0.5 };
+  put({ name: "stand.floor-back", layer: "back", at: [STRIP.x + 4, STRIP.y + STRIP.d / 2, FLOOR_Z - 4], bias: -60, svg: S(k.slabOf(STRIP, FLOOR_Z - 8, 8, P, 1, 0.4), { tone: "lo" }), shapes: [ground(A.slab(STRIP, FLOOR_Z - 8, 8))] });
   // the door sill stands on the floor, so it lives with the machine's parts
   block("stand.sill", WALL_X, [FRONT_Y - 10, FRONT_Y], [FLOOR_Z, FLOOR_Z + 4], { bevel: 0.4, details: { dots: [-270, -150, -30, 90, 176].map((x) => ({ at: [FLOOR_Z + 4, x, FRONT_Y - 5], normal: [0, 0, 1], size: 0.5 })) } });
 
@@ -254,9 +258,9 @@ function chamber() {
   plate("wall.slot-left", [WALL_X[0], SLOT.x[0]], SLOT.z);
   plate("wall.slot-right", [SLOT.x[1], WALL_X[1]], SLOT.z);
   plate("wall.top", WALL_X, [SLOT.z[1], WALL_TOP], Array.from({ length: 12 }, (_, i) => ({ at: [WALL_TOP - 12, -260 + 40 * i, WY[1]], normal: [0, 1, 0], size: 0.5 })));
-  // the brushed slot centred above the ram (dealer's photo 3), drawn on the face
-  const slot = k.pathOf(k.roundedPlan({ x: -65, y: 41, w: 130, d: 8, r: 4 }, 4), true);
-  const brush = k.pathOf(k.roundedPlan({ x: -63, y: 43.5, w: 126, d: 3, r: 1.5 }, 4), true);
+  // the brushed slot just above the ram (dealer's photo 3), drawn on the face
+  const slot = k.pathOf(k.roundedPlan({ x: -65, y: 36, w: 130, d: 6, r: 3 }, 4), true);
+  const brush = k.pathOf(k.roundedPlan({ x: -63, y: 38, w: 126, d: 2, r: 1 }, 4), true);
   T.plane({ part: face, o: [0, WY[1], 0], u: [1, 0, 0], v: [0, 0, 1], normal: [0, 1, 0], svg: `<path class="tr-hole" d="${slot}"/><path class="iso-line" data-tone="lo" d="${slot}"/><path class="iso-line" data-tone="faint" d="${brush}"/>` });
   // a ledge above the magazine window
   block("wall.ledge", [WALL_X[0] + 10, WIN.x[1] + 20], [WY[1], WY[1] + 8], [WIN.z[1] + 5, WIN.z[1] + 10], { bevel: 0.4 });
@@ -271,8 +275,11 @@ function chamber() {
   block("bay.roof", BX, BAY.y, [WIN.z[1], WIN.z[1] + BAY.skin], dark);
   block("bay.back", BX, [BAY.y[0] - BAY.back, BAY.y[0]], [WIN.z[0] - BAY.skin, WIN.z[1] + BAY.skin], dark);
   // the machine's side housing behind the wall's left edge: it hides the bay and the retracted magazine, which would
-  // otherwise show past the edge from this viewpoint
-  block("wall.return", [WALL_X[0] - 8, WALL_X[0]], [BAY.y[0] - BAY.back - 15, WY[0]], [FLOOR_Z, WALL_TOP], { tone: "lo" });
+  // otherwise show past the edge from this viewpoint; it carries the wall's bands and screws round the corner
+  const RET = { x: [WALL_X[0] - 8, WALL_X[0]], y: [BAY.y[0] - BAY.back - 15, WY[0]] };
+  const retDots = [];
+  for (let y = RET.y[0] + 20; y < RET.y[1] - 10; y += 50) for (let z = FLOOR_Z + 18; z < WALL_TOP - 8; z += 40) retDots.push({ at: [z, RET.x[0], y], normal: [-1, 0, 0], size: 0.5 });
+  block("wall.return", RET.x, RET.y, [FLOOR_Z, WALL_TOP], { details: { seams: [SILL_Z, WIN.z[1], SLOT.z[0], SLOT.z[1]], dots: retDots } });
   // and a dark channel behind the column slot
   block("slot.back", SLOT.x, [WY[0] - 17, WY[0] - 12], [SLOT.z[0] - 4, SLOT.z[1] + 4], dark);
 }
@@ -281,13 +288,15 @@ function chamber() {
 function ram() {
   const y1 = -KNUCKLE[1];
   const z1 = RAM.z[1];
-  const dots = [[-52, z1 - 8], [52, z1 - 8], [-57, RAM.z[0] + 8], [57, RAM.z[0] + 8]].map(([x, z]) => ({ at: [z, x, y1], normal: [0, 1, 0], size: 0.55 }));
-  block("ram", RAM.x, [y1 - RAM.len, y1], RAM.z, { group: gx, material: "steel", details: { seams: [z1 - 6], dots } });
+  // screws along its top, in pairs every 40 mm, so it reads as a carriage as it comes out of the wall
+  const dots = [];
+  for (let y = y1 - 12; y > y1 - RAM.len + 10; y -= 40) for (const x of [-60, 60]) dots.push({ at: [z1, x, y], normal: [0, 0, 1], size: 0.55 });
+  block("ram", RAM.x, [y1 - RAM.len, y1], RAM.z, { group: gx, material: "gunmetal", details: { seams: [z1 - 6], dots } });
 }
 
 // ---------------------------------------------------------------- Y and Z: the column on the wall, the head on its rails
 function spindle() {
-  const F = UP(HX, 0);
+  const F = UP(HX, HY);
   // Y: the column with two rails, and the tongue that runs in the wall slot
   const COL = { x: [HX - 45, HX + 45], z: [50, WALL_TOP - 14] };
   block("column", COL.x, [WY[1], -132], COL.z, { group: gy, details: { seams: [COL.z[1] - 10] } });
@@ -305,23 +314,23 @@ function spindle() {
   const ringProfile = [[S0 + 25, 32.5], [S0 + 29, 40], [S0 + 30, 42.5], [S0 + 41, 42.5]];
   const parts = [
     { name: "head.box", svg: S(boxPaths, { tone: "mid", inner: Ln(boxSeam, { tone: "faint" }) }) + Dots(frontScrews, { size: 0.5 }), shape: A.prism(HXF, prof, BOX.x, BOX.x + BOX.w), at: [HX, BOX.y + BOX.d / 2, BOX_Z[0]] },
-    { name: "head.ring", svg: S(G.solidOf(ringProfile, F, P), { tone: "hi", crease: "lo" }), shape: A.solid(F, ringProfile), at: [HX, 0, S0 + 33] },
-    { name: "head.nose", svg: S(G.solidOf([[S0 + 7, 32.5], [S0 + 25, 32.5]], F, P), { tone: "mid", inner: Ln(G.arcOf(F, S0 + 12, 32.5, P), { tone: "faint" }) }), shape: A.solid(F, [[S0 + 7, 32.5], [S0 + 25, 32.5]]), at: [HX, 0, S0 + 16] },
-    { name: "head.nose-ring", svg: S(G.solidOf([[S0, 17], [S0 + 2, 19], [S0 + 7, 19]], F, P), { tone: "mid" }), shape: A.solid(F, [[S0, 17], [S0 + 2, 19], [S0 + 7, 19]]), at: [HX, 0, S0 + 3.5] },
-    { name: "head.shaft", svg: S(G.solidOf([[S0 - 10, 7.5], [S0, 7.5]], F, P), { tone: "mid" }), shape: A.solid(F, [[S0 - 10, 7.5], [S0, 7.5]]), at: [HX, 0, S0 - 5] },
-    { name: "tool.collar", svg: S(G.solidOf([[S0 - 17, 6.5], [S0 - 10, 6.5]], F, P), { tone: "mid" }) + Faded(G.ribsOf(F, S0 - 17, S0 - 10, 6.5, 6, P, { fade: [0.1, 0.55] }), { tone: "lo" }), shape: A.solid(F, [[S0 - 17, 6.5], [S0 - 10, 6.5]]), at: [HX, 0, S0 - 13.5] },
+    { name: "head.ring", svg: S(G.solidOf(ringProfile, F, P), { tone: "hi", crease: "lo" }), shape: A.solid(F, ringProfile), at: [HX, HY, S0 + 33] },
+    { name: "head.nose", svg: S(G.solidOf([[S0 + 7, 32.5], [S0 + 25, 32.5]], F, P), { tone: "mid", inner: Ln(G.arcOf(F, S0 + 12, 32.5, P), { tone: "faint" }) }), shape: A.solid(F, [[S0 + 7, 32.5], [S0 + 25, 32.5]]), at: [HX, HY, S0 + 16] },
+    { name: "head.nose-ring", svg: S(G.solidOf([[S0, 17], [S0 + 2, 19], [S0 + 7, 19]], F, P), { tone: "mid" }), shape: A.solid(F, [[S0, 17], [S0 + 2, 19], [S0 + 7, 19]]), at: [HX, HY, S0 + 3.5] },
+    { name: "head.shaft", svg: S(G.solidOf([[S0 - 10, 7.5], [S0, 7.5]], F, P), { tone: "mid" }), shape: A.solid(F, [[S0 - 10, 7.5], [S0, 7.5]]), at: [HX, HY, S0 - 5] },
+    { name: "tool.collar", svg: S(G.solidOf([[S0 - 17, 6.5], [S0 - 10, 6.5]], F, P), { tone: "mid" }) + Faded(G.ribsOf(F, S0 - 17, S0 - 10, 6.5, 6, P, { fade: [0.1, 0.55] }), { tone: "lo" }), shape: A.solid(F, [[S0 - 17, 6.5], [S0 - 10, 6.5]]), at: [HX, HY, S0 - 13.5] },
   ];
   // the bur: Ø6 shank, neck, Ø2 ball-end cutter
   const bur = [[TIP_Z, 0], [TIP_Z + 0.4, 0.8, 1], [TIP_Z + 1, 1], [TIP_Z + 7, 1], [TIP_Z + 9, 0.8], [TIP_Z + 12, 0.8], [TIP_Z + 18, 3], [S0 - 17, 3]];
   if (!(S0 - 17 > TIP_Z + 18)) throw new Error("tool: shank shorter than its taper");
-  parts.push({ name: "tool.bur", svg: S(G.solidOf(bur, F, P, {}), { tone: "hi", crease: "lo" }), shape: A.solid(F, bur), at: [HX, 0, TIP_Z + 12] });
+  parts.push({ name: "tool.bur", svg: S(G.solidOf(bur, F, P, {}), { tone: "hi", crease: "lo" }), shape: A.solid(F, bur), at: [HX, HY, TIP_Z + 12] });
   // coolant: on each side a hex block with a domed swivel under the head, a short rigid Ø5 tube and a black tip, aimed at a
   // point on the spindle axis 29 mm below the nose
-  const aim = [HX, 0, S0 - 29];
+  const aim = [HX, HY, S0 - 29];
   const top = BOX_Z[0];
   for (const side of [-1, 1]) {
     // one picture per nozzle (the head only translates), its pieces painted far to near
-    const c = [HX + side * 48, 33];
+    const c = [HX + side * 48, HY + 33];
     const hex = Array.from({ length: 6 }, (_, j) => [c[0] + 9.8 * Math.cos((j * Math.PI) / 3), c[1] + 9.8 * Math.sin((j * Math.PI) / 3)]);
     const DF = UP(c[0], c[1]);
     const dome = [[top - 17, 0], [top - 16.4, 3, 1], [top - 14.6, 5.4, 1], [top - 12, 7, 1], [top - 10, 7.4]];
@@ -342,11 +351,13 @@ function spindle() {
 
 // ---------------------------------------------------------------- the magazine, its pedestal and the flap
 function magazine() {
-  // pedestal: lower under the open flap, level with the magazine's underside in front of it
+  // one stand under the magazine, level with the open flap, with two steel guides in front of the flap that the
+  // magazine runs out on
   const PX = [MAG.x + 8, MAG.x + MAG.w - 8];
   const step = FLAP.y + FLAP.len;
-  block("stand.mag.pedestal", PX, [MAG.y + 8, step], [FLOOR_Z, FLAP.z - 1.5], { tone: "lo", details: { seams: [FLOOR_Z + 20] } });
-  block("stand.mag.pedestal-front", PX, [step, MAG.y + MAG.d - 8], [FLOOR_Z, MAG_TOP - 40], { tone: "lo", details: { seams: [FLOOR_Z + 20] } });
+  const front = MAG.y + MAG.d - 8;
+  block("stand.mag.pedestal", PX, [FLAP.y + 1.5, front], [FLOOR_Z, FLAP.z - 1.5], { details: { seams: [FLOOR_Z + 20] } });
+  for (const [i, gx0] of [PX[0], PX[1] - 8].entries()) block(`stand.mag.guide.${i + 1}`, [gx0, gx0 + 8], [step, front], [FLAP.z - 1.5, MAG_TOP - 40], { material: "steel", details: { dots: [step + 10, front - 10].map((y) => ({ at: [MAG_TOP - 40, gx0 + 4, y], normal: [0, 0, 1], size: 0.45 })) } });
   // the magazine: 15 pockets on a 32 mm grid, with the dealer's photo's occupancy (C1R1, C2R1, C2R5 and C3R2 empty)
   const cols = [MAG.x + MAG.w - 17, MAG.x + MAG.w - 49, MAG.x + MAG.w - 81]; // C1 nearest the cradle … C3
   const rows = [0, 1, 2, 3, 4].map((i) => MAG.y + 16 + i * 32); // back … front (R5 … R1)
@@ -364,7 +375,12 @@ function magazine() {
   T.fixed({ name: "magazine", group: gm, layer: live, svg: svg.join(""), anchor: [MAG.x + MAG.w / 2, MAG.y + MAG.d / 2, MAG_TOP - 20], shapes: [A.slab(MAG, MAG_TOP - 40, 40 + 33)] });
   // the flap, shown open (flat): a plate on a hinge barrel along its bottom edge
   T.round({ name: "flap.barrel", group: gf, layer: live, F: frameOf([0, FLAP.y, FLAP.z], [1, 0, 0], [0, 1, 0]), s0: FLAP.x[0], s1: FLAP.x[1], r: 1.5, tone: "mid", material: "steel" });
-  block("flap", FLAP.x, [FLAP.y + 1.5, FLAP.y + FLAP.len], [FLAP.z - 1.5, FLAP.z + 1.5], { group: gf, material: "steel" });
+  const flap = block("flap", FLAP.x, [FLAP.y + 1.5, FLAP.y + FLAP.len], [FLAP.z - 1.5, FLAP.z + 1.5], { group: gf, material: "steel" });
+  // on its outer face: two hinge leaves with screws at the hinge edge, and a pull along the free edge
+  const leaf = (x0) => `<path class="iso-line" data-tone="lo" d="${roundRect(x0, FLAP.y + 2.5, x0 + 16, FLAP.y + 10, 1)}"/>${screwHead(x0 + 4.5, FLAP.y + 6.5, 1.3)}${screwHead(x0 + 11.5, FLAP.y + 6.5, 1.3)}`;
+  const pullY = FLAP.y + FLAP.len - 6;
+  const flapFace = leaf(FLAP.x[0] + 7) + leaf(FLAP.x[1] - 23) + `<path class="iso-line" data-tone="lo" d="${roundRect((FLAP.x[0] + FLAP.x[1]) / 2 - 22, pullY - 2, (FLAP.x[0] + FLAP.x[1]) / 2 + 22, pullY + 2, 2)}"/>`;
+  T.plane({ part: flap, o: [0, 0, FLAP.z + 1.5], u: [1, 0, 0], v: [0, 1, 0], normal: [0, 0, 1], svg: flapFace });
 }
 
 chamber();
@@ -389,7 +405,7 @@ if (argv.includes("--audit")) {
 }
 
 const LABEL =
-  "Inside the machining chamber of a 5-axis dental mill. A gold cradle, open at the front, holds a square disc holder on a horizontal shaft between a support hub on the left and a drive hub on the right. The holder turns all the way round on that shaft (A), and the whole cradle rolls left or right (B), shown about a front-to-back axis through the bolt circle in its back wall (inferred from photos). The cradle rides on a ram through the back wall and slides toward the operator and back (X). Above it the spindle points straight down, with a coolant nozzle on each side; its column runs left and right along the back wall (Y) and the head slides up and down the column (Z). To the left a tool magazine holds burs in fifteen pockets; it slides out through a window in the wall over a flap door hinged at the bottom, and back in, when the spindle comes for a tool.";
+  "Inside the machining chamber of a 5-axis dental mill. A gold cradle, open at the front, holds a square disc holder on a horizontal shaft between a small hub on the left and a larger hub on the right. The holder turns all the way round on that shaft (A), and the whole cradle tilts left or right (B). The cradle slides toward the operator and back (X) on a ram through the back wall. Above it the spindle points straight down, with a coolant nozzle on each side; its column runs left and right along the back wall (Y) and the head slides up and down the column (Z). To the left a tool magazine holds burs in fifteen pockets; it slides out through a window in the wall over a flap door hinged at the bottom, and back in, when the spindle comes for a tool.";
 // the five controls: each names its axis and shows its position
 const AXES = [
   { key: "X", name: "cradle in and out", range: `0 to ${TRAVEL.x} mm` },
@@ -400,9 +416,9 @@ const AXES = [
 ];
 const backSvg = k.figureSvg({ width: W, height: H, label: LABEL, body: layerOf("back") });
 const staticSvg = (list) => `<svg xmlns="http://www.w3.org/2000/svg" class="iso-svg iso-layer" viewBox="0 0 ${W} ${H}" aria-hidden="true">${list.join("")}</svg>`;
-const KEYS_HELP = "Press X, Y, Z, A or B to choose an axis, then the arrow keys to move it (Shift for bigger steps); Home returns every axis home. With a mouse or a finger, choose an axis below and drag across the picture.";
-const stage = `<div class="iso-stage iso-turn tr-stage" tabindex="0" role="slider" aria-label="Y: spindle left and right. ${KEYS_HELP}" aria-valuemin="0" aria-valuemax="${TRAVEL.y}" aria-valuenow="${Y_DISC}" aria-valuetext="${wordsOf(HOME)}">${backSvg}${out.layerSvg("machine", { width: W, height: H })}${staticSvg(layerOf("front"))}</div>`;
-const axesRow = `<div class="tr-axes" role="group" aria-label="Axis to move">${AXES.map((ax) => `<button type="button" class="tr-axis" data-axis="${ax.key}" aria-pressed="${ax.key === "Y"}" title="${ax.key}: ${ax.name}, ${ax.range}"><span class="tr-axis-key">${ax.key}</span><span class="tr-axis-value" data-value="${ax.key}"></span></button>`).join("")}</div>`;
+const KEYS_HELP = "Press X, Y, Z, A or B to choose an axis, then the arrow keys to move it: up and right raise its value, down and left lower it; Page Up and Page Down take big steps; Home and End go to the axis's ends; 0 returns every axis home. With a mouse or a finger, choose an axis below and drag across the picture. The Tour button plays or pauses the tour.";
+const stage = `<div class="iso-stage iso-turn tr-stage" tabindex="0" role="slider" aria-label="Y axis, spindle left and right" aria-describedby="tr-help" aria-valuemin="0" aria-valuemax="${TRAVEL.y}" aria-valuenow="${Y_DISC}" aria-valuetext="Y ${Y_DISC} millimetres, spindle over the disc centre">${backSvg}${out.layerSvg("machine", { width: W, height: H })}${staticSvg(layerOf("front"))}</div><span class="tr-help" id="tr-help">${KEYS_HELP}</span>`;
+const axesRow = `<div class="tr-axes" role="group" aria-label="Axis to move">${AXES.map((ax) => `<button type="button" class="tr-axis" data-axis="${ax.key}" aria-pressed="${ax.key === "Y"}" title="${ax.key}: ${ax.name}, ${ax.range}"><span class="tr-axis-key">${ax.key}</span><span class="tr-axis-value" data-value="${ax.key}"></span></button>`).join("")}<button type="button" class="tr-axis tr-tour" aria-pressed="true" title="Play or pause the tour"><span class="tr-axis-key">Tour</span></button></div>`;
 
 const CSS = `${out.css}
 .iso{--tr-ring:#1c1c1e;--tr-disc:#ffffff;--tr-disc-a:.10;--tr-bevel:#9a9aa0;--tr-hole:#0d0d0e;--tr-screw:#8f8f94;--tr-recess:#161618}
@@ -421,12 +437,16 @@ const CSS = `${out.css}
 .tr-axes{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:12px 0 10px}
 .tr-axis{display:inline-flex;align-items:baseline;gap:7px;padding:6px 10px;border:0;border-radius:3px;background:transparent;box-shadow:inset 0 0 0 1px var(--anatomy-lo);color:var(--anatomy-muted);font:10.5px/1 var(--anatomy-mono);letter-spacing:.04em;font-variant-numeric:tabular-nums;cursor:pointer;transition:box-shadow .2s var(--anatomy-ease),color .2s var(--anatomy-ease)}
 .tr-axis-key{color:var(--anatomy-text);font-weight:600}
-.tr-axis-value{min-width:6.5ch;text-align:right}
+.tr-axis-value{flex:none;letter-spacing:0;text-align:right}
+[data-value="A"]{width:7ch}
+[data-value="Z"],[data-value="B"]{width:6ch}
+[data-value="X"],[data-value="Y"]{width:5ch}
+.tr-help{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tr-axis[aria-pressed="true"]{box-shadow:inset 0 0 0 1px var(--anatomy-hi);color:var(--anatomy-strong)}
 .tr-axis[data-moving]{color:var(--anatomy-strong)}
 .tr-axis[data-moving] .tr-axis-key{color:var(--anatomy-lit)}
 .tr-axis:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:2px}
-@media (max-width:480px){.tr-plate .iso-plate-corner[data-corner="readout"]{font-size:9px;letter-spacing:0}.tr-axes{gap:4px}.tr-axis{padding:6px 5px;gap:4px;font-size:9.5px;letter-spacing:0}.tr-axis-value{min-width:5.2ch}}
+@media (max-width:480px){.tr-axes{gap:4px}.tr-axis{padding:6px 5px;gap:4px;font-size:9.5px;letter-spacing:0}}
 @media (prefers-reduced-motion: reduce){.tr-axis{transition:none}}
 `;
 const DATA = { turn: out.data };
@@ -440,12 +460,12 @@ const body =
     hint: "Drag · arrows · X Y Z A B",
     readout: readoutOf(HOME),
     keys: [
-      { mark: "lit", label: "The disc: what the five axes bring under the bur" },
-      { mark: "raised", label: "Cradle (gold): slides in and out on X, rolls ±30° on B, and turns the holder 360° on A" },
+      { mark: "lit", label: "The disc: X, A and B move it; Y and Z bring the bur to it" },
+      { mark: "raised", label: "Cradle (gold): slides in and out on X, tilts ±30° on B, and turns the holder 360° on A" },
     ],
     caption:
-      `Three straight moves and two turns. X slides the cradle toward the operator and back on a ram through the back wall (${TRAVEL.x} mm); Y runs the spindle column left and right along the wall (${TRAVEL.y} mm), far enough to reach the magazine; Z lowers the head down the column (${TRAVEL.z} mm). A turns the holder a full ${SPEC.aRange}° between the support hub and the drive hub, and B rolls the whole cradle up to ±${SPEC.bLimit}°, shown about a front-to-back axis through the bolt circle in the cradle's back wall (inferred from the photos, not published). The bur never tilts: the cradle brings the disc to it. When the spindle goes for a tool, the magazine slides out over its flap door, which is hinged at the bottom, and goes back in after. The figure holds the head clear of the cradle and the magazine, as the machine's limits would. ` +
-      `Specs: ARUM 5X-200 (5 axes; travel ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm; five premill seats P1–P5). Which part moves on which axis is from the dealer, and ARUM's ${TRAVEL.y} mm stroke is drawn on the spindle's left-right move, the only one long enough to reach the magazine. Holder (Ø${SPEC.disc} mm disc), cradle, hubs, nozzles and magazine measured from the dealer's photos of a 5X-200 and ARUM's product photos; column, ram, flap and chamber schematic; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
+      `Three straight moves and two turns. X slides the cradle toward the operator and back on a ram through the back wall (${TRAVEL.x} mm, from the disc's front edge to past the premill bar at its back edge); Y runs the spindle column left and right along the wall (${TRAVEL.y} mm), far enough to reach the magazine's columns; Z lowers the head down the column (${TRAVEL.z} mm). A turns the holder a full ${SPEC.aRange}° between the small hub on the left and the larger one on the right, and B tilts the whole cradle up to ±${SPEC.bLimit}°, shown about a front-to-back axis through the bolt circle in the cradle's back wall (inferred from the photos, not published). The bur never tilts: the cradle brings the disc to it. When the spindle goes for a tool, the magazine slides out over its flap door, which is hinged at the bottom, and goes back in after; how the spindle reaches the back four rows (perhaps the magazine stopping row by row) is not shown. The figure holds the head clear of the cradle, its ram and the magazine, as the machine's limits would. ` +
+      `Specs: ARUM 5X-200 (5 axes; travel X, Y, Z ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm as ARUM lists them; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm; five premill seats P1–P5). Which part moves on which axis, and the letters, are the dealer's: ARUM's sheet lists the ${TRAVEL.y} mm stroke as X, and here it is Y, the spindle's left-right move and the only one long enough to reach the magazine; ARUM's ${TRAVEL.x} mm is the cradle's X. Proportions from the dealer's photos of a 5X-200 and ARUM's product photos, scaled to a standard Ø${SPEC.disc} mm disc (ARUM publishes no disc size for the 5X-200); column, ram, flap and chamber schematic; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
     body: stage + axesRow,
   }) +
   `</div>`;

@@ -4,7 +4,8 @@
 // Which part carries which axis is from the dealer: the cradle (with A and B) moves in and out (X), the spindle moves
 // left and right and up and down (Z); the magazine comes out through a window behind a flap door hinged at its bottom.
 // The 325 mm stroke is drawn on the spindle's left-right move (Y): it is the only stroke long enough to reach the magazine.
-// Ø98.5 mm disc: measured from the dealer's photos; ARUM publishes no disc diameter for the 5X-200.
+// Ø98.5 mm disc: assumed (the standard dental disc size); ARUM publishes none for the 5X-200. The dealer's photos give
+// proportions only, so every size taken from them (holder 157 × 25, magazine grid) is scaled to this disc.
 // Form: from the dealer's photos of a 5X-200 chamber and ARUM's product photos (styling illustrative, not traced).
 
 export const SPEC = { aRange: 360, bLimit: 30, tools: 15, shank: 6, rpm: 60000, kw: 3.0, disc: 98.5, premills: 5 };
@@ -17,7 +18,7 @@ export const GEO = {
   THICK: 12.5, // holder: 25 thick
   ARM_L: [-130, -94], // cradle: left (support) arm X span
   ARM_R: [119, 160], // cradle: right (A drive) arm X span
-  BOSS_R: 28.5,
+  BOSS_R: 33, // a rim of gold round the left cap, as in the dealer's photo 1
   WALL: [85, 105], // cradle back wall, distance back
   TOP: 52,
   WALL_Z0: -40,
@@ -25,13 +26,19 @@ export const GEO = {
   TIP_Z: 112, // bur tip with Z at 0
   TOOL: 43, // bur stick-out below the nose ring
   SPINDLE_X0: -225, // spindle axis with Y at 0: over the magazine's far column
-  MAG: { x: -244, y: -138, w: 100, d: 160, r: 3 }, // magazine block in plan, out
+  // The spindle's line is 55 mm in front of the B axis, so the X stroke spans the work: X 0 puts the bur just past the
+  // disc's front edge (+55), X 142.5 just past the premill bar at the back edge (−87.5), and X 55 over the disc centre.
+  SPINDLE_Y: 55,
+  // magazine block in plan, out: its front row (R1) on the spindle's line
+  MAG: { x: -244, y: -89, w: 100, d: 160, r: 3 },
   MAG_TOP: 0,
-  MAG_STROKE: 175, // magazine travel from out to fully behind the flap
+  MAG_STROKE: 222, // magazine travel from out to fully behind the flap
+  RAM: { x: [-77.5, 77.5], z: [-40, 35], len: 200 }, // the X carriage's ram through the back wall, behind the knuckle
 };
-// Y at which the spindle is over the disc centre, and the readout's home
+// Y at which the spindle is over the disc centre, X at which the disc centre is under the spindle, and the home they make
 export const Y_DISC = -GEO.SPINDLE_X0;
-export const HOME = { x: 0, y: Y_DISC, z: 0, a: 0, b: 0 };
+export const X_DISC = GEO.SPINDLE_Y;
+export const HOME = { x: X_DISC, y: Y_DISC, z: 0, a: 0, b: 0 };
 
 export const wrap = (deg) => ((((deg + 180) % 360) + 360) % 360) - 180;
 export const clampB = (deg) => Math.max(-SPEC.bLimit, Math.min(SPEC.bLimit, deg));
@@ -65,7 +72,7 @@ const mulM = (A, B) => {
 
 // collision stand-ins at rest, in the frame of the group that carries them: boxes [x0, x1, y0, y1, z0, z1] and
 // cylinders along x or y { c, axis, s: [s0, s1], r }
-const { HALF, THICK, ARM_L, ARM_R, BOSS_R, WALL, TOP, WALL_Z0, KNUCKLE, MAG, MAG_TOP } = GEO;
+const { HALF, THICK, ARM_L, ARM_R, BOSS_R, WALL, TOP, WALL_Z0, KNUCKLE, MAG, MAG_TOP, RAM, SPINDLE_Y } = GEO;
 const CRADLE = [
   { box: [ARM_L[0], ARM_L[1], -WALL[0], BOSS_R, -BOSS_R, BOSS_R] },
   { box: [ARM_L[0], ARM_L[1], -WALL[0], -8, BOSS_R, TOP] },
@@ -74,7 +81,7 @@ const CRADLE = [
   { box: [-45, 45, -WALL[1], -WALL[0], TOP, TOP + 12] },
   { cyl: { axis: 1, c: [0, 0], s: [-KNUCKLE[1], -KNUCKLE[0]], r: 34 } },
   { cyl: { axis: 0, c: [0, 0], s: [ARM_L[0] - 5, ARM_L[0]], r: 29.5 } },
-  { cyl: { axis: 0, c: [0, 0], s: [ARM_L[1], ARM_L[1] + 6], r: 30 } },
+  { cyl: { axis: 0, c: [0, 0], s: [ARM_L[1], ARM_L[1] + 6], r: 31.5 } },
   { cyl: { axis: 0, c: [0, 0], s: [91, ARM_R[0]], r: 42.5 } },
 ];
 const HOLDER = [
@@ -84,16 +91,23 @@ const HOLDER = [
   { cyl: { axis: 0, c: [0, 0], s: [ARM_L[1] + 6, -HALF], r: 24 } },
   { cyl: { axis: 0, c: [0, 0], s: [HALF, 91], r: 29 } },
 ];
+// the ram rides X only (it does not tilt with B)
+const RAM_BODY = { box: [RAM.x[0], RAM.x[1], -KNUCKLE[1] - RAM.len, -KNUCKLE[1], RAM.z[0], RAM.z[1]] };
 // the magazine block with its shanks standing in the pockets
 const MAGAZINE = { box: [MAG.x, MAG.x + MAG.w, MAG.y, MAG.y + MAG.d, MAG_TOP - 40, MAG_TOP + 33] };
-// the spindle's underside, from the bur tip up: footprint (circle about the spindle axis or a box) and its height above the tip
+// the spindle's underside, from the bur tip up: footprint (circle about the spindle axis, or a box relative to it) and its
+// height above the tip
 const HEAD = [
   { r: 3, zb: 0 }, // bur
   { r: 7.5, zb: 26 }, // collar and shaft
   { r: 19, zb: 43 }, // nose ring
-  { r: 42.5, zb: 47 }, // nose, ring and the two nozzle tips
-  { rect: [-59, 59, -70, 45], zb: 67 }, // nozzle blocks and the head box
-  { rect: [-35, 35, -126, -68], zb: 84 }, // saddle on the column rails
+  { r: 42.5, zb: 47 }, // nose, ring, and the inner half of the nozzle tips
+  { rect: [28, 48, 18, 34], zb: 49 }, // right nozzle tube and tip, outside r 42.5
+  { rect: [-48, -28, 18, 34], zb: 49 }, // left nozzle tube and tip
+  { rect: [38, 58, 24, 42], zb: 67 }, // right nozzle block and dome
+  { rect: [-58, -38, 24, 42], zb: 67 }, // left nozzle block and dome
+  { rect: [-56, 57, -68, 42], zb: 84 }, // head box
+  { rect: [-35, 35, -126 - SPINDLE_Y, -68], zb: 84 }, // saddle, back to the column rails
 ];
 const CLEAR = 2;
 
@@ -175,15 +189,19 @@ function topAt(body, x, y) {
 // sample points of a footprint about the spindle axis at (sx, 0)
 const RING = Array.from({ length: 16 }, (_, j) => [Math.cos((j / 16) * 2 * Math.PI), Math.sin((j / 16) * 2 * Math.PI)]);
 function footprint(part, sx) {
+  const sy = SPINDLE_Y;
   if (part.r !== undefined) {
-    const pts = [[sx, 0]];
-    for (const [c, s] of RING) pts.push([sx + part.r * c, part.r * s], [sx + 0.5 * part.r * c, 0.5 * part.r * s]);
-    return { pts, ext: [sx - part.r, sx + part.r, -part.r, part.r], inside: (x, y) => (x - sx) ** 2 + y * y <= part.r * part.r };
+    const pts = [[sx, sy]];
+    for (const [c, s] of RING) pts.push([sx + part.r * c, sy + part.r * s], [sx + 0.5 * part.r * c, sy + 0.5 * part.r * s]);
+    return { pts, ext: [sx - part.r, sx + part.r, sy - part.r, sy + part.r], inside: (x, y) => (x - sx) ** 2 + (y - sy) ** 2 <= part.r * part.r };
   }
   const [x0, x1, y0, y1] = part.rect;
+  // sampled at 8 mm or finer, so a thin part (the cradle hat is 20 deep) cannot slip between the rows
+  const ni = Math.max(4, Math.ceil((x1 - x0) / 8));
+  const nj = Math.max(4, Math.ceil((y1 - y0) / 8));
   const pts = [];
-  for (let i = 0; i <= 4; i++) for (let j = 0; j <= 4; j++) pts.push([sx + x0 + ((x1 - x0) * i) / 4, y0 + ((y1 - y0) * j) / 4]);
-  return { pts, ext: [sx + x0, sx + x1, y0, y1], inside: (x, y) => x >= sx + x0 && x <= sx + x1 && y >= y0 && y <= y1 };
+  for (let i = 0; i <= ni; i++) for (let j = 0; j <= nj; j++) pts.push([sx + x0 + ((x1 - x0) * i) / ni, sy + y0 + ((y1 - y0) * j) / nj]);
+  return { pts, ext: [sx + x0, sx + x1, sy + y0, sy + y1], inside: (x, y) => x >= sx + x0 && x <= sx + x1 && y >= sy + y0 && y <= sy + y1 };
 }
 const meets = (a, b) => a[0] <= b[1] && b[0] <= a[1] && a[2] <= b[3] && b[2] <= a[3];
 
@@ -192,8 +210,9 @@ export function bodiesOf(pose) {
   const t = [0, pose.x ?? 0, 0];
   const Mb = rot([0, -1, 0], pose.b ?? 0);
   const Ma = mulM(Mb, rot([1, 0, 0], pose.a ?? 0));
-  const out = [...CRADLE.map((s) => placed(s, Mb, t)), ...HOLDER.map((s) => placed(s, Ma, t))];
-  out.push(placed(MAGAZINE, rot([1, 0, 0], 0), [0, -(pose.mag ?? 0), 0]));
+  const eye = rot([1, 0, 0], 0);
+  const out = [...CRADLE.map((s) => placed(s, Mb, t)), ...HOLDER.map((s) => placed(s, Ma, t)), placed(RAM_BODY, eye, t)];
+  out.push(placed(MAGAZINE, eye, [0, -(pose.mag ?? 0), 0]));
   for (const body of out) body.ext = extentOf(body);
   return out;
 }
@@ -238,11 +257,11 @@ export const wordsOf = (s) => `Cradle ${Math.round(s.x)} millimetres in X, spind
 // Steps run in order; each eases the values it names to their targets over its duration (a `path` step sets them
 // directly). `axis` is the control lit during the step and `say` the line the readout shows.
 const ease = (u) => (u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u));
-const START = { x: 0, y: Y_DISC, z: 0, a: 0, b: 0, m: 1 };
+const START = { ...HOME, m: 1 };
 const deepest = (s) => zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(s.m).mag }, s.y);
 // all five at once: the cradle forward and back, the spindle across the disc, A swinging and B rocking, with Z as deep
 // as the tightest moment allows
-const together = (u) => ({ x: 60 * (1 - Math.cos(2 * Math.PI * u)), y: Y_DISC + 45 * Math.sin(4 * Math.PI * u), a: 150 * Math.sin(2 * Math.PI * u), b: 25 * Math.sin(4 * Math.PI * u), m: 1 });
+const together = (u) => ({ x: X_DISC + 45 * Math.sin(2 * Math.PI * u), y: Y_DISC + 45 * Math.sin(4 * Math.PI * u), a: 150 * Math.sin(2 * Math.PI * u), b: 25 * Math.sin(4 * Math.PI * u), m: 1 });
 const HOVER = (() => {
   let h = Infinity;
   for (let i = 1; i < 200; i++) {
@@ -260,8 +279,9 @@ const STEPS = [
   { axis: "Z", say: "Z: back up", dur: 1.0, to: { z: 0 } },
   { axis: "Y", say: "Y: back over the disc", dur: 2.6, to: { y: Y_DISC } },
   { say: "The magazine goes back behind its flap", dur: 2.2, to: { m: 1 } },
-  { axis: "X", say: "X: the cradle comes forward", dur: 2.4, to: { x: TRAVEL.x } },
-  { axis: "X", say: "X: and goes back", dur: 2.4, to: { x: 0 } },
+  { axis: "X", say: "X: the cradle comes forward, to the premill bar", dur: 2.0, to: { x: TRAVEL.x } },
+  { axis: "X", say: "X: and goes back, to the disc's front edge", dur: 2.8, to: { x: 0 } },
+  { axis: "X", say: "X: to the disc's centre", dur: 1.4, to: { x: X_DISC } },
   { axis: "Z", say: "Z: the bur comes down to the disc", dur: 2.0, to: { z: (s) => deepest(s) - 1 } },
   { axis: "Z", say: "Z: and back up", dur: 1.6, to: { z: 0 } },
   { axis: "A", say: "A: the holder turns all the way round", dur: 5.0, to: { a: 360 } },
@@ -297,4 +317,14 @@ export function tourAt(time) {
   else for (const [key, v] of Object.entries(step.to)) { const to = typeof v === "function" ? v(from) : v; s[key] = from[key] + (to - from[key]) * ease(u); }
   s.a = wrap(s.a);
   return { ...s, axis: step.axis ?? null, say: step.say };
+}
+// the time the tour step running at `time` began, so a paused tour can resume from the start of its step
+export function tourStepStart(time) {
+  const t = ((time % TOUR_LEN) + TOUR_LEN) % TOUR_LEN;
+  let start = 0;
+  for (const step of STEPS) {
+    if (t < start + step.dur) return start;
+    start += step.dur;
+  }
+  return 0;
 }
