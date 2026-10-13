@@ -1,5 +1,6 @@
-// Fig 2 · Two rotary axes (ARUM 5X-200): the gold cradle rolls ±30° on B, the disc holder turns 360° on A.
-// node build.mjs [--light] [--audit [--quick] [--only=a,b]] [--verify]
+// Fig 2 · Five axes (ARUM 5X-200): the cradle slides in and out (X), the spindle travels left and right (Y) and up and
+// down (Z), the gold cradle rolls ±30° (B) and the disc holder turns 360° (A); the magazine comes out behind its flap.
+// node build.mjs [--light] [--audit [--quick] [--only=a,b]] [--verify] [--artifact=path]
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,53 +9,53 @@ import * as G from "../../../.claude/skills/anatomy/kit/lathe.mjs";
 import * as A from "../../../.claude/skills/anatomy/kit/audit.mjs";
 import { turning } from "../../../.claude/skills/anatomy/kit/turn-build.mjs";
 import * as TA from "../../../.claude/skills/anatomy/kit/turn-audit.mjs";
-import { tubePieces, tubeSvg } from "../../../.claude/skills/anatomy/kit/tube.mjs";
 import { turnScript } from "../../../.claude/skills/anatomy/scripts/inline-kit.mjs";
-import { SPEC, readoutOf, wordsOf } from "./model.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, wrap, magOf, zLimit, tourAt, TOUR_LEN, readoutOf, wordsOf } from "./model.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
 const THEME = argv.includes("--light") ? "light" : "dark";
 
-// World: 1 unit = 1 mm. Origin at the disc centre, where A and B cross. X right (drive side), y toward the
-// operator (front), Z up. Depths behind the holder are written as positive distances back (frames point back).
+// World: 1 unit = 1 mm. Origin at the disc centre with every axis at 0, where A and B cross. X right (drive side),
+// y toward the operator (front), Z up. Depths behind the holder are written as positive distances back (frames point back).
 const W = 620;
 const H = 560;
 const AZIMUTH = 128; // viewer at the front left, as an operator at the open door
 const ELEVATION = 30;
 
 // Holder (disc cartridge frame, from the dealer's photos: 157 square, 25 thick, Ø98.5 disc, P1–P5 premill bar)
-const HALF = 78.5;
-const THICK = 12.5;
+const { HALF, THICK, ARM_L, ARM_R, BOSS_R, WALL, TOP, WALL_Z0, KNUCKLE, TIP_Z, MAG, MAG_TOP } = GEO;
 const CHAMFER = 6.5;
 const DISC_R = SPEC.disc / 2;
-// Cradle (gold, rolls on B about the Y axis through the back-wall flange)
-const ARM_L = [-130, -94]; // left arm X span (support side)
-const ARM_R = [119, 160]; // right arm X span (A drive side)
-const BOSS_R = 28.5;
-const WALL = [85, 105]; // back wall Y span
-const TOP = 52; // cradle top
-const WALL_Z0 = -40;
 // Chamber
 const FLOOR_Z = -142;
 const BACK_Y = 150;
-// Spindle head (fixed in this figure; Z parked above the holder's swing)
-const TIP_Z = 112;
-const S0 = TIP_Z + 43; // nose-ring bottom face (tool sticks out 43, as in the photos)
-const BOX = { x: -56, y: -68, w: 113, d: 110, r: 4 }; // spindle 42 behind the box front
+const WALL_X = [-300, 200];
+const WALL_T = 14;
+const FRONT_Y = 250; // the floor reaches the door, so the cradle can come forward its full X stroke
+// Spindle head: with Y at 0 the spindle axis is over the magazine's far column; Z at 0 parks the bur above everything
+const HX = GEO.SPINDLE_X0;
+const S0 = TIP_Z + GEO.TOOL; // nose-ring bottom face (tool sticks out 43, as in the photos)
+const BOX = { x: HX - 56, y: -68, w: 113, d: 110, r: 4 }; // spindle 42 behind the box front
 const BOX_Z = [S0 + 41, S0 + 200];
-// Tool magazine (15 pockets, 32 mm grid), beside the left arm
-const MAG = { x: -244, y: -138, w: 100, d: 160, r: 3 };
-const MAG_TOP = -4;
+const WALL_TOP = BOX_Z[1] + 24;
+// Openings in the chamber's back wall: the magazine window (with its flap), the ram behind the cradle, and the slot the
+// spindle column's tongue runs in
+const WIN = { x: [MAG.x - 6, MAG.x + MAG.w + 6], z: [MAG_TOP - 40, 35] };
+const RAM = { x: [-77.5, 77.5], z: [WALL_Z0, 35], len: 200 };
+const SLOT = { x: [HX - 30, HX + TRAVEL.y + 30], z: [325, 345] };
+// Flap: hinged along its bottom edge just in front of the wall; open, it lies flat at the window sill and the magazine
+// slides over it; shut, it stands against the wall over the window
+const FLAP = { y: -BACK_Y + 1.5, z: WIN.z[0] - 1.5, x: [WIN.x[0] + 1, WIN.x[1] - 1], len: WIN.z[1] - WIN.z[0] + 3 };
 
 const P = k.fitProjection(
   [
-    [-250, 110, FLOOR_Z - 6], [200, 110, FLOOR_Z - 6], [200, -BACK_Y - 15, FLOOR_Z - 6], [-250, -BACK_Y - 15, FLOOR_Z - 6],
-    [-250, -BACK_Y, BOX_Z[1] + 20], [200, -BACK_Y, BOX_Z[1] + 20], [BOX.x, BOX.y + BOX.d, BOX_Z[1]], [BOX.x + BOX.w, BOX.y + BOX.d, BOX_Z[1]],
+    [WALL_X[0], FRONT_Y, FLOOR_Z - 6], [WALL_X[1], FRONT_Y, FLOOR_Z - 6], [WALL_X[1], -BACK_Y - WALL_T, FLOOR_Z - 6], [WALL_X[0], -BACK_Y - WALL_T, FLOOR_Z - 6],
+    [WALL_X[0], -BACK_Y, WALL_TOP], [WALL_X[1], -BACK_Y, WALL_TOP], [BOX.x, BOX.y + BOX.d, BOX_Z[1]], [BOX.x + BOX.w + TRAVEL.y, BOX.y + BOX.d, BOX_Z[1]],
   ],
   W,
   H,
-  { pad: 30, azimuth: AZIMUTH, elevation: ELEVATION },
+  { pad: 26, azimuth: AZIMUTH, elevation: ELEVATION },
 );
 const V = G.viewOf(P);
 const at = (p) => k.iso(p, P);
@@ -75,16 +76,54 @@ const UP = (x, y) => G.frameOf([x, y, 0], [0, 0, 1], [1, 0, 0], [0, 1, 0]);
 export const R = A.recorder(P);
 const put = (item) => R.put({ ...item, shapes: (item.shapes ?? []).map((shape, index) => R.solid(Object.assign(shape, { name: shape.name ?? (index ? `${item.name}#${index + 1}` : item.name) }))) });
 
-// ---------------------------------------------------------------- live: cradle (B) and holder (A)
+// ---------------------------------------------------------------- live: the five axes, the magazine and its flap
 export const T = turning(P, { recorder: R });
-const b = T.group("b", { hinge: { point: [0, 0, 0], axis: [0, -1, 0], range: [-SPEC.bLimit, SPEC.bLimit] } });
+// X: the cradle, its ram and everything on it slide toward the operator from home at the back
+const gx = T.group("x", { slide: { direction: [0, 1, 0], travel: TRAVEL.x } });
+const b = T.group("b", { parent: gx, hinge: { point: [0, 0, 0], axis: [0, -1, 0], range: [-SPEC.bLimit, SPEC.bLimit] } });
 const a = T.group("a", { parent: b, hinge: { point: [0, 0, 0], axis: [1, 0, 0], range: [-180, 180] } });
-const live = T.layer("cradle");
-T.stack(["back", "cradle", "front"]);
-export const follow = (values) => ({ b: values.b ?? 0, a: values.a ?? 0 });
-export const poses = () => {
+// Y: the spindle column runs right from over the magazine; Z: the head slides down its rails from the top
+const gy = T.group("y", { slide: { direction: [1, 0, 0], travel: TRAVEL.y } });
+const gz = T.group("z", { parent: gy, slide: { direction: [0, 0, -1], travel: TRAVEL.z } });
+// the magazine slides back through the window from out; the flap swings up from flat (0) to shut (90)
+const gm = T.group("mag", { slide: { direction: [0, -1, 0], travel: GEO.MAG_STROKE } });
+const gf = T.group("flap", { hinge: { point: [(WIN.x[0] + WIN.x[1]) / 2, FLAP.y, FLAP.z], axis: [1, 0, 0], range: [0, 90] } });
+const live = T.layer("machine");
+T.stack(["back", "machine", "front"]);
+// page values { x, y, z, a, b, m } (m: magazine sequence, 0 out … 1 in and shut) to group values
+export const follow = (values) => ({ x: values.x ?? 0, b: values.b ?? 0, a: values.a ?? 0, y: values.y ?? 0, z: values.z ?? 0, ...magOf(values.m ?? 1) });
+// reachable states for the build: the tour, and a grid of jog states with the head as low as each allows
+const reachable = () => {
   const out = [];
-  for (let bv = -30; bv <= 30; bv += 7.5) for (let av = -180; av < 180; av += 3) out.push(follow({ b: bv, a: av }));
+  for (let t = 0; t < TOUR_LEN; t += 1 / 8) out.push(follow(tourAt(t)));
+  for (const x of [0, TRAVEL.x / 2, TRAVEL.x])
+    for (const y of [0, 60, 120, 180, Y_DISC, 270, TRAVEL.y])
+      for (const bv of [-30, -15, 0, 15, 30])
+        for (let av = -180; av < 180; av += 30) {
+          const m = y < 110 ? 0 : 1;
+          const deep = zLimit({ x, b: bv, a: av, mag: magOf(m).mag }, y);
+          if (deep < 0) continue;
+          for (const z of [0, deep]) out.push(follow({ x, y, z, a: av, b: bv, m }));
+        }
+  return out;
+};
+// The build fits each cross-group plane to 24 states spread evenly through this list, so an envelope of 24 states that
+// spans every relative motion (B in two passes, A round in 15° steps, Z down its rails, every X, Y and magazine step)
+// sits exactly where it samples, and the reachable states fill the gaps between.
+const envelope = () =>
+  Array.from({ length: 24 }, (_, i) => {
+    const s = { x: [0, TRAVEL.x / 2, TRAVEL.x][i % 3], y: [0, TRAVEL.y, Y_DISC, 112, 270, 60][i % 6], a: wrap(15 * i), b: -30 + (60 * (i % 12)) / 11, m: [1, 0, 0.5, 0.72, 0.86, 1][i % 6] };
+    const deep = zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(s.m).mag }, s.y);
+    return follow({ ...s, z: Math.max(0, Math.min(deep, (TRAVEL.z * (i % 8)) / 7)) });
+  });
+export const poses = () => {
+  const fill = reachable();
+  const k = Math.ceil(fill.length / 24) + 1;
+  const out = [];
+  envelope().forEach((state, i) => {
+    out.push(state);
+    for (let j = 1; j < k; j++) out.push(fill[Math.min(fill.length - 1, i * (k - 1) + j - 1)]);
+  });
   return out;
 };
 
@@ -114,8 +153,7 @@ const bolt = (deg) => [27.5 * Math.sin((deg * Math.PI) / 180), 27.5 * Math.cos((
 const wallFace = [...[-68, -34, 0, 34, 68, 125, 150, 180, 210, 235].map((d) => { const [x, z] = bolt(d); return `<path class="iso-line" data-tone="lo" d="${shift(circle(5, 20), x, z)}"/>${socketHead(x, z, 3.4)}`; }), ...[-105, 105].map((d) => { const [x, z] = bolt(d); return `<path class="tr-hole" d="${shift(circle(2.6, 12), x, z)}"/>`; })].join("");
 T.plane({ part: wall, o: [0, -WALL[0], 0], u: [1, 0, 0], v: [0, 0, 1], normal: [0, 1, 0], svg: wallFace });
 T.prism({ name: "cradle.hat", ...CB, F: ALONG_Y, polygon: [[-45, TOP], [45, TOP], [33, TOP + 12], [-33, TOP + 12]], s0: WALL[0], s1: WALL[1], tone: "mid", material: "gold", bevel: 0.5 });
-// B knuckle on the wall's back face, flush against the stainless box behind the cradle
-const KNUCKLE = [WALL[1], WALL[1] + 6];
+// B knuckle on the wall's back face, flush against the ram's front face
 T.round({ name: "cradle.b-knuckle", ...CB, F: ALONG_Y, s0: KNUCKLE[0], s1: KNUCKLE[1], r: 34, tone: "mid", material: "steel" });
 // hubs (silver): left end cap and bearing cap on the support arm, drive housing on the right arm
 T.round({ name: "hub.left.cap", ...CB, F: ALONG_X, s0: ARM_L[0] - 5, s1: ARM_L[0], r: 29.5, tone: "mid", material: "steel", details: { bolts: [{ s: ARM_L[0] - 5, r: 22, count: 6, phase: 0, size: 0.5 }] } });
@@ -176,71 +214,87 @@ T.round({ name: "holder.collar.right", ...CA, F: ALONG_X, s0: HALF, s1: 91, r: 2
 // side straps on the Face B side, from the back corner blocks to just in front of the A shaft
 for (const side of [-1, 1]) T.prism({ name: `holder.strap.${side < 0 ? "left" : "right"}`, ...CA, F: HF, polygon: [[side * (HALF - 10), -40], [side * (HALF - 1), -40], [side * (HALF - 1), HALF - 15], [side * (HALF - 10), HALF - 15]], s0: THICK, s1: THICK + 3, tone: "mid", material: "steel", details: { dots: [-30, 10, 50].map((y) => ({ at: [THICK + 3, side * (HALF - 5.5), y], normal: [0, 0, 1], size: 0.5 })) } });
 
-// ---------------------------------------------------------------- static: chamber, rear box, spindle, nozzles, magazine
+// ---------------------------------------------------------------- chamber: the floor is static and behind everything; the
+// back wall is a set of plates around its openings, in the live layer, so the ram, the magazine and the column's tongue
+// can pass behind it
 const ground = (shape) => Object.assign(shape, { ground: true });
+const UPF = UP(0, 0);
+const block = (name, [x0, x1], [y0, y1], [z0, z1], extra = {}) => T.prism({ name, layer: live, F: UPF, polygon: [[x0, y0], [x1, y0], [x1, y1], [x0, y1]], s0: z0, s1: z1, tone: "mid", ...extra });
+const WY = [-BACK_Y - WALL_T, -BACK_Y];
 function chamber() {
-  const FLOOR = { x: -258, y: -BACK_Y - 14, w: 452, d: BACK_Y + 14 + 112, r: 2 };
+  const FLOOR = { x: WALL_X[0], y: WY[0], w: WALL_X[1] - WALL_X[0], d: FRONT_Y - WY[0], r: 2 };
   const floorSvg = `<path class="iso-halo" d="${k.haloOf(FLOOR, FLOOR_Z - 8, 8, P)}"/>` + S(k.slabOf(FLOOR, FLOOR_Z - 8, 8, P, 3, 1.2), { tone: "lo", inner: Ln(k.sideSeam(FLOOR, FLOOR_Z - 4, P, 3), { tone: "faint" }) });
-  // a sheet joint across the floor, edge to edge, and a soft shadow under the cradle
-  const joint = Ln(k.lineOnTop([FLOOR.x, -20], [FLOOR.x + FLOOR.w, -20], FLOOR_Z, P), { tone: "faint" });
-  const shadow = `<path class="iso-halo tr-shade" d="${k.haloOf({ x: -150, y: -100, w: 320, d: 150, r: 40 }, FLOOR_Z, 0.1, P)}" style="filter:blur(10px)"/>`;
-  const drains = [[120, 60], [150, -60]];
+  // sheet joints across the floor, edge to edge
+  const joints = [-20, 120].map((y) => Ln(k.lineOnTop([FLOOR.x, y], [FLOOR.x + FLOOR.w, y], FLOOR_Z, P), { tone: "faint" })).join("");
+  const drains = [[120, 60], [150, -60], [60, 190]];
   const drainSvg = drains.map(([x, y]) => S(k.cylinder(x, y, 18, FLOOR_Z, 1.2, P, 40, 0.3), { tone: "mid" }) + Ln(k.ring(x, y, 12, FLOOR_Z + 1.2, P, 36), { tone: "lo" }) + Dots(k.dotGrid(x - 6, y - 6, 4, 4, 4, FLOOR_Z + 1.2, P), { size: 0.45, tone: "lo" }) + Dots([0, 1, 2, 3, 4, 5].map((j) => at([x + 15 * Math.cos(j * 1.047 + 0.3), y + 15 * Math.sin(j * 1.047 + 0.3), FLOOR_Z + 1.2])), { size: 0.45 })).join("");
-  const SILL = { x: FLOOR.x, y: 112 - 10, w: FLOOR.w, d: 10, r: 1 };
-  const sillSvg = S(k.slabOf(SILL, FLOOR_Z, 4, P, 2, 0.4), { tone: "mid" }) + Dots([-230, -120, 0, 120, 176].map((x) => at([x, 107, FLOOR_Z + 4])), { size: 0.5 });
-  put({ name: "stand.floor", layer: "back", at: [0, 0, FLOOR_Z - 4], bias: -50, svg: floorSvg + joint + shadow + drainSvg + sillSvg, shapes: [ground(A.slab(FLOOR, FLOOR_Z - 8, 8)), A.slab(SILL, FLOOR_Z, 4)] });
-  const WALLP = { x: -258, y: -BACK_Y - 14, w: 452, d: 14, r: 1 };
-  const wallTop = BOX_Z[1] + 24;
-  const onWall = (x, z) => at([x, -BACK_Y, z]);
-  const panelScrews = [];
-  // the window behind the tool magazine (ARUM's photo of the magazine and the dealer's photo 5): a framed opening onto
-  // the machine's interior, its lower part hidden by the magazine (size and height read from the photos, not published)
-  const WIN = { x: [-205, -130], z: [-4, 50] };
-  const inWindow = (x, z) => x > WIN.x[0] - 4 && x < WIN.x[1] + 4 && z > WIN.z[0] - 4 && z < WIN.z[1] + 4;
-  for (const x of [-240, -160, -140, 100, 120, 176]) for (let z = FLOOR_Z + 18; z < wallTop - 10; z += 40) if (!inWindow(x, z)) panelScrews.push(onWall(x, z));
-  for (let x = -220; x < 180; x += 40) panelScrews.push(onWall(x, wallTop - 12));
-  // the Z slide runs in a recess behind the head: its floor and right side are visible, with two rails inside
-  const RX = [-62, 62];
-  const RZ = [70, wallTop - 8];
-  const DEEP = 12;
-  const recessOutline = k.pathOf([onWall(RX[0], RZ[0]), onWall(RX[1], RZ[0]), onWall(RX[1], RZ[1]), onWall(RX[0], RZ[1])], true);
-  const recessBack = k.pathOf([[RX[0], RZ[0]], [RX[1], RZ[0]], [RX[1], RZ[1]], [RX[0], RZ[1]]].map(([x, z]) => at([x, -BACK_Y - DEEP, z])), true);
-  const recessFloor = k.pathOf([[RX[0], -BACK_Y], [RX[1], -BACK_Y], [RX[1], -BACK_Y - DEEP], [RX[0], -BACK_Y - DEEP]].map(([x, y]) => at([x, y, RZ[0]])), true);
-  const recessSide = k.pathOf([[RZ[0], -BACK_Y], [RZ[1], -BACK_Y], [RZ[1], -BACK_Y - DEEP], [RZ[0], -BACK_Y - DEEP]].map(([z, y]) => at([RX[1], y, z])), true);
-  const rails = [-48, 30].map((x) => S(k.slabOf({ x, y: -BACK_Y - DEEP, w: 18, d: 6, r: 1 }, RZ[0], RZ[1] - RZ[0], P, 2, 0.4), { tone: "mid" })).join("");
-  const recessSvg = `<g clip-path="url(#tr-recess)"><path class="tr-recess" d="${recessBack}"/><path class="iso-top" d="${recessFloor}"/><path class="iso-shade" data-shade="1" d="${recessSide}"/>${rails}</g>` + Ln(recessOutline, { tone: "lo" });
-  // panel seams, the left one broken by the window
-  const seams = [[-150, FLOOR_Z, WIN.z[0]], [-150, WIN.z[1], wallTop], [110, FLOOR_Z, wallTop]].map(([x, z0, z1]) => k.segment([x, -BACK_Y, z0], [x, -BACK_Y, z1], P)).join("");
-  const box = ([x0, x1], [z0, z1]) => k.pathOf([onWall(x0, z0), onWall(x1, z0), onWall(x1, z1), onWall(x0, z1)], true);
-  const winOuter = box(WIN.x, WIN.z);
-  const winInner = box([WIN.x[0] + 3, WIN.x[1] - 3], [WIN.z[0] + 3, WIN.z[1] - 3]);
-  const LEDGE = { x: -258, y: -BACK_Y, w: 190, d: 8, r: 1 };
-  // the brushed slot sits centred just above the stainless box (dealer's photo 3); from this high view the box mostly hides it
-  const slot = k.pathOf(k.roundedPlan({ x: -65, y: 41, w: 130, d: 8, r: 4 }, 4).map(([x, z]) => onWall(x, z)), true);
-  const brush = k.pathOf(k.roundedPlan({ x: -63, y: 43.5, w: 126, d: 3, r: 1.5 }, 4).map(([x, z]) => onWall(x, z)), true);
-  const wallSvg =
-    `<defs><clipPath id="tr-recess"><path d="${recessOutline}"/></clipPath></defs>` +
-    S(k.slabOf(WALLP, FLOOR_Z, wallTop - FLOOR_Z, P, 2, 1), { tone: "mid" }) +
-    recessSvg +
-    Ln(seams, { tone: "faint" }) +
-    Dots(panelScrews, { size: 0.5 }) +
-    `<path class="tr-recess" d="${winInner}"/>` + Ln(winOuter, { tone: "lo" }) + Ln(winInner, { tone: "lo" }) +
-    `<path class="tr-hole" d="${slot}"/>` + Ln(slot, { tone: "lo" }) + Ln(brush, { tone: "faint" }) +
-    S(k.slabOf(LEDGE, 56, 5, P, 2, 0.4), { tone: "mid" });
-  put({ name: "stand.wall", layer: "back", at: [0, -BACK_Y - 7, 40], bias: -40, svg: wallSvg, shapes: [ground(A.slab(WALLP, FLOOR_Z, wallTop - FLOOR_Z)), A.slab(LEDGE, 56, 5)] });
+  put({ name: "stand.floor", layer: "back", at: [0, 0, FLOOR_Z - 4], bias: -50, svg: floorSvg + joints + drainSvg, shapes: [ground(A.slab(FLOOR, FLOOR_Z - 8, 8))] });
+  // the door sill stands on the floor, so it lives with the machine's parts
+  block("stand.sill", WALL_X, [FRONT_Y - 10, FRONT_Y], [FLOOR_Z, FLOOR_Z + 4], { bevel: 0.4, details: { dots: [-270, -150, -30, 90, 176].map((x) => ({ at: [FLOOR_Z + 4, x, FRONT_Y - 5], normal: [0, 0, 1], size: 0.5 })) } });
+
+  // the wall in bands: under the openings, beside the window and the ram, the face, beside the slot, and the top
+  const screwsIn = (x0, x1, z0, z1) => {
+    const out = [];
+    for (const x of [-284, -204, -124, 100, 140, 184]) for (let z = FLOOR_Z + 18; z < WALL_TOP - 8; z += 40) if (x > x0 + 4 && x < x1 - 4 && z > z0 + 4 && z < z1 - 4) out.push({ at: [z, x, WY[1]], normal: [0, 1, 0], size: 0.5 });
+    return out;
+  };
+  const plate = (name, xs, zs, more = []) => block(name, xs, WY, zs, { details: { dots: [...screwsIn(xs[0], xs[1], zs[0], zs[1]), ...more] } });
+  // the long bands are cut where the openings' sides fall, so no plate spans both the bay and the ram (a long plate there
+  // closes a painter's cycle: plate → bay → ram → plate)
+  // The base stops 0.5 under the window sill and the ram, so the bay floor, the magazine and the ram rest on their own
+  // contacts and each meeting has one plane to order by (flush plates on two planes at once tie and can cycle).
+  const CUTS = [WALL_X[0], WIN.x[1], RAM.x[1], WALL_X[1]];
+  const SILL_Z = WIN.z[0] - 0.5;
+  for (let i = 0; i < 3; i++) plate(`wall.base.${i + 1}`, [CUTS[i], CUTS[i + 1]], [FLOOR_Z, SILL_Z]);
+  plate("wall.left", [WALL_X[0], WIN.x[0]], [SILL_Z, WIN.z[1]]);
+  plate("wall.mid", [WIN.x[1], RAM.x[0]], [SILL_Z, WIN.z[1]]);
+  plate("wall.right", [RAM.x[1], WALL_X[1]], [SILL_Z, WIN.z[1]]);
+  const faces = [0, 1, 2].map((i) => plate(`wall.face.${i + 1}`, [CUTS[i], CUTS[i + 1]], [WIN.z[1], SLOT.z[0]]));
+  const face = faces[1];
+  plate("wall.slot-left", [WALL_X[0], SLOT.x[0]], SLOT.z);
+  plate("wall.slot-right", [SLOT.x[1], WALL_X[1]], SLOT.z);
+  plate("wall.top", WALL_X, [SLOT.z[1], WALL_TOP], Array.from({ length: 12 }, (_, i) => ({ at: [WALL_TOP - 12, -260 + 40 * i, WY[1]], normal: [0, 1, 0], size: 0.5 })));
+  // the brushed slot centred above the ram (dealer's photo 3), drawn on the face
+  const slot = k.pathOf(k.roundedPlan({ x: -65, y: 41, w: 130, d: 8, r: 4 }, 4), true);
+  const brush = k.pathOf(k.roundedPlan({ x: -63, y: 43.5, w: 126, d: 3, r: 1.5 }, 4), true);
+  T.plane({ part: face, o: [0, WY[1], 0], u: [1, 0, 0], v: [0, 0, 1], normal: [0, 1, 0], svg: `<path class="tr-hole" d="${slot}"/><path class="iso-line" data-tone="lo" d="${slot}"/><path class="iso-line" data-tone="faint" d="${brush}"/>` });
+  // a ledge above the magazine window
+  block("wall.ledge", [WALL_X[0] + 10, WIN.x[1] + 20], [WY[1], WY[1] + 8], [WIN.z[1] + 5, WIN.z[1] + 10], { bevel: 0.4 });
+  // the magazine bay behind the window: dark, deep enough to take the whole magazine with its flap shut
+  const BAY = { y: [WY[0] - 156, WY[0]], back: 5, skin: 5 };
+  const dark = { tone: "lo", material: "rubber" };
+  // a floor under everything, side walls standing on it and a roof capping them: each joint meets on one face
+  const BX = [WIN.x[0] - BAY.skin, WIN.x[1] + BAY.skin];
+  block("bay.floor", BX, BAY.y, [WIN.z[0] - BAY.skin, WIN.z[0]], dark);
+  block("bay.left", [BX[0], WIN.x[0]], BAY.y, WIN.z, dark);
+  block("bay.right", [WIN.x[1], BX[1]], BAY.y, WIN.z, dark);
+  block("bay.roof", BX, BAY.y, [WIN.z[1], WIN.z[1] + BAY.skin], dark);
+  block("bay.back", BX, [BAY.y[0] - BAY.back, BAY.y[0]], [WIN.z[0] - BAY.skin, WIN.z[1] + BAY.skin], dark);
+  // the machine's side housing behind the wall's left edge: it hides the bay and the retracted magazine, which would
+  // otherwise show past the edge from this viewpoint
+  block("wall.return", [WALL_X[0] - 8, WALL_X[0]], [BAY.y[0] - BAY.back - 15, WY[0]], [FLOOR_Z, WALL_TOP], { tone: "lo" });
+  // and a dark channel behind the column slot
+  block("slot.back", SLOT.x, [WY[0] - 17, WY[0] - 12], [SLOT.z[0] - 4, SLOT.z[1] + 4], dark);
 }
-// the stainless box behind the cradle (the B drive itself is hidden inside the machine)
-function rearBox() {
-  const BOXR = { x: -77.5, y: -BACK_Y, w: 155, d: BACK_Y - KNUCKLE[1], r: 1.5 };
-  const z0 = -40;
-  const z1 = 35;
-  const screws = [[-52, -BACK_Y + 8, z1], [52, -BACK_Y + 8, z1], [-57, -KNUCKLE[1], z0 + 8], [57, -KNUCKLE[1], z0 + 8]].map((p) => at(p));
-  const svg = S(k.slabOf(BOXR, z0, z1 - z0, P, 2, 0.8), { tone: "mid", inner: Ln(k.sideSeam(BOXR, z1 - 6, P, 2), { tone: "faint" }) }) + Dots(screws, { size: 0.55 });
-  put({ name: "stand.rear-box", layer: "back", at: [0, -(KNUCKLE[1] + BACK_Y) / 2, 0], svg, shapes: [A.slab(BOXR, z0, z1 - z0)] });
+
+// ---------------------------------------------------------------- X: the ram behind the cradle, through the wall
+function ram() {
+  const y1 = -KNUCKLE[1];
+  const z1 = RAM.z[1];
+  const dots = [[-52, z1 - 8], [52, z1 - 8], [-57, RAM.z[0] + 8], [57, RAM.z[0] + 8]].map(([x, z]) => ({ at: [z, x, y1], normal: [0, 1, 0], size: 0.55 }));
+  block("ram", RAM.x, [y1 - RAM.len, y1], RAM.z, { group: gx, material: "steel", details: { seams: [z1 - 6], dots } });
 }
-function head() {
-  const F = UP(0, 0);
-  // the head box, with a 45° chamfer along its bottom front edge
+
+// ---------------------------------------------------------------- Y and Z: the column on the wall, the head on its rails
+function spindle() {
+  const F = UP(HX, 0);
+  // Y: the column with two rails, and the tongue that runs in the wall slot
+  const COL = { x: [HX - 45, HX + 45], z: [50, WALL_TOP - 14] };
+  block("column", COL.x, [WY[1], -132], COL.z, { group: gy, details: { seams: [COL.z[1] - 10] } });
+  for (const side of [-1, 1]) block(`column.rail.${side < 0 ? "left" : "right"}`, side < 0 ? [HX - 34, HX - 22] : [HX + 22, HX + 34], [-132, -126], COL.z, { group: gy, material: "steel" });
+  block("column.tongue", [HX - 30, HX + 30], [WY[0] - 12, WY[1]], SLOT.z, { group: gy });
+  // Z: the saddle on the rails, the head box with a 45° chamfer along its bottom front edge, the spindle and the bur
+  block("head.saddle", [HX - 35, HX + 35], [-126, BOX.y], BOX_Z, { group: gz });
   const HXF = G.frameOf([0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]);
   const yb = BOX.y;
   const yf = BOX.y + BOX.d;
@@ -249,81 +303,85 @@ function head() {
   const frontScrews = [[BOX.x + 8, BOX_Z[0] + 24], [BOX.x + BOX.w - 8, BOX_Z[0] + 24], [BOX.x + 8, BOX_Z[1] - 10], [BOX.x + BOX.w - 8, BOX_Z[1] - 10]].map(([x, z]) => at([x, yf, z]));
   const boxSeam = k.segment([BOX.x, yf, BOX_Z[0] + 52], [BOX.x + BOX.w, yf, BOX_Z[0] + 52], P);
   const ringProfile = [[S0 + 25, 32.5], [S0 + 29, 40], [S0 + 30, 42.5], [S0 + 41, 42.5]];
-  const stack = [
-    { name: "head.box", svg: S(boxPaths, { tone: "mid", inner: Ln(boxSeam, { tone: "faint" }) }) + Dots(frontScrews, { size: 0.5 }), shape: A.prism(HXF, prof, BOX.x, BOX.x + BOX.w), at: [0, BOX.y + BOX.d / 2, BOX_Z[0]] },
-    { name: "head.ring", svg: S(G.solidOf(ringProfile, F, P), { tone: "hi", crease: "lo" }), shape: A.solid(F, ringProfile), at: [0, 0, S0 + 33] },
-    { name: "head.nose", svg: S(G.solidOf([[S0 + 7, 32.5], [S0 + 25, 32.5]], F, P), { tone: "mid", inner: Ln(G.arcOf(F, S0 + 12, 32.5, P), { tone: "faint" }) }), shape: A.solid(F, [[S0 + 7, 32.5], [S0 + 25, 32.5]]), at: [0, 0, S0 + 16] },
-    { name: "head.nose-ring", svg: S(G.solidOf([[S0, 17], [S0 + 2, 19], [S0 + 7, 19]], F, P), { tone: "mid" }), shape: A.solid(F, [[S0, 17], [S0 + 2, 19], [S0 + 7, 19]]), at: [0, 0, S0 + 3.5] },
-    { name: "head.shaft", svg: S(G.solidOf([[S0 - 10, 7.5], [S0, 7.5]], F, P), { tone: "mid" }), shape: A.solid(F, [[S0 - 10, 7.5], [S0, 7.5]]), at: [0, 0, S0 - 5] },
-    { name: "tool.collar", svg: S(G.solidOf([[S0 - 17, 6.5], [S0 - 10, 6.5]], F, P), { tone: "mid" }) + Faded(G.ribsOf(F, S0 - 17, S0 - 10, 6.5, 6, P, { fade: [0.1, 0.55] }), { tone: "lo" }), shape: A.solid(F, [[S0 - 17, 6.5], [S0 - 10, 6.5]]), at: [0, 0, S0 - 13.5] },
+  const parts = [
+    { name: "head.box", svg: S(boxPaths, { tone: "mid", inner: Ln(boxSeam, { tone: "faint" }) }) + Dots(frontScrews, { size: 0.5 }), shape: A.prism(HXF, prof, BOX.x, BOX.x + BOX.w), at: [HX, BOX.y + BOX.d / 2, BOX_Z[0]] },
+    { name: "head.ring", svg: S(G.solidOf(ringProfile, F, P), { tone: "hi", crease: "lo" }), shape: A.solid(F, ringProfile), at: [HX, 0, S0 + 33] },
+    { name: "head.nose", svg: S(G.solidOf([[S0 + 7, 32.5], [S0 + 25, 32.5]], F, P), { tone: "mid", inner: Ln(G.arcOf(F, S0 + 12, 32.5, P), { tone: "faint" }) }), shape: A.solid(F, [[S0 + 7, 32.5], [S0 + 25, 32.5]]), at: [HX, 0, S0 + 16] },
+    { name: "head.nose-ring", svg: S(G.solidOf([[S0, 17], [S0 + 2, 19], [S0 + 7, 19]], F, P), { tone: "mid" }), shape: A.solid(F, [[S0, 17], [S0 + 2, 19], [S0 + 7, 19]]), at: [HX, 0, S0 + 3.5] },
+    { name: "head.shaft", svg: S(G.solidOf([[S0 - 10, 7.5], [S0, 7.5]], F, P), { tone: "mid" }), shape: A.solid(F, [[S0 - 10, 7.5], [S0, 7.5]]), at: [HX, 0, S0 - 5] },
+    { name: "tool.collar", svg: S(G.solidOf([[S0 - 17, 6.5], [S0 - 10, 6.5]], F, P), { tone: "mid" }) + Faded(G.ribsOf(F, S0 - 17, S0 - 10, 6.5, 6, P, { fade: [0.1, 0.55] }), { tone: "lo" }), shape: A.solid(F, [[S0 - 17, 6.5], [S0 - 10, 6.5]]), at: [HX, 0, S0 - 13.5] },
   ];
   // the bur: Ø6 shank, neck, Ø2 ball-end cutter
   const bur = [[TIP_Z, 0], [TIP_Z + 0.4, 0.8, 1], [TIP_Z + 1, 1], [TIP_Z + 7, 1], [TIP_Z + 9, 0.8], [TIP_Z + 12, 0.8], [TIP_Z + 18, 3], [S0 - 17, 3]];
   if (!(S0 - 17 > TIP_Z + 18)) throw new Error("tool: shank shorter than its taper");
-  stack.push({ name: "tool.bur", svg: S(G.solidOf(bur, F, P, {}), { tone: "hi", crease: "lo" }), shape: A.solid(F, bur), at: [0, 0, TIP_Z + 12] });
-  for (const part of stack) put({ name: part.name, layer: "front", at: part.at, svg: part.svg, shapes: [part.shape] });
-  // carriage arm from the head box back to the Z slide on the chamber wall
-  const ARMP = { x: -40, y: -BACK_Y, w: 80, d: BOX.y + BACK_Y, r: 2 };
-  const armScrews = [[-30, BOX.y - 10], [30, BOX.y - 10], [-30, -BACK_Y + 10], [30, -BACK_Y + 10]].map(([x, y]) => at([x, y, BOX_Z[1]]));
-  put({ name: "head.carriage", layer: "front", at: [0, ARMP.y + ARMP.d / 2, BOX_Z[1] - 30], svg: S(k.slabOf(ARMP, BOX_Z[1] - 60, 60, P, 3, 0.8), { tone: "mid", inner: Ln(k.sideSeam(ARMP, BOX_Z[1] - 46, P, 3), { tone: "faint" }) }) + Dots(armScrews, { size: 0.5 }), shapes: [A.slab(ARMP, BOX_Z[1] - 60, 60)] });
-}
-// coolant: on each side a hex block with a domed swivel under the head, a short rigid Ø5 tube and a black tip,
-// aimed at a point on the spindle axis 29 mm below the nose
-function nozzles() {
-  const aim = [0, 0, S0 - 29];
+  parts.push({ name: "tool.bur", svg: S(G.solidOf(bur, F, P, {}), { tone: "hi", crease: "lo" }), shape: A.solid(F, bur), at: [HX, 0, TIP_Z + 12] });
+  // coolant: on each side a hex block with a domed swivel under the head, a short rigid Ø5 tube and a black tip, aimed at a
+  // point on the spindle axis 29 mm below the nose
+  const aim = [HX, 0, S0 - 29];
   const top = BOX_Z[0];
   for (const side of [-1, 1]) {
-    const c = [side * 48, 33];
+    // one picture per nozzle (the head only translates), its pieces painted far to near
+    const c = [HX + side * 48, 33];
     const hex = Array.from({ length: 6 }, (_, j) => [c[0] + 9.8 * Math.cos((j * Math.PI) / 3), c[1] + 9.8 * Math.sin((j * Math.PI) / 3)]);
-    const hexSvg = S(k.extrude(hex, top - 10, 10, P, { bevel: 0.3 }), { tone: "mid" });
     const DF = UP(c[0], c[1]);
     const dome = [[top - 17, 0], [top - 16.4, 3, 1], [top - 14.6, 5.4, 1], [top - 12, 7, 1], [top - 10, 7.4]];
-    put({ name: `nozzle.block.${side}`, layer: "front", at: [c[0], c[1], top - 8], svg: hexSvg + S(G.solidOf(dome, DF, P, {}), { tone: "mid" }), shapes: [A.extruded(hex, top - 10, 10, { name: `nozzle.hex.${side}`, owner: `nozzle.${side}` }), A.solid(DF, dome, { name: `nozzle.dome.${side}`, owner: `nozzle.${side}` })] });
     const from = [c[0], c[1], top - 12];
     const dir = G.unit3(G.sub3(aim, from));
     const tubeEnd = G.add3(from, G.mul3(dir, 20));
     const TF = frameOf(from, dir, [0, 0, 1]);
-    put({ name: `nozzle.tube.${side}`, layer: "front", at: G.add3(from, G.mul3(dir, 12)), svg: S(G.solidOf([[4, 2.5], [20, 2.5]], TF, P, {}), { tone: "hi", crease: "lo" }), shapes: [A.solid(TF, [[4, 2.5], [20, 2.5]], { owner: `nozzle.${side}` })] });
     const tip = [[20, 4.5], [27, 4.5], [30, 2.4]];
-    put({ name: `nozzle.tip.${side}`, layer: "front", at: G.add3(tubeEnd, G.mul3(dir, 5)), svg: `<g class="tr-black">${S(G.solidOf(tip, TF, P, {}), { tone: "lo" })}</g>`, shapes: [A.solid(TF, tip, { owner: `nozzle.${side}` })] });
+    const pieces = [
+      { at: [c[0], c[1], top - 8], svg: S(k.extrude(hex, top - 10, 10, P, { bevel: 0.3 }), { tone: "mid" }) + S(G.solidOf(dome, DF, P, {}), { tone: "mid" }) },
+      { at: G.add3(from, G.mul3(dir, 12)), svg: S(G.solidOf([[4, 2.5], [20, 2.5]], TF, P, {}), { tone: "hi", crease: "lo" }) },
+      { at: G.add3(tubeEnd, G.mul3(dir, 5)), svg: `<g class="tr-black">${S(G.solidOf(tip, TF, P, {}), { tone: "lo" })}</g>` },
+    ].sort((u, w) => k.depthOf(u.at, P) - k.depthOf(w.at, P));
+    parts.push({ name: `nozzle.${side < 0 ? "left" : "right"}`, svg: pieces.map((piece) => piece.svg).join(""), shapes: [A.extruded(hex, top - 10, 10, { name: `nozzle.hex.${side}`, owner: `nozzle.${side}` }), A.solid(DF, dome, { name: `nozzle.dome.${side}`, owner: `nozzle.${side}` }), A.solid(TF, [[4, 2.5], [20, 2.5]], { name: `nozzle.tube.${side}`, owner: `nozzle.${side}` }), A.solid(TF, tip, { name: `nozzle.tip.${side}`, owner: `nozzle.${side}` })], at: [c[0], c[1], top - 12] });
   }
+  for (const part of parts) T.fixed({ name: part.name, group: gz, layer: live, svg: part.svg, anchor: part.at, shapes: part.shapes ?? [part.shape] });
 }
+
+// ---------------------------------------------------------------- the magazine, its pedestal and the flap
 function magazine() {
-  const base = { x: MAG.x + 8, y: MAG.y + 8, w: MAG.w - 16, d: MAG.d - 16, r: 2 };
-  put({ name: "stand.mag.pedestal", layer: "front", at: [MAG.x + MAG.w / 2, MAG.y + MAG.d / 2, FLOOR_Z + 20], svg: S(k.slabOf(base, FLOOR_Z, MAG_TOP - 40 - FLOOR_Z, P, 3, 0.6), { tone: "lo", inner: Ln(k.sideSeam(base, FLOOR_Z + 20, P, 3), { tone: "faint" }) }), shapes: [A.slab(base, FLOOR_Z, MAG_TOP - 40 - FLOOR_Z)] });
+  // pedestal: lower under the open flap, level with the magazine's underside in front of it
+  const PX = [MAG.x + 8, MAG.x + MAG.w - 8];
+  const step = FLAP.y + FLAP.len;
+  block("stand.mag.pedestal", PX, [MAG.y + 8, step], [FLOOR_Z, FLAP.z - 1.5], { tone: "lo", details: { seams: [FLOOR_Z + 20] } });
+  block("stand.mag.pedestal-front", PX, [step, MAG.y + MAG.d - 8], [FLOOR_Z, MAG_TOP - 40], { tone: "lo", details: { seams: [FLOOR_Z + 20] } });
+  // the magazine: 15 pockets on a 32 mm grid, with the dealer's photo's occupancy (C1R1, C2R1, C2R5 and C3R2 empty)
   const cols = [MAG.x + MAG.w - 17, MAG.x + MAG.w - 49, MAG.x + MAG.w - 81]; // C1 nearest the cradle … C3
   const rows = [0, 1, 2, 3, 4].map((i) => MAG.y + 16 + i * 32); // back … front (R5 … R1)
   const pockets = [];
   rows.forEach((y, r) => cols.forEach((x, c) => pockets.push({ x, y, c: c + 1, r: 5 - r })));
-  // occupancy as in the dealer's photo: C1R1, C2R1, C2R5 and C3R2 empty
   const empty = new Set(["1/1", "2/1", "2/5", "3/2"]);
-  const parts = [S(k.slabOf(MAG, MAG_TOP - 40, 40, P, 3, 1), { tone: "mid", inner: Ln(k.sideSeam(MAG, MAG_TOP - 8, P, 3), { tone: "faint" }) })];
+  const svg = [S(k.slabOf(MAG, MAG_TOP - 40, 40, P, 3, 1), { tone: "mid", inner: Ln(k.sideSeam(MAG, MAG_TOP - 8, P, 3), { tone: "faint" }) })];
   const sorted = pockets.slice().sort((u, w) => k.depthOf([u.x, u.y, MAG_TOP], P) - k.depthOf([w.x, w.y, MAG_TOP], P));
   for (const { x, y, c, r } of sorted) {
-    parts.push(S(k.cylinder(x, y, 7, MAG_TOP, 6, P, 24, 0.3), { tone: "mid" }));
-    parts.push(Ln(k.ring(x, y, 3.8, MAG_TOP + 6, P, 18), { tone: "lo" }));
-    parts.push(Dots([at([x - 7.8, y + 7.8, MAG_TOP]), at([x + 7.8, y - 7.8, MAG_TOP])], { size: 0.45 }));
-    if (!empty.has(`${c}/${r}`)) parts.push(S(k.cylinder(x, y, 3, MAG_TOP + 6, 27, P, 16), { tone: "mid", crease: "faint" }));
+    svg.push(S(k.cylinder(x, y, 7, MAG_TOP, 6, P, 24, 0.3), { tone: "mid" }));
+    svg.push(Ln(k.ring(x, y, 3.8, MAG_TOP + 6, P, 18), { tone: "lo" }));
+    svg.push(Dots([at([x - 7.8, y + 7.8, MAG_TOP]), at([x + 7.8, y - 7.8, MAG_TOP])], { size: 0.45 }));
+    if (!empty.has(`${c}/${r}`)) svg.push(S(k.cylinder(x, y, 3, MAG_TOP + 6, 27, P, 16), { tone: "mid", crease: "faint" }));
   }
-  put({ name: "stand.mag", layer: "front", at: [MAG.x + MAG.w / 2, MAG.y + MAG.d / 2, MAG_TOP - 20], svg: parts.join(""), shapes: [A.slab(MAG, MAG_TOP - 40, 40 + 33)] });
+  T.fixed({ name: "magazine", group: gm, layer: live, svg: svg.join(""), anchor: [MAG.x + MAG.w / 2, MAG.y + MAG.d / 2, MAG_TOP - 20], shapes: [A.slab(MAG, MAG_TOP - 40, 40 + 33)] });
+  // the flap, shown open (flat): a plate on a hinge barrel along its bottom edge
+  T.round({ name: "flap.barrel", group: gf, layer: live, F: frameOf([0, FLAP.y, FLAP.z], [1, 0, 0], [0, 1, 0]), s0: FLAP.x[0], s1: FLAP.x[1], r: 1.5, tone: "mid", material: "steel" });
+  block("flap", FLAP.x, [FLAP.y + 1.5, FLAP.y + FLAP.len], [FLAP.z - 1.5, FLAP.z + 1.5], { group: gf, material: "steel" });
 }
 
 chamber();
-rearBox();
-head();
-nozzles();
+ram();
+spindle();
 magazine();
 
 const verify = argv.includes("--verify");
-const out = T.build({ statics: R.items, poses, verify });
+const out = T.build({ statics: R.items, poses, verify, fullClouds: true });
 A.settle(R, P);
 const layerOf = (name) => R.items.filter((item) => item.layer === name).sort((u, w) => u.key - w.key).map((item) => item.svg);
 
 if (argv.includes("--audit")) {
   A.auditOrExit(R, P);
   TA.orbitOrExit(T, R, P, {
-    sweep: { at: (x) => follow({ a: x, b: 30 * Math.sin((x * Math.PI) / 90) }), from: -180, to: 180, frame: 0.5 },
-    clips: [-150, -90, 0, 60, 120].map((av) => ({ name: `b@${av}`, at: (t) => follow({ a: av, b: -30 + 30 * t }), from: 0, to: 2, frame: 1 / 30 })),
+    sweep: { at: (x) => follow({ x: TRAVEL.x / 2, y: Y_DISC, z: 0, a: x, b: 30 * Math.sin((x * Math.PI) / 90), m: 1 }), from: -180, to: 180, frame: 0.5 },
+    clips: [{ name: "tour", at: (t) => follow(tourAt(t)), from: 0, to: TOUR_LEN, frame: 1 / 10 }],
     quick: argv.includes("--quick"),
     only: argv.find((x) => x.startsWith("--only="))?.slice(7).split(",") ?? null,
     log: argv.includes("--verbose") ? (text) => console.log(`  … ${text}`) : null,
@@ -331,10 +389,20 @@ if (argv.includes("--audit")) {
 }
 
 const LABEL =
-  "Inside the machining chamber of a 5-axis dental mill. A gold cradle, open at the front, holds a square disc holder on a horizontal shaft between a support hub on the left and a drive hub on the right; the holder can turn all the way round on that shaft. The whole cradle can also roll left or right, shown here about a front-to-back axis through the bolt circle in its back wall (that axis is inferred from photos). Above it the spindle points straight down, with a coolant nozzle on each side; to the left a tool magazine holds burs standing in fifteen pockets.";
+  "Inside the machining chamber of a 5-axis dental mill. A gold cradle, open at the front, holds a square disc holder on a horizontal shaft between a support hub on the left and a drive hub on the right. The holder turns all the way round on that shaft (A), and the whole cradle rolls left or right (B), shown about a front-to-back axis through the bolt circle in its back wall (inferred from photos). The cradle rides on a ram through the back wall and slides toward the operator and back (X). Above it the spindle points straight down, with a coolant nozzle on each side; its column runs left and right along the back wall (Y) and the head slides up and down the column (Z). To the left a tool magazine holds burs in fifteen pockets; it slides out through a window in the wall over a flap door hinged at the bottom, and back in, when the spindle comes for a tool.";
+// the five controls: each names its axis and shows its position
+const AXES = [
+  { key: "X", name: "cradle in and out", range: `0 to ${TRAVEL.x} mm` },
+  { key: "Y", name: "spindle left and right", range: `0 to ${TRAVEL.y} mm` },
+  { key: "Z", name: "spindle up and down", range: `0 to −${TRAVEL.z} mm` },
+  { key: "A", name: "holder turns", range: "360°" },
+  { key: "B", name: "cradle tilts", range: `±${SPEC.bLimit}°` },
+];
 const backSvg = k.figureSvg({ width: W, height: H, label: LABEL, body: layerOf("back") });
 const staticSvg = (list) => `<svg xmlns="http://www.w3.org/2000/svg" class="iso-svg iso-layer" viewBox="0 0 ${W} ${H}" aria-hidden="true">${list.join("")}</svg>`;
-const stage = `<div class="iso-stage iso-turn tr-stage" tabindex="0" role="slider" aria-label="Disc holder. Left and right arrows turn the holder on A (Shift for 45 degrees); up and down arrows roll the cradle on B (Shift for 5 degrees); 1 and 2 show each face; Home returns to zero; End goes to the B limit. With a mouse, drag sideways for A and up or down for B." aria-valuemin="-30" aria-valuemax="30" aria-valuenow="0" aria-valuetext="${wordsOf(0, 0)}">${backSvg}${out.layerSvg("cradle", { width: W, height: H })}${staticSvg(layerOf("front"))}</div>`;
+const KEYS_HELP = "Press X, Y, Z, A or B to choose an axis, then the arrow keys to move it (Shift for bigger steps); Home returns every axis home. With a mouse or a finger, choose an axis below and drag across the picture.";
+const stage = `<div class="iso-stage iso-turn tr-stage" tabindex="0" role="slider" aria-label="Y: spindle left and right. ${KEYS_HELP}" aria-valuemin="0" aria-valuemax="${TRAVEL.y}" aria-valuenow="${Y_DISC}" aria-valuetext="${wordsOf(HOME)}">${backSvg}${out.layerSvg("machine", { width: W, height: H })}${staticSvg(layerOf("front"))}</div>`;
+const axesRow = `<div class="tr-axes" role="group" aria-label="Axis to move">${AXES.map((ax) => `<button type="button" class="tr-axis" data-axis="${ax.key}" aria-pressed="${ax.key === "Y"}" title="${ax.key}: ${ax.name}, ${ax.range}"><span class="tr-axis-key">${ax.key}</span><span class="tr-axis-value" data-value="${ax.key}"></span></button>`).join("")}</div>`;
 
 const CSS = `${out.css}
 .iso{--tr-ring:#1c1c1e;--tr-disc:#ffffff;--tr-disc-a:.10;--tr-bevel:#9a9aa0;--tr-hole:#0d0d0e;--tr-screw:#8f8f94;--tr-recess:#161618}
@@ -350,8 +418,16 @@ const CSS = `${out.css}
 .tr-stage{touch-action:pan-y pinch-zoom;cursor:grab}
 .tr-stage[data-drag]{cursor:grabbing}
 .tr-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
-.tr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-@media (max-width:480px){.tr-plate .iso-plate-corner[data-corner="readout"]{font-size:9px;letter-spacing:0}}
+.tr-axes{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:12px 0 10px}
+.tr-axis{display:inline-flex;align-items:baseline;gap:7px;padding:6px 10px;border:0;border-radius:3px;background:transparent;box-shadow:inset 0 0 0 1px var(--anatomy-lo);color:var(--anatomy-muted);font:10.5px/1 var(--anatomy-mono);letter-spacing:.04em;font-variant-numeric:tabular-nums;cursor:pointer;transition:box-shadow .2s var(--anatomy-ease),color .2s var(--anatomy-ease)}
+.tr-axis-key{color:var(--anatomy-text);font-weight:600}
+.tr-axis-value{min-width:6.5ch;text-align:right}
+.tr-axis[aria-pressed="true"]{box-shadow:inset 0 0 0 1px var(--anatomy-hi);color:var(--anatomy-strong)}
+.tr-axis[data-moving]{color:var(--anatomy-strong)}
+.tr-axis[data-moving] .tr-axis-key{color:var(--anatomy-lit)}
+.tr-axis:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:2px}
+@media (max-width:480px){.tr-plate .iso-plate-corner[data-corner="readout"]{font-size:9px;letter-spacing:0}.tr-axes{gap:4px}.tr-axis{padding:6px 5px;gap:4px;font-size:9.5px;letter-spacing:0}.tr-axis-value{min-width:5.2ch}}
+@media (prefers-reduced-motion: reduce){.tr-axis{transition:none}}
 `;
 const DATA = { turn: out.data };
 const modelScript = readFileSync(join(HERE, "model.mjs"), "utf8").replace(/^export /gm, "");
@@ -360,20 +436,20 @@ const body =
   `<style>${CSS}</style><div class="tr-plate">` +
   k.plateHtml({
     fig: "Fig 2",
-    title: "Two rotary axes",
-    hint: "Drag · arrows · 1 2 faces",
-    readout: readoutOf(0, 0),
+    title: "Five axes",
+    hint: "Drag · arrows · X Y Z A B",
+    readout: readoutOf(HOME),
     keys: [
-      { mark: "lit", label: "The disc: what the two axes point at the bur" },
-      { mark: "raised", label: "Cradle (gold): rolls ±30° on B, carrying the holder on its A shaft (360°)" },
+      { mark: "lit", label: "The disc: what the five axes bring under the bur" },
+      { mark: "raised", label: "Cradle (gold): slides in and out on X, rolls ±30° on B, and turns the holder 360° on A" },
     ],
     caption:
-      `A turns the holder a full ${SPEC.aRange}° on the shaft between the support hub and the drive hub. B rolls the whole cradle up to ±${SPEC.bLimit}°; we show it about a front-to-back axis through the centre of the bolt circle in the cradle's back wall, an inference from the photos rather than published data. Together they tilt the disc under the bur, which never tilts, so undercuts, angled screw channels and the disc's back face can be reached without unclamping it. ` +
-      `Specs: ARUM 5X-200 (A 360°, B ±30°, ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks, DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm, five premill seats P1–P5 on the holder's back edge). Holder (Ø${SPEC.disc} mm disc), cradle, hubs, nozzles and the magazine grid measured from the dealer's photos of a 5X-200 and ARUM's product photos; spindle head, rear box and chamber schematic; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
-    body: stage,
+      `Three straight moves and two turns. X slides the cradle toward the operator and back on a ram through the back wall (${TRAVEL.x} mm); Y runs the spindle column left and right along the wall (${TRAVEL.y} mm), far enough to reach the magazine; Z lowers the head down the column (${TRAVEL.z} mm). A turns the holder a full ${SPEC.aRange}° between the support hub and the drive hub, and B rolls the whole cradle up to ±${SPEC.bLimit}°, shown about a front-to-back axis through the bolt circle in the cradle's back wall (inferred from the photos, not published). The bur never tilts: the cradle brings the disc to it. When the spindle goes for a tool, the magazine slides out over its flap door, which is hinged at the bottom, and goes back in after. The figure holds the head clear of the cradle and the magazine, as the machine's limits would. ` +
+      `Specs: ARUM 5X-200 (5 axes; travel ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm; five premill seats P1–P5). Which part moves on which axis is from the dealer, and ARUM's ${TRAVEL.y} mm stroke is drawn on the spindle's left-right move, the only one long enough to reach the magazine. Holder (Ø${SPEC.disc} mm disc), cradle, hubs, nozzles and magazine measured from the dealer's photos of a 5X-200 and ARUM's product photos; column, ram, flap and chamber schematic; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
+    body: stage + axesRow,
   }) +
   `</div>`;
-const page = k.pageHtml({ title: "Two rotary axes", theme: THEME, body, script: turnScript() + modelScript + (verify ? `window.__isoVerify = ${JSON.stringify(out.verify)};\n` : "") + LIVE, width: 680 });
+const page = k.pageHtml({ title: "Five axes", theme: THEME, body, script: turnScript() + modelScript + (verify ? `window.__isoVerify = ${JSON.stringify(out.verify)};\n` : "") + LIVE, width: 680 });
 // A claude.ai Artifact page (--artifact=path): no document skeleton of its own (the host adds it), and the figure follows
 // the viewer's theme: an explicit data-theme on <html>, else the system setting
 const THEME_HOST = `{
