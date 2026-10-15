@@ -104,6 +104,53 @@ function runs(poly, depth, sh, pick) {
   return out;
 }
 
+// Line of sight. A point at p (face coordinates) and depth d shows on screen where the face-level point p + d·sh does;
+// on its way up the sight line passes p + k·sh at depth d − k. The line is open while it stays inside the channel's
+// opening and, below the bridge's top, outside the bridge. So the deepest a point at p can be and still be seen is the
+// distance k1 to where the ray p + k·sh leaves the opening, or k2 + top where it first enters the bridge (a point over
+// the bridge itself is open only above the bridge's top).
+const segsOf = (pts) => pts.map((a, i) => [a, pts[(i + 1) % pts.length]]);
+const MOAT_SEGS = segsOf(MOAT.pts);
+const BODY_SEGS = segsOf(BODY.pts);
+const insidePoly = (p, pts) => { let c = false; for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) { const a = pts[i]; const b = pts[j]; if (a[1] > p[1] !== b[1] > p[1] && p[0] < ((b[0] - a[0]) * (p[1] - a[1])) / (b[1] - a[1]) + a[0]) c = !c; } return c; };
+// the first k > 0 where p + k·dir crosses one of the segments (Infinity if none); u holds each segment end's offset
+// across the ray's direction, so only segments that straddle p's own offset are tested
+function firstHit(p, dir, segs, u) {
+  let best = Infinity;
+  const up = dir[0] * p[1] - dir[1] * p[0];
+  for (let i = 0; i < segs.length; i++) {
+    const ua = u[i];
+    const ub = u[(i + 1) % segs.length];
+    if ((ua > up && ub > up) || (ua < up && ub < up)) continue;
+    const [a, b] = segs[i];
+    const ex = b[0] - a[0];
+    const ey = b[1] - a[1];
+    const den = dir[0] * ey - dir[1] * ex;
+    if (Math.abs(den) < 1e-12) continue;
+    const wx = a[0] - p[0];
+    const wy = a[1] - p[1];
+    const k = (wx * ey - wy * ex) / den;
+    if (k <= 1e-9 || k >= best) continue;
+    const t = (wx * dir[1] - wy * dir[0]) / den;
+    if (t >= 0 && t <= 1) best = k;
+  }
+  return best;
+}
+// the offsets across one direction, worked out once per direction
+let SIGHT = { key: "", moat: null, body: null };
+const offsetsFor = (sh) => {
+  const key = `${sh[0]} ${sh[1]}`;
+  if (SIGHT.key !== key) SIGHT = { key, moat: MOAT.pts.map((q) => sh[0] * q[1] - sh[1] * q[0]), body: BODY.pts.map((q) => sh[0] * q[1] - sh[1] * q[0]), seen: null };
+  return SIGHT;
+};
+// (inChannel: the caller knows p is in the channel, off the bridge, so the two inside tests can be skipped)
+export function sightDepth(p, sh, inChannel = false) {
+  if (!inChannel && !insidePoly(p, MOAT.pts)) return 0;
+  if (!inChannel && insidePoly(p, BODY.pts)) return BRIDGE.top;
+  const o = offsetsFor(sh);
+  return Math.min(firstHit(p, sh, MOAT_SEGS, o.moat), firstHit(p, sh, BODY_SEGS, o.body) + BRIDGE.top);
+}
+
 // which walls the finishing passes have reached: each edge of the outline belongs to the buccal pass (the buccal side and
 // the right-hand end) or the palatal pass (the palatal side and the left-hand end)
 const finishedEdge = (i, done) => (done[WALL_REACH.pass[i]] ?? 0) >= WALL_REACH.at[i] - 1e-9;
@@ -113,22 +160,40 @@ const finishedEdge = (i, done) => (done[WALL_REACH.pass[i]] ?? 0) >= WALL_REACH.
 export function workShapes(sh, done, lit) {
   const facing = (poly, sign = 1) => (i) => sign * (poly.n[i][0] * sh[0] + poly.n[i][1] * sh[1]) > 1e-6;
   const bodyFacing = facing(BODY);
+  // how deep each facing wall's corner can be seen (from just outside the wall, where its sight line starts)
+  const cache = offsetsFor(sh);
+  if (!cache.seen) {
+    cache.seen = BODY.pts.map((p, i) => (bodyFacing(i) || bodyFacing((i + BODY.pts.length - 1) % BODY.pts.length) ? Math.max(BRIDGE.top, Math.min(BRIDGE.base, sightDepth(add(p, sh, 0.03), sh, true))) : BRIDGE.top));
+    cache.moatSeen = MOAT.pts.map((p) => sightDepth(add(p, sh, 0.03), sh, true));
+    cache.conn = CONN.map((c) => { const [a, b, e, f] = c.quad; const mid = (u, v) => [(u[0] + v[0]) / 2, (u[1] + v[1]) / 2]; return [mid(mid(a, b), mid(e, f)), mid(a, f), mid(b, e)].some((p) => sightDepth(p, sh, true) > c.depth[0]); });
+  }
+  const seen = cache.seen;
   const body = { roughLit: "", roughShade: "", finLit: "", finShade: "" };
-  for (const fin of [false, true]) for (const isLit of [true, false]) {
-    const key = `${fin ? "fin" : "rough"}${isLit ? "Lit" : "Shade"}`;
-    body[key] = sides(BODY, BRIDGE.top, BRIDGE.base, sh, (i) => bodyFacing(i) && finishedEdge(i, done) === fin && lit(BODY.n[i]) === isLit);
+  const n = BODY.pts.length;
+  for (let i = 0; i < n; i++) {
+    if (!bodyFacing(i)) continue;
+    const j = (i + 1) % n;
+    if (seen[i] <= BRIDGE.top + 1e-6 && seen[j] <= BRIDGE.top + 1e-6) continue;
+    const p = BODY.pts[i];
+    const q = BODY.pts[j];
+    const quad = [add(p, sh, BRIDGE.top), add(q, sh, BRIDGE.top), add(q, sh, seen[j]), add(p, sh, seen[i])];
+    if (signedArea(quad) < 0) quad.reverse();
+    body[`${finishedEdge(i, done) ? "fin" : "rough"}${lit(BODY.n[i]) ? "Lit" : "Shade"}`] += ring(quad);
   }
   const roughFacing = (i) => bodyFacing(i) && !finishedEdge(i, done);
-  const bodySteps = STEP_DEPTHS.map((d) => runs(BODY, d, sh, roughFacing)).join("");
-  // the channel's far walls (seen from inside the pocket) and their roughing steps
-  const moatFar = facing(MOAT, -1);
+  const bodySteps = STEP_DEPTHS.map((d) => runs(BODY, d, sh, (i) => roughFacing(i) && d < Math.min(seen[i], seen[(i + 1) % n]))).join("");
   // the channel's far walls, swept all the way down: anything deeper seen inside the opening lies behind one of them,
-  // so painting them over the void keeps the far side of the horseshoe from showing through
+  // so painting them over the void keeps the far side of the horseshoe from showing through; their roughing steps only
+  // as deep as each can be seen
+  const moatFar = facing(MOAT, -1);
   const moatWalls = sides(MOAT, 0, THROUGH, sh, moatFar);
-  const moatSteps = MOAT_STEPS.map((d) => runs(MOAT, d, sh, moatFar)).join("");
+  const moatSeen = cache.moatSeen;
+  const moatSteps = MOAT_STEPS.map((d) => runs(MOAT, d, sh, (i) => moatFar(i) && d < Math.min(moatSeen[i], moatSeen[(i + 1) % MOAT.pts.length]))).join("");
   // connectors: those on walls facing away sit behind the bridge, the rest in front of it
   const conn = { farTop: "", farSide: "", nearTop: "", nearSide: "" };
-  for (const c of CONN) {
+  // only connectors whose top face can be seen (its middle or either end, at the connector's depth)
+  for (const [ci, c] of CONN.entries()) {
+    if (!cache.conn[ci]) continue;
     const out = archAt(c.s).n;
     const toward = c.wall * (out[0] * sh[0] + out[1] * sh[1]) > 0;
     const k = toward ? "near" : "far";

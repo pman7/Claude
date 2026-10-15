@@ -53,6 +53,12 @@ export const magOf = (m) => {
   return { mag: GEO.MAG_STROKE * ease(slide), flap: t <= 0.72 ? 0 : 90 * ease((t - 0.72) / 0.28) };
 };
 
+// ---------------------------------------------------------------- the axes' directions, shared with the scene
+// X slides the cradle toward the operator; B tilts it about a front-to-back axis through the disc centre; A turns the
+// holder in it about the left-right shaft (A rides on B); Y runs the spindle right, Z brings it down. build.mjs builds
+// its groups from these, and the clearance model and the kinematics turn the holder with them.
+export const AXES_DIR = { x: [0, 1, 0], b: [0, -1, 0], a: [1, 0, 0], y: [1, 0, 0], z: [0, 0, -1] };
+
 // ---------------------------------------------------------------- clearance: how far down the spindle may come
 // Rodrigues rotation about a unit axis through the origin, right-handed, as the turn engine's hinges
 const rot = (axis, degrees) => {
@@ -208,7 +214,7 @@ const meets = (a, b) => a[0] <= b[1] && b[0] <= a[1] && a[2] <= b[3] && b[2] <= 
 // every stand-in placed for a pose { x, b, a, mag }
 export function bodiesOf(pose) {
   const t = [0, pose.x ?? 0, 0];
-  const Mb = rot([0, -1, 0], pose.b ?? 0);
+  const Mb = rot(AXES_DIR.b, pose.b ?? 0);
   const Ma = partRotation(pose.a ?? 0, pose.b ?? 0);
   const eye = rot([1, 0, 0], 0);
   const out = [...CRADLE.map((s) => placed(s, Mb, t)), ...HOLDER.map((s) => placed(s, Ma, t)), placed(RAM_BODY, eye, t)];
@@ -243,8 +249,10 @@ export const zLimit = (pose, y, bodies) => {
 // ---------------------------------------------------------------- five-axis kinematics
 // The holder frame turns with A inside the cradle, and the cradle tilts with B: holder → world is B's rotation after
 // A's, then the cradle's X slide (as bodiesOf).
-export const partRotation = (a, b) => mulM(rot([0, -1, 0], b), rot([1, 0, 0], a));
-export const toWorld = (s, p) => { const q = mul(partRotation(s.a, s.b), p); return [q[0], q[1] + s.x, q[2]]; };
+export const partRotation = (a, b) => mulM(rot(AXES_DIR.b, b), rot(AXES_DIR.a, a));
+// a turn about a unit axis, as the turn engine's hinges and the clearance model make it (for the tests)
+export const turnAbout = (axis, degrees) => rot(axis, degrees);
+export const toWorld = (s, p) => { const q = mul(partRotation(s.a, s.b), p); const X = AXES_DIR.x; return [q[0] + s.x * X[0], q[1] + s.x * X[1], q[2] + s.x * X[2]]; };
 // The machine position that puts the bur tip on p (holder frame, mm) with the tool along t (unit, holder frame, from the
 // tip toward the spindle). The spindle never tilts, so A and B turn t upright: R(A, B)·t = ẑ gives t = (sin B,
 // cos B sin A, cos B cos A); then X, Y and Z bring the tip to the turned point.
@@ -257,7 +265,11 @@ export function axesFor(p, t) {
 // where the bur tip is, in the holder frame, and which way the tool points there, for a machine position
 export function tipIn(s) {
   const M = partRotation(s.a, s.b);
-  const tip = [GEO.SPINDLE_X0 + s.y, GEO.SPINDLE_Y - s.x, GEO.TIP_Z - s.z];
+  // the tip in the cradle's frame before X: where Y and Z put it, less the cradle's X slide
+  const Y = AXES_DIR.y;
+  const Z = AXES_DIR.z;
+  const X = AXES_DIR.x;
+  const tip = [0, 1, 2].map((k) => [GEO.SPINDLE_X0, GEO.SPINDLE_Y, GEO.TIP_Z][k] + s.y * Y[k] + s.z * Z[k] - s.x * X[k]);
   const inv = (v) => [M[0] * v[0] + M[3] * v[1] + M[6] * v[2], M[1] * v[0] + M[4] * v[1] + M[7] * v[2], M[2] * v[0] + M[5] * v[1] + M[8] * v[2]];
   return { p: inv(tip), t: inv([0, 0, 1]) };
 }
@@ -368,23 +380,28 @@ const at2 = (c, o) => [c.p[0] + o * c.n[0], c.p[1] + o * c.n[1]];
 // a closed outline of the band round the arch, grown by `grow` (the channel's outer wall is the bridge grown by the
 // gap), with round ends; returned with the arc position along the arch of each point (for the finishing reveal)
 export function bandOutline(grow = 0, step = 0.6) {
-  const L = ARCH.L;
+  // the end sits CAP + grow past the last contact (inside it, for an inset outline), its corners rounded with radius r;
+  // the sides run to where the corners begin
+  const [hbL, hlL] = halfWidths(ARCH.L, grow);
+  const end = CAP + grow;
+  const r = Math.max(0.5, Math.min(Math.max(end, 0.5), (hbL + hlL) / 2));
+  const L = ARCH.L + Math.min(0, end - r);
+  // how far the end reaches past where the sides stop
+  const reach = end - Math.min(0, end - r);
   const pts = [];
   const sOf = [];
   const side = [];
   const n = Math.ceil((2 * L) / step);
   for (let i = 0; i <= n; i++) { const s = -L + (2 * L * i) / n; const c = archAt(s); pts.push(at2(c, halfWidths(s, grow)[0])); sOf.push(s); side.push(1); }
-  // the distal ends: square across, CAP past the last contact, with rounded corners
+  // the distal ends: square across, with rounded corners
   const cap = (s, dir) => {
     const [hb, hl] = halfWidths(s, grow);
-    const end = CAP + grow;
-    const r = Math.max(0.5, Math.min(end, (hb + hl) / 2));
     const at = (a, o) => { const c = archAt(s + dir * a); return [c.p[0] + o * c.n[0], c.p[1] + o * c.n[1]]; };
     const m = 6;
     // round the buccal corner, across, round the palatal corner; the −L end is the same list run backwards
     const list = [];
-    for (let j = 0; j <= m; j++) { const th = (j / m) * (Math.PI / 2); list.push([end - r + r * Math.sin(th), hb - r + r * Math.cos(th)]); }
-    for (let j = 0; j <= m; j++) { const th = Math.PI / 2 + (j / m) * (Math.PI / 2); list.push([end - r + r * Math.sin(th), -hl + r + r * Math.cos(th)]); }
+    for (let j = 0; j <= m; j++) { const th = (j / m) * (Math.PI / 2); list.push([reach - r + r * Math.sin(th), hb - r + r * Math.cos(th)]); }
+    for (let j = 0; j <= m; j++) { const th = Math.PI / 2 + (j / m) * (Math.PI / 2); list.push([reach - r + r * Math.sin(th), -hl + r + r * Math.cos(th)]); }
     for (const [a, o] of dir > 0 ? list : list.reverse()) { pts.push(at(a, o)); sOf.push(s); side.push(0); }
   };
   cap(L, 1);
@@ -559,8 +576,8 @@ const wallPoint = (kind, a, lean) => {
   return { p: tipFor(toHolder(q, WALL_DEPTH), [n[0], n[1], 0], t), t, s: a };
 };
 // The lean on the walls: 15° where the head is clear, eased where tilting the cradle that far would bring a part of it
-// up into the head (it is the right drive hub against the right coolant nozzle, on the buccal side of the right-hand
-// premolars and molar), as a CAM program limits the tilt to avoid the holder. Worked out on a 0.25 mm grid with 3 mm of
+// up into the head (it is the right drive hub against the right coolant nozzle, along the buccal side of the right
+// second premolar and first molar and round the right-hand end), as a CAM program limits the tilt to avoid the holder. Worked out on a 0.25 mm grid with 3 mm of
 // room to spare, then the least lean within 6 mm either side, blended, so the tilt changes gently; the build writes the
 // table into the page, so it is not worked out again on load.
 const LEAN_STEP = 0.25;

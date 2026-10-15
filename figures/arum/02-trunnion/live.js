@@ -51,6 +51,8 @@ const trController = TURN.mount(trStage, TR.turn, {
     trState.want = { x: trState.cur.x, y: trState.cur.y, z: trState.cur.z, a: trState.cur.a, b: trState.cur.b };
     trState.mWant = trMagFor(trState.cur.y);
     trWork(true);
+    trInsetUpdate();
+    trBurClip();
     trShow();
     trDescribe();
   },
@@ -76,6 +78,7 @@ function trWork(force = false) {
   const det = a * d - b * c;
   if (!Number.isFinite(det) || Math.abs(det) < 1e-6) return;
   const sh = [-(dx * d - c * dy) / det, -(a * dy - b * dx) / det];
+  trState.sh = sh;
   const done = trState.done;
   const key = `${sh[0].toFixed(3)} ${sh[1].toFixed(3)} ${a.toFixed(3)} ${c.toFixed(3)} ${done.occlusal.toFixed(4)} ${done.buccal.toFixed(4)} ${done.palatal.toFixed(4)}`;
   if (!force && key === trWorkKey) return;
@@ -140,14 +143,15 @@ let trSaid = "";
 function trSay() {
   const s = trState.sim;
   const text = s && (trState.playing || trState.time > 0) ? s.say : "";
-  if (!text || text === trSaid) return;
+  // the autoplay is not narrated; a job the reader started or moved is
+  if (!trState.asked || !text || text === trSaid) return;
   trSaid = text;
   if (trLive) trLive.textContent = text;
   trDescribe();
 }
 
-// the bur below the bridge's top, in a wall pass, is down in the channel: clip it at the depth of the bridge's top,
-// where the rim and the bridge hide it (the spindle is upright on screen, so the cut is a horizontal line)
+// The bur below face B is down in the channel: from the face down, it shows only as far as its sight line stays in
+// the channel (work.mjs sightDepth), so clip it there (the spindle is upright on screen, so the cut is a horizontal line)
 const trBur = trStage.querySelector('[data-name="tool.bur"]');
 let trBurRect = null;
 if (trBur && trBur.ownerSVGElement) {
@@ -164,17 +168,20 @@ if (trBur && trBur.ownerSVGElement) {
 }
 function trBurClip() {
   if (!trBur || !trBurRect || !trFaceB || !trFaceA) return;
-  const s = trState.sim;
   const { p, t } = tipIn(trState.cur);
-  const level = GEO.THICK - BRIDGE.top;
-  const wall = trState.mode === "sim" && s && (s.kind === "buccal" || s.kind === "palatal") && p[2] < level;
-  if (!wall) { if (trBur.hasAttribute("clip-path")) trBur.removeAttribute("clip-path"); return; }
-  const k = (level - p[2]) / t[2];
-  const q = [p[0] + k * t[0], p[1] + k * t[1]];
-  const [a, b, c, d, e, f] = trMatrix(trFaceB);
+  const sh = trState.sh;
+  const tipDepth = GEO.THICK - p[2];
+  // above the face, or turned away (face B hidden), nothing to clip
+  if (tipDepth <= 0 || !sh || trFaceB.getAttribute("opacity") === "0") { if (trBur.hasAttribute("clip-path")) trBur.removeAttribute("clip-path"); return; }
+  const at = (e) => { const k = (GEO.THICK - e - p[2]) / t[2]; return [p[0] + k * t[0], p[1] + k * t[1]]; };
+  let cut = tipDepth;
+  for (let e = 0.05; e < tipDepth; e += 0.1) if (e >= sightDepth(at(e), sh)) { cut = Math.max(0, e - 0.05); break; }
+  if (cut >= tipDepth) { if (trBur.hasAttribute("clip-path")) trBur.removeAttribute("clip-path"); return; }
+  const q = at(cut);
+  const [, b, , d, , f] = trMatrix(trFaceB);
   const under = trMatrix(trFaceA);
   const dy = (under[5] - f) / (2 * GEO.THICK);
-  const y = b * -q[0] + d * -q[1] + f + BRIDGE.top * dy;
+  const y = b * -q[0] + d * -q[1] + f + cut * dy;
   const move = (trBur.getAttribute("transform") || "").match(/translate\(\s*([-\d.e]+)[ ,]+([-\d.e]+)/);
   const ty = move ? Number(move[2]) : 0;
   trBurRect.setAttribute("height", (10000 + y - ty).toFixed(2));
@@ -314,6 +321,7 @@ function trStartJob(asked = false) {
   if (trState.mode !== "sim") trEnterSim();
   if (trState.time >= SIM_LEN - 1e-6) trState.time = 0;
   trState.playing = true;
+  trState.asked = asked;
   trState.viewTo = 1;
   trShow();
   trRun();
@@ -337,6 +345,7 @@ function trPause({ sticky = true } = {}) {
 // was running (above the part), so the bur never drops into it on the way
 function trEnterSim() {
   trState.mode = "sim";
+  trState.lifting = false;
   trState.time = simPassStart(trState.time);
   trState.blend = { from: { ...trState.cur }, t: 0 };
   trState.viewTo = 1;
@@ -362,6 +371,7 @@ function trEnterJog() {
   trRun();
 }
 function trSeek(time) {
+  trState.asked = true;
   if (trState.mode !== "sim") trEnterSim();
   trPause({ sticky: true });
   trState.blend = null;
@@ -398,9 +408,10 @@ function trTick(now) {
       const k3 = trSmooth((bl.t - 1.8) / 0.6);
       const lerp = (u, v, k) => u + (v - u) * k;
       next = { x: lerp(f.x, p.x, k2), y: lerp(f.y, p.y, k2), z: lerp(lerp(f.z, 0, k1), p.z, k3), a: wrap(f.a + wrap(p.a - f.a) * k2), b: lerp(f.b, p.b, k2), m: lerp(f.m, 1, k1) };
-      // the head keeps clear of everything on the way, the uncut disc face included
+      // the head keeps clear of everything on the way, the uncut disc face included (it may start in a cut, lifting:
+      // then it only rises until it is clear)
       const room = trRoom(next, next.m);
-      if (next.z > room) next.z = Math.max(0, room);
+      if (next.z > room && next.z > c.z) next.z = Math.max(c.z, room);
       trState.sim = { ...p, say: "" };
       if (bl.t >= 2.4) trState.blend = null;
       trState.cur = next;
@@ -419,6 +430,8 @@ function trTick(now) {
     const k = calm ? 1 : 1 - Math.exp(-dt / 0.18);
     const w = trState.want;
     next = { x: c.x + (w.x - c.x) * k, y: c.y + (w.y - c.y) * k, z: c.z + (w.z - c.z) * k, a: wrap(c.a + wrap(w.a - c.a) * k), b: c.b + (w.b - c.b) * k, m: c.m };
+    // rising out of a cut: only Z moves until the head is clear, so a key pressed meanwhile waits
+    if (trState.lifting) { next.x = c.x; next.y = c.y; next.a = c.a; next.b = c.b; }
     for (const key of ["x", "y", "z", "b"]) if (Math.abs(w[key] - next[key]) < 0.01) next[key] = w[key];
     if (Math.abs(wrap(w.a - next.a)) < 0.01) next.a = w.a;
     // the magazine runs its sequence at its own pace, and only comes out once the head is clear of its path
@@ -435,7 +448,7 @@ function trTick(now) {
       trState.want = { x: c.x, y: c.y, z: c.z, a: c.a, b: c.b };
       next = { ...c };
       changed = true;
-    } else if (trState.lifting && next.z <= c.z) {
+    } else if (trState.lifting) {
       // rising out of the cut: let it ease up; clamp again once it is clear
       if (next.z <= room + 0.01) trState.lifting = false;
     } else if (next.z > room) next.z = Math.max(0, room);

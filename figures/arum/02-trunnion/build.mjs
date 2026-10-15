@@ -10,7 +10,7 @@ import * as A from "../../../.claude/skills/anatomy/kit/audit.mjs";
 import { turning } from "../../../.claude/skills/anatomy/kit/turn-build.mjs";
 import * as TA from "../../../.claude/skills/anatomy/kit/turn-audit.mjs";
 import { turnScript } from "../../../.claude/skills/anatomy/scripts/inline-kit.mjs";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, BRIDGE, CONNECTORS, PASS_TRACKS, leansTable, wrap, magOf, zLimit, simAt, SIM_LEN, SIM_SPANS, readoutOf, wordsOf } from "./model.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, AXES_DIR, BRIDGE, CONNECTORS, PASS_TRACKS, leansTable, wrap, magOf, zLimit, simAt, SIM_LEN, SIM_SPANS, readoutOf, wordsOf } from "./model.mjs";
 import { workSvg, underSvg } from "./work.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -86,12 +86,12 @@ const put = (item) => R.put({ ...item, shapes: (item.shapes ?? []).map((shape, i
 // ---------------------------------------------------------------- live: the five axes, the magazine and its flap
 export const T = turning(P, { recorder: R });
 // X: the cradle, its ram and everything on it slide toward the operator from home at the back
-const gx = T.group("x", { slide: { direction: [0, 1, 0], travel: TRAVEL.x } });
-const b = T.group("b", { parent: gx, hinge: { point: [0, 0, 0], axis: [0, -1, 0], range: [-SPEC.bLimit, SPEC.bLimit] } });
-const a = T.group("a", { parent: b, hinge: { point: [0, 0, 0], axis: [1, 0, 0], range: [-180, 180] } });
+const gx = T.group("x", { slide: { direction: AXES_DIR.x, travel: TRAVEL.x } });
+const b = T.group("b", { parent: gx, hinge: { point: [0, 0, 0], axis: AXES_DIR.b, range: [-SPEC.bLimit, SPEC.bLimit] } });
+const a = T.group("a", { parent: b, hinge: { point: [0, 0, 0], axis: AXES_DIR.a, range: [-180, 180] } });
 // Y: the spindle column runs right from over the magazine; Z: the head slides down its rails from the top
-const gy = T.group("y", { slide: { direction: [1, 0, 0], travel: TRAVEL.y } });
-const gz = T.group("z", { parent: gy, slide: { direction: [0, 0, -1], travel: TRAVEL.z } });
+const gy = T.group("y", { slide: { direction: AXES_DIR.y, travel: TRAVEL.y } });
+const gz = T.group("z", { parent: gy, slide: { direction: AXES_DIR.z, travel: TRAVEL.z } });
 // the magazine slides back through the window from out; the flap swings up from flat (0) to shut (90)
 const gm = T.group("mag", { slide: { direction: [0, -1, 0], travel: GEO.MAG_STROKE } });
 const gf = T.group("flap", { hinge: { point: [(WIN.x[0] + WIN.x[1]) / 2, FLAP.y, FLAP.z], axis: [1, 0, 0], range: [0, 90] } });
@@ -252,7 +252,9 @@ function chamber() {
   const drainSvg = drains.map(([x, y]) => S(k.cylinder(x, y, 18, FLOOR_Z, 1.2, P, 40, 0.3), { tone: "mid" }) + Ln(k.ring(x, y, 12, FLOOR_Z + 1.2, P, 36), { tone: "lo" }) + Dots(k.dotGrid(x - 6, y - 6, 4, 4, 4, FLOOR_Z + 1.2, P), { size: 0.45, tone: "lo" }) + Dots([0, 1, 2, 3, 4, 5].map((j) => at([x + 15 * Math.cos(j * 1.047 + 0.3), y + 15 * Math.sin(j * 1.047 + 0.3), FLOOR_Z + 1.2])), { size: 0.45 })).join("");
   put({ name: "stand.floor", layer: "back", at: [0, 0, FLOOR_Z - 4], bias: -50, svg: floorSvg + joints + drainSvg, shapes: [ground(A.slab(FLOOR, FLOOR_Z - 8, 8))] });
   // the floor carries on under the side housing behind the wall, so the housing stands on something
-  const STRIP = { x: WALL_X[0] - 8, y: WY[0] - 181, w: 8, d: 181, r: 0.5 };
+  // (it reaches as far back as the housing: the bay's depth, its back, 15 behind that, and 5 more)
+  const STRIP_Y = WY[0] - (156 + 5 + 15) - 5;
+  const STRIP = { x: WALL_X[0] - 8, y: STRIP_Y, w: 8, d: WY[0] - STRIP_Y, r: 0.5 };
   put({ name: "stand.floor-back", layer: "back", at: [STRIP.x + 4, STRIP.y + STRIP.d / 2, FLOOR_Z - 4], bias: -60, svg: S(k.slabOf(STRIP, FLOOR_Z - 8, 8, P, 1, 0.4), { tone: "lo" }), shapes: [ground(A.slab(STRIP, FLOOR_Z - 8, 8))] });
   // the door sill stands on the floor, so it lives with the machine's parts
   block("stand.sill", WALL_X, [FRONT_Y - 10, FRONT_Y], [FLOOR_Z, FLOOR_Z + 4], { bevel: 0.4, details: { dots: [-270, -150, -30, 90, 176].map((x) => ({ at: [FLOOR_Z + 4, x, FRONT_Y - 5], normal: [0, 0, 1], size: 0.5 })) } });
@@ -286,16 +288,20 @@ function chamber() {
   // a ledge above the magazine window
   block("wall.ledge", [WALL_X[0] + 10, WIN.x[1] + 20], [WY[1], WY[1] + 8], [WIN.z[1] + 5, WIN.z[1] + 10], { bevel: 0.4 });
   // the magazine bay behind the window: dark, deep enough to take the whole magazine with its flap shut
-  // deep enough for the magazine and its carrier arm when it is in
-  const BAY = { y: [WY[0] - 156 - MAG_ARM, WY[0]], back: 5, skin: 5 };
+  // deep enough for the magazine when it is in; its carrier arm runs on back past the bay's back face
+  const BAY = { y: [WY[0] - 156, WY[0]], back: 5, skin: 5 };
   const dark = { tone: "lo", material: "rubber" };
   // a floor under everything, side walls standing on it and a roof capping them: each joint meets on one face
   const BX = [WIN.x[0] - BAY.skin, WIN.x[1] + BAY.skin];
-  block("bay.floor", BX, BAY.y, [WIN.z[0] - BAY.skin, WIN.z[0]], dark);
+  const bayFloor = block("bay.floor", BX, BAY.y, [WIN.z[0] - BAY.skin, WIN.z[0]], dark);
   block("bay.left", [BX[0], WIN.x[0]], BAY.y, WIN.z, dark);
   block("bay.right", [WIN.x[1], BX[1]], BAY.y, WIN.z, dark);
   block("bay.roof", BX, BAY.y, [WIN.z[1], WIN.z[1] + BAY.skin], dark);
-  block("bay.back", BX, [BAY.y[0] - BAY.back, BAY.y[0]], [WIN.z[0] - BAY.skin, WIN.z[1] + BAY.skin], dark);
+  // the back: drawn on the floor as a dark face rather than built as a solid, so the carrier arm can run back past it
+  // into the machine when the magazine is in (the flap is shut by then, and the side housing hides it from the side)
+  const backO = [(BX[0] + BX[1]) / 2, BAY.y[0], (WIN.z[0] + WIN.z[1]) / 2];
+  const backSvg = `<path class="tr-bay-back" d="${roundRect(BX[0] - backO[0], WIN.z[0] - BAY.skin - backO[2], BX[1] - backO[0], WIN.z[1] + BAY.skin - backO[2], 0.5)}"/>`;
+  T.plane({ part: bayFloor, o: backO, u: [1, 0, 0], v: [0, 0, 1], normal: [0, 1, 0], svg: backSvg });
   // the machine's side housing behind the wall's left edge: it hides the bay and the retracted magazine, which would
   // otherwise show past the edge from this viewpoint; it carries the wall's bands and screws round the corner
   const RET = { x: [WALL_X[0] - 8, WALL_X[0]], y: [BAY.y[0] - BAY.back - 15, WY[0]] };
@@ -455,8 +461,8 @@ const timeline = `<div class="tr-line" aria-hidden="true">${SIM_SPANS.map((span)
 const axesRow = `<div class="tr-axes" role="group" aria-label="Controls"><button type="button" class="tr-axis tr-play" title="Play or pause the simulation">Pause</button><span class="tr-modes" role="group" aria-label="Mode"><button type="button" class="tr-axis tr-mode tr-mode-sim" aria-pressed="true" title="Run the finishing job">Simulate</button><button type="button" class="tr-axis tr-mode tr-mode-jog" aria-pressed="false" title="Move the axes yourself">Jog</button></span>${AXES.map((ax) => `<button type="button" class="tr-axis" data-axis="${ax.key}" aria-pressed="false" aria-label="Jog ${ax.key}: ${ax.name}" title="${ax.key}: ${ax.name}, ${ax.range}"><span class="tr-axis-key" aria-hidden="true">${ax.key}</span><span class="tr-axis-value" data-value="${ax.key}" aria-hidden="true"></span></button>`).join("")}</div>`;
 
 const CSS = `${out.css}
-.iso{--tr-ring:#1c1c1e;--tr-disc:#ffffff;--tr-disc-a:.10;--tr-bevel:#9a9aa0;--tr-hole:#0d0d0e;--tr-screw:#8f8f94;--tr-recess:#161618}
-.iso[data-theme="light"]{--tr-ring:#4a4a50;--tr-disc:#ffffff;--tr-disc-a:.5;--tr-bevel:#e4e4e6;--tr-hole:#55555a;--tr-screw:#b9b9bd;--tr-recess:#d3d3d6}
+.iso{--tr-bay-back:#0e0e10;--tr-ring:#1c1c1e;--tr-disc:#ffffff;--tr-disc-a:.10;--tr-bevel:#9a9aa0;--tr-hole:#0d0d0e;--tr-screw:#8f8f94;--tr-recess:#161618}
+.iso[data-theme="light"]{--tr-bay-back:#3f4247;--tr-ring:#4a4a50;--tr-disc:#ffffff;--tr-disc-a:.5;--tr-bevel:#e4e4e6;--tr-hole:#55555a;--tr-screw:#b9b9bd;--tr-recess:#d3d3d6}
 .iso{--tr-zr-top:#5d5d61;--tr-zr-lit:#4b4b4f;--tr-zr-shade:#3b3b3f;--tr-zr-fin-lit:#55555a;--tr-zr-fin-shade:#444449;--tr-moat:#2f2f33;--tr-void:#0b0b0c}
 .iso[data-theme="light"]{--tr-zr-top:#ffffff;--tr-zr-lit:#f0f0ee;--tr-zr-shade:#e0e0dd;--tr-zr-fin-lit:#f7f7f5;--tr-zr-fin-shade:#e9e9e6;--tr-moat:#d7d7d4;--tr-void:#4a4a50}
 .tr-top{fill:var(--tr-zr-top)}
@@ -476,6 +482,7 @@ const CSS = `${out.css}
 .tr-shade{opacity:.3}
 .tr-hole,.tr-gap{fill:var(--tr-hole)}
 .tr-recess{fill:var(--tr-recess)}
+.tr-bay-back{fill:var(--tr-bay-back)}
 .tr-screw{fill:var(--tr-screw);stroke:var(--anatomy-lo);stroke-width:.3}
 .tr-black .iso-fill,.tr-black .iso-shade,.tr-black .iso-top{fill:var(--tr-ring)}
 .tr-stage{touch-action:pan-y pinch-zoom;cursor:grab;overflow:hidden}
@@ -537,7 +544,7 @@ const body =
       { mark: "raised", label: "Cradle (gold): X in and out, B tilts ±30°, A turns the holder 360°" },
     ],
     caption:
-      `An illustrative full-arch bridge: twelve units, screw-retained on four implants (channels at the lateral incisors and second premolars), nested occlusal side up in a 25 mm pre-sintered zirconia disc after roughing and milled about 20% large for the shrinkage in sintering. It stands in a channel through the disc as wide as the Ø2.0 mm roughing ball plus 0.7 mm, held by ${CONNECTORS.length} connectors at its equator; the sintering support a bridge this long would also carry is left out. Each finishing pass is thinned for clarity, a zig-zag every few millimetres across the occlusal surface and one line round each wall, where the machine steps about 0.1 mm, so on the machine the job takes far longer. The Ø1.0 mm ball stays nearly upright on the occlusal surface (3°), then leans 15° out from the wall on one contour round the buccal side and the right-hand end, and one round the palatal side and the left-hand end. The spindle never tilts, so the disc is tilted to the tool: at the incisors the lean is on A, at the molars on B, and between them A and B share it, both changing as the tool goes round (simultaneous 5-axis motion, as hyperDENT's 5X cycles drive it). On the buccal side of the right-hand premolars and molar the lean eases to about ${MIN_LEAN}°, where tilting the cradle further would bring its right drive hub up into the coolant nozzle. The screw channels are indexed jobs of their own and are shown done. Jog hands you the axes: X slides the cradle on a ram through the back wall (${TRAVEL.x} mm), Y runs the spindle column along the wall (${TRAVEL.y} mm, far enough to reach the magazine), Z lowers the head (${TRAVEL.z} mm), A turns the holder ${SPEC.aRange}° and B tilts the cradle ±${SPEC.bLimit}° about a front-to-back axis (inferred from the photos, not published); when the spindle comes over the magazine, it slides out through its window on a carrier arm, over a flap hinged at the bottom, with nothing under it. ` +
+      `An illustrative full-arch bridge: twelve units, screw-retained on four implants (channels at the lateral incisors and second premolars), nested occlusal side up in a 25 mm pre-sintered zirconia disc after roughing and milled about 20% large for the shrinkage in sintering. It stands in a channel through the disc as wide as the Ø2.0 mm roughing ball plus 0.7 mm, held by ${CONNECTORS.length} connectors at its equator; the sintering support a bridge this long would also carry is left out. Each finishing pass is thinned for clarity, a zig-zag every few millimetres across the occlusal surface and one line round each wall, where the machine steps about 0.1 mm, so on the machine the job takes far longer. The Ø1.0 mm ball stays nearly upright on the occlusal surface (3°), then leans 15° out from the wall on one contour round the buccal side and the right-hand end, and one round the palatal side and the left-hand end. The spindle never tilts, so the disc is tilted to the tool: at the incisors the lean is on A, at the molars on B, and between them A and B share it, both changing as the tool goes round (simultaneous 5-axis motion, as hyperDENT's 5X cycles drive it). Along the buccal side of the right second premolar and first molar, and round the right-hand end, the lean eases to about ${MIN_LEAN}°, where tilting the cradle further would bring its right drive hub up into the coolant nozzle. The screw channels are indexed jobs of their own and are shown done. Jog hands you the axes: X slides the cradle on a ram through the back wall (${TRAVEL.x} mm), Y runs the spindle column along the wall (${TRAVEL.y} mm, far enough to reach the magazine), Z lowers the head (${TRAVEL.z} mm), A turns the holder ${SPEC.aRange}° and B tilts the cradle ±${SPEC.bLimit}° about a front-to-back axis (inferred from the photos, not published); when the spindle comes over the magazine, it slides out through its window on a carrier arm, over a flap hinged at the bottom, with nothing under it. ` +
       `Specs: ARUM 5X-200 (5 axes; travel X, Y, Z ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm as ARUM lists them; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm); finishing tool as ARUM's ZB-86 (Ø1.0 mm ball, 20 mm reach, 60 mm long). Tilts after the guidance of hyperDENT, a CAM ARUM supplies 5X-200 machine data for: 5° at most (3° preferred) where nothing is undercut, 10° or more on walls. ARUM shows its own 5X-200 screw-retained work in metal; zirconia is among the machine's listed materials. Which part moves on which axis, and the letters, are the dealer's: ARUM's sheet lists the ${TRAVEL.y} mm stroke as X. Machine proportions from the dealer's photos and ARUM's product photos, scaled to a standard Ø${SPEC.disc} mm disc; bridge from typical tooth widths and arch form, drawn at one height; column, ram, flap and chamber schematic; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
     body: `<div class="tr-stagewrap">${stage}${inset}</div>` + timeline + axesRow,
   }) +

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, magOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, simAt, simPassStart, SIM_LEN, SIM_SPANS, readoutOf, wrap } from "./model.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, magOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, simAt, simPassStart, SIM_LEN, SIM_SPANS, readoutOf, wrap } from "./model.mjs";
 import { workShapes } from "./work.mjs";
 
 const near = (a, b, tol) => assert.ok(Math.abs(a - b) <= tol, `${a} vs ${b}`);
@@ -62,6 +62,30 @@ test("the collision model turns the holder exactly as the kinematics do", () => 
     const want = [];
     for (const x of [-H, H]) for (const y of [-H, H]) for (const z of [-T, T]) want.push(toWorld(pose, [x, y, z]));
     for (let k = 0; k < 8; k++) for (let j = 0; j < 3; j++) near(plate.corners[k][j], want[k][j], 1e-9);
+  }
+});
+
+test("the cradle in the collision model tilts as the kinematics do", () => {
+  for (let i = 0; i < 30; i++) {
+    const pose = { x: (i * 11) % 140, a: 0, b: ((i * 17) % 60) - 30, mag: 0 };
+    // the cradle's back wall box (CRADLE[3]) rides B only
+    const wall = bodiesOf(pose)[3];
+    const [x0, x1, y0, y1, z0, z1] = [GEO.ARM_L[0], GEO.ARM_R[1], -GEO.WALL[1], -GEO.WALL[0], GEO.WALL_Z0, GEO.TOP];
+    const want = [];
+    for (const x of [x0, x1]) for (const y of [y0, y1]) for (const z of [z0, z1]) want.push(toWorld(pose, [x, y, z]));
+    for (let k = 0; k < 8; k++) for (let j = 0; j < 3; j++) near(wall.corners[k][j], want[k][j], 1e-9);
+  }
+});
+
+test("each wall edge belongs to the pass that finishes it", () => {
+  const n = OUTLINE.pts.length;
+  for (let i = 0; i < n; i++) {
+    const side = OUTLINE.side[i];
+    const pass = WALL_REACH.pass[i];
+    if (side === 1) assert.equal(pass, "buccal", `edge ${i}`);
+    if (side === -1 && OUTLINE.side[(i + 1) % n] === -1) assert.equal(pass, "palatal", `edge ${i}`);
+    if (side === 0) assert.equal(pass, OUTLINE.s[i] > 0 ? "buccal" : "palatal", `end edge ${i}`);
+    assert.ok(WALL_REACH.at[i] > 0 && WALL_REACH.at[i] <= 1);
   }
 });
 
@@ -134,6 +158,18 @@ test("the bur touches each surface it finishes, and its neck clears the channel 
     const top = level(s, GEO.THICK - BRIDGE.top);
     assert.ok(!inside(top.q, OUTLINE.pts) && edgeDist(top.q, OUTLINE.pts) >= neck(top.h) - 1e-9, `neck on the bridge's edge at ${t}`);
   }
+});
+
+test("dipping into and out of a pass, the bur stays in the channel and off the bridge", () => {
+  let dips = 0;
+  for (const { t, s } of job) {
+    if (s.step !== "dip") continue;
+    const { p } = tipIn(s);
+    const depth = GEO.THICK - p[2];
+    if (depth > 0) { dips++; assert.ok(inside(p, OPENING.pts), `dip tip outside the channel at ${t}`); }
+    if (depth > BRIDGE.top && s.kind !== "occlusal") assert.ok(!inside(p, OUTLINE.pts), `dip tip inside the bridge at ${t}`);
+  }
+  assert.ok(dips > 20);
 });
 
 test("between passes the bur stays above the disc", () => {
