@@ -2,7 +2,7 @@
 // plane can only carry flat markup, so depth is drawn as the 2.5D trick for prisms seen from above: everything at depth
 // d is the same outline moved by d·sh, where sh is how far one millimetre down moves a point across the face on screen
 // (live.js reads it from the two face planes each frame). Pure: path strings only, no DOM.
-import { BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, ARCH_L, OCC_SPAN, archAt, halfWidths, bandOutline } from "./model.mjs";
+import { BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, ARCH_L, OCC_SPAN, WALL_REACH, archAt, halfWidths, bandOutline } from "./model.mjs";
 
 const n2 = (v) => Math.round(v * 100) / 100;
 const pt = (p) => `${n2(p[0])} ${n2(p[1])}`;
@@ -104,15 +104,9 @@ function runs(poly, depth, sh, pick) {
   return out;
 }
 
-// which edges each finishing pass has passed: the buccal pass runs −L → +L on the buccal side, the palatal pass +L → −L
-// on the palatal side; a round end counts as done once the pass that ends there is done
-function finishedEdge(i, done) {
-  const s = BODY.s[i];
-  const side = BODY.side[i];
-  if (side > 0) return s <= -ARCH_L + done.buccal * 2 * ARCH_L;
-  if (side < 0) return s >= ARCH_L - done.palatal * 2 * ARCH_L;
-  return s > 0 ? done.buccal >= 1 : done.palatal >= 1;
-}
+// which walls the finishing passes have reached: each edge of the outline belongs to the buccal pass (the buccal side and
+// the right-hand end) or the palatal pass (the palatal side and the left-hand end)
+const finishedEdge = (i, done) => (done[WALL_REACH.pass[i]] ?? 0) >= WALL_REACH.at[i] - 1e-9;
 
 // Everything that moves with the view and the job. sh: depth shift per mm (disc frame); done: the passes' progress;
 // lit(n): whether a wall with outward normal n faces the light.
@@ -128,6 +122,9 @@ export function workShapes(sh, done, lit) {
   const bodySteps = STEP_DEPTHS.map((d) => runs(BODY, d, sh, roughFacing)).join("");
   // the channel's far walls (seen from inside the pocket) and their roughing steps
   const moatFar = facing(MOAT, -1);
+  // the channel's far walls, swept all the way down: anything deeper seen inside the opening lies behind one of them,
+  // so painting them over the void keeps the far side of the horseshoe from showing through
+  const moatWalls = sides(MOAT, 0, THROUGH, sh, moatFar);
   const moatSteps = MOAT_STEPS.map((d) => runs(MOAT, d, sh, moatFar)).join("");
   // connectors: those on walls facing away sit behind the bridge, the rest in front of it
   const conn = { farTop: "", farSide: "", nearTop: "", nearSide: "" };
@@ -141,6 +138,7 @@ export function workShapes(sh, done, lit) {
   return {
     floor: `translate(${n2(sh[0] * THROUGH)} ${n2(sh[1] * THROUGH)})`,
     top: `translate(${n2(sh[0] * BRIDGE.top)} ${n2(sh[1] * BRIDGE.top)})`,
+    moatWalls,
     moatSteps,
     body,
     bodySteps,
@@ -164,6 +162,7 @@ export function workSvg(sh, done, lit, id = "tr") {
     `<g clip-path="url(#${id}-open)">` +
     `<path class="tr-moat" d="${OPEN_D}"/>` +
     P("floor", "tr-void", OPEN_D, ` transform="${w.floor}"`) +
+    P("moatWalls", "tr-moat", w.moatWalls) +
     P("moatSteps", "iso-line", w.moatSteps, ' data-tone="faint" data-free="both"') +
     P("connFarSide", "tr-conn-side", w.conn.farSide) +
     P("connFarTop", "tr-conn", w.conn.farTop) +
@@ -198,7 +197,7 @@ export function underSvg() {
     `<path class="tr-void" d="${ring(flipped(MOAT.pts))}"/>` +
     `<path class="tr-conn" d="${CONN.map((c) => ring(flipped(c.quad))).join("")}"/>` +
     `<path class="tr-top" d="${ring(flipped(BODY.pts))}"/>` +
-    `<path class="tr-hole" d="${CHANNELS.map((c) => circleAt(c.p, BRIDGE.channel / 2 + 0.6, 18)).join("")}"/>` +
+    `<path class="tr-hole" d="${CHANNELS.map((c) => { const k = (BRIDGE.base - BRIDGE.top) / c.axis[2]; return circleAt([c.p[0] - k * c.axis[0], c.p[1] - k * c.axis[1]], BRIDGE.channel / 2 + 0.6, 18); }).join("")}"/>` +
     `<path class="iso-line" data-tone="mid" d="${ring(flipped(BODY.pts))}"/>` +
     `<path class="iso-line" data-tone="lit" d="${circleAt([0, 0], 49.25, 96)}"/>` +
     `</g>`
