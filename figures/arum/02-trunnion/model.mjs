@@ -219,10 +219,10 @@ export function bodiesOf(pose) {
 
 // the lowest the bur tip may come with the spindle at Y = y, with CLEAR mm between every part of the head and anything
 // under it; and the Z it allows (0 … TRAVEL.z, down)
-export function tipFloor(pose, y, bodies = bodiesOf(pose)) {
+export function tipFloor(pose, y, bodies = bodiesOf(pose), parts = HEAD) {
   const sx = GEO.SPINDLE_X0 + y;
   let floor = -Infinity;
-  for (const part of HEAD) {
+  for (const part of parts) {
     const fp = footprint(part, sx);
     let top = -Infinity;
     for (const body of bodies) {
@@ -240,6 +240,28 @@ export const zLimit = (pose, y, bodies) => {
   return room < 0 ? -1 : Math.min(room, TRAVEL.z);
 };
 
+// ---------------------------------------------------------------- five-axis kinematics
+// The holder frame turns with A inside the cradle, and the cradle tilts with B: holder → world is B's rotation after
+// A's, then the cradle's X slide (as bodiesOf).
+export const partRotation = (a, b) => mulM(rot([0, -1, 0], b), rot([1, 0, 0], a));
+export const toWorld = (s, p) => { const q = mul(partRotation(s.a, s.b), p); return [q[0], q[1] + s.x, q[2]]; };
+// The machine position that puts the bur tip on p (holder frame, mm) with the tool along t (unit, holder frame, from the
+// tip toward the spindle). The spindle never tilts, so A and B turn t upright: R(A, B)·t = ẑ gives t = (sin B,
+// cos B sin A, cos B cos A); then X, Y and Z bring the tip to the turned point.
+export function axesFor(p, t) {
+  const b = (Math.asin(Math.max(-1, Math.min(1, t[0]))) * 180) / Math.PI;
+  const a = (Math.atan2(t[1], t[2]) * 180) / Math.PI;
+  const w = mul(partRotation(a, b), p);
+  return { x: GEO.SPINDLE_Y - w[1], y: w[0] - GEO.SPINDLE_X0, z: GEO.TIP_Z - w[2], a, b };
+}
+// where the bur tip is, in the holder frame, and which way the tool points there, for a machine position
+export function tipIn(s) {
+  const M = partRotation(s.a, s.b);
+  const tip = [GEO.SPINDLE_X0 + s.y, GEO.SPINDLE_Y - s.x, GEO.TIP_Z - s.z];
+  const inv = (v) => [M[0] * v[0] + M[3] * v[1] + M[6] * v[2], M[1] * v[0] + M[4] * v[1] + M[7] * v[2], M[2] * v[0] + M[5] * v[1] + M[8] * v[2]];
+  return { p: inv(tip), t: inv([0, 0, 1]) };
+}
+
 // ---------------------------------------------------------------- readout and words
 const mm = (v) => {
   const r = Math.round(v * 10) / 10 || 0;
@@ -253,78 +275,353 @@ export const axesOf = (s) => ({ X: mm(s.x), Y: mm(s.y), Z: mm(-s.z), A: deg(half
 export const readoutOf = (s) => { const v = axesOf(s); return `X ${v.X} · Y ${v.Y} · Z ${v.Z} · A ${v.A} · B ${v.B}`; };
 export const wordsOf = (s) => `Cradle ${Math.round(s.x)} millimetres in X, spindle ${Math.round(s.y)} in Y and ${Math.round(s.z)} down in Z; disc turned ${Math.round(half(s.a))} degrees on A, tilted ${Math.round(s.b)} on B`;
 
-// ---------------------------------------------------------------- the idle tour: each axis on its own, then all five
-// Steps run in order; each eases the values it names to their targets over its duration (a `path` step sets them
-// directly). `axis` is the control lit during the step and `say` the line the readout shows.
-const ease = (u) => (u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u));
-const START = { ...HOME, m: 1 };
-const deepest = (s) => zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(s.m).mag }, s.y);
-// all five at once: the cradle forward and back, the spindle across the disc, A swinging and B rocking, with Z as deep
-// as the tightest moment allows
-const together = (u) => ({ x: X_DISC + 45 * Math.sin(2 * Math.PI * u), y: Y_DISC + 45 * Math.sin(4 * Math.PI * u), a: 150 * Math.sin(2 * Math.PI * u), b: 25 * Math.sin(4 * Math.PI * u), m: 1 });
-const HOVER = (() => {
-  let h = Infinity;
-  for (let i = 1; i < 200; i++) {
-    const u = i / 200;
-    const w = Math.sin(Math.PI * u) ** 2;
-    if (w < 0.02) continue;
-    h = Math.min(h, (deepest({ ...together(u), z: 0 }) - 3) / w);
+// ---------------------------------------------------------------- the part: a full-arch screw-retained bridge
+// Disc frame: origin at the centre of face B (the face up at A = 0), x to the machine's right, y toward the operator; a
+// point at depth d below face B is (x, y, THICK − d) in the holder frame. The bridge is maxillary, occlusal side up, its
+// incisors toward the operator. Roughing is done (both sides), so the bridge stands in a channel cut through the disc,
+// held by connectors; the figure shows the 5-axis finishing of its top side.
+export const BRIDGE = {
+  // green (pre-sintered) enlargement: the part is milled about 20% large and shrinks when sintered
+  ef: 1.2,
+  // one side, mesial to distal: tooth, mesiodistal and buccolingual crown widths as sintered (mm)
+  teeth: [["central incisor", 8.5, 7.0], ["lateral incisor", 6.5, 6.0], ["canine", 7.5, 8.0], ["first premolar", 7.0, 9.0], ["second premolar", 7.0, 9.0], ["first molar", 10.0, 11.0]],
+  arch: { w: 29, d: 36 }, // the crowns' centre line as milled: an ellipse arc (intermolar about 48 mm sintered)
+  top: 1.5, // the highest cusp, below face B
+  base: 22, // the bridge's underside (the intaglio side), below face B
+  flange: [0.8, 1.8], // the gingival flange beyond the crowns as milled: buccal, palatal
+  gap: 2.8, // the channel round the bridge: the Ø2.0 roughing ball plus 0.8
+  ball: 0.5, // finishing bur: Ø1.0 ball end (ARUM ZB-86, 20 mm reach)
+  connector: { w: 2.8 }, // Ø2.8 at the part, at its equator
+  // screw access (All-on-4): tooth index, how far palatal of the centre line the channel opens (mm), its axis tilt from
+  // the disc's normal toward palatal and toward distal (deg), and its diameter as milled
+  implants: [
+    { tooth: 1, off: -1.2, palatal: 12, distal: 0 },
+    { tooth: 4, off: -0.4, palatal: 6, distal: 14 },
+  ],
+  channel: 3.2,
+};
+const ARCH = (() => {
+  const { w, d } = BRIDGE.arch;
+  const N = 2400;
+  const table = [[0, 0]];
+  let s = 0;
+  let prev = [0, d];
+  for (let i = 1; i <= N; i++) {
+    const f = (i / N) * (Math.PI / 2);
+    const p = [w * Math.sin(f), d * Math.cos(f)];
+    s += Math.hypot(p[0] - prev[0], p[1] - prev[1]);
+    table.push([f, s]);
+    prev = p;
   }
-  return Math.max(0, Math.min(h, TRAVEL.z));
+  const ends = [0];
+  for (const [, md] of BRIDGE.teeth) ends.push(ends[ends.length - 1] + md * BRIDGE.ef);
+  return { table, ends, L: ends[ends.length - 1] + 0.4 };
 })();
-const STEPS = [
-  { say: "The magazine comes out", dur: 2.2, to: { m: 0 } },
-  { axis: "Y", say: "Y: the spindle travels to the magazine", dur: 2.6, to: { y: 0 } },
-  { axis: "Z", say: "Z: down to the tools", dur: 1.2, to: { z: (s) => deepest(s) - 1 } },
-  { axis: "Z", say: "Z: back up", dur: 1.0, to: { z: 0 } },
-  { axis: "Y", say: "Y: back over the disc", dur: 2.6, to: { y: Y_DISC } },
-  { say: "The magazine goes back behind its flap", dur: 2.2, to: { m: 1 } },
-  { axis: "X", say: "X: the cradle comes forward, to the premill bar", dur: 2.0, to: { x: TRAVEL.x } },
-  { axis: "X", say: "X: and goes back, to the disc's front edge", dur: 2.8, to: { x: 0 } },
-  { axis: "X", say: "X: to the disc's centre", dur: 1.4, to: { x: X_DISC } },
-  { axis: "Z", say: "Z: the bur comes down to the disc", dur: 2.0, to: { z: (s) => deepest(s) - 1 } },
-  { axis: "Z", say: "Z: and back up", dur: 1.6, to: { z: 0 } },
-  { axis: "A", say: "A: the holder turns all the way round", dur: 5.0, to: { a: 360 } },
-  { axis: "B", say: "B: the cradle tilts", dur: 1.6, to: { b: SPEC.bLimit } },
-  { axis: "B", say: "B: to the other limit", dur: 3.0, to: { b: -SPEC.bLimit } },
-  { axis: "B", say: "B: and back", dur: 1.6, to: { b: 0 } },
-  { axis: "all", say: "All five together", dur: 9.0, path: (u) => ({ ...together(u), z: HOVER * Math.sin(Math.PI * u) ** 2 }) },
-  { say: "", dur: 1.2, to: {} },
+const phiAt = (s) => {
+  const a = Math.abs(s);
+  const t = ARCH.table;
+  let lo = 0;
+  let hi = t.length - 1;
+  while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (t[mid][1] < a) lo = mid; else hi = mid; }
+  const k = (a - t[lo][1]) / (t[hi][1] - t[lo][1] || 1);
+  return Math.sign(s) * (t[lo][0] + (t[hi][0] - t[lo][0]) * k);
+};
+// buccolingual width along the arch: each tooth's width at its centre, eased between neighbours
+const BL = (() => {
+  const centres = BRIDGE.teeth.map(([, , bl], i) => [(ARCH.ends[i] + ARCH.ends[i + 1]) / 2, bl * BRIDGE.ef]);
+  return (s) => {
+    const a = Math.abs(s);
+    if (a <= centres[0][0]) return centres[0][1];
+    for (let i = 1; i < centres.length; i++) {
+      if (a <= centres[i][0]) {
+        const u = (a - centres[i - 1][0]) / (centres[i][0] - centres[i - 1][0]);
+        const k = u * u * (3 - 2 * u);
+        return centres[i - 1][1] + (centres[i][1] - centres[i - 1][1]) * k;
+      }
+    }
+    return centres[centres.length - 1][1];
+  };
+})();
+// the arch placed in the disc: its extent (with the channel) centred front to back
+const Y0 = (() => {
+  const { w, d } = BRIDGE.arch;
+  const f = phiAt(ARCH.L);
+  const back = d * Math.cos(f) - (BL(ARCH.L) / 2 + BRIDGE.flange[1] + BRIDGE.gap) - 2;
+  const front = d + BL(0) / 2 + BRIDGE.flange[0] + BRIDGE.gap;
+  return -(back + front) / 2;
+})();
+// centre-line point, unit tangent (toward +s) and buccal normal at s
+export function archAt(s) {
+  const { w, d } = BRIDGE.arch;
+  const f = phiAt(Math.max(-ARCH.L, Math.min(ARCH.L, s)));
+  const p = [w * Math.sin(f), Y0 + d * Math.cos(f)];
+  const tx = w * Math.cos(f);
+  const ty = -d * Math.sin(f);
+  const l = Math.hypot(tx, ty);
+  const t = [tx / l, ty / l];
+  // past either end, carry straight on along the tangent
+  const over = Math.abs(s) - ARCH.L;
+  if (over > 0) { p[0] += t[0] * over * Math.sign(s); p[1] += t[1] * over * Math.sign(s); }
+  return { p, t, n: [-t[1], t[0]] };
+}
+export const halfWidths = (s, grow = 0) => { const h = BL(s) / 2; return [h + BRIDGE.flange[0] + grow, h + BRIDGE.flange[1] + grow]; };
+const at2 = (c, o) => [c.p[0] + o * c.n[0], c.p[1] + o * c.n[1]];
+// a closed outline of the band round the arch, grown by `grow` (the channel's outer wall is the bridge grown by the
+// gap), with round ends; returned with the arc position along the arch of each point (for the finishing reveal)
+export function bandOutline(grow = 0, step = 0.6) {
+  const L = ARCH.L;
+  const pts = [];
+  const sOf = [];
+  const side = [];
+  const n = Math.ceil((2 * L) / step);
+  for (let i = 0; i <= n; i++) { const s = -L + (2 * L * i) / n; const c = archAt(s); pts.push(at2(c, halfWidths(s, grow)[0])); sOf.push(s); side.push(1); }
+  const cap = (s, dir) => {
+    const c = archAt(s);
+    const [hb, hl] = halfWidths(s, grow);
+    const mid = (hb - hl) / 2;
+    const rho = (hb + hl) / 2;
+    const m = 14;
+    for (let j = 1; j < m; j++) {
+      // from the buccal side round to the palatal at the +L end, and back the other way at the −L end
+      const th = ((dir > 0 ? j : m - j) / m) * Math.PI;
+      const o = mid + rho * Math.cos(th);
+      const along = dir * rho * Math.sin(th);
+      pts.push([c.p[0] + o * c.n[0] + along * c.t[0], c.p[1] + o * c.n[1] + along * c.t[1]]);
+      sOf.push(s);
+      side.push(0);
+    }
+  };
+  cap(L, 1);
+  for (let i = n; i >= 0; i--) { const s = -L + (2 * L * i) / n; const c = archAt(s); pts.push(at2(c, -halfWidths(s, grow)[1])); sOf.push(s); side.push(-1); }
+  cap(-L, -1);
+  return { pts, s: sOf, side };
+}
+export const OUTLINE = bandOutline(0);
+export const OPENING = bandOutline(BRIDGE.gap, 1.2);
+// the teeth: their outlines on the occlusal face, each a rounded box in (along the arch, across it)
+export const TEETH = [];
+for (const side of [1, -1]) {
+  BRIDGE.teeth.forEach(([name, md0, bl0], i) => {
+    const md = md0 * BRIDGE.ef;
+    const bl = bl0 * BRIDGE.ef;
+    const s0 = ARCH.ends[i] + 0.15;
+    const s1 = ARCH.ends[i + 1] - 0.15;
+    const r = 0.38 * Math.min(md, bl);
+    const box = [];
+    const corner = (cs, co, a0) => { for (let j = 0; j <= 5; j++) { const a = a0 + (j / 5) * (Math.PI / 2); box.push([cs + r * Math.cos(a), co + r * Math.sin(a)]); } };
+    const h = bl / 2 - 0.2;
+    corner(s1 - r, h - r, 0);
+    corner(s0 + r, h - r, Math.PI / 2);
+    corner(s0 + r, -h + r, Math.PI);
+    corner(s1 - r, -h + r, (3 * Math.PI) / 2);
+    const outline = box.map(([ss, o]) => at2(archAt(side * ss), o));
+    TEETH.push({ name, side, index: i, s: [side * s0, side * s1], bl, md, outline });
+  });
+}
+// screw channels: where each opens on the occlusal face, and its axis (unit, disc frame, out of the face)
+export const CHANNELS = [];
+for (const side of [1, -1]) {
+  for (const im of BRIDGE.implants) {
+    const s = side * (ARCH.ends[im.tooth] + ARCH.ends[im.tooth + 1]) / 2;
+    const c = archAt(s);
+    const p = at2(c, im.off);
+    const pal = (im.palatal * Math.PI) / 180;
+    const dis = (im.distal * Math.PI) / 180;
+    // tilt toward palatal (−n) and toward distal (away from the midline along the arch: +t·side)
+    const v = [-c.n[0] * Math.tan(pal) + side * c.t[0] * Math.tan(dis), -c.n[1] * Math.tan(pal) + side * c.t[1] * Math.tan(dis), 1];
+    const l = Math.hypot(...v);
+    CHANNELS.push({ s, p, axis: v.map((x) => x / l), tooth: BRIDGE.teeth[im.tooth][0], side });
+  }
+}
+CHANNELS.sort((u, v) => u.s - v.s);
+// connectors at the bridge's equator, from its wall across the channel: one per unit, alternating buccal and palatal,
+// and both sides of each distal end
+export const CONNECTORS = (() => {
+  const out = [];
+  const eq = (BRIDGE.top + BRIDGE.base) / 2;
+  const w = BRIDGE.connector.w / 2;
+  const add = (s, wall) => {
+    const c = archAt(s);
+    const [hb, hl] = halfWidths(s);
+    const o0 = wall > 0 ? hb - 0.4 : -(hl - 0.4);
+    const o1 = wall > 0 ? hb + BRIDGE.gap + 0.4 : -(hl + BRIDGE.gap + 0.4);
+    const q = (o, a) => [c.p[0] + o * c.n[0] + a * c.t[0], c.p[1] + o * c.n[1] + a * c.t[1]];
+    out.push({ s, wall, quad: [q(o0, -w), q(o1, -w), q(o1, w), q(o0, w)], depth: [eq - w, eq + w] });
+  };
+  for (const side of [1, -1]) {
+    BRIDGE.teeth.forEach((_, i) => { if (i < 5) add(side * (ARCH.ends[i] + ARCH.ends[i + 1]) / 2, i % 2 === 0 ? 1 : -1); });
+    add(side * (ARCH.L - 1.8), 1);
+    add(side * (ARCH.L - 1.8), -1);
+  }
+  return out.sort((u, v) => u.s - v.s);
+})();
+
+// ---------------------------------------------------------------- the finishing simulation
+// One pass of each kind, far faster than the machine runs them (the finishing takes about an hour): the occlusal surface
+// with the tool nearly upright, then the buccal and the palatal wall with the tool leaning out from the wall along the
+// arch's normal. A and B move together through every pass, as the tilt follows the arch. The screw channels are indexed
+// jobs of their own (3+2, not simultaneous), shown already finished.
+const toHolder = (p2, depth) => [p2[0], p2[1], GEO.THICK - depth];
+const tiltOf = (dir2, deg) => { const r = (deg * Math.PI) / 180; return [Math.sin(r) * dir2[0], Math.sin(r) * dir2[1], Math.cos(r)]; };
+const LEAN = { occlusal: 5, wall: 15 };
+const WALL_DEPTH = BRIDGE.top + 5;
+export const ARCH_L = ARCH.L;
+const L = ARCH.L;
+// tip for a ball-end bur touching a point with outward normal n (3D), the tool along t: centre = point + r·n, tip = centre − r·t
+const tipFor = (q, n, t) => { const r = BRIDGE.ball; return [q[0] + r * n[0] - r * t[0], q[1] + r * n[1] - r * t[1], q[2] + r * n[2] - r * t[2]]; };
+// the occlusal pass runs past each end of the arch, over the molars' round distal ends
+export const OCC_SPAN = [-L - 4, L + 4];
+const occlusalAt = (u) => {
+  const s = OCC_SPAN[0] + u * (OCC_SPAN[1] - OCC_SPAN[0]);
+  const c = archAt(s);
+  const [hb, hl] = halfWidths(Math.max(-L, Math.min(L, s)));
+  // across the occlusal table and back, normal to the arch, about every 5 mm along it; narrowing over the round ends
+  const over = Math.max(0, Math.abs(s) - L);
+  const rho = (hb + hl) / 2;
+  const amp = (rho - BRIDGE.flange[1] - 1.1) * Math.sqrt(Math.max(0, 1 - (over / rho) ** 2));
+  const o = (hb - hl) / 2 + amp * Math.sin((2 * Math.PI * (s + L)) / 5);
+  const p = at2(c, o);
+  // cusps and fossae: the surface dips toward the middle of each tooth's table
+  const depth = BRIDGE.top + 0.6 + 0.9 * (1 - Math.cos((Math.PI * o) / Math.max(1, amp))) * 0.5;
+  // nearly upright on the tops: a small lean back along the arch keeps the ball's centre from rubbing
+  const t = tiltOf([-c.t[0], -c.t[1]], LEAN.occlusal);
+  return { p: tipFor(toHolder(p, depth), [0, 0, 1], t), t, s };
+};
+// how far down the head may come when only the parts above the bur count (the bur itself cuts the part)
+const ABOVE_BUR = HEAD.filter((part) => part.zb >= 26);
+export const upperRoom = (s) => GEO.TIP_Z - tipFloor({ x: s.x, b: s.b, a: s.a, mag: magOf(s.m ?? 1).mag }, s.y, undefined, ABOVE_BUR);
+const CLEAR_HEAD = 2;
+const wallPoint = (s, sign, lean) => {
+  const c = archAt(s);
+  const [hb, hl] = halfWidths(s);
+  const o = sign > 0 ? hb : -hl;
+  const n2 = sign > 0 ? c.n : [-c.n[0], -c.n[1]];
+  const t = tiltOf(n2, lean);
+  return { p: tipFor(toHolder(at2(c, o), WALL_DEPTH), [n2[0], n2[1], 0], t), t, s };
+};
+// The lean on the walls: 15° where the head is clear, eased where tilting the cradle that far would bring an arm up
+// into the spindle nose (at the ends of the arch), as a CAM program limits the tilt to avoid the holder.
+const LEAN_N = Math.ceil(2 * L);
+const LEANS = (() => {
+  const out = {};
+  for (const sign of [1, -1]) {
+    const grid = [];
+    for (let i = 0; i <= LEAN_N; i++) {
+      const s = -L + (2 * L * i) / LEAN_N;
+      let ok = 0;
+      let bad = LEAN.wall;
+      const fits = (lean) => { const q = wallPoint(s, sign, lean); const ax = axesFor(q.p, q.t); return upperRoom(ax) - ax.z >= CLEAR_HEAD + 1; };
+      if (fits(bad)) ok = bad;
+      else for (let i = 0; i < 14; i++) { const mid = (ok + bad) / 2; if (fits(mid)) ok = mid; else bad = mid; }
+      grid.push(ok);
+    }
+    // the least lean within 6 mm either side, then a smooth blend, so the tilt changes gently
+    const low = grid.map((_, i) => Math.min(...grid.slice(Math.max(0, i - 6), i + 7)));
+    out[sign] = low.map((_, i) => { let sum = 0; let w = 0; for (let j = -6; j <= 6; j++) { const v = low[Math.max(0, Math.min(low.length - 1, i + j))]; const k = Math.cos((j / 7) * (Math.PI / 2)) ** 2; sum += v * k; w += k; } return sum / w; });
+  }
+  return out;
+})();
+const leanAt = (s, sign) => {
+  const g = LEANS[sign];
+  const f = Math.max(0, Math.min(LEAN_N, ((s + L) / (2 * L)) * LEAN_N));
+  const i = Math.floor(f);
+  const k = f - i;
+  return g[i] + ((g[Math.min(g.length - 1, i + 1)] ?? g[i]) - g[i]) * k;
+};
+const wallAt = (u, sign) => {
+  const s = sign > 0 ? -L + u * 2 * L : L - u * 2 * L;
+  return wallPoint(s, sign, leanAt(s, sign));
+};
+// passes in order: kind, readout line, duration, tip and tool along u ∈ [0, 1]
+const PASSES = [
+  { kind: "occlusal", say: "Occlusal surface: the tool nearly upright, leaning 5° back along the arch", dur: 12, at: occlusalAt },
+  { kind: "buccal", say: "Buccal wall: the tool leans out from the wall, up to 15°", dur: 9, at: (u) => wallAt(u, 1) },
+  { kind: "palatal", say: "Palatal wall: the tool leans out from the wall, up to 15°", dur: 9, at: (u) => wallAt(u, -1) },
 ];
-// each step's starting state, worked out once
-const STARTS = [];
-{
-  let s = { ...START };
-  for (const step of STEPS) {
-    STARTS.push(s);
-    const next = { ...s };
-    if (step.path) Object.assign(next, step.path(1));
-    else for (const [key, v] of Object.entries(step.to)) next[key] = typeof v === "function" ? v(s) : v;
-    if (Math.abs(next.a) >= 360) next.a = 0;
-    s = next;
+// each pass's tool path as the tip's track across the disc (disc frame, mm), for the part view
+export const PASS_TRACKS = PASSES.map((pass) => {
+  const pts = [];
+  const n = Math.round(pass.dur * 40);
+  for (let i = 0; i <= n; i++) { const q = pass.at(i / n); pts.push([q.p[0], q.p[1]]); }
+  return { kind: pass.kind, pts };
+});
+// clearance plane for moves between passes: the tip 6 mm above face B, along the tool
+const SAFE = 6;
+const lift = (q) => {
+  const k = (GEO.THICK + SAFE - q.p[2]) / q.t[2];
+  return { p: [q.p[0] + k * q.t[0], q.p[1] + k * q.t[1], q.p[2] + k * q.t[2]], t: q.t };
+};
+const smooth = (u) => (u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u));
+const lerpAxes = (a, b, k) => ({ x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k, z: a.z + (b.z - a.z) * k, a: a.a + wrap(b.a - a.a) * k, b: a.b + (b.b - a.b) * k });
+// the timeline: from home, down into each pass and up out of it, with a move between passes at a raised Z
+const LINK = 1.2;
+// a move's time: Z climbs in its first 35% and comes down in its last 35%, at no more than 90 mm/s (the 5X-200-class
+// rapid is about 100 mm/s)
+const moveTime = (from, via, to) => Math.max(LINK, (1.6 * Math.max(Math.abs(via.z - from.z), Math.abs(to.z - via.z))) / (0.35 * 90));
+const DIP = 0.5;
+export const SIM = (() => {
+  const steps = [];
+  const homeAxes = { ...HOME };
+  let prev = homeAxes;
+  for (const pass of PASSES) {
+    const first = pass.at(0);
+    const last = pass.at(1);
+    const above = axesFor(lift(first).p, first.t);
+    const raised = { ...above, z: Math.max(0, Math.min(above.z, prev.z) - 12) };
+    steps.push({ kind: "move", say: prev === homeAxes ? "Down to the first pass" : "Up, across and down to the next pass", dur: moveTime(prev, raised, above), from: prev, via: raised, to: above, pass });
+    steps.push({ kind: "dip", say: pass.say, dur: DIP, from: above, to: axesFor(first.p, first.t), pass });
+    steps.push({ kind: "cut", say: pass.say, dur: pass.dur, pass });
+    const out = axesFor(lift(last).p, last.t);
+    steps.push({ kind: "dip", say: pass.say, dur: DIP, from: axesFor(last.p, last.t), to: out, pass, rising: true });
+    prev = out;
   }
-}
-export const TOUR_LEN = STEPS.reduce((sum, step) => sum + step.dur, 0);
-export function tourAt(time) {
-  let t = ((time % TOUR_LEN) + TOUR_LEN) % TOUR_LEN;
-  let i = 0;
-  while (i < STEPS.length - 1 && t >= STEPS[i].dur) t -= STEPS[i++].dur;
-  const step = STEPS[i];
-  const from = STARTS[i];
-  const u = Math.min(1, t / step.dur);
-  const s = { ...from };
-  if (step.path) Object.assign(s, step.path(u));
-  else for (const [key, v] of Object.entries(step.to)) { const to = typeof v === "function" ? v(from) : v; s[key] = from[key] + (to - from[key]) * ease(u); }
-  s.a = wrap(s.a);
-  return { ...s, axis: step.axis ?? null, say: step.say };
-}
-// the time the tour step running at `time` began, so a paused tour can resume from the start of its step
-export function tourStepStart(time) {
-  const t = ((time % TOUR_LEN) + TOUR_LEN) % TOUR_LEN;
+  steps.push({ kind: "move", say: "Finished: back home", dur: moveTime(prev, { ...prev, z: 0 }, homeAxes), from: prev, via: { ...prev, z: 0 }, to: { ...homeAxes, z: 0 }, pass: null });
+  steps.push({ kind: "hold", say: "Finished", dur: 1.4, from: homeAxes, pass: null });
   let start = 0;
-  for (const step of STEPS) {
-    if (t < start + step.dur) return start;
-    start += step.dur;
+  for (const step of steps) { step.start = start; start += step.dur; }
+  return { steps, len: start, passes: PASSES };
+})();
+export const SIM_LEN = SIM.len;
+// the passes' spans on the timeline (for the scrubber): kind, start, end
+export const SIM_SPANS = PASSES.map((pass) => {
+  const mine = SIM.steps.filter((step) => step.pass === pass);
+  return { kind: pass.kind, start: mine[0].start, end: mine[mine.length - 1].start + mine[mine.length - 1].dur };
+});
+// the state at a time in the job: machine axes, the tool's tilt from the disc's normal, which pass, and how far each
+// surface is finished (0 … 1 along the arch; channels 0 or 1)
+export function simAt(time) {
+  const t = Math.max(0, Math.min(SIM.len, time));
+  let i = 0;
+  while (i < SIM.steps.length - 1 && t >= SIM.steps[i].start + SIM.steps[i].dur) i++;
+  const step = SIM.steps[i];
+  const u = Math.min(1, (t - step.start) / step.dur);
+  let axes;
+  let tilt = 0;
+  if (step.kind === "cut") {
+    const q = step.pass.at(u);
+    axes = axesFor(q.p, q.t);
+    tilt = (Math.acos(Math.min(1, q.t[2])) * 180) / Math.PI;
+  } else if (step.kind === "dip") axes = lerpAxes(step.from, step.to, smooth(u));
+  else if (step.kind === "move") {
+    // up to the raised Z first, across, then down: Z leads on the way up and lags on the way down
+    const k = smooth(u);
+    const zk = smooth(Math.min(1, u / 0.35));
+    const dk = smooth(Math.max(0, (u - 0.65) / 0.35));
+    axes = lerpAxes(step.from, step.to, k);
+    axes.z = step.from.z + (step.via.z - step.from.z) * zk + (step.to.z - step.via.z) * dk;
+  } else axes = { ...step.from };
+  // how far each surface is finished at this time
+  const done = { occlusal: 0, buccal: 0, palatal: 0 };
+  for (const s2 of SIM.steps) {
+    if (s2.kind !== "cut") continue;
+    done[s2.pass.kind] = t >= s2.start + s2.dur ? 1 : t <= s2.start ? 0 : (t - s2.start) / s2.dur;
   }
-  return 0;
+  return { ...axes, a: wrap(axes.a), m: 1, axis: step.kind === "cut" || step.kind === "dip" ? "all" : null, say: step.say, kind: step.pass ? step.pass.kind : null, tilt, done, cutting: step.kind === "cut" };
+}
+// the time the pass running at `time` began, its move in included (for resuming and Page Up/Down)
+export function simPassStart(time) {
+  const t = Math.max(0, Math.min(SIM.len, time));
+  let best = 0;
+  for (const span of SIM_SPANS) if (span.start <= t + 1e-9) best = span.start;
+  return best;
 }

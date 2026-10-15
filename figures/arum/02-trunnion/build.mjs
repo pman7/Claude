@@ -10,7 +10,8 @@ import * as A from "../../../.claude/skills/anatomy/kit/audit.mjs";
 import { turning } from "../../../.claude/skills/anatomy/kit/turn-build.mjs";
 import * as TA from "../../../.claude/skills/anatomy/kit/turn-audit.mjs";
 import { turnScript } from "../../../.claude/skills/anatomy/scripts/inline-kit.mjs";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, wrap, magOf, zLimit, tourAt, TOUR_LEN, readoutOf, wordsOf } from "./model.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, BRIDGE, CONNECTORS, PASS_TRACKS, wrap, magOf, zLimit, simAt, SIM_LEN, SIM_SPANS, readoutOf, wordsOf } from "./model.mjs";
+import { workSvg, underSvg } from "./work.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
@@ -96,7 +97,7 @@ export const follow = (values) => ({ x: values.x ?? 0, b: values.b ?? 0, a: valu
 // reachable states for the build: the tour, and a grid of jog states with the head as low as each allows
 const reachable = () => {
   const out = [];
-  for (let t = 0; t < TOUR_LEN; t += 1 / 8) out.push(follow(tourAt(t)));
+  for (let t = 0; t < SIM_LEN; t += 1 / 8) out.push(follow(simAt(t)));
   for (const x of [0, TRAVEL.x / 2, TRAVEL.x])
     for (const y of [0, 60, 120, 180, Y_DISC, 270, TRAVEL.y])
       for (const bv of [-30, -15, 0, 15, 30])
@@ -171,12 +172,28 @@ const holder = T.prism({ name: "holder.plate", ...CA, F: HF, polygon: plate, s0:
 // and the premill bar along the back edge with five seat marks (ARUM's photos show P1–P5 on this face too)
 const ringScrews = Array.from({ length: 6 }, (_, i) => [56.5 * Math.cos((i * Math.PI) / 3), 56.5 * Math.sin((i * Math.PI) / 3)]);
 const knurled = (x, y) => `${screwHead(x, y, 3.6)}<path class="iso-line" data-tone="faint" d="${shift(circle(2.2, 12), x, y)}"/>`;
+// The milled disc (work.mjs) is drawn for the holder at rest; live.js redraws it as the holder moves. One millimetre
+// down from face B moves a point across the face by REST_SHIFT (disc frame); a wall is lit when it faces screen left.
+const REST = (() => {
+  const o = k.iso([0, 0, THICK], P);
+  const pu = k.iso([-1, 0, THICK], P);
+  const pv = k.iso([0, -1, THICK], P);
+  const down = k.iso([0, 0, THICK - 1], P);
+  const [a, b, c, d] = [pu[0] - o[0], pu[1] - o[1], pv[0] - o[0], pv[1] - o[1]];
+  const dx = down[0] - o[0];
+  const dy = down[1] - o[1];
+  const det = a * d - b * c;
+  const su = (dx * d - c * dy) / det;
+  const sv = (a * dy - b * dx) / det;
+  return { shift: [-su, -sv], m: [a, b, c, d] };
+})();
+const REST_SHIFT = REST.shift;
+const REST_LIT = (n) => REST.m[0] * -n[0] + REST.m[2] * -n[1] < 0;
 const faceB = [
   `<path class="tr-ring" fill-rule="evenodd" d="${circle(55)}${circle(47)}"/>`,
   `<path class="tr-bevel" fill-rule="evenodd" d="${circle(47)}${circle(45.5)}"/>`,
   `<path class="iso-line" data-tone="lo" d="${circle(55)}"/>`,
-  `<path class="tr-disc" d="${circle(45.5)}"/>`,
-  `<path class="iso-line" data-tone="lit" d="${circle(45.5)}"/>`,
+  workSvg(REST_SHIFT, { occlusal: 0, buccal: 0, palatal: 0 }, REST_LIT),
   ...ringScrews.map(([x, y]) => screwHead(x, y)),
   `<path class="iso-line" data-tone="lo" d="${roundRect(-31, -HALF + 8, 31, -HALF + 20, 6)}"/>`,
   `<path class="tr-hole" d="${roundRect(-29, -HALF + 11, 29, -HALF + 17, 3)}"/>`,
@@ -192,8 +209,7 @@ T.plane({ part: holder, o: [0, 0, THICK], u: [-1, 0, 0], v: [0, -1, 0], svg: fac
 const faceA = [
   `<path class="iso-line" data-tone="lo" d="${roundRect(-64, -57, 63, 55, 3)}"/>`,
   `<path class="tr-gap" fill-rule="evenodd" d="${circle(DISC_R + 0.9)}${circle(DISC_R)}"/>`,
-  `<path class="tr-disc" d="${circle(DISC_R)}"/>`,
-  `<path class="iso-line" data-tone="lit" d="${circle(DISC_R)}"/>`,
+  underSvg(),
   `<path class="iso-line" data-tone="lo" d="${roundRect(-56, 58, 55, 68, 2)}"/>`,
   `<path class="iso-line" data-tone="lo" data-free="end" d="${[-42, -21, 0, 21, 42].map((x) => `M${x} 68L${x} 72`).join("")}"/>`,
   ...ringScrews.map(([x, y]) => `<path class="iso-line" data-tone="lo" d="${shift(circle(1.6, 12), x * 1.02, y * 1.02)}"/>`),
@@ -320,10 +336,13 @@ function spindle() {
     { name: "head.shaft", svg: S(G.solidOf([[S0 - 10, 7.5], [S0, 7.5]], F, P), { tone: "mid" }), shape: A.solid(F, [[S0 - 10, 7.5], [S0, 7.5]]), at: [HX, HY, S0 - 5] },
     { name: "tool.collar", svg: S(G.solidOf([[S0 - 17, 6.5], [S0 - 10, 6.5]], F, P), { tone: "mid" }) + Faded(G.ribsOf(F, S0 - 17, S0 - 10, 6.5, 6, P, { fade: [0.1, 0.55] }), { tone: "lo" }), shape: A.solid(F, [[S0 - 17, 6.5], [S0 - 10, 6.5]]), at: [HX, HY, S0 - 13.5] },
   ];
-  // the bur: Ø6 shank, neck, Ø2 ball-end cutter
-  const bur = [[TIP_Z, 0], [TIP_Z + 0.4, 0.8, 1], [TIP_Z + 1, 1], [TIP_Z + 7, 1], [TIP_Z + 9, 0.8], [TIP_Z + 12, 0.8], [TIP_Z + 18, 3], [S0 - 17, 3]];
-  if (!(S0 - 17 > TIP_Z + 18)) throw new Error("tool: shank shorter than its taper");
-  parts.push({ name: "tool.bur", svg: S(G.solidOf(bur, F, P, {}), { tone: "hi", crease: "lo" }), shape: A.solid(F, bur), at: [HX, HY, TIP_Z + 12] });
+  // the bur: the finishing tool, a Ø1.0 ball on a long neck (ARUM's ZB-86: 20 mm reach) tapering to the Ø6 shank
+  const bur = [[TIP_Z, 0], [TIP_Z + 0.25, 0.43, 1], [TIP_Z + 0.5, 0.5], [TIP_Z + 2, 0.55], [TIP_Z + 20, 0.9], [TIP_Z + 23.5, 3], [S0 - 17, 3]];
+  if (!(S0 - 17 > TIP_Z + 23.5)) throw new Error("tool: shank shorter than its taper");
+  // its depth-sorting shape stops 9 mm above the tip: the cutting reach is down in the channel it cuts, which the holder
+  // plate's solid (a plain block) does not model
+  const sortBur = [[TIP_Z + 9, 0], [TIP_Z + 9.05, 0.69], [TIP_Z + 20, 0.9], [TIP_Z + 23.5, 3], [S0 - 17, 3]];
+  parts.push({ name: "tool.bur", svg: S(G.solidOf(bur, F, P, {}), { tone: "hi", crease: "lo" }), shape: A.solid(F, sortBur), at: [HX, HY, TIP_Z + 14] });
   // coolant: on each side a hex block with a domed swivel under the head, a short rigid Ø5 tube and a black tip, aimed at a
   // point on the spindle axis 29 mm below the nose
   const aim = [HX, HY, S0 - 29];
@@ -349,15 +368,10 @@ function spindle() {
   for (const part of parts) T.fixed({ name: part.name, group: gz, layer: live, svg: part.svg, anchor: part.at, shapes: part.shapes ?? [part.shape] });
 }
 
-// ---------------------------------------------------------------- the magazine, its pedestal and the flap
+// ---------------------------------------------------------------- the magazine and the flap
 function magazine() {
-  // one stand under the magazine, level with the open flap, with two steel guides in front of the flap that the
-  // magazine runs out on
-  const PX = [MAG.x + 8, MAG.x + MAG.w - 8];
-  const step = FLAP.y + FLAP.len;
-  const front = MAG.y + MAG.d - 8;
-  block("stand.mag.pedestal", PX, [FLAP.y + 1.5, front], [FLOOR_Z, FLAP.z - 1.5], { details: { seams: [FLOOR_Z + 20] } });
-  for (const [i, gx0] of [PX[0], PX[1] - 8].entries()) block(`stand.mag.guide.${i + 1}`, [gx0, gx0 + 8], [step, front], [FLAP.z - 1.5, MAG_TOP - 40], { material: "steel", details: { dots: [step + 10, front - 10].map((y) => ({ at: [MAG_TOP - 40, gx0 + 4, y], normal: [0, 0, 1], size: 0.45 })) } });
+  // the magazine slides out through the window over the open flap with nothing under it: its carriage stays inside the
+  // wall, as on the machine
   // the magazine: 15 pockets on a 32 mm grid, with the dealer's photo's occupancy (C1R1, C2R1, C2R5 and C3R2 empty)
   const cols = [MAG.x + MAG.w - 17, MAG.x + MAG.w - 49, MAG.x + MAG.w - 81]; // C1 nearest the cradle … C3
   const rows = [0, 1, 2, 3, 4].map((i) => MAG.y + 16 + i * 32); // back … front (R5 … R1)
@@ -397,7 +411,7 @@ if (argv.includes("--audit")) {
   A.auditOrExit(R, P);
   TA.orbitOrExit(T, R, P, {
     sweep: { at: (x) => follow({ x: TRAVEL.x / 2, y: Y_DISC, z: 0, a: x, b: 30 * Math.sin((x * Math.PI) / 90), m: 1 }), from: -180, to: 180, frame: 0.5 },
-    clips: [{ name: "tour", at: (t) => follow(tourAt(t)), from: 0, to: TOUR_LEN, frame: 1 / 10 }],
+    clips: [{ name: "sim", at: (t) => follow(simAt(t)), from: 0, to: SIM_LEN, frame: 1 / 10 }],
     quick: argv.includes("--quick"),
     only: argv.find((x) => x.startsWith("--only="))?.slice(7).split(",") ?? null,
     log: argv.includes("--verbose") ? (text) => console.log(`  … ${text}`) : null,
@@ -405,8 +419,7 @@ if (argv.includes("--audit")) {
 }
 
 const LABEL =
-  "Inside the machining chamber of a 5-axis dental mill. A gold cradle, open at the front, holds a square disc holder on a horizontal shaft between a small hub on the left and a larger hub on the right. The holder turns all the way round on that shaft (A), and the whole cradle tilts left or right (B). The cradle slides toward the operator and back (X) on a ram through the back wall. Above it the spindle points straight down, with a coolant nozzle on each side; its column runs left and right along the back wall (Y) and the head slides up and down the column (Z). To the left a tool magazine holds burs in fifteen pockets; it slides out through a window in the wall over a flap door hinged at the bottom, and back in, when the spindle comes for a tool.";
-// the five controls: each names its axis and shows its position
+  "Inside the machining chamber of a 5-axis dental mill, finishing a full-arch zirconia bridge. A gold cradle, open at the front, holds a square disc holder on a horizontal shaft; in the disc a horseshoe-shaped twelve-tooth bridge stands in a channel cut through it, held by small connectors, with four screw holes. Above it the spindle points straight down and never tilts. As the bur works round the arch, the holder turns (A) and the cradle tilts (B) together to lean the part against the tool, while the cradle slides toward the operator and back (X), the spindle column runs left and right (Y) and the head moves up and down (Z). Behind the bur the rough terraces left by roughing give way to finished teeth. To the left a tool magazine slides out through a window over a flap door hinged at the bottom, with nothing under it, when the spindle goes for a tool.";
 const AXES = [
   { key: "X", name: "cradle in and out", range: `0 to ${TRAVEL.x} mm` },
   { key: "Y", name: "spindle left and right", range: `0 to ${TRAVEL.y} mm` },
@@ -416,13 +429,36 @@ const AXES = [
 ];
 const backSvg = k.figureSvg({ width: W, height: H, label: LABEL, body: layerOf("back") });
 const staticSvg = (list) => `<svg xmlns="http://www.w3.org/2000/svg" class="iso-svg iso-layer" viewBox="0 0 ${W} ${H}" aria-hidden="true">${list.join("")}</svg>`;
-const KEYS_HELP = "Press X, Y, Z, A or B to choose an axis, then the arrow keys to move it: up and right raise its value, down and left lower it; Page Up and Page Down take big steps; Home and End go to the axis's ends; 0 returns every axis home. With a mouse or a finger, choose an axis below and drag across the picture. The Tour button plays or pauses the tour.";
-const stage = `<div class="iso-stage iso-turn tr-stage" tabindex="0" role="slider" aria-label="Y axis, spindle left and right" aria-describedby="tr-help" aria-valuemin="0" aria-valuemax="${TRAVEL.y}" aria-valuenow="${Y_DISC}" aria-valuetext="Y ${Y_DISC} millimetres, spindle over the disc centre">${backSvg}${out.layerSvg("machine", { width: W, height: H })}${staticSvg(layerOf("front"))}</div><span class="tr-help" id="tr-help">${KEYS_HELP}</span>`;
-const axesRow = `<div class="tr-axes" role="group" aria-label="Axis to move">${AXES.map((ax) => `<button type="button" class="tr-axis" data-axis="${ax.key}" aria-pressed="${ax.key === "Y"}" title="${ax.key}: ${ax.name}, ${ax.range}"><span class="tr-axis-key">${ax.key}</span><span class="tr-axis-value" data-value="${ax.key}"></span></button>`).join("")}<button type="button" class="tr-axis tr-tour" aria-pressed="true" title="Play or pause the tour"><span class="tr-axis-key">Tour</span></button></div>`;
+const KEYS_HELP = "In the simulation, Space plays or pauses, the arrow keys step through the job a second at a time (with Shift, five), Page Up and Page Down jump between passes, and Home and End go to its start and end. Press X, Y, Z, A or B to jog that axis yourself: the arrow keys then move it, up and right raising its value; Page Up and Page Down take big steps; Home and End go to the axis's ends; 0 returns every axis home. With a mouse or a finger, drag sideways across the picture to scrub through the job, or, in jog, to move the chosen axis.";
+const stage = `<div class="iso-stage iso-turn tr-stage" data-mode="sim" tabindex="0" role="slider" aria-label="Milling simulation: finishing a full-arch bridge" aria-describedby="tr-help" aria-valuemin="0" aria-valuemax="${Math.round(SIM_LEN)}" aria-valuenow="0" aria-valuetext="0 of ${Math.round(SIM_LEN)} seconds">${backSvg}${out.layerSvg("machine", { width: W, height: H })}${staticSvg(layerOf("front"))}</div><span class="tr-help" id="tr-help">${KEYS_HELP}</span>`;
+// the part view: the disc from above (front at the bottom), drawn flat with the walls just showing, the current pass's
+// tool path (done part darker) and the bur's tip with a line along its lean
+const INSET_SH = [0, 0.45];
+const insetLit = (n) => n[0] < 0;
+const trackD = (pts) => `M${pts.map((p) => `${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join("L")}`;
+const inset = `<div class="tr-inset" aria-hidden="true"><svg class="iso-svg" viewBox="-51 -51 102 102"><g transform="scale(-1 -1)">${workSvg(INSET_SH, { occlusal: 0, buccal: 0, palatal: 0 }, insetLit, "tri")}</g>${PASS_TRACKS.map((t) => `<path class="tr-track" data-track="${t.kind}" d="${trackD(t.pts)}"/><path class="tr-track-done" data-track-done="${t.kind}" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" d="${trackD(t.pts)}"/>`).join("")}<g class="tr-tool" data-tool="" opacity="0"><path class="tr-tool-lean" d="M0 0L0 0"/><circle class="tr-tool-tip" r="1.5"/></g></svg><span class="tr-inset-name">Part · from above</span></div>`;
+// the job's timeline (pointer only: the stage is the slider), then the controls: play, the two modes, and the five axes
+const PASS_NAME = { occlusal: "Occlusal", buccal: "Buccal", palatal: "Palatal" };
+const pct = (t) => `${((100 * t) / SIM_LEN).toFixed(2)}%`;
+const timeline = `<div class="tr-line" aria-hidden="true">${SIM_SPANS.map((span) => `<span class="tr-line-seg" style="left:${pct(span.start)};width:${pct(span.end - span.start)}"><span class="tr-line-name">${PASS_NAME[span.kind]}</span></span>`).join("")}<span class="tr-line-head" style="left:0%"></span></div>`;
+const axesRow = `<div class="tr-axes" role="group" aria-label="Controls"><button type="button" class="tr-axis tr-play" aria-pressed="true" title="Play or pause the simulation">Pause</button><span class="tr-modes" role="group" aria-label="Mode"><button type="button" class="tr-axis tr-mode tr-mode-sim" aria-pressed="true" title="Run the finishing job">Simulate</button><button type="button" class="tr-axis tr-mode tr-mode-jog" aria-pressed="false" title="Move the axes yourself">Jog</button></span>${AXES.map((ax) => `<button type="button" class="tr-axis" data-axis="${ax.key}" aria-pressed="false" title="${ax.key}: ${ax.name}, ${ax.range}"><span class="tr-axis-key">${ax.key}</span><span class="tr-axis-value" data-value="${ax.key}"></span></button>`).join("")}</div>`;
 
 const CSS = `${out.css}
 .iso{--tr-ring:#1c1c1e;--tr-disc:#ffffff;--tr-disc-a:.10;--tr-bevel:#9a9aa0;--tr-hole:#0d0d0e;--tr-screw:#8f8f94;--tr-recess:#161618}
 .iso[data-theme="light"]{--tr-ring:#4a4a50;--tr-disc:#ffffff;--tr-disc-a:.5;--tr-bevel:#e4e4e6;--tr-hole:#55555a;--tr-screw:#b9b9bd;--tr-recess:#d3d3d6}
+.iso{--tr-zr:#ffffff;--tr-zr-top:.3;--tr-zr-lit:.2;--tr-zr-shade:.12;--tr-zr-fin:.06;--tr-moat:.04;--tr-void:#000000;--tr-void-a:.6}
+.iso[data-theme="light"]{--tr-zr:#ffffff;--tr-zr-top:1;--tr-zr-lit:.86;--tr-zr-shade:.62;--tr-zr-fin:.12;--tr-moat:.5;--tr-void:#4a4a50;--tr-void-a:1}
+.tr-top{fill:var(--tr-zr);fill-opacity:var(--tr-zr-top)}
+.tr-wall{fill:var(--tr-zr);fill-opacity:var(--tr-zr-shade)}
+.tr-wall[data-lit]{fill-opacity:var(--tr-zr-lit)}
+.tr-wall.tr-fin{fill-opacity:calc(var(--tr-zr-shade) + var(--tr-zr-fin))}
+.tr-wall.tr-fin[data-lit]{fill-opacity:calc(var(--tr-zr-lit) + var(--tr-zr-fin))}
+.tr-moat{fill:var(--tr-zr);fill-opacity:var(--tr-moat)}
+.tr-void{fill:var(--tr-void);fill-opacity:var(--tr-void-a)}
+.tr-conn{fill:var(--tr-zr);fill-opacity:var(--tr-zr-lit)}
+.tr-conn-side{fill:var(--tr-zr);fill-opacity:var(--tr-zr-shade)}
+.tr-crowns{fill:var(--anatomy-lo)}
+.iso-svg .tr-reveal{vector-effect:none;stroke-linecap:butt}
 .tr-ring{fill:var(--tr-ring)}
 .tr-disc{fill:var(--tr-disc);fill-opacity:var(--tr-disc-a)}
 .tr-bevel{fill:var(--tr-bevel)}
@@ -431,7 +467,8 @@ const CSS = `${out.css}
 .tr-recess{fill:var(--tr-recess)}
 .tr-screw{fill:var(--tr-screw);stroke:var(--anatomy-lo);stroke-width:.3}
 .tr-black .iso-fill,.tr-black .iso-shade,.tr-black .iso-top{fill:var(--tr-ring)}
-.tr-stage{touch-action:pan-y pinch-zoom;cursor:grab}
+.tr-stage{touch-action:pan-y pinch-zoom;cursor:grab;overflow:hidden}
+.tr-stage>svg{overflow:hidden}
 .tr-stage[data-drag]{cursor:grabbing}
 .tr-stage:focus-visible{outline:1px solid var(--anatomy-muted);outline-offset:6px}
 .tr-axes{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:12px 0 10px}
@@ -441,6 +478,27 @@ const CSS = `${out.css}
 [data-value="A"]{width:7ch}
 [data-value="Z"],[data-value="B"]{width:6ch}
 [data-value="X"],[data-value="Y"]{width:5ch}
+.tr-stagewrap{position:relative}
+.tr-inset{position:absolute;left:1.5%;top:1.5%;width:31%;aspect-ratio:1;border-radius:4px;background:var(--anatomy-card);box-shadow:inset 0 0 0 1px var(--anatomy-faint);opacity:0;pointer-events:none;transition:opacity .5s var(--anatomy-ease)}
+.tr-stagewrap[data-close] .tr-inset{opacity:1}
+.tr-inset>svg{position:absolute;inset:4%;width:92%;height:92%}
+.tr-inset-name{position:absolute;left:9px;top:8px;font:9px/1 var(--anatomy-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--anatomy-muted)}
+.tr-track,.tr-track-done{fill:none;stroke-linecap:round;stroke-linejoin:round;display:none}
+.tr-track{stroke:var(--anatomy-mid);stroke-width:.7;stroke-dasharray:1.5 2.5}
+.tr-track-done{stroke:var(--anatomy-strong);stroke-width:1.1;stroke-opacity:.8}
+.tr-track[data-on],.tr-track-done[data-on]{display:inline}
+.tr-tool-tip{fill:var(--anatomy-strong);stroke:var(--anatomy-card);stroke-width:1}
+.tr-tool-lean{fill:none;stroke:var(--anatomy-strong);stroke-width:1.4;stroke-linecap:round}
+@media (prefers-reduced-motion: reduce){.tr-inset{transition:none}}
+.tr-modes{display:inline-flex;gap:0}
+.tr-mode:first-child{border-radius:3px 0 0 3px}
+.tr-mode:last-child{border-radius:0 3px 3px 0;margin-left:-1px}
+.tr-play{min-width:6.2ch;justify-content:center;color:var(--anatomy-text)}
+.tr-line{position:relative;height:22px;margin:10px 4px 0;cursor:pointer;touch-action:none}
+.tr-line-seg{position:absolute;top:4px;height:3px;background:var(--anatomy-faint);border-radius:1px}
+.tr-line-name{position:absolute;top:7px;left:0;font:9px/1 var(--anatomy-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--anatomy-muted);white-space:nowrap}
+.tr-line-head{position:absolute;top:0;width:1px;height:11px;margin-left:-.5px;background:var(--anatomy-strong)}
+.tr-stage[data-mode="jog"]~.tr-line{opacity:.45}
 .tr-help{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tr-axis[aria-pressed="true"]{box-shadow:inset 0 0 0 1px var(--anatomy-hi);color:var(--anatomy-strong)}
 .tr-axis[data-moving]{color:var(--anatomy-strong)}
@@ -450,26 +508,26 @@ const CSS = `${out.css}
 @media (prefers-reduced-motion: reduce){.tr-axis{transition:none}}
 `;
 const DATA = { turn: out.data };
-const modelScript = readFileSync(join(HERE, "model.mjs"), "utf8").replace(/^export /gm, "");
+const modelScript = [readFileSync(join(HERE, "model.mjs"), "utf8"), readFileSync(join(HERE, "work.mjs"), "utf8").replace(/^import [^;]+;\n/gm, "")].join("\n").replace(/^export /gm, "");
 const LIVE = readFileSync(join(HERE, "live.js"), "utf8").replace("__DATA__", JSON.stringify(DATA)).replace("const follow = null;", `const follow = ${follow.toString()};`);
 const body =
   `<style>${CSS}</style><div class="tr-plate">` +
   k.plateHtml({
     fig: "Fig 2",
-    title: "Five axes",
-    hint: "Drag · arrows · X Y Z A B",
-    readout: readoutOf(HOME),
+    title: "Five-axis finishing",
+    hint: "Play · scrub · jog",
+    readout: "Finishing a full-arch bridge",
     keys: [
-      { mark: "lit", label: "The disc: X, A and B move it; Y and Z bring the bur to it" },
-      { mark: "raised", label: "Cradle (gold): slides in and out on X, tilts ±30° on B, and turns the holder 360° on A" },
+      { mark: "lit", label: "The bridge: zirconia, milled about 20% large; finished teeth appear behind the bur" },
+      { mark: "raised", label: "Cradle (gold): X in and out, B tilts ±30°, A turns the holder 360°" },
     ],
     caption:
-      `Three straight moves and two turns. X slides the cradle toward the operator and back on a ram through the back wall (${TRAVEL.x} mm, from the disc's front edge to past the premill bar at its back edge); Y runs the spindle column left and right along the wall (${TRAVEL.y} mm), far enough to reach the magazine's columns; Z lowers the head down the column (${TRAVEL.z} mm). A turns the holder a full ${SPEC.aRange}° between the small hub on the left and the larger one on the right, and B tilts the whole cradle up to ±${SPEC.bLimit}°, shown about a front-to-back axis through the bolt circle in the cradle's back wall (inferred from the photos, not published). The bur never tilts: the cradle brings the disc to it. When the spindle goes for a tool, the magazine slides out over its flap door, which is hinged at the bottom, and goes back in after; how the spindle reaches the back four rows (perhaps the magazine stopping row by row) is not shown. The figure holds the head clear of the cradle, its ram and the magazine, as the machine's limits would. ` +
-      `Specs: ARUM 5X-200 (5 axes; travel X, Y, Z ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm as ARUM lists them; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm; five premill seats P1–P5). Which part moves on which axis, and the letters, are the dealer's: ARUM's sheet lists the ${TRAVEL.y} mm stroke as X, and here it is Y, the spindle's left-right move and the only one long enough to reach the magazine; ARUM's ${TRAVEL.x} mm is the cradle's X. Proportions from the dealer's photos of a 5X-200 and ARUM's product photos, scaled to a standard Ø${SPEC.disc} mm disc (ARUM publishes no disc size for the 5X-200); column, ram, flap and chamber schematic; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
-    body: stage + axesRow,
+      `A twelve-unit maxillary bridge, screw-retained on four implants, nested in a 25 mm zirconia disc after roughing: it stands in a channel cut through the disc (the Ø2.0 mm roughing ball plus 0.8 mm), held by ${CONNECTORS.length} connectors at its equator, milled about 20% large for the shrinkage in sintering. The simulation runs one finishing pass of each kind, much faster than real time: the occlusal surface with the Ø1.0 mm ball nearly upright (a 5° lean back along the arch), then the buccal and the palatal wall with the tool leaning out from the wall by up to 15°, along the arch's normal. The spindle never tilts, so A and B tilt the disc to the tool and move together all the way round the arch while X, Y and Z keep the ball on the surface; near the ends of the arch the lean eases, where tilting further would bring a cradle arm up into the spindle nose. The screw channels are indexed jobs of their own and are shown done. Jog hands you the axes: X slides the cradle on a ram through the back wall (${TRAVEL.x} mm), Y runs the spindle column along the wall (${TRAVEL.y} mm, far enough to reach the magazine), Z lowers the head (${TRAVEL.z} mm), A turns the holder ${SPEC.aRange}° and B tilts the cradle ±${SPEC.bLimit}° about a front-to-back axis (inferred from the photos, not published); the magazine slides out over its bottom-hinged flap, with nothing under it, when the spindle comes over it. ` +
+      `Specs: ARUM 5X-200 (5 axes; travel X, Y, Z ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm as ARUM lists them; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm); finishing tool as ARUM's ZB-86 (Ø1.0 mm ball, 20 mm reach). Tilts after hyperDENT's guidance (a CAM ARUM supplies machine data for): about 5° or less on tops, 10–20° on walls. Which part moves on which axis, and the letters, are the dealer's: ARUM's sheet lists the ${TRAVEL.y} mm stroke as X. Machine proportions from the dealer's photos and ARUM's product photos, scaled to a standard Ø${SPEC.disc} mm disc; bridge from typical tooth widths and arch form; column, ram, flap and chamber schematic; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
+    body: `<div class="tr-stagewrap">${stage}${inset}</div>` + timeline + axesRow,
   }) +
   `</div>`;
-const page = k.pageHtml({ title: "Five axes", theme: THEME, body, script: turnScript() + modelScript + (verify ? `window.__isoVerify = ${JSON.stringify(out.verify)};\n` : "") + LIVE, width: 680 });
+const page = k.pageHtml({ title: "Five-axis finishing", theme: THEME, body, script: turnScript() + modelScript + (verify ? `window.__isoVerify = ${JSON.stringify(out.verify)};\n` : "") + LIVE, width: 680 });
 // A claude.ai Artifact page (--artifact=path): no document skeleton of its own (the host adds it), and the figure follows
 // the viewer's theme: an explicit data-theme on <html>, else the system setting
 const THEME_HOST = `{
@@ -483,7 +541,7 @@ const THEME_HOST = `{
 }
 `;
 const artifactPage = () =>
-  `<title>ARUM 5X-200 Axes</title><style>${k.ISO_CSS}
+  `<title>ARUM 5X-200 Finishing</title><style>${k.ISO_CSS}
 :root{--page:#0b0b0b;color-scheme:dark}
 @media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--page:#f2f2ef;color-scheme:light}}
 :root[data-theme="light"]{--page:#f2f2ef;color-scheme:light}
