@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, simAt, simPassStart, SIM_LEN, SIM_SPANS, readoutOf, wrap } from "./model.mjs";
-import { workShapes } from "./work.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, roomAt, magFor, jogEnter, jogRequest, jogStep, simAt, simPassStart, SIM_LEN, SIM_SPANS, readoutOf, wrap } from "./model.mjs";
+import { workShapes, burCut } from "./work.mjs";
 
 const near = (a, b, tol) => assert.ok(Math.abs(a - b) <= tol, `${a} vs ${b}`);
 const deg = (r) => (r * 180) / Math.PI;
@@ -352,6 +352,60 @@ test("the disc drawing: only walls facing the viewer are swept, and the reveal r
   assert.equal(end.bodySteps, "");
   assert.ok(start.reveal > 0);
   assert.equal(end.reveal, 0);
+});
+
+test("the bur is cut off where it goes into the channel, and left whole in the open", () => {
+  const sh = [-1.07, 1.36];
+  const faceAt = (p, axis) => { const k = (GEO.THICK - p[2]) / axis[2]; return [p[0] + k * axis[0], p[1] + k * axis[1]]; };
+  // in the job: whenever the tip is below face B, the bur went in through the opening, so only its sight line decides
+  let cuts = 0;
+  for (const { t, s } of job) {
+    const { p, t: axis } = tipIn(s);
+    if (GEO.THICK - p[2] <= 0) { assert.equal(burCut(p, axis, sh), null, `clipped above the face at ${t}`); continue; }
+    assert.ok(axis[2] >= 0.2 && inside(faceAt(p, axis), OPENING.pts), `below face B outside the channel at ${t}`);
+    if (burCut(p, axis, sh)) cuts++;
+  }
+  assert.ok(cuts > 100, `cuts ${cuts}`);
+  // in jog: the tip below face B's plane but out in the open (over the magazine, past the disc's edge, turned on A)
+  let open = 0;
+  for (const a of [-180, -135, -90, -85, -45, 0, 45, 90, 135]) for (const b of [-30, -15, 0, 15, 30]) for (const y of [0, 50, 100, 150, 225, 300]) for (const x of [0, 55, 140]) {
+    const pose = { x, y, a, b, m: magFor(y) };
+    const { p, t: axis } = tipIn({ ...pose, z: Math.max(0, roomAt(pose, pose.m)) });
+    if (GEO.THICK - p[2] <= 0 || (axis[2] >= 0.2 && inside(faceAt(p, axis), OPENING.pts))) continue;
+    open++;
+    assert.equal(burCut(p, axis, sh), null, `clipped in the open at ${JSON.stringify(pose)}`);
+  }
+  assert.ok(open > 100, `open ${open}`);
+});
+
+test("jog: out of a cut the head only rises, never deeper or sideways in the part, and clears whatever keys come meanwhile", () => {
+  const ENDS = { x: [0, TRAVEL.x], y: [0, TRAVEL.y], z: [0, TRAVEL.z], a: [-180, 180], b: [-SPEC.bLimit, SPEC.bLimit] };
+  const ask = (j, key, delta) => ({ ...j, want: jogRequest(j.want, key, j.want[key] + delta, ...ENDS[key]), mWant: magFor(key === "y" ? j.want.y + delta : j.want.y) });
+  const run = (t0, lateral, zDown, zFrame, hz) => {
+    const s = simAt(t0);
+    const cur = { x: s.x, y: s.y, z: s.z, a: s.a, b: s.b, m: 1 };
+    let j = { cur, ...jogEnter(cur) };
+    const depth0 = GEO.THICK - tipIn(cur).p[2];
+    assert.ok(j.lifting, `not in the cut at ${t0}`);
+    const k = 1 - Math.exp(-1 / hz / 0.18);
+    const label = `${t0} ${lateral.join(" ")} then Z +${zDown} at frame ${zFrame}, ${hz} Hz`;
+    j = ask(j, ...lateral);
+    let cleared = -1;
+    for (let f = 0; f < 10 * hz; f++) {
+      if (f === zFrame) j = ask(j, "z", zDown);
+      const r = jogStep(j, k, 1 / hz / 2.2);
+      const depth = GEO.THICK - tipIn(r.cur).p[2];
+      assert.ok(depth <= depth0 + 1e-6, `${label}: ${depth.toFixed(2)} deep at frame ${f}, from ${depth0.toFixed(2)}`);
+      if (depth > 0) for (const key of ["x", "y", "a", "b"]) near(r.cur[key], cur[key], 1e-9);
+      j = { ...j, cur: r.cur, want: r.want, lifting: r.lifting };
+      if (cleared < 0 && !r.lifting) cleared = f;
+      if (!r.busy) return;
+    }
+    assert.fail(`${label}: still moving after 10 s (lift cleared at frame ${cleared})`);
+  };
+  for (const t0 of [5.03, 11.43, 24, 36, 41]) for (const lateral of [["x", 5], ["y", 5], ["a", -45], ["b", 15]]) for (const [zDown, zFrame] of [[1, 2], [5, 1], [200, 4]]) run(t0, lateral, zDown, zFrame, 60);
+  // the sequences that once stalled, at 60 and 120 frames a second
+  for (const hz of [60, 120]) { run(11.43, ["x", 5], 200, 1, hz); run(5.03, ["y", 5], 5, 1, hz); run(24, ["a", -30], 200, 1, hz); }
 });
 
 test("readout", () => {

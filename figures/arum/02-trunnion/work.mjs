@@ -2,7 +2,7 @@
 // plane can only carry flat markup, so depth is drawn as the 2.5D trick for prisms seen from above: everything at depth
 // d is the same outline moved by d·sh, where sh is how far one millimetre down moves a point across the face on screen
 // (live.js reads it from the two face planes each frame). Pure: path strings only, no DOM.
-import { BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, ARCH_L, OCC_SPAN, WALL_REACH, archAt, halfWidths, bandOutline } from "./model.mjs";
+import { GEO, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, ARCH_L, OCC_SPAN, WALL_REACH, archAt, halfWidths, bandOutline } from "./model.mjs";
 
 const n2 = (v) => Math.round(v * 100) / 100;
 const pt = (p) => `${n2(p[0])} ${n2(p[1])}`;
@@ -137,16 +137,17 @@ function firstHit(p, dir, segs, u) {
   return best;
 }
 // the offsets across one direction, worked out once per direction and kept for the last few (the main view, the part
-// view and the bur's clip all ask in the same frame)
+// view and the bur's clip all ask in the same frame); the one used longest ago goes first
 const SIGHTS = new Map();
 const offsetsFor = (sh) => {
   const key = `${sh[0]} ${sh[1]}`;
   let S = SIGHTS.get(key);
-  if (!S) {
+  if (S) SIGHTS.delete(key);
+  else {
     if (SIGHTS.size >= 4) SIGHTS.delete(SIGHTS.keys().next().value);
     S = { moat: MOAT.pts.map((q) => sh[0] * q[1] - sh[1] * q[0]), body: BODY.pts.map((q) => sh[0] * q[1] - sh[1] * q[0]), seen: null };
-    SIGHTS.set(key, S);
   }
+  SIGHTS.set(key, S);
   return S;
 };
 // (inChannel: the caller knows p is in the channel, off the bridge, so the two inside tests can be skipped)
@@ -155,6 +156,21 @@ export function sightDepth(p, sh, inChannel = false) {
   if (!inChannel && insidePoly(p, BODY.pts)) return BRIDGE.top;
   const o = offsetsFor(sh);
   return Math.min(firstHit(p, sh, MOAT_SEGS, o.moat), firstHit(p, sh, BODY_SEGS, o.body) + BRIDGE.top);
+}
+
+// The bur (tip p, axis t, holder frame) goes into the channel through face B: from the face down it shows only as far as
+// its sight line stays in the channel. Its cut: the depth below face B where it goes out of sight, and the point on its
+// axis there; null when nothing of it is hidden (above the face, turned away, in the open over the magazine or off the
+// disc's edge, or in sight all the way to its tip).
+export function burCut(p, t, sh) {
+  const tipDepth = GEO.THICK - p[2];
+  if (tipDepth <= 0 || !sh || t[2] < 0.2) return null;
+  const at = (e) => { const k = (GEO.THICK - e - p[2]) / t[2]; return [p[0] + k * t[0], p[1] + k * t[1]]; };
+  if (sightDepth(at(0), sh) <= 0) return null;
+  for (let e = 0.05; e < tipDepth; e += 0.1) {
+    if (e >= sightDepth(at(e), sh)) { const cut = Math.max(0, e - 0.05); return { cut, at: at(cut) }; }
+  }
+  return null;
 }
 
 // Connectors, row by row. Each is a small prism across the channel that runs 0.4 into the bridge and 0.4 into the disc.
@@ -241,12 +257,12 @@ function sampledRuns(A, B, runs, d, sh) {
   }
   return out;
 }
-// The seen parts of every connector for one view: top faces and the long sides facing the viewer, split into those
-// behind the bridge (on a wall facing away) and those in front of it. A sight line from the row at v, at the point a
+// The seen parts of every connector for one view: top faces and the long sides facing the viewer, painted over the
+// bridge's walls (what the bridge hides of them is already cut away here). A sight line from the row at v, at the point a
 // fraction u along it, passes that point + k·sh; in a connector's own (u, k) frame every edge of the opening and the
 // bridge is a segment, and the part of it within the blocking range of k casts its u-range as cut off.
 function connectorsSeen(sh) {
-  const conn = { farTop: "", farSide: "", nearTop: "", nearSide: "" };
+  const conn = { top: "", side: "" };
   for (const [ci, c] of CONN.entries()) {
     const part = CONN_PARTS[ci];
     const [a, b, , f] = c.quad;
@@ -305,13 +321,11 @@ function connectorsSeen(sh) {
       cast(body, d - BRIDGE.top);
       return minus(runs, cut);
     };
-    const out = archAt(c.s).n;
-    const k = c.wall * (out[0] * sh[0] + out[1] * sh[1]) > 0 ? "near" : "far";
     for (const row of part.top) {
       for (const [u0, u1] of seenAt(row.v, [lerp(row.lo[0], row.hi[0], 0.5), lerp(row.lo[1], row.hi[1], 0.5)], row.runs, c.depth[0])) {
         const q = [lerp(row.lo[0], row.lo[1], u0), lerp(row.lo[0], row.lo[1], u1), lerp(row.hi[0], row.hi[1], u1), lerp(row.hi[0], row.hi[1], u0)].map((p) => add(p, sh, c.depth[0]));
         if (signedArea(q) < 0) q.reverse();
-        conn[`${k}Top`] += ring(q);
+        conn.top += ring(q);
       }
     }
     for (const side of part.long) {
@@ -323,7 +337,7 @@ function connectorsSeen(sh) {
         for (const [u0, u1] of seenAt(side.v, side.line, side.runs, (d0 + d1) / 2)) {
           const q = [add(lerp(A, B, u0), sh, d0), add(lerp(A, B, u1), sh, d0), add(lerp(A, B, u1), sh, d1), add(lerp(A, B, u0), sh, d1)];
           if (signedArea(q) < 0) q.reverse();
-          conn[`${k}Side`] += ring(q);
+          conn.side += ring(q);
         }
       }
     }
@@ -347,7 +361,6 @@ export function workShapes(sh, done, lit) {
   if (!cache.seen) {
     cache.seen = BODY.pts.map((p, i) => (bodyFacing(i) || bodyFacing((i + BODY.pts.length - 1) % BODY.pts.length) ? Math.max(BRIDGE.top, Math.min(BRIDGE.base, fromCorner(p))) : BRIDGE.top));
     cache.moatSeen = MOAT.pts.map(fromCorner);
-    cache.conn = connectorsSeen(sh);
   }
   const seen = cache.seen;
   const body = { roughLit: "", roughShade: "", finLit: "", finShade: "" };
@@ -371,7 +384,6 @@ export function workShapes(sh, done, lit) {
   const moatWalls = sides(MOAT, 0, THROUGH, sh, moatFar);
   const moatSeen = cache.moatSeen;
   const moatSteps = MOAT_STEPS.map((d) => runs(MOAT, d, sh, (i) => moatFar(i) && d < Math.min(moatSeen[i], moatSeen[(i + 1) % MOAT.pts.length]))).join("");
-  const conn = cache.conn;
   return {
     floor: `translate(${n2(sh[0] * THROUGH)} ${n2(sh[1] * THROUGH)})`,
     top: `translate(${n2(sh[0] * BRIDGE.top)} ${n2(sh[1] * BRIDGE.top)})`,
@@ -379,7 +391,8 @@ export function workShapes(sh, done, lit) {
     moatSteps,
     body,
     bodySteps,
-    conn,
+    // the connectors only when asked for (the part view has none)
+    get conn() { return (cache.conn ??= connectorsSeen(sh)); },
     reveal: n2(REVEAL.len * (1 - done.occlusal)),
   };
 }
@@ -401,15 +414,13 @@ export function workSvg(sh, done, lit, id = "tr") {
     P("floor", "tr-void", OPEN_D, ` transform="${w.floor}"`) +
     P("moatWalls", "tr-moat", w.moatWalls) +
     P("moatSteps", "iso-line", w.moatSteps, ' data-tone="faint" data-free="both"') +
-    P("connFarSide", "tr-conn-side", w.conn.farSide) +
-    P("connFarTop", "tr-conn", w.conn.farTop) +
     P("roughShade", "tr-wall tr-rough", w.body.roughShade) +
     P("roughLit", "tr-wall tr-rough", w.body.roughLit, ' data-lit=""') +
     P("finShade", "tr-wall tr-fin", w.body.finShade) +
     P("finLit", "tr-wall tr-fin", w.body.finLit, ' data-lit=""') +
     P("bodySteps", "iso-line", w.bodySteps, ' data-tone="faint" data-free="both"') +
-    P("connNearSide", "tr-conn-side", w.conn.nearSide) +
-    P("connNearTop", "tr-conn", w.conn.nearTop) +
+    P("connSide", "tr-conn-side", w.conn.side) +
+    P("connTop", "tr-conn", w.conn.top) +
     `<g data-w="top" transform="${w.top}">` +
     `<path class="tr-top" d="${BODY_D}"/>` +
     `<g mask="url(#${id}-raw)"><path class="iso-line" data-tone="faint" d="${TERRACES}"/></g>` +

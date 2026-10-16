@@ -33,11 +33,8 @@ let trFrame = 0, trLast = 0, trVisible = false, trIdle = 0, trEma = 0, trSkip = 
 // mount (at the build's rest pose) does not overwrite home
 let trOwn = true;
 
-// how far down the head may come in a state (−1: it would not fit even at the top)
-const trRoom = (s, m = trState.cur.m) => zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(m).mag }, s.y);
-// the magazine comes out while the spindle is over it, and goes back in when it leaves
-const trMagFor = (y) => (y < 110 ? 0 : 1);
-const trFits = (s) => trRoom(s, 0) >= 0 && trRoom(s, 1) >= 0;
+// how far down the head may come in a state (−1: it would not fit even at the top); jog itself is model.mjs's
+const trRoom = (s, m = trState.cur.m) => roomAt(s, m);
 
 const trController = TURN.mount(trStage, TR.turn, {
   follow,
@@ -49,7 +46,7 @@ const trController = TURN.mount(trStage, TR.turn, {
     const m = typeof v.m === "number" ? v.m : (v.flap ?? 0) > 0 ? 0.72 + (0.28 * v.flap) / 90 : (0.72 * (v.mag ?? 0)) / GEO.MAG_STROKE;
     trState.cur = { x: v.x ?? 0, y: v.y ?? 0, z: v.z ?? 0, a: wrap(v.a ?? 0), b: v.b ?? 0, m };
     trState.want = { x: trState.cur.x, y: trState.cur.y, z: trState.cur.z, a: trState.cur.a, b: trState.cur.b };
-    trState.mWant = trMagFor(trState.cur.y);
+    trState.mWant = magFor(trState.cur.y);
     trWork(true);
     trInsetUpdate();
     trBurClip();
@@ -91,10 +88,8 @@ function trWork(force = false) {
   put("moatSteps", "d", w.moatSteps);
   put("bodySteps", "d", w.bodySteps);
   for (const k of ["roughShade", "roughLit", "finShade", "finLit"]) put(k, "d", w.body[k]);
-  put("connFarSide", "d", w.conn.farSide);
-  put("connFarTop", "d", w.conn.farTop);
-  put("connNearSide", "d", w.conn.nearSide);
-  put("connNearTop", "d", w.conn.nearTop);
+  put("connSide", "d", w.conn.side);
+  put("connTop", "d", w.conn.top);
   put("reveal", "stroke-dashoffset", String(w.reveal));
 }
 
@@ -141,13 +136,16 @@ function trInsetUpdate() {
 const trLive = document.querySelector("[data-say]");
 let trSaid = "";
 let trDescribed = "";
-function trSay() {
+function trSay(seek = false) {
   const s = trState.sim;
-  const text = s && (trState.playing || trState.time > 0) ? s.say : "";
-  if (!text) return;
-  if (text !== trDescribed) { trDescribed = text; trDescribe(); }
-  // the autoplay is not narrated; a job the reader started or moved is
-  if (!trState.asked || text === trSaid) return;
+  if (!s) return;
+  const text = trState.playing || trState.time > 0 ? s.say : "Finishing a full-arch bridge";
+  const focused = document.activeElement === trStage;
+  // the slider's value follows the job: each new line, and while it is not focused (so not read out) each second
+  if (text !== trDescribed || (!focused && trStage.getAttribute("aria-valuenow") !== String(Math.round(trState.time)))) { trDescribed = text; trDescribe(); }
+  // the autoplay is not narrated; a job the reader started or moved is, through the live region (while playing, unless
+  // the focused slider's own value text already says it; a seek from the timeline always)
+  if (!trState.asked || (focused && !seek) || text === trSaid) return;
   trSaid = text;
   if (trLive) trLive.textContent = text;
 }
@@ -172,16 +170,9 @@ if (trBur && trBur.ownerSVGElement) {
 function trBurClip() {
   if (!trBur || !trBurRect || !trFaceB || !trFaceA) return;
   const { p, t } = tipIn(trState.cur);
-  const sh = trState.sh;
-  const tipDepth = GEO.THICK - p[2];
-  // above the face, or turned away (face B hidden), nothing to clip
-  if (tipDepth <= 0 || !sh || trFaceB.getAttribute("opacity") === "0") { if (trBur.hasAttribute("clip-path")) trBur.removeAttribute("clip-path"); return; }
-  const at = (e) => { const k = (GEO.THICK - e - p[2]) / t[2]; return [p[0] + k * t[0], p[1] + k * t[1]]; };
-  if (t[2] < 0.2 || sightDepth(at(0), sh) <= 0) { if (trBur.hasAttribute("clip-path")) trBur.removeAttribute("clip-path"); return; }
-  let cut = tipDepth;
-  for (let e = 0.05; e < tipDepth; e += 0.1) if (e >= sightDepth(at(e), sh)) { cut = Math.max(0, e - 0.05); break; }
-  if (cut >= tipDepth) { if (trBur.hasAttribute("clip-path")) trBur.removeAttribute("clip-path"); return; }
-  const q = at(cut);
+  const hit = trFaceB.getAttribute("opacity") === "0" ? null : burCut(p, t, trState.sh);
+  if (!hit) { if (trBur.hasAttribute("clip-path")) trBur.removeAttribute("clip-path"); return; }
+  const { cut, at: q } = hit;
   const [, b, , d, , f] = trMatrix(trFaceB);
   const under = trMatrix(trFaceA);
   const dy = (under[5] - f) / (2 * GEO.THICK);
@@ -301,19 +292,8 @@ function trDraw() {
 // request when it would not; Z never asks for deeper than the state allows
 function trRequest(axis, value) {
   const ax = TR_AXES[axis];
-  const from = trState.want[ax.key];
-  let to = ax.key === "a" ? value : trClamp(value, ax.lo, ax.hi);
-  const test = (v) => trFits({ ...trState.want, [ax.key]: v });
-  if (ax.key !== "z" && !test(to)) {
-    let ok = from;
-    let bad = to;
-    for (let i = 0; i < 12; i++) { const mid = (ok + bad) / 2; if (test(mid)) ok = mid; else bad = mid; }
-    to = ok;
-  }
-  const next = { ...trState.want, [ax.key]: to };
-  next.z = trClamp(next.z, 0, Math.max(0, Math.min(trRoom(next, 0), trRoom(next, 1))));
-  trState.want = next;
-  trState.mWant = trMagFor(next.y);
+  trState.want = jogRequest(trState.want, ax.key, value, ax.lo, ax.hi);
+  trState.mWant = magFor(trState.want.y);
 }
 
 // ---------------------------------------------------------------- the job: play, pause, seek, and the two modes
@@ -333,7 +313,8 @@ function trStartJob(asked = false) {
 function trArmJob(delay = 3600) {
   clearTimeout(trIdle);
   trIdle = 0;
-  if (trState.mode !== "sim" || trCalm || trState.focused || trState.dragging || trState.held || trState.stopped) { trShow(); return; }
+  // (a job already playing, the reader's own included, just carries on)
+  if (trState.playing || trState.mode !== "sim" || trCalm || trState.focused || trState.dragging || trState.held || trState.stopped) { trShow(); return; }
   trIdle = setTimeout(() => trStartJob(), delay);
   trShow();
 }
@@ -354,6 +335,7 @@ function trEnterSim() {
   trState.blend = { from: { ...trState.cur }, t: 0 };
   trState.viewTo = 1;
   trDescribe();
+  trDescribed = "";
   trShow();
   trRun();
 }
@@ -362,19 +344,15 @@ function trEnterJog() {
   trPause({ sticky: true });
   trState.mode = "jog";
   trState.blend = null;
-  const c = trState.cur;
-  // the bur may be in the part: the reader's first request is the same pose, lifted clear, and the head rises to it
-  // (straight up, along the upright tool) before anything else is clamped
-  const room = Math.max(0, trRoom(c, c.m));
-  trState.lifting = c.z > room + 0.01;
-  trState.want = { x: c.x, y: c.y, z: Math.min(c.z, room), a: c.a, b: c.b };
-  trState.mWant = trMagFor(c.y);
+  // the bur may be in the part: it rises straight up, along the upright tool, before anything else moves
+  Object.assign(trState, jogEnter(trState.cur));
   trState.viewTo = 0;
   trDescribe();
   trShow();
   trRun();
 }
-function trSeek(time) {
+// a seek from the timeline is spoken; one from the keys or a drag on the focused slider is read from its value text
+function trSeek(time, speak = document.activeElement !== trStage) {
   trState.asked = true;
   if (trState.mode !== "sim") trEnterSim();
   trPause({ sticky: true });
@@ -383,8 +361,7 @@ function trSeek(time) {
   trState.viewTo = 1;
   trSimDraw();
   trDescribe();
-  // a seek from the timeline or a drag is spoken; from the focused slider its value text already says it
-  if (document.activeElement !== trStage) trSay();
+  if (speak) trSay(true);
   trRun();
 }
 function trSimDraw() {
@@ -433,36 +410,12 @@ function trTick(now) {
     }
   } else {
     trState.sim = null;
-    const k = calm ? 1 : 1 - Math.exp(-dt / 0.18);
-    const w = trState.want;
-    // rising out of a cut: only Z moves, and only up to the room at the pose it is held in, until the head is clear;
-    // a key pressed meanwhile waits (a request is clamped for its own pose, which may let it go deeper)
-    const wz = trState.lifting ? Math.min(w.z, Math.max(0, trRoom(c, c.m))) : w.z;
-    next = { x: c.x + (w.x - c.x) * k, y: c.y + (w.y - c.y) * k, z: c.z + (wz - c.z) * k, a: wrap(c.a + wrap(w.a - c.a) * k), b: c.b + (w.b - c.b) * k, m: c.m };
-    if (trState.lifting) { next.x = c.x; next.y = c.y; next.a = c.a; next.b = c.b; }
-    for (const key of ["x", "y", "z", "b"]) if (Math.abs(w[key] - next[key]) < 0.01) next[key] = w[key];
-    if (Math.abs(wrap(w.a - next.a)) < 0.01) next.a = w.a;
-    // the magazine runs its sequence at its own pace, and only comes out once the head is clear of its path
-    if (next.m !== trState.mWant) {
-      const step = calm ? 1 : dt / 2.2;
-      const m2 = trState.mWant < next.m ? Math.max(trState.mWant, next.m - step) : Math.min(trState.mWant, next.m + step);
-      if (trRoom(next, m2) >= next.z) next.m = m2;
-      else { trState.want.z = Math.min(trState.want.z, Math.max(0, trRoom(next, m2))); changed = true; }
-    }
-    // never draw the head inside anything: lift the drawn head when the state needs it (the request stands, so the head
-    // comes back down to it once there is room), and stop when even the top is not clear
-    const room = trRoom(next, next.m);
-    if (room < 0) {
-      trState.want = { x: c.x, y: c.y, z: c.z, a: c.a, b: c.b };
-      next = { ...c };
-      changed = true;
-    } else if (trState.lifting) {
-      // rising out of the cut: let it ease up; clamp again once it is clear
-      if (next.z <= room + 0.01) trState.lifting = false;
-    } else if (next.z > room) next.z = Math.max(0, room);
-    trState.cur = next;
-    const w2 = trState.want;
-    busy = !(next.x === w2.x && next.y === w2.y && Math.abs(next.z - Math.min(w2.z, Math.max(0, room))) < 0.01 && next.a === w2.a && next.b === w2.b && next.m === trState.mWant);
+    const step = jogStep({ cur: c, want: trState.want, mWant: trState.mWant, lifting: trState.lifting }, calm ? 1 : 1 - Math.exp(-dt / 0.18), calm ? 1 : dt / 2.2);
+    trState.cur = step.cur;
+    trState.want = step.want;
+    trState.lifting = step.lifting;
+    changed = step.changed;
+    busy = step.busy;
   }
   // the view eases between the whole chamber and the work over about a second
   if (trState.view !== trState.viewTo) {
@@ -477,7 +430,7 @@ function trTick(now) {
   trSkip = trHalf ? !trSkip : false;
   if (!trSkip || !busy) trDraw();
   if (changed || !busy) trDescribe();
-  else if (trState.mode === "sim") trSay();
+  else if (trState.mode === "sim" && trState.playing) trSay();
   trFrame = trVisible && busy ? requestAnimationFrame(trTick) : 0;
 }
 const trRun = () => { if (!trFrame && trVisible) { trLast = 0; trFrame = requestAnimationFrame(trTick); } };
@@ -528,7 +481,7 @@ trPlayButton?.addEventListener("click", () => {
 });
 // the timeline under the stage: click or drag along it to seek
 if (trLine) {
-  const seekAt = (event) => { const r = trLine.getBoundingClientRect(); trSeek(((event.clientX - r.left) / r.width) * SIM_LEN); };
+  const seekAt = (event) => { const r = trLine.getBoundingClientRect(); trSeek(((event.clientX - r.left) / r.width) * SIM_LEN, true); };
   trLine.addEventListener("pointerdown", (event) => { if (event.button !== 0 && event.pointerType === "mouse") return; trLine.setPointerCapture?.(event.pointerId); seekAt(event); });
   trLine.addEventListener("pointermove", (event) => { if (trLine.hasPointerCapture?.(event.pointerId)) seekAt(event); });
 }

@@ -486,6 +486,69 @@ export const CONNECTORS = (() => {
   return out.sort((u, v) => u.s - v.s);
 })();
 
+// ---------------------------------------------------------------- jog: the reader moves the axes (live.js drives these)
+// how far down the head may come in a state, with the magazine at m (−1: it would not fit even at the top)
+export const roomAt = (s, m) => zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(m).mag }, s.y);
+// the magazine comes out while the spindle is over it, and goes back in when it leaves
+export const magFor = (y) => (y < 110 ? 0 : 1);
+const fitsAt = (s) => roomAt(s, 0) >= 0 && roomAt(s, 1) >= 0;
+// into jog from wherever the job left the head: if the bur is in the part, the first request is the same pose lifted
+// clear, and the head rises to it before anything else moves
+export function jogEnter(cur) {
+  const room = Math.max(0, roomAt(cur, cur.m));
+  return { lifting: cur.z > room + 0.01, want: { x: cur.x, y: cur.y, z: Math.min(cur.z, room), a: cur.a, b: cur.b }, mWant: magFor(cur.y) };
+}
+// the reader asks for a value on one axis: kept to its travel (A turns all the way round), stopped short of anything
+// the move would hit, and Z kept to the room the new pose allows with the magazine either way
+export function jogRequest(want, key, value, lo, hi) {
+  let to = key === "a" ? value : Math.max(lo, Math.min(hi, value));
+  const test = (v) => fitsAt({ ...want, [key]: v });
+  if (key !== "z" && !test(to)) {
+    let ok = want[key];
+    let bad = to;
+    for (let i = 0; i < 12; i++) { const mid = (ok + bad) / 2; if (test(mid)) ok = mid; else bad = mid; }
+    to = ok;
+  }
+  const next = { ...want, [key]: to };
+  next.z = Math.max(0, Math.min(next.z, Math.max(0, Math.min(roomAt(next, 0), roomAt(next, 1)))));
+  return next;
+}
+// One frame of jog. j: { cur, want, mWant, lifting }; k: how much of the way to the request this frame eases;
+// mStep: how far the magazine's sequence runs. The head never goes inside anything: it is lifted when the state needs
+// it (the request stands, so it comes back down once there is room), and stops when even the top is not clear.
+export function jogStep(j, k, mStep) {
+  const c = j.cur;
+  let want = j.want;
+  let lifting = j.lifting;
+  let changed = false;
+  // rising out of a cut: only Z moves, and only up to the room at the pose it is held in, until the head is clear; a key
+  // pressed meanwhile waits (a request is kept to the room at its own pose, which may let it go deeper)
+  const wz = lifting ? Math.min(want.z, Math.max(0, roomAt(c, c.m))) : want.z;
+  let next = { x: c.x + (want.x - c.x) * k, y: c.y + (want.y - c.y) * k, z: c.z + (wz - c.z) * k, a: wrap(c.a + wrap(want.a - c.a) * k), b: c.b + (want.b - c.b) * k, m: c.m };
+  // close enough: land on the target (Z on the one it is easing to)
+  for (const key of ["x", "y", "b"]) if (Math.abs(want[key] - next[key]) < 0.01) next[key] = want[key];
+  if (Math.abs(wz - next.z) < 0.01) next.z = wz;
+  if (Math.abs(wrap(want.a - next.a)) < 0.01) next.a = want.a;
+  if (lifting) { next.x = c.x; next.y = c.y; next.a = c.a; next.b = c.b; }
+  // the magazine runs its sequence at its own pace, and only comes out once the head is clear of its path
+  if (next.m !== j.mWant) {
+    const m2 = j.mWant < next.m ? Math.max(j.mWant, next.m - mStep) : Math.min(j.mWant, next.m + mStep);
+    if (roomAt(next, m2) >= next.z) next.m = m2;
+    else { want = { ...want, z: Math.min(want.z, Math.max(0, roomAt(next, m2))) }; changed = true; }
+  }
+  const room = roomAt(next, next.m);
+  if (room < 0) {
+    want = { x: c.x, y: c.y, z: c.z, a: c.a, b: c.b };
+    next = { ...c };
+    changed = true;
+  } else if (lifting) {
+    // rising out of the cut: clamped again once it is clear
+    if (next.z <= room + 0.01) lifting = false;
+  } else if (next.z > room) next.z = Math.max(0, room);
+  const busy = !(next.x === want.x && next.y === want.y && Math.abs(next.z - Math.min(want.z, Math.max(0, room))) < 0.01 && next.a === want.a && next.b === want.b && next.m === j.mWant);
+  return { cur: next, want, lifting, changed, busy };
+}
+
 // ---------------------------------------------------------------- the finishing simulation
 // One pass of each kind, thinned for clarity (a zig-zag every few millimetres, one contour round each wall, where the
 // machine steps about 0.1 mm): the occlusal surface with the tool nearly upright, then the buccal and the palatal wall
