@@ -137,21 +137,24 @@ function trInsetUpdate() {
   }
 }
 
-// each new line of the job goes to a polite live region (and the slider's value text), not every frame
+// each new line of the job goes to the slider's value text and to a polite live region, not every frame
 const trLive = document.querySelector("[data-say]");
 let trSaid = "";
+let trDescribed = "";
 function trSay() {
   const s = trState.sim;
   const text = s && (trState.playing || trState.time > 0) ? s.say : "";
+  if (!text) return;
+  if (text !== trDescribed) { trDescribed = text; trDescribe(); }
   // the autoplay is not narrated; a job the reader started or moved is
-  if (!trState.asked || !text || text === trSaid) return;
+  if (!trState.asked || text === trSaid) return;
   trSaid = text;
   if (trLive) trLive.textContent = text;
-  trDescribe();
 }
 
-// The bur below face B is down in the channel: from the face down, it shows only as far as its sight line stays in
-// the channel (work.mjs sightDepth), so clip it there (the spindle is upright on screen, so the cut is a horizontal line)
+// The bur goes into the channel through face B: from the face down, it shows only as far as its sight line stays in
+// the channel (work.mjs sightDepth), so clip it there (the spindle is upright on screen, so the cut is a horizontal line).
+// Anywhere else (over the magazine, or with the disc turned away) it is in the open and is left whole.
 const trBur = trStage.querySelector('[data-name="tool.bur"]');
 let trBurRect = null;
 if (trBur && trBur.ownerSVGElement) {
@@ -174,6 +177,7 @@ function trBurClip() {
   // above the face, or turned away (face B hidden), nothing to clip
   if (tipDepth <= 0 || !sh || trFaceB.getAttribute("opacity") === "0") { if (trBur.hasAttribute("clip-path")) trBur.removeAttribute("clip-path"); return; }
   const at = (e) => { const k = (GEO.THICK - e - p[2]) / t[2]; return [p[0] + k * t[0], p[1] + k * t[1]]; };
+  if (t[2] < 0.2 || sightDepth(at(0), sh) <= 0) { if (trBur.hasAttribute("clip-path")) trBur.removeAttribute("clip-path"); return; }
   let cut = tipDepth;
   for (let e = 0.05; e < tipDepth; e += 0.1) if (e >= sightDepth(at(e), sh)) { cut = Math.max(0, e - 0.05); break; }
   if (cut >= tipDepth) { if (trBur.hasAttribute("clip-path")) trBur.removeAttribute("clip-path"); return; }
@@ -379,6 +383,8 @@ function trSeek(time) {
   trState.viewTo = 1;
   trSimDraw();
   trDescribe();
+  // a seek from the timeline or a drag is spoken; from the focused slider its value text already says it
+  if (document.activeElement !== trStage) trSay();
   trRun();
 }
 function trSimDraw() {
@@ -429,8 +435,10 @@ function trTick(now) {
     trState.sim = null;
     const k = calm ? 1 : 1 - Math.exp(-dt / 0.18);
     const w = trState.want;
-    next = { x: c.x + (w.x - c.x) * k, y: c.y + (w.y - c.y) * k, z: c.z + (w.z - c.z) * k, a: wrap(c.a + wrap(w.a - c.a) * k), b: c.b + (w.b - c.b) * k, m: c.m };
-    // rising out of a cut: only Z moves until the head is clear, so a key pressed meanwhile waits
+    // rising out of a cut: only Z moves, and only up to the room at the pose it is held in, until the head is clear;
+    // a key pressed meanwhile waits (a request is clamped for its own pose, which may let it go deeper)
+    const wz = trState.lifting ? Math.min(w.z, Math.max(0, trRoom(c, c.m))) : w.z;
+    next = { x: c.x + (w.x - c.x) * k, y: c.y + (w.y - c.y) * k, z: c.z + (wz - c.z) * k, a: wrap(c.a + wrap(w.a - c.a) * k), b: c.b + (w.b - c.b) * k, m: c.m };
     if (trState.lifting) { next.x = c.x; next.y = c.y; next.a = c.a; next.b = c.b; }
     for (const key of ["x", "y", "z", "b"]) if (Math.abs(w[key] - next[key]) < 0.01) next[key] = w[key];
     if (Math.abs(wrap(w.a - next.a)) < 0.01) next.a = w.a;

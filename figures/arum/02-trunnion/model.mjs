@@ -77,13 +77,13 @@ const mulM = (A, B) => {
 };
 
 // collision stand-ins at rest, in the frame of the group that carries them: boxes [x0, x1, y0, y1, z0, z1] and
-// cylinders along x or y { c, axis, s: [s0, s1], r }
+// cylinders along x or y { c, axis, s: [s0, s1], r }; the ones the tests check by name carry one
 const { HALF, THICK, ARM_L, ARM_R, BOSS_R, WALL, TOP, WALL_Z0, KNUCKLE, MAG, MAG_TOP, RAM, SPINDLE_Y } = GEO;
 const CRADLE = [
   { box: [ARM_L[0], ARM_L[1], -WALL[0], BOSS_R, -BOSS_R, BOSS_R] },
   { box: [ARM_L[0], ARM_L[1], -WALL[0], -8, BOSS_R, TOP] },
   { box: [ARM_R[0], ARM_R[1], -WALL[0], 35, -60, TOP] },
-  { box: [ARM_L[0], ARM_R[1], -WALL[1], -WALL[0], WALL_Z0, TOP] },
+  { name: "cradle.wall", box: [ARM_L[0], ARM_R[1], -WALL[1], -WALL[0], WALL_Z0, TOP] },
   { box: [-45, 45, -WALL[1], -WALL[0], TOP, TOP + 12] },
   { cyl: { axis: 1, c: [0, 0], s: [-KNUCKLE[1], -KNUCKLE[0]], r: 34 } },
   { cyl: { axis: 0, c: [0, 0], s: [ARM_L[0] - 5, ARM_L[0]], r: 29.5 } },
@@ -91,7 +91,7 @@ const CRADLE = [
   { cyl: { axis: 0, c: [0, 0], s: [91, ARM_R[0]], r: 42.5 } },
 ];
 const HOLDER = [
-  { box: [-HALF, HALF, -HALF, HALF, -THICK, THICK] },
+  { name: "holder.plate", box: [-HALF, HALF, -HALF, HALF, -THICK, THICK] },
   { box: [HALF - 10, HALF - 1, -(HALF - 15), 40, THICK, THICK + 3] },
   { box: [-(HALF - 1), -(HALF - 10), -(HALF - 15), 40, THICK, THICK + 3] },
   { cyl: { axis: 0, c: [0, 0], s: [ARM_L[1] + 6, -HALF], r: 24 } },
@@ -101,9 +101,16 @@ const HOLDER = [
 const RAM_BODY = { box: [RAM.x[0], RAM.x[1], -KNUCKLE[1] - RAM.len, -KNUCKLE[1], RAM.z[0], RAM.z[1]] };
 // the magazine block with its shanks standing in the pockets
 const MAGAZINE = { box: [MAG.x, MAG.x + MAG.w, MAG.y, MAG.y + MAG.d, MAG_TOP - 40, MAG_TOP + 33] };
+// the finishing bur (as ARUM's ZB-86: a Ø1.0 ball on a neck widening to Ø1.8 at its 20 mm reach, then the taper to the
+// Ø6 shank): height above the tip and radius, mm, as drawn (the ball's shoulder point drawn round)
+export const BUR = [[0, 0], [0.25, 0.43, 1], [0.5, 0.5], [2, 0.55], [20, 0.9], [23.5, 3]];
+export const burRadius = (h) => {
+  for (let i = 1; i < BUR.length; i++) { const [h0, r0] = BUR[i - 1]; const [h1, r1] = BUR[i]; if (h <= h1) return r0 + ((r1 - r0) * Math.max(0, h - h0)) / (h1 - h0); }
+  return BUR[BUR.length - 1][1];
+};
 // the spindle's underside, from the bur tip up: footprint (circle about the spindle axis, or a box relative to it) and its
 // height above the tip
-const HEAD = [
+export const HEAD = [
   { r: 3, zb: 0 }, // bur
   { r: 7.5, zb: 26 }, // collar and shaft
   { r: 19, zb: 43 }, // nose ring
@@ -126,7 +133,7 @@ function placed(shape, M, t) {
     const e = [mul(M, [1, 0, 0]), mul(M, [0, 1, 0]), mul(M, [0, 0, 1])];
     const corners = [];
     for (const x of [x0, x1]) for (const y of [y0, y1]) for (const z of [z0, z1]) corners.push(at([x, y, z]));
-    return { kind: "box", c, e, h: [(x1 - x0) / 2, (y1 - y0) / 2, (z1 - z0) / 2], corners };
+    return { name: shape.name, kind: "box", c, e, h: [(x1 - x0) / 2, (y1 - y0) / 2, (z1 - z0) / 2], corners };
   }
   const { axis, c: [c0, c1], s: [s0, s1], r } = shape.cyl;
   const end = (s) => (axis === 0 ? [s, c0, c1] : [c0, s, c1]);
@@ -137,7 +144,7 @@ function placed(shape, M, t) {
   const w = mul(M, [0, 0, 1]);
   const corners = [];
   for (const p of [p0, p1]) for (let j = 0; j < 12; j++) { const t2 = (j / 12) * 2 * Math.PI; corners.push([p[0] + r * (Math.cos(t2) * v[0] + Math.sin(t2) * w[0]), p[1] + r * (Math.cos(t2) * v[1] + Math.sin(t2) * w[1]), p[2] + r * (Math.cos(t2) * v[2] + Math.sin(t2) * w[2])]); }
-  return { kind: "cyl", p0, u, len: s1 - s0, r, corners };
+  return { name: shape.name, kind: "cyl", p0, u, len: s1 - s0, r, corners };
 }
 // plan extent of a placed stand-in (its corners, grown by 1 for the cylinder's rim samples)
 function extentOf(body) {
@@ -250,8 +257,6 @@ export const zLimit = (pose, y, bodies) => {
 // The holder frame turns with A inside the cradle, and the cradle tilts with B: holder → world is B's rotation after
 // A's, then the cradle's X slide (as bodiesOf).
 export const partRotation = (a, b) => mulM(rot(AXES_DIR.b, b), rot(AXES_DIR.a, a));
-// a turn about a unit axis, as the turn engine's hinges and the clearance model make it (for the tests)
-export const turnAbout = (axis, degrees) => rot(axis, degrees);
 export const toWorld = (s, p) => { const q = mul(partRotation(s.a, s.b), p); const X = AXES_DIR.x; return [q[0] + s.x * X[0], q[1] + s.x * X[1], q[2] + s.x * X[2]]; };
 // The machine position that puts the bur tip on p (holder frame, mm) with the tool along t (unit, holder frame, from the
 // tip toward the spindle). The spindle never tilts, so A and B turn t upright: R(A, B)·t = ẑ gives t = (sin B,
@@ -360,7 +365,7 @@ const BL = (() => {
 })();
 // the arch placed in the disc: its extent (with the channel) centred front to back
 // the bridge ends this far past the first molars' distal contacts, squared off with rounded corners
-const CAP = 2.2;
+export const CAP = 2.2;
 // placed so the channel's outer wall is as far inside the clamp ring as it can be (worked out below, once the outline can be drawn)
 let Y0 = 0;
 // centre-line point, unit tangent (toward +s) and buccal normal at s; past either end it carries straight on
@@ -576,10 +581,11 @@ const wallPoint = (kind, a, lean) => {
   return { p: tipFor(toHolder(q, WALL_DEPTH), [n[0], n[1], 0], t), t, s: a };
 };
 // The lean on the walls: 15° where the head is clear, eased where tilting the cradle that far would bring a part of it
-// up into the head (it is the right drive hub against the right coolant nozzle, along the buccal side of the right
-// second premolar and first molar and round the right-hand end), as a CAM program limits the tilt to avoid the holder. Worked out on a 0.25 mm grid with 3 mm of
-// room to spare, then the least lean within 6 mm either side, blended, so the tilt changes gently; the build writes the
-// table into the page, so it is not worked out again on load.
+// up into the head, as a CAM program limits the tilt to avoid the holder. Here that is the right drive hub against the
+// right coolant nozzle, along the buccal side of the right first molar; the blend carries the easing over the second
+// premolar and the first part of the right-hand end. Worked out on a 0.25 mm grid with 3 mm of room to spare, then the
+// least lean within 6 mm either side, blended, so the tilt changes gently; the build writes the table into the page, so
+// it is not worked out again on load.
 const LEAN_STEP = 0.25;
 // LEANS:begin
 const LEANS = (() => {

@@ -10,7 +10,7 @@ import * as A from "../../../.claude/skills/anatomy/kit/audit.mjs";
 import { turning } from "../../../.claude/skills/anatomy/kit/turn-build.mjs";
 import * as TA from "../../../.claude/skills/anatomy/kit/turn-audit.mjs";
 import { turnScript } from "../../../.claude/skills/anatomy/scripts/inline-kit.mjs";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, AXES_DIR, BRIDGE, CONNECTORS, PASS_TRACKS, leansTable, wrap, magOf, zLimit, simAt, SIM_LEN, SIM_SPANS, readoutOf, wordsOf } from "./model.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, AXES_DIR, BUR, burRadius, BRIDGE, CONNECTORS, PASS_TRACKS, leansTable, wrap, magOf, zLimit, simAt, SIM_LEN, SIM_SPANS, readoutOf, wordsOf } from "./model.mjs";
 import { workSvg, underSvg } from "./work.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -251,9 +251,12 @@ function chamber() {
   const drains = [[120, 60], [150, -60], [60, 190]];
   const drainSvg = drains.map(([x, y]) => S(k.cylinder(x, y, 18, FLOOR_Z, 1.2, P, 40, 0.3), { tone: "mid" }) + Ln(k.ring(x, y, 12, FLOOR_Z + 1.2, P, 36), { tone: "lo" }) + Dots(k.dotGrid(x - 6, y - 6, 4, 4, 4, FLOOR_Z + 1.2, P), { size: 0.45, tone: "lo" }) + Dots([0, 1, 2, 3, 4, 5].map((j) => at([x + 15 * Math.cos(j * 1.047 + 0.3), y + 15 * Math.sin(j * 1.047 + 0.3), FLOOR_Z + 1.2])), { size: 0.45 })).join("");
   put({ name: "stand.floor", layer: "back", at: [0, 0, FLOOR_Z - 4], bias: -50, svg: floorSvg + joints + drainSvg, shapes: [ground(A.slab(FLOOR, FLOOR_Z - 8, 8))] });
-  // the floor carries on under the side housing behind the wall, so the housing stands on something
-  // (it reaches as far back as the housing: the bay's depth, its back, 15 behind that, and 5 more)
-  const STRIP_Y = WY[0] - (156 + 5 + 15) - 5;
+  // the magazine bay behind the window, deep enough for the magazine when it is in (its carrier arm runs on back past
+  // the bay's back face), and the machine's side housing behind the wall's left edge, 15 behind the bay
+  const BAY = { y: [WY[0] - 156, WY[0]], back: 5, skin: 5 };
+  const RET = { x: [WALL_X[0] - 8, WALL_X[0]], y: [BAY.y[0] - BAY.back - 15, WY[0]] };
+  // the floor carries on under the side housing, 5 past its back, so the housing stands on something
+  const STRIP_Y = RET.y[0] - 5;
   const STRIP = { x: WALL_X[0] - 8, y: STRIP_Y, w: 8, d: WY[0] - STRIP_Y, r: 0.5 };
   put({ name: "stand.floor-back", layer: "back", at: [STRIP.x + 4, STRIP.y + STRIP.d / 2, FLOOR_Z - 4], bias: -60, svg: S(k.slabOf(STRIP, FLOOR_Z - 8, 8, P, 1, 0.4), { tone: "lo" }), shapes: [ground(A.slab(STRIP, FLOOR_Z - 8, 8))] });
   // the door sill stands on the floor, so it lives with the machine's parts
@@ -287,9 +290,7 @@ function chamber() {
   T.plane({ part: face, o: [0, WY[1], 0], u: [1, 0, 0], v: [0, 0, 1], normal: [0, 1, 0], svg: `<path class="tr-hole" d="${slot}"/><path class="iso-line" data-tone="lo" d="${slot}"/><path class="iso-line" data-tone="faint" d="${brush}"/>` });
   // a ledge above the magazine window
   block("wall.ledge", [WALL_X[0] + 10, WIN.x[1] + 20], [WY[1], WY[1] + 8], [WIN.z[1] + 5, WIN.z[1] + 10], { bevel: 0.4 });
-  // the magazine bay behind the window: dark, deep enough to take the whole magazine with its flap shut
-  // deep enough for the magazine when it is in; its carrier arm runs on back past the bay's back face
-  const BAY = { y: [WY[0] - 156, WY[0]], back: 5, skin: 5 };
+  // the magazine bay: dark, a floor, two sides, a roof and a back
   const dark = { tone: "lo", material: "rubber" };
   // a floor under everything, side walls standing on it and a roof capping them: each joint meets on one face
   const BX = [WIN.x[0] - BAY.skin, WIN.x[1] + BAY.skin];
@@ -304,7 +305,6 @@ function chamber() {
   T.plane({ part: bayFloor, o: backO, u: [1, 0, 0], v: [0, 0, 1], normal: [0, 1, 0], svg: backSvg });
   // the machine's side housing behind the wall's left edge: it hides the bay and the retracted magazine, which would
   // otherwise show past the edge from this viewpoint; it carries the wall's bands and screws round the corner
-  const RET = { x: [WALL_X[0] - 8, WALL_X[0]], y: [BAY.y[0] - BAY.back - 15, WY[0]] };
   const retDots = [];
   for (let y = RET.y[0] + 20; y < RET.y[1] - 10; y += 50) for (let z = FLOOR_Z + 18; z < WALL_TOP - 8; z += 40) retDots.push({ at: [z, RET.x[0], y], normal: [-1, 0, 0], size: 0.5 });
   block("wall.return", RET.x, RET.y, [FLOOR_Z, WALL_TOP], { details: { seams: [SILL_Z, WIN.z[1], SLOT.z[0], SLOT.z[1]], dots: retDots } });
@@ -349,11 +349,11 @@ function spindle() {
     { name: "tool.collar", svg: S(G.solidOf([[S0 - 17, 6.5], [S0 - 10, 6.5]], F, P), { tone: "mid" }) + Faded(G.ribsOf(F, S0 - 17, S0 - 10, 6.5, 6, P, { fade: [0.1, 0.55] }), { tone: "lo" }), shape: A.solid(F, [[S0 - 17, 6.5], [S0 - 10, 6.5]]), at: [HX, HY, S0 - 13.5] },
   ];
   // the bur: the finishing tool, a Ø1.0 ball on a long neck (ARUM's ZB-86: 20 mm reach) tapering to the Ø6 shank
-  const bur = [[TIP_Z, 0], [TIP_Z + 0.25, 0.43, 1], [TIP_Z + 0.5, 0.5], [TIP_Z + 2, 0.55], [TIP_Z + 20, 0.9], [TIP_Z + 23.5, 3], [S0 - 17, 3]];
-  if (!(S0 - 17 > TIP_Z + 23.5)) throw new Error("tool: shank shorter than its taper");
+  const bur = [...BUR.map(([h, r, round]) => (round ? [TIP_Z + h, r, round] : [TIP_Z + h, r])), [S0 - 17, 3]];
+  if (!(S0 - 17 > TIP_Z + BUR[BUR.length - 1][0])) throw new Error("tool: shank shorter than its taper");
   // its depth-sorting shape stops 9 mm above the tip: the cutting reach is down in the channel it cuts, which the holder
   // plate's solid (a plain block) does not model
-  const sortBur = [[TIP_Z + 9, 0], [TIP_Z + 9.05, 0.69], [TIP_Z + 20, 0.9], [TIP_Z + 23.5, 3], [S0 - 17, 3]];
+  const sortBur = [[TIP_Z + 9, 0], [TIP_Z + 9.05, burRadius(9.05)], ...BUR.filter(([h]) => h > 9.05).map(([h, r]) => [TIP_Z + h, r]), [S0 - 17, 3]];
   parts.push({ name: "tool.bur", svg: S(G.solidOf(bur, F, P, {}), { tone: "hi", crease: "lo" }), shape: A.solid(F, sortBur), at: [HX, HY, TIP_Z + 14] });
   // coolant: on each side a hex block with a domed swivel under the head, a short rigid Ø5 tube and a black tip, aimed at a
   // point on the spindle axis 29 mm below the nose
@@ -544,7 +544,7 @@ const body =
       { mark: "raised", label: "Cradle (gold): X in and out, B tilts ±30°, A turns the holder 360°" },
     ],
     caption:
-      `An illustrative full-arch bridge: twelve units, screw-retained on four implants (channels at the lateral incisors and second premolars), nested occlusal side up in a 25 mm pre-sintered zirconia disc after roughing and milled about 20% large for the shrinkage in sintering. It stands in a channel through the disc as wide as the Ø2.0 mm roughing ball plus 0.7 mm, held by ${CONNECTORS.length} connectors at its equator; the sintering support a bridge this long would also carry is left out. Each finishing pass is thinned for clarity, a zig-zag every few millimetres across the occlusal surface and one line round each wall, where the machine steps about 0.1 mm, so on the machine the job takes far longer. The Ø1.0 mm ball stays nearly upright on the occlusal surface (3°), then leans 15° out from the wall on one contour round the buccal side and the right-hand end, and one round the palatal side and the left-hand end. The spindle never tilts, so the disc is tilted to the tool: at the incisors the lean is on A, at the molars on B, and between them A and B share it, both changing as the tool goes round (simultaneous 5-axis motion, as hyperDENT's 5X cycles drive it). Along the buccal side of the right second premolar and first molar, and round the right-hand end, the lean eases to about ${MIN_LEAN}°, where tilting the cradle further would bring its right drive hub up into the coolant nozzle. The screw channels are indexed jobs of their own and are shown done. Jog hands you the axes: X slides the cradle on a ram through the back wall (${TRAVEL.x} mm), Y runs the spindle column along the wall (${TRAVEL.y} mm, far enough to reach the magazine), Z lowers the head (${TRAVEL.z} mm), A turns the holder ${SPEC.aRange}° and B tilts the cradle ±${SPEC.bLimit}° about a front-to-back axis (inferred from the photos, not published); when the spindle comes over the magazine, it slides out through its window on a carrier arm, over a flap hinged at the bottom, with nothing under it. ` +
+      `An illustrative full-arch bridge: twelve units, screw-retained on four implants (channels at the lateral incisors and second premolars), nested occlusal side up in a 25 mm pre-sintered zirconia disc after roughing and milled about 20% large for the shrinkage in sintering. It stands in a channel through the disc as wide as the Ø2.0 mm roughing ball plus 0.7 mm, held by ${CONNECTORS.length} connectors at its equator; the sintering support a bridge this long would also carry is left out. Each finishing pass is thinned for clarity, a zig-zag every few millimetres across the occlusal surface and one line round each wall, where the machine steps about 0.1 mm, so on the machine the job takes far longer. The Ø1.0 mm ball stays nearly upright on the occlusal surface (3°), then leans 15° out from the wall on one contour round the buccal side and the right-hand end, and one round the palatal side and the left-hand end. The spindle never tilts, so the disc is tilted to the tool: at the incisors the lean is on A, at the molars on B, and between them A and B share it, both changing as the tool goes round (simultaneous 5-axis motion, as hyperDENT's 5X cycles drive it). Along the buccal side of the right first molar the lean eases to about ${MIN_LEAN}°, where tilting the cradle further would bring its right drive hub up into the coolant nozzle, and it blends back to 15° over the second premolar and the first part of the right-hand end. The screw channels are indexed jobs of their own and are shown done. Jog hands you the axes: X slides the cradle on a ram through the back wall (${TRAVEL.x} mm), Y runs the spindle column along the wall (${TRAVEL.y} mm, far enough to reach the magazine), Z lowers the head (${TRAVEL.z} mm), A turns the holder ${SPEC.aRange}° and B tilts the cradle ±${SPEC.bLimit}° about a front-to-back axis (inferred from the photos, not published); when the spindle comes over the magazine, it slides out through its window on a carrier arm, over a flap hinged at the bottom, with nothing under it. ` +
       `Specs: ARUM 5X-200 (5 axes; travel X, Y, Z ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm as ARUM lists them; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm); finishing tool as ARUM's ZB-86 (Ø1.0 mm ball, 20 mm reach, 60 mm long). Tilts after the guidance of hyperDENT, a CAM ARUM supplies 5X-200 machine data for: 5° at most (3° preferred) where nothing is undercut, 10° or more on walls. ARUM shows its own 5X-200 screw-retained work in metal; zirconia is among the machine's listed materials. Which part moves on which axis, and the letters, are the dealer's: ARUM's sheet lists the ${TRAVEL.y} mm stroke as X. Machine proportions from the dealer's photos and ARUM's product photos, scaled to a standard Ø${SPEC.disc} mm disc; bridge from typical tooth widths and arch form, drawn at one height; column, ram, flap and chamber schematic; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
     body: `<div class="tr-stagewrap">${stage}${inset}</div>` + timeline + axesRow,
   }) +

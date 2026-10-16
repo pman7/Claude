@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, magOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, simAt, simPassStart, SIM_LEN, SIM_SPANS, readoutOf, wrap } from "./model.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, simAt, simPassStart, SIM_LEN, SIM_SPANS, readoutOf, wrap } from "./model.mjs";
 import { workShapes } from "./work.mjs";
 
 const near = (a, b, tol) => assert.ok(Math.abs(a - b) <= tol, `${a} vs ${b}`);
@@ -10,8 +10,8 @@ for (let t = 0; t <= SIM_LEN + 1e-9; t += 0.01) job.push({ t, s: simAt(t) });
 // distance from a point to a closed polygon's boundary, and whether it is inside
 const inside = (p, poly) => { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [xi, yi] = poly[i]; const [xj, yj] = poly[j]; if (yi > p[1] !== yj > p[1] && p[0] < ((xj - xi) * (p[1] - yi)) / (yj - yi) + xi) c = !c; } return c; };
 const edgeDist = (p, poly) => { let best = Infinity; for (let i = 0; i < poly.length; i++) { const a = poly[i]; const b = poly[(i + 1) % poly.length]; const ex = b[0] - a[0]; const ey = b[1] - a[1]; const l2 = ex * ex + ey * ey || 1; const k = Math.max(0, Math.min(1, ((p[0] - a[0]) * ex + (p[1] - a[1]) * ey) / l2)); best = Math.min(best, Math.hypot(p[0] - a[0] - k * ex, p[1] - a[1] - k * ey)); } return best; };
-// the finishing bur's radius at a height h above its tip (as drawn: Ø1.0 ball, a neck widening to Ø1.8 at 20 mm)
-const neck = (h) => (h < 2 ? 0.55 : h < 20 ? 0.55 + ((h - 2) * 0.35) / 18 : 0.9 + ((h - 20) * 2.1) / 3.5);
+// the finishing bur's radius at a height h above its tip, as drawn (model.mjs BUR)
+const neck = burRadius;
 const level = (s, z) => { const { p, t } = tipIn(s); const k = (z - p[2]) / t[2]; return { q: [p[0] + k * t[0], p[1] + k * t[1]], h: k }; };
 
 test("specs match ARUM's 5X-200 page", () => {
@@ -56,7 +56,7 @@ test("the axes put the tip where asked, with the tool upright in the machine", (
 test("the collision model turns the holder exactly as the kinematics do", () => {
   for (let i = 0; i < 50; i++) {
     const pose = { x: (i * 7) % 140, a: ((i * 47) % 360) - 180, b: ((i * 13) % 60) - 30, mag: 0 };
-    const plate = bodiesOf(pose)[9];
+    const plate = bodiesOf(pose).find((body) => body.name === "holder.plate");
     const H = GEO.HALF;
     const T = GEO.THICK;
     const want = [];
@@ -68,12 +68,123 @@ test("the collision model turns the holder exactly as the kinematics do", () => 
 test("the cradle in the collision model tilts as the kinematics do", () => {
   for (let i = 0; i < 30; i++) {
     const pose = { x: (i * 11) % 140, a: 0, b: ((i * 17) % 60) - 30, mag: 0 };
-    // the cradle's back wall box (CRADLE[3]) rides B only
-    const wall = bodiesOf(pose)[3];
+    // the cradle's back wall rides B only
+    const wall = bodiesOf(pose).find((body) => body.name === "cradle.wall");
     const [x0, x1, y0, y1, z0, z1] = [GEO.ARM_L[0], GEO.ARM_R[1], -GEO.WALL[1], -GEO.WALL[0], GEO.WALL_Z0, GEO.TOP];
     const want = [];
     for (const x of [x0, x1]) for (const y of [y0, y1]) for (const z of [z0, z1]) want.push(toWorld(pose, [x, y, z]));
     for (let k = 0; k < 8; k++) for (let j = 0; j < 3; j++) near(wall.corners[k][j], want[k][j], 1e-9);
+  }
+});
+
+// the drawn machine, as build.mjs puts it together (importing it builds the scene but writes nothing)
+const scene = (async () => {
+  const { T } = await import("./build.mjs");
+  const { TURN } = await import("../../../.claude/skills/anatomy/kit/turn.mjs");
+  const groups = T.groups.map((g) => ({ name: g.name, parent: g.parent ? g.parent.index : -1, kind: g.kind, origin: g.origin, direction: g.direction, axis: g.axis }));
+  // a point at rest carried by one group, with every axis at the given values
+  const carry = (values, name, p) => {
+    const { R, t } = TURN.poses(groups, values).get(name);
+    const o = groups.find((g) => g.name === name).origin;
+    const q = [p[0] - o[0], p[1] - o[1], p[2] - o[2]];
+    return [0, 1, 2].map((r) => R[3 * r] * q[0] + R[3 * r + 1] * q[1] + R[3 * r + 2] * q[2] + t[r]);
+  };
+  return { T, carry };
+})();
+// points over a recorded shape's surface: a solid of revolution's profile turned round its axis, a prism's two ends
+const add3 = (p, v, k) => [p[0] + v[0] * k, p[1] + v[1] * k, p[2] + v[2] * k];
+function surface(shape) {
+  const out = [];
+  const along = (a, b, f) => { const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.5)); for (let j = 0; j < n; j++) f(a[0] + ((b[0] - a[0]) * j) / n, a[1] + ((b[1] - a[1]) * j) / n); };
+  const { F, poly } = shape;
+  if (shape.kind === "body") {
+    for (let i = 0; i < poly.length; i++) along(poly[i], poly[(i + 1) % poly.length], (s, r) => { for (let k = 0; k < 24; k++) { const th = (k / 24) * 2 * Math.PI; out.push(add3(add3(add3(F.o, F.a, s), F.u, r * Math.cos(th)), F.v, r * Math.sin(th))); } });
+  } else if (shape.kind === "prism") {
+    for (const s of [shape.s0, shape.s1]) for (let i = 0; i < poly.length; i++) along(poly[i], poly[(i + 1) % poly.length], (x, y) => out.push(add3(add3(add3(F.o, F.u, x), F.v, y), F.a, s)));
+  } else throw new Error(`no surface for a ${shape.kind}`);
+  return out;
+}
+
+test("the drawn machine moves as the kinematics do: the holder's points and the bur's tip land where the model puts them", async () => {
+  const { carry } = await scene;
+  const TIP = [GEO.SPINDLE_X0, GEO.SPINDLE_Y, GEO.TIP_Z];
+  for (let i = 0; i < 40; i++) {
+    const pose = { x: (i * 7) % 140, a: ((i * 47) % 360) - 180, b: ((i * 13) % 60) - 30, y: (i * 29) % 320, z: (i * 11) % 140 };
+    for (const p of [[GEO.HALF, GEO.HALF, GEO.THICK], [-GEO.HALF, 20, -GEO.THICK], [10, -30, 5]]) {
+      const got = carry(pose, "a", p);
+      const want = toWorld(pose, p);
+      for (let j = 0; j < 3; j++) near(got[j], want[j], 1e-9);
+    }
+    // Y runs the spindle right along the wall, Z lowers it
+    const tip = carry(pose, "z", TIP);
+    const want = [GEO.SPINDLE_X0 + pose.y, GEO.SPINDLE_Y, GEO.TIP_Z - pose.z];
+    for (let j = 0; j < 3; j++) near(tip[j], want[j], 1e-9);
+  }
+  // through the job, the drawn bur's tip is on the point of the drawn holder that the model says it cuts
+  for (let t = 0; t < SIM_LEN; t += 0.37) {
+    const s = simAt(t);
+    const tip = carry(s, "z", TIP);
+    const at = carry(s, "a", tipIn(s).p);
+    for (let j = 0; j < 3; j++) near(tip[j], at[j], 1e-9);
+  }
+});
+
+test("the collision stand-ins cover what is drawn: the head under the spindle, the cradle and the holder", async () => {
+  const { T } = await scene;
+  // the head: every drawn point at or above the floor its stand-in footprint gives it
+  for (const part of T.parts.filter((x) => x.group?.name === "z")) {
+    for (const shape of part.shapes) {
+      for (const q of surface(shape)) {
+        const dx = q[0] - GEO.SPINDLE_X0;
+        const dy = q[1] - GEO.SPINDLE_Y;
+        const h = q[2] - GEO.TIP_Z;
+        let zb = Infinity;
+        for (const sb of HEAD) {
+          const on = sb.r !== undefined ? Math.hypot(dx, dy) <= sb.r + 1e-6 : dx >= sb.rect[0] - 1e-6 && dx <= sb.rect[1] + 1e-6 && dy >= sb.rect[2] - 1e-6 && dy <= sb.rect[3] + 1e-6;
+          if (on) zb = Math.min(zb, sb.zb);
+        }
+        assert.ok(zb <= h + 1e-6, `${part.name}: drawn ${h.toFixed(1)} above the tip at (${dx.toFixed(1)}, ${dy.toFixed(1)}), stand-ins from ${zb}`);
+      }
+    }
+  }
+  // the cradle and the holder, at rest: every drawn point inside a stand-in (within 0.5)
+  const rest = bodiesOf({ x: 0, a: 0, b: 0, mag: 0 });
+  const dot = (u, v) => u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
+  const within = (body, q) => {
+    if (body.kind === "box") { const d = [q[0] - body.c[0], q[1] - body.c[1], q[2] - body.c[2]]; return body.e.every((e, i) => Math.abs(dot(d, e)) <= body.h[i] + 0.5); }
+    const d = [q[0] - body.p0[0], q[1] - body.p0[1], q[2] - body.p0[2]];
+    const s = dot(d, body.u);
+    return s >= -0.5 && s <= body.len + 0.5 && Math.hypot(d[0] - s * body.u[0], d[1] - s * body.u[1], d[2] - s * body.u[2]) <= body.r + 0.5;
+  };
+  let checked = 0;
+  for (const part of T.parts.filter((x) => x.group?.name === "a" || x.group?.name === "b")) {
+    for (const shape of part.shapes) for (const q of surface(shape)) { checked++; assert.ok(rest.some((body) => within(body, q)), `${part.name} drawn outside its stand-ins at ${q.map((v) => v.toFixed(1))}`); }
+  }
+  assert.ok(checked > 1000);
+});
+
+test("the bridge's outline and the roughing terraces inside it: no spurs, no crossings, and each end where it belongs", () => {
+  for (const g of [0, BRIDGE.gap, -1.3, -2.6]) {
+    const { pts } = bandOutline(g, g < 0 ? 1.2 : 0.6);
+    const n = pts.length;
+    const edge = (k) => [pts[(k + 1) % n][0] - pts[k][0], pts[(k + 1) % n][1] - pts[k][1]];
+    for (let k = 0; k < n; k++) {
+      const a = edge(k);
+      const b = edge((k + 1) % n);
+      const turn = deg(Math.abs(Math.atan2(a[0] * b[1] - a[1] * b[0], a[0] * b[0] + a[1] * b[1])));
+      assert.ok(turn < 100, `grow ${g}: turns ${turn.toFixed(0)}° at point ${k + 1}`);
+    }
+    const cross = (p, q, r, s) => { const d = (q[0] - p[0]) * (s[1] - r[1]) - (q[1] - p[1]) * (s[0] - r[0]); if (Math.abs(d) < 1e-12) return false; const u = ((r[0] - p[0]) * (s[1] - r[1]) - (r[1] - p[1]) * (s[0] - r[0])) / d; const v = ((r[0] - p[0]) * (q[1] - p[1]) - (r[1] - p[1]) * (q[0] - p[0])) / d; return u > 1e-9 && u < 1 - 1e-9 && v > 1e-9 && v < 1 - 1e-9; };
+    for (let i = 0; i < n; i++) for (let j = i + 2; j < n; j++) {
+      if (i === 0 && j === n - 1) continue;
+      assert.ok(!cross(pts[i], pts[(i + 1) % n], pts[j], pts[(j + 1) % n]), `grow ${g}: edges ${i} and ${j} cross`);
+    }
+    // each end face stands CAP + grow past the last contact, along the arch
+    for (const dir of [1, -1]) {
+      const c = archAt(dir * ARCH_L);
+      const reach = Math.max(...pts.map((p) => dir * ((p[0] - c.p[0]) * c.t[0] + (p[1] - c.p[1]) * c.t[1])));
+      near(reach, CAP + g, 0.05);
+    }
   }
 });
 
@@ -85,7 +196,23 @@ test("each wall edge belongs to the pass that finishes it", () => {
     if (side === 1) assert.equal(pass, "buccal", `edge ${i}`);
     if (side === -1 && OUTLINE.side[(i + 1) % n] === -1) assert.equal(pass, "palatal", `edge ${i}`);
     if (side === 0) assert.equal(pass, OUTLINE.s[i] > 0 ? "buccal" : "palatal", `end edge ${i}`);
-    assert.ok(WALL_REACH.at[i] > 0 && WALL_REACH.at[i] <= 1);
+  }
+  // and is reached in order: each edge's far end at its share of the way along its pass
+  const seg = (k) => Math.hypot(OUTLINE.pts[(k + 1) % n][0] - OUTLINE.pts[k][0], OUTLINE.pts[(k + 1) % n][1] - OUTLINE.pts[k][1]);
+  const firstPalatal = OUTLINE.side.indexOf(-1);
+  for (const [kind, from, to] of [["buccal", 0, firstPalatal], ["palatal", firstPalatal, n]]) {
+    let total = 0;
+    for (let k = from; k < to; k++) total += seg(k);
+    let run = 0;
+    let last = 0;
+    for (let k = from; k < to; k++) {
+      run += seg(k);
+      assert.equal(WALL_REACH.pass[k], kind, `edge ${k}`);
+      near(WALL_REACH.at[k], run / total, 1e-9);
+      assert.ok(WALL_REACH.at[k] > last, `edge ${k} reached out of order`);
+      last = WALL_REACH.at[k];
+    }
+    near(last, 1, 1e-12);
   }
 });
 
@@ -129,7 +256,7 @@ test("A and B share the lean through every pass, within hyperDENT's tilts", () =
     assert.ok(range("a") > 2 && range("b") > 2, `${span.kind}: A ${range("a")}, B ${range("b")}`);
     const tilts = cut.map(({ s }) => s.tilt);
     if (span.kind === "occlusal") { near(Math.max(...tilts), 3, 0.01); near(Math.min(...tilts), 3, 0.01); }
-    else { assert.ok(Math.max(...tilts) <= 15 + 1e-9 && Math.max(...tilts) > 14.9, `${span.kind} max ${Math.max(...tilts)}`); assert.ok(Math.min(...tilts) >= 8, `${span.kind} min ${Math.min(...tilts)}`); }
+    else { assert.ok(Math.max(...tilts) <= 15 + 1e-9 && Math.max(...tilts) > 14.9, `${span.kind} max ${Math.max(...tilts)}`); assert.ok(Math.min(...tilts) >= 10, `${span.kind} min ${Math.min(...tilts)}`); }
   }
   // the lean eases only where the cradle's drive hub would meet the right nozzle: the buccal side, right-hand end
   const eased = job.filter(({ s }) => s.cutting && s.kind !== "occlusal" && s.tilt < 14.5);
@@ -160,14 +287,22 @@ test("the bur touches each surface it finishes, and its neck clears the channel 
   }
 });
 
-test("dipping into and out of a pass, the bur stays in the channel and off the bridge", () => {
+test("dipping into and out of a pass, the whole bur stays in the channel and off the bridge", () => {
   let dips = 0;
   for (const { t, s } of job) {
     if (s.step !== "dip") continue;
-    const { p } = tipIn(s);
-    const depth = GEO.THICK - p[2];
-    if (depth > 0) { dips++; assert.ok(inside(p, OPENING.pts), `dip tip outside the channel at ${t}`); }
-    if (depth > BRIDGE.top && s.kind !== "occlusal") assert.ok(!inside(p, OUTLINE.pts), `dip tip inside the bridge at ${t}`);
+    const { p, t: axis } = tipIn(s);
+    if (GEO.THICK - p[2] > 0) dips++;
+    // up the tool from its tip: below face B it is in the channel, clear of the outer wall; below the bridge's top, clear
+    // of the bridge (the 0.12 is the wall pass's own tolerance on the ball's contact)
+    for (let h = 0; h <= 24; h += 0.1) {
+      const q = [p[0] + h * axis[0], p[1] + h * axis[1], p[2] + h * axis[2]];
+      const depth = GEO.THICK - q[2];
+      if (depth <= 0) break;
+      const r = neck(h);
+      assert.ok(inside(q, OPENING.pts) && edgeDist(q, OPENING.pts) >= r - 1e-9, `dip: the bur ${h.toFixed(1)} up meets the channel's wall at ${t}`);
+      if (depth > BRIDGE.top) assert.ok(!inside(q, OUTLINE.pts) && edgeDist(q, OUTLINE.pts) >= r - 0.12, `dip: the bur ${h.toFixed(1)} up meets the bridge at ${t}`);
+    }
   }
   assert.ok(dips > 20);
 });

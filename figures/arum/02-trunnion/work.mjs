@@ -136,12 +136,18 @@ function firstHit(p, dir, segs, u) {
   }
   return best;
 }
-// the offsets across one direction, worked out once per direction
-let SIGHT = { key: "", moat: null, body: null };
+// the offsets across one direction, worked out once per direction and kept for the last few (the main view, the part
+// view and the bur's clip all ask in the same frame)
+const SIGHTS = new Map();
 const offsetsFor = (sh) => {
   const key = `${sh[0]} ${sh[1]}`;
-  if (SIGHT.key !== key) SIGHT = { key, moat: MOAT.pts.map((q) => sh[0] * q[1] - sh[1] * q[0]), body: BODY.pts.map((q) => sh[0] * q[1] - sh[1] * q[0]), seen: null };
-  return SIGHT;
+  let S = SIGHTS.get(key);
+  if (!S) {
+    if (SIGHTS.size >= 4) SIGHTS.delete(SIGHTS.keys().next().value);
+    S = { moat: MOAT.pts.map((q) => sh[0] * q[1] - sh[1] * q[0]), body: BODY.pts.map((q) => sh[0] * q[1] - sh[1] * q[0]), seen: null };
+    SIGHTS.set(key, S);
+  }
+  return S;
 };
 // (inChannel: the caller knows p is in the channel, off the bridge, so the two inside tests can be skipped)
 export function sightDepth(p, sh, inChannel = false) {
@@ -149,6 +155,180 @@ export function sightDepth(p, sh, inChannel = false) {
   if (!inChannel && insidePoly(p, BODY.pts)) return BRIDGE.top;
   const o = offsetsFor(sh);
   return Math.min(firstHit(p, sh, MOAT_SEGS, o.moat), firstHit(p, sh, BODY_SEGS, o.body) + BRIDGE.top);
+}
+
+// Connectors, row by row. Each is a small prism across the channel that runs 0.4 into the bridge and 0.4 into the disc.
+// Its top face and its two long sides are cut into thin rows, and along each row the stretch that can be seen is worked
+// out exactly: the part out in the channel (fixed), less every stretch whose sight line crosses the opening's edge on
+// its way up, or the bridge's edge while it is still below the bridge's top.
+const cross2 = (u, v) => u[0] * v[1] - u[1] * v[0];
+const sub = (u, v) => [u[0] - v[0], u[1] - v[1]];
+const lerp = (a, b, u) => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u];
+// the stretches of the line a→b (as fractions of it) that lie in the channel: inside the opening, outside the bridge
+function channelRuns(a, b) {
+  const w = sub(b, a);
+  const us = [0, 1];
+  for (const segs of [MOAT_SEGS, BODY_SEGS]) {
+    for (const [e0, e1] of segs) {
+      const ev = sub(e1, e0);
+      const den = cross2(w, ev);
+      if (Math.abs(den) < 1e-12) continue;
+      const d = sub(e0, a);
+      const u = cross2(d, ev) / den;
+      const t = cross2(d, w) / den;
+      if (u > 0 && u < 1 && t >= 0 && t <= 1) us.push(u);
+    }
+  }
+  us.sort((x, y) => x - y);
+  const out = [];
+  for (let i = 0; i + 1 < us.length; i++) {
+    if (us[i + 1] - us[i] < 1e-9) continue;
+    const m = lerp(a, b, (us[i] + us[i + 1]) / 2);
+    if (!insidePoly(m, MOAT.pts) || insidePoly(m, BODY.pts)) continue;
+    if (out.length && us[i] - out[out.length - 1][1] < 1e-9) out[out.length - 1][1] = us[i + 1];
+    else out.push([us[i], us[i + 1]]);
+  }
+  return out;
+}
+const CONN_ROWS = 12;
+const SIDE_ROWS = 6;
+// a connector's quad runs a (bridge side) → b (disc side) along one long edge and e → f back along the other; rows run
+// parallel to a→b at fractions v of the way from a to f (the long sides are the rows at v = 0 and v = 1)
+const CONN_PARTS = CONN.map((c) => {
+  const [a, b, e, f] = c.quad;
+  const row = (v) => [lerp(a, f, v), lerp(b, e, v)];
+  const top = Array.from({ length: CONN_ROWS }, (_, j) => ({ v: (j + 0.5) / CONN_ROWS, runs: channelRuns(...row((j + 0.5) / CONN_ROWS)), lo: row(j / CONN_ROWS), hi: row((j + 1) / CONN_ROWS) }));
+  const long = [{ s: 0, v: 0 }, { s: 2, v: 1 }].map((x) => ({ ...x, line: row(x.v), runs: channelRuns(...row(x.v)) }));
+  return { top, long };
+});
+// runs less the union of the cut intervals
+function minus(runs, cut) {
+  cut.sort((x, y) => x[0] - y[0]);
+  const out = [];
+  for (const [r0, r1] of runs) {
+    let u = r0;
+    for (const [c0, c1] of cut) {
+      if (c1 <= u) continue;
+      if (c0 >= r1) break;
+      if (c0 > u) out.push([u, c0]);
+      u = Math.max(u, c1);
+      if (u >= r1) break;
+    }
+    if (u < r1) out.push([u, r1]);
+  }
+  return out.filter(([u0, u1]) => u1 - u0 > 1e-4);
+}
+// fallback for a sight line running along the rows: sample each row, then pin each change down
+function sampledRuns(A, B, runs, d, sh) {
+  const open = (u) => sightDepth(lerp(A, B, u), sh, true) > d;
+  const out = [];
+  for (const [r0, r1] of runs) {
+    const N = 24;
+    let prev = open(r0);
+    let start = prev ? r0 : null;
+    for (let i = 1; i <= N; i++) {
+      const u = r0 + ((r1 - r0) * i) / N;
+      const now = open(Math.min(u, r1 - 1e-9));
+      if (now === prev) continue;
+      let lo = r0 + ((r1 - r0) * (i - 1)) / N;
+      let hi = u;
+      for (let k = 0; k < 12; k++) { const m = (lo + hi) / 2; if (open(m) === prev) lo = m; else hi = m; }
+      if (now) start = hi;
+      else { out.push([start, lo]); start = null; }
+      prev = now;
+    }
+    if (start !== null) out.push([start, r1]);
+  }
+  return out;
+}
+// The seen parts of every connector for one view: top faces and the long sides facing the viewer, split into those
+// behind the bridge (on a wall facing away) and those in front of it. A sight line from the row at v, at the point a
+// fraction u along it, passes that point + k·sh; in a connector's own (u, k) frame every edge of the opening and the
+// bridge is a segment, and the part of it within the blocking range of k casts its u-range as cut off.
+function connectorsSeen(sh) {
+  const conn = { farTop: "", farSide: "", nearTop: "", nearSide: "" };
+  for (const [ci, c] of CONN.entries()) {
+    const part = CONN_PARTS[ci];
+    const [a, b, , f] = c.quad;
+    const w = sub(b, a);
+    const fv = sub(f, a);
+    const det = cross2(w, sh);
+    const along = Math.abs(det) < 1e-9 * (Math.hypot(w[0], w[1]) * Math.hypot(sh[0], sh[1]) + 1e-12);
+    // moving to the row at v shifts every edge by −v·du in u and −v·dk in k
+    const du = along ? 0 : cross2(fv, sh) / det;
+    const dk = along ? 0 : cross2(w, fv) / det;
+    const frame = (segs, kmax) => {
+      const out = [];
+      if (along || kmax <= 0) return out;
+      for (const [e0, e1] of segs) {
+        const r0 = sub(e0, a);
+        const r1 = sub(e1, a);
+        const u0 = cross2(r0, sh) / det;
+        const u1 = cross2(r1, sh) / det;
+        const k0 = cross2(w, r0) / det;
+        const k1 = cross2(w, r1) / det;
+        if (Math.max(u0, u1) - Math.min(0, du) < 0 || Math.min(u0, u1) - Math.max(0, du) > 1) continue;
+        if (Math.max(k0, k1) - Math.min(0, dk) < 0 || Math.min(k0, k1) - Math.max(0, dk) > kmax) continue;
+        out.push([u0, k0, u1, k1]);
+      }
+      return out;
+    };
+    const moat = frame(MOAT_SEGS, c.depth[1]);
+    const body = frame(BODY_SEGS, c.depth[1] - BRIDGE.top);
+    const seenAt = (v, line, runs, d) => {
+      if (!runs.length) return runs;
+      if (along) return sampledRuns(line[0], line[1], runs, d, sh);
+      const cut = [];
+      const cast = (list, hi) => {
+        if (hi <= 0) return;
+        const su = v * du;
+        const sk = v * dk;
+        for (const [u0, k0, u1, k1] of list) {
+          const ka = k0 - sk;
+          const kb = k1 - sk;
+          let t0 = 0;
+          let t1 = 1;
+          if (Math.abs(kb - ka) < 1e-12) { if (ka < 0 || ka > hi) continue; }
+          else {
+            const ta = -ka / (kb - ka);
+            const tb = (hi - ka) / (kb - ka);
+            t0 = Math.max(0, Math.min(ta, tb));
+            t1 = Math.min(1, Math.max(ta, tb));
+            if (t0 > t1) continue;
+          }
+          const ua = u0 + (u1 - u0) * t0 - su;
+          const ub = u0 + (u1 - u0) * t1 - su;
+          cut.push(ua < ub ? [ua, ub] : [ub, ua]);
+        }
+      };
+      cast(moat, d);
+      cast(body, d - BRIDGE.top);
+      return minus(runs, cut);
+    };
+    const out = archAt(c.s).n;
+    const k = c.wall * (out[0] * sh[0] + out[1] * sh[1]) > 0 ? "near" : "far";
+    for (const row of part.top) {
+      for (const [u0, u1] of seenAt(row.v, [lerp(row.lo[0], row.hi[0], 0.5), lerp(row.lo[1], row.hi[1], 0.5)], row.runs, c.depth[0])) {
+        const q = [lerp(row.lo[0], row.lo[1], u0), lerp(row.lo[0], row.lo[1], u1), lerp(row.hi[0], row.hi[1], u1), lerp(row.hi[0], row.hi[1], u0)].map((p) => add(p, sh, c.depth[0]));
+        if (signedArea(q) < 0) q.reverse();
+        conn[`${k}Top`] += ring(q);
+      }
+    }
+    for (const side of part.long) {
+      if (!(c.n[side.s][0] * sh[0] + c.n[side.s][1] * sh[1] > 1e-6)) continue;
+      const [A, B] = side.line;
+      for (let j = 0; j < SIDE_ROWS; j++) {
+        const d0 = c.depth[0] + ((c.depth[1] - c.depth[0]) * j) / SIDE_ROWS;
+        const d1 = c.depth[0] + ((c.depth[1] - c.depth[0]) * (j + 1)) / SIDE_ROWS;
+        for (const [u0, u1] of seenAt(side.v, side.line, side.runs, (d0 + d1) / 2)) {
+          const q = [add(lerp(A, B, u0), sh, d0), add(lerp(A, B, u1), sh, d0), add(lerp(A, B, u1), sh, d1), add(lerp(A, B, u0), sh, d1)];
+          if (signedArea(q) < 0) q.reverse();
+          conn[`${k}Side`] += ring(q);
+        }
+      }
+    }
+  }
+  return conn;
 }
 
 // which walls the finishing passes have reached: each edge of the outline belongs to the buccal pass (the buccal side and
@@ -160,12 +340,14 @@ const finishedEdge = (i, done) => (done[WALL_REACH.pass[i]] ?? 0) >= WALL_REACH.
 export function workShapes(sh, done, lit) {
   const facing = (poly, sign = 1) => (i) => sign * (poly.n[i][0] * sh[0] + poly.n[i][1] * sh[1]) > 1e-6;
   const bodyFacing = facing(BODY);
-  // how deep each facing wall's corner can be seen (from just outside the wall, where its sight line starts)
+  // how deep each facing wall's corner can be seen: measured from a step up its sight line (clear of the wall the line
+  // starts on), plus that step
   const cache = offsetsFor(sh);
+  const fromCorner = (p) => sightDepth(add(p, sh, 0.03), sh, true) + 0.03;
   if (!cache.seen) {
-    cache.seen = BODY.pts.map((p, i) => (bodyFacing(i) || bodyFacing((i + BODY.pts.length - 1) % BODY.pts.length) ? Math.max(BRIDGE.top, Math.min(BRIDGE.base, sightDepth(add(p, sh, 0.03), sh, true))) : BRIDGE.top));
-    cache.moatSeen = MOAT.pts.map((p) => sightDepth(add(p, sh, 0.03), sh, true));
-    cache.conn = CONN.map((c) => { const [a, b, e, f] = c.quad; const mid = (u, v) => [(u[0] + v[0]) / 2, (u[1] + v[1]) / 2]; return [mid(mid(a, b), mid(e, f)), mid(a, f), mid(b, e)].some((p) => sightDepth(p, sh, true) > c.depth[0]); });
+    cache.seen = BODY.pts.map((p, i) => (bodyFacing(i) || bodyFacing((i + BODY.pts.length - 1) % BODY.pts.length) ? Math.max(BRIDGE.top, Math.min(BRIDGE.base, fromCorner(p))) : BRIDGE.top));
+    cache.moatSeen = MOAT.pts.map(fromCorner);
+    cache.conn = connectorsSeen(sh);
   }
   const seen = cache.seen;
   const body = { roughLit: "", roughShade: "", finLit: "", finShade: "" };
@@ -182,24 +364,14 @@ export function workShapes(sh, done, lit) {
   }
   const roughFacing = (i) => bodyFacing(i) && !finishedEdge(i, done);
   const bodySteps = STEP_DEPTHS.map((d) => runs(BODY, d, sh, (i) => roughFacing(i) && d < Math.min(seen[i], seen[(i + 1) % n]))).join("");
-  // the channel's far walls, swept all the way down: anything deeper seen inside the opening lies behind one of them,
-  // so painting them over the void keeps the far side of the horseshoe from showing through; their roughing steps only
-  // as deep as each can be seen
+  // the channel's far walls, swept all the way down: the floor seen inside the opening lies behind one of them, so
+  // painting them over the void keeps it from showing through; their roughing steps only as deep as each can be seen
+  // (the bridge's walls and the connectors carry their own line of sight)
   const moatFar = facing(MOAT, -1);
   const moatWalls = sides(MOAT, 0, THROUGH, sh, moatFar);
   const moatSeen = cache.moatSeen;
   const moatSteps = MOAT_STEPS.map((d) => runs(MOAT, d, sh, (i) => moatFar(i) && d < Math.min(moatSeen[i], moatSeen[(i + 1) % MOAT.pts.length]))).join("");
-  // connectors: those on walls facing away sit behind the bridge, the rest in front of it
-  const conn = { farTop: "", farSide: "", nearTop: "", nearSide: "" };
-  // only connectors whose top face can be seen (its middle or either end, at the connector's depth)
-  for (const [ci, c] of CONN.entries()) {
-    if (!cache.conn[ci]) continue;
-    const out = archAt(c.s).n;
-    const toward = c.wall * (out[0] * sh[0] + out[1] * sh[1]) > 0;
-    const k = toward ? "near" : "far";
-    conn[`${k}Top`] += ring(c.quad.map((p) => add(p, sh, c.depth[0])));
-    conn[`${k}Side`] += sides({ pts: c.quad, n: c.n }, c.depth[0], c.depth[1], sh, (i) => c.n[i][0] * sh[0] + c.n[i][1] * sh[1] > 1e-6);
-  }
+  const conn = cache.conn;
   return {
     floor: `translate(${n2(sh[0] * THROUGH)} ${n2(sh[1] * THROUGH)})`,
     top: `translate(${n2(sh[0] * BRIDGE.top)} ${n2(sh[1] * BRIDGE.top)})`,
