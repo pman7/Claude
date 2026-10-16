@@ -6,7 +6,10 @@
 // The 325 mm stroke is drawn on the spindle's left-right move (Y): it is the only stroke long enough to reach the magazine.
 // Ø98.5 mm disc: assumed (the standard dental disc size); ARUM publishes none for the 5X-200. The dealer's photos give
 // proportions only, so every size taken from them (holder 157 × 25, magazine grid) is scaled to this disc.
-// Form: from the dealer's photos of a 5X-200 chamber and ARUM's product photos (styling illustrative, not traced).
+// Form: from the dealer's photos of a 5X-200 chamber, ARUM's product photos, and a video of a 5X-200 at work filmed for
+// this figure (a tool change and a cradle tilt; styling illustrative, not traced). The video shows the magazine indexing
+// by row (the spindle never moves front to back: the magazine slide brings the row under it), the tool-length sensor
+// post at the left end of Y, the tall X carriage in a raised collar, and the head's proportions.
 
 export const SPEC = { aRange: 360, bLimit: 30, tools: 15, shank: 6, rpm: 60000, kw: 3.0, disc: 98.5, premills: 5 };
 // strokes in mm: X the cradle in and out, Y the spindle left and right, Z the spindle up and down
@@ -17,23 +20,34 @@ export const GEO = {
   HALF: 78.5, // holder: 157 square
   THICK: 12.5, // holder: 25 thick
   ARM_L: [-130, -94], // cradle: left (support) arm X span
-  ARM_R: [119, 160], // cradle: right (A drive) arm X span
+  ARM_R: [110, 185], // cradle: right (A drive) housing X span, about half the holder's width across (video)
   BOSS_R: 33, // a rim of gold round the left cap, as in the dealer's photo 1
   WALL: [85, 105], // cradle back wall, distance back
   TOP: 52,
   WALL_Z0: -40,
-  KNUCKLE: [105, 111], // B knuckle on the cradle's back face, distance back
+  KNUCKLE: [105, 111], // B knuckle on the cradle's back wall, distance back
   TIP_Z: 112, // bur tip with Z at 0
   TOOL: 43, // bur stick-out below the nose ring
-  SPINDLE_X0: -225, // spindle axis with Y at 0: over the magazine's far column
+  COLLET: 26, // from the bur's tip up to the collet nut
+  // the spindle's axis with Y at 0: over the tool-length sensor post, left of the magazine (the video's head parks
+  // there, near the chamber's left wall)
+  SPINDLE_X0: -262,
   // The spindle's line is 55 mm in front of the B axis, so the X stroke spans the work: X 0 puts the bur just past the
   // disc's front edge (+55), X 142.5 just past the premill bar at the back edge (−87.5), and X 55 over the disc centre.
   SPINDLE_Y: 55,
-  // magazine block in plan, out: its front row (R1) on the spindle's line
-  MAG: { x: -244, y: -89, w: 100, d: 160, r: 3 },
-  MAG_TOP: 0,
-  MAG_STROKE: 222, // magazine travel from out to fully behind the flap
-  RAM: { x: [-77.5, 77.5], z: [-40, 35], len: 200 }, // the X carriage's ram through the back wall, behind the knuckle
+  // the back wall's face, behind the disc centre: with X at 0 the carriage's face is flush in its collar (video)
+  WALL_Y: -117,
+  FLOOR: -172,
+  // magazine block in plan, out with its front row (R1) on the spindle's line; 3 columns × 5 rows on a 33 mm pitch
+  MAG: { x: -244, y: -96, w: 100, d: 170, r: 3 },
+  MAG_TOP: 18, // the block's top plate (its underside 50 below); the pocket collars stand 5 on it, the shanks 24 more
+  PITCH: 33,
+  MAG_STROKE: 211, // magazine travel from out (R1 under the spindle) to fully behind the flap
+  // the tool-length sensor post: a 20 mm square bar on the spindle's line, its cap (Ø22) level with the magazine's top
+  POST: { x: -262, y: 55, r: 11, top: 18 },
+  // the X carriage through the back wall, behind the knuckle: as wide as the holder, from the floor to 22 mm above the
+  // cradle's hat (the video: 20–30), its bristles included
+  RAM: { x: [-77.5, 77.5], z: [-171, 86], len: 200 },
 };
 // Y at which the spindle is over the disc centre, X at which the disc centre is under the spindle, and the home they make
 export const Y_DISC = -GEO.SPINDLE_X0;
@@ -44,14 +58,29 @@ export const wrap = (deg) => ((((deg + 180) % 360) + 360) % 360) - 180;
 export const clampB = (deg) => Math.max(-SPEC.bLimit, Math.min(SPEC.bLimit, deg));
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
-// The magazine and its flap move as one sequence, 0 (out, flap open flat) to 1 (in, flap shut): the block slides in over
-// the open flap first, then the flap swings up.
+// The magazine and its flap move as one sequence, 0 (out, flap open flat) to 1 (in, flap shut). Going in, the block
+// slides back over the open flap; once its front is behind the wall the flap swings up (about 0.2 s of a 1 s sequence
+// in the video, overlapping the end of the slide). Coming out is the same run backwards.
+const ease = (u) => u * u * (3 - 2 * u);
+// the inverse of ease on [0, 1]
+const uneased = (v) => 0.5 - Math.sin(Math.asin(1 - 2 * Math.max(0, Math.min(1, v))) / 3);
+const FLAP_FROM = 0.82;
+const SLIDE_TO = 0.9;
 export const magOf = (m) => {
   const t = clamp(m, 0, 1);
-  const slide = t < 0.72 ? t / 0.72 : 1;
-  const ease = (u) => u * u * (3 - 2 * u);
-  return { mag: GEO.MAG_STROKE * ease(slide), flap: t <= 0.72 ? 0 : 90 * ease((t - 0.72) / 0.28) };
+  return { mag: GEO.MAG_STROKE * (1 - ease(clamp((SLIDE_TO - t) / SLIDE_TO, 0, 1))), flap: 90 * ease(clamp((t - FLAP_FROM) / (1 - FLAP_FROM), 0, 1)) };
 };
+// the sequence for a slide and a flap angle (for a pose set from outside, as a verification tool does)
+export const mOf = ({ mag = GEO.MAG_STROKE, flap = 90 }) => (flap > 0 ? FLAP_FROM + (1 - FLAP_FROM) * uneased(flap / 90) : SLIDE_TO - SLIDE_TO * uneased(1 - mag / GEO.MAG_STROKE));
+// The pockets: column c from the operator's left (1 … 3), row r from the front (1 … 5), in plan with the magazine out
+// and its front row on the spindle's line. The slide indexes the block toward the operator by a row's pitch to bring
+// row r under the spindle (row = r − 1), so the head reaches every pocket with Y and Z alone.
+export const pocketAt = (c, r) => [GEO.MAG.x + GEO.MAG.w / 2 + (c - 2) * GEO.PITCH, GEO.SPINDLE_Y - (r - 1) * GEO.PITCH];
+// the pockets never filled in the figure, and the two the tool change swaps: the last job's tool goes back into C1 R1,
+// and the finishing bur comes out of C3 R4 (the video's own change)
+export const POCKETS = { empty: ["1/2", "2/5", "3/5"], drop: "1/1", pick: "3/4" };
+// heights: the pocket collars and the shanks' tops (tools stand shank up, 24 out)
+export const SHANK_TOP = GEO.MAG_TOP + 5 + 24;
 
 // ---------------------------------------------------------------- the axes' directions, shared with the scene
 // X slides the cradle toward the operator; B tilts it about a front-to-back axis through the disc centre; A turns the
@@ -78,7 +107,7 @@ const mulM = (A, B) => {
 
 // collision stand-ins at rest, in the frame of the group that carries them: boxes [x0, x1, y0, y1, z0, z1] and
 // cylinders along x or y { c, axis, s: [s0, s1], r }; the ones the tests check by name carry one
-const { HALF, THICK, ARM_L, ARM_R, BOSS_R, WALL, TOP, WALL_Z0, KNUCKLE, MAG, MAG_TOP, RAM, SPINDLE_Y } = GEO;
+const { HALF, THICK, ARM_L, ARM_R, BOSS_R, WALL, TOP, WALL_Z0, KNUCKLE, MAG, MAG_TOP, RAM, POST, SPINDLE_Y } = GEO;
 const CRADLE = [
   { box: [ARM_L[0], ARM_L[1], -WALL[0], BOSS_R, -BOSS_R, BOSS_R] },
   { box: [ARM_L[0], ARM_L[1], -WALL[0], -8, BOSS_R, TOP] },
@@ -88,7 +117,9 @@ const CRADLE = [
   { cyl: { axis: 1, c: [0, 0], s: [-KNUCKLE[1], -KNUCKLE[0]], r: 34 } },
   { cyl: { axis: 0, c: [0, 0], s: [ARM_L[0] - 5, ARM_L[0]], r: 29.5 } },
   { cyl: { axis: 0, c: [0, 0], s: [ARM_L[1], ARM_L[1] + 6], r: 31.5 } },
-  { cyl: { axis: 0, c: [0, 0], s: [91, ARM_R[0]], r: 42.5 } },
+  { cyl: { axis: 0, c: [0, 0], s: [91, ARM_R[0]], r: 35 } },
+  // the A motor's white box on the right housing's outer face, on a short collar: it tilts with B
+  { name: "cradle.motor", box: [ARM_R[1], 258, -22, 22, -33, 33] },
 ];
 const HOLDER = [
   { name: "holder.plate", box: [-HALF, HALF, -HALF, HALF, -THICK, THICK] },
@@ -97,10 +128,12 @@ const HOLDER = [
   { cyl: { axis: 0, c: [0, 0], s: [ARM_L[1] + 6, -HALF], r: 24 } },
   { cyl: { axis: 0, c: [0, 0], s: [HALF, 91], r: 29 } },
 ];
-// the ram rides X only (it does not tilt with B)
+// the carriage rides X only (it does not tilt with B)
 const RAM_BODY = { box: [RAM.x[0], RAM.x[1], -KNUCKLE[1] - RAM.len, -KNUCKLE[1], RAM.z[0], RAM.z[1]] };
-// the magazine block with its shanks standing in the pockets
-const MAGAZINE = { box: [MAG.x, MAG.x + MAG.w, MAG.y, MAG.y + MAG.d, MAG_TOP - 40, MAG_TOP + 33] };
+// the magazine block with its tray, side bar and front fittings, and the shanks standing in its pockets
+const MAGAZINE = { box: [MAG.x - 2, MAG.x + MAG.w + 5, MAG.y - 10, MAG.y + MAG.d + 11, MAG_TOP - 60, SHANK_TOP] };
+// the sensor post and its cap, standing on the floor
+const POST_BODY = { box: [POST.x - POST.r, POST.x + POST.r, POST.y - POST.r, POST.y + POST.r, GEO.FLOOR, POST.top] };
 // the finishing bur (as ARUM's ZB-86: a Ø1.0 ball on a neck widening to Ø1.8 at its 20 mm reach, then the taper to the
 // Ø6 shank): height above the tip and radius, mm, as drawn (the ball's shoulder point drawn round)
 export const BUR = [[0, 0], [0.25, 0.43, 1], [0.5, 0.5], [2, 0.55], [20, 0.9], [23.5, 3]];
@@ -108,21 +141,30 @@ export const burRadius = (h) => {
   for (let i = 1; i < BUR.length; i++) { const [h0, r0] = BUR[i - 1]; const [h1, r1] = BUR[i]; if (h <= h1) return r0 + ((r1 - r0) * Math.max(0, h - h0)) / (h1 - h0); }
   return BUR[BUR.length - 1][1];
 };
+// the coolant nozzles: on each side a black upright block under the head box ends in a swivel eye, from which a Ø5
+// tube and a flat Ø10 tip aim in and down at the tool (the video: swivels about 54 mm out, tips about 30 mm from the
+// axis, aimed 20–30 mm below the nose ring). Shared with the drawing: the eye's centre (dx, dy, height above the tip)
+// and the aim point's height, and the tube's and the tip's spans along the aim from the eye.
+export const NOZZLE = { dx: 54, dy: 33, h: 80, aim: 18, tube: [4, 29], tip: [29, 36], r: [2.5, 5], eye: 6.5 };
 // the spindle's underside, from the bur tip up: footprint (circle about the spindle axis, or a box relative to it) and its
-// height above the tip. A safety envelope, as a CAM keeps round the head: it covers everything drawn, and in places
-// stands well proud of it (the nose circle reaches 10 mm past the drawn nose, the nozzle boxes sit up to 16 mm under
-// the drawn tubes' outer ends)
+// height above the tip. A safety envelope, as a CAM keeps round the head: it covers everything drawn, stepped to follow
+// the nozzles' tubes
+const nozzleRects = [
+  { rect: [27, 41, 14, 29], zb: 51 }, // tip
+  { rect: [41, 46, 21, 33], zb: 61 }, // tube
+  { rect: [46, 50, 25, 39], zb: 67 }, // tube
+  { rect: [50, 61, 26, 41], zb: 71.5 }, // tube's start and the swivel eye
+];
 export const HEAD = [
   { r: 3, zb: 0 }, // bur
-  { r: 7.5, zb: 26 }, // collar and shaft
+  { r: 7.5, zb: GEO.COLLET }, // collet nut and shaft
   { r: 19, zb: 43 }, // nose ring
-  { r: 42.5, zb: 47 }, // nose, ring, and the inner half of the nozzle tips
-  { rect: [28, 48, 18, 34], zb: 49 }, // right nozzle tube and tip, outside r 42.5
-  { rect: [-48, -28, 18, 34], zb: 49 }, // left nozzle tube and tip
-  { rect: [38, 58, 24, 42], zb: 67 }, // right nozzle block and dome
-  { rect: [-58, -38, 24, 42], zb: 67 }, // left nozzle block and dome
-  { rect: [-56, 57, -68, 42], zb: 84 }, // head box
-  { rect: [-35, 35, -126 - SPINDLE_Y, -68], zb: 84 }, // saddle, back to the column rails
+  { r: 32.5, zb: 50 }, // nose
+  { r: 42.5, zb: 68 }, // flange
+  { rect: [-42, 42, -46, 36], zb: 84 }, // the gold plate under the head box
+  ...nozzleRects,
+  ...nozzleRects.map(({ rect: [x0, x1, y0, y1], zb }) => ({ rect: [-x1, -x0, y0, y1], zb })),
+  { rect: [-69, 69, -125, 40], zb: 91 }, // head box and its side plates, back to the column
 ];
 const CLEAR = 2;
 
@@ -220,14 +262,15 @@ function footprint(part, sx) {
 }
 const meets = (a, b) => a[0] <= b[1] && b[0] <= a[1] && a[2] <= b[3] && b[2] <= a[3];
 
-// every stand-in placed for a pose { x, b, a, mag }
+// every stand-in placed for a pose { x, b, a, mag, row } (row: how many rows the magazine is indexed toward the operator)
 export function bodiesOf(pose) {
   const t = [0, pose.x ?? 0, 0];
   const Mb = rot(AXES_DIR.b, pose.b ?? 0);
   const Ma = partRotation(pose.a ?? 0, pose.b ?? 0);
   const eye = rot([1, 0, 0], 0);
   const out = [...CRADLE.map((s) => ({ ...placed(s, Mb, t), group: "b" })), ...HOLDER.map((s) => ({ ...placed(s, Ma, t), group: "a" })), { ...placed(RAM_BODY, eye, t), group: "x" }];
-  out.push({ ...placed(MAGAZINE, eye, [0, -(pose.mag ?? 0), 0]), group: "mag" });
+  out.push({ ...placed(MAGAZINE, eye, [0, -(pose.mag ?? 0) + GEO.PITCH * (pose.row ?? 0), 0]), group: "mag" });
+  out.push({ ...placed(POST_BODY, eye, [0, 0, 0]), group: "post" });
   for (const body of out) body.ext = extentOf(body);
   return out;
 }
@@ -489,16 +532,20 @@ export const CONNECTORS = (() => {
 })();
 
 // ---------------------------------------------------------------- jog: the reader moves the axes (live.js drives these)
-// how far down the head may come in a state, with the magazine at m (−1: it would not fit even at the top)
-export const roomAt = (s, m) => zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(m).mag }, s.y);
-// the magazine comes out while the spindle is over it, and goes back in when it leaves
-export const magFor = (y) => (y < 110 ? 0 : 1);
-const fitsAt = (s) => roomAt(s, 0) >= 0 && roomAt(s, 1) >= 0;
+// how far down the head may come in a state, with the magazine at m and indexed `row` rows out (−1: it would not fit
+// even at the top)
+export const roomAt = (s, m, row = s.row ?? 0) => zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(m).mag, row }, s.y);
+// The magazine comes out while the spindle is over it (or over the sensor post beside it), and goes back in when it
+// leaves; it comes out only with the cradle level, and the cradle tilts only with it in (an interlock: the cradle's
+// left end swings down beside the magazine's path)
+const LEVEL = 0.5;
+export const magFor = (y, b = 0) => (y < 125 && Math.abs(b) <= LEVEL ? 0 : 1);
+const fitsAt = (s) => roomAt(s, 0, 0) >= 0 && roomAt(s, 1, 0) >= 0;
 // into jog from wherever the job left the head: if the bur is in the part, the first request is the same pose lifted
 // clear, and the head rises to it before anything else moves
 export function jogEnter(cur) {
   const room = Math.max(0, roomAt(cur, cur.m));
-  return { lifting: cur.z > room + 0.01, want: { x: cur.x, y: cur.y, z: Math.min(cur.z, room), a: cur.a, b: cur.b }, mWant: magFor(cur.y) };
+  return { lifting: cur.z > room + 0.01, want: { x: cur.x, y: cur.y, z: Math.min(cur.z, room), a: cur.a, b: cur.b }, mWant: magFor(cur.y, cur.b) };
 }
 // the reader asks for a value on one axis: kept to its travel (A turns all the way round), stopped short of anything
 // the move would hit, and Z kept to the room the new pose allows with the magazine either way
@@ -512,12 +559,13 @@ export function jogRequest(want, key, value, lo, hi) {
     to = ok;
   }
   const next = { ...want, [key]: to };
-  next.z = Math.max(0, Math.min(next.z, Math.max(0, Math.min(roomAt(next, 0), roomAt(next, 1)))));
+  next.z = Math.max(0, Math.min(next.z, Math.max(0, Math.min(roomAt(next, 0, 0), roomAt(next, 1, 0)))));
   return next;
 }
 // One frame of jog. j: { cur, want, mWant, lifting }; k: how much of the way to the request this frame eases;
-// mStep: how far the magazine's sequence runs. The head never goes inside anything: it is lifted when the state needs
-// it (the request stands, so it comes back down once there is room), and stops when even the top is not clear.
+// mStep: how far the magazine's sequence runs (its row index runs four times as fast: three rows in 0.75 s). The head
+// never goes inside anything: it is lifted when the state needs it (the request stands, so it comes back down once
+// there is room), and stops when even the top is not clear.
 export function jogStep(j, k, mStep) {
   const c = j.cur;
   let want = j.want;
@@ -526,28 +574,38 @@ export function jogStep(j, k, mStep) {
   // rising out of a cut: only Z moves, and only up to the room at the pose it is held in, until the head is clear; a key
   // pressed meanwhile waits (a request is kept to the room at its own pose, which may let it go deeper)
   const wz = lifting ? Math.min(want.z, Math.max(0, roomAt(c, c.m))) : want.z;
-  let next = { x: c.x + (want.x - c.x) * k, y: c.y + (want.y - c.y) * k, z: c.z + (wz - c.z) * k, a: wrap(c.a + wrap(want.a - c.a) * k), b: c.b + (want.b - c.b) * k, m: c.m };
+  let next = { x: c.x + (want.x - c.x) * k, y: c.y + (want.y - c.y) * k, z: c.z + (wz - c.z) * k, a: wrap(c.a + wrap(want.a - c.a) * k), b: c.b + (want.b - c.b) * k, m: c.m, row: c.row ?? 0 };
   // close enough: land on the target (Z on the one it is easing to)
   for (const key of ["x", "y", "b"]) if (Math.abs(want[key] - next[key]) < 0.01) next[key] = want[key];
   if (Math.abs(wz - next.z) < 0.01) next.z = wz;
   if (Math.abs(wrap(want.a - next.a)) < 0.01) next.a = want.a;
   if (lifting) { next.x = c.x; next.y = c.y; next.a = c.a; next.b = c.b; }
-  // the magazine runs its sequence at its own pace, and only comes out once the head is clear of its path
-  if (next.m !== j.mWant) {
+  // the cradle stays level while the magazine is out of its bay
+  if (c.m < 1 && Math.abs(next.b) > LEVEL) next.b = c.b;
+  // the magazine runs its sequence at its own pace, and only moves once the head is clear of its path: first back to its
+  // front row (if the job left it indexed), then in or out (out only with the cradle level)
+  const clearFor = (room) => { want = { ...want, z: Math.min(want.z, Math.max(0, room)) }; changed = true; };
+  if (next.row > 0) {
+    const r2 = Math.max(0, next.row - 4 * mStep);
+    const room = roomAt(next, next.m, r2);
+    if (room >= next.z) next.row = r2;
+    else clearFor(room);
+  } else if (next.m !== j.mWant && !(j.mWant < next.m && Math.abs(next.b) > LEVEL)) {
     const m2 = j.mWant < next.m ? Math.max(j.mWant, next.m - mStep) : Math.min(j.mWant, next.m + mStep);
-    if (roomAt(next, m2) >= next.z) next.m = m2;
-    else { want = { ...want, z: Math.min(want.z, Math.max(0, roomAt(next, m2))) }; changed = true; }
+    const room = roomAt(next, m2);
+    if (room >= next.z) next.m = m2;
+    else clearFor(room);
   }
   const room = roomAt(next, next.m);
   if (room < 0) {
     want = { x: c.x, y: c.y, z: c.z, a: c.a, b: c.b };
-    next = { ...c };
+    next = { ...c, row: c.row ?? 0 };
     changed = true;
   } else if (lifting) {
     // rising out of the cut: clamped again once it is clear
     if (next.z <= room + 0.01) lifting = false;
   } else if (next.z > room) next.z = Math.max(0, room);
-  const busy = !(next.x === want.x && next.y === want.y && Math.abs(next.z - Math.min(want.z, Math.max(0, room))) < 0.01 && next.a === want.a && next.b === want.b && next.m === j.mWant);
+  const busy = !(next.x === want.x && next.y === want.y && Math.abs(next.z - Math.min(want.z, Math.max(0, room))) < 0.01 && next.a === want.a && next.b === want.b && next.m === j.mWant && next.row === 0);
   return { cur: next, want, lifting, changed, busy };
 }
 
@@ -588,7 +646,7 @@ const occlusalAt = (u) => {
 };
 // how far down the head may come when only the parts above the bur count (the bur itself cuts the part)
 const ABOVE_BUR = HEAD.filter((part) => part.zb >= 26);
-export const upperRoom = (s) => GEO.TIP_Z - tipFloor({ x: s.x, b: s.b, a: s.a, mag: magOf(s.m ?? 1).mag }, s.y, undefined, ABOVE_BUR);
+export const upperRoom = (s) => GEO.TIP_Z - tipFloor({ x: s.x, b: s.b, a: s.a, mag: magOf(s.m ?? 1).mag, row: s.row ?? 0 }, s.y, undefined, ABOVE_BUR);
 const CLEAR_HEAD = 2;
 // The two wall passes follow the bridge's outline: the buccal pass from the left distal end round the front to the
 // right one and on round that end; the palatal pass back from there round the inside and on round the left end. So
@@ -647,11 +705,11 @@ const wallPoint = (kind, a, lean) => {
 };
 // The lean on the walls: 15° where the head is clear, eased where tilting the cradle that far would bring a part of it
 // inside the head's safety envelope (HEAD), as a CAM program limits the tilt to keep its clearance round the head.
-// Here that is the right drive hub against the envelope round the spindle nose and the right coolant nozzle, along
-// the buccal side of the right first molar; the blend carries the easing over the second premolar and most of the way
-// round the right-hand end. Worked out on a 0.25 mm grid with 3 mm of room to spare, then the
-// least lean within 6 mm either side, blended, so the tilt changes gently; the build writes the table into the page, so
-// it is not worked out again on load.
+// With the head and cradle in the video's proportions (the drive hub Ø70, the nozzles' tips tucked in under the
+// flange, the carriage's top clear under the head box) it never needs to: the lean is 15° all the way
+// round, and the tests hold it there, so a change that brings the easing back must be described. Worked out on a
+// 0.25 mm grid with 3 mm of room to spare, then the least lean within 6 mm either side, blended, so the tilt changes
+// gently; the build writes the table into the page, so it is not worked out again on load.
 const LEAN_STEP = 0.25;
 // LEANS:begin
 const LEANS = (() => {
@@ -708,22 +766,64 @@ const lift = (q) => {
 };
 const smooth = (u) => (u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u));
 const lerpAxes = (a, b, k) => ({ x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k, z: a.z + (b.z - a.z) * k, a: a.a + wrap(b.a - a.a) * k, b: a.b + (b.b - a.b) * k });
-// the timeline: from home, down into each pass and up out of it, with a move between passes at a raised Z
+// the timeline: from home, the tool change, then down into each pass and up out of it, with a move between passes at a
+// raised Z
 const LINK = 1.2;
-// a move's time: Z climbs in its first 35% and comes down in its last 35%, at no more than 90 mm/s (the 5X-200-class
-// rapid is about 100 mm/s)
-const moveTime = (from, via, to) => Math.max(LINK, (1.6 * Math.max(Math.abs(via.z - from.z), Math.abs(to.z - via.z))) / (0.35 * 90));
+// a move's time: X and Y at no more than about 95 mm/s at their fastest, and Z climbing in the first 35% and coming
+// down in the last 35% at no more than 90 mm/s (the 5X-200-class rapid is about 100 mm/s)
+const moveTime = (from, via, to) => Math.max(LINK, (1.6 * Math.max(Math.abs(to.x - from.x), Math.abs(to.y - from.y))) / 100, (1.6 * Math.max(Math.abs(via.z - from.z), Math.abs(to.z - via.z))) / (0.35 * 90));
+// a straight move along one axis, as fast
+const dipTime = (from, to) => Math.max(0.5, (1.6 * Math.max(Math.abs(to.y - from.y), Math.abs(to.z - from.z))) / 100);
 const DIP = 0.5;
+// The tool change, as in the video: the magazine comes out to its front row while the head is still over the work; the
+// head returns the last job's tool to C1 R1, rises, and crosses at a safe height while the magazine indexes three rows
+// out to bring R4 under it; it takes the finishing bur from C3 R4, then touches it down on the sensor post to measure
+// its length while the magazine indexes back. The magazine goes in as the head leaves for the first pass.
+const TOOL = { kind: "tool", say: "Tool change" };
+// heights of the tip (above the disc centre) for the change: crossing over the magazine, at a pocket (the collet 5 mm
+// above the shank's top: the swap itself is drawn as the tool passing between pocket and collet), and over the post
+const CROSS_Z = 40;
+const SWAP_Z = GEO.TIP_Z - (SHANK_TOP + 5 - GEO.COLLET);
+const TOUCH_Z = GEO.TIP_Z - POST.top;
+const overPocket = (c, z) => ({ x: X_DISC, y: pocketAt(c, 1)[0] - GEO.SPINDLE_X0, z, a: 0, b: 0 });
+const overPost = (z) => ({ x: X_DISC, y: POST.x - GEO.SPINDLE_X0, z, a: 0, b: 0 });
+const SWAP_HOLD = 0.8;
 export const SIM = (() => {
   const steps = [];
   const homeAxes = { ...HOME };
-  let prev = homeAxes;
+  const [cDrop, rDrop] = POCKETS.drop.split("/").map(Number);
+  const [cPick, rPick] = POCKETS.pick.split("/").map(Number);
+  // the tool change: moves, dips (straight), holds; each step can carry the magazine's sequence and row index from → to
+  const tool = (kind, say, from, to, extra = {}) => {
+    const via = kind === "move" ? { ...to, z: Math.min(from.z, to.z) } : undefined;
+    const dur = extra.dur ?? (kind === "move" ? moveTime(from, via, to) : kind === "dip" ? dipTime(from, to) : SWAP_HOLD);
+    steps.push({ kind, say, dur, from, via, to, pass: TOOL, ...extra });
+    return to;
+  };
+  let at = homeAxes;
+  const dropUp = overPocket(cDrop, CROSS_Z);
+  at = tool("move", "Tool change · the magazine comes out", at, dropUp, { mag: [1, 0] });
+  at = tool("dip", "Returning the last tool to the magazine", at, overPocket(cDrop, SWAP_Z));
+  tool("hold", "Returning the last tool to the magazine", at, at, { swap: "drop" });
+  at = tool("dip", "Returning the last tool to the magazine", at, dropUp);
+  at = tool("move", `Indexing the magazine to row ${rPick}`, at, overPocket(cPick, CROSS_Z), { row: [rDrop - 1, rPick - 1] });
+  at = tool("dip", "Picking up the finishing bur", at, overPocket(cPick, SWAP_Z));
+  tool("hold", "Picking up the finishing bur", at, at, { swap: "pick" });
+  at = tool("dip", "Picking up the finishing bur", at, overPocket(cPick, CROSS_Z));
+  at = tool("move", "To the tool sensor", at, overPost(CROSS_Z));
+  at = tool("dip", "Measuring the bur on the tool sensor", at, overPost(TOUCH_Z - 10));
+  // the last 10 mm onto the cap slowly, as the video's head creeps down; the magazine indexes back meanwhile
+  at = tool("dip", "Measuring the bur on the tool sensor", at, overPost(TOUCH_Z), { dur: 0.9, row: [rPick - 1, 0] });
+  tool("hold", "Measuring the bur on the tool sensor", at, at, { dur: 0.5 });
+  at = tool("dip", "Measuring the bur on the tool sensor", at, overPost(0));
+  let prev = at;
   for (const pass of PASSES) {
     const first = pass.at(0);
     const last = pass.at(1);
     const above = axesFor(lift(first).p, first.t);
     const raised = { ...above, z: Math.max(0, Math.min(above.z, prev.z) - 12) };
-    steps.push({ kind: "move", say: prev === homeAxes ? "Down to the first pass" : "Up, across, down to the next pass", dur: moveTime(prev, raised, above), from: prev, via: raised, to: above, pass });
+    const opening = pass === PASSES[0];
+    steps.push({ kind: "move", say: opening ? "Down to the first pass" : "Up, across, down to the next pass", dur: moveTime(prev, raised, above), from: prev, via: raised, to: above, pass, ...(opening ? { mag: [0, 1] } : {}) });
     steps.push({ kind: "dip", say: pass.say, dur: DIP, from: above, to: axesFor(first.p, first.t), pass });
     steps.push({ kind: "cut", say: pass.say, dur: pass.dur, pass });
     const out = axesFor(lift(last).p, last.t);
@@ -734,16 +834,35 @@ export const SIM = (() => {
   steps.push({ kind: "hold", say: "Finished", dur: 1.4, from: homeAxes, pass: null });
   let start = 0;
   for (const step of steps) { step.start = start; start += step.dur; }
-  return { steps, len: start, passes: PASSES };
+  // the magazine's runs: out over 1.0 s once the head has left the work, its row index at about 4 rows a second, and in
+  // over 1.0 s as the head leaves for the first pass
+  const runs = [];
+  for (const step of steps) {
+    if (step.mag) runs.push({ key: "m", from: step.mag[0], to: step.mag[1], t0: step.start + 0.2, t1: step.start + 1.2 });
+    if (step.row) runs.push({ key: "row", from: step.row[0], to: step.row[1], t0: step.start, t1: step.start + Math.abs(step.row[1] - step.row[0]) / 4 });
+  }
+  const swapAt = Object.fromEntries(steps.filter((step) => step.swap).map((step) => [step.swap, step.start + step.dur / 2]));
+  return { steps, len: start, passes: PASSES, runs, swapAt };
 })();
 export const SIM_LEN = SIM.len;
-// the passes' spans on the timeline (for the scrubber): kind, start, end
-export const SIM_SPANS = PASSES.map((pass) => {
+// the job's spans on the timeline (for the scrubber): the tool change, then the passes: kind, start, end
+export const SIM_SPANS = [TOOL, ...PASSES].map((pass) => {
   const mine = SIM.steps.filter((step) => step.pass === pass);
   return { kind: pass.kind, start: mine[0].start, end: mine[mine.length - 1].start + mine[mine.length - 1].dur };
 });
-// the state at a time in the job: machine axes, the tool's tilt from the disc's normal, which pass, and how far each
-// surface is finished (0 … 1 along the arch; channels 0 or 1)
+// the magazine at a time in the job: its sequence (1 in … 0 out) and how many rows it is indexed out
+const magAt = (t) => {
+  const out = { m: 1, row: 0 };
+  for (const run of SIM.runs) {
+    if (t < run.t0) continue;
+    out[run.key] = run.from + (run.to - run.from) * smooth((t - run.t0) / (run.t1 - run.t0));
+  }
+  return out;
+};
+// which tools are where at a time in the job: in the spindle, and in the two pockets the change swaps
+const toolAt = (t) => ({ spindle: !(t >= SIM.swapAt.drop && t < SIM.swapAt.pick), [POCKETS.drop]: t >= SIM.swapAt.drop, [POCKETS.pick]: t < SIM.swapAt.pick });
+// the state at a time in the job: machine axes, the magazine, the tools, the tool's tilt from the disc's normal, which
+// pass, and how far each surface is finished (0 … 1 along the arch; channels 0 or 1)
 export function simAt(time) {
   const t = Math.max(0, Math.min(SIM.len, time));
   let i = 0;
@@ -771,9 +890,12 @@ export function simAt(time) {
     if (s2.kind !== "cut") continue;
     done[s2.pass.kind] = t >= s2.start + s2.dur ? 1 : t <= s2.start ? 0 : (t - s2.start) / s2.dur;
   }
-  return { ...axes, a: wrap(axes.a), m: 1, axis: step.kind === "cut" || step.kind === "dip" ? "all" : null, say: step.say, kind: step.pass ? step.pass.kind : null, step: step.kind, tilt, done, cutting: step.kind === "cut" };
+  const kind = step.pass ? step.pass.kind : null;
+  const axis = kind === "tool" ? (step.kind === "hold" ? null : "yz") : step.kind === "cut" || step.kind === "dip" ? "all" : null;
+  return { ...axes, a: wrap(axes.a), ...magAt(t), tool: toolAt(t), axis, say: step.say, kind, step: step.kind, tilt, done, cutting: step.kind === "cut" };
 }
-// the time the pass running at `time` began, its move in included (for resuming and Page Up/Down)
+// the time the pass running at `time` began, its move in included (for resuming and Page Up/Down); the tool change
+// starts the job
 export function simPassStart(time) {
   const t = Math.max(0, Math.min(SIM.len, time));
   // once the last pass is over (on the way home, or finished), the job starts again from the top

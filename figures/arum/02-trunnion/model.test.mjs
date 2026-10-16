@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, roomAt, magFor, jogEnter, jogRequest, jogStep, simAt, simPassStart, SIM_LEN, SIM_SPANS, readoutOf, wrap } from "./model.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, mOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, roomAt, magFor, jogEnter, jogRequest, jogStep, simAt, simPassStart, SIM, SIM_LEN, SIM_SPANS, POCKETS, SHANK_TOP, pocketAt, readoutOf, wrap } from "./model.mjs";
 import { workShapes, burCut } from "./work.mjs";
 
 const near = (a, b, tol) => assert.ok(Math.abs(a - b) <= tol, `${a} vs ${b}`);
@@ -25,16 +25,22 @@ test("home puts the bur over the disc centre, inside the travel, with room to co
   assert.ok(zLimit({ ...HOME, mag: magOf(1).mag }, HOME.y) > 50);
 });
 
-test("the magazine slides in over the open flap, then the flap swings shut", () => {
+test("the magazine slides in over the open flap, and the flap swings up only once the block is behind the wall", () => {
   assert.deepEqual(magOf(0), { mag: 0, flap: 0 });
   assert.deepEqual(magOf(1), { mag: GEO.MAG_STROKE, flap: 90 });
   let last = magOf(0);
-  for (let m = 0.01; m <= 1.0001; m += 0.01) {
+  for (let m = 0.002; m <= 1.0001; m += 0.002) {
     const now = magOf(m);
     assert.ok(now.mag >= last.mag && now.flap >= last.flap, `m ${m}`);
-    if (now.flap > 0) near(now.mag, GEO.MAG_STROKE, 1e-9);
+    // the block's front (with its fittings) behind the wall's face whenever the flap is off the floor of its swing
+    if (now.flap > 0) assert.ok(GEO.MAG.y + GEO.MAG.d + 11 - now.mag < GEO.WALL_Y, `flap ${now.flap.toFixed(1)}° with the block's front at ${(GEO.MAG.y + GEO.MAG.d - now.mag).toFixed(1)}`);
+    // and the pose read back from the slide and the flap gives the sequence again
+    near(mOf(now), Math.min(1, m), 1e-6);
     last = now;
   }
+  // in, the whole magazine with its carrier is behind the window; out, its front row is on the spindle's line
+  near(pocketAt(1, 1)[1], GEO.SPINDLE_Y, 1e-9);
+  assert.ok(GEO.MAG.y + GEO.MAG.d - GEO.MAG_STROKE < GEO.WALL_Y - 14);
 });
 
 test("the axes put the tip where asked, with the tool upright in the machine", () => {
@@ -154,6 +160,15 @@ test("the collision stand-ins cover what is drawn: the head under the spindle, t
       }
     }
   }
+  // and the other way: each stand-in has something drawn within 2.5 mm of its underside over its footprint, so the
+  // envelope does not stand far proud of the head anywhere (where it did, it once eased the walls' lean on its own)
+  const headPts = T.parts.filter((x) => x.group?.name === "z").flatMap((part) => part.shapes.flatMap(surface)).map((q) => [q[0] - GEO.SPINDLE_X0, q[1] - GEO.SPINDLE_Y, q[2] - GEO.TIP_Z]);
+  // (the bur's own stand-in is its drawn profile's, checked in the scene test; its sorting shape starts 9 mm up)
+  for (const sb of HEAD.filter((x) => x.zb > 0)) {
+    const on = ([dx, dy]) => (sb.r !== undefined ? Math.hypot(dx, dy) <= sb.r : dx >= sb.rect[0] && dx <= sb.rect[1] && dy >= sb.rect[2] && dy <= sb.rect[3]);
+    const lowest = Math.min(...headPts.filter(on).map((q) => q[2]));
+    assert.ok(lowest - sb.zb <= 2.5, `stand-in ${JSON.stringify(sb)}: nothing drawn within 2.5 of it (lowest ${lowest.toFixed(1)})`);
+  }
   // the cradle and the holder: every drawn point inside one of its own group's stand-ins (within 0.5), at rest and
   // turned, the drawn points carried as the page carries them
   const { carry } = await scene;
@@ -266,7 +281,7 @@ test("the head above the bur clears the cradle, holder and disc everywhere in th
 });
 
 test("A and B share the lean through every pass, within hyperDENT's tilts", () => {
-  for (const span of SIM_SPANS) {
+  for (const span of SIM_SPANS.filter((x) => x.kind !== "tool")) {
     const cut = job.filter(({ s }) => s.cutting && s.kind === span.kind);
     assert.ok(cut.length > 100, span.kind);
     const range = (k) => Math.max(...cut.map(({ s }) => s[k])) - Math.min(...cut.map(({ s }) => s[k]));
@@ -275,13 +290,10 @@ test("A and B share the lean through every pass, within hyperDENT's tilts", () =
     if (span.kind === "occlusal") { near(Math.max(...tilts), 3, 0.01); near(Math.min(...tilts), 3, 0.01); }
     else { assert.ok(Math.max(...tilts) <= 15 + 1e-9 && Math.max(...tilts) > 14.9, `${span.kind} max ${Math.max(...tilts)}`); assert.ok(Math.min(...tilts) >= 10, `${span.kind} min ${Math.min(...tilts)}`); }
   }
-  // the lean eases only where the cradle's right drive hub would come inside the head's envelope: on the buccal pass,
-  // from the right second premolar on round the right-hand end
-  const pm2 = TEETH.find((t) => t.side === 1 && t.name === "second premolar");
-  const from = Math.min(...pm2.outline.map((p) => p[0])) - 1.5;
+  // with the head and cradle as drawn, nothing comes inside the head's envelope, so the walls' lean never eases (the
+  // caption says so: a change that brings an easing back must be described there)
   const eased = job.filter(({ s }) => s.cutting && s.kind !== "occlusal" && s.tilt < 14.99);
-  assert.ok(eased.length > 0);
-  for (const { t, s } of eased) assert.ok(s.kind === "buccal" && tipIn(s).p[0] >= from, `lean eased to ${s.tilt.toFixed(1)}° at ${t}, before the right second premolar`);
+  assert.equal(eased.length, 0, `lean eased to ${eased.length ? Math.min(...eased.map(({ s }) => s.tilt)).toFixed(2) : ""}°`);
 });
 
 test("the bur touches each surface it finishes, and its neck clears the channel and the bridge's edge", () => {
@@ -330,8 +342,8 @@ test("dipping into and out of a pass, the whole bur stays in the channel and off
 
 test("between passes the bur stays above the disc", () => {
   for (const { t, s } of job) {
-    // only the dips into and out of each pass go below the clearance plane
-    if (s.step === "cut" || s.step === "dip") continue;
+    // only the dips into and out of each pass go below the clearance plane; the tool change is left of the cradle
+    if (s.step === "cut" || s.step === "dip" || s.kind === "tool") continue;
     assert.ok(tipIn(s).p[2] >= GEO.THICK + 5.9, `tip ${tipIn(s).p[2]} at ${t} (${s.say})`);
   }
 });
@@ -349,10 +361,12 @@ test("the job starts and ends at home, and finishes every surface in order", () 
   for (const k of ["x", "y", "z", "a", "b"]) { near(simAt(0)[k], HOME[k], 1e-9); near(simAt(SIM_LEN)[k], HOME[k], 1e-9); }
   assert.deepEqual(simAt(0).done, { occlusal: 0, buccal: 0, palatal: 0 });
   assert.deepEqual(simAt(SIM_LEN).done, { occlusal: 1, buccal: 1, palatal: 1 });
-  const order = SIM_SPANS.map((span) => span.kind);
-  assert.deepEqual(order, ["occlusal", "buccal", "palatal"]);
+  assert.deepEqual(SIM_SPANS.map((span) => span.kind), ["tool", "occlusal", "buccal", "palatal"]);
+  const order = ["occlusal", "buccal", "palatal"];
   let last = { occlusal: 0, buccal: 0, palatal: 0 };
   for (const { s } of job) { for (const k of order) assert.ok(s.done[k] >= last[k] - 1e-12); last = s.done; }
+  // the magazine is in, and back on its front row, whenever the head is at the work
+  for (const { t, s } of job) if (s.kind !== "tool" && s.step !== "move") { near(s.m, 1, 1e-12); near(s.row, 0, 1e-12); assert.ok(s.tool.spindle, `no tool at ${t}`); }
 });
 
 test("a pass's start is where Page Up and resuming land; after the last pass, the job starts again", () => {
@@ -401,10 +415,10 @@ test("the bur is cut off where it goes into the channel, and left whole in the o
 
 test("jog: out of a cut the head only rises, never deeper or sideways in the part, and clears whatever keys come meanwhile", () => {
   const ENDS = { x: [0, TRAVEL.x], y: [0, TRAVEL.y], z: [0, TRAVEL.z], a: [-180, 180], b: [-SPEC.bLimit, SPEC.bLimit] };
-  const ask = (j, key, delta) => ({ ...j, want: jogRequest(j.want, key, j.want[key] + delta, ...ENDS[key]), mWant: magFor(key === "y" ? j.want.y + delta : j.want.y) });
+  const ask = (j, key, delta) => { const want = jogRequest(j.want, key, j.want[key] + delta, ...ENDS[key]); return { ...j, want, mWant: magFor(want.y, want.b) }; };
   const run = (t0, lateral, zDown, zFrame, hz) => {
     const s = simAt(t0);
-    const cur = { x: s.x, y: s.y, z: s.z, a: s.a, b: s.b, m: 1 };
+    const cur = { x: s.x, y: s.y, z: s.z, a: s.a, b: s.b, m: s.m, row: s.row };
     let j = { cur, ...jogEnter(cur) };
     const depth0 = GEO.THICK - tipIn(cur).p[2];
     assert.ok(j.lifting, `not in the cut at ${t0}`);
@@ -424,11 +438,82 @@ test("jog: out of a cut the head only rises, never deeper or sideways in the par
     }
     assert.fail(`${label}: still moving after 10 s (lift cleared at frame ${cleared})`);
   };
-  for (const t0 of [5.03, 11.43, 24, 36, 41]) for (const lateral of [["x", 5], ["y", 5], ["a", -45], ["b", 15]]) for (const [zDown, zFrame] of [[1, 2], [5, 1], [200, 4]]) run(t0, lateral, zDown, zFrame, 60);
+  // times in the cuts, counted from the start of the first pass's move (the tool change comes before it)
+  const T0 = SIM_SPANS.find((span) => span.kind === "occlusal").start;
+  for (const dt of [5.03, 11.43, 24, 36, 41]) for (const lateral of [["x", 5], ["y", 5], ["a", -45], ["b", 15]]) for (const [zDown, zFrame] of [[1, 2], [5, 1], [200, 4]]) run(T0 + dt, lateral, zDown, zFrame, 60);
   // the sequences that once stalled, at 60 and 120 frames a second
-  for (const hz of [60, 120]) { run(11.43, ["x", 5], 200, 1, hz); run(5.03, ["y", 5], 5, 1, hz); run(24, ["a", -30], 200, 1, hz); }
+  for (const hz of [60, 120]) { run(T0 + 11.43, ["x", 5], 200, 1, hz); run(T0 + 5.03, ["y", 5], 5, 1, hz); run(T0 + 24, ["a", -30], 200, 1, hz); }
+});
+
+test("the tool change: the magazine brings each pocket under the spindle, and the drawn tools swap where the head stands", async () => {
+  const { carry } = await scene;
+  for (const [what, key] of [["drop", POCKETS.drop], ["pick", POCKETS.pick]]) {
+    const t = SIM.swapAt[what];
+    const s = simAt(t);
+    const [c, r] = key.split("/").map(Number);
+    const [px, py] = pocketAt(c, r);
+    // the spindle over the pocket, the slide holding that pocket's row on the spindle's line, the collet 5 above the shank
+    near(GEO.SPINDLE_X0 + s.y, px, 1e-9);
+    near(py - magOf(s.m).mag + GEO.PITCH * s.row, GEO.SPINDLE_Y, 1e-9);
+    near(GEO.TIP_Z - s.z + GEO.COLLET, SHANK_TOP + 5, 1e-9);
+    assert.equal(s.step, "hold");
+    // and the drawn pocket under the drawn spindle, as the page poses them
+    const pocket = carry(s, "magrow", [px, py, SHANK_TOP]);
+    const tip = carry(s, "z", [GEO.SPINDLE_X0, GEO.SPINDLE_Y, GEO.TIP_Z]);
+    near(pocket[0], tip[0], 1e-9);
+    near(pocket[1], tip[1], 1e-9);
+  }
+  // the tools: the spindle holds one except between the swaps; the drop pocket fills at the first, the pick pocket
+  // empties at the second; the job loops back to the start's tools
+  for (const { t, s } of job) {
+    const between = t >= SIM.swapAt.drop && t < SIM.swapAt.pick;
+    assert.equal(s.tool.spindle, !between, `spindle at ${t}`);
+    assert.equal(s.tool[POCKETS.drop], t >= SIM.swapAt.drop, `drop pocket at ${t}`);
+    assert.equal(s.tool[POCKETS.pick], t < SIM.swapAt.pick, `pick pocket at ${t}`);
+  }
+  assert.ok(SIM.swapAt.drop < SIM.swapAt.pick && SIM.swapAt.pick < SIM_SPANS[1].start);
+  // the bur comes down onto the sensor post's cap to be measured, with the magazine back on its front row by then
+  const post = job.filter(({ s }) => s.kind === "tool" && Math.abs(GEO.SPINDLE_X0 + s.y - GEO.POST.x) < 1e-6 && Math.abs(GEO.SPINDLE_Y - GEO.POST.y) < 1e-9);
+  const lowest = post.reduce((best, x) => (GEO.TIP_Z - x.s.z < GEO.TIP_Z - best.s.z ? x : best));
+  near(GEO.TIP_Z - lowest.s.z, GEO.POST.top, 1e-6);
+  near(lowest.s.row, 0, 1e-9);
+  assert.ok(lowest.s.tool.spindle);
+});
+
+test("jog: the magazine comes out only with the cradle level, the cradle tilts only with it in, and it indexes home first", () => {
+  const ENDS = { x: [0, TRAVEL.x], y: [0, TRAVEL.y], z: [0, TRAVEL.z], a: [-180, 180], b: [-SPEC.bLimit, SPEC.bLimit] };
+  const ask = (j, key, value) => { const want = jogRequest(j.want, key, value, ...ENDS[key]); return { ...j, want, mWant: magFor(want.y, want.b) }; };
+  const settle = (j, label) => {
+    for (let f = 0; f < 1200; f++) {
+      const r = jogStep(j, 0.1, 1 / 60);
+      const c = r.cur;
+      assert.ok(c.m >= 1 || Math.abs(c.b) <= 0.5 + 1e-9, `${label}: cradle tilted ${c.b.toFixed(2)}° with the magazine at ${c.m.toFixed(3)}`);
+      assert.ok(c.row <= 1e-12 || c.m === j.cur.m, `${label}: the magazine ran its sequence while indexed out`);
+      // out of a swap the head first rises straight up (its bur stand-in is down among the shanks); after that it is
+      // never inside anything
+      if (r.lifting) assert.ok(c.z <= j.cur.z + 1e-12 && c.x === j.cur.x && c.y === j.cur.y, `${label}: moved off the lift at frame ${f}`);
+      else assert.ok(roomAt(c, c.m) >= c.z - 1e-9, `${label}: head inside at frame ${f}`);
+      j = { ...j, cur: c, want: r.want, lifting: r.lifting };
+      if (!r.busy) return j;
+    }
+    assert.fail(`${label}: still moving`);
+  };
+  let j = { cur: { ...HOME, m: 1, row: 0 }, want: { ...HOME }, mWant: 1, lifting: false };
+  j = settle(ask(j, "b", 10), "tilt");
+  j = settle(ask(j, "y", 50), "over the magazine, tilted");
+  near(j.cur.m, 1, 1e-12);
+  j = settle(ask(j, "b", 0), "level");
+  near(j.cur.m, 0, 1e-12);
+  j = settle(ask(j, "b", -12), "tilt with it out");
+  near(j.cur.m, 1, 1e-12);
+  near(j.cur.b, -12, 1e-9);
+  // into jog at the pick, the magazine indexed three rows out: it indexes home before anything else of its own moves
+  const s = simAt(SIM.swapAt.pick);
+  const cur = { x: s.x, y: s.y, z: s.z, a: s.a, b: s.b, m: s.m, row: s.row };
+  j = settle({ cur, ...jogEnter(cur) }, "from the pick");
+  near(j.cur.row, 0, 1e-12);
 });
 
 test("readout", () => {
-  assert.equal(readoutOf({ ...HOME, z: 12.34, a: -180 }), "X 55.0 · Y 225.0 · Z −12.3 · A 180.0° · B 0.0°");
+  assert.equal(readoutOf({ ...HOME, z: 12.34, a: -180 }), "X 55.0 · Y 262.0 · Z −12.3 · A 180.0° · B 0.0°");
 });

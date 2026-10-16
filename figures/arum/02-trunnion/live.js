@@ -22,12 +22,13 @@ const TR_AXES = {
   A: { key: "a", name: "holder turns", lo: -180, hi: 180, step: 5, big: 45, unit: "degrees", sign: 1 },
   B: { key: "b", name: "cradle tilts", lo: -SPEC.bLimit, hi: SPEC.bLimit, step: 1, big: 5, unit: "degrees", sign: 1 },
 };
-const TR_PASS = { occlusal: "Occlusal surface", buccal: "Buccal wall", palatal: "Palatal wall" };
+const TR_PASS = { tool: "Tool change", occlusal: "Occlusal surface", buccal: "Buccal wall", palatal: "Palatal wall" };
 const trHome = () => ({ x: HOME.x, y: HOME.y, z: HOME.z, a: HOME.a, b: HOME.b });
 // mode: "sim" plays the finishing job, "jog" hands the axes to the reader.
-// cur: what is drawn; want: what the reader asked for (jog); m: the magazine sequence (0 out … 1 in, flap shut).
+// cur: what is drawn; want: what the reader asked for (jog); m: the magazine sequence (0 out … 1 in, flap shut); row:
+// how many rows the magazine is indexed out; tool: which tools are in the spindle and the two pockets the change swaps.
 // time: where the job is; playing: the job runs; stopped: the reader paused it, so it waits for Play.
-const trState = { mode: "sim", time: 0, playing: false, stopped: false, lifting: false, cur: { ...trHome(), m: 1 }, want: trHome(), mWant: 1, axis: "Y", blend: null, focused: false, dragging: null, pending: null, held: false, sim: null, done: { occlusal: 0, buccal: 0, palatal: 0 }, view: 0, viewTo: 0 };
+const trState = { mode: "sim", time: 0, playing: false, stopped: false, lifting: false, cur: { ...trHome(), m: 1, row: 0 }, want: trHome(), mWant: 1, tool: null, axis: "Y", blend: null, focused: false, dragging: null, pending: null, held: false, sim: null, done: { occlusal: 0, buccal: 0, palatal: 0 }, viewTo: 0 };
 let trFrame = 0, trLast = 0, trVisible = false, trIdle = 0, trEma = 0, trSkip = false, trHalf = false;
 // true while the page itself draws, so onFrame does not echo it back; it starts true so the engine's first render at
 // mount (at the build's rest pose) does not overwrite home
@@ -43,10 +44,11 @@ const trController = TURN.mount(trStage, TR.turn, {
   onFrame: (controller) => {
     if (trOwn) return;
     const v = controller.values ?? {};
-    const m = typeof v.m === "number" ? v.m : (v.flap ?? 0) > 0 ? 0.72 + (0.28 * v.flap) / 90 : (0.72 * (v.mag ?? 0)) / GEO.MAG_STROKE;
-    trState.cur = { x: v.x ?? 0, y: v.y ?? 0, z: v.z ?? 0, a: wrap(v.a ?? 0), b: v.b ?? 0, m };
+    const m = typeof v.m === "number" ? v.m : mOf({ mag: v.mag ?? GEO.MAG_STROKE, flap: v.flap ?? 90 });
+    const row = typeof v.row === "number" ? v.row : (v.magrow ?? 0) / GEO.PITCH;
+    trState.cur = { x: v.x ?? 0, y: v.y ?? 0, z: v.z ?? 0, a: wrap(v.a ?? 0), b: v.b ?? 0, m, row };
     trState.want = { x: trState.cur.x, y: trState.cur.y, z: trState.cur.z, a: trState.cur.a, b: trState.cur.b };
-    trState.mWant = magFor(trState.cur.y);
+    trState.mWant = magFor(trState.cur.y, trState.cur.b);
     trWork(true);
     trInsetUpdate();
     trBurClip();
@@ -183,21 +185,58 @@ function trBurClip() {
   if (trBur.getAttribute("clip-path") !== "url(#tr-bur-clip)") trBur.setAttribute("clip-path", "url(#tr-bur-clip)");
 }
 
-// ---------------------------------------------------------------- the view: the whole chamber, or in close on the work
+// The tool change: the bur shows in the spindle while it holds a tool, and a shank in each of the two pockets the change
+// swaps while the pocket holds one (the last job's tool goes in, the finishing bur comes out). Jog keeps whatever the
+// job left.
+const trPockets = Object.fromEntries([POCKETS.drop, POCKETS.pick].map((key) => [key, trStage.querySelector(`[data-name="pocket.${key.replace("/", ".")}"]`)]));
+let trToolKey = "";
+function trTools() {
+  const tool = trState.tool;
+  if (!tool) return;
+  const key = JSON.stringify(tool);
+  if (key === trToolKey) return;
+  trToolKey = key;
+  const show = (el, on) => { if (el && (el.getAttribute("visibility") === "hidden") === on) { if (on) el.removeAttribute("visibility"); else el.setAttribute("visibility", "hidden"); } };
+  show(trBur, tool.spindle);
+  for (const [key2, el] of Object.entries(trPockets)) show(el, tool[key2]);
+}
+
+// ---------------------------------------------------------------- the view: the whole chamber (0), in close on the work
+// (1), or on the magazine for the tool change (2)
 const trSvgs = [...trStage.querySelectorAll(":scope > svg")];
 const TR_BOX = (trSvgs[0]?.getAttribute("viewBox") ?? "0 0 620 560").split(/[ ,]+/).map(Number);
 const TR_ZOOM = 4.2;
 let trFocus = null;
-function trViewAt(k) {
-  if (!trFocus) return;
+const trViewOf = (i) => {
   const [x0, y0, w0, h0] = TR_BOX;
-  const K = 1 + (TR_ZOOM - 1) * k;
-  const w = w0 / K;
-  const h = h0 / K;
-  const cx = x0 + w0 / 2 + (trFocus[0] - (x0 + w0 / 2)) * k;
-  const cy = y0 + h0 / 2 + (trFocus[1] - (y0 + h0 / 2)) * k;
-  const vb = `${(cx - w / 2).toFixed(2)} ${(cy - h / 2).toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)}`;
+  if (i === 1 && trFocus) return { K: TR_ZOOM, c: trFocus };
+  if (i === 2 && TR.magFocus) return { K: TR.magZoom, c: TR.magFocus };
+  return { K: 1, c: [x0 + w0 / 2, y0 + h0 / 2] };
+};
+// the view now, and the one it eases from (over 0.9 s) toward trState.viewTo
+let trViewNow = trViewOf(0);
+let trViewFrom = trViewNow;
+let trViewT = 1;
+function trViewSet(v) {
+  trViewNow = v;
+  const w = TR_BOX[2] / v.K;
+  const h = TR_BOX[3] / v.K;
+  const vb = `${(v.c[0] - w / 2).toFixed(2)} ${(v.c[1] - h / 2).toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)}`;
   for (const svg of trSvgs) if (svg.getAttribute("viewBox") !== vb) svg.setAttribute("viewBox", vb);
+}
+function trViewGo(i, now = false) {
+  if (i !== trState.viewTo) { trState.viewTo = i; trViewFrom = trViewNow; trViewT = 0; }
+  if (now) { trViewT = 1; trViewSet(trViewOf(i)); }
+}
+// one frame of the view's ease; true while it moves
+function trViewStep(dt) {
+  if (trViewT >= 1) return false;
+  trViewT = Math.min(1, trViewT + (trCalm ? 1 : dt / 0.9));
+  const k = trSmooth(trViewT);
+  const to = trViewOf(trState.viewTo);
+  // the zoom eases in its logarithm, so it feels even all the way
+  trViewSet({ K: Math.exp(Math.log(trViewFrom.K) + (Math.log(to.K) - Math.log(trViewFrom.K)) * k), c: [trViewFrom.c[0] + (to.c[0] - trViewFrom.c[0]) * k, trViewFrom.c[1] + (to.c[1] - trViewFrom.c[1]) * k] });
+  return true;
 }
 
 function trShow() {
@@ -212,10 +251,11 @@ function trShow() {
   else if (sim) text = "Finishing a full-arch bridge";
   else text = `${trState.axis} · ${ax.name} · ${v[trState.axis]}${ax.unit === "millimetres" ? " mm" : ""}`;
   if (trReadout.textContent !== text) trReadout.textContent = text;
-  // during the job every axis moves together
-  const moving = sim && s && s.axis === "all" && (trState.playing || trState.blend);
+  // during the passes every axis moves together; in the tool change, Y and Z
+  const running = sim && s && (trState.playing || trState.blend);
   for (const btn of trButtons) {
-    if (btn.hasAttribute("data-moving") !== Boolean(moving)) btn.toggleAttribute("data-moving", Boolean(moving));
+    const moving = Boolean(running && (s.axis === "all" || (s.axis ?? "").includes(btn.dataset.axis.toLowerCase())));
+    if (btn.hasAttribute("data-moving") !== moving) btn.toggleAttribute("data-moving", moving);
     const on = !sim && btn.dataset.axis === trState.axis;
     if ((btn.getAttribute("aria-pressed") === "true") !== on) btn.setAttribute("aria-pressed", String(on));
   }
@@ -246,7 +286,7 @@ const trWords = (axis, s) => {
   const n = Math.round(trValueOf(axis, s) * 10) / 10 || 0;
   const rest = {
     X: Math.abs(s.x - HOME.x) < 0.05 ? "disc centre under the spindle" : s.x < HOME.x ? "cradle toward the back" : "cradle toward the operator",
-    Y: s.y < 110 ? "spindle over the magazine" : Math.abs(s.y - HOME.y) < 0.05 ? "spindle over the disc centre" : "spindle over the work",
+    Y: s.y < 12 ? "spindle over the tool sensor" : s.y < 125 ? "spindle over the magazine" : Math.abs(s.y - HOME.y) < 0.05 ? "spindle over the disc centre" : "spindle over the work",
     Z: s.z < 0.05 ? "head at the top" : "head down",
     A: "holder turned",
     B: "cradle tilted",
@@ -277,13 +317,14 @@ function trDraw() {
   if (trState.held) return;
   trOwn = true;
   const c = trState.cur;
-  // page values; the controller applies follow() to turn the magazine sequence into the magazine and flap groups
-  const stats = trController.set({ x: c.x, y: c.y, z: c.z, a: c.a, b: c.b, m: c.m });
+  // page values; the controller applies follow() to turn the magazine sequence and row into the magazine and flap groups
+  const stats = trController.set({ x: c.x, y: c.y, z: c.z, a: c.a, b: c.b, m: c.m, row: c.row ?? 0 });
   trOwn = false;
   if (stats && typeof stats.ms === "number") trEma = trEma ? trEma * 0.9 + stats.ms * 0.1 : stats.ms;
   trWork();
   trInsetUpdate();
   trBurClip();
+  trTools();
   trShow();
 }
 
@@ -293,7 +334,7 @@ function trDraw() {
 function trRequest(axis, value) {
   const ax = TR_AXES[axis];
   trState.want = jogRequest(trState.want, ax.key, value, ax.lo, ax.hi);
-  trState.mWant = magFor(trState.want.y);
+  trState.mWant = magFor(trState.want.y, trState.want.b);
 }
 
 // ---------------------------------------------------------------- the job: play, pause, seek, and the two modes
@@ -306,7 +347,7 @@ function trStartJob(asked = false) {
   if (trState.time >= SIM_LEN - 1e-6) trState.time = 0;
   trState.playing = true;
   trState.asked = asked;
-  trState.viewTo = 1;
+  trViewGo(trViewFor(trState.time));
   trShow();
   trRun();
 }
@@ -333,7 +374,7 @@ function trEnterSim() {
   trState.lifting = false;
   trState.time = simPassStart(trState.time);
   trState.blend = { from: { ...trState.cur }, t: 0 };
-  trState.viewTo = 1;
+  trViewGo(trViewFor(trState.time));
   trDescribe();
   trDescribed = "";
   trShow();
@@ -346,7 +387,7 @@ function trEnterJog() {
   trState.blend = null;
   // the bur may be in the part: it rises straight up, along the upright tool, before anything else moves
   Object.assign(trState, jogEnter(trState.cur));
-  trState.viewTo = 0;
+  trViewGo(0);
   trDescribe();
   trShow();
   trRun();
@@ -358,7 +399,7 @@ function trSeek(time, speak = document.activeElement !== trStage) {
   trPause({ sticky: true });
   trState.blend = null;
   trState.time = trClamp(time, 0, SIM_LEN);
-  trState.viewTo = 1;
+  trViewGo(trViewFor(trState.time));
   trSimDraw();
   trDescribe();
   if (speak) trSay(true);
@@ -368,8 +409,11 @@ function trSimDraw() {
   const s = simAt(trState.time);
   trState.sim = s;
   trState.done = s.done;
-  trState.cur = { x: s.x, y: s.y, z: s.z, a: s.a, b: s.b, m: 1 };
+  trState.tool = s.tool;
+  trState.cur = { x: s.x, y: s.y, z: s.z, a: s.a, b: s.b, m: s.m, row: s.row };
 }
+// the view stands back for the tool change, and comes in close on the work for the passes
+function trViewFor(time) { return simAt(time).kind === "tool" ? 2 : 1; }
 
 function trTick(now) {
   const dt = trLast ? Math.min((now - trLast) / 1000, 1 / 30) : 1 / 60;
@@ -381,7 +425,8 @@ function trTick(now) {
   let busy = false;
   if (trState.mode === "sim") {
     if (trState.blend) {
-      // up first, across at the top, then down into the job: 0.6 s, 1.2 s and 0.6 s
+      // up first, across at the top, then down into the job: 0.6 s, 1.2 s and 0.6 s; the magazine indexes back to its
+      // front row while the head rises, then runs to where the job has it while the head crosses
       const bl = trState.blend;
       bl.t += calm ? 3 : dt;
       const p = simAt(trState.time);
@@ -390,12 +435,13 @@ function trTick(now) {
       const k2 = trSmooth((bl.t - 0.6) / 1.2);
       const k3 = trSmooth((bl.t - 1.8) / 0.6);
       const lerp = (u, v, k) => u + (v - u) * k;
-      next = { x: lerp(f.x, p.x, k2), y: lerp(f.y, p.y, k2), z: lerp(lerp(f.z, 0, k1), p.z, k3), a: wrap(f.a + wrap(p.a - f.a) * k2), b: lerp(f.b, p.b, k2), m: lerp(f.m, 1, k1) };
+      next = { x: lerp(f.x, p.x, k2), y: lerp(f.y, p.y, k2), z: lerp(lerp(f.z, 0, k1), p.z, k3), a: wrap(f.a + wrap(p.a - f.a) * k2), b: lerp(f.b, p.b, k2), m: lerp(f.m, p.m, k2), row: lerp(f.row ?? 0, p.row, k1) };
       // the head keeps clear of everything on the way, the uncut disc face included (it may start in a cut, lifting:
       // then it only rises until it is clear)
       const room = trRoom(next, next.m);
       if (next.z > room && next.z > c.z) next.z = Math.max(c.z, room);
       trState.sim = { ...p, say: "" };
+      trState.tool = p.tool;
       if (bl.t >= 2.4) trState.blend = null;
       trState.cur = next;
       busy = true;
@@ -404,26 +450,22 @@ function trTick(now) {
         trState.time += dt;
         // the job loops: a short hold on the finished bridge is part of its last step
         if (trState.time >= SIM_LEN) trState.time = 0;
+        trViewGo(trViewFor(trState.time));
         busy = true;
       }
       trSimDraw();
     }
   } else {
     trState.sim = null;
-    const step = jogStep({ cur: c, want: trState.want, mWant: trState.mWant, lifting: trState.lifting }, calm ? 1 : 1 - Math.exp(-dt / 0.18), calm ? 1 : dt / 2.2);
+    const step = jogStep({ cur: c, want: trState.want, mWant: trState.mWant, lifting: trState.lifting }, calm ? 1 : 1 - Math.exp(-dt / 0.18), calm ? 1 : dt / 1.0);
     trState.cur = step.cur;
     trState.want = step.want;
     trState.lifting = step.lifting;
     changed = step.changed;
     busy = step.busy;
   }
-  // the view eases between the whole chamber and the work over about a second
-  if (trState.view !== trState.viewTo) {
-    const step = calm ? 1 : dt / 0.9;
-    trState.view = trState.viewTo > trState.view ? Math.min(trState.viewTo, trState.view + step) : Math.max(trState.viewTo, trState.view - step);
-    trViewAt(trSmooth(trState.view));
-    busy = true;
-  }
+  // the view eases between the whole chamber, the work and the magazine over about a second
+  if (trViewStep(dt)) busy = true;
   // half rate on slow devices: alternate frames once renders average over 14 ms, every frame again under 9 ms
   if (trEma > 14) trHalf = true;
   else if (trEma < 9) trHalf = false;
@@ -592,7 +634,7 @@ trStage.addEventListener("keydown", (event) => {
 trStill.addEventListener("change", (event) => { trCalm = event.matches; if (trCalm) trPause({ sticky: false }); else trArmJob(1400); trRun(); });
 
 // a verification hook: put the job at a time, paused (for stills and video frames)
-window.__isoSim = { seek: (time) => { trState.held = false; trState.stopped = true; trSeek(time); trViewAt(trSmooth((trState.view = trState.viewTo = 1))); trDraw(); return trState.sim && trState.sim.say; }, view: (k) => { trState.view = trState.viewTo = k; trViewAt(trSmooth(k)); } };
+window.__isoSim = { seek: (time) => { trState.held = false; trState.stopped = true; trSeek(time); trViewGo(trState.viewTo, true); trDraw(); return trState.sim && trState.sim.say; }, view: (i) => trViewGo(i, true) };
 
 trArmJob(1400);
 trDescribe();
