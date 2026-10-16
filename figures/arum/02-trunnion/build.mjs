@@ -574,11 +574,49 @@ body{margin:0;background:var(--page);font:14px/1.6 ui-sans-serif,system-ui,-appl
 .tr-host{background:var(--anatomy-page);color:var(--anatomy-text);padding-inline:16px;padding-block:40px 64px}
 .tr-host .iso-page{width:min(680px,100%);margin:0 auto}
 </style><div class="iso tr-host" data-theme="dark"><main class="iso-page">${body}</main></div><script type="module">${(THEME_HOST + turnScript() + modelScript + LIVE).replace(/<\/(script)/gi, "<\\/$1")}</script>`;
+// The page for embedding on another site in an iframe: a whole document on its own (no outside requests). ?theme=light
+// or ?theme=dark pins the theme (else it follows the reader's system), ?bg=none drops the page colour round the card,
+// ?caption=none keeps only the credit line under it, and in a frame it posts its height to the host page
+// ({ type: "iso-figure:height", height }) so the frame can fit it.
+const EMBED_HOST = `{
+  const query = new URLSearchParams(location.search);
+  const theme = query.get("theme");
+  if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);
+  if (query.get("bg") === "none") document.querySelector(".tr-host").style.background = "transparent";
+  if (query.get("caption") === "none") {
+    document.querySelector(".tr-host .iso-keys")?.remove();
+    const caption = document.querySelector(".tr-host .iso-caption");
+    if (caption) caption.textContent = "Product data from ARUM Dentistry, used with permission.";
+  }
+  if (window.parent !== window) {
+    let last = 0;
+    const post = () => { const height = Math.ceil(document.documentElement.getBoundingClientRect().height); if (height !== last) { last = height; window.parent.postMessage({ type: "iso-figure:height", height }, "*"); } };
+    new ResizeObserver(post).observe(document.documentElement);
+    post();
+  }
+}
+`;
+const embedPage = () =>
+  `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ARUM 5X-200 Finishing</title><style>${k.ISO_CSS}
+:root{color-scheme:dark}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){color-scheme:light}}
+:root[data-theme="light"]{color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;background:transparent}
+body{font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.tr-host{background:var(--anatomy-page);color:var(--anatomy-text);padding:16px}
+.tr-host .iso-page{width:min(680px,100%);margin:0 auto}
+</style></head><body><div class="iso tr-host" data-theme="dark"><main class="iso-page">${body}</main></div><script type="module">${(EMBED_HOST + THEME_HOST + turnScript() + modelScript + LIVE).replace(/<\/(script)/gi, "<\\/$1")}</script></body></html>`;
 const artifactOut = argv.find((a) => a.startsWith("--artifact="))?.slice("--artifact=".length);
 if (artifactOut && process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const html = artifactPage();
   writeFileSync(artifactOut, html);
   console.log(`wrote ${artifactOut} · ${(html.length / 1024).toFixed(0)} KB (artifact page)`);
+}
+if (argv.includes("--embed") && process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  const html = embedPage();
+  writeFileSync(join(HERE, "trunnion-embed.html"), html);
+  console.log(`wrote trunnion-embed.html · ${(html.length / 1024).toFixed(0)} KB (embed page)`);
 }
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const name = `trunnion${verify ? "-verify" : ""}${THEME === "light" ? "-light" : ""}.html`;
