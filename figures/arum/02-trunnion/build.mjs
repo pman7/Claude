@@ -130,16 +130,32 @@ const reachable = () => {
   return out;
 };
 // The build fits each cross-group plane to 24 states spread evenly through this list, so an envelope of 24 states that
-// spans every relative motion (B in two passes, A round in 15° steps, Z down its face, every X and Y) sits exactly where
-// it samples, and the reachable states fill the gaps between. The magazine is out (and indexed) in every fourth state,
-// with the cradle level and the spindle over it, as the interlock allows; in the rest it is in and the cradle tilts.
-const MAG_STATES = [{ m: 0, row: 0, y: 36 }, { m: 0.5, row: 0, y: 101 }, { m: 0.86, row: 0, y: 60 }, { m: 0, row: 3, y: 101 }, { m: 0.95, row: 0, y: 112 }, { m: 0, row: 4, y: 0 }];
+// spans every relative motion sits exactly where it samples, and the reachable states fill the gaps between: here a
+// third of them from the job itself (the head low over the tilted, turning holder), a third from jog's extremes (B in
+// two passes, A round in 30° steps, Z down its face, every X and Y), and a third with the magazine out or indexed, the
+// cradle level and the spindle over it, as the interlock allows.
+const MAG_STATES = [{ m: 0, row: 0, y: 36 }, { m: 0.5, row: 0, y: 101 }, { m: 0.86, row: 0, y: 60 }, { m: 0, row: 3, y: 101 }, { m: 0.95, row: 0, y: 112 }, { m: 0, row: 4, y: 0 }, { m: 0.3, row: 0, y: 20 }, { m: 0, row: 1.5, y: 70 }];
+const CUTS = SIM.steps.filter((step) => step.kind === "cut");
 const envelope = () =>
   Array.from({ length: 24 }, (_, i) => {
-    const mag = i % 4 === 1 ? MAG_STATES[(i - 1) / 4] : null;
-    const s = { x: [0, TRAVEL.x / 2, TRAVEL.x][i % 3], y: mag ? mag.y : [0, TRAVEL.y, Y_DISC, 112, 290, 60][i % 6], a: wrap(15 * i), b: mag ? 0 : -30 + (60 * (i % 12)) / 11, m: mag ? mag.m : 1, row: mag ? mag.row : 0 };
-    const deep = zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(s.m).mag, row: s.row }, s.y);
-    return follow({ ...s, z: Math.max(0, Math.min(deep, (TRAVEL.z * (i % 8)) / 7)) });
+    const j = Math.floor(i / 3);
+    if (i % 3 === 0) {
+      // the job: eight times spread through its cuts
+      const u = (j + 0.5) / 8;
+      const total = CUTS.reduce((sum, step) => sum + step.dur, 0);
+      let at = u * total;
+      const step = CUTS.find((c) => (at -= c.dur) < 0) ?? CUTS[CUTS.length - 1];
+      return follow(simAt(step.start + step.dur + at));
+    }
+    if (i % 3 === 2) {
+      const mag = MAG_STATES[j];
+      const s = { x: [0, TRAVEL.x / 2, TRAVEL.x][j % 3], y: mag.y, a: wrap(45 * j), b: 0, m: mag.m, row: mag.row };
+      const deep = zLimit({ x: s.x, b: 0, a: s.a, mag: magOf(s.m).mag, row: s.row }, s.y);
+      return follow({ ...s, z: Math.max(0, Math.min(deep, (TRAVEL.z * (j % 4)) / 3)) });
+    }
+    const s = { x: [0, TRAVEL.x / 2, TRAVEL.x][j % 3], y: [0, TRAVEL.y, Y_DISC, 150, 290, 60, 200, 325][j], a: wrap(30 * j - 165), b: -30 + (60 * j) / 7, m: 1, row: 0 };
+    const deep = zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(1).mag }, s.y);
+    return follow({ ...s, z: Math.max(0, Math.min(deep, (TRAVEL.z * ((j + 3) % 6)) / 5)) });
   });
 export const poses = () => {
   const fill = reachable();
