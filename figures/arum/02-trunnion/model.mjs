@@ -109,7 +109,9 @@ export const burRadius = (h) => {
   return BUR[BUR.length - 1][1];
 };
 // the spindle's underside, from the bur tip up: footprint (circle about the spindle axis, or a box relative to it) and its
-// height above the tip
+// height above the tip. A safety envelope, as a CAM keeps round the head: it covers everything drawn, and in places
+// stands well proud of it (the nose circle reaches 10 mm past the drawn nose, the nozzle boxes sit up to 16 mm under
+// the drawn tubes' outer ends)
 export const HEAD = [
   { r: 3, zb: 0 }, // bur
   { r: 7.5, zb: 26 }, // collar and shaft
@@ -224,8 +226,8 @@ export function bodiesOf(pose) {
   const Mb = rot(AXES_DIR.b, pose.b ?? 0);
   const Ma = partRotation(pose.a ?? 0, pose.b ?? 0);
   const eye = rot([1, 0, 0], 0);
-  const out = [...CRADLE.map((s) => placed(s, Mb, t)), ...HOLDER.map((s) => placed(s, Ma, t)), placed(RAM_BODY, eye, t)];
-  out.push(placed(MAGAZINE, eye, [0, -(pose.mag ?? 0), 0]));
+  const out = [...CRADLE.map((s) => ({ ...placed(s, Mb, t), group: "b" })), ...HOLDER.map((s) => ({ ...placed(s, Ma, t), group: "a" })), { ...placed(RAM_BODY, eye, t), group: "x" }];
+  out.push({ ...placed(MAGAZINE, eye, [0, -(pose.mag ?? 0), 0]), group: "mag" });
   for (const body of out) body.ext = extentOf(body);
   return out;
 }
@@ -644,9 +646,10 @@ const wallPoint = (kind, a, lean) => {
   return { p: tipFor(toHolder(q, WALL_DEPTH), [n[0], n[1], 0], t), t, s: a };
 };
 // The lean on the walls: 15° where the head is clear, eased where tilting the cradle that far would bring a part of it
-// up into the head, as a CAM program limits the tilt to avoid the holder. Here that is the right drive hub against the
-// right coolant nozzle, along the buccal side of the right first molar; the blend carries the easing over the second
-// premolar and the first part of the right-hand end. Worked out on a 0.25 mm grid with 3 mm of room to spare, then the
+// inside the head's safety envelope (HEAD), as a CAM program limits the tilt to keep its clearance round the head.
+// Here that is the right drive hub against the envelope round the spindle nose and the right coolant nozzle, along
+// the buccal side of the right first molar; the blend carries the easing over the second premolar and most of the way
+// round the right-hand end. Worked out on a 0.25 mm grid with 3 mm of room to spare, then the
 // least lean within 6 mm either side, blended, so the tilt changes gently; the build writes the table into the page, so
 // it is not worked out again on load.
 const LEAN_STEP = 0.25;

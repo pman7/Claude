@@ -79,17 +79,17 @@ test("the cradle in the collision model tilts as the kinematics do", () => {
 
 // the drawn machine, as build.mjs puts it together (importing it builds the scene but writes nothing)
 const scene = (async () => {
-  const { T } = await import("./build.mjs");
+  const { T, follow, BUR_DRAWN } = await import("./build.mjs");
   const { TURN } = await import("../../../.claude/skills/anatomy/kit/turn.mjs");
   const groups = T.groups.map((g) => ({ name: g.name, parent: g.parent ? g.parent.index : -1, kind: g.kind, origin: g.origin, direction: g.direction, axis: g.axis }));
-  // a point at rest carried by one group, with every axis at the given values
-  const carry = (values, name, p) => {
-    const { R, t } = TURN.poses(groups, values).get(name);
+  // a point at rest carried by one group, with the machine in the given state, posed as the page poses it (follow())
+  const carry = (state, name, p) => {
+    const { R, t } = TURN.poses(groups, follow({ m: 1, ...state })).get(name);
     const o = groups.find((g) => g.name === name).origin;
     const q = [p[0] - o[0], p[1] - o[1], p[2] - o[2]];
     return [0, 1, 2].map((r) => R[3 * r] * q[0] + R[3 * r + 1] * q[1] + R[3 * r + 2] * q[2] + t[r]);
   };
-  return { T, carry };
+  return { T, carry, BUR_DRAWN };
 })();
 // points over a recorded shape's surface: a solid of revolution's profile turned round its axis, a prism's two ends
 const add3 = (p, v, k) => [p[0] + v[0] * k, p[1] + v[1] * k, p[2] + v[2] * k];
@@ -106,8 +106,15 @@ function surface(shape) {
 }
 
 test("the drawn machine moves as the kinematics do: the holder's points and the bur's tip land where the model puts them", async () => {
-  const { carry } = await scene;
+  const { T, carry, BUR_DRAWN } = await scene;
   const TIP = [GEO.SPINDLE_X0, GEO.SPINDLE_Y, GEO.TIP_Z];
+  // the bur is drawn upright on the spindle's line, its tip at TIP and its profile the model's
+  const F = T.parts.find((x) => x.name === "tool.bur").shapes[0].F;
+  near(F.o[0], TIP[0], 1e-9);
+  near(F.o[1], TIP[1], 1e-9);
+  assert.deepEqual(F.a, [0, 0, 1]);
+  assert.deepEqual(BUR_DRAWN[0], [GEO.TIP_Z, 0]);
+  for (const [z, r] of BUR_DRAWN.slice(0, -1)) near(r, burRadius(z - GEO.TIP_Z), 1e-9);
   for (let i = 0; i < 40; i++) {
     const pose = { x: (i * 7) % 140, a: ((i * 47) % 360) - 180, b: ((i * 13) % 60) - 30, y: (i * 29) % 320, z: (i * 11) % 140 };
     for (const p of [[GEO.HALF, GEO.HALF, GEO.THICK], [-GEO.HALF, 20, -GEO.THICK], [10, -30, 5]]) {
@@ -147,8 +154,9 @@ test("the collision stand-ins cover what is drawn: the head under the spindle, t
       }
     }
   }
-  // the cradle and the holder, at rest: every drawn point inside a stand-in (within 0.5)
-  const rest = bodiesOf({ x: 0, a: 0, b: 0, mag: 0 });
+  // the cradle and the holder: every drawn point inside one of its own group's stand-ins (within 0.5), at rest and
+  // turned, the drawn points carried as the page carries them
+  const { carry } = await scene;
   const dot = (u, v) => u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
   const within = (body, q) => {
     if (body.kind === "box") { const d = [q[0] - body.c[0], q[1] - body.c[1], q[2] - body.c[2]]; return body.e.every((e, i) => Math.abs(dot(d, e)) <= body.h[i] + 0.5); }
@@ -157,8 +165,17 @@ test("the collision stand-ins cover what is drawn: the head under the spindle, t
     return s >= -0.5 && s <= body.len + 0.5 && Math.hypot(d[0] - s * body.u[0], d[1] - s * body.u[1], d[2] - s * body.u[2]) <= body.r + 0.5;
   };
   let checked = 0;
-  for (const part of T.parts.filter((x) => x.group?.name === "a" || x.group?.name === "b")) {
-    for (const shape of part.shapes) for (const q of surface(shape)) { checked++; assert.ok(rest.some((body) => within(body, q)), `${part.name} drawn outside its stand-ins at ${q.map((v) => v.toFixed(1))}`); }
+  const parts = T.parts.filter((x) => x.group?.name === "a" || x.group?.name === "b").map((x) => ({ name: x.name, group: x.group.name, pts: x.shapes.flatMap(surface) }));
+  for (const pose of [{ x: 0, a: 0, b: 0 }, { x: 40, a: 90, b: 30 }, { x: 100, a: -135, b: -20 }]) {
+    const bodies = bodiesOf({ ...pose, mag: 0 });
+    for (const part of parts) {
+      const mine = bodies.filter((body) => body.group === part.group);
+      for (const p of part.pts) {
+        const q = pose.x || pose.a || pose.b ? carry({ ...pose, y: 0, z: 0 }, part.group, p) : p;
+        checked++;
+        assert.ok(mine.some((body) => within(body, q)), `${part.name} drawn outside its group's stand-ins at ${JSON.stringify(pose)}: ${q.map((v) => v.toFixed(1))}`);
+      }
+    }
   }
   assert.ok(checked > 1000);
 });
@@ -258,9 +275,13 @@ test("A and B share the lean through every pass, within hyperDENT's tilts", () =
     if (span.kind === "occlusal") { near(Math.max(...tilts), 3, 0.01); near(Math.min(...tilts), 3, 0.01); }
     else { assert.ok(Math.max(...tilts) <= 15 + 1e-9 && Math.max(...tilts) > 14.9, `${span.kind} max ${Math.max(...tilts)}`); assert.ok(Math.min(...tilts) >= 10, `${span.kind} min ${Math.min(...tilts)}`); }
   }
-  // the lean eases only where the cradle's drive hub would meet the right nozzle: the buccal side, right-hand end
-  const eased = job.filter(({ s }) => s.cutting && s.kind !== "occlusal" && s.tilt < 14.5);
-  assert.ok(eased.length > 0 && eased.every(({ s }) => s.kind === "buccal" && tipIn(s).p[0] > 20));
+  // the lean eases only where the cradle's right drive hub would come inside the head's envelope: on the buccal pass,
+  // from the right second premolar on round the right-hand end
+  const pm2 = TEETH.find((t) => t.side === 1 && t.name === "second premolar");
+  const from = Math.min(...pm2.outline.map((p) => p[0])) - 1.5;
+  const eased = job.filter(({ s }) => s.cutting && s.kind !== "occlusal" && s.tilt < 14.99);
+  assert.ok(eased.length > 0);
+  for (const { t, s } of eased) assert.ok(s.kind === "buccal" && tipIn(s).p[0] >= from, `lean eased to ${s.tilt.toFixed(1)}° at ${t}, before the right second premolar`);
 });
 
 test("the bur touches each surface it finishes, and its neck clears the channel and the bridge's edge", () => {
