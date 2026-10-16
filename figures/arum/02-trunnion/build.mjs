@@ -555,7 +555,17 @@ if (argv.includes("--audit")) {
   A.auditOrExit(R, P);
   TA.orbitOrExit(T, R, P, {
     sweep: { at: (x) => follow({ x: TRAVEL.x / 2, y: Y_DISC, z: 0, a: x, b: 30 * Math.sin((x * Math.PI) / 90), m: 1 }), from: -180, to: 180, frame: 0.5 },
-    clips: [{ name: "sim", at: (t) => follow(simAt(t)), from: 0, to: SIM_LEN, frame: 1 / 10 }],
+    // the job in 0.1 s frames, but its two magazine runs in 1/60 s frames: there the 3 mm flap swings its own thickness
+    // and more within an eighth of a 0.1 s frame, so the halving test, which counts the pixels that change owner, sees
+    // its thin edges saturate rather than shrink with the step; at the page's own frame rate they shrink as they should
+    clips: (() => {
+      const at = (t) => follow(simAt(t));
+      const runs = SIM.runs.filter((run) => run.key === "m");
+      const cuts = [0, ...runs.flatMap((run) => [run.t0, run.t1]), SIM_LEN];
+      const out = [];
+      for (let i = 0; i + 1 < cuts.length; i++) out.push({ name: i % 2 ? `magazine ${(i + 1) / 2}` : `sim ${i / 2 + 1}`, at, from: cuts[i], to: cuts[i + 1], frame: i % 2 ? 1 / 60 : 1 / 10 });
+      return out;
+    })(),
     // the two tools the change swaps sort on a stub under the spindle's bur (see magazine()), so their shapes cover only
     // the foot of their drawing
     cover: [POCKETS.drop, POCKETS.pick].map((key) => `pocket.${key.replace("/", ".")}`),
