@@ -60,13 +60,13 @@ const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
 // The magazine and its flap move as one sequence, 0 (out, flap open flat) to 1 (in, flap shut). Going in, the block
 // slides back over the open flap; once its front is behind the wall the flap swings up, overlapping the end of the
-// slide (the video's flap takes about 0.2 s of a 1 s sequence; here it takes 0.4, so its swing can be followed).
-// Coming out is the same run backwards.
+// slide (about 0.2 s of a 1 s sequence in the video). Coming out is the same run backwards: the block starts out with
+// the flap half down.
 const ease = (u) => u * u * (3 - 2 * u);
 // the inverse of ease on [0, 1]
 const uneased = (v) => 0.5 - Math.sin(Math.asin(1 - 2 * Math.max(0, Math.min(1, v))) / 3);
-const FLAP_FROM = 0.6;
-const SLIDE_TO = 0.67;
+const FLAP_FROM = 0.82;
+const SLIDE_TO = 0.9;
 export const magOf = (m) => {
   const t = clamp(m, 0, 1);
   return { mag: GEO.MAG_STROKE * (1 - ease(clamp((SLIDE_TO - t) / SLIDE_TO, 0, 1))), flap: 90 * ease(clamp((t - FLAP_FROM) / (1 - FLAP_FROM), 0, 1)) };
@@ -178,7 +178,10 @@ function placed(shape, M, t) {
     const e = [mul(M, [1, 0, 0]), mul(M, [0, 1, 0]), mul(M, [0, 0, 1])];
     const corners = [];
     for (const x of [x0, x1]) for (const y of [y0, y1]) for (const z of [z0, z1]) corners.push(at([x, y, z]));
-    return { name: shape.name, kind: "box", c, e, h: [(x1 - x0) / 2, (y1 - y0) / 2, (z1 - z0) / 2], corners };
+    // its edges every 2 mm too, so a tilted edge crossing a footprint between the footprint's samples is not missed
+    const edges = corners.slice();
+    for (let i = 0; i < 8; i++) for (let j = i + 1; j < 8; j++) if ([1, 2, 4].includes(i ^ j)) { const p = corners[i]; const q = corners[j]; const n = Math.ceil(Math.hypot(q[0] - p[0], q[1] - p[1], q[2] - p[2]) / 2); for (let k = 1; k < n; k++) edges.push([p[0] + ((q[0] - p[0]) * k) / n, p[1] + ((q[1] - p[1]) * k) / n, p[2] + ((q[2] - p[2]) * k) / n]); }
+    return { name: shape.name, kind: "box", c, e, h: [(x1 - x0) / 2, (y1 - y0) / 2, (z1 - z0) / 2], corners, edges };
   }
   const { axis, c: [c0, c1], s: [s0, s1], r } = shape.cyl;
   const end = (s) => (axis === 0 ? [s, c0, c1] : [c0, s, c1]);
@@ -244,13 +247,13 @@ function topAt(body, x, y) {
   return lo <= hi ? hi : -Infinity;
 }
 
-// sample points of a footprint about the spindle axis at (sx, 0)
-const RING = Array.from({ length: 16 }, (_, j) => [Math.cos((j / 16) * 2 * Math.PI), Math.sin((j / 16) * 2 * Math.PI)]);
+// sample points of a footprint about the spindle axis at (sx, 0): a circle on four rings of 48
+const RING = Array.from({ length: 48 }, (_, j) => [Math.cos((j / 48) * 2 * Math.PI), Math.sin((j / 48) * 2 * Math.PI)]);
 function footprint(part, sx) {
   const sy = SPINDLE_Y;
   if (part.r !== undefined) {
     const pts = [[sx, sy]];
-    for (const [c, s] of RING) pts.push([sx + part.r * c, sy + part.r * s], [sx + 0.5 * part.r * c, sy + 0.5 * part.r * s]);
+    for (const [c, s] of RING) for (const f of [1, 0.75, 0.5, 0.25]) pts.push([sx + f * part.r * c, sy + f * part.r * s]);
     return { pts, ext: [sx - part.r, sx + part.r, sy - part.r, sy + part.r], inside: (x, y) => (x - sx) ** 2 + (y - sy) ** 2 <= part.r * part.r };
   }
   const [x0, x1, y0, y1] = part.rect;
@@ -287,7 +290,7 @@ export function tipFloor(pose, y, bodies = bodiesOf(pose), parts = HEAD) {
     for (const body of bodies) {
       if (!meets(fp.ext, body.ext)) continue;
       for (const [px, py] of fp.pts) top = Math.max(top, topAt(body, px, py));
-      for (const p of body.corners) if (fp.inside(p[0], p[1])) top = Math.max(top, p[2]);
+      for (const p of body.edges ?? body.corners) if (fp.inside(p[0], p[1])) top = Math.max(top, p[2]);
     }
     if (top > -Infinity) floor = Math.max(floor, top + CLEAR - part.zb);
   }
@@ -788,10 +791,11 @@ const moveTime = (from, via, to) => Math.max(LINK, (1.6 * Math.max(Math.abs(to.x
 // a straight move along one axis, as fast
 const dipTime = (from, to) => Math.max(0.5, (1.6 * Math.max(Math.abs(to.y - from.y), Math.abs(to.z - from.z))) / 100);
 const DIP = 0.5;
-// The tool change, as in the video: the magazine comes out to its front row while the head is still over the work; the
-// head returns the last job's tool to C1 R1, rises, and crosses at a safe height while the magazine indexes three rows
-// out to bring R4 under it; it takes the finishing bur from C3 R4, then touches it down on the sensor post to measure
-// its length while the magazine indexes back. The magazine goes back in as the head rises off the sensor.
+// The tool change, as in the video: the head goes to the sensor post and touches the last job's tool down on it while
+// the magazine comes out through its window, then crosses over it at a safe height; it returns that tool to C1 R1,
+// rises, and crosses while the magazine indexes three rows out to bring R4 under it; it takes the finishing bur from
+// C3 R4, then touches it down on the sensor to measure its length while the magazine indexes back. The magazine goes
+// back in as the head leaves for the first pass.
 const TOOL = { kind: "tool", say: "Tool change" };
 // heights of the tip (above the disc centre) for the change: crossing over the magazine, at a pocket (the collet 5 mm
 // above the shank's top: the swap itself is drawn as the tool passing between pocket and collet), and over the post
@@ -801,7 +805,9 @@ const TOUCH_Z = GEO.TIP_Z - POST.top;
 const overPocket = (c, z) => ({ x: X_DISC, y: pocketAt(c, 1)[0] - GEO.SPINDLE_X0, z, a: 0, b: 0 });
 const overPost = (z) => ({ x: X_DISC, y: POST.x - GEO.SPINDLE_X0, z, a: 0, b: 0 });
 const SWAP_HOLD = 0.8;
-const MAG_RUN = 2.4;
+// the magazine's sequence in the job, run at an even pace (the slide and the flap ease on their own): about the video's
+// 1 s, the flap's swing about 0.25 s of it; jog runs it at the same pace
+export const MAG_RUN = 1.3;
 export const SIM = (() => {
   const steps = [];
   const homeAxes = { ...HOME };
@@ -814,9 +820,19 @@ export const SIM = (() => {
     steps.push({ kind, say, dur, from, via, to, pass: TOOL, ...extra });
     return to;
   };
+  // onto the sensor, the last 10 mm slowly, as the video's head creeps down
+  const touch = (at, say, extra = {}) => {
+    at = tool("dip", say, at, overPost(TOUCH_Z - 10), extra.first ?? {});
+    at = tool("dip", say, at, overPost(TOUCH_Z), { dur: 0.9, ...(extra.creep ?? {}) });
+    tool("hold", say, at, at, { dur: 0.5 });
+    return at;
+  };
   let at = homeAxes;
+  at = tool("move", "Tool change · to the tool sensor", at, overPost(0));
+  at = touch(at, "Checking the last tool on the sensor · the magazine comes out", { first: { mag: [1, 0] } });
+  at = tool("dip", "Checking the last tool on the sensor · the magazine comes out", at, overPost(CROSS_Z));
   const dropUp = overPocket(cDrop, CROSS_Z);
-  at = tool("move", "Tool change · the magazine comes out", at, dropUp, { mag: [1, 0] });
+  at = tool("move", "Returning the last tool to the magazine", at, dropUp);
   at = tool("dip", "Returning the last tool to the magazine", at, overPocket(cDrop, SWAP_Z));
   tool("hold", "Returning the last tool to the magazine", at, at, { swap: "drop" });
   at = tool("dip", "Returning the last tool to the magazine", at, dropUp);
@@ -825,13 +841,8 @@ export const SIM = (() => {
   tool("hold", "Picking up the finishing bur", at, at, { swap: "pick" });
   at = tool("dip", "Picking up the finishing bur", at, overPocket(cPick, CROSS_Z));
   at = tool("move", "To the tool sensor", at, overPost(CROSS_Z));
-  at = tool("dip", "Measuring the bur on the tool sensor", at, overPost(TOUCH_Z - 10));
-  // the last 10 mm onto the cap slowly, as the video's head creeps down; the magazine indexes back meanwhile
-  at = tool("dip", "Measuring the bur on the tool sensor", at, overPost(TOUCH_Z), { dur: 0.9, row: [rPick - 1, 0] });
-  tool("hold", "Measuring the bur on the tool sensor", at, at, { dur: 0.5 });
-  // up off the sensor, the magazine going back in meanwhile (it is shut before the head leaves for the work)
-  at = tool("dip", "The magazine goes back in", at, overPost(0), { mag: [0, 1] });
-  tool("hold", "The magazine goes back in", at, at, { dur: Math.max(0.3, MAG_RUN + 0.3 - dipTime(overPost(TOUCH_Z), overPost(0))) });
+  at = touch(at, "Measuring the bur on the tool sensor", { creep: { row: [rPick - 1, 0] } });
+  at = tool("dip", "Measuring the bur on the tool sensor", at, overPost(0));
   let prev = at;
   for (const pass of PASSES) {
     const first = pass.at(0);
@@ -839,7 +850,8 @@ export const SIM = (() => {
     const above = axesFor(lift(first).p, first.t);
     const raised = { ...above, z: Math.max(0, Math.min(above.z, prev.z) - 12) };
     const opening = pass === PASSES[0];
-    steps.push({ kind: "move", say: opening ? "Down to the first pass" : "Up, across, down to the next pass", dur: moveTime(prev, raised, above), from: prev, via: raised, to: above, pass });
+    // (the magazine goes back in as the head leaves the sensor for the first pass)
+    steps.push({ kind: "move", say: opening ? "Down to the first pass · the magazine goes back in" : "Up, across, down to the next pass", dur: moveTime(prev, raised, above), from: prev, via: raised, to: above, pass, ...(opening ? { mag: [0, 1] } : {}) });
     steps.push({ kind: "dip", say: pass.say, dur: DIP, from: above, to: axesFor(first.p, first.t), pass });
     steps.push({ kind: "cut", say: pass.say, dur: pass.dur, pass });
     const out = axesFor(lift(last).p, last.t);
@@ -850,9 +862,8 @@ export const SIM = (() => {
   steps.push({ kind: "hold", say: "Finished", dur: 1.4, from: homeAxes, pass: null });
   let start = 0;
   for (const step of steps) { step.start = start; start += step.dur; }
-  // the magazine's runs: out once the head has left the work, its row index at about 4 rows a second, and in as the head
-  // rises off the sensor; out and in run the sequence at an even pace (the slide and the flap ease on their own) over
-  // MAG_RUN, the block at about the video's speed
+  // the magazine's runs: out while the head checks the last tool on the sensor, its row index at about 4 rows a second,
+  // and in as the head leaves for the first pass
   const runs = [];
   for (const step of steps) {
     if (step.mag) runs.push({ key: "m", from: step.mag[0], to: step.mag[1], t0: step.start + 0.2, t1: step.start + 0.2 + MAG_RUN, even: true });

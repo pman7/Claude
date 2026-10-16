@@ -414,8 +414,8 @@ function trSimDraw() {
   trState.tool = s.tool;
   trState.cur = { x: s.x, y: s.y, z: s.z, a: s.a, b: s.b, m: s.m, row: s.row };
 }
-// the view stands back for the tool change, and comes in close on the work for the passes
-function trViewFor(time) { return simAt(time).kind === "tool" ? 2 : 1; }
+// the view stands on the magazine for the tool change, until it is shut again, and comes in close on the work for the passes
+function trViewFor(time) { const s = simAt(time); return s.kind === "tool" || s.m < 1 ? 2 : 1; }
 
 function trTick(now) {
   const dt = trLast ? Math.min((now - trLast) / 1000, 1 / 30) : 1 / 60;
@@ -466,7 +466,7 @@ function trTick(now) {
     }
   } else {
     trState.sim = null;
-    const step = jogStep({ cur: c, want: trState.want, mWant: trState.mWant, lifting: trState.lifting }, calm ? 1 : 1 - Math.exp(-dt / 0.18), calm ? 1 : dt / 1.0);
+    const step = jogStep({ cur: c, want: trState.want, mWant: trState.mWant, lifting: trState.lifting }, calm ? 1 : 1 - Math.exp(-dt / 0.18), calm ? 1 : dt / MAG_RUN);
     trState.cur = step.cur;
     trState.want = step.want;
     trState.lifting = step.lifting;

@@ -492,6 +492,15 @@ test("the tool change: the magazine brings each pocket under the spindle, and th
   near(GEO.TIP_Z - lowest.s.z, GEO.POST.top, 1e-6);
   near(lowest.s.row, 0, 1e-9);
   assert.ok(lowest.s.tool.spindle);
+  // as in the video: the magazine comes out while the head is over the sensor post, before it moves over the magazine,
+  // and goes back in as the head leaves for the first pass
+  for (const { t, s } of job) {
+    const out = SIM.runs[0];
+    if (t >= out.t0 && t <= out.t1) near(GEO.SPINDLE_X0 + s.y, GEO.POST.x, 1e-9);
+    const back = SIM.runs[SIM.runs.length - 1];
+    if (t >= back.t0 && t <= back.t1) assert.equal(s.say, "Down to the first pass · the magazine goes back in", `at ${t}`);
+  }
+  assert.deepEqual(SIM.runs.map((run) => run.key), ["m", "row", "row", "m"]);
 });
 
 test("jog: the magazine comes out only with the cradle level, the cradle tilts only with it in, and it indexes home first", () => {

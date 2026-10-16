@@ -55,16 +55,22 @@ const COL = { x: [HX - 90, HX + 90], y: [UPPER_Y, BOX.y], z: [LEDGE.z[1] + 3, WA
 // a raised collar that runs down to the floor
 const WIN = { x: [-250, -133], z: [-42, 90] };
 const RAM = GEO.RAM;
-const COLLAR = { out: 97.5, in: 77.5, y: GEO.WALL_Y + 10, top: 105, inTop: 90 };
+// (6 proud of the wall, so the carriage's face is flush with it at X 0, as the video shows; the video's collar stands
+// out about 10)
+const COLLAR = { out: 97.5, in: 77.5, y: -KNUCKLE[1], top: 105, inTop: 90 };
 // Flap: hinged along its bottom edge on two butt hinges against the wall; open, it lies flat at the window sill, level
 // with the bay's floor, a shelf the magazine's tray slides out onto; shut, it stands against the wall over the window
-const FLAP = { y: -BACK_Y + 1.5, z: WIN.z[0] - 1.5, x: [WIN.x[0] + 1, WIN.x[1] - 1], len: WIN.z[1] - WIN.z[0] + 4.5 };
-// the magazine's tray (under the block) and side bar (along its cradle side, running on back through the window as
-// its carrier)
-const TRAY = { x: [MAG.x - 2, MAG.x + MAG.w + 5], y: [MAG.y - 4, MAG.y + MAG.d + 2], z: [WIN.z[0], WIN.z[0] + 2] };
-const BAR = { x: [MAG.x + MAG.w, MAG.x + MAG.w + 5], back: 160, z: [WIN.z[0] + 2, MAG_TOP - 28] };
+// (3 in from the window's cradle side, so it swings clear of the cradle's left end cap with X back)
+const FLAP = { y: -BACK_Y + 1.5, z: WIN.z[0] - 1.5, x: [WIN.x[0] + 1, WIN.x[1] - 3], len: WIN.z[1] - WIN.z[0] + 4.5 };
+// the magazine's tray (under the block, running on back at sill level through the window as its carrier) and side bar
+// (along the block's cradle side; the video shows nothing above the sill behind the block)
+const TRAY = { x: [MAG.x - 2, MAG.x + MAG.w + 5], y: [MAG.y - 160, MAG.y + MAG.d + 2], z: [WIN.z[0], WIN.z[0] + 2] };
+const BAR = { x: [MAG.x + MAG.w, MAG.x + MAG.w + 5], z: [WIN.z[0] + 2, MAG_TOP - 28] };
 // the sensor's cable gland on the wall left of the flap (the video), and the floor cover's front with X at 0
 const GLAND = { x: -272, z: -10, len: 9 };
+// the floor's raised left part the post stands on (the video's floor is a formed basin: the post stands on its flat
+// part, its cap level with the magazine's top, about 135 tall), with a sloped edge down to the floor under the cradle
+const PAD = { x: [-210, -185], z: FLOOR_Z + 55 };
 const COVER_FRONT = 90;
 
 const P = k.fitProjection(
@@ -315,6 +321,8 @@ function chamber() {
   const STRIP_Y = RET.y[0] - 5;
   const BACKSTRIP = { x: WALL_X[0] - 8, y: STRIP_Y, w: 8, d: WY[0] - STRIP_Y, r: 0.5 };
   put({ name: "stand.floor-back", layer: "back", at: [BACKSTRIP.x + 4, BACKSTRIP.y + BACKSTRIP.d / 2, FLOOR_Z - 4], bias: -60, svg: S(k.slabOf(BACKSTRIP, FLOOR_Z - 8, 8, P, 1, 0.4), { tone: "lo" }), shapes: [ground(A.slab(BACKSTRIP, FLOOR_Z - 8, 8))] });
+  // the raised floor on the left, under the sensor post and the magazine's side
+  T.prism({ name: "stand.pad", layer: live, F: ALONG_Y, polygon: [[WALL_X[0], FLOOR_Z], [PAD.x[1], FLOOR_Z], [PAD.x[0], PAD.z], [WALL_X[0], PAD.z]], s0: -(FRONT_Y - 10), s1: BACK_Y, tone: "lo", bevel: 0.4 });
   // the door sill stands on the floor, so it lives with the machine's parts
   block("stand.sill", WALL_X, [FRONT_Y - 10, FRONT_Y], [FLOOR_Z, FLOOR_Z + 4], { bevel: 0.4, details: { dots: [-330, -210, -90, 30, 150, 250].map((x) => ({ at: [FLOOR_Z + 4, x, FRONT_Y - 5], normal: [0, 0, 1], size: 0.5 })) } });
 
@@ -330,7 +338,7 @@ function chamber() {
   plate("wall.mid", [WIN.x[1], -COLLAR.in], [FLOOR_Z, LOW]);
   plate("wall.over", [-COLLAR.in, COLLAR.in], [COLLAR.inTop, LOW]);
   plate("wall.right", [COLLAR.in, WALL_X[1]], [FLOOR_Z, LOW]);
-  // the raised collar the carriage comes through, 10 proud of the wall, down to the floor (the video)
+  // the raised collar the carriage comes through, down to the floor (the video)
   const CY = [WY[1], COLLAR.y];
   const collarDots = (x) => [COLLAR.top - 28, 20, -70, FLOOR_Z + 20].map((z) => ({ at: [z, x, COLLAR.y], normal: [0, 1, 0], size: 0.55 }));
   block("collar.left", [-COLLAR.out, -COLLAR.in], CY, [FLOOR_Z, COLLAR.top], { tone: "hi", bevel: 0.5, details: { dots: collarDots(-(COLLAR.out + COLLAR.in) / 2) } });
@@ -380,7 +388,7 @@ function ram() {
   const y0 = y1 - RAM.len;
   const z1 = RAM.z[1] - 3;
   // a tall light-grey box from the floor strip to above the cradle, its plain front plate held by four small screws, and
-  // bristles lying front to back on its top (the video); with X at 0 its face is flush inside the collar
+  // bristles lying front to back on its top (the video); with X at 0 its face is flush with the collar
   const dots = [[z1 - 8, -68], [z1 - 8, 68], [FLOOR_Z + 30, -68], [FLOOR_Z + 30, 68]].map(([z, x]) => ({ at: [z, x, y1], normal: [0, 1, 0], size: 0.5 }));
   block("ram", RAM.x, [y0, y1], [FLOOR_Z + 2, z1], { group: gx, tone: "hi", details: { dots } });
   const brush = block("ram.brush", [RAM.x[0] + 3, RAM.x[1] - 3], [y0, y1 - 3], [z1, RAM.z[1]], { group: gx, tone: "lo", material: "rubber" });
@@ -465,12 +473,12 @@ function spindle() {
 // ---------------------------------------------------------------- the magazine and the flap
 function magazine() {
   const MR = { group: gr, layer: live };
-  // under the block a tray, and along its cradle side a bar that runs on back through the window as the carrier, so the
-  // block is never without a plate under it (the video); the tray slides on the bay's floor, then on the open flap
+  // under the block a tray that runs on back through the window as the carrier, so the block is never without a plate
+  // under it (the video), and along its cradle side a bar; the tray slides on the bay's floor, then on the open flap
   block("magazine.tray", TRAY.x, TRAY.y, TRAY.z, { ...MR, material: "steel" });
   const barDots = [];
-  for (let y = MAG.y + MAG.d - 15; y > MAG.y - BAR.back + 10; y -= 40) barDots.push({ at: [(BAR.z[0] + BAR.z[1]) / 2, BAR.x[1], y], normal: [1, 0, 0], size: 0.5 });
-  block("magazine.bar", BAR.x, [MAG.y - BAR.back, MAG.y + MAG.d], BAR.z, { ...MR, tone: "hi", material: "steel", details: { dots: barDots } });
+  for (let y = MAG.y + MAG.d - 15; y > MAG.y + 10; y -= 40) barDots.push({ at: [(BAR.z[0] + BAR.z[1]) / 2, BAR.x[1], y], normal: [1, 0, 0], size: 0.5 });
+  block("magazine.bar", BAR.x, [MAG.y, MAG.y + MAG.d], BAR.z, { ...MR, tone: "hi", material: "steel", details: { dots: barDots } });
   // the block: 50 tall, its front in two tiers, a plain cover plate 25 tall on top and below it a brushed strip set back
   // 2, with two black knurled fittings 60 apart and a hex stud between them (the video)
   const cx = MAG.x + MAG.w / 2;
@@ -506,9 +514,10 @@ function magazine() {
   const hinges = [[0.05, 0.36], [0.68, 0.96]].map(([u0, u1]) => [FLAP.x[0] + u0 * span, FLAP.x[0] + u1 * span]);
   hinges.forEach(([h0, h1], i) => T.round({ name: `flap.hinge.${i + 1}`, group: gf, layer: live, F: frameOf([0, FLAP.y, FLAP.z], [1, 0, 0], [0, 1, 0]), s0: h0, s1: h1, r: 1.5, tone: "mid", material: "steel", details: { seams: [(h0 + h1) / 2] } }));
   const flap = block("flap", FLAP.x, [FLAP.y + 1.5, FLAP.y + FLAP.len], [FLAP.z - 1.5, FLAP.z + 1.5], { group: gf, tone: "hi", material: "steel" });
-  // its inner face (up when open) with a rim round it: open, the flap is a shallow tray under the magazine (outlined
-  // only: a filled face here would switch on and off whole as the flap swings)
-  const inner = `<path class="iso-line" data-tone="lo" d="${roundRect(FLAP.x[0] + 4, FLAP.y + 6, FLAP.x[1] - 4, FLAP.y + FLAP.len - 4, 1.5)}"/>`;
+  // its inner face (up when open) dark inside a light rim, as the video shows: open, the flap is a shallow tray under the
+  // magazine
+  const field = roundRect(FLAP.x[0] + 5, FLAP.y + 7, FLAP.x[1] - 5, FLAP.y + FLAP.len - 5, 1.5);
+  const inner = `<path class="tr-bay-back" d="${field}"/><path class="iso-line" data-tone="lo" d="${field}"/>`;
   T.plane({ part: flap, o: [0, 0, FLAP.z + 1.5], u: [1, 0, 0], v: [0, 1, 0], normal: [0, 0, 1], svg: inner });
   // on its outer face (underneath when open, toward the chamber when shut) the hinges' leaves, two screws each
   const leaf = ([h0, h1]) => `<path class="iso-line" data-tone="lo" d="${roundRect(h0, FLAP.y + 2.5, h1, FLAP.y + 11, 1)}"/>${screwHead(h0 + (h1 - h0) * 0.25, FLAP.y + 7, 1.3)}${screwHead(h0 + (h1 - h0) * 0.75, FLAP.y + 7, 1.3)}`;
@@ -522,12 +531,12 @@ function post() {
   const capZ = top - 8;
   // an aluminium bar of square section on an L foot, a round contact cap on top, and an orange LED on its front face
   // 17 below the cap's top (the video)
-  const bar = block("post.bar", [x - half, x + half], [y - half, y + half], [FLOOR_Z + 3, capZ], { tone: "hi", material: "steel" });
+  const bar = block("post.bar", [x - half, x + half], [y - half, y + half], [PAD.z + 3, capZ], { tone: "hi", material: "steel" });
   T.plane({ part: bar, o: [x, y + half, top - 17], u: [1, 0, 0], v: [0, 0, 1], normal: [0, 1, 0], svg: `<path class="tr-led" d="${circle(2.5, 16)}"/><path class="iso-line" data-tone="lo" d="${circle(2.5, 16)}"/>` });
   const cap = T.round({ name: "post.cap", layer: live, F: UP(x, y), s0: capZ, s1: top, r, tone: "hi", material: "steel" });
   T.plane({ part: cap, o: [x, y, top], u: [1, 0, 0], v: [0, 1, 0], normal: [0, 0, 1], svg: `<path class="tr-ring" fill-rule="evenodd" d="${circle(8, 32)}${circle(6.5, 32)}"/><path class="iso-line" data-tone="lo" d="${circle(1.5, 12)}"/>` });
-  block("post.foot", [x - 22, x + half], [y - 13, y + 13], [FLOOR_Z, FLOOR_Z + 3], { material: "steel", details: { dots: [y - 7, y + 7].map((v) => ({ at: [FLOOR_Z + 3, x - 17, v], normal: [0, 0, 1], size: 0.5 })) } });
-  block("post.leg", [x - half - 4, x - half], [y - half, y + half], [FLOOR_Z + 3, FLOOR_Z + 30], { material: "steel" });
+  block("post.foot", [x - 22, x + half], [y - 13, y + 13], [PAD.z, PAD.z + 3], { material: "steel", details: { dots: [y - 7, y + 7].map((v) => ({ at: [PAD.z + 3, x - 17, v], normal: [0, 0, 1], size: 0.5 })) } });
+  block("post.leg", [x - half - 4, x - half], [y - half, y + half], [PAD.z + 3, PAD.z + 30], { material: "steel" });
   // its cable: out of a strain relief on the bar's back face, sagging back to the gland on the wall
   const from = [x, y - half, top - 30];
   // (a shallow sag, level where it leaves the post and where it enters the gland, so the cable's pieces sort cleanly
@@ -555,15 +564,15 @@ if (argv.includes("--audit")) {
   A.auditOrExit(R, P);
   TA.orbitOrExit(T, R, P, {
     sweep: { at: (x) => follow({ x: TRAVEL.x / 2, y: Y_DISC, z: 0, a: x, b: 30 * Math.sin((x * Math.PI) / 90), m: 1 }), from: -180, to: 180, frame: 0.5 },
-    // the job in 0.1 s frames, but its two magazine runs in 1/60 s frames: there the 3 mm flap swings its own thickness
+    // the job in 0.1 s frames, but its two magazine runs in 1/120 s frames: there the 3 mm flap swings its own thickness
     // and more within an eighth of a 0.1 s frame, so the halving test, which counts the pixels that change owner, sees
-    // its thin edges saturate rather than shrink with the step; at the page's own frame rate they shrink as they should
+    // its thin edges saturate rather than shrink with the step; at twice the page's frame rate they shrink as they should
     clips: (() => {
       const at = (t) => follow(simAt(t));
       const runs = SIM.runs.filter((run) => run.key === "m");
       const cuts = [0, ...runs.flatMap((run) => [run.t0, run.t1]), SIM_LEN];
       const out = [];
-      for (let i = 0; i + 1 < cuts.length; i++) out.push({ name: i % 2 ? `magazine ${(i + 1) / 2}` : `sim ${i / 2 + 1}`, at, from: cuts[i], to: cuts[i + 1], frame: i % 2 ? 1 / 60 : 1 / 10 });
+      for (let i = 0; i + 1 < cuts.length; i++) out.push({ name: i % 2 ? `magazine ${(i + 1) / 2}` : `sim ${i / 2 + 1}`, at, from: cuts[i], to: cuts[i + 1], frame: i % 2 ? 1 / 120 : 1 / 10 });
       return out;
     })(),
     // the two tools the change swaps sort on a stub under the spindle's bur (see magazine()), so their shapes cover only
@@ -576,7 +585,7 @@ if (argv.includes("--audit")) {
 }
 
 const LABEL =
-  "Inside the machining chamber of a 5-axis dental mill, finishing an illustrative full-arch zirconia bridge. A gold cradle, open at the front, holds a square disc holder on a horizontal shaft; in the disc a horseshoe-shaped twelve-tooth bridge stands in a channel cut through it, held by small connectors, with four screw holes. Above it the spindle points straight down and never tilts. The job opens with a tool change at the left: behind a flap door hinged at the bottom is the tool magazine, which slides out through its window over the open flap; the spindle returns its last tool to a pocket, the magazine indexes a few rows toward the operator to bring the next pocket under the spindle, the spindle takes the finishing bur, and it touches the bur down on a sensor post beside the magazine to measure it. Then, as the bur works round the arch, the holder turns (A) and the cradle tilts (B) to lean the part against the tool, while the cradle slides toward the operator and back on a tall carriage that comes out of a collar in the back wall (X), the spindle column runs left and right (Y) and the head moves up and down (Z). Behind the bur the rough terraces left by roughing give way to finished teeth.";
+  "Inside the machining chamber of a 5-axis dental mill, finishing an illustrative full-arch zirconia bridge. A gold cradle, open at the front, holds a square disc holder on a horizontal shaft; in the disc a horseshoe-shaped twelve-tooth bridge stands in a channel cut through it, held by small connectors, with four screw holes. Above it the spindle points straight down and never tilts. The job opens with a tool change at the left: behind a flap door hinged at the bottom is the tool magazine, which slides out through its window over the open flap while the spindle touches its last tool down on a sensor post beside it; the spindle returns that tool to a pocket, the magazine indexes a few rows toward the operator to bring the next pocket under the spindle, the spindle takes the finishing bur, and it measures the bur on the sensor post. Then, as the bur works round the arch, the holder turns (A) and the cradle tilts (B) to lean the part against the tool, while the cradle slides toward the operator and back on a tall carriage that comes out of a collar in the back wall (X), the spindle column runs left and right (Y) and the head moves up and down (Z). Behind the bur the rough terraces left by roughing give way to finished teeth.";
 const AXES = [
   { key: "X", name: "cradle in and out", range: `0 to ${TRAVEL.x} mm` },
   { key: "Y", name: "spindle left and right", range: `0 to ${TRAVEL.y} mm` },
@@ -686,7 +695,7 @@ const body =
       { mark: "raised", label: "Cradle (gold): X in and out, B tilts ±30°, A turns the holder 360°" },
     ],
     caption:
-      `An illustrative full-arch bridge: twelve units, screw-retained on four implants (channels at the lateral incisors and second premolars), nested occlusal side up in a 25 mm pre-sintered zirconia disc after roughing and milled about 20% large for the shrinkage in sintering. It stands in a channel through the disc as wide as the Ø2.0 mm roughing ball plus 0.7 mm, held by ${CONNECTORS.length} connectors at its equator; the sintering support a bridge this long would also carry is left out. The job opens with a tool change, as a 5X-200 does it in a video filmed for this figure: the magazine comes out through its window over the flap, which folds down into a shelf; the spindle returns the last job's tool to the front row; the magazine indexes three rows toward the operator to bring the finishing bur's pocket under the spindle (the spindle never moves front to back); the spindle takes the bur and touches it down on the sensor post beside the magazine to measure its length; and the magazine goes back in as the head leaves for the first pass. The swap itself is drawn as the tool passing between pocket and collet, with the collet just above the shank. Each finishing pass is thinned for clarity, a zig-zag every few millimetres across the occlusal surface and one line round each wall, where the machine steps about 0.1 mm, so on the machine the job takes far longer. The Ø1.0 mm ball stays nearly upright on the occlusal surface (3°), then leans 15° out from the wall on one contour round the buccal side and the right-hand end, and one round the palatal side and the left-hand end. The spindle never tilts, so the disc is tilted to the tool: at the incisors the lean is on A, at the molars on B, and between them A and B share it, both changing as the tool goes round (simultaneous 5-axis motion, as hyperDENT's 5X cycles drive it). With the head and cradle in the video's proportions, nothing comes inside the clearance kept round the head (as a CAM program keeps one), so the lean holds at 15° all the way round. The screw channels are indexed jobs of their own and are shown done. Jog hands you the axes: X slides the cradle on a tall carriage through a raised collar in the back wall (${TRAVEL.x} mm), Y runs the spindle column along the wall (${TRAVEL.y} mm, from over the sensor post past the disc), Z lowers the head (${TRAVEL.z} mm), A turns the holder ${SPEC.aRange}° and B tilts the cradle ±${SPEC.bLimit}° about a front-to-back axis (inferred from the photos and the video, not published); when the spindle comes over the magazine or the sensor post, the magazine slides out over the open flap, but only with the cradle level, and the cradle tilts only with the magazine in. ` +
+      `An illustrative full-arch bridge: twelve units, screw-retained on four implants (channels at the lateral incisors and second premolars), nested occlusal side up in a 25 mm pre-sintered zirconia disc after roughing and milled about 20% large for the shrinkage in sintering. It stands in a channel through the disc as wide as the Ø2.0 mm roughing ball plus 0.7 mm, held by ${CONNECTORS.length} connectors at its equator; the sintering support a bridge this long would also carry is left out. The job opens with a tool change, as a 5X-200 does it in a video filmed for this figure: the head touches the last job's tool down on the sensor post beside the magazine while the magazine comes out through its window over the flap, which folds down into a shelf; the spindle returns that tool to the front row; the magazine indexes three rows toward the operator to bring the finishing bur's pocket under the spindle (the spindle never moves front to back); the spindle takes the bur and touches it down on the sensor to measure its length while the magazine indexes back; and the magazine goes back in as the head leaves for the first pass. The swap itself is drawn as the tool passing between pocket and collet, with the collet just above the shank. Each finishing pass is thinned for clarity, a zig-zag every few millimetres across the occlusal surface and one line round each wall, where the machine steps about 0.1 mm, so on the machine the job takes far longer. The Ø1.0 mm ball stays nearly upright on the occlusal surface (3°), then leans 15° out from the wall on one contour round the buccal side and the right-hand end, and one round the palatal side and the left-hand end. The spindle never tilts, so the disc is tilted to the tool: at the incisors the lean is on A, at the molars on B, and between them A and B share it, both changing as the tool goes round (simultaneous 5-axis motion, as hyperDENT's 5X cycles drive it). With the head and cradle in the video's proportions, nothing comes inside the clearance kept round the head (as a CAM program keeps one), so the lean holds at 15° all the way round. The screw channels are indexed jobs of their own and are shown done. Jog hands you the axes: X slides the cradle on a tall carriage through a raised collar in the back wall (${TRAVEL.x} mm), Y runs the spindle column along the wall (${TRAVEL.y} mm, from over the sensor post past the disc), Z lowers the head (${TRAVEL.z} mm), A turns the holder ${SPEC.aRange}° and B tilts the cradle ±${SPEC.bLimit}° about a front-to-back axis (inferred from the photos and the video, not published); when the spindle comes over the magazine or the sensor post, the magazine slides out over the open flap, but only with the cradle level, and the cradle tilts only with the magazine in. ` +
       `Specs: ARUM 5X-200 (5 axes; travel X, Y, Z ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm as ARUM lists them; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm); finishing tool as ARUM's ZB-86 (Ø1.0 mm ball, 20 mm reach, 60 mm long). Tilts after the guidance of hyperDENT, a CAM ARUM supplies 5X-200 machine data for: 5° at most (3° preferred) where nothing is undercut, 10° or more on walls. ARUM shows its own 5X-200 screw-retained work in metal; zirconia is among the machine's listed materials. Which part moves on which axis, and the letters, are the dealer's: ARUM's sheet lists the ${TRAVEL.y} mm stroke as X. Machine proportions from the dealer's photos, ARUM's product photos and the video, scaled to a standard Ø${SPEC.disc} mm disc; bridge from typical tooth widths and arch form, drawn at one height; column, carriage, flap and chamber schematic, with the chamber's side walls, door and lights left off for the cutaway; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
     body: `<div class="tr-stagewrap">${stage}${inset}</div>` + timeline + axesRow,
   }) +
