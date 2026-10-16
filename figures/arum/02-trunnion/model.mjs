@@ -834,11 +834,11 @@ export const SIM = (() => {
   steps.push({ kind: "hold", say: "Finished", dur: 1.4, from: homeAxes, pass: null });
   let start = 0;
   for (const step of steps) { step.start = start; start += step.dur; }
-  // the magazine's runs: out over 1.0 s once the head has left the work, its row index at about 4 rows a second, and in
-  // over 1.0 s as the head leaves for the first pass
+  // the magazine's runs: out once the head has left the work, its row index at about 4 rows a second, and in as the head
+  // leaves for the first pass; out and in take 2 s here, twice the video's, so the flap's swing can be followed
   const runs = [];
   for (const step of steps) {
-    if (step.mag) runs.push({ key: "m", from: step.mag[0], to: step.mag[1], t0: step.start + 0.2, t1: step.start + 1.2 });
+    if (step.mag) runs.push({ key: "m", from: step.mag[0], to: step.mag[1], t0: step.start + 0.2, t1: step.start + 2.2 });
     if (step.row) runs.push({ key: "row", from: step.row[0], to: step.row[1], t0: step.start, t1: step.start + Math.abs(step.row[1] - step.row[0]) / 4 });
   }
   const swapAt = Object.fromEntries(steps.filter((step) => step.swap).map((step) => [step.swap, step.start + step.dur / 2]));

@@ -508,10 +508,11 @@ function post() {
   block("post.leg", [x - half - 4, x - half], [y - half, y + half], [FLOOR_Z + 3, FLOOR_Z + 30], { material: "steel" });
   // its cable: out of a strain relief on the bar's back face, sagging back to the gland on the wall
   const from = [x, y - half, top - 30];
-  // (a smooth sag, level where it leaves the post and where it enters the gland, so the cable's pieces sort cleanly)
+  // (a shallow sag, level where it leaves the post and where it enters the gland, so the cable's pieces sort cleanly
+  // and it never slopes near the line of sight)
   const end = [GLAND.x, WY[1] + 12, GLAND.z];
   const out = [from[0], from[1] - 8, from[2]];
-  const route = [from, ...Array.from({ length: 17 }, (_, i) => i / 16).map((u) => [out[0] + (end[0] - out[0]) * u, out[1] + (end[1] - out[1]) * u, out[2] + (end[2] - out[2]) * u - 26 * Math.sin(Math.PI * u) ** 2]), [GLAND.x, WY[1], GLAND.z]];
+  const route = [from, ...Array.from({ length: 17 }, (_, i) => i / 16).map((u) => [out[0] + (end[0] - out[0]) * u, out[1] + (end[1] - out[1]) * u, out[2] + (end[2] - out[2]) * u - 11 * Math.sin(Math.PI * u) ** 2]), [GLAND.x, WY[1], GLAND.z]];
   const total = G.pathLength(G.resample(route, 0.8));
   T.round({ name: "post.relief", layer: live, F: frameOf(from, [0, -1, 0], [1, 0, 0]), s0: 0, s1: 6, r: 3.6, tone: "lo", material: "rubber", owner: "post.cable" });
   T.tube({ name: "post.cable", layer: live, route, r: 2.5, gaps: [[0, 6], [total - GLAND.len, total]], tone: "mid", material: "rubber" });
