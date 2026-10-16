@@ -59,13 +59,14 @@ export const clampB = (deg) => Math.max(-SPEC.bLimit, Math.min(SPEC.bLimit, deg)
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
 // The magazine and its flap move as one sequence, 0 (out, flap open flat) to 1 (in, flap shut). Going in, the block
-// slides back over the open flap; once its front is behind the wall the flap swings up (about 0.2 s of a 1 s sequence
-// in the video, overlapping the end of the slide). Coming out is the same run backwards.
+// slides back over the open flap; once its front is behind the wall the flap swings up, overlapping the end of the
+// slide (the video's flap takes about 0.2 s of a 1 s sequence; here it takes 0.4, so its swing can be followed).
+// Coming out is the same run backwards.
 const ease = (u) => u * u * (3 - 2 * u);
 // the inverse of ease on [0, 1]
 const uneased = (v) => 0.5 - Math.sin(Math.asin(1 - 2 * Math.max(0, Math.min(1, v))) / 3);
-const FLAP_FROM = 0.82;
-const SLIDE_TO = 0.9;
+const FLAP_FROM = 0.6;
+const SLIDE_TO = 0.67;
 export const magOf = (m) => {
   const t = clamp(m, 0, 1);
   return { mag: GEO.MAG_STROKE * (1 - ease(clamp((SLIDE_TO - t) / SLIDE_TO, 0, 1))), flap: 90 * ease(clamp((t - FLAP_FROM) / (1 - FLAP_FROM), 0, 1)) };
@@ -800,6 +801,7 @@ const TOUCH_Z = GEO.TIP_Z - POST.top;
 const overPocket = (c, z) => ({ x: X_DISC, y: pocketAt(c, 1)[0] - GEO.SPINDLE_X0, z, a: 0, b: 0 });
 const overPost = (z) => ({ x: X_DISC, y: POST.x - GEO.SPINDLE_X0, z, a: 0, b: 0 });
 const SWAP_HOLD = 0.8;
+const MAG_RUN = 2.4;
 export const SIM = (() => {
   const steps = [];
   const homeAxes = { ...HOME };
@@ -829,7 +831,7 @@ export const SIM = (() => {
   tool("hold", "Measuring the bur on the tool sensor", at, at, { dur: 0.5 });
   // up off the sensor, the magazine going back in meanwhile (it is shut before the head leaves for the work)
   at = tool("dip", "The magazine goes back in", at, overPost(0), { mag: [0, 1] });
-  tool("hold", "The magazine goes back in", at, at, { dur: Math.max(0.3, 2.3 - dipTime(overPost(TOUCH_Z), overPost(0))) });
+  tool("hold", "The magazine goes back in", at, at, { dur: Math.max(0.3, MAG_RUN + 0.3 - dipTime(overPost(TOUCH_Z), overPost(0))) });
   let prev = at;
   for (const pass of PASSES) {
     const first = pass.at(0);
@@ -849,10 +851,11 @@ export const SIM = (() => {
   let start = 0;
   for (const step of steps) { step.start = start; start += step.dur; }
   // the magazine's runs: out once the head has left the work, its row index at about 4 rows a second, and in as the head
-  // rises off the sensor; out and in take 2 s here, twice the video's, so the flap's swing can be followed
+  // rises off the sensor; out and in run the sequence at an even pace (the slide and the flap ease on their own) over
+  // MAG_RUN, the block at about the video's speed
   const runs = [];
   for (const step of steps) {
-    if (step.mag) runs.push({ key: "m", from: step.mag[0], to: step.mag[1], t0: step.start + 0.2, t1: step.start + 2.2 });
+    if (step.mag) runs.push({ key: "m", from: step.mag[0], to: step.mag[1], t0: step.start + 0.2, t1: step.start + 0.2 + MAG_RUN, even: true });
     if (step.row) runs.push({ key: "row", from: step.row[0], to: step.row[1], t0: step.start, t1: step.start + Math.abs(step.row[1] - step.row[0]) / 4 });
   }
   const swapAt = Object.fromEntries(steps.filter((step) => step.swap).map((step) => [step.swap, step.start + step.dur / 2]));
@@ -869,7 +872,8 @@ const magAt = (t) => {
   const out = { m: 1, row: 0 };
   for (const run of SIM.runs) {
     if (t < run.t0) continue;
-    out[run.key] = run.from + (run.to - run.from) * smooth((t - run.t0) / (run.t1 - run.t0));
+    const u = Math.min(1, (t - run.t0) / (run.t1 - run.t0));
+    out[run.key] = run.from + (run.to - run.from) * (run.even ? u : smooth(u));
   }
   return out;
 };
