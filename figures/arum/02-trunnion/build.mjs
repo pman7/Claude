@@ -506,8 +506,9 @@ function magazine() {
   const hinges = [[0.05, 0.36], [0.68, 0.96]].map(([u0, u1]) => [FLAP.x[0] + u0 * span, FLAP.x[0] + u1 * span]);
   hinges.forEach(([h0, h1], i) => T.round({ name: `flap.hinge.${i + 1}`, group: gf, layer: live, F: frameOf([0, FLAP.y, FLAP.z], [1, 0, 0], [0, 1, 0]), s0: h0, s1: h1, r: 1.5, tone: "mid", material: "steel", details: { seams: [(h0 + h1) / 2] } }));
   const flap = block("flap", FLAP.x, [FLAP.y + 1.5, FLAP.y + FLAP.len], [FLAP.z - 1.5, FLAP.z + 1.5], { group: gf, tone: "hi", material: "steel" });
-  // its inner face (up when open) dark, with a light rim: open, the flap is a shallow tray under the magazine
-  const inner = `<path class="tr-recess" d="${roundRect(FLAP.x[0] + 4, FLAP.y + 6, FLAP.x[1] - 4, FLAP.y + FLAP.len - 4, 1.5)}"/><path class="iso-line" data-tone="lo" d="${roundRect(FLAP.x[0] + 4, FLAP.y + 6, FLAP.x[1] - 4, FLAP.y + FLAP.len - 4, 1.5)}"/>`;
+  // its inner face (up when open) with a rim round it: open, the flap is a shallow tray under the magazine (outlined
+  // only: a filled face here would switch on and off whole as the flap swings)
+  const inner = `<path class="iso-line" data-tone="lo" d="${roundRect(FLAP.x[0] + 4, FLAP.y + 6, FLAP.x[1] - 4, FLAP.y + FLAP.len - 4, 1.5)}"/>`;
   T.plane({ part: flap, o: [0, 0, FLAP.z + 1.5], u: [1, 0, 0], v: [0, 1, 0], normal: [0, 0, 1], svg: inner });
   // on its outer face (underneath when open, toward the chamber when shut) the hinges' leaves, two screws each
   const leaf = ([h0, h1]) => `<path class="iso-line" data-tone="lo" d="${roundRect(h0, FLAP.y + 2.5, h1, FLAP.y + 11, 1)}"/>${screwHead(h0 + (h1 - h0) * 0.25, FLAP.y + 7, 1.3)}${screwHead(h0 + (h1 - h0) * 0.75, FLAP.y + 7, 1.3)}`;

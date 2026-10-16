@@ -425,8 +425,10 @@ function trTick(now) {
   let busy = false;
   if (trState.mode === "sim") {
     if (trState.blend) {
-      // up first, across at the top, then down into the job: 0.6 s, 1.2 s and 0.6 s; the magazine indexes back to its
-      // front row while the head rises, then runs to where the job has it while the head crosses
+      // up first, across at the top, then down into the job: 0.6 s, 1.2 s and 0.6 s. The magazine and the cradle keep the
+      // interlock: going in, the magazine indexes home while the head rises, goes in over the first half of the crossing,
+      // and the cradle tilts over the second; coming out, the cradle levels first, then the magazine comes out, and it
+      // indexes while the head goes down
       const bl = trState.blend;
       bl.t += calm ? 3 : dt;
       const p = simAt(trState.time);
@@ -434,8 +436,11 @@ function trTick(now) {
       const k1 = trSmooth(bl.t / 0.6);
       const k2 = trSmooth((bl.t - 0.6) / 1.2);
       const k3 = trSmooth((bl.t - 1.8) / 0.6);
+      const first = trSmooth((bl.t - 0.6) / 0.6);
+      const second = trSmooth((bl.t - 1.2) / 0.6);
+      const inward = p.m >= f.m;
       const lerp = (u, v, k) => u + (v - u) * k;
-      next = { x: lerp(f.x, p.x, k2), y: lerp(f.y, p.y, k2), z: lerp(lerp(f.z, 0, k1), p.z, k3), a: wrap(f.a + wrap(p.a - f.a) * k2), b: lerp(f.b, p.b, k2), m: lerp(f.m, p.m, k2), row: lerp(f.row ?? 0, p.row, k1) };
+      next = { x: lerp(f.x, p.x, k2), y: lerp(f.y, p.y, k2), z: lerp(lerp(f.z, 0, k1), p.z, k3), a: wrap(f.a + wrap(p.a - f.a) * k2), b: lerp(f.b, p.b, inward ? second : first), m: lerp(f.m, p.m, inward ? first : second), row: lerp(f.row ?? 0, p.row, inward ? k1 : k3) };
       // the head keeps clear of everything on the way, the uncut disc face included (it may start in a cut, lifting:
       // then it only rises until it is clear)
       const room = trRoom(next, next.m);

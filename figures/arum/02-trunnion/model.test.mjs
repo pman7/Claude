@@ -372,7 +372,15 @@ test("the job starts and ends at home, and finishes every surface in order", () 
 test("a pass's start is where Page Up and resuming land; after the last pass, the job starts again", () => {
   assert.equal(simPassStart(0), 0);
   assert.equal(simPassStart(SIM_LEN), 0);
-  for (const span of SIM_SPANS) { near(simPassStart(span.start + 0.5), span.start, 1e-9); near(simPassStart(span.end - 0.01), span.start, 1e-9); }
+  for (const span of SIM_SPANS.filter((x) => x.kind !== "tool")) { near(simPassStart(span.start + 0.5), span.start, 1e-9); near(simPassStart(span.end - 0.01), span.start, 1e-9); }
+  // in the tool change, resuming lands on a move with the tools as they are at the time left (never undoing a swap)
+  for (const { t, s } of job) {
+    if (s.kind !== "tool" || t > SIM_SPANS[0].end - 1e-6) continue;
+    const back = simPassStart(t);
+    assert.ok(back >= SIM_SPANS[0].start && back < SIM_SPANS[0].end, `resume from ${t} at ${back}`);
+    assert.deepEqual(simAt(back).tool, s.tool, `resume from ${t} at ${back} changes the tools`);
+    assert.equal(simAt(back + 1e-6).step, "move");
+  }
 });
 
 test("the disc drawing: only walls facing the viewer are swept, and the reveal runs with the occlusal pass", () => {
@@ -512,6 +520,40 @@ test("jog: the magazine comes out only with the cradle level, the cradle tilts o
   const cur = { x: s.x, y: s.y, z: s.z, a: s.a, b: s.b, m: s.m, row: s.row };
   j = settle({ cur, ...jogEnter(cur) }, "from the pick");
   near(j.cur.row, 0, 1e-12);
+});
+
+test("jog: the cradle and the magazine never wait on each other, and the head never passes through anything between frames", () => {
+  const ENDS = { x: [0, TRAVEL.x], y: [0, TRAVEL.y], z: [0, TRAVEL.z], a: [-180, 180], b: [-SPEC.bLimit, SPEC.bLimit] };
+  const k = 1 - Math.exp(-1 / 60 / 0.18);
+  const run = (j, label) => {
+    for (let f = 0; f < 1800; f++) {
+      const r = jogStep(j, k, 1 / 60);
+      const a = j.cur;
+      const b = r.cur;
+      // between this frame and the next, at quarter steps, the head clear of everything (it may only be inside while it
+      // rises straight out of a cut)
+      if (!r.lifting && !j.lifting)
+        for (const u of [0.25, 0.5, 0.75]) {
+          const mid = { x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u, z: a.z + (b.z - a.z) * u, a: a.a + wrap(b.a - a.a) * u, b: a.b + (b.b - a.b) * u, m: a.m + (b.m - a.m) * u, row: (a.row ?? 0) + ((b.row ?? 0) - (a.row ?? 0)) * u };
+          assert.ok(roomAt(mid, mid.m) >= mid.z - 0.5, `${label}: through something at frame ${f} + ${u} (room ${roomAt(mid, mid.m).toFixed(1)} at Z ${mid.z.toFixed(1)})`);
+        }
+      j = { ...j, cur: b, want: r.want, lifting: r.lifting };
+      if (!r.busy) return j;
+    }
+    assert.fail(`${label}: still moving after 30 s`);
+  };
+  const ask = (j, key, value) => { const want = jogRequest(j.want, key, value, ...ENDS[key]); return { ...j, want, mWant: magFor(want.y, want.b) }; };
+  // half way back into the job from a tilted jog (the magazine half out, the cradle still tilted), the reader levels it
+  const half = { x: 55, y: 50, z: 0, a: 0, b: -3.125, m: 0.156, row: 0 };
+  let j = run(ask({ cur: half, want: { ...half }, mWant: 0, lifting: false }, "b", -0.13), "level from half way");
+  assert.ok(Math.abs(j.cur.b) <= 0.5 && j.cur.m === 0, `ended at B ${j.cur.b}, magazine ${j.cur.m}`);
+  // the head down by the sensor post, then sideways over the magazine or home
+  const post = { x: X_DISC, y: 0, z: 0, a: 0, b: 0, m: 0, row: 0 };
+  post.z = roomAt(post, 0);
+  const low = { cur: post, want: { ...post }, mWant: 0, lifting: false };
+  run(ask(low, "y", TRAVEL.y), "from the post to Y's end");
+  run(ask(low, "y", 25), "from the post over the magazine");
+  run({ ...low, want: { ...HOME }, mWant: 1 }, "from the post home");
 });
 
 test("readout", () => {

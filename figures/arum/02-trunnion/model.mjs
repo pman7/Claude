@@ -582,16 +582,28 @@ export function jogStep(j, k, mStep) {
   if (lifting) { next.x = c.x; next.y = c.y; next.a = c.a; next.b = c.b; }
   // the cradle stays level while the magazine is out of its bay
   if (c.m < 1 && Math.abs(next.b) > LEVEL) next.b = c.b;
+  // too low for where the other axes are taking it this frame: only Z moves, up to the room there, before anything goes
+  // sideways (else the head would pass through what it then clears)
+  if (!lifting) {
+    const across = roomAt(next, next.m);
+    if (across >= 0 && c.z > across + 0.01) {
+      const zt = Math.min(wz, across);
+      const z = c.z + (zt - c.z) * k;
+      next = { ...next, x: c.x, y: c.y, a: c.a, b: c.b, z: Math.abs(zt - z) < 0.01 ? zt : z };
+    }
+  }
   // the magazine runs its sequence at its own pace, and only moves once the head is clear of its path: first back to its
   // front row (if the job left it indexed), then in or out (out only with the cradle level)
   const clearFor = (room) => { want = { ...want, z: Math.min(want.z, Math.max(0, room)) }; changed = true; };
+  // (with the cradle off level the magazine goes in whatever was asked, so the cradle can then level or tilt on)
+  const mGoal = Math.abs(next.b) > LEVEL ? 1 : j.mWant;
   if (next.row > 0) {
     const r2 = Math.max(0, next.row - 4 * mStep);
     const room = roomAt(next, next.m, r2);
     if (room >= next.z) next.row = r2;
     else clearFor(room);
-  } else if (next.m !== j.mWant && !(j.mWant < next.m && Math.abs(next.b) > LEVEL)) {
-    const m2 = j.mWant < next.m ? Math.max(j.mWant, next.m - mStep) : Math.min(j.mWant, next.m + mStep);
+  } else if (next.m !== mGoal) {
+    const m2 = mGoal < next.m ? Math.max(mGoal, next.m - mStep) : Math.min(mGoal, next.m + mStep);
     const room = roomAt(next, m2);
     if (room >= next.z) next.m = m2;
     else clearFor(room);
@@ -748,7 +760,7 @@ const wallAt = (u, kind) => {
 // passes in order: kind, readout line, duration, tip and tool along u ∈ [0, 1]
 const PASSES = [
   { kind: "occlusal", say: "Occlusal surface · nearly upright, 3°", dur: 12, at: occlusalAt },
-  { kind: "buccal", say: "Buccal wall and right end · leaning out up to 15°", dur: 10, at: (u) => wallAt(u, "buccal") },
+  { kind: "buccal", say: "Buccal wall and right end · leaning out 15°", dur: 10, at: (u) => wallAt(u, "buccal") },
   { kind: "palatal", say: "Palatal wall and left end · leaning out 15°", dur: 10, at: (u) => wallAt(u, "palatal") },
 ];
 // each pass's tool path as the tip's track across the disc (disc frame, mm), for the part view
@@ -778,7 +790,7 @@ const DIP = 0.5;
 // The tool change, as in the video: the magazine comes out to its front row while the head is still over the work; the
 // head returns the last job's tool to C1 R1, rises, and crosses at a safe height while the magazine indexes three rows
 // out to bring R4 under it; it takes the finishing bur from C3 R4, then touches it down on the sensor post to measure
-// its length while the magazine indexes back. The magazine goes in as the head leaves for the first pass.
+// its length while the magazine indexes back. The magazine goes back in as the head rises off the sensor.
 const TOOL = { kind: "tool", say: "Tool change" };
 // heights of the tip (above the disc centre) for the change: crossing over the magazine, at a pocket (the collet 5 mm
 // above the shank's top: the swap itself is drawn as the tool passing between pocket and collet), and over the post
@@ -815,7 +827,9 @@ export const SIM = (() => {
   // the last 10 mm onto the cap slowly, as the video's head creeps down; the magazine indexes back meanwhile
   at = tool("dip", "Measuring the bur on the tool sensor", at, overPost(TOUCH_Z), { dur: 0.9, row: [rPick - 1, 0] });
   tool("hold", "Measuring the bur on the tool sensor", at, at, { dur: 0.5 });
-  at = tool("dip", "Measuring the bur on the tool sensor", at, overPost(0));
+  // up off the sensor, the magazine going back in meanwhile (it is shut before the head leaves for the work)
+  at = tool("dip", "The magazine goes back in", at, overPost(0), { mag: [0, 1] });
+  tool("hold", "The magazine goes back in", at, at, { dur: Math.max(0.3, 2.3 - dipTime(overPost(TOUCH_Z), overPost(0))) });
   let prev = at;
   for (const pass of PASSES) {
     const first = pass.at(0);
@@ -823,7 +837,7 @@ export const SIM = (() => {
     const above = axesFor(lift(first).p, first.t);
     const raised = { ...above, z: Math.max(0, Math.min(above.z, prev.z) - 12) };
     const opening = pass === PASSES[0];
-    steps.push({ kind: "move", say: opening ? "Down to the first pass" : "Up, across, down to the next pass", dur: moveTime(prev, raised, above), from: prev, via: raised, to: above, pass, ...(opening ? { mag: [0, 1] } : {}) });
+    steps.push({ kind: "move", say: opening ? "Down to the first pass" : "Up, across, down to the next pass", dur: moveTime(prev, raised, above), from: prev, via: raised, to: above, pass });
     steps.push({ kind: "dip", say: pass.say, dur: DIP, from: above, to: axesFor(first.p, first.t), pass });
     steps.push({ kind: "cut", say: pass.say, dur: pass.dur, pass });
     const out = axesFor(lift(last).p, last.t);
@@ -835,7 +849,7 @@ export const SIM = (() => {
   let start = 0;
   for (const step of steps) { step.start = start; start += step.dur; }
   // the magazine's runs: out once the head has left the work, its row index at about 4 rows a second, and in as the head
-  // leaves for the first pass; out and in take 2 s here, twice the video's, so the flap's swing can be followed
+  // rises off the sensor; out and in take 2 s here, twice the video's, so the flap's swing can be followed
   const runs = [];
   for (const step of steps) {
     if (step.mag) runs.push({ key: "m", from: step.mag[0], to: step.mag[1], t0: step.start + 0.2, t1: step.start + 2.2 });
@@ -894,12 +908,20 @@ export function simAt(time) {
   const axis = kind === "tool" ? (step.kind === "hold" ? null : "yz") : step.kind === "cut" || step.kind === "dip" ? "all" : null;
   return { ...axes, a: wrap(axes.a), ...magAt(t), tool: toolAt(t), axis, say: step.say, kind, step: step.kind, tilt, done, cutting: step.kind === "cut" };
 }
-// the time the pass running at `time` began, its move in included (for resuming and Page Up/Down); the tool change
-// starts the job
+// the time the pass running at `time` began, its move in included (for resuming); in the tool change, the move that
+// began the stretch it is in, with the tools as they are by then (a swap since the last move resumes from the next one)
+const TOOL_MOVES = SIM.steps.filter((step) => step.pass === TOOL && step.kind === "move").map((step) => step.start);
 export function simPassStart(time) {
   const t = Math.max(0, Math.min(SIM.len, time));
   // once the last pass is over (on the way home, or finished), the job starts again from the top
   if (t >= SIM_SPANS[SIM_SPANS.length - 1].end - 1e-9) return 0;
+  if (t < SIM_SPANS[0].end - 1e-9) {
+    let best = 0;
+    for (const start of TOOL_MOVES) if (start <= t + 1e-9) best = start;
+    const next = TOOL_MOVES.find((start) => start > best + 1e-9);
+    if (next !== undefined && Object.values(SIM.swapAt).some((at) => at > best && at <= t)) best = next;
+    return best;
+  }
   let best = 0;
   for (const span of SIM_SPANS) if (span.start <= t + 1e-9) best = span.start;
   return best;
