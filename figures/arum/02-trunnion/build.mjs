@@ -130,12 +130,14 @@ const reachable = () => {
   return out;
 };
 // The build fits each cross-group plane to 24 states spread evenly through this list, so an envelope of 24 states that
-// spans every relative motion (B in two passes, A round in 15° steps, Z down its face, every X, Y and magazine step and
-// row) sits exactly where it samples, and the reachable states fill the gaps between.
+// spans every relative motion (B in two passes, A round in 15° steps, Z down its face, every X and Y) sits exactly where
+// it samples, and the reachable states fill the gaps between. The magazine is out (and indexed) in every fourth state,
+// with the cradle level and the spindle over it, as the interlock allows; in the rest it is in and the cradle tilts.
+const MAG_STATES = [{ m: 0, row: 0, y: 36 }, { m: 0.5, row: 0, y: 101 }, { m: 0.86, row: 0, y: 60 }, { m: 0, row: 3, y: 101 }, { m: 0.95, row: 0, y: 112 }, { m: 0, row: 4, y: 0 }];
 const envelope = () =>
   Array.from({ length: 24 }, (_, i) => {
-    const s = { x: [0, TRAVEL.x / 2, TRAVEL.x][i % 3], y: [0, TRAVEL.y, Y_DISC, 112, 290, 60][i % 6], a: wrap(15 * i), b: -30 + (60 * (i % 12)) / 11, m: [1, 0, 0.5, 0.86, 0.95, 0][i % 6], row: [0, 0, 0, 0, 0, 4][i % 6] * ((i % 4) / 3) };
-    if (s.m < 1) s.b = 0;
+    const mag = i % 4 === 1 ? MAG_STATES[(i - 1) / 4] : null;
+    const s = { x: [0, TRAVEL.x / 2, TRAVEL.x][i % 3], y: mag ? mag.y : [0, TRAVEL.y, Y_DISC, 112, 290, 60][i % 6], a: wrap(15 * i), b: mag ? 0 : -30 + (60 * (i % 12)) / 11, m: mag ? mag.m : 1, row: mag ? mag.row : 0 };
     const deep = zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(s.m).mag, row: s.row }, s.y);
     return follow({ ...s, z: Math.max(0, Math.min(deep, (TRAVEL.z * (i % 8)) / 7)) });
   });
@@ -327,18 +329,21 @@ function chamber() {
   const grooves = [40, 90, 150].map((dz) => `M${WALL_X[0].toFixed(1)} ${(LEDGE.z[1] + dz).toFixed(1)}L${FRAME_X.toFixed(1)} ${(LEDGE.z[1] + dz).toFixed(1)}`).join("");
   T.plane({ part: upper, o: [0, UPPER_Y, 0], u: [1, 0, 0], v: [0, 0, 1], normal: [0, 1, 0], svg: `<path class="iso-line" data-tone="faint" d="${grooves}"/>` });
   block("wall.upper.frame", [FRAME_X, WALL_X[1]], [UPPER_Y - WALL_T, UPPER_Y + 6], [LEDGE.z[1], WALL_TOP], { material: "steel", tone: "hi", bevel: 0.6 });
-  // the magazine bay: dark, a floor, two sides, a roof and a back
+  // the magazine bay: dark, a floor, two sides, a roof and a back, all within the window's own width and height, so no
+  // part of the bay reaches behind the plates beside the window (where it did, the bay, the plate and the magazine
+  // passing between them closed a painter's cycle)
   const dark = { tone: "lo", material: "rubber" };
-  // a floor under everything, side walls standing on it and a roof capping them: each joint meets on one face
-  const BX = [WIN.x[0] - BAY.skin, WIN.x[1] + BAY.skin];
+  // a floor under everything, thin side walls standing on it and a roof between them: each joint meets on one face
+  const SIDE = 2;
+  const BX = WIN.x;
   const bayFloor = block("bay.floor", BX, BAY.y, [WIN.z[0] - BAY.skin, WIN.z[0]], dark);
-  block("bay.left", [BX[0], WIN.x[0]], BAY.y, WIN.z, dark);
-  block("bay.right", [WIN.x[1], BX[1]], BAY.y, WIN.z, dark);
-  block("bay.roof", BX, BAY.y, [WIN.z[1], WIN.z[1] + BAY.skin], dark);
+  block("bay.left", [BX[0], BX[0] + SIDE], BAY.y, [WIN.z[0], WIN.z[1]], dark);
+  block("bay.right", [BX[1] - SIDE, BX[1]], BAY.y, [WIN.z[0], WIN.z[1]], dark);
+  block("bay.roof", [BX[0] + SIDE, BX[1] - SIDE], BAY.y, [WIN.z[1] - SIDE, WIN.z[1]], dark);
   // the back: drawn on the floor as a dark face rather than built as a solid, so the carrier bar can run back past it
   // into the machine when the magazine is in (the flap is shut by then, and the side housing hides it from the side)
   const backO = [(BX[0] + BX[1]) / 2, BAY.y[0], (WIN.z[0] + WIN.z[1]) / 2];
-  const backSvg = `<path class="tr-bay-back" d="${roundRect(BX[0] - backO[0], WIN.z[0] - BAY.skin - backO[2], BX[1] - backO[0], WIN.z[1] + BAY.skin - backO[2], 0.5)}"/>`;
+  const backSvg = `<path class="tr-bay-back" d="${roundRect(BX[0] - backO[0], WIN.z[0] - BAY.skin - backO[2], BX[1] - backO[0], WIN.z[1] - backO[2], 0.5)}"/>`;
   T.plane({ part: bayFloor, o: backO, u: [1, 0, 0], v: [0, 0, 1], normal: [0, 1, 0], svg: backSvg });
   // the machine's side housing behind the wall's left edge: it hides the bay and the retracted magazine, which would
   // otherwise show past the edge from this viewpoint; it carries the wall's screws round the corner
