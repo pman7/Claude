@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, mOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, roomAt, magFor, jogEnter, jogRequest, jogStep, simAt, simPassStart, SIM, SIM_LEN, SIM_SPANS, POCKETS, SHANK_TOP, pocketAt, readoutOf, wrap } from "./model.mjs";
 import { workShapes, burCut } from "./work.mjs";
+import { readFileSync } from "node:fs";
 
 const near = (a, b, tol) => assert.ok(Math.abs(a - b) <= tol, `${a} vs ${b}`);
 const deg = (r) => (r * 180) / Math.PI;
@@ -569,6 +570,120 @@ test("jog: the cradle and the magazine never wait on each other, and the head ne
   run(ask(low, "y", TRAVEL.y), "from the post to Y's end");
   run(ask(low, "y", 25), "from the post over the magazine");
   run({ ...low, want: { ...HOME }, mWant: 1 }, "from the post home");
+});
+
+test("the tool change uses the video's pockets: C1 R1 back, C3 R4 out, column 1 at the operator's left, row 1 at the front, three rows indexed", () => {
+  // (the caption names them: the front row, three rows)
+  assert.equal(POCKETS.drop, "1/1");
+  assert.equal(POCKETS.pick, "3/4");
+  assert.ok(pocketAt(1, 1)[0] < pocketAt(2, 1)[0] && pocketAt(2, 1)[0] < pocketAt(3, 1)[0], "column 1 at the operator's left (−x)");
+  assert.ok(pocketAt(1, 1)[1] > pocketAt(1, 2)[1], "row 1 at the front (+y)");
+  assert.deepEqual(SIM.runs.filter((r) => r.key === "row").map((r) => [r.from, r.to]), [[0, 3], [3, 0]]);
+});
+
+test("the drawn magazine slides and indexes as the model and its stand-in do", async () => {
+  const { carry } = await scene;
+  const at0 = bodiesOf({ mag: 0, row: 0 }).find((b) => b.group === "mag").c;
+  for (const [m, row] of [[1, 0], [0.8, 0], [0.5, 0], [0, 0], [0, 1.5], [0, 3], [0, 4]]) {
+    const mag = magOf(m).mag;
+    const p = [...pocketAt(2, 3), SHANK_TOP];
+    const q = carry({ m, row }, "magrow", p);
+    near(q[0], p[0], 1e-9);
+    near(q[1], p[1] - mag + GEO.PITCH * row, 1e-9);
+    near(q[2], p[2], 1e-9);
+    const at = bodiesOf({ mag, row }).find((b) => b.group === "mag").c;
+    near(at[1] - at0[1], -mag + GEO.PITCH * row, 1e-9);
+  }
+});
+
+test("jog never lets the head inside the drawn carriage, magazine (its tools included) or sensor post", async () => {
+  const { T, carry } = await scene;
+  const pick = (name) => (name === "ram" || name === "ram.brush" ? "x" : name.startsWith("magazine") || name.startsWith("pocket.") ? "magrow" : name.startsWith("post.") && !name.startsWith("post.cable") ? "post" : null);
+  const parts = [];
+  for (const part of T.parts) {
+    const g = pick(part.name);
+    if (!g) continue;
+    let pts = part.shapes.flatMap(surface);
+    // the two pockets the change swaps sort on a stub: take their drawn shank
+    const key = part.name.startsWith("pocket.") ? part.name.slice(7).replace(".", "/") : null;
+    if (key === POCKETS.drop || key === POCKETS.pick) {
+      const [x, y] = pocketAt(...key.split("/").map(Number));
+      pts = [];
+      for (let z = GEO.MAG_TOP + 5; z <= SHANK_TOP + 1e-9; z += 0.5) for (let k = 0; k < 24; k++) pts.push([x + 3 * Math.cos((k / 24) * 2 * Math.PI), y + 3 * Math.sin((k / 24) * 2 * Math.PI), z]);
+    }
+    parts.push({ name: part.name, g, pts });
+  }
+  const covering = (dx, dy) => { let zb = Infinity; for (const sb of HEAD) { const on = sb.r !== undefined ? Math.hypot(dx, dy) <= sb.r : dx >= sb.rect[0] && dx <= sb.rect[1] && dy >= sb.rect[2] && dy <= sb.rect[3]; if (on) zb = Math.min(zb, sb.zb); } return zb; };
+  let worst = { over: -Infinity };
+  let checked = 0;
+  const states = [];
+  for (const x of [0, TRAVEL.x / 2, TRAVEL.x]) for (let y = 0; y <= TRAVEL.y; y += 2.5) states.push({ x, y, a: 0, b: 0, m: magFor(y, 0), row: 0 });
+  for (let y = 0; y <= 125; y += 2.5) for (const row of [1.5, 3]) states.push({ x: GEO.SPINDLE_Y, y, a: 0, b: 0, m: 0, row });
+  // the cradle tilted (its left end down beside the carriage), the magazine in as the interlock keeps it
+  for (const x of [40, 80, 120, TRAVEL.x]) for (let y = 60; y <= 200; y += 5) for (const b of [-30, 30]) for (const a of [-180, 0]) states.push({ x, y, a, b, m: 1, row: 0 });
+  for (const s of states) {
+    const z = zLimit({ x: s.x, b: s.b, a: s.a, mag: magOf(s.m).mag, row: s.row }, s.y);
+    if (z < 0) continue;
+    const sx = GEO.SPINDLE_X0 + s.y;
+    const tip = GEO.TIP_Z - z;
+    // both groups are slides: their pose is a translation
+    const shifts = { post: [0, 0, 0], x: carry({ ...s, a: 0, b: 0, z: 0 }, "x", [0, 0, 0]), magrow: carry({ ...s, a: 0, b: 0, z: 0 }, "magrow", [0, 0, 0]) };
+    for (const part of parts) {
+      const shift = shifts[part.g];
+      for (const p of part.pts) {
+        const q = [p[0] + shift[0], p[1] + shift[1], p[2] + shift[2]];
+        const zb = covering(q[0] - sx, q[1] - GEO.SPINDLE_Y);
+        if (zb === Infinity) continue;
+        checked++;
+        const over = q[2] - tip - zb;
+        if (over > worst.over) worst = { over, part: part.name, s, z };
+      }
+    }
+  }
+  assert.ok(checked > 10000, `checked ${checked}`);
+  assert.ok(worst.over <= 0, `head ${worst.over.toFixed(1)} mm into ${worst.part} at ${JSON.stringify(worst.s)} Z ${worst.z.toFixed(1)}`);
+});
+
+test("the drawn sensor post stands where the model measures on it and where its stand-in is", async () => {
+  const { T } = await scene;
+  const cap = T.parts.find((p) => p.name === "post.cap").shapes[0];
+  near(cap.F.o[0], GEO.POST.x, 1e-9);
+  near(cap.F.o[1], GEO.POST.y, 1e-9);
+  near(Math.max(...cap.poly.map(([sv]) => sv)), GEO.POST.top, 1e-9);
+  near(Math.max(...cap.poly.map(([, r]) => r)), GEO.POST.r, 1e-9);
+  const body = bodiesOf({ mag: 0 }).find((b) => b.group === "post");
+  near(body.c[0], GEO.POST.x, 1e-9);
+  near(body.c[1], GEO.POST.y, 1e-9);
+  near(body.c[2] + body.h[2], GEO.POST.top, 1e-9);
+});
+
+test("jog: a magazine the job left indexed out goes back to its front row before it moves in, and only once the head is clear", () => {
+  const s = simAt(SIM.swapAt.pick + 0.01);
+  const cur = { x: s.x, y: s.y, z: s.z, a: s.a, b: s.b, m: s.m, row: s.row };
+  let j = { cur, ...jogEnter(cur) };
+  const want = jogRequest(j.want, "y", TRAVEL.y, 0, TRAVEL.y);
+  j = { ...j, want, mWant: magFor(want.y, want.b) };
+  let ran = false;
+  for (let f = 0; f < 1800; f++) {
+    const r = jogStep(j, 1 - Math.exp(-1 / 60 / 0.18), 1 / 60);
+    const c = r.cur;
+    if (c.m !== j.cur.m) { ran = true; assert.ok(j.cur.row <= 1e-12 && c.row <= 1e-12, `the magazine ran its sequence at row ${c.row.toFixed(3)} (frame ${f})`); }
+    if (c.row !== j.cur.row) assert.ok(roomAt(c, c.m, c.row) >= c.z - 1e-9, `row stepped to ${c.row.toFixed(3)} with the head ${(c.z - roomAt(c, c.m, c.row)).toFixed(1)} too low (frame ${f})`);
+    j = { ...j, cur: c, want: r.want, lifting: r.lifting };
+    if (!r.busy) break;
+  }
+  assert.ok(ran, "the magazine never went in");
+  near(j.cur.m, 1, 1e-12);
+  near(j.cur.row, 0, 1e-12);
+});
+
+test("the parts live.js shows and hides exist under the names it looks for", async () => {
+  const { T } = await scene;
+  const live = readFileSync(new URL("./live.js", import.meta.url), "utf8");
+  const names = new Set(T.parts.map((p) => p.name));
+  for (const [, n] of live.matchAll(/data-name="([^"$]+)"/g)) assert.ok(names.has(n), `live.js looks for ${n}`);
+  assert.match(live, /`\[data-name="pocket\.\$\{key\.replace\("\/", "\."\)\}"\]`/);
+  for (const key of [POCKETS.drop, POCKETS.pick]) assert.ok(names.has(`pocket.${key.replace("/", ".")}`), `no drawn pocket.${key}`);
 });
 
 test("readout", () => {
