@@ -912,9 +912,12 @@ export function simAt(time) {
   const axis = kind === "tool" ? (step.kind === "hold" ? null : "yz") : step.kind === "cut" || step.kind === "dip" ? "all" : null;
   return { ...axes, a: wrap(axes.a), ...magAt(t), tool: toolAt(t), axis, say: step.say, kind, step: step.kind, tilt, done, cutting: step.kind === "cut" };
 }
-// the time the pass running at `time` began, its move in included (for resuming); in the tool change, the move that
-// began the stretch it is in, with the tools as they are by then (a swap since the last move resumes from the next one)
+// where resuming the job lands for a time: the pass running then, at the start of its dip into the part (so the blend
+// brings the head down above the part, not to where the move into the pass began, the sensor post for the first); in
+// the tool change, the move that began the stretch it is in, with the tools as they are by then (a swap since the last
+// move resumes from the next one)
 const TOOL_MOVES = SIM.steps.filter((step) => step.pass === TOOL && step.kind === "move").map((step) => step.start);
+const DIP_INTO = new Map(PASSES.map((pass) => [pass.kind, SIM.steps.find((step) => step.pass === pass && step.kind === "dip").start]));
 export function simPassStart(time) {
   const t = Math.max(0, Math.min(SIM.len, time));
   // once the last pass is over (on the way home, or finished), the job starts again from the top
@@ -927,6 +930,6 @@ export function simPassStart(time) {
     return best;
   }
   let best = 0;
-  for (const span of SIM_SPANS) if (span.start <= t + 1e-9) best = span.start;
+  for (const span of SIM_SPANS) if (span.start <= t + 1e-9) best = DIP_INTO.get(span.kind) ?? span.start;
   return best;
 }

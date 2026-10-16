@@ -297,7 +297,9 @@ function trDescribe() {
   const set = (name, val) => { if (trStage.getAttribute(name) !== val) trStage.setAttribute(name, val); };
   if (trState.mode === "sim") {
     const s = trState.sim ?? simAt(trState.time);
-    const pass = s.kind ? `${TR_PASS[s.kind]}, ` : "";
+    // the job's line at this point (each step of the tool change and each pass has its own), else the pass's name
+    const line = s.say || TR_PASS[s.kind] || "";
+    const pass = line ? `${line}, ` : "";
     set("aria-label", "Milling simulation: finishing a full-arch bridge");
     set("aria-valuemin", "0");
     set("aria-valuemax", String(Math.round(SIM_LEN)));
@@ -446,7 +448,9 @@ function trTick(now) {
       const room = trRoom(next, next.m);
       if (next.z > room && next.z > c.z) next.z = Math.max(c.z, room);
       trState.sim = { ...p, say: "" };
-      trState.tool = p.tool;
+      // the job's tools are taken on only once they cannot be seen changing: with the magazine shut, or at the blend's end
+      // (resuming mid change they already match; restarting from the top they may not)
+      if (next.m >= 1 - 1e-9 || bl.t >= 2.4) trState.tool = p.tool;
       if (bl.t >= 2.4) trState.blend = null;
       trState.cur = next;
       busy = true;

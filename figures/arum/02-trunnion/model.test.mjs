@@ -369,10 +369,16 @@ test("the job starts and ends at home, and finishes every surface in order", () 
   for (const { t, s } of job) if (s.kind !== "tool" && s.step !== "move") { near(s.m, 1, 1e-12); near(s.row, 0, 1e-12); assert.ok(s.tool.spindle, `no tool at ${t}`); }
 });
 
-test("a pass's start is where Page Up and resuming land; after the last pass, the job starts again", () => {
+test("resuming lands at the dip into the pass that was running, above the part; after the last pass, the job starts again", () => {
   assert.equal(simPassStart(0), 0);
   assert.equal(simPassStart(SIM_LEN), 0);
-  for (const span of SIM_SPANS.filter((x) => x.kind !== "tool")) { near(simPassStart(span.start + 0.5), span.start, 1e-9); near(simPassStart(span.end - 0.01), span.start, 1e-9); }
+  for (const span of SIM_SPANS.filter((x) => x.kind !== "tool")) {
+    const dip = SIM.steps.find((step) => step.kind === "dip" && step.pass?.kind === span.kind).start;
+    near(simPassStart(span.start + 0.5), dip, 1e-9);
+    near(simPassStart(span.end - 0.01), dip, 1e-9);
+    // above the part, the tip on the clearance plane over the disc
+    near(tipIn(simAt(dip)).p[2], GEO.THICK + 6, 0.5);
+  }
   // in the tool change, resuming lands on a move with the tools as they are at the time left (never undoing a swap)
   for (const { t, s } of job) {
     if (s.kind !== "tool" || t > SIM_SPANS[0].end - 1e-6) continue;
