@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, mOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, roomAt, magFor, jogEnter, jogRequest, jogStep, simAt, simPassStart, SIM, SIM_LEN, SIM_SPANS, POCKETS, SHANK_TOP, pocketAt, readoutOf, wrap } from "./model.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, mOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, roomAt, magFor, jogEnter, jogRequest, jogStep, simAt, simPassStart, SIM, SIM_LEN, SIM_SPANS, POCKETS, SHANK_TOP, pocketAt, viewFor, drawnTools, readoutOf, wrap } from "./model.mjs";
 import { workShapes, burCut } from "./work.mjs";
 import { readFileSync } from "node:fs";
 
@@ -677,13 +677,26 @@ test("jog: a magazine the job left indexed out goes back to its front row before
   near(j.cur.row, 0, 1e-12);
 });
 
-test("the parts live.js shows and hides exist under the names it looks for", async () => {
+test("the page shows and hides the drawn tools by the job's tools, and frames the tool change on the magazine", async () => {
   const { T } = await scene;
   const live = readFileSync(new URL("./live.js", import.meta.url), "utf8");
   const names = new Set(T.parts.map((p) => p.name));
   for (const [, n] of live.matchAll(/data-name="([^"$]+)"/g)) assert.ok(names.has(n), `live.js looks for ${n}`);
-  assert.match(live, /`\[data-name="pocket\.\$\{key\.replace\("\/", "\."\)\}"\]`/);
-  for (const key of [POCKETS.drop, POCKETS.pick]) assert.ok(names.has(`pocket.${key.replace("/", ".")}`), `no drawn pocket.${key}`);
+  // live.js takes both from the model
+  assert.match(live, /drawnTools\(tool\)/);
+  assert.match(live, /const trViewFor = viewFor;/);
+  // the tools: every part named is drawn; before the drop, between the swaps and after the pick
+  for (const name of Object.keys(drawnTools(simAt(0).tool))) assert.ok(names.has(name), `no drawn ${name}`);
+  const at = (t) => drawnTools(simAt(t).tool);
+  const drop = `pocket.${POCKETS.drop.replace("/", ".")}`;
+  const pick = `pocket.${POCKETS.pick.replace("/", ".")}`;
+  assert.deepEqual(at(SIM.swapAt.drop - 0.1), { "tool.bur": true, [drop]: false, [pick]: true });
+  assert.deepEqual(at((SIM.swapAt.drop + SIM.swapAt.pick) / 2), { "tool.bur": false, [drop]: true, [pick]: true });
+  assert.deepEqual(at(SIM.swapAt.pick + 0.1), { "tool.bur": true, [drop]: true, [pick]: false });
+  // the view: on the magazine through the tool change and until it is shut, then in close for the passes
+  for (const { t, s } of job) assert.equal(viewFor(t), s.kind === "tool" || s.m < 1 ? 2 : 1, `view at ${t}`);
+  for (const { t, s } of job) if (s.cutting) assert.equal(viewFor(t), 1, `view while cutting at ${t}`);
+  assert.equal(viewFor(SIM.swapAt.drop), 2);
 });
 
 test("readout", () => {

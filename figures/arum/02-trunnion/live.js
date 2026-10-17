@@ -186,9 +186,9 @@ function trBurClip() {
 }
 
 // The tool change: the bur shows in the spindle while it holds a tool, and a shank in each of the two pockets the change
-// swaps while the pocket holds one (the last job's tool goes in, the finishing bur comes out). Jog keeps whatever the
-// job left.
-const trPockets = Object.fromEntries([POCKETS.drop, POCKETS.pick].map((key) => [key, trStage.querySelector(`[data-name="pocket.${key.replace("/", ".")}"]`)]));
+// swaps while the pocket holds one (the last job's tool goes in, the finishing bur comes out); model.mjs drawnTools names
+// the parts. Jog keeps whatever the job left.
+const trToolParts = new Map();
 let trToolKey = "";
 function trTools() {
   const tool = trState.tool;
@@ -196,9 +196,11 @@ function trTools() {
   const key = JSON.stringify(tool);
   if (key === trToolKey) return;
   trToolKey = key;
-  const show = (el, on) => { if (el && (el.getAttribute("visibility") === "hidden") === on) { if (on) el.removeAttribute("visibility"); else el.setAttribute("visibility", "hidden"); } };
-  show(trBur, tool.spindle);
-  for (const [key2, el] of Object.entries(trPockets)) show(el, tool[key2]);
+  for (const [name, on] of Object.entries(drawnTools(tool))) {
+    if (!trToolParts.has(name)) trToolParts.set(name, trStage.querySelector(`[data-name="${name}"]`));
+    const el = trToolParts.get(name);
+    if (el && (el.getAttribute("visibility") === "hidden") === on) { if (on) el.removeAttribute("visibility"); else el.setAttribute("visibility", "hidden"); }
+  }
 }
 
 // ---------------------------------------------------------------- the view: the whole chamber (0), in close on the work
@@ -414,8 +416,9 @@ function trSimDraw() {
   trState.tool = s.tool;
   trState.cur = { x: s.x, y: s.y, z: s.z, a: s.a, b: s.b, m: s.m, row: s.row };
 }
-// the view stands on the magazine for the tool change, until it is shut again, and comes in close on the work for the passes
-function trViewFor(time) { const s = simAt(time); return s.kind === "tool" || s.m < 1 ? 2 : 1; }
+// the view stands on the magazine for the tool change, until it is shut again, and comes in close on the work for the
+// passes (model.mjs viewFor)
+const trViewFor = viewFor;
 
 function trTick(now) {
   const dt = trLast ? Math.min((now - trLast) / 1000, 1 / 30) : 1 / 60;

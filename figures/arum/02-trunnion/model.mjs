@@ -923,6 +923,12 @@ export function simAt(time) {
   const axis = kind === "tool" ? (step.kind === "hold" ? null : "yz") : step.kind === "cut" || step.kind === "dip" ? "all" : null;
   return { ...axes, a: wrap(axes.a), ...magAt(t), tool: toolAt(t), axis, say: step.say, kind, step: step.kind, tilt, done, cutting: step.kind === "cut" };
 }
+// the page's view for a time in the job: on the magazine (2) for the tool change, until the magazine is shut again, and in
+// close on the work (1) for the passes
+export const viewFor = (time) => { const s = simAt(time); return s.kind === "tool" || s.m < 1 ? 2 : 1; };
+// the drawn parts the page shows (true) or hides for a state's tools: the spindle's bur, and the shanks in the two
+// pockets the change swaps
+export const drawnTools = (tool) => ({ "tool.bur": tool.spindle, [`pocket.${POCKETS.drop.replace("/", ".")}`]: tool[POCKETS.drop], [`pocket.${POCKETS.pick.replace("/", ".")}`]: tool[POCKETS.pick] });
 // where resuming the job lands for a time: the pass running then, at the start of its dip into the part (so the blend
 // brings the head down above the part, not to where the move into the pass began, the sensor post for the first); in
 // the tool change, the move that began the stretch it is in, with the tools as they are by then (a swap since the last
