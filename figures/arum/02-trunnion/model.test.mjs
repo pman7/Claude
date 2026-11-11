@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, mOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, roomAt, magFor, jogEnter, jogRequest, jogStep, simAt, simPassStart, SIM, SIM_LEN, SIM_SPANS, POCKETS, SHANK_TOP, pocketAt, viewFor, drawnTools, readoutOf, wrap } from "./model.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, mOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, roomAt, magFor, jogEnter, jogRequest, jogStep, simAt, simPassStart, SIM, SIM_LEN, SIM_SPANS, POCKETS, SHANK_TOP, pocketAt, viewFor, VIEW_CUTS, VIEW_EASE, drawnTools, readoutOf, wrap } from "./model.mjs";
 import { workShapes, burCut } from "./work.mjs";
 import { readFileSync } from "node:fs";
 
@@ -499,7 +499,7 @@ test("the tool change: the magazine brings each pocket under the spindle, and th
     const out = SIM.runs[0];
     if (t >= out.t0 && t <= out.t1) near(GEO.SPINDLE_X0 + s.y, GEO.POST.x, 1e-9);
     const back = SIM.runs[SIM.runs.length - 1];
-    if (t >= back.t0 && t <= back.t1) assert.equal(s.say, "Down to the first pass · the magazine goes back in", `at ${t}`);
+    if (t >= back.t0 && t <= back.t1) assert.equal(s.say, "To the first pass · magazine goes in", `at ${t}`);
   }
   assert.deepEqual(SIM.runs.map((run) => run.key), ["m", "row", "row", "m"]);
 });
@@ -693,10 +693,25 @@ test("the page shows and hides the drawn tools by the job's tools, and frames th
   assert.deepEqual(at(SIM.swapAt.drop - 0.1), { "tool.bur": true, [drop]: false, [pick]: true });
   assert.deepEqual(at((SIM.swapAt.drop + SIM.swapAt.pick) / 2), { "tool.bur": false, [drop]: true, [pick]: true });
   assert.deepEqual(at(SIM.swapAt.pick + 0.1), { "tool.bur": true, [drop]: true, [pick]: false });
-  // the view: on the magazine through the tool change and until it is shut, then in close for the passes
-  for (const { t, s } of job) assert.equal(viewFor(t), s.kind === "tool" || s.m < 1 ? 2 : 1, `view at ${t}`);
-  for (const { t, s } of job) if (s.cutting) assert.equal(viewFor(t), 1, `view while cutting at ${t}`);
+  // the view: the whole machine while the head first goes to the sensor post, the magazine through the tool change
+  // until it is shut, in close for the passes, and the whole machine again on the way home
+  assert.equal(viewFor(0), 0, "the job opens on the whole machine");
+  assert.equal(viewFor(SIM_LEN - 0.05), 0, "and ends on it");
+  const first = SIM.steps[0];
+  assert.equal(first.kind, "move");
+  assert.ok(Math.abs(VIEW_CUTS.magazine - (first.start + first.dur - VIEW_EASE)) < 1e-9, "the view is on the magazine as the head arrives over the post");
+  for (const { t, s } of job) {
+    const view = viewFor(t);
+    if (t < VIEW_CUTS.magazine) assert.equal(view, 0, `view at ${t}`);
+    else if (s.kind === "tool" || s.m < 1) assert.equal(view, 2, `view at ${t}`);
+    else if (s.cutting || s.step === "dip") assert.equal(view, 1, `view at ${t}`);
+    // every change of view happens with the bur out of the part
+    if (view !== viewFor(t + 0.05)) assert.ok(!s.cutting, `the view changes during a cut at ${t}`);
+  }
   assert.equal(viewFor(SIM.swapAt.drop), 2);
+  assert.equal(viewFor(SIM.swapAt.pick), 2);
+  // the readout has one line on a phone: every line of the job fits in 40 characters
+  for (const step of SIM.steps) assert.ok(step.say.length <= 40, `"${step.say}" is ${step.say.length} characters`);
 });
 
 test("readout", () => {

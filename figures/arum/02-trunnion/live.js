@@ -2,12 +2,16 @@ const TR = __DATA__;
 const follow = null;
 const trStage = document.querySelector(".tr-stage");
 const trReadout = document.querySelector("[data-readout]");
+const trHint = document.querySelector('.iso-plate-corner[data-corner="hint"]');
+const trCoarse = matchMedia("(pointer: coarse)");
 const trButtons = [...document.querySelectorAll(".tr-axis[data-axis]")];
 const trSimButton = document.querySelector(".tr-mode-sim");
 const trJogButton = document.querySelector(".tr-mode-jog");
 const trPlayButton = document.querySelector(".tr-play");
 const trLine = document.querySelector(".tr-line");
 const trLineHead = document.querySelector(".tr-line-head");
+const trLinePlayed = document.querySelector(".tr-line-played");
+const trLineSegs = [...document.querySelectorAll(".tr-line-seg[data-start]")];
 const trValues = Object.fromEntries([...document.querySelectorAll("[data-value]")].map((el) => [el.dataset.value, el]));
 const trStill = matchMedia("(prefers-reduced-motion: reduce)");
 let trCalm = trStill.matches;
@@ -22,6 +26,8 @@ const TR_AXES = {
   A: { key: "a", name: "holder turns", lo: -180, hi: 180, step: 5, big: 45, unit: "degrees", sign: 1 },
   B: { key: "b", name: "cradle tilts", lo: -SPEC.bLimit, hi: SPEC.bLimit, step: 1, big: 5, unit: "degrees", sign: 1 },
 };
+// a drag in jog: which way the pointer moves the axis, and how much of it a drag across the stage covers
+const TR_DRAG = { X: ["y", 220], Y: ["x", 400], Z: ["y", 200], A: ["x", 360], B: ["y", -90] };
 const TR_PASS = { tool: "Tool change", occlusal: "Occlusal surface", buccal: "Buccal wall", palatal: "Palatal wall" };
 const trHome = () => ({ x: HOME.x, y: HOME.y, z: HOME.z, a: HOME.a, b: HOME.b });
 // mode: "sim" plays the finishing job, "jog" hands the axes to the reader.
@@ -249,10 +255,19 @@ function trShow() {
   const ax = TR_AXES[trState.axis];
   let text;
   if (sim && trState.blend) text = "Into the job";
-  else if (sim && s && (trState.playing || trState.time > 0)) text = s.say || readoutOf(trState.cur);
+  else if (sim && s && (trState.playing || trState.time > 0)) text = s.say;
   else if (sim) text = "Finishing a full-arch bridge";
   else text = `${trState.axis} · ${ax.name} · ${v[trState.axis]}${ax.unit === "millimetres" ? " mm" : ""}`;
   if (trReadout.textContent !== text) trReadout.textContent = text;
+  if (trHint) {
+    const touch = trCoarse.matches;
+    let hint;
+    if (!sim) hint = touch ? `${trState.axis} · drag sideways` : `${trState.axis} · drag ${TR_DRAG[trState.axis][0] === "x" ? "sideways" : "up-down"} or arrow keys`;
+    else if (trState.playing || trIdle !== 0) hint = touch ? "Drag sideways · tap pauses" : "Drag to scrub · click pauses";
+    else if (trState.stopped) hint = touch ? "Paused · tap plays" : "Paused · click or Space plays";
+    else hint = touch ? "Tap to play · drag sideways" : "Click to play · drag to scrub";
+    if (trHint.textContent !== hint) trHint.textContent = hint;
+  }
   // during the passes every axis moves together; in the tool change, Y and Z
   const running = sim && s && (trState.playing || trState.blend);
   for (const btn of trButtons) {
@@ -272,9 +287,17 @@ function trShow() {
   setAttr(trWrap, "data-mode", trState.mode);
   const close = sim && trState.viewTo === 1;
   if (trWrap && trWrap.hasAttribute("data-close") !== close) trWrap.toggleAttribute("data-close", close);
+  // the two close views get an edge (the picture runs off the stage there)
+  setAttr(trWrap, "data-view", String(trState.viewTo));
   if (trLineHead) {
     const pct = `${((100 * trState.time) / SIM_LEN).toFixed(2)}%`;
     if (trLineHead.style.left !== pct) trLineHead.style.left = pct;
+    if (trLinePlayed && trLinePlayed.style.width !== pct) trLinePlayed.style.width = pct;
+    // the stretch the job is in is named in the strong tone
+    for (const seg of trLineSegs) {
+      const on = trState.time >= Number(seg.dataset.start) && trState.time < Number(seg.dataset.end);
+      if (seg.hasAttribute("data-on") !== on) seg.toggleAttribute("data-on", on);
+    }
   }
 }
 // the slider names what it moves: in the job, the time through it; in jog, the chosen axis
@@ -454,7 +477,7 @@ function trTick(now) {
       // the job's tools are taken on only once they cannot be seen changing: with the magazine shut, or at the blend's end
       // (resuming mid change they already match; restarting from the top they may not)
       if (next.m >= 1 - 1e-9 || bl.t >= 2.4) trState.tool = p.tool;
-      if (bl.t >= 2.4) trState.blend = null;
+      if (bl.t >= 2.4) { trState.blend = null; trState.sim = p; }
       trState.cur = next;
       busy = true;
     } else {
@@ -515,7 +538,7 @@ function trSetEnd(axis, high) {
   trRun();
 }
 const trNextPass = (dir) => {
-  const starts = [0, ...SIM_SPANS.map((span) => span.start), SIM_LEN];
+  const starts = [...SIM_MARKS.map((mark) => mark.start), SIM_LEN];
   const t = trState.time;
   if (dir > 0) return starts.find((s) => s > t + 0.05) ?? SIM_LEN;
   return [...starts].reverse().find((s) => s < t - 0.05) ?? 0;
@@ -525,14 +548,27 @@ new IntersectionObserver((entries) => { trVisible = entries[entries.length - 1].
 
 // the axis buttons hand the chosen axis to the reader (jog); the mode buttons switch between the job and jog
 for (const btn of trButtons) btn.addEventListener("click", () => trSelect(btn.dataset.axis));
+for (const btn of trButtons) {
+  btn.setAttribute("aria-keyshortcuts", "ArrowUp ArrowDown ArrowLeft ArrowRight");
+  btn.addEventListener("keydown", (event) => {
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
+    const ax = TR_AXES[btn.dataset.axis];
+    const step = event.shiftKey ? ax.big : ax.step;
+    if (event.key === "ArrowUp" || event.key === "ArrowRight") trJog(btn.dataset.axis, step);
+    else if (event.key === "ArrowDown" || event.key === "ArrowLeft") trJog(btn.dataset.axis, -step);
+    else return;
+    event.preventDefault();
+  });
+}
 trSimButton?.addEventListener("click", () => { if (trState.mode === "sim") return; trState.stopped = false; trState.held = false; trEnterSim(); trStartJob(true); });
 trJogButton?.addEventListener("click", () => trEnterJog());
-trPlayButton?.addEventListener("click", () => {
+function trToggle() {
   if (trState.mode === "sim" && (trState.playing || trIdle !== 0)) { trPause(); return; }
   trState.stopped = false;
   trState.held = false;
   trStartJob(true);
-});
+}
+trPlayButton?.addEventListener("click", trToggle);
 // the timeline under the stage: click or drag along it to seek
 if (trLine) {
   const seekAt = (event) => { const r = trLine.getBoundingClientRect(); trSeek(((event.clientX - r.left) / r.width) * SIM_LEN, true); };
@@ -542,8 +578,8 @@ if (trLine) {
 
 // drag: in the job, sideways scrubs through it; in jog, Y and A follow the pointer sideways and X, Z and B a mouse up and
 // down (down brings the cradle forward, lowers the head and tilts B negative). A touch drag works sideways only, and only
-// once it is clearly sideways, so a page scroll that starts on the figure scrolls and leaves the job alone.
-const TR_DRAG = { X: ["y", 220], Y: ["x", 400], Z: ["y", 200], A: ["x", 360], B: ["y", -90] };
+// once it is clearly sideways, so a page scroll that starts on the figure scrolls and leaves the job alone. A press and
+// release without a move is a click: in the job it plays or pauses, like the Play button.
 function trBegin(event) {
   if (trState.mode === "sim") trPause();
   const ax = TR_AXES[trState.axis];
@@ -552,7 +588,11 @@ function trBegin(event) {
   trStage.setPointerCapture?.(event.pointerId);
 }
 function trRelease(event) {
-  if (trState.pending && event.pointerId === trState.pending.id) trState.pending = null;
+  if (trState.pending && event.pointerId === trState.pending.id) {
+    trState.pending = null;
+    // released where it was pressed: a click
+    if (event.type === "pointerup" && trState.mode === "sim") trToggle();
+  }
   const d = trState.dragging;
   if (!d || event.pointerId !== d.id) return;
   trState.dragging = null;
@@ -562,19 +602,23 @@ function trRelease(event) {
 }
 trStage.addEventListener("pointerdown", (event) => {
   if (!event.isPrimary || trState.dragging) return;
-  if (event.pointerType === "touch") { trState.pending = { id: event.pointerId, x: event.clientX, y: event.clientY }; return; }
-  if (event.button !== 0) return;
-  trBegin(event);
+  if (event.pointerType !== "touch" && event.button !== 0) return;
+  trState.pending = { id: event.pointerId, x: event.clientX, y: event.clientY, touch: event.pointerType === "touch" };
 });
 trStage.addEventListener("pointermove", (event) => {
   const p = trState.pending;
   if (p && event.pointerId === p.id) {
     const dx = event.clientX - p.x;
     const dy = event.clientY - p.y;
-    if (Math.abs(dx) >= 8 && Math.abs(dx) > Math.abs(dy)) {
+    if (p.touch) {
+      if (Math.abs(dx) >= 8 && Math.abs(dx) > Math.abs(dy)) {
+        trState.pending = null;
+        trBegin(event);
+      } else if (Math.abs(dy) >= 8) trState.pending = null;
+    } else if (Math.hypot(dx, dy) >= 4) {
       trState.pending = null;
       trBegin(event);
-    } else if (Math.abs(dy) >= 8) trState.pending = null;
+    }
     return;
   }
   const d = trState.dragging;
@@ -607,6 +651,8 @@ trStage.addEventListener("focus", () => {
 trStage.addEventListener("blur", () => { trState.focused = false; trArmJob(); });
 trStage.addEventListener("keydown", (event) => {
   if (event.ctrlKey || event.metaKey || event.altKey) return;
+  const typed = trState.focused;
+  if (!typed && !["ArrowLeft", "ArrowRight", " "].includes(event.key) && !(trState.mode === "jog" && event.key.length === 1)) return;
   const letter = event.key.length === 1 ? event.key.toUpperCase() : "";
   if (TR_AXES[letter]) {
     trSelect(letter);
@@ -621,7 +667,7 @@ trStage.addEventListener("keydown", (event) => {
     else if (event.key === "PageDown") trSeek(trNextPass(-1));
     else if (event.key === "Home") trSeek(0);
     else if (event.key === "End") trSeek(SIM_LEN);
-    else if (event.key === " ") { if (trState.playing) trPause(); else { trState.stopped = false; trStartJob(true); } }
+    else if (event.key === " ") trToggle();
     else return;
     event.preventDefault();
     return;
@@ -648,8 +694,15 @@ trStill.addEventListener("change", (event) => { trCalm = event.matches; if (trCa
 // a verification hook: put the job at a time, paused (for stills and video frames)
 window.__isoSim = { seek: (time) => { trState.held = false; trState.stopped = true; trSeek(time); trViewGo(trState.viewTo, true); trDraw(); return trState.sim && trState.sim.say; }, view: (i) => trViewGo(i, true) };
 
-trArmJob(1400);
+// the job starts by itself a second after the stage first comes properly into view (two fifths of it: a short
+// landscape phone never shows more), so a reader who scrolls down to the figure sees it from its start
+new IntersectionObserver((entries, observer) => {
+  if (!entries.some((entry) => entry.isIntersecting)) return;
+  observer.disconnect();
+  trArmJob(1000);
+}, { threshold: 0.4 }).observe(trStage);
 trDescribe();
 trDraw();
+trStage.setAttribute("data-ready", "");
 // the work zone: the disc's centre on screen at home, a little toward the spindle above it
 if (trFaceB) { const m = trMatrix(trFaceB); trFocus = [m[4] - 18, m[5] - 8]; }

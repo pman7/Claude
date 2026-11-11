@@ -764,8 +764,8 @@ const wallAt = (u, kind) => {
 // passes in order: kind, readout line, duration, tip and tool along u ∈ [0, 1]
 const PASSES = [
   { kind: "occlusal", say: "Occlusal surface · nearly upright, 3°", dur: 12, at: occlusalAt },
-  { kind: "buccal", say: "Buccal wall and right end · leaning out 15°", dur: 10, at: (u) => wallAt(u, "buccal") },
-  { kind: "palatal", say: "Palatal wall and left end · leaning out 15°", dur: 10, at: (u) => wallAt(u, "palatal") },
+  { kind: "buccal", say: "Buccal wall, right end · leaning out 15°", dur: 10, at: (u) => wallAt(u, "buccal") },
+  { kind: "palatal", say: "Palatal wall, left end · leaning out 15°", dur: 10, at: (u) => wallAt(u, "palatal") },
 ];
 // each pass's tool path as the tip's track across the disc (disc frame, mm), for the part view
 export const PASS_TRACKS = PASSES.map((pass) => {
@@ -829,8 +829,8 @@ export const SIM = (() => {
   };
   let at = homeAxes;
   at = tool("move", "Tool change · to the tool sensor", at, overPost(0));
-  at = touch(at, "Checking the last tool on the sensor · the magazine comes out", { first: { mag: [1, 0] } });
-  at = tool("dip", "Checking the last tool on the sensor · the magazine comes out", at, overPost(CROSS_Z));
+  at = touch(at, "Last tool on the sensor · magazine out", { first: { mag: [1, 0] } });
+  at = tool("dip", "Last tool on the sensor · magazine out", at, overPost(CROSS_Z));
   const dropUp = overPocket(cDrop, CROSS_Z);
   at = tool("move", "Returning the last tool to the magazine", at, dropUp);
   at = tool("dip", "Returning the last tool to the magazine", at, overPocket(cDrop, SWAP_Z));
@@ -851,7 +851,7 @@ export const SIM = (() => {
     const raised = { ...above, z: Math.max(0, Math.min(above.z, prev.z) - 12) };
     const opening = pass === PASSES[0];
     // (the magazine goes back in as the head leaves the sensor for the first pass)
-    steps.push({ kind: "move", say: opening ? "Down to the first pass · the magazine goes back in" : "Up, across, down to the next pass", dur: moveTime(prev, raised, above), from: prev, via: raised, to: above, pass, ...(opening ? { mag: [0, 1] } : {}) });
+    steps.push({ kind: "move", say: opening ? "To the first pass · magazine goes in" : "Up, across, down to the next pass", dur: moveTime(prev, raised, above), from: prev, via: raised, to: above, pass, ...(opening ? { mag: [0, 1] } : {}) });
     steps.push({ kind: "dip", say: pass.say, dur: DIP, from: above, to: axesFor(first.p, first.t), pass });
     steps.push({ kind: "cut", say: pass.say, dur: pass.dur, pass });
     const out = axesFor(lift(last).p, last.t);
@@ -923,9 +923,18 @@ export function simAt(time) {
   const axis = kind === "tool" ? (step.kind === "hold" ? null : "yz") : step.kind === "cut" || step.kind === "dip" ? "all" : null;
   return { ...axes, a: wrap(axes.a), ...magAt(t), tool: toolAt(t), axis, say: step.say, kind, step: step.kind, tilt, done, cutting: step.kind === "cut" };
 }
-// the page's view for a time in the job: on the magazine (2) for the tool change, until the magazine is shut again, and in
-// close on the work (1) for the passes
-export const viewFor = (time) => { const s = simAt(time); return s.kind === "tool" || s.m < 1 ? 2 : 1; };
+// the page's view through the job: the whole chamber (0) while the head first goes over to the sensor post, the
+// magazine (2) for the tool change until the magazine is shut again, in close on the work (1) for the passes, and the
+// whole chamber again a second into the move home, so the loop begins and ends on the machine. The page eases from one
+// view to the next over VIEW_EASE, so the first cut comes that long before the head is over the post.
+export const VIEW_EASE = 0.9;
+export const VIEW_CUTS = (() => {
+  const first = SIM.steps[0];
+  const shut = Math.max(...SIM.runs.filter((run) => run.key === "m").map((run) => run.t1));
+  const home = SIM.steps.find((step) => step.kind === "move" && step.pass === null);
+  return { magazine: first.start + first.dur - VIEW_EASE, work: shut, whole: home.start + 1 };
+})();
+export const viewFor = (time) => (time < VIEW_CUTS.magazine ? 0 : time < VIEW_CUTS.work ? 2 : time < VIEW_CUTS.whole ? 1 : 0);
 // the drawn parts the page shows (true) or hides for a state's tools: the spindle's bur, and the shanks in the two
 // pockets the change swaps
 export const drawnTools = (tool) => ({ "tool.bur": tool.spindle, [`pocket.${POCKETS.drop.replace("/", ".")}`]: tool[POCKETS.drop], [`pocket.${POCKETS.pick.replace("/", ".")}`]: tool[POCKETS.pick] });
@@ -935,6 +944,10 @@ export const drawnTools = (tool) => ({ "tool.bur": tool.spindle, [`pocket.${POCK
 // move resumes from the next one)
 const TOOL_MOVES = SIM.steps.filter((step) => step.pass === TOOL && step.kind === "move").map((step) => step.start);
 const DIP_INTO = new Map(PASSES.map((pass) => [pass.kind, SIM.steps.find((step) => step.pass === pass && step.kind === "dip").start]));
+// the page's timeline and its Page Up / Page Down stops: the tool change runs until the bur dips into the first pass,
+// each pass from its own dip to the next one's, and the last to the end of its rise, so a jump to a pass lands with the
+// bur over the part and the view in close on it
+export const SIM_MARKS = [TOOL, ...PASSES].map((pass, i, all) => ({ kind: pass.kind, start: i ? DIP_INTO.get(pass.kind) : 0, end: i + 1 < all.length ? DIP_INTO.get(all[i + 1].kind) : SIM_SPANS[SIM_SPANS.length - 1].end }));
 export function simPassStart(time) {
   const t = Math.max(0, Math.min(SIM.len, time));
   // once the last pass is over (on the way home, or finished), the job starts again from the top
