@@ -683,6 +683,7 @@ const modelSource = readFileSync(join(HERE, "model.mjs"), "utf8").replace(/\/\/ 
 if (!modelSource.includes("const LEANS = {")) throw new Error("build: the wall-lean table was not written into the page");
 const modelScript = [modelSource, readFileSync(join(HERE, "work.mjs"), "utf8").replace(/^import [^;]+;\n/gm, "")].join("\n").replace(/^export /gm, "");
 const LIVE = readFileSync(join(HERE, "live.js"), "utf8").replace("__DATA__", JSON.stringify(DATA)).replace("const follow = null;", `const follow = ${follow.toString()};`);
+const CREDIT = "Product data from ARUM Dentistry, used with permission.";
 const body =
   `<style>${CSS}</style><div class="tr-plate">` +
   k.plateHtml({
@@ -696,7 +697,7 @@ const body =
     ],
     caption:
       `An illustrative full-arch bridge: twelve units, screw-retained on four implants (channels at the lateral incisors and second premolars), nested occlusal side up in a 25 mm pre-sintered zirconia disc after roughing and milled about 20% large for the shrinkage in sintering. It stands in a channel through the disc as wide as the Ø2.0 mm roughing ball plus 0.7 mm, held by ${CONNECTORS.length} connectors at its equator; the sintering support a bridge this long would also carry is left out. The job opens with a tool change, as a 5X-200 does it in a video filmed for this figure: the head touches the last job's tool down on the sensor post beside the magazine while the magazine comes out through its window over the flap, which folds down into a shelf; the spindle returns that tool to the front row; the magazine indexes three rows toward the operator to bring the finishing bur's pocket under the spindle (the spindle never moves front to back); the spindle takes the bur and touches it down on the sensor to measure its length while the magazine indexes back; and the magazine goes back in as the head leaves for the first pass. The swap itself is drawn as the tool passing between pocket and collet, with the collet just above the shank. Each finishing pass is thinned for clarity, a zig-zag every few millimetres across the occlusal surface and one line round each wall, where the machine steps about 0.1 mm, so on the machine the job takes far longer. The Ø1.0 mm ball stays nearly upright on the occlusal surface (3°), then leans 15° out from the wall on one contour round the buccal side and the right-hand end, and one round the palatal side and the left-hand end. The spindle never tilts, so the disc is tilted to the tool: at the incisors the lean is on A, at the molars on B, and between them A and B share it, both changing as the tool goes round (simultaneous 5-axis motion, as hyperDENT's 5X cycles drive it). With the head and cradle in the video's proportions, nothing comes inside the clearance kept round the head (as a CAM program keeps one), so the lean holds at 15° all the way round. The screw channels are indexed jobs of their own and are shown done. Jog hands you the axes: X slides the cradle on a tall carriage through a raised collar in the back wall (${TRAVEL.x} mm), Y runs the spindle column along the wall (${TRAVEL.y} mm, from over the sensor post past the disc), Z lowers the head (${TRAVEL.z} mm), A turns the holder ${SPEC.aRange}° and B tilts the cradle ±${SPEC.bLimit}° about a front-to-back axis (inferred from the photos and the video, not published); when the spindle comes over the magazine or the sensor post, the magazine slides out over the open flap, but only with the cradle level, and the cradle tilts only with the magazine in. ` +
-      `Specs: ARUM 5X-200 (5 axes; travel X, Y, Z ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm as ARUM lists them; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm); finishing tool as ARUM's ZB-86 (Ø1.0 mm ball, 20 mm reach, 60 mm long). Tilts after the guidance of hyperDENT, a CAM ARUM supplies 5X-200 machine data for: 5° at most (3° preferred) where nothing is undercut, 10° or more on walls. ARUM shows its own 5X-200 screw-retained work in metal; zirconia is among the machine's listed materials. Which part moves on which axis, and the letters, are the dealer's: ARUM's sheet lists the ${TRAVEL.y} mm stroke as X. Machine proportions from the dealer's photos, ARUM's product photos and the video, scaled to a standard Ø${SPEC.disc} mm disc; bridge from typical tooth widths and arch form, drawn at one height; column, carriage, flap and chamber schematic, with the chamber's side walls, door and lights left off for the cutaway; styling illustrative. Product data from ARUM Dentistry, used with permission.`,
+      `Specs: ARUM 5X-200 (5 axes; travel X, Y, Z ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm as ARUM lists them; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm); finishing tool as ARUM's ZB-86 (Ø1.0 mm ball, 20 mm reach, 60 mm long). Tilts after the guidance of hyperDENT, a CAM ARUM supplies 5X-200 machine data for: 5° at most (3° preferred) where nothing is undercut, 10° or more on walls. ARUM shows its own 5X-200 screw-retained work in metal; zirconia is among the machine's listed materials. Which part moves on which axis, and the letters, are the dealer's: ARUM's sheet lists the ${TRAVEL.y} mm stroke as X. Machine proportions from the dealer's photos, ARUM's product photos and the video, scaled to a standard Ø${SPEC.disc} mm disc; bridge from typical tooth widths and arch form, drawn at one height; column, carriage, flap and chamber schematic, with the chamber's side walls, door and lights left off for the cutaway; styling illustrative. ${CREDIT}`,
     body: `<div class="tr-stagewrap">${stage}${inset}</div>` + timeline + axesRow,
   }) +
   `</div>`;
@@ -723,20 +724,16 @@ body{margin:0;background:var(--page);font:14px/1.6 ui-sans-serif,system-ui,-appl
 .tr-host{background:var(--anatomy-page);color:var(--anatomy-text);padding-inline:16px;padding-block:40px 64px}
 .tr-host .iso-page{width:min(680px,100%);margin:0 auto}
 </style><div class="iso tr-host" data-theme="dark"><main class="iso-page">${body}</main></div><script type="module">${(THEME_HOST + turnScript() + modelScript + LIVE).replace(/<\/(script)/gi, "<\\/$1")}</script>`;
-// The page for embedding on another site in an iframe: a whole document on its own (no outside requests). ?theme=light
-// or ?theme=dark pins the theme (else it follows the reader's system), ?bg=none drops the page colour round the card,
-// ?caption=none keeps only the credit line under it, and in a frame it posts its height to the host page
-// ({ type: "iso-figure:height", height }) so the frame can fit it.
+// The page for embedding on another site in an iframe: a whole document on its own (no outside requests), as wide as its
+// frame up to 760. The frame's address sets how it sits in the host page, each option on <html> before the first paint:
+//   ?theme=light|dark   pins the theme (else it follows the reader's system)
+//   ?bg=none            drops the page colour round the card, so the host page shows through
+//   ?frame=soft         a rounded card with no outline (white in the light theme), for a host page of soft cards
+//   ?fig=none           drops the "Fig n" tag, which means nothing outside a set of figures
+//   ?caption=short      two sentences for a visitor and the credit line; ?caption=none keeps only the credit line
+// In a frame it posts its height to the host page ({ type: "iso-figure:height", height }) so the frame can fit it.
+const EMBED_OPTIONS = `(function(){var q=new URLSearchParams(location.search),r=document.documentElement,k=["theme","bg","frame","fig","caption"];for(var i=0;i<k.length;i++){var v=q.get(k[i]);if(v&&/^[a-z]+$/.test(v))r.setAttribute("data-"+k[i],v)}})()`;
 const EMBED_HOST = `{
-  const query = new URLSearchParams(location.search);
-  const theme = query.get("theme");
-  if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);
-  if (query.get("bg") === "none") document.querySelector(".tr-host").style.background = "transparent";
-  if (query.get("caption") === "none") {
-    document.querySelector(".tr-host .iso-keys")?.remove();
-    const caption = document.querySelector(".tr-host .iso-caption");
-    if (caption) caption.textContent = "Product data from ARUM Dentistry, used with permission.";
-  }
   if (window.parent !== window) {
     let last = 0;
     const post = () => { const height = Math.ceil(document.documentElement.getBoundingClientRect().height); if (height !== last) { last = height; window.parent.postMessage({ type: "iso-figure:height", height }, "*"); } };
@@ -745,8 +742,15 @@ const EMBED_HOST = `{
   }
 }
 `;
+const CAPTION_SHORT = `A simulated job on the ARUM 5X-200: the machine changes to a Ø${(2 * BRIDGE.ball).toFixed(1)} mm finishing bur, then finishes an illustrative full-arch zirconia bridge in three five-axis passes. The spindle never tilts: the disc turns and tilts to meet it. The passes are thinned for clarity, so the real job takes far longer. ${CREDIT}`;
+// the three captions side by side; the page's styles show the one the frame's address asks for
+const embedBody = () => {
+  const mark = '<span class="iso-caption">';
+  if (body.split(mark).length !== 2) throw new Error("embed: the caption was not found once in the card");
+  return body.replace(mark, `<span class="iso-caption" data-for="short">${CAPTION_SHORT}</span><span class="iso-caption" data-for="none">${CREDIT}</span>${mark}`);
+};
 const embedPage = () =>
-  `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ARUM 5X-200 Finishing</title><style>${k.ISO_CSS}
+  `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, indexifembedded"><title>ARUM 5X-200 Finishing</title><script>${EMBED_OPTIONS}</script><style>${k.ISO_CSS}
 :root{color-scheme:dark}
 @media (prefers-color-scheme: light){:root:not([data-theme="dark"]){color-scheme:light}}
 :root[data-theme="light"]{color-scheme:light}
@@ -754,8 +758,16 @@ const embedPage = () =>
 html,body{margin:0;background:transparent}
 body{font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
 .tr-host{background:var(--anatomy-page);color:var(--anatomy-text);padding:16px}
-.tr-host .iso-page{width:min(680px,100%);margin:0 auto}
-</style></head><body><div class="iso tr-host" data-theme="dark"><main class="iso-page">${body}</main></div><script type="module">${(EMBED_HOST + THEME_HOST + turnScript() + modelScript + LIVE).replace(/<\/(script)/gi, "<\\/$1")}</script></body></html>`;
+.tr-host .iso-page{width:min(760px,100%);margin:0 auto}
+.tr-host .iso-figure{margin:0}
+html[data-bg="none"] .tr-host{background:transparent;padding:1px}
+html[data-frame="soft"] .iso-plate{border-radius:18px;box-shadow:none}
+html[data-frame="soft"] .iso[data-theme="light"]{--anatomy-card:#ffffff}
+html[data-fig="none"] .iso-plate-corner[data-corner="fig"]{display:none}
+.iso-caption[data-for]{display:none}
+html[data-caption="short"] .iso-caption:not([data-for]),html[data-caption="none"] .iso-caption:not([data-for]),html[data-caption="none"] .iso-keys{display:none}
+html[data-caption="short"] .iso-caption[data-for="short"],html[data-caption="none"] .iso-caption[data-for="none"]{display:block}
+</style></head><body><div class="iso tr-host" data-theme="dark"><main class="iso-page">${embedBody()}</main></div><script type="module">${(EMBED_HOST + THEME_HOST + turnScript() + modelScript + LIVE).replace(/<\/(script)/gi, "<\\/$1")}</script></body></html>`;
 const artifactOut = argv.find((a) => a.startsWith("--artifact="))?.slice("--artifact=".length);
 if (artifactOut && process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const html = artifactPage();
