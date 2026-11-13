@@ -70,35 +70,53 @@ const trFaceA = trPlate && trPlate.querySelector('[data-r="plane1"]');
 const trW = {};
 for (const el of trStage.querySelectorAll("[data-w]")) (trW[el.dataset.w] ??= []).push(el);
 const trMatrix = (el) => { const t = el.getAttribute("transform") || ""; const i = t.indexOf("("); return t.slice(i + 1, -1).split(/[ ,]+/).map(Number); };
-let trWorkKey = "";
-function trWork(force = false) {
-  if (!trFaceB || !trFaceA) return;
-  if (trFaceB.getAttribute("opacity") === "0") return;
-  const [a, b, c, d, e, f] = trMatrix(trFaceB);
-  const under = trMatrix(trFaceA);
-  // one millimetre down from face B, on screen (face A is 25 below it), then in the face's own coordinates; the disc
-  // markup sits in a scale(−1 −1) group, so the shift in the disc frame is the negative
+// One millimetre down from a face, on screen (the other face is 25 below it), then in the face's own coordinates; the
+// disc markup sits in a scale(−1 −1) group, so the shift in the disc frame is the negative. Also whether a wall with
+// outward normal n faces the light (screen left).
+function trShift(face, other) {
+  const [a, b, c, d, e, f] = trMatrix(face);
+  const under = trMatrix(other);
   const dx = (under[4] - e) / (2 * GEO.THICK);
   const dy = (under[5] - f) / (2 * GEO.THICK);
   const det = a * d - b * c;
-  if (!Number.isFinite(det) || Math.abs(det) < 1e-6) return;
-  const sh = [-(dx * d - c * dy) / det, -(a * dy - b * dx) / det];
-  trState.sh = sh;
+  if (!Number.isFinite(det) || Math.abs(det) < 1e-6) return null;
+  return { sh: [-(dx * d - c * dy) / det, -(a * dy - b * dx) / det], lit: (n) => a * -n[0] + c * -n[1] < 0, key: `${a.toFixed(3)} ${c.toFixed(3)}` };
+}
+const trPut = (set, k, name, v) => { for (const el of set[k] ?? []) if (el.getAttribute(name) !== v) el.setAttribute(name, v); };
+// the pieces of one side's drawing that follow the view (face A's copies carry the key "a.")
+function trPutSide(w, key) {
+  trPut(trW, `${key}disc`, "transform", w.disc);
+  trPut(trW, `${key}floor`, "transform", w.floor);
+  trPut(trW, `${key}top`, "transform", w.top);
+  trPut(trW, `${key}moatWalls`, "d", w.moatWalls);
+  trPut(trW, `${key}moatSteps`, "d", w.moatSteps);
+  trPut(trW, `${key}bodySteps`, "d", w.bodySteps);
+  for (const k of ["roughShade", "roughLit", "finShade", "finLit"]) trPut(trW, `${key}${k}`, "d", w.body[k]);
+  trPut(trW, `${key}margin`, "d", w.margin);
+  trPut(trW, `${key}connSide`, "d", w.conn.side);
+  trPut(trW, `${key}connTop`, "d", w.conn.top);
+}
+let trWorkKey = "";
+let trUnderKey = "";
+function trWork(force = false) {
+  if (!trFaceB || !trFaceA) return;
+  // the fitting side, when the holder is turned over far enough to show face A
+  if (trFaceA.getAttribute("opacity") !== "0") {
+    const v = trShift(trFaceA, trFaceB);
+    const key = v && `${v.sh[0].toFixed(3)} ${v.sh[1].toFixed(3)} ${v.key}`;
+    if (v && (force || key !== trUnderKey)) { trUnderKey = key; trPutSide(underShapes(v.sh, v.lit), "a."); }
+  }
+  if (trFaceB.getAttribute("opacity") === "0") return;
+  const v = trShift(trFaceB, trFaceA);
+  if (!v) return;
+  trState.sh = v.sh;
   const done = trState.done;
-  const key = `${sh[0].toFixed(3)} ${sh[1].toFixed(3)} ${a.toFixed(3)} ${c.toFixed(3)} ${done.occlusal.toFixed(4)} ${done.buccal.toFixed(4)} ${done.palatal.toFixed(4)}`;
+  const key = `${v.sh[0].toFixed(3)} ${v.sh[1].toFixed(3)} ${v.key} ${done.occlusal.toFixed(4)} ${done.buccal.toFixed(4)} ${done.palatal.toFixed(4)}`;
   if (!force && key === trWorkKey) return;
   trWorkKey = key;
-  const w = workShapes(sh, done, (n) => a * -n[0] + c * -n[1] < 0);
-  const put = (k, name, v) => { for (const el of trW[k] ?? []) if (el.getAttribute(name) !== v) el.setAttribute(name, v); };
-  put("floor", "transform", w.floor);
-  put("top", "transform", w.top);
-  put("moatWalls", "d", w.moatWalls);
-  put("moatSteps", "d", w.moatSteps);
-  put("bodySteps", "d", w.bodySteps);
-  for (const k of ["roughShade", "roughLit", "finShade", "finLit"]) put(k, "d", w.body[k]);
-  put("connSide", "d", w.conn.side);
-  put("connTop", "d", w.conn.top);
-  put("reveal", "stroke-dashoffset", String(w.reveal));
+  const w = workShapes(v.sh, done, v.lit);
+  trPutSide(w, "");
+  trPut(trW, "reveal", "stroke-dashoffset", String(w.reveal));
 }
 
 // the part view beside it: the same disc from above, the current pass's path and the bur's tip with its lean
@@ -109,7 +127,7 @@ if (trInset) for (const el of trInset.querySelectorAll("[data-w]")) (trInsetW[el
 const trTracks = trInset ? [...trInset.querySelectorAll("[data-track]")] : [];
 const trTracksDone = trInset ? [...trInset.querySelectorAll("[data-track-done]")] : [];
 const trTool = trInset && trInset.querySelector("[data-tool]");
-const trToolLean = trTool && trTool.querySelector(".tr-tool-lean");
+const trToolLean = trTool ? [...trTool.querySelectorAll(".tr-tool-lean")] : [];
 const TR_INSET_SH = [0, 0.45];
 let trInsetKey = "";
 function trInsetUpdate() {
@@ -120,10 +138,10 @@ function trInsetUpdate() {
   if (key !== trInsetKey) {
     trInsetKey = key;
     const w = workShapes(TR_INSET_SH, done, (n) => n[0] < 0);
-    const put = (k, name, v) => { for (const el of trInsetW[k] ?? []) if (el.getAttribute(name) !== v) el.setAttribute(name, v); };
-    put("bodySteps", "d", w.bodySteps);
-    for (const k of ["roughShade", "roughLit", "finShade", "finLit"]) put(k, "d", w.body[k]);
-    put("reveal", "stroke-dashoffset", String(w.reveal));
+    trPut(trInsetW, "bodySteps", "d", w.bodySteps);
+    for (const k of ["roughShade", "roughLit", "finShade", "finLit"]) trPut(trInsetW, k, "d", w.body[k]);
+    trPut(trInsetW, "margin", "d", w.margin);
+    trPut(trInsetW, "reveal", "stroke-dashoffset", String(w.reveal));
     for (const el of trTracks) el.toggleAttribute("data-on", el.dataset.track === kind);
     for (const el of trTracksDone) { el.toggleAttribute("data-on", el.dataset.trackDone === kind); el.setAttribute("stroke-dashoffset", (1 - (done[el.dataset.trackDone] ?? 0)).toFixed(4)); }
   }
@@ -135,7 +153,7 @@ function trInsetUpdate() {
     if (trTool.getAttribute("opacity") !== op) trTool.setAttribute("opacity", op);
     if (near) {
       trTool.setAttribute("transform", `translate(${p[0].toFixed(2)} ${p[1].toFixed(2)})`);
-      trToolLean.setAttribute("d", `M0 0L${(25 * t[0]).toFixed(2)} ${(25 * t[1]).toFixed(2)}`);
+      for (const el of trToolLean) el.setAttribute("d", `M0 0L${(25 * t[0]).toFixed(2)} ${(25 * t[1]).toFixed(2)}`);
     }
   }
 }
@@ -147,7 +165,7 @@ let trDescribed = "";
 function trSay(seek = false) {
   const s = trState.sim;
   if (!s) return;
-  const text = trState.playing || trState.time > 0 ? s.say : "Finishing a full-arch bridge";
+  const text = trState.playing || trState.time > 0 ? s.say : "Finishing a titanium bridge framework";
   const focused = document.activeElement === trStage;
   // the slider's value follows the job: each new line, and while it is not focused (so not read out) each second
   if (text !== trDescribed || (!focused && trStage.getAttribute("aria-valuenow") !== String(Math.round(trState.time)))) { trDescribed = text; trDescribe(); }
@@ -158,9 +176,10 @@ function trSay(seek = false) {
   if (trLive) trLive.textContent = text;
 }
 
-// The bur goes into the channel through face B: from the face down, it shows only as far as its sight line stays in
-// the channel (work.mjs sightDepth), so clip it there (the spindle is upright on screen, so the cut is a horizontal line).
-// Anywhere else (over the magazine, or with the disc turned away) it is in the open and is left whole.
+// The bur comes down the holder's bore and goes into the channel through the disc's face: from that face down, it shows
+// only as far as its sight line stays in the channel and the bore (work.mjs burCut), so clip it there (the spindle is
+// upright on screen, so the cut is a horizontal line). Anywhere else (over the magazine, or with the disc turned away)
+// it is in the open and is left whole.
 const trBur = trStage.querySelector('[data-name="tool.bur"]');
 let trBurRect = null;
 if (trBur && trBur.ownerSVGElement) {
@@ -184,7 +203,7 @@ function trBurClip() {
   const [, b, , d, , f] = trMatrix(trFaceB);
   const under = trMatrix(trFaceA);
   const dy = (under[5] - f) / (2 * GEO.THICK);
-  const y = b * -q[0] + d * -q[1] + f + cut * dy;
+  const y = b * -q[0] + d * -q[1] + f + (RECESS + cut) * dy;
   const move = (trBur.getAttribute("transform") || "").match(/translate\(\s*([-\d.e]+)[ ,]+([-\d.e]+)/);
   const ty = move ? Number(move[2]) : 0;
   trBurRect.setAttribute("height", (10000 + y - ty).toFixed(2));
@@ -256,7 +275,7 @@ function trShow() {
   let text;
   if (sim && trState.blend) text = "Into the job";
   else if (sim && s && (trState.playing || trState.time > 0)) text = s.say;
-  else if (sim) text = "Finishing a full-arch bridge";
+  else if (sim) text = "Finishing a titanium bridge framework";
   else text = `${trState.axis} · ${ax.name} · ${v[trState.axis]}${ax.unit === "millimetres" ? " mm" : ""}`;
   if (trReadout.textContent !== text) trReadout.textContent = text;
   if (trHint) {
@@ -325,7 +344,7 @@ function trDescribe() {
     // the job's line at this point (each step of the tool change and each pass has its own), else the pass's name
     const line = s.say || TR_PASS[s.kind] || "";
     const pass = line ? `${line}, ` : "";
-    set("aria-label", "Milling simulation: finishing a full-arch bridge");
+    set("aria-label", "Milling simulation: finishing a titanium bridge framework");
     set("aria-valuemin", "0");
     set("aria-valuemax", String(Math.round(SIM_LEN)));
     set("aria-valuenow", String(Math.round(trState.time)));
@@ -483,7 +502,7 @@ function trTick(now) {
     } else {
       if (trState.playing) {
         trState.time += dt;
-        // the job loops: a short hold on the finished bridge is part of its last step
+        // the job loops: a short hold on the finished occlusal side is part of its last step
         if (trState.time >= SIM_LEN) trState.time = 0;
         trViewGo(trViewFor(trState.time));
         busy = true;

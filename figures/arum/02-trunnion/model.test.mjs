@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, mOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, roomAt, magFor, jogEnter, jogRequest, jogStep, simAt, simPassStart, SIM, SIM_LEN, SIM_SPANS, POCKETS, SHANK_TOP, pocketAt, viewFor, VIEW_CUTS, VIEW_EASE, drawnTools, readoutOf, wrap } from "./model.mjs";
-import { workShapes, burCut } from "./work.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, X_DISC, BRIDGE, LEAN, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, CAP, ARCH_L, HEAD, burRadius, magOf, mOf, zLimit, upperRoom, axesFor, tipIn, toWorld, bodiesOf, WALL_REACH, archAt, bandOutline, roomAt, magFor, jogEnter, jogRequest, jogStep, simAt, simPassStart, SIM, SIM_LEN, SIM_SPANS, POCKETS, SHANK_TOP, pocketAt, viewFor, VIEW_CUTS, VIEW_EASE, drawnTools, readoutOf, wrap } from "./model.mjs";
+import { workShapes, workSvg, underShapes, underSvg, burCut, RECESS, DISC_FACE } from "./work.mjs";
 import { readFileSync } from "node:fs";
 
 const near = (a, b, tol) => assert.ok(Math.abs(a - b) <= tol, `${a} vs ${b}`);
@@ -11,6 +11,8 @@ for (let t = 0; t <= SIM_LEN + 1e-9; t += 0.01) job.push({ t, s: simAt(t) });
 // distance from a point to a closed polygon's boundary, and whether it is inside
 const inside = (p, poly) => { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [xi, yi] = poly[i]; const [xj, yj] = poly[j]; if (yi > p[1] !== yj > p[1] && p[0] < ((xj - xi) * (p[1] - yi)) / (yj - yi) + xi) c = !c; } return c; };
 const edgeDist = (p, poly) => { let best = Infinity; for (let i = 0; i < poly.length; i++) { const a = poly[i]; const b = poly[(i + 1) % poly.length]; const ex = b[0] - a[0]; const ey = b[1] - a[1]; const l2 = ex * ex + ey * ey || 1; const k = Math.max(0, Math.min(1, ((p[0] - a[0]) * ex + (p[1] - a[1]) * ey) / l2)); best = Math.min(best, Math.hypot(p[0] - a[0] - k * ex, p[1] - a[1] - k * ey)); } return best; };
+// the point of a closed polygon's boundary nearest to a point
+const nearestOn = (p, poly) => { let best = Infinity; let at = null; for (let i = 0; i < poly.length; i++) { const a = poly[i]; const b = poly[(i + 1) % poly.length]; const ex = b[0] - a[0]; const ey = b[1] - a[1]; const l2 = ex * ex + ey * ey || 1; const k = Math.max(0, Math.min(1, ((p[0] - a[0]) * ex + (p[1] - a[1]) * ey) / l2)); const q = [a[0] + k * ex, a[1] + k * ey]; const d = Math.hypot(p[0] - q[0], p[1] - q[1]); if (d < best) { best = d; at = q; } } return at; };
 // the finishing bur's radius at a height h above its tip, as drawn (model.mjs BUR)
 const neck = burRadius;
 const level = (s, z) => { const { p, t } = tipIn(s); const k = (z - p[2]) / t[2]; return { q: [p[0] + k * t[0], p[1] + k * t[1]], h: k }; };
@@ -164,7 +166,7 @@ test("the collision stand-ins cover what is drawn: the head under the spindle, t
   // and the other way: each stand-in has something drawn within 2.5 mm of its underside over its footprint, so the
   // envelope does not stand far proud of the head anywhere (where it did, it once eased the walls' lean on its own)
   const headPts = T.parts.filter((x) => x.group?.name === "z").flatMap((part) => part.shapes.flatMap(surface)).map((q) => [q[0] - GEO.SPINDLE_X0, q[1] - GEO.SPINDLE_Y, q[2] - GEO.TIP_Z]);
-  // (the bur's own stand-in is its drawn profile's, checked in the scene test; its sorting shape starts 9 mm up)
+  // (the bur's own stand-in is its drawn profile's, checked in the scene test; its sorting shape starts 10 mm up)
   for (const sb of HEAD.filter((x) => x.zb > 0)) {
     const on = ([dx, dy]) => (sb.r !== undefined ? Math.hypot(dx, dy) <= sb.r : dx >= sb.rect[0] && dx <= sb.rect[1] && dy >= sb.rect[2] && dy <= sb.rect[3]);
     const lowest = Math.min(...headPts.filter(on).map((q) => q[2]));
@@ -196,7 +198,7 @@ test("the collision stand-ins cover what is drawn: the head under the spindle, t
   assert.ok(checked > 1000);
 });
 
-test("the bridge's outline and the roughing terraces inside it: no spurs, no crossings, and each end where it belongs", () => {
+test("the framework's outline and the roughing terraces inside it: no spurs, no crossings, and each end where it belongs", () => {
   for (const g of [0, BRIDGE.gap, -1.3, -2.6]) {
     const { pts } = bandOutline(g, g < 0 ? 1.2 : 0.6);
     const n = pts.length;
@@ -249,21 +251,44 @@ test("each wall edge belongs to the pass that finishes it", () => {
   }
 });
 
-test("the bridge fits the disc: a maxillary twelve-unit arch inside the clamp ring, milled 20% large", () => {
+test("the framework fits the disc: a maxillary twelve-unit arch inside the bore, milled at final size within the disc's thickness", () => {
   assert.equal(TEETH.length, 12);
+  // titanium is milled at final size
+  assert.equal(BRIDGE.ef, 1);
   const r = Math.max(...OPENING.pts.map((p) => Math.hypot(...p)));
-  assert.ok(r <= 45.5 - 1, `channel reaches r ${r}`);
-  // intermolar width (first-molar centres) as sintered, about 48-50 mm in adults
+  assert.ok(r <= DISC_FACE - 1, `channel reaches r ${r}`);
+  // intermolar width (first-molar centres), about 48-50 mm in adults
   const molars = TEETH.filter((t) => t.name === "first molar");
   const cx = (t) => t.outline.reduce((a, p) => a + p[0], 0) / t.outline.length;
   const inter = Math.abs(cx(molars[0]) - cx(molars[1])) / BRIDGE.ef;
   assert.ok(inter > 45 && inter < 52, `intermolar ${inter}`);
-  // milled height within a 25 mm disc
-  assert.ok(BRIDGE.base - BRIDGE.top > 18 && BRIDGE.base < 2 * GEO.THICK);
+  // milled height within the 16 mm disc, with disc left above and below it
+  assert.equal(2 * GEO.DISC, 16);
+  assert.ok(BRIDGE.base - BRIDGE.top >= 8 && BRIDGE.base - BRIDGE.top <= 12 && BRIDGE.top > 0 && BRIDGE.base < 2 * GEO.DISC);
   assert.equal(CHANNELS.length, 4);
   assert.ok(CONNECTORS.length >= 10 && CONNECTORS.length <= 14);
-  // the bridge's outline stays inside the channel's
+  // the framework's outline stays inside the channel's
   for (const p of OUTLINE.pts) assert.ok(inside(p, OPENING.pts), `outline point ${p} outside the channel`);
+});
+
+test("the equator lies on the disc's mid-plane, within the finishing bur's reach from either face along the lean", () => {
+  // the framework is centred in the disc's thickness, and the disc on the A axis: turned over, it presents the same
+  // depths from face A
+  const equator = (BRIDGE.top + BRIDGE.base) / 2;
+  near(equator, GEO.DISC, 1e-9);
+  for (const c of CONNECTORS) near((c.depth[0] + c.depth[1]) / 2, GEO.DISC, 1e-9);
+  // the bur's reach: its neck, no wider than its ball, as far up as the cone (ARUM's size code gives 10)
+  let reach = 0;
+  while (burRadius(reach + 0.01) <= BRIDGE.ball + 1e-9) reach += 0.01;
+  assert.ok(reach >= 10 - 1e-6 && reach < 10.5, `neck ${reach}`);
+  // touching the wall at the equator and leaning as on the walls, the length of tool below the disc's face
+  const lean = (LEAN.wall * Math.PI) / 180;
+  const used = (equator + BRIDGE.ball * Math.cos(lean)) / Math.cos(lean);
+  assert.ok(used <= 10, `the equator needs ${used.toFixed(2)} mm of tool`);
+  // and on the contour the job shows, what is used of it
+  let deepest = 0;
+  for (const { s } of job) { if (!s.cutting) continue; const { p, t: axis } = tipIn(s); deepest = Math.max(deepest, (GEO.DISC - p[2]) / axis[2]); }
+  assert.ok(deepest > 4 && deepest <= used, `the job uses ${deepest.toFixed(2)} mm of tool`);
 });
 
 test("the job stays in the machine's travel and B's ±30°", () => {
@@ -282,6 +307,9 @@ test("the head above the bur clears the cradle, holder and disc everywhere in th
 });
 
 test("A and B share the lean through every pass, within hyperDENT's tilts", () => {
+  // 3° where nothing is undercut; on the walls hyperDENT's least tilt, which the readout names
+  assert.deepEqual(LEAN, { occlusal: 3, wall: 10 });
+  for (const step of SIM.steps) if (step.kind === "cut") assert.ok(step.say.endsWith(` ${LEAN[step.pass.kind === "occlusal" ? "occlusal" : "wall"]}°`), step.say);
   for (const span of SIM_SPANS.filter((x) => x.kind !== "tool")) {
     const cut = job.filter(({ s }) => s.cutting && s.kind === span.kind);
     assert.ok(cut.length > 100, span.kind);
@@ -289,53 +317,62 @@ test("A and B share the lean through every pass, within hyperDENT's tilts", () =
     assert.ok(range("a") > 2 && range("b") > 2, `${span.kind}: A ${range("a")}, B ${range("b")}`);
     const tilts = cut.map(({ s }) => s.tilt);
     if (span.kind === "occlusal") { near(Math.max(...tilts), 3, 0.01); near(Math.min(...tilts), 3, 0.01); }
-    else { assert.ok(Math.max(...tilts) <= 15 + 1e-9 && Math.max(...tilts) > 14.9, `${span.kind} max ${Math.max(...tilts)}`); assert.ok(Math.min(...tilts) >= 10, `${span.kind} min ${Math.min(...tilts)}`); }
+    else { assert.ok(Math.max(...tilts) <= LEAN.wall + 1e-9, `${span.kind} max ${Math.max(...tilts)}`); assert.ok(Math.min(...tilts) >= 10 - 1e-9, `${span.kind} min ${Math.min(...tilts)}`); }
   }
   // with the head and cradle as drawn, nothing comes inside the head's envelope, so the walls' lean never eases (the
   // caption says so: a change that brings an easing back must be described there)
-  const eased = job.filter(({ s }) => s.cutting && s.kind !== "occlusal" && s.tilt < 14.99);
+  const eased = job.filter(({ s }) => s.cutting && s.kind !== "occlusal" && s.tilt < 9.99);
   assert.equal(eased.length, 0, `lean eased to ${eased.length ? Math.min(...eased.map(({ s }) => s.tilt)).toFixed(2) : ""}°`);
 });
 
-test("the bur touches each surface it finishes, and its neck clears the channel and the bridge's edge", () => {
+test("the bur touches each surface it finishes, and its neck clears the channel and the framework's edge", () => {
   for (const { t, s } of job) {
     if (!s.cutting) continue;
     const { p, t: axis } = tipIn(s);
     const ball = [p[0] + BRIDGE.ball * axis[0], p[1] + BRIDGE.ball * axis[1]];
     if (s.kind === "occlusal") {
-      // over the bridge's top (or just past its ends, over the channel), between the cusp lines and the fossa
-      assert.ok(inside(ball, OUTLINE.pts) || edgeDist(ball, OUTLINE.pts) < 1.3, `occlusal ball off the bridge at ${t}`);
-      const depth = GEO.THICK - p[2];
-      assert.ok(depth >= BRIDGE.top - 0.01 && depth <= BRIDGE.top + 1.25, `occlusal depth ${depth} at ${t}`);
+      // over the framework's top (or just past its ends, over the channel), between its edges' height and the dip
+      // along the middle of the table
+      assert.ok(inside(ball, OUTLINE.pts) || edgeDist(ball, OUTLINE.pts) < 1.3, `occlusal ball off the framework at ${t}`);
+      const depth = GEO.DISC - p[2];
+      assert.ok(depth >= BRIDGE.top - 0.01 && depth <= BRIDGE.top + 1.05, `occlusal depth ${depth} at ${t}`);
       continue;
     }
     // walls: the ball's centre one radius outside the wall
-    assert.ok(!inside(ball, OUTLINE.pts), `wall ball inside the bridge at ${t}`);
+    assert.ok(!inside(ball, OUTLINE.pts), `wall ball inside the framework at ${t}`);
     near(edgeDist(ball, OUTLINE.pts), BRIDGE.ball, 0.12);
-    // the neck at face B stays inside the channel, clear of its outer wall
-    const face = level(s, GEO.THICK);
+    // the tool leans away from the wall it touches: straight out along the sides, and round a distal corner in a
+    // direction eased between the two walls' normals, never more than 32° off the wall's own
+    const wall = nearestOn(ball, OUTLINE.pts);
+    const out = [(ball[0] - wall[0]) / Math.hypot(ball[0] - wall[0], ball[1] - wall[1]), (ball[1] - wall[1]) / Math.hypot(ball[0] - wall[0], ball[1] - wall[1])];
+    const outward = (axis[0] * out[0] + axis[1] * out[1]) / Math.hypot(axis[0], axis[1]);
+    assert.ok(outward >= Math.cos((32 * Math.PI) / 180), `the lean is ${deg(Math.acos(outward)).toFixed(1)}° off the wall's normal at ${t}`);
+    // the neck at the disc's face stays inside the channel, clear of its outer wall
+    const face = level(s, GEO.DISC);
     assert.ok(inside(face.q, OPENING.pts) && edgeDist(face.q, OPENING.pts) >= neck(face.h) + 0.1, `neck at the channel's lip at ${t}`);
-    // and at the bridge's top it stays off the bridge's edge
-    const top = level(s, GEO.THICK - BRIDGE.top);
-    assert.ok(!inside(top.q, OUTLINE.pts) && edgeDist(top.q, OUTLINE.pts) >= neck(top.h) - 1e-9, `neck on the bridge's edge at ${t}`);
+    // and at the framework's top it stays off the framework's edge
+    const top = level(s, GEO.DISC - BRIDGE.top);
+    assert.ok(!inside(top.q, OUTLINE.pts) && edgeDist(top.q, OUTLINE.pts) >= neck(top.h) - 1e-9, `neck on the framework's edge at ${t}`);
   }
 });
 
-test("dipping into and out of a pass, the whole bur stays in the channel and off the bridge", () => {
+test("dipping into and out of a pass, the whole bur stays in the bore and the channel and off the framework", () => {
   let dips = 0;
   for (const { t, s } of job) {
     if (s.step !== "dip") continue;
     const { p, t: axis } = tipIn(s);
-    if (GEO.THICK - p[2] > 0) dips++;
-    // up the tool from its tip: below face B it is in the channel, clear of the outer wall; below the bridge's top, clear
-    // of the bridge (the 0.12 is the wall pass's own tolerance on the ball's contact)
+    if (GEO.DISC - p[2] > 0) dips++;
+    // up the tool from its tip: below the disc's face it is in the channel, clear of the outer wall; below the
+    // framework's top, clear of the framework (the 0.12 is the wall pass's own tolerance on the ball's contact); and
+    // from the disc's face up to the holder's it is inside the holder's bore
     for (let h = 0; h <= 24; h += 0.1) {
       const q = [p[0] + h * axis[0], p[1] + h * axis[1], p[2] + h * axis[2]];
-      const depth = GEO.THICK - q[2];
-      if (depth <= 0) break;
+      const depth = GEO.DISC - q[2];
+      if (depth <= -RECESS) break;
       const r = neck(h);
+      if (depth <= 0) { assert.ok(Math.hypot(q[0], q[1]) + r < DISC_FACE, `dip: the bur ${h.toFixed(1)} up meets the bore's wall at ${t}`); continue; }
       assert.ok(inside(q, OPENING.pts) && edgeDist(q, OPENING.pts) >= r - 1e-9, `dip: the bur ${h.toFixed(1)} up meets the channel's wall at ${t}`);
-      if (depth > BRIDGE.top) assert.ok(!inside(q, OUTLINE.pts) && edgeDist(q, OUTLINE.pts) >= r - 0.12, `dip: the bur ${h.toFixed(1)} up meets the bridge at ${t}`);
+      if (depth > BRIDGE.top) assert.ok(!inside(q, OUTLINE.pts) && edgeDist(q, OUTLINE.pts) >= r - 0.12, `dip: the bur ${h.toFixed(1)} up meets the framework at ${t}`);
     }
   }
   assert.ok(dips > 20);
@@ -402,26 +439,62 @@ test("the disc drawing: only walls facing the viewer are swept, and the reveal r
   assert.equal(end.bodySteps, "");
   assert.ok(start.reveal > 0);
   assert.equal(end.reveal, 0);
+  // the finished margin along the framework's top edge grows with the wall passes: none before them, the buccal side
+  // and the right-hand end after the first, all of the outline after both
+  const edges = (d) => (d.match(/L/g) ?? []).length;
+  assert.equal(start.margin, "");
+  const half = workShapes([0.3, 1.2], { occlusal: 1, buccal: 1, palatal: 0 }, lit);
+  assert.equal(edges(half.margin), WALL_REACH.pass.filter((pass) => pass === "buccal").length);
+  assert.equal(edges(end.margin), OUTLINE.pts.length);
+});
+
+test("the occlusal side is drawn as plain metal units: twelve outlines and four screw holes, no occlusal detail", () => {
+  const svg = workSvg([0.3, 1.2], { occlusal: 0, buccal: 0, palatal: 0 }, (n) => n[0] < 0);
+  const subpaths = (cls) => { const m = svg.match(new RegExp(`class="${cls}" d="([^"]*)"`)); assert.ok(m, `no ${cls}`); return m[1].split("M").length - 1; };
+  assert.equal(subpaths("iso-line tr-unit"), 12);
+  assert.equal(subpaths("tr-hole"), 4);
+  assert.equal(subpaths("iso-line tr-rim"), 4);
+  // nothing else is revealed with the finished surface: its fill and the units' outlines
+  const fin = svg.match(/<g mask="url\(#tr-fin\)">(.*?)<\/g>/);
+  assert.ok(fin);
+  assert.equal(fin[1].split("<path").length - 1, 2);
+  assert.doesNotMatch(svg, /tr-crowns|cusp|fissure/);
+  // the framework's own outline carries the lit accent; the bore's rim does not
+  const outline = svg.match(/class="iso-line" data-tone="lit" d="([^"]*)"/g);
+  assert.equal(outline.length, 1);
+  assert.equal(outline[0].split("L").length, OUTLINE.pts.length);
 });
 
 test("the bur is cut off where it goes into the channel, and left whole in the open", () => {
   const sh = [-1.07, 1.36];
-  const faceAt = (p, axis) => { const k = (GEO.THICK - p[2]) / axis[2]; return [p[0] + k * axis[0], p[1] + k * axis[1]]; };
-  // in the job: whenever the tip is below face B, the bur went in through the opening, so only its sight line decides
+  const faceAt = (p, axis) => { const k = (GEO.DISC - p[2]) / axis[2]; return [p[0] + k * axis[0], p[1] + k * axis[1]]; };
+  // in the job: whenever the tip is below the disc's face, the bur went in through the opening, so only its sight
+  // line decides; down the holder's bore above that face it is whole
   let cuts = 0;
   for (const { t, s } of job) {
     const { p, t: axis } = tipIn(s);
-    if (GEO.THICK - p[2] <= 0) { assert.equal(burCut(p, axis, sh), null, `clipped above the face at ${t}`); continue; }
-    assert.ok(axis[2] >= 0.2 && inside(faceAt(p, axis), OPENING.pts), `below face B outside the channel at ${t}`);
+    if (GEO.DISC - p[2] <= 0) { assert.equal(burCut(p, axis, sh), null, `clipped above the disc's face at ${t}`); continue; }
+    assert.ok(axis[2] >= 0.2 && inside(faceAt(p, axis), OPENING.pts), `below the disc's face outside the channel at ${t}`);
     if (burCut(p, axis, sh)) cuts++;
   }
   assert.ok(cuts > 100, `cuts ${cuts}`);
-  // in jog: the tip below face B's plane but out in the open (over the magazine, past the disc's edge, turned on A)
+  // the holder's rim hides it too: upright in the channel in front of the incisors, 3 mm into the disc. Seen so low
+  // that a sight line from just above the disc's face there comes out under the rim, it is cut in the bore, where
+  // that happens; seen from higher, at the channel's lip
+  const front = [0, Math.max(...OUTLINE.pts.map((q) => q[1])) + BRIDGE.gap / 2];
+  assert.ok(inside(front, OPENING.pts) && !inside(front, OUTLINE.pts));
+  const tip = [front[0], front[1], GEO.DISC - 3];
+  assert.ok(front[1] + RECESS * 3 > DISC_FACE && front[1] + (RECESS + 3) * 1.5 < DISC_FACE);
+  near(burCut(tip, [0, 0, 1], [0, 3]).cut, (DISC_FACE - front[1]) / 3 - RECESS, 0.1);
+  const lip = burCut(tip, [0, 0, 1], [0, 1.5]).cut;
+  near(lip, BRIDGE.gap / 2 / 1.5, 0.1);
+  // in jog: the tip below the plane of the disc's face but out in the open (over the magazine, past the disc's edge,
+  // turned on A)
   let open = 0;
   for (const a of [-180, -135, -90, -85, -45, 0, 45, 90, 135]) for (const b of [-30, -15, 0, 15, 30]) for (const y of [0, 50, 100, 150, 225, 300]) for (const x of [0, 55, 140]) {
     const pose = { x, y, a, b, m: magFor(y) };
     const { p, t: axis } = tipIn({ ...pose, z: Math.max(0, roomAt(pose, pose.m)) });
-    if (GEO.THICK - p[2] <= 0 || (axis[2] >= 0.2 && inside(faceAt(p, axis), OPENING.pts))) continue;
+    if (GEO.DISC - p[2] <= 0 || (axis[2] >= 0.2 && inside(faceAt(p, axis), OPENING.pts))) continue;
     open++;
     assert.equal(burCut(p, axis, sh), null, `clipped in the open at ${JSON.stringify(pose)}`);
   }
@@ -713,6 +786,72 @@ test("the page shows and hides the drawn tools by the job's tools, and frames th
   // the readout has one line on a phone: every line of the job fits in 40 characters
   for (const step of SIM.steps) assert.ok(step.say.length <= 40, `"${step.say}" is ${step.say.length} characters`);
 });
+
+test("the disc's face lies 4.5 mm below the holder's on both faces, seen through a bore no narrower than it", () => {
+  // the 16 mm disc is centred in the 25 mm holder
+  near(RECESS, GEO.THICK - GEO.DISC, 1e-12);
+  near(RECESS, 4.5, 1e-12);
+  // the model mills from the disc's face, not the holder's: the highest point the bur touches is the framework's top,
+  // that far below face B
+  let highest = Infinity;
+  for (const { s } of job) if (s.cutting) highest = Math.min(highest, GEO.THICK - tipIn(s).p[2]);
+  near(highest, RECESS + BRIDGE.top, 0.02);
+  // the drawing: everything of the disc is moved one recess down its sight line, under face B and under face A alike
+  const lit = (n) => n[0] < 0;
+  const sh = [0.5, 1.5];
+  const moved = `translate(${sh[0] * RECESS} ${sh[1] * RECESS})`;
+  assert.equal(moved, "translate(2.25 6.75)");
+  const zero = { occlusal: 0, buccal: 0, palatal: 0 };
+  assert.equal(workShapes(sh, zero, lit).disc, moved);
+  assert.equal(underShapes(sh, lit).disc, moved);
+  // (the part view looks straight down at the disc: no recess)
+  assert.equal(workShapes(sh, zero, lit, 0).disc, "translate(0 0)");
+  const radius = (d) => Math.max(...d.split("Z")[0].slice(1).split("L").map((q) => Math.hypot(...q.split(" ").map(Number))));
+  for (const [svg, key, id] of [[workSvg(sh, zero, lit), "", "tr"], [underSvg(sh, lit), "a.", "tru"]]) {
+    assert.ok(svg.includes(`<g data-w="${key}disc" transform="${moved}">`), `${id}: the disc is not moved down`);
+    // the bore's mouth, the fill that shows as its far wall, and the disc's face inside them: one radius, and the face
+    // is drawn inside the group the mouth clips
+    const mouth = svg.match(new RegExp(`<clipPath id="${id}-bore"><path d="([^"]*)"/></clipPath>`));
+    const wall = svg.match(/class="tr-seat" d="([^"]*)"/);
+    const face = svg.match(/class="tr-disc" fill-rule="evenodd" d="([^"]*)"/);
+    assert.ok(mouth && wall && face, id);
+    near(radius(mouth[1]), DISC_FACE, 0.01);
+    near(radius(wall[1]), DISC_FACE, 0.01);
+    assert.ok(radius(face[1]) <= radius(mouth[1]) + 1e-9, `${id}: the disc's face is drawn wider than the bore`);
+    assert.ok(svg.indexOf(`<g clip-path="url(#${id}-bore)">`) < svg.indexOf('class="tr-disc"'), `${id}: the disc's face is not clipped by the bore`);
+  }
+  // the page moves both, and cuts the bur off below the disc's face, not the holder's
+  const live = readFileSync(new URL("./live.js", import.meta.url), "utf8");
+  assert.match(live, /trPutSide\(underShapes\(v\.sh, v\.lit\), "a\."\)/);
+  assert.match(live, /\(RECESS \+ cut\) \* dy/);
+});
+
+test("each pass starts and ends at rest: no axis is stopped dead at full feed", () => {
+  for (const step of SIM.steps.filter((x) => x.kind === "cut")) {
+    for (const [from, to] of [[step.start, step.start + 0.01], [step.start + step.dur - 0.01, step.start + step.dur]]) {
+      const a = simAt(from + 1e-9);
+      const b = simAt(to - 1e-9);
+      for (const k of ["x", "y", "z"]) assert.ok(Math.abs(b[k] - a[k]) / 0.01 < 0.05, `${step.pass.kind}: ${k} at ${(Math.abs(b[k] - a[k]) / 0.01).toFixed(2)} mm/s at ${from.toFixed(2)}`);
+      for (const k of ["a", "b"]) assert.ok(Math.abs(wrap(b[k] - a[k])) / 0.01 < 0.05, `${step.pass.kind}: ${k} at ${(Math.abs(wrap(b[k] - a[k])) / 0.01).toFixed(2)}°/s at ${from.toFixed(2)}`);
+    }
+    // and in between it runs at a steady feed: the progress drawn is the share of the path covered
+    const mid = simAt(step.start + step.dur / 2);
+    near(mid.done[step.pass.kind], 0.5, 1e-9);
+    assert.ok(simAt(step.start + 1).done[step.pass.kind] < 1 / step.dur, `${step.pass.kind}: no ramp up`);
+  }
+});
+
+// words that belonged to the earlier job (a white ceramic bridge milled oversize with another tool): none may be left
+// in what ships in the page, comments included
+const OLD_WORDS = [/zirconia/i, /\b[Ss]inter/, /ZB-8/, /20%/, /tr-zr-/, /finished teeth/i];
+for (const name of ["model.mjs", "work.mjs", "live.js", "build.mjs"]) {
+  test(`no word of the earlier job is left in ${name}`, () => {
+    const lines = readFileSync(new URL(`./${name}`, import.meta.url), "utf8").split("\n");
+    const hits = [];
+    lines.forEach((line, i) => { for (const word of OLD_WORDS) if (word.test(line)) hits.push(`${name}:${i + 1} ${word}`); });
+    assert.deepEqual(hits, []);
+  });
+}
 
 test("readout", () => {
   assert.equal(readoutOf({ ...HOME, z: 12.34, a: -180 }), "X 55.0 · Y 262.0 · Z −12.3 · A 180.0° · B 0.0°");

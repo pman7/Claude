@@ -19,6 +19,9 @@ export const TRAVEL = { x: 142.5, y: 325, z: 144 };
 export const GEO = {
   HALF: 78.5, // holder: 157 square
   THICK: 12.5, // holder: 25 thick
+  // the titanium disc: 16 thick (assumed: ARUM publishes none), its mid-plane on the A axis, so each of its faces lies
+  // 4.5 below the holder's and turning A over presents the other face at the same height
+  DISC: 8,
   ARM_L: [-130, -94], // cradle: left (support) arm X span
   ARM_R: [110, 185], // cradle: right (A drive) housing X span, about half the holder's width across (video)
   BOSS_R: 33, // a rim of gold round the left cap, as in the dealer's photo 1
@@ -135,9 +138,11 @@ const RAM_BODY = { box: [RAM.x[0], RAM.x[1], -KNUCKLE[1] - RAM.len, -KNUCKLE[1],
 const MAGAZINE = { box: [MAG.x - 2, MAG.x + MAG.w + 5, MAG.y - 10, MAG.y + MAG.d + 11, MAG_TOP - 60, SHANK_TOP] };
 // the sensor post and its cap, standing on the floor
 const POST_BODY = { box: [POST.x - POST.r, POST.x + POST.r, POST.y - POST.r, POST.y + POST.r, GEO.FLOOR, POST.top] };
-// the finishing bur (as ARUM's ZB-86: a Ø1.0 ball on a neck widening to Ø1.8 at its 20 mm reach, then the taper to the
-// Ø6 shank): height above the tip and radius, mm, as drawn (the ball's shoulder point drawn round)
-export const BUR = [[0, 0], [0.25, 0.43, 1], [0.5, 0.5], [2, 0.55], [20, 0.9], [23.5, 3]];
+// the finishing bur (as ARUM's MB-12, listed "D1.0*L10*50" and read here as Ø1.0, 10 mm reach, 50 mm long: a Ø1.0 ball
+// on a Ø0.9 neck to 10.2 mm, a cone to Ø4.9 at 15.5 mm, a Ø5 collar to 21.8 mm and a step to the Ø6 shank at 22 mm,
+// measured on ARUM's product photograph): height above the tip and radius, mm, as drawn (the ball's shoulder point
+// drawn round)
+export const BUR = [[0, 0], [0.25, 0.43, 1], [0.5, 0.5], [1.2, 0.45], [10.2, 0.45], [15.5, 2.45], [21.8, 2.5], [22, 3]];
 export const burRadius = (h) => {
   for (let i = 1; i < BUR.length; i++) { const [h0, r0] = BUR[i - 1]; const [h1, r1] = BUR[i]; if (h <= h1) return r0 + ((r1 - r0) * Math.max(0, h - h0)) / (h1 - h0); }
   return BUR[BUR.length - 1][1];
@@ -341,33 +346,39 @@ export const axesOf = (s) => ({ X: mm(s.x), Y: mm(s.y), Z: mm(-s.z), A: deg(half
 export const readoutOf = (s) => { const v = axesOf(s); return `X ${v.X} · Y ${v.Y} · Z ${v.Z} · A ${v.A} · B ${v.B}`; };
 export const wordsOf = (s) => `Cradle ${Math.round(s.x)} millimetres in X, spindle ${Math.round(s.y)} in Y and ${Math.round(s.z)} down in Z; disc turned ${Math.round(half(s.a))} degrees on A, tilted ${Math.round(s.b)} on B`;
 
-// ---------------------------------------------------------------- the part: a full-arch screw-retained bridge
-// Disc frame: origin at the centre of face B (the face up at A = 0), x to the machine's right, y toward the operator; a
-// point at depth d below face B is (x, y, THICK − d) in the holder frame. The bridge is maxillary, occlusal side up, its
-// incisors toward the operator. Roughing is done (both sides), so the bridge stands in a channel cut through the disc,
-// held by connectors; the figure shows the 5-axis finishing of its top side.
+// ---------------------------------------------------------------- the part: a full-arch screw-retained bridge framework
+// An illustrative titanium framework, twelve tooth-shaped units on four implants, milled at final size (titanium is not
+// enlarged). Disc frame: origin at the centre of the disc's upper face (the one under holder face B, up at A = 0), x to
+// the machine's right, y toward the operator; a point at depth d below that face is (x, y, DISC − d) in the holder
+// frame. The framework is maxillary, occlusal side up, its incisors toward the operator. Roughing is done (both sides),
+// so it stands in a channel cut through the disc, held by connectors; the figure shows the 5-axis finishing of its
+// occlusal side.
 export const BRIDGE = {
-  // green (pre-sintered) enlargement: the part is milled about 20% large and shrinks when sintered
-  ef: 1.2,
-  // one side, mesial to distal: tooth, mesiodistal and buccolingual crown widths as sintered (mm)
+  // scale of the milled part against the final one: 1, as titanium is milled at final size
+  ef: 1,
+  // one side, mesial to distal: unit, mesiodistal and buccolingual widths (mm)
   teeth: [["central incisor", 8.5, 7.0], ["lateral incisor", 6.5, 6.0], ["canine", 7.5, 8.0], ["first premolar", 7.0, 9.0], ["second premolar", 7.0, 9.0], ["first molar", 10.0, 11.0]],
-  arch: { A: 0.02111, B: 8.0e-8 }, // the crowns' centre line as sintered, y = −(A·x² + B·x⁶) (mm)
-  top: 1.5, // the highest cusp, below face B
-  base: 22, // the bridge's underside (the intaglio side), below face B
-  flange: [0.8, 1.8], // the gingival flange beyond the crowns as milled: buccal, palatal
-  gap: 2.7, // the channel round the bridge: the Ø2.0 roughing ball plus 0.7 (hyperDENT's milling boundary)
-  ball: 0.5, // finishing bur: Ø1.0 ball end (ARUM ZB-86, 20 mm reach)
-  connector: { w: 2.8 }, // Ø2.8 at the part, at its equator
-  // screw access (All-on-4): tooth index, how far palatal of the centre line the channel opens (mm), its axis tilt from
-  // the disc's normal toward palatal and toward distal (deg), and its diameter as milled
+  arch: { A: 0.02111, B: 8.0e-8 }, // the units' centre line, y = −(A·x² + B·x⁶) (mm)
+  // 12 high (an assumption: no source gives a framework's height), 2 of disc left above and below it, so its equator
+  // lies on the disc's mid-plane
+  top: 2, // the framework's highest point, below the disc's face
+  base: 14, // its underside (the fitting side), below the disc's face
+  flange: [0.67, 1.5], // the gingival flange beyond the units: buccal, palatal
+  // the channel round the framework: the Ø2.0 roughing ball (as ARUM's MB-10) plus 0.7, hyperDENT's rule for the width
+  // of the milling boundary
+  gap: 2.7,
+  ball: 0.5, // finishing bur: Ø1.0 ball end (as ARUM's MB-12)
+  connector: { w: 2 }, // Ø2.0 at the part, at its equator
+  // screw access (All-on-4): unit index, how far palatal of the centre line the channel opens (mm), its axis tilt from
+  // the disc's normal toward palatal and toward distal (deg), and its diameter
   implants: [
-    { tooth: 1, off: -2.5, palatal: 10, distal: 0 },
-    { tooth: 4, off: -0.4, palatal: 6, distal: 14 },
+    { tooth: 1, off: -2.08, palatal: 10, distal: 0 },
+    { tooth: 4, off: -0.33, palatal: 6, distal: 14 },
   ],
-  channel: 3.2,
+  channel: 2.6,
 };
-// The crowns' centre line as sintered: y = −(A·x² + B·x⁶) from the incisal contact (a polynomial arch form fitted to
-// typical maxillary tooth widths), milled EF larger; laid out by arc length from the midline
+// The units' centre line: y = −(A·x² + B·x⁶) from the incisal contact (a polynomial arch form fitted to typical
+// maxillary tooth widths), scaled by ef; laid out by arc length from the midline
 const ARCH = (() => {
   const { A, B } = BRIDGE.arch;
   const ef = BRIDGE.ef;
@@ -413,8 +424,8 @@ const BL = (() => {
   };
 })();
 // the arch placed in the disc: its extent (with the channel) centred front to back
-// the bridge ends this far past the first molars' distal contacts, squared off with rounded corners
-export const CAP = 2.2;
+// the framework ends this far past the first molars' distal contacts, squared off with rounded corners
+export const CAP = 1.83;
 // placed so the channel's outer wall is as far inside the clamp ring as it can be (worked out below, once the outline can be drawn)
 let Y0 = 0;
 // centre-line point, unit tangent (toward +s) and buccal normal at s; past either end it carries straight on
@@ -431,7 +442,7 @@ export function archAt(s) {
 }
 export const halfWidths = (s, grow = 0) => { const h = BL(s) / 2; return [h + BRIDGE.flange[0] + grow, h + BRIDGE.flange[1] + grow]; };
 const at2 = (c, o) => [c.p[0] + o * c.n[0], c.p[1] + o * c.n[1]];
-// a closed outline of the band round the arch, grown by `grow` (the channel's outer wall is the bridge grown by the
+// a closed outline of the band round the arch, grown by `grow` (the channel's outer wall is the framework grown by the
 // gap), with round ends; returned with the arc position along the arch of each point (for the finishing reveal)
 export function bandOutline(grow = 0, step = 0.6) {
   // the end sits CAP + grow past the last contact (inside it, for an inset outline), its corners rounded with radius r;
@@ -477,7 +488,7 @@ Y0 = (() => {
 })();
 export const OUTLINE = bandOutline(0);
 export const OPENING = bandOutline(BRIDGE.gap, 1.2);
-// the teeth: their outlines on the occlusal face, each a rounded box in (along the arch, across it)
+// the twelve units: their outlines on the occlusal face, each a rounded box in (along the arch, across it)
 export const TEETH = [];
 for (const side of [1, -1]) {
   BRIDGE.teeth.forEach(([name, md0, bl0], i) => {
@@ -513,7 +524,7 @@ for (const side of [1, -1]) {
   }
 }
 CHANNELS.sort((u, v) => u.s - v.s);
-// connectors at the bridge's equator, from its wall across the channel: one per unit, alternating buccal and palatal,
+// connectors at the framework's equator, from its wall across the channel: one per unit, alternating buccal and palatal,
 // and both sides of each distal end
 export const CONNECTORS = (() => {
   const out = [];
@@ -529,8 +540,8 @@ export const CONNECTORS = (() => {
   };
   for (const side of [1, -1]) {
     BRIDGE.teeth.forEach((_, i) => { if (i < 5) add(side * (ARCH.ends[i] + ARCH.ends[i + 1]) / 2, i % 2 === 0 ? 1 : -1); });
-    add(side * (ARCH.L - 1.8), 1);
-    add(side * (ARCH.L - 1.8), -1);
+    add(side * (ARCH.L - 1.5), 1);
+    add(side * (ARCH.L - 1.5), -1);
   }
   return out.sort((u, v) => u.s - v.s);
 })();
@@ -627,16 +638,18 @@ export function jogStep(j, k, mStep) {
 
 // ---------------------------------------------------------------- the finishing simulation
 // One pass of each kind, thinned for clarity (a zig-zag every few millimetres, one contour round each wall, where the
-// machine steps about 0.1 mm): the occlusal surface with the tool nearly upright, then the buccal and the palatal wall
-// with the tool leaning out from the wall along the outline's normal. The spindle never tilts, so A and B tilt the disc
-// to the tool: at the incisors the lean is on A, at the molars on B, and between them both share it and change together.
+// machine steps a small fraction of a millimetre: hyperDENT's stepover range is 0.02 to 0.15 mm): the occlusal surface
+// with the tool nearly upright, then the buccal and the palatal wall with the tool leaning out from the wall (along the
+// outline's normal, eased round the distal corners). The spindle never tilts, so A and B tilt the disc to the tool: at
+// the incisors the lean is on A, at the molars on B, and between them both share it and change together.
 // The screw channels are indexed jobs of their own (3+2, not simultaneous), shown already finished.
-const toHolder = (p2, depth) => [p2[0], p2[1], GEO.THICK - depth];
+const toHolder = (p2, depth) => [p2[0], p2[1], GEO.DISC - depth];
 const tiltOf = (dir2, deg) => { const r = (deg * Math.PI) / 180; return [Math.sin(r) * dir2[0], Math.sin(r) * dir2[1], Math.cos(r)]; };
-const LEAN = { occlusal: 3, wall: 15 };
-// The wall pass runs one contour 3.3 mm below the cusps: deeper, the 15° lean would bring the bur's neck against the
-// channel's outer wall (the channel is only the roughing ball's width; a drafted channel would not fit the disc)
-const WALL_DEPTH = BRIDGE.top + 3.3;
+export const LEAN = { occlusal: 3, wall: 10 };
+// The wall pass runs one contour 2 mm below the framework's top, leaning 10° (hyperDENT's least tilt for wall
+// finishing). Only that contour is shown: on deeper ones, in this model, a 10° tilt of the low, centred disc brings the
+// head box inside its clearance over the X carriage, so nothing is claimed for them
+const WALL_DEPTH = BRIDGE.top + 2;
 export const ARCH_L = ARCH.L;
 const L = ARCH.L;
 // tip for a ball-end bur touching a point with outward normal n (3D), the tool along t: centre = point + r·n, tip = centre − r·t
@@ -653,9 +666,9 @@ const occlusalAt = (u) => {
   const amp = (rho - BRIDGE.flange[1] - 1.1) * Math.max(0, 1 - over / 3.1);
   const o = (hb - hl) / 2 + amp * Math.sin((2 * Math.PI * (s + L)) / 5);
   const p = at2(c, o);
-  // cusps and fossae: the cusp lines at the top, the surface dipping 1.2 mm to the fossa in the middle of the table
+  // the occlusal surface is highest along its two edges and dips 1.0 mm along the middle of the table
   const mid = (hb - hl) / 2;
-  const depth = BRIDGE.top + (1.2 * (1 + Math.cos((Math.PI * (o - mid)) / Math.max(1, amp)))) / 2;
+  const depth = BRIDGE.top + (1.0 * (1 + Math.cos((Math.PI * (o - mid)) / Math.max(1, amp)))) / 2;
   // nearly upright on the tops, within hyperDENT's few degrees for cycles without undercuts
   const t = tiltOf([-c.t[0], -c.t[1]], LEAN.occlusal);
   return { p: tipFor(toHolder(p, depth), [0, 0, 1], t), t, s };
@@ -664,10 +677,16 @@ const occlusalAt = (u) => {
 const ABOVE_BUR = HEAD.filter((part) => part.zb >= 26);
 export const upperRoom = (s) => GEO.TIP_Z - tipFloor({ x: s.x, b: s.b, a: s.a, mag: magOf(s.m ?? 1).mag, row: s.row ?? 0 }, s.y, undefined, ABOVE_BUR);
 const CLEAR_HEAD = 2;
-// The two wall passes follow the bridge's outline: the buccal pass from the left distal end round the front to the
+// The two wall passes follow the framework's outline: the buccal pass from the left distal end round the front to the
 // right one and on round that end; the palatal pass back from there round the inside and on round the left end. So
 // each distal end is finished by the pass that ends there. Each path: contact points on the wall, outward normals, and
 // arc length along it.
+// The direction the tool leans in is the outward normal eased along the outline: its average over SWAY mm either side
+// under a raised-cosine weight. Round a distal corner the normal itself turns a quarter turn in 3 mm, which would whip
+// A and B round and stop them dead at each end of the corner; eased, they turn into and out of it over about two
+// seconds, as a controller's look-ahead smooths its rotary axes. At a convex corner every direction between the two
+// walls' normals still leans away from both, and the ball's contact keeps the true normal.
+const SWAY = 10;
 const WALL_PATHS = (() => {
   const pts = OUTLINE.pts;
   const n = pts.length;
@@ -676,6 +695,38 @@ const WALL_PATHS = (() => {
   const area = pts.reduce((a, p, k) => { const q = pts[(k + 1) % n]; return a + p[0] * q[1] - q[0] * p[1]; }, 0);
   const edgeN = pts.map((p, k) => { const q = pts[(k + 1) % n]; const ex = q[0] - p[0]; const ey = q[1] - p[1]; const l = Math.hypot(ex, ey) || 1; return area > 0 ? [ey / l, -ex / l] : [-ey / l, ex / l]; });
   const vertN = pts.map((_, k) => { const a = edgeN[(k + n - 1) % n]; const b = edgeN[k]; const l = Math.hypot(a[0] + b[0], a[1] + b[1]) || 1; return [(a[0] + b[0]) / l, (a[1] + b[1]) / l]; });
+  // (worked out round the closed outline on a 0.25 mm grid of its length, so a long edge counts for its whole length)
+  const edge = pts.map((p, k) => { const q = pts[(k + 1) % n]; return Math.hypot(q[0] - p[0], q[1] - p[1]); });
+  const along = [0];
+  for (let k = 1; k < n; k++) along.push(along[k - 1] + edge[k - 1]);
+  const round = along[n - 1] + edge[n - 1];
+  const count = Math.round(round / 0.25);
+  const h = round / count;
+  const fine = [];
+  for (let i = 0, k = 0; i < count; i++) {
+    while (k < n - 1 && along[k + 1] <= i * h) k++;
+    const u = (i * h - along[k]) / (edge[k] || 1);
+    const v = vertN[(k + 1) % n];
+    fine.push([vertN[k][0] + (v[0] - vertN[k][0]) * u, vertN[k][1] + (v[1] - vertN[k][1]) * u]);
+  }
+  const W = Math.round(SWAY / h);
+  const eased = fine.map((_, i) => {
+    let x = 0;
+    let y = 0;
+    for (let j = 1 - W; j < W; j++) { const w = Math.cos((j / W) * (Math.PI / 2)) ** 2; const q = fine[(i + j + count) % count]; x += w * q[0]; y += w * q[1]; }
+    return [x, y];
+  });
+  // the eased direction on edge k, a share u of the way along it
+  const leanAt = (k, u) => {
+    const f = (along[k] + u * edge[k]) / h;
+    const i = Math.floor(f);
+    const p = eased[i % count];
+    const q = eased[(i + 1) % count];
+    const x = p[0] + (q[0] - p[0]) * (f - i);
+    const y = p[1] + (q[1] - p[1]) * (f - i);
+    const l = Math.hypot(x, y) || 1;
+    return [x / l, y / l];
+  };
   const path = (from, to) => {
     const idx = [];
     for (let k = from; k !== to; k = (k + 1) % n) idx.push(k);
@@ -684,7 +735,7 @@ const WALL_PATHS = (() => {
     for (let k = 1; k < idx.length; k++) len.push(len[k - 1] + Math.hypot(pts[idx[k]][0] - pts[idx[k - 1]][0], pts[idx[k]][1] - pts[idx[k - 1]][1]));
     return { idx, len, total: len[len.length - 1] };
   };
-  return { buccal: path(0, firstPalatal), palatal: path(firstPalatal, 0), pts, vertN };
+  return { buccal: path(0, firstPalatal), palatal: path(firstPalatal, 0), pts, vertN, leanAt };
 })();
 // for each edge of the outline (point k to point k + 1), the pass that finishes it and how far along that pass its
 // far end is (0 … 1), for the drawing's finished walls
@@ -698,7 +749,8 @@ export const WALL_REACH = (() => {
   }
   return { pass, at };
 })();
-// a point on a wall path at arc length a: the contact point and the outward normal, both interpolated
+// a point on a wall path at arc length a: the contact point, the outward normal and the direction of the lean, all
+// interpolated
 const wallContact = (kind, a) => {
   const w = WALL_PATHS[kind];
   const t = Math.max(0, Math.min(w.total, a));
@@ -712,20 +764,20 @@ const wallContact = (kind, a) => {
   const nx = n0[0] + (n1[0] - n0[0]) * k;
   const ny = n0[1] + (n1[1] - n0[1]) * k;
   const l = Math.hypot(nx, ny) || 1;
-  return { q: [p0[0] + (p1[0] - p0[0]) * k, p0[1] + (p1[1] - p0[1]) * k], n: [nx / l, ny / l] };
+  return { q: [p0[0] + (p1[0] - p0[0]) * k, p0[1] + (p1[1] - p0[1]) * k], n: [nx / l, ny / l], out: WALL_PATHS.leanAt(w.idx[j - 1], k) };
 };
 const wallPoint = (kind, a, lean) => {
-  const { q, n } = wallContact(kind, a);
-  const t = tiltOf(n, lean);
+  const { q, n, out } = wallContact(kind, a);
+  const t = tiltOf(out, lean);
   return { p: tipFor(toHolder(q, WALL_DEPTH), [n[0], n[1], 0], t), t, s: a };
 };
-// The lean on the walls: 15° where the head is clear, eased where tilting the cradle that far would bring a part of it
+// The lean on the walls: 10° where the head is clear, eased where tilting the cradle that far would bring a part of it
 // inside the head's safety envelope (HEAD), as a CAM program limits the tilt to keep its clearance round the head.
 // With the head and cradle in the video's proportions (the drive hub Ø70, the nozzles' tips tucked in under the
-// flange, the carriage's top clear under the head box) it never needs to: the lean is 15° all the way
-// round, and the tests hold it there, so a change that brings the easing back must be described. Worked out on a
-// 0.25 mm grid with 3 mm of room to spare, then the least lean within 6 mm either side, blended, so the tilt changes
-// gently; the build writes the table into the page, so it is not worked out again on load.
+// flange, the carriage's top clear under the head box) it never needs to on the contour shown: the lean is 10° all
+// the way round, and the tests hold it there, so a change that brings the easing back must be described. Worked out
+// on a 0.25 mm grid with 3 mm of room to spare, then the least lean within 6 mm either side, blended, so the tilt
+// changes gently; the build writes the table into the page, so it is not worked out again on load.
 const LEAN_STEP = 0.25;
 // LEANS:begin
 const LEANS = (() => {
@@ -761,12 +813,22 @@ const wallAt = (u, kind) => {
   const a = u * WALL_PATHS[kind].total;
   return wallPoint(kind, a, leanAt(kind, a));
 };
-// passes in order: kind, readout line, duration, tip and tool along u ∈ [0, 1]
+// The feed along a pass: from rest up to a steady feed over its first RAMP seconds, and down to rest over its last, as
+// a machine's axes accelerate and brake. A pass run at full feed to its last point would stop every axis dead there,
+// and a wall pass ends just round a distal corner, where A and B are turning at tens of degrees a second. Given the
+// share of the pass's time gone, the share of its path covered; the speed and the acceleration are both zero at the ends.
+const RAMP = 0.6;
+const feedOf = (dur) => {
+  const e = RAMP / dur;
+  const ramp = (v) => v * v * v - (v * v * v * v) / 2;
+  return (u) => (u <= 0 ? 0 : u >= 1 ? 1 : u < e ? (e * ramp(u / e)) / (1 - e) : u > 1 - e ? 1 - (e * ramp((1 - u) / e)) / (1 - e) : (u - e / 2) / (1 - e));
+};
+// passes in order: kind, readout line, duration, tip and tool along the path's u ∈ [0, 1], and the feed along it
 const PASSES = [
   { kind: "occlusal", say: "Occlusal surface · nearly upright, 3°", dur: 12, at: occlusalAt },
-  { kind: "buccal", say: "Buccal wall, right end · leaning out 15°", dur: 10, at: (u) => wallAt(u, "buccal") },
-  { kind: "palatal", say: "Palatal wall, left end · leaning out 15°", dur: 10, at: (u) => wallAt(u, "palatal") },
-];
+  { kind: "buccal", say: "Buccal wall, right end · leaning out 10°", dur: 10, at: (u) => wallAt(u, "buccal") },
+  { kind: "palatal", say: "Palatal wall, left end · leaning out 10°", dur: 10, at: (u) => wallAt(u, "palatal") },
+].map((pass) => ({ ...pass, feed: feedOf(pass.dur) }));
 // each pass's tool path as the tip's track across the disc (disc frame, mm), for the part view
 export const PASS_TRACKS = PASSES.map((pass) => {
   const pts = [];
@@ -774,7 +836,7 @@ export const PASS_TRACKS = PASSES.map((pass) => {
   for (let i = 0; i <= n; i++) { const q = pass.at(i / n); pts.push([q.p[0], q.p[1]]); }
   return { kind: pass.kind, pts };
 });
-// clearance plane for moves between passes: the tip 6 mm above face B, along the tool
+// clearance plane for moves between passes: the tip 6 mm above the holder's face B, along the tool
 const SAFE = 6;
 const lift = (q) => {
   const k = (GEO.THICK + SAFE - q.p[2]) / q.t[2];
@@ -858,8 +920,8 @@ export const SIM = (() => {
     steps.push({ kind: "dip", say: pass.say, dur: DIP, from: axesFor(last.p, last.t), to: out, pass, rising: true });
     prev = out;
   }
-  steps.push({ kind: "move", say: "Finished: back home", dur: moveTime(prev, { ...prev, z: 0 }, homeAxes), from: prev, via: { ...prev, z: 0 }, to: { ...homeAxes, z: 0 }, pass: null });
-  steps.push({ kind: "hold", say: "Finished", dur: 1.4, from: homeAxes, pass: null });
+  steps.push({ kind: "move", say: "Occlusal side finished: back home", dur: moveTime(prev, { ...prev, z: 0 }, homeAxes), from: prev, via: { ...prev, z: 0 }, to: { ...homeAxes, z: 0 }, pass: null });
+  steps.push({ kind: "hold", say: "Occlusal side finished", dur: 1.4, from: homeAxes, pass: null });
   let start = 0;
   for (const step of steps) { step.start = start; start += step.dur; }
   // the magazine's runs: out while the head checks the last tool on the sensor, its row index at about 4 rows a second,
@@ -901,7 +963,7 @@ export function simAt(time) {
   let axes;
   let tilt = 0;
   if (step.kind === "cut") {
-    const q = step.pass.at(u);
+    const q = step.pass.at(step.pass.feed(u));
     axes = axesFor(q.p, q.t);
     tilt = (Math.acos(Math.min(1, q.t[2])) * 180) / Math.PI;
   } else if (step.kind === "dip") axes = lerpAxes(step.from, step.to, smooth(u));
@@ -913,11 +975,11 @@ export function simAt(time) {
     axes = lerpAxes(step.from, step.to, k);
     axes.z = step.from.z + (step.via.z - step.from.z) * zk + (step.to.z - step.via.z) * dk;
   } else axes = { ...step.from };
-  // how far each surface is finished at this time
+  // how far each surface is finished at this time: the share of its pass's path the bur has covered
   const done = { occlusal: 0, buccal: 0, palatal: 0 };
   for (const s2 of SIM.steps) {
     if (s2.kind !== "cut") continue;
-    done[s2.pass.kind] = t >= s2.start + s2.dur ? 1 : t <= s2.start ? 0 : (t - s2.start) / s2.dur;
+    done[s2.pass.kind] = s2.pass.feed((t - s2.start) / s2.dur);
   }
   const kind = step.pass ? step.pass.kind : null;
   const axis = kind === "tool" ? (step.kind === "hold" ? null : "yz") : step.kind === "cut" || step.kind === "dip" ? "all" : null;

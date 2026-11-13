@@ -11,7 +11,7 @@ import * as A from "../../../.claude/skills/anatomy/kit/audit.mjs";
 import { turning } from "../../../.claude/skills/anatomy/kit/turn-build.mjs";
 import * as TA from "../../../.claude/skills/anatomy/kit/turn-audit.mjs";
 import { turnScript } from "../../../.claude/skills/anatomy/scripts/inline-kit.mjs";
-import { SPEC, TRAVEL, GEO, HOME, Y_DISC, AXES_DIR, BUR, burRadius, BRIDGE, CONNECTORS, PASS_TRACKS, NOZZLE, POCKETS, SHANK_TOP, pocketAt, leansTable, wrap, magOf, magFor, zLimit, simAt, SIM, SIM_LEN, SIM_MARKS, axesOf, wordsOf } from "./model.mjs";
+import { SPEC, TRAVEL, GEO, HOME, Y_DISC, AXES_DIR, BUR, burRadius, BRIDGE, CONNECTORS, PASS_TRACKS, NOZZLE, POCKETS, SHANK_TOP, pocketAt, leansTable, LEAN, wrap, magOf, magFor, zLimit, simAt, SIM, SIM_LEN, SIM_MARKS, axesOf, wordsOf } from "./model.mjs";
 import { workSvg, underSvg } from "./work.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -29,7 +29,6 @@ const ELEVATION = 30;
 // to an assumed standard Ø98.5 disc
 const { HALF, THICK, ARM_L, ARM_R, BOSS_R, WALL, TOP, WALL_Z0, KNUCKLE, TIP_Z, MAG, MAG_TOP, POST, PITCH } = GEO;
 const CHAMFER = 6.5;
-const DISC_R = SPEC.disc / 2;
 // Chamber: the back wall's lower band, the ledge across it, and the dark upper band set back behind the column
 const FLOOR_Z = GEO.FLOOR;
 const BACK_Y = -GEO.WALL_Y;
@@ -223,7 +222,8 @@ const holder = T.prism({ name: "holder.plate", ...CA, F: HF, polygon: plate, s0:
 const ringScrews = Array.from({ length: 6 }, (_, i) => [56.5 * Math.cos((i * Math.PI) / 3), 56.5 * Math.sin((i * Math.PI) / 3)]);
 const knurled = (x, y) => `${screwHead(x, y, 3.6)}<path class="iso-line" data-tone="faint" d="${shift(circle(2.2, 12), x, y)}"/>`;
 // The milled disc (work.mjs) is drawn for the holder at rest; live.js redraws it as the holder moves. One millimetre
-// down from face B moves a point across the face by REST_SHIFT (disc frame); a wall is lit when it faces screen left.
+// down from face B moves a point across the face by REST_SHIFT (disc frame), and one millimetre in from face A by its
+// opposite; a wall is lit when it faces screen left.
 const REST = (() => {
   const o = k.iso([0, 0, THICK], P);
   const pu = k.iso([-1, 0, THICK], P);
@@ -254,12 +254,15 @@ const faceB = [
   `<path class="iso-line" data-tone="lo" data-free="end" d="${[-42, -21, 0, 21, 42].map((x) => `M${x} 68L${x} 72`).join("")}"/>`,
 ].join("");
 T.plane({ part: holder, o: [0, 0, THICK], u: [-1, 0, 0], v: [0, -1, 0], svg: faceB });
-// Face A (down at A = 0): the disc in its bore, the recessed field, the premill groove with five engraved seat marks,
-// knurled screws on brackets at the bar-end corners, side-rim screws and through-holes
+// Face A (down at A = 0): the disc seen through the seat's bore, as far below this face as below face B (the seat is
+// an assumption: a ledge under the disc's rim, its bore the clamp ring's size, with a chamfered mouth), the recessed
+// field, the premill groove with five engraved seat marks, knurled screws on brackets at the bar-end corners, side-rim
+// screws and through-holes
 const faceA = [
   `<path class="iso-line" data-tone="lo" d="${roundRect(-64, -57, 63, 55, 3)}"/>`,
-  `<path class="tr-gap" fill-rule="evenodd" d="${circle(DISC_R + 0.9)}${circle(DISC_R)}"/>`,
-  underSvg(),
+  `<path class="tr-bevel" fill-rule="evenodd" d="${circle(47)}${circle(45.5)}"/>`,
+  `<path class="iso-line" data-tone="lo" d="${circle(47)}"/>`,
+  underSvg([-REST_SHIFT[0], -REST_SHIFT[1]], REST_LIT),
   `<path class="iso-line" data-tone="lo" d="${roundRect(-56, 58, 55, 68, 2)}"/>`,
   `<path class="iso-line" data-tone="lo" data-free="end" d="${[-42, -21, 0, 21, 42].map((x) => `M${x} 68L${x} 72`).join("")}"/>`,
   ...ringScrews.map(([x, y]) => `<path class="iso-line" data-tone="lo" d="${shift(circle(1.6, 12), x * 1.02, y * 1.02)}"/>`),
@@ -451,14 +454,22 @@ function spindle() {
     { name: "head.shaft", material: "steel", svg: S(G.solidOf([[S0 - 10, 7.5], [S0, 7.5]], F, P), { tone: "mid" }), shape: A.solid(F, [[S0 - 10, 7.5], [S0, 7.5]]), at: [HX, HY, S0 - 5] },
     { name: "tool.collar", material: "steel", svg: S(G.solidOf([[S0 - 17, 6.5], [S0 - 10, 6.5]], F, P), { tone: "mid" }) + Faded(G.ribsOf(F, S0 - 17, S0 - 10, 6.5, 6, P, { fade: [0.1, 0.55] }), { tone: "lo" }), shape: A.solid(F, [[S0 - 17, 6.5], [S0 - 10, 6.5]]), at: [HX, HY, S0 - 13.5] },
   ];
-  // the bur: the finishing tool, a Ø1.0 ball on a long neck (ARUM's ZB-86: 20 mm reach) tapering to the Ø6 shank, dark
-  // like the tools in the magazine, so it keeps its colour through a swap
-  const bur = BUR_DRAWN;
+  // the bur: the finishing tool, a Ø1.0 ball on a 10 mm neck, a cone and a short collar under the Ø6 shank (as ARUM's
+  // MB-12; model.mjs BUR), dark like the tools in the magazine, so it keeps its colour through a swap
+  // drawn as a stack of convex turned pieces, lowest first: the ball and neck, the cone and collar, the shank with the
+  // step under it. A new piece starts wherever the profile turns outward (by more than the ball's shoulder does), so
+  // each piece's outline is its own straight-sided hull; drawn as one piece the bur came out as the cone that wraps
+  // it, its thin neck lost inside
+  const burPieces = [];
+  for (let i = 1, from = 0; i < BUR_DRAWN.length; i++) {
+    const slope = (j) => (BUR_DRAWN[j + 1][1] - BUR_DRAWN[j][1]) / (BUR_DRAWN[j + 1][0] - BUR_DRAWN[j][0]);
+    if (i === BUR_DRAWN.length - 1 || slope(i) > slope(i - 1) + 0.1) { burPieces.push(BUR_DRAWN.slice(from, i + 1)); from = i; }
+  }
   if (!(S0 - 17 > TIP_Z + BUR[BUR.length - 1][0])) throw new Error("tool: shank shorter than its taper");
-  // its depth-sorting shape stops 9 mm above the tip: the cutting reach is down in the channel it cuts, which the holder
-  // plate's solid (a plain block) does not model
-  const sortBur = [[TIP_Z + 9, 0], [TIP_Z + 9.05, burRadius(9.05)], ...BUR.filter(([h]) => h > 9.05).map(([h, r]) => [TIP_Z + h, r]), [S0 - 17, 3]];
-  parts.push({ name: "tool.bur", material: "gunmetal", svg: S(G.solidOf(bur, F, P, {}), { tone: "hi", crease: "lo" }), shape: A.solid(F, sortBur), at: [HX, HY, TIP_Z + 14] });
+  // its depth-sorting shape stops 10 mm above the tip: the cutting reach is down in the bore and the channel it cuts,
+  // which the holder plate's solid (a plain block) does not model, and the tip goes 9 mm below the holder's face
+  const sortBur = [[TIP_Z + 10, 0], [TIP_Z + 10.05, burRadius(10.05)], ...BUR.filter(([h]) => h > 10.05).map(([h, r]) => [TIP_Z + h, r]), [S0 - 17, 3]];
+  parts.push({ name: "tool.bur", material: "gunmetal", svg: burPieces.map((piece) => S(G.solidOf(piece, F, P, {}), { tone: "hi", crease: "lo" })).join(""), shape: A.solid(F, sortBur), at: [HX, HY, TIP_Z + 14] });
   // coolant: on each side a black upright block under the head box ends in a swivel eye; from it a Ø5 tube and a flat
   // black Ø10 tip aim in and down at the tool (model.mjs NOZZLE)
   const aim = [HX, HY, TIP_Z + NOZZLE.aim];
@@ -608,7 +619,7 @@ if (argv.includes("--audit")) {
 }
 
 const LABEL =
-  "Inside the machining chamber of a 5-axis dental mill, finishing an illustrative full-arch zirconia bridge. A gold cradle, open at the front, holds a square disc holder on a horizontal shaft; in the disc a horseshoe-shaped twelve-tooth bridge stands in a channel cut through it, held by small connectors, with four screw holes. Above it the spindle points straight down and never tilts. The job opens with a tool change at the left: behind a flap door hinged at the bottom is the tool magazine, which slides out through its window over the open flap while the spindle touches its last tool down on a sensor post beside it; the spindle returns that tool to a pocket, the magazine indexes a few rows toward the operator to bring the next pocket under the spindle, the spindle takes the finishing bur, and it measures the bur on the sensor post. Then, as the bur works round the arch, the holder turns (A) and the cradle tilts (B) to lean the part against the tool, while the cradle slides toward the operator and back on a tall carriage that comes out of a collar in the back wall (X), the spindle column runs left and right (Y) and the head moves up and down (Z). Behind the bur the rough terraces left by roughing give way to finished teeth.";
+  "Inside the machining chamber of a 5-axis dental mill, finishing an illustrative full-arch titanium bridge framework. A gold cradle, open at the front, holds a square disc holder on a horizontal shaft; the titanium disc sits a little below the holder's face, and in it a horseshoe-shaped twelve-unit framework stands in a channel cut through the disc, held by small connectors, with four screw holes. Above it the spindle points straight down and never tilts. The job opens with a tool change at the left: behind a flap door hinged at the bottom is the tool magazine, which slides out through its window over the open flap while the spindle touches its last tool down on a sensor post beside it; the spindle returns that tool to a pocket, the magazine indexes a few rows toward the operator to bring the next pocket under the spindle, the spindle takes the finishing bur, and it measures the bur on the sensor post. Then, as the bur works round the arch, the holder turns (A) and the cradle tilts (B) to lean the part against the tool, while the cradle slides toward the operator and back on a tall carriage that comes out of a collar in the back wall (X), the spindle column runs left and right (Y) and the head moves up and down (Z). Behind the bur the rough terraces left by roughing give way to the finished surface.";
 const AXES = [
   { key: "X", name: "cradle in and out", range: `0 to ${TRAVEL.x} mm` },
   { key: "Y", name: "spindle left and right", range: `0 to ${TRAVEL.y} mm` },
@@ -623,13 +634,14 @@ const KEYS_HELP = "In the simulation, Space plays or pauses, the arrow keys step
 // left, and this puts it in the middle of the card; the page script reads its box from the first layer
 const VIEW_X = -34;
 const centred = (svg) => svg.replace(`viewBox="0 0 ${W} ${H}"`, () => `viewBox="${VIEW_X} 0 ${W} ${H}"`);
-const stage = `<div class="iso-stage iso-turn tr-stage" data-mode="sim" tabindex="0" role="slider" aria-label="Milling simulation: finishing a full-arch bridge" aria-describedby="tr-help" aria-valuemin="0" aria-valuemax="${Math.round(SIM_LEN)}" aria-valuenow="0" aria-valuetext="0 of ${Math.round(SIM_LEN)} seconds">${centred(backSvg)}${centred(out.layerSvg("machine", { width: W, height: H }))}${centred(staticSvg(layerOf("front")))}</div><noscript><style>.tr-stage>svg{opacity:1}</style></noscript><span class="tr-help" id="tr-help">${KEYS_HELP}</span><span class="tr-help" aria-live="polite" data-say=""></span>`;
+const stage = `<div class="iso-stage iso-turn tr-stage" data-mode="sim" tabindex="0" role="slider" aria-label="Milling simulation: finishing a titanium bridge framework" aria-describedby="tr-help" aria-valuemin="0" aria-valuemax="${Math.round(SIM_LEN)}" aria-valuenow="0" aria-valuetext="0 of ${Math.round(SIM_LEN)} seconds">${centred(backSvg)}${centred(out.layerSvg("machine", { width: W, height: H }))}${centred(staticSvg(layerOf("front")))}</div><noscript><style>.tr-stage>svg{opacity:1}</style></noscript><span class="tr-help" id="tr-help">${KEYS_HELP}</span><span class="tr-help" aria-live="polite" data-say=""></span>`;
 // the part view: the disc from above (front at the bottom), drawn flat with the walls just showing, the current pass's
-// tool path (done part darker) and the bur's tip with a line along its lean
+// tool path (to come dashed, done solid; inked dark over the metal of the part's top and light in the channel beside
+// its walls) and the bur's tip with a line along its lean, cased in the card's colour so it shows on any ground
 const INSET_SH = [0, 0.45];
 const insetLit = (n) => n[0] < 0;
 const trackD = (pts) => `M${pts.map((p) => `${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join("L")}`;
-const inset = `<div class="tr-inset" aria-hidden="true"><svg class="iso-svg" viewBox="-51 -51 102 102"><g transform="scale(-1 -1)">${workSvg(INSET_SH, { occlusal: 0, buccal: 0, palatal: 0 }, insetLit, "tri")}</g>${PASS_TRACKS.map((t) => `<path class="tr-track" data-track="${t.kind}" d="${trackD(t.pts)}"/><path class="tr-track-done" data-track-done="${t.kind}" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" d="${trackD(t.pts)}"/>`).join("")}<g class="tr-tool" data-tool="" opacity="0"><path class="tr-tool-lean" d="M0 0L0 0"/><circle class="tr-tool-tip" r="1.5"/></g></svg><span class="tr-inset-name"><span class="tr-inset-long">Part · </span>from above</span></div>`;
+const inset = `<div class="tr-inset" aria-hidden="true"><svg class="iso-svg" viewBox="-51 -51 102 102"><g transform="scale(-1 -1)">${workSvg(INSET_SH, { occlusal: 0, buccal: 0, palatal: 0 }, insetLit, "tri", 0)}</g>${PASS_TRACKS.map((t) => `<path class="tr-track" data-track="${t.kind}" d="${trackD(t.pts)}"/><path class="tr-track-done" data-track-done="${t.kind}" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" d="${trackD(t.pts)}"/>`).join("")}<g class="tr-tool" data-tool="" opacity="0"><path class="tr-tool-lean tr-tool-case" d="M0 0L0 0"/><path class="tr-tool-lean" d="M0 0L0 0"/><circle class="tr-tool-tip" r="1.5"/></g></svg><span class="tr-inset-name"><span class="tr-inset-long">Part · </span>from above</span></div>`;
 // the job's timeline (pointer only: the stage is the slider): the tool change and the three passes, named, then the way
 // home, so the track runs the job's whole length; then the controls: play, the two modes, and the five axes
 const PASS_NAME = { tool: "Tool", occlusal: "Occlusal", buccal: "Buccal", palatal: "Palatal" };
@@ -640,26 +652,32 @@ const HOME_AXES = axesOf(HOME);
 const axesRow = `<div class="tr-axes" role="group" aria-label="Controls"><button type="button" class="tr-axis tr-play" title="Play or pause the simulation">Play</button><span class="tr-modes" role="group" aria-label="Mode"><button type="button" class="tr-axis tr-mode tr-mode-sim" aria-pressed="true" title="Run the finishing job">Simulate</button><button type="button" class="tr-axis tr-mode tr-mode-jog" aria-pressed="false" title="Move the axes yourself">Jog</button></span>${AXES.map((ax) => `<button type="button" class="tr-axis" data-axis="${ax.key}" aria-pressed="false" aria-label="Jog ${ax.key}: ${ax.name}" title="${ax.key}: ${ax.name}, ${ax.range}"><span class="tr-axis-key" aria-hidden="true">${ax.key}</span><span class="tr-axis-value" data-value="${ax.key}" aria-hidden="true">${HOME_AXES[ax.key]}</span></button>`).join("")}</div>`;
 
 const CSS = `${out.css}
-.iso{--tr-bay-back:#0e0e10;--tr-ring:#1c1c1e;--tr-disc:#ffffff;--tr-disc-a:.10;--tr-bevel:#9a9aa0;--tr-hole:#0d0d0e;--tr-screw:#8f8f94;--tr-recess:#161618;--tr-led:#e8742a;--tr-bore:#08080a}
-.iso[data-theme="light"]{--tr-bay-back:#3f4247;--tr-ring:#4a4a50;--tr-disc:#ffffff;--tr-disc-a:.5;--tr-bevel:#e4e4e6;--tr-hole:#55555a;--tr-screw:#b9b9bd;--tr-recess:#d3d3d6;--tr-led:#e0611a;--tr-bore:#232428}
-.iso{--tr-zr-top:#5d5d61;--tr-zr-lit:#4b4b4f;--tr-zr-shade:#3b3b3f;--tr-zr-fin-lit:#55555a;--tr-zr-fin-shade:#444449;--tr-moat:#2f2f33;--tr-void:#0b0b0c}
-.iso[data-theme="light"]{--tr-zr-top:#ffffff;--tr-zr-lit:#f0f0ee;--tr-zr-shade:#e0e0dd;--tr-zr-fin-lit:#f7f7f5;--tr-zr-fin-shade:#e9e9e6;--tr-moat:#d7d7d4;--tr-void:#4a4a50}
-.tr-top{fill:var(--tr-zr-top)}
-.tr-wall{fill:var(--tr-zr-shade)}
-.tr-wall[data-lit]{fill:var(--tr-zr-lit)}
-.tr-wall.tr-fin{fill:var(--tr-zr-fin-shade)}
-.tr-wall.tr-fin[data-lit]{fill:var(--tr-zr-fin-lit)}
+.iso{--tr-bay-back:#0e0e10;--tr-ring:#1c1c1e;--tr-bevel:#9a9aa0;--tr-hole:#0d0d0e;--tr-screw:#8f8f94;--tr-recess:#161618;--tr-led:#e8742a;--tr-bore:#08080a}
+.iso[data-theme="light"]{--tr-bay-back:#3f4247;--tr-ring:#4a4a50;--tr-bevel:#e4e4e6;--tr-hole:#55555a;--tr-screw:#b9b9bd;--tr-recess:#d3d3d6;--tr-led:#e0611a;--tr-bore:#232428}
+.iso{--tr-disc:#54575d;--tr-seat:#33353a;--tr-moat:#2f3237;--tr-void:#0b0b0c;--tr-ti-top:#7b7f87;--tr-ti-lit:#6a6e75;--tr-ti-shade:#4d5056;--tr-ti-fin-top:#c6cad0;--tr-ti-fin-lit:#b1b5bc;--tr-ti-fin-shade:#858990;--tr-ti-line:#8f939b;--tr-ti-terrace:#5d6168;--tr-ti-step:#3b3e43;--tr-ti-rim:#a9adb5;--tr-track:#3a3d42;--tr-track-done:#15161a;--tr-track-wall:#8d9198;--tr-track-wall-done:#ffffff}
+.iso[data-theme="light"]{--tr-disc:#b2b5bc;--tr-seat:#989ca3;--tr-moat:#82878f;--tr-void:#4a4a50;--tr-ti-top:#cbced4;--tr-ti-lit:#bcc0c6;--tr-ti-shade:#9da2aa;--tr-ti-fin-top:#f5f6f8;--tr-ti-fin-lit:#e8eaee;--tr-ti-fin-shade:#c6cad0;--tr-ti-line:#b3b7be;--tr-ti-terrace:#a3a7af;--tr-ti-step:#8d9299;--tr-ti-rim:#8b9097;--tr-track:#8a8f97;--tr-track-done:#18181a;--tr-track-wall:#eceef1;--tr-track-wall-done:#18181a}
+.tr-top{fill:var(--tr-ti-top)}
+.tr-top.tr-fin{fill:var(--tr-ti-fin-top)}
+.tr-wall{fill:var(--tr-ti-shade)}
+.tr-wall[data-lit]{fill:var(--tr-ti-lit)}
+.tr-wall.tr-fin{fill:var(--tr-ti-fin-shade)}
+.tr-wall.tr-fin[data-lit]{fill:var(--tr-ti-fin-lit)}
+.tr-seat{fill:var(--tr-seat)}
 .tr-moat{fill:var(--tr-moat)}
 .tr-void{fill:var(--tr-void)}
-.tr-conn{fill:var(--tr-zr-lit)}
-.tr-conn-side{fill:var(--tr-zr-shade)}
-.tr-crowns{fill:var(--anatomy-lo)}
+.tr-conn{fill:var(--tr-ti-lit)}
+.tr-conn-side{fill:var(--tr-ti-shade)}
+.iso-line.tr-unit{stroke:var(--tr-ti-line)}
+.iso-line.tr-terrace{stroke:var(--tr-ti-terrace)}
+.iso-line.tr-step{stroke:var(--tr-ti-step)}
+.iso-line.tr-rim{stroke:var(--tr-ti-rim)}
+.iso-line.tr-margin{stroke-width:calc(var(--anatomy-weight)*1.7)}
 .iso-svg .tr-reveal{vector-effect:none;stroke-linecap:butt}
 .tr-ring{fill:var(--tr-ring)}
-.tr-disc{fill:var(--tr-disc);fill-opacity:var(--tr-disc-a)}
+.tr-disc{fill:var(--tr-disc)}
 .tr-bevel{fill:var(--tr-bevel)}
 .tr-shade{opacity:.3}
-.tr-hole,.tr-gap{fill:var(--tr-hole)}
+.tr-hole{fill:var(--tr-hole)}
 .tr-recess{fill:var(--tr-recess)}
 .tr-led{fill:var(--tr-led)}
 .tr-bay-back{fill:var(--tr-bay-back)}
@@ -690,12 +708,15 @@ path.tr-bore,.tr-bore .iso-fill,.tr-bore .iso-shade,.tr-bore .iso-top{fill:var(-
 .tr-inset>svg{position:absolute;inset:4%;width:92%;height:92%}
 .tr-inset-name{position:absolute;left:9px;top:8px;font:9px/1 var(--anatomy-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--anatomy-text);white-space:nowrap}
 .tr-track,.tr-track-done{fill:none;stroke-linecap:round;stroke-linejoin:round;display:none}
-.tr-track{stroke:var(--anatomy-mid);stroke-width:.7;stroke-dasharray:1.5 2.5}
-.tr-track-done{stroke:var(--anatomy-strong);stroke-width:1.1;stroke-opacity:.8}
+.tr-track{stroke:var(--tr-track);stroke-width:.7;stroke-dasharray:1.5 2.5}
+.tr-track-done{stroke:var(--tr-track-done);stroke-width:1.1;stroke-opacity:.8}
+.tr-track[data-track="buccal"],.tr-track[data-track="palatal"]{stroke:var(--tr-track-wall)}
+.tr-track-done[data-track-done="buccal"],.tr-track-done[data-track-done="palatal"]{stroke:var(--tr-track-wall-done)}
 .iso-svg .tr-track-done{vector-effect:none;stroke-width:.7}
 .tr-track[data-on],.tr-track-done[data-on]{display:inline}
 .tr-tool-tip{fill:var(--anatomy-strong);stroke:var(--anatomy-card);stroke-width:1}
 .tr-tool-lean{fill:none;stroke:var(--anatomy-strong);stroke-width:1.4;stroke-linecap:round}
+.tr-tool-lean.tr-tool-case{stroke:var(--anatomy-card);stroke-width:3.4}
 @media (prefers-reduced-motion: reduce){.tr-inset,.tr-stagewrap::after,.tr-stage[data-ready]>svg{transition:none}}
 @media (max-width:480px){.tr-inset-long{display:none}.tr-inset-name{left:6px;top:6px}.iso-plate-corner[data-corner="readout"]{left:0;text-align:right;overflow:hidden;text-overflow:ellipsis}}
 .tr-plate .iso-legend{color:var(--anatomy-text)}
@@ -732,15 +753,15 @@ const body =
     fig: "Fig 2",
     title: "Five-axis finishing",
     hint: "Click to play · drag to scrub",
-    readout: "Finishing a full-arch bridge",
+    readout: "Finishing a titanium bridge framework",
     keys: [
-      { mark: "lit", label: "Bridge: zirconia, milled about 20% large" },
+      { mark: "lit", label: "Framework: titanium, milled at final size" },
       { mark: "raised", label: "Cradle: X slides, B tilts ±30°, A turns 360°" },
       { mark: "flat", label: "Spindle: Y along the wall, Z up and down" },
     ],
     caption:
-      `An illustrative full-arch bridge: twelve units, screw-retained on four implants (channels at the lateral incisors and second premolars), nested occlusal side up in a 25 mm pre-sintered zirconia disc after roughing and milled about 20% large for the shrinkage in sintering. It stands in a channel through the disc as wide as the Ø2.0 mm roughing ball plus 0.7 mm, held by ${CONNECTORS.length} connectors at its equator; the sintering support a bridge this long would also carry is left out. The job opens with a tool change, as a 5X-200 does it in a video filmed for this figure: the head touches the last job's tool down on the sensor post beside the magazine while the magazine comes out through its window over the flap, which folds down into a shelf; the spindle returns that tool to the front row; the magazine indexes three rows toward the operator to bring the finishing bur's pocket under the spindle (the spindle never moves front to back); the spindle takes the bur and touches it down on the sensor to measure its length while the magazine indexes back; and the magazine goes back in as the head leaves for the first pass. The swap itself is drawn as the tool passing between pocket and collet, with the collet just above the shank. Each finishing pass is thinned for clarity, a zig-zag every few millimetres across the occlusal surface and one line round each wall, where the machine steps about 0.1 mm, so on the machine the job takes far longer. The Ø1.0 mm ball stays nearly upright on the occlusal surface (3°), then leans 15° out from the wall on one contour round the buccal side and the right-hand end, and one round the palatal side and the left-hand end. The spindle never tilts, so the disc is tilted to the tool: at the incisors the lean is on A, at the molars on B, and between them A and B share it, both changing as the tool goes round (simultaneous 5-axis motion, as hyperDENT's 5X cycles drive it). With the head and cradle in the video's proportions, nothing comes inside the clearance kept round the head (as a CAM program keeps one), so the lean holds at 15° all the way round. The screw channels are indexed jobs of their own and are shown done. Jog hands you the axes: X slides the cradle on a tall carriage through a raised collar in the back wall (${TRAVEL.x} mm), Y runs the spindle column along the wall (${TRAVEL.y} mm, from over the sensor post past the disc), Z lowers the head (${TRAVEL.z} mm), A turns the holder ${SPEC.aRange}° and B tilts the cradle ±${SPEC.bLimit}° about a front-to-back axis (inferred from the photos and the video, not published); when the spindle comes over the magazine or the sensor post, the magazine slides out over the open flap, but only with the cradle level, and the cradle tilts only with the magazine in. ` +
-      `Specs: ARUM 5X-200 (5 axes; travel X, Y, Z ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm as ARUM lists them; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm); finishing tool as ARUM's ZB-86 (Ø1.0 mm ball, 20 mm reach, 60 mm long). Tilts after the guidance of hyperDENT, a CAM ARUM supplies 5X-200 machine data for: 5° at most (3° preferred) where nothing is undercut, 10° or more on walls. ARUM shows its own 5X-200 screw-retained work in metal; zirconia is among the machine's listed materials. Which part moves on which axis, and the letters, are the dealer's: ARUM's sheet lists the ${TRAVEL.y} mm stroke as X. Machine proportions from the dealer's photos, ARUM's product photos and the video, scaled to a standard Ø${SPEC.disc} mm disc; bridge from typical tooth widths and arch form, drawn at one height; column, carriage, flap and chamber schematic, with the chamber's side walls, door and lights left off for the cutaway; styling illustrative. ${CREDIT}`,
+      `An illustrative full-arch bridge framework in titanium: twelve units, screw-retained on four implants (channels at the lateral incisors and second premolars), nested occlusal side up in a ${2 * GEO.DISC} mm titanium disc after roughing and milled at final size. The disc is thinner than its holder and is drawn centred in it, so each of its faces sits a few millimetres below the holder's (the disc's thickness and its seat are assumptions, not published). The framework stands in a straight channel through the disc, ${BRIDGE.gap} mm wide by hyperDENT's rule for the width (the roughing ball's diameter plus about 0.7 mm, with a Ø2.0 mm ball assumed, as ARUM's MB-10); ARUM's own photographs of milled metal discs show wider troughs with sloping walls. It is held by ${CONNECTORS.length} connectors at its equator, their number and size illustrative. The job opens with a tool change, as a 5X-200 does it in a video filmed for this figure: the head touches the last job's tool down on the sensor post beside the magazine while the magazine comes out through its window over the flap, which folds down into a shelf; the spindle returns that tool to the front row; the magazine indexes three rows toward the operator to bring the finishing bur's pocket under the spindle (the spindle never moves front to back); the spindle takes the bur and touches it down on the sensor to measure its length while the magazine indexes back; and the magazine goes back in as the head leaves for the first pass. The swap itself is drawn as the tool passing between pocket and collet, with the collet just above the shank. Each finishing pass is thinned for clarity, a zig-zag every few millimetres across the occlusal surface and one line round each wall, where a real program's lines lie a small fraction of a millimetre apart (hyperDENT's manual gives 0.02 to 0.15 mm as an example range for the stepover; ARUM publishes no value for titanium), so on the machine the job takes far longer. The Ø${(2 * BRIDGE.ball).toFixed(1)} mm ball stays nearly upright on the occlusal surface (${LEAN.occlusal}°), then leans ${LEAN.wall}° away from the wall on a single contour 2 mm below the top of each side: one round the buccal side and the right-hand end, and one round the palatal side and the left-hand end, the lean swinging gradually from wall to wall round each distal corner. The spindle never tilts, so the disc is tilted to the tool: at the incisors the lean is on A, at the molars on B, and between them A and B share it, both changing as the tool goes round (simultaneous 5-axis motion, as hyperDENT's 5X cycles drive it). With the head and cradle in the video's proportions, nothing comes inside the clearance kept round the head (as a CAM program keeps one) on the contour shown, so the lean holds at ${LEAN.wall}° all the way round it. A real job carries on down each wall to the equator and then turns the disc over on A to finish the fitting side from the other face; none of that is shown. Titanium is normally milled wet; the two coolant nozzles on the head are drawn, but the coolant is left out of the drawing. The screw channels are indexed jobs of their own and are shown done. Jog hands you the axes: X slides the cradle on a tall carriage through a raised collar in the back wall (${TRAVEL.x} mm), Y runs the spindle column along the wall (${TRAVEL.y} mm, from over the sensor post past the disc), Z lowers the head (${TRAVEL.z} mm), A turns the holder ${SPEC.aRange}° and B tilts the cradle ±${SPEC.bLimit}° about a front-to-back axis (inferred from the photos and the video, not published); when the spindle comes over the magazine or the sensor post, the magazine slides out over the open flap, but only with the cradle level, and the cradle tilts only with the magazine in. ` +
+      `Specs: ARUM 5X-200 (5 axes; travel X, Y, Z ${TRAVEL.y} × ${TRAVEL.x} × ${TRAVEL.z} mm as ARUM lists them; A 360°, B ±30°; ${SPEC.tools} tools on Ø${SPEC.shank} mm shanks; DC ${SPEC.kw.toFixed(1)} kW, ${SPEC.rpm.toLocaleString("en-US")} rpm); finishing tool as ARUM's MB-12 (size code D1.0*L10*50, read here as a Ø1.0 mm ball with 10 mm reach, 50 mm long). Tilts after the guidance of hyperDENT, a CAM ARUM supplies 5X-200 machine data for: 5° at most (3° preferred) where nothing is undercut, 10° or more on walls. ARUM lists titanium discs among the 5X-200's materials and the screw-retained bridge among its applications. Which part moves on which axis, and the letters, are the dealer's: ARUM's sheet lists the ${TRAVEL.y} mm stroke as X. Machine proportions from the dealer's photos, ARUM's product photos and the video, scaled to a standard Ø${SPEC.disc} mm disc; framework outline from typical tooth widths and arch form, ${BRIDGE.base - BRIDGE.top} mm high (an assumption); column, carriage, flap and chamber schematic, with the chamber's side walls, door and lights left off for the cutaway; styling illustrative. ${CREDIT}`,
     body: `<div class="tr-stagewrap">${stage}${inset}</div>` + timeline + axesRow,
   }) +
   `</div>`;
@@ -773,7 +794,7 @@ body{margin:0;background:var(--page);font:14px/1.6 ui-sans-serif,system-ui,-appl
 //   ?bg=none            drops the page colour round the card, so the host page shows through
 //   ?frame=soft         a rounded card with no outline (white in the light theme), for a host page of soft cards
 //   ?fig=none           drops the "Fig n" tag, which means nothing outside a set of figures
-//   ?caption=short      two sentences for a visitor and the credit line; ?caption=none keeps only the credit line
+//   ?caption=short      three sentences for a visitor and the credit line; ?caption=none keeps only the credit line
 // In a frame it posts its height to the host page ({ type: "iso-figure:height", height }) so the frame can fit it.
 const EMBED_OPTIONS = `(function(){var q=new URLSearchParams(location.search),r=document.documentElement,k=["theme","bg","frame","fig","caption"];for(var i=0;i<k.length;i++){var v=q.get(k[i]);if(v&&/^[a-z]+$/.test(v))r.setAttribute("data-"+k[i],v)}})()`;
 // (again on load and pageshow, and whenever the host asks with { type: "iso-figure:height?" }, so a host whose listener
@@ -793,7 +814,7 @@ const EMBED_HOST = `{
 // the card's theme before the first paint (the page script sets it again and keeps it in step): the address's, else
 // the reader's system
 const EMBED_THEME = `(function(){var r=document.documentElement,h=document.currentScript.parentNode,t=r.getAttribute("data-theme");h.setAttribute("data-theme",t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")})()`;
-const CAPTION_SHORT = `A simulated job on the ARUM 5X-200: the machine changes to a Ø${(2 * BRIDGE.ball).toFixed(1)} mm finishing bur, then finishes an illustrative full-arch zirconia bridge in three five-axis passes. The spindle never tilts: the disc turns and tilts to meet it. The passes are thinned for clarity, so the real job takes far longer. ${CREDIT}`;
+const CAPTION_SHORT = `A simulated job on the ARUM 5X-200: the machine changes to a Ø${(2 * BRIDGE.ball).toFixed(1)} mm finishing bur, then finishes the occlusal side of an illustrative full-arch titanium bridge framework in three five-axis passes. The spindle never tilts: the disc turns and tilts to meet it. The passes are thinned for clarity, so the real job takes far longer, and the coolant is left out of the drawing. ${CREDIT}`;
 // the three captions side by side; the page's styles show the one the frame's address asks for
 const embedBody = () => {
   const mark = '<span class="iso-caption">';

@@ -15,16 +15,23 @@ const INTEGRA_FIGURES_VERSION = '1.0.0';
 
 /**
  * The figures this plugin ships. `height` is the frame's height before the figure has loaded and reported its
- * real one, per caption setting, as a line in the frame's own width (cqw is a hundredth of it), measured from the
- * figure at widths from 320 to 760 px; `ratio` (width over height at full width) stands in where cqw is unknown.
+ * real one, per caption setting, worked out from the frame's own width (cqw is a hundredth of it): the height at
+ * 320 px, then a straight piece to each of 390, 480, 600 and 760 px (each term runs only over its own stretch),
+ * then the two steps the figure's own breakpoints make, up past 480 px and down past 560 px. Fitted from above to
+ * the figure's height measured at every width from 320 to 760 px, with the shortcode's default frame and
+ * background; `ratio` (width over height at full width) stands in where cqw is unknown.
  */
 function integra_figures() {
 	return array(
 		'arum-5x200-finishing' => array(
 			'file'   => 'figures/arum-5x200-finishing.html',
-			'title'  => 'Interactive figure: the ARUM 5X-200 changes its tool, then finishes a full-arch bridge in five axes',
-			'ratio'  => array( 'short' => '760 / 951', 'none' => '760 / 856', 'full' => '760 / 1515' ),
-			'height' => array( 'short' => 'calc(578px + 49cqw)', 'none' => 'calc(300px + 73cqw)', 'full' => 'calc(2400px - 120cqw)' ),
+			'title'  => 'Interactive figure: the ARUM 5X-200 changes its tool, then finishes the occlusal side of a full-arch titanium bridge framework in five axes',
+			'ratio'  => array( 'short' => '760 / 972', 'none' => '760 / 858', 'full' => '760 / 1677' ),
+			'height' => array(
+				'short' => 'calc(769px + clamp(0px, (100cqw - 320px) * 0.5571, 39px) + clamp(0px, (100cqw - 390px) * 0.3778, 34px) + clamp(0px, (100cqw - 480px) * 0.4833, 58px) + clamp(0px, (100cqw - 600px) * 0.475, 76px) + clamp(0px, (100cqw - 480px) * 31, 31px) - clamp(0px, (100cqw - 560px) * 35, 35px))',
+				'none'  => 'calc(545px + clamp(0px, (100cqw - 320px) * 0.7714, 54px) + clamp(0px, (100cqw - 390px) * 0.6222, 56px) + clamp(0px, (100cqw - 480px) * 0.7667, 92px) + clamp(0px, (100cqw - 600px) * 0.7188, 115px) + clamp(0px, (100cqw - 480px) * 31, 31px) - clamp(0px, (100cqw - 560px) * 35, 35px))',
+				'full'  => 'calc(2510px + max(-298px, (100cqw - 320px) * -4.2571) + clamp(-246px, (100cqw - 390px) * -2.7333, 0px) + clamp(-165px, (100cqw - 480px) * -1.375, 0px) + clamp(-120px, (100cqw - 600px) * -0.75, 0px) + clamp(0px, (100cqw - 480px) * 31, 31px) - clamp(0px, (100cqw - 560px) * 35, 35px))',
+			),
 		),
 	);
 }

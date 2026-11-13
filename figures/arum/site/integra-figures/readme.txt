@@ -20,7 +20,7 @@ Place a figure anywhere shortcodes run, including inside a Custom HTML block:
 Options (all optional):
 
 * `theme` - `light` (default), `dark`, or `auto` to follow the visitor's system setting.
-* `caption` - `short` (default: two sentences and the credit line), `full` (the whole technical caption) or `none`
+* `caption` - `short` (default: three sentences and the credit line), `full` (the whole technical caption) or `none`
   (the credit line only).
 * `frame` - `soft` (default: a white rounded card with no outline) or `card` (the figure's own hairline card).
 * `bg` - `none` (default: the page shows through round the card) or `page` (the figure's own page colour).
@@ -29,8 +29,9 @@ Options (all optional):
 
 Figures:
 
-* `arum-5x200-finishing` - the ARUM 5X-200 changes its tool, then finishes a full-arch zirconia bridge in three
-  five-axis passes; a Jog mode hands the visitor all five axes. Product data from ARUM Dentistry, used with permission.
+* `arum-5x200-finishing` - the ARUM 5X-200 changes its tool, then finishes the occlusal side of an illustrative
+  full-arch titanium bridge framework in three five-axis passes; a Jog mode hands the visitor all five axes. Product
+  data from ARUM Dentistry, used with permission.
 
 == Changelog ==
 

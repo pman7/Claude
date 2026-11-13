@@ -1,7 +1,9 @@
-// The milled disc on the holder's face B: the bridge standing in its roughed channel, drawn in the face's own plane. A
-// plane can only carry flat markup, so depth is drawn as the 2.5D trick for prisms seen from above: everything at depth
-// d is the same outline moved by d·sh, where sh is how far one millimetre down moves a point across the face on screen
-// (live.js reads it from the two face planes each frame). Pure: path strings only, no DOM.
+// The milled disc in its holder: the titanium framework standing in its roughed channel, drawn in the plane of the
+// holder's face. A plane can only carry flat markup, so depth is drawn as the 2.5D trick for prisms seen from above:
+// everything at depth d is the same outline moved by d·sh, where sh is how far one millimetre down moves a point across
+// the face on screen (live.js reads it from the two face planes each frame). The disc is thinner than the holder and
+// centred in it, so its face is itself a step down: seen through the holder's bore, with the bore's far wall above it.
+// Pure: path strings only, no DOM.
 import { GEO, BRIDGE, OUTLINE, OPENING, TEETH, CHANNELS, CONNECTORS, ARCH_L, OCC_SPAN, WALL_REACH, archAt, halfWidths, bandOutline } from "./model.mjs";
 
 const n2 = (v) => Math.round(v * 100) / 100;
@@ -22,15 +24,19 @@ const normalsOf = (pts) => {
   });
 };
 
+// the bore the disc is seen through, on either face of the holder (its radius), and how far down it the disc's face
+// lies: the disc is thinner than its holder and centred in it
 export const DISC_FACE = 45.5;
+export const RECESS = GEO.THICK - GEO.DISC;
 const BODY = { pts: OUTLINE.pts, s: OUTLINE.s, side: OUTLINE.side, n: normalsOf(OUTLINE.pts) };
 const MOAT = { pts: OPENING.pts, n: normalsOf(OPENING.pts) };
 const CONN = CONNECTORS.map((c) => ({ ...c, n: normalsOf(c.quad) }));
-const THROUGH = 2 * 12.5;
-const STEP_DEPTHS = [4, 7, 10, 13, 16, 19];
-const MOAT_STEPS = [5, 10, 15, 20];
+const THROUGH = 2 * GEO.DISC;
+const STEP_DEPTHS = [4, 6, 8, 10, 12];
+const MOAT_STEPS = [4, 8, 12];
 const OPEN_D = ring(MOAT.pts);
 const BODY_D = ring(BODY.pts);
+const BORE_D = circleAt([0, 0], DISC_FACE, 96);
 
 // the occlusal pass's reveal: a broad stroke along the path the tool follows, drawn on as it goes (mask dash)
 const REVEAL = (() => {
@@ -48,32 +54,16 @@ const REVEAL = (() => {
   return { d: line(pts), len: Math.ceil(len), width: 2 * widest + 4 };
 })();
 
-// the finished occlusal anatomy: crown outlines, cusp tips, fissures and incisal edges (in the arch's own coordinates:
-// along the arch from the midline, across it toward buccal)
-const toXY = (side, s, o) => { const c = archAt(side * s); return [c.p[0] + o * c.n[0], c.p[1] + o * c.n[1]]; };
-const anatomy = (() => {
-  const outlines = [];
-  const lines = [];
-  const dots = [];
-  for (const tooth of TEETH) {
-    const { side, index, md, bl } = tooth;
-    const s0 = Math.min(Math.abs(tooth.s[0]), Math.abs(tooth.s[1]));
-    const at = (f, g) => toXY(side, s0 + f * md, g * bl);
-    outlines.push(ring(tooth.outline));
-    if (index <= 1) lines.push(line([at(0.18, 0.2), at(0.5, 0.24), at(0.82, 0.2)]));
-    else if (index === 2) { dots.push(at(0.5, 0.12)); lines.push(line([at(0.15, 0.05), at(0.5, 0.12), at(0.85, 0.05)])); }
-    else if (index <= 4) { dots.push(at(0.5, 0.22), at(0.5, -0.2)); lines.push(line([at(0.2, 0.02), at(0.5, 0), at(0.8, 0.02)])); }
-    else {
-      dots.push(at(0.28, 0.24), at(0.72, 0.24), at(0.3, -0.22), at(0.74, -0.24));
-      lines.push(line([at(0.15, 0.02), at(0.5, -0.02), at(0.85, 0.03)]), line([at(0.3, -0.22), at(0.72, 0.24)]));
-    }
-  }
-  return { outlines: outlines.join(""), lines: lines.join(""), dots: dots.map((d) => circleAt(d, 0.45, 10)).join("") };
-})();
+// the finished occlusal side: the twelve units' outlines, plain reduced metal units with no occlusal detail
+const UNITS = TEETH.map((unit) => ring(unit.outline)).join("");
 // the roughed top before finishing: the roughing ball's terraces, inset from the outline
 const TERRACES = [-1.3, -2.6].map((g) => ring(bandOutline(g, 1.2).pts)).join("");
 const HOLES = CHANNELS.map((c) => circleAt(c.p, BRIDGE.channel / 2, 18)).join("");
 const HOLE_RIMS = CHANNELS.map((c) => circleAt(c.p, BRIDGE.channel / 2 + 0.7, 22)).join("");
+// where each screw channel comes out on the fitting side, seen from face A
+const EXITS = CHANNELS.map((c) => { const k = (BRIDGE.base - BRIDGE.top) / c.axis[2]; return [c.p[0] - k * c.axis[0], c.p[1] - k * c.axis[1]]; });
+const EXIT_HOLES = EXITS.map((p) => circleAt(p, BRIDGE.channel / 2 + 0.6, 18)).join("");
+const EXIT_RIMS = EXITS.map((p) => circleAt(p, BRIDGE.channel / 2 + 1.3, 22)).join("");
 
 const add = (p, v, k) => [p[0] + v[0] * k, p[1] + v[1] * k];
 // the swept sides of a prism outline between two depths: one quad per edge facing the viewer (n·sh > 0, or < 0 for a
@@ -158,17 +148,22 @@ export function sightDepth(p, sh, inChannel = false) {
   return Math.min(firstHit(p, sh, MOAT_SEGS, o.moat), firstHit(p, sh, BODY_SEGS, o.body) + BRIDGE.top);
 }
 
-// The bur (tip p, axis t, holder frame) goes into the channel through face B: from the face down it shows only as far as
-// its sight line stays in the channel. Its cut: the depth below face B where it goes out of sight, and the point on its
-// axis there; null when nothing of it is hidden (above the face, turned away, in the open over the magazine or off the
-// disc's edge, or in sight all the way to its tip).
+// The bur (tip p, axis t, holder frame) comes down the holder's bore and goes into the channel through the disc's face.
+// In the bore it shows as far as its sight line comes out through the bore's mouth, and below the disc's face only as
+// far as that line also stays in the channel. Its cut: the depth below the disc's face where it goes out of sight
+// (negative while still in the bore, behind the holder's rim), and the point on its axis there; null when nothing of it
+// is hidden (above the disc's face, turned away, in the open over the magazine or off the disc's edge, or in sight all
+// the way to its tip).
 export function burCut(p, t, sh) {
-  const tipDepth = GEO.THICK - p[2];
+  const tipDepth = GEO.DISC - p[2];
   if (tipDepth <= 0 || !sh || t[2] < 0.2) return null;
-  const at = (e) => { const k = (GEO.THICK - e - p[2]) / t[2]; return [p[0] + k * t[0], p[1] + k * t[1]]; };
+  const at = (e) => { const k = (GEO.DISC - e - p[2]) / t[2]; return [p[0] + k * t[0], p[1] + k * t[1]]; };
   if (sightDepth(at(0), sh) <= 0) return null;
-  for (let e = 0.05; e < tipDepth; e += 0.1) {
-    if (e >= sightDepth(at(e), sh)) { const cut = Math.max(0, e - 0.05); return { cut, at: at(cut) }; }
+  // a point at depth e is behind the holder's rim when its sight line reaches the holder's face outside the bore
+  const rimmed = (e, q) => Math.hypot(q[0] + (RECESS + e) * sh[0], q[1] + (RECESS + e) * sh[1]) > DISC_FACE;
+  for (let e = 0.05 - RECESS; e < tipDepth; e += 0.1) {
+    const q = at(e);
+    if (rimmed(e, q) || (e > 0 && e >= sightDepth(q, sh))) { const cut = Math.max(-RECESS, e - 0.05); return { cut, at: at(cut) }; }
   }
   return null;
 }
@@ -350,8 +345,10 @@ function connectorsSeen(sh) {
 const finishedEdge = (i, done) => (done[WALL_REACH.pass[i]] ?? 0) >= WALL_REACH.at[i] - 1e-9;
 
 // Everything that moves with the view and the job. sh: depth shift per mm (disc frame); done: the passes' progress;
-// lit(n): whether a wall with outward normal n faces the light.
-export function workShapes(sh, done, lit) {
+// lit(n): whether a wall with outward normal n faces the light; recess: how far the disc's face lies below the plane
+// the markup is drawn in (the part view looks straight at the disc, so it has none). The framework is centred in the
+// disc's thickness, so the same shapes serve the disc seen from face A, with its own shift and nothing finished.
+export function workShapes(sh, done, lit, recess = RECESS) {
   const facing = (poly, sign = 1) => (i) => sign * (poly.n[i][0] * sh[0] + poly.n[i][1] * sh[1]) > 1e-6;
   const bodyFacing = facing(BODY);
   // how deep each facing wall's corner can be seen: measured from a step up its sight line (clear of the wall the line
@@ -379,75 +376,89 @@ export function workShapes(sh, done, lit) {
   const bodySteps = STEP_DEPTHS.map((d) => runs(BODY, d, sh, (i) => roughFacing(i) && d < Math.min(seen[i], seen[(i + 1) % n]))).join("");
   // the channel's far walls, swept all the way down: the floor seen inside the opening lies behind one of them, so
   // painting them over the void keeps it from showing through; their roughing steps only as deep as each can be seen
-  // (the bridge's walls and the connectors carry their own line of sight)
+  // (the framework's walls and the connectors carry their own line of sight)
   const moatFar = facing(MOAT, -1);
   const moatWalls = sides(MOAT, 0, THROUGH, sh, moatFar);
   const moatSeen = cache.moatSeen;
   const moatSteps = MOAT_STEPS.map((d) => runs(MOAT, d, sh, (i) => moatFar(i) && d < Math.min(moatSeen[i], moatSeen[(i + 1) % MOAT.pts.length]))).join("");
   return {
+    disc: `translate(${n2(sh[0] * recess)} ${n2(sh[1] * recess)})`,
     floor: `translate(${n2(sh[0] * THROUGH)} ${n2(sh[1] * THROUGH)})`,
     top: `translate(${n2(sh[0] * BRIDGE.top)} ${n2(sh[1] * BRIDGE.top)})`,
     moatWalls,
     moatSteps,
     body,
     bodySteps,
+    // the framework's margin where a wall pass has finished the wall under it, along its top edge
+    margin: runs(BODY, 0, sh, (i) => finishedEdge(i, done)),
     // the connectors only when asked for (the part view has none)
     get conn() { return (cache.conn ??= connectorsSeen(sh)); },
     reveal: n2(REVEAL.len * (1 - done.occlusal)),
   };
 }
 
-// the markup, with each live piece tagged data-w so live.js can find it; filled for one view and state
-export function workSvg(sh, done, lit, id = "tr") {
-  const w = workShapes(sh, done, lit);
-  const P = (k, cls, d, extra = "") => `<path data-w="${k}" class="${cls}"${extra} d="${d}"/>`;
-  const box = 'maskUnits="userSpaceOnUse" x="-60" y="-60" width="120" height="120"';
-  const stroke = `class="tr-reveal" fill="none" stroke-width="${REVEAL.width}" stroke-dasharray="${REVEAL.len} ${REVEAL.len}" d="${REVEAL.d}"`;
+// The markup, with each live piece tagged data-w so live.js can find it (the keys of face A's copy carry key "a."). The
+// holder's bore is filled with its wall's tone and the disc's face is drawn on it one recess down, clipped by the
+// bore's mouth: what is left of the fill is the bore's far wall, and the near wall hides the near edge of the disc.
+function discSvg(w, id, key, top) {
+  const P = (k, cls, d, extra = "") => `<path data-w="${key}${k}" class="${cls}"${extra} d="${d}"/>`;
   return (
-    `<g class="tr-work" transform="scale(-1 -1)">` +
-    `<defs><clipPath id="${id}-open"><path d="${OPEN_D}"/></clipPath>` +
-    `<mask id="${id}-fin" ${box}><path data-w="reveal" stroke="#fff" ${stroke} stroke-dashoffset="${w.reveal}"/></mask>` +
-    `<mask id="${id}-raw" ${box}><rect x="-60" y="-60" width="120" height="120" fill="#fff"/><path data-w="reveal" stroke="#000" ${stroke} stroke-dashoffset="${w.reveal}"/></mask></defs>` +
-    `<path class="tr-disc" fill-rule="evenodd" d="${circleAt([0, 0], DISC_FACE, 96)}${OPEN_D}"/>` +
+    `<g clip-path="url(#${id}-bore)"><path class="tr-seat" d="${BORE_D}"/>` +
+    `<g data-w="${key}disc" transform="${w.disc}">` +
+    `<path class="tr-disc" fill-rule="evenodd" d="${BORE_D}${OPEN_D}"/>` +
     `<g clip-path="url(#${id}-open)">` +
     `<path class="tr-moat" d="${OPEN_D}"/>` +
     P("floor", "tr-void", OPEN_D, ` transform="${w.floor}"`) +
     P("moatWalls", "tr-moat", w.moatWalls) +
-    P("moatSteps", "iso-line", w.moatSteps, ' data-tone="faint" data-free="both"') +
+    P("moatSteps", "iso-line tr-step", w.moatSteps, ' data-free="both"') +
     P("roughShade", "tr-wall tr-rough", w.body.roughShade) +
     P("roughLit", "tr-wall tr-rough", w.body.roughLit, ' data-lit=""') +
     P("finShade", "tr-wall tr-fin", w.body.finShade) +
     P("finLit", "tr-wall tr-fin", w.body.finLit, ' data-lit=""') +
-    P("bodySteps", "iso-line", w.bodySteps, ' data-tone="faint" data-free="both"') +
+    P("bodySteps", "iso-line tr-step", w.bodySteps, ' data-free="both"') +
     P("connSide", "tr-conn-side", w.conn.side) +
     P("connTop", "tr-conn", w.conn.top) +
-    `<g data-w="top" transform="${w.top}">` +
-    `<path class="tr-top" d="${BODY_D}"/>` +
-    `<g mask="url(#${id}-raw)"><path class="iso-line" data-tone="faint" d="${TERRACES}"/></g>` +
-    `<g mask="url(#${id}-fin)"><path class="tr-crowns" d="${anatomy.dots}"/><path class="iso-line" data-tone="lo" d="${anatomy.outlines}"/><path class="iso-line" data-tone="lo" data-free="both" d="${anatomy.lines}"/></g>` +
-    `<path class="tr-hole" d="${HOLES}"/><path class="iso-line" data-tone="faint" d="${HOLE_RIMS}"/>` +
-    `<path class="iso-line" data-tone="mid" d="${BODY_D}"/>` +
+    `<g data-w="${key}top" transform="${w.top}">${top}` +
+    // the framework's own outline carries the figure's lit accent, heavier where the wall under it is finished
+    `<path class="iso-line" data-tone="lit" d="${BODY_D}"/>` +
+    P("margin", "iso-line tr-margin", w.margin, ' data-tone="lit"') +
     `</g></g>` +
-    `<path class="iso-line" data-tone="lit" d="${circleAt([0, 0], DISC_FACE, 96)}"/>` +
     `<path class="iso-line" data-tone="lo" d="${OPEN_D}"/>` +
+    // the disc's edge at the foot of the bore's wall
+    `<path class="iso-line" data-tone="lo" d="${BORE_D}"/>` +
+    `</g></g>` +
+    `<path class="iso-line" data-tone="mid" d="${BORE_D}"/>`
+  );
+}
+const clips = (id) => `<clipPath id="${id}-open"><path d="${OPEN_D}"/></clipPath><clipPath id="${id}-bore"><path d="${BORE_D}"/></clipPath>`;
+
+// the occlusal side, seen through face B: the rough top with its terraces gives way to the finished surface, brighter,
+// with the units' outlines, as the occlusal pass goes (the two masks follow the pass)
+export function workSvg(sh, done, lit, id = "tr", recess = RECESS) {
+  const w = workShapes(sh, done, lit, recess);
+  const box = 'maskUnits="userSpaceOnUse" x="-60" y="-60" width="120" height="120"';
+  const stroke = `class="tr-reveal" fill="none" stroke-width="${REVEAL.width}" stroke-dasharray="${REVEAL.len} ${REVEAL.len}" d="${REVEAL.d}"`;
+  const top =
+    `<path class="tr-top" d="${BODY_D}"/>` +
+    `<g mask="url(#${id}-raw)"><path class="iso-line tr-terrace" d="${TERRACES}"/></g>` +
+    `<g mask="url(#${id}-fin)"><path class="tr-top tr-fin" d="${BODY_D}"/><path class="iso-line tr-unit" d="${UNITS}"/></g>` +
+    `<path class="tr-hole" d="${HOLES}"/><path class="iso-line tr-rim" d="${HOLE_RIMS}"/>`;
+  return (
+    `<g class="tr-work" transform="scale(-1 -1)">` +
+    `<defs>${clips(id)}` +
+    `<mask id="${id}-fin" ${box}><path data-w="reveal" stroke="#fff" ${stroke} stroke-dashoffset="${w.reveal}"/></mask>` +
+    `<mask id="${id}-raw" ${box}><rect x="-60" y="-60" width="120" height="120" fill="#fff"/><path data-w="reveal" stroke="#000" ${stroke} stroke-dashoffset="${w.reveal}"/></mask></defs>` +
+    discSvg(w, id, "", top) +
     `</g>`
   );
 }
 
-// face A (the underside at A = 0): the channel goes through, so the bridge's intaglio side shows in it, held by the
-// connectors; drawn flat (that face is only seen when the holder is turned over)
-export function underSvg() {
-  // face A's u and v are face B's, so the same disc frame holds
-  const flipped = (pts) => pts;
-  return (
-    `<g class="tr-work" transform="scale(-1 -1)">` +
-    `<path class="tr-disc" fill-rule="evenodd" d="${circleAt([0, 0], 49.25, 96)}${ring(flipped(MOAT.pts))}"/>` +
-    `<path class="tr-void" d="${ring(flipped(MOAT.pts))}"/>` +
-    `<path class="tr-conn" d="${CONN.map((c) => ring(flipped(c.quad))).join("")}"/>` +
-    `<path class="tr-top" d="${ring(flipped(BODY.pts))}"/>` +
-    `<path class="tr-hole" d="${CHANNELS.map((c) => { const k = (BRIDGE.base - BRIDGE.top) / c.axis[2]; return circleAt([c.p[0] - k * c.axis[0], c.p[1] - k * c.axis[1]], BRIDGE.channel / 2 + 0.6, 18); }).join("")}"/>` +
-    `<path class="iso-line" data-tone="mid" d="${ring(flipped(BODY.pts))}"/>` +
-    `<path class="iso-line" data-tone="lit" d="${circleAt([0, 0], 49.25, 96)}"/>` +
-    `</g>`
-  );
+// The fitting side, seen through face A when the holder is turned over: the disc lies as far below this face as below
+// face B, the channel goes through, and the framework's roughed underside stands in it with the screw channels' ends.
+// Face A's u and v are face B's, so the same disc frame holds; nothing on this side is finished in the figure.
+const ROUGH = { occlusal: 0, buccal: 0, palatal: 0 };
+export const underShapes = (sh, lit) => workShapes(sh, ROUGH, lit);
+export function underSvg(sh, lit, id = "tru") {
+  const top = `<path class="tr-top" d="${BODY_D}"/><path class="iso-line tr-terrace" d="${TERRACES}"/><path class="tr-hole" d="${EXIT_HOLES}"/><path class="iso-line tr-rim" d="${EXIT_RIMS}"/>`;
+  return `<g class="tr-work" transform="scale(-1 -1)"><defs>${clips(id)}</defs>${discSvg(underShapes(sh, lit), id, "a.", top)}</g>`;
 }
