@@ -1,0 +1,127 @@
+<?php
+/**
+ * Plugin Name:       Integra Figures
+ * Description:       Interactive technical figures for integra.dental. Each figure is one self-contained file served from this site; place one with [integra_figure id="arum-5x200-finishing"].
+ * Version:           1.0.0
+ * Requires at least: 6.0
+ * Requires PHP:      7.4
+ * Author:            Integra Dental
+ * License:           GPL-2.0-or-later
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+const INTEGRA_FIGURES_VERSION = '1.0.0';
+
+/**
+ * The figures this plugin ships. `height` is the frame's height before the figure has loaded and reported its
+ * real one, per caption setting, worked out from the frame's own width (cqw is a hundredth of it): the height at
+ * 320 px, then a straight piece to each of 390, 480, 600 and 760 px (each term runs only over its own stretch),
+ * then the two steps the figure's own breakpoints make, up past 480 px and down past 560 px. Fitted from above to
+ * the figure's height measured at every width from 320 to 760 px, with the shortcode's default frame and
+ * background; `ratio` (width over height at full width) stands in where cqw is unknown.
+ */
+function integra_figures() {
+	return array(
+		'arum-5x200-finishing' => array(
+			'file'   => 'figures/arum-5x200-finishing.html',
+			'title'  => 'Interactive figure: the ARUM 5X-200 changes its tool, then finishes the occlusal side of a full-arch titanium bridge framework in five axes',
+			'ratio'  => array( 'short' => '760 / 972', 'none' => '760 / 858', 'full' => '760 / 1677' ),
+			'height' => array(
+				'short' => 'calc(769px + clamp(0px, (100cqw - 320px) * 0.5571, 39px) + clamp(0px, (100cqw - 390px) * 0.3778, 34px) + clamp(0px, (100cqw - 480px) * 0.4833, 58px) + clamp(0px, (100cqw - 600px) * 0.475, 76px) + clamp(0px, (100cqw - 480px) * 31, 31px) - clamp(0px, (100cqw - 560px) * 35, 35px))',
+				'none'  => 'calc(545px + clamp(0px, (100cqw - 320px) * 0.7714, 54px) + clamp(0px, (100cqw - 390px) * 0.6222, 56px) + clamp(0px, (100cqw - 480px) * 0.7667, 92px) + clamp(0px, (100cqw - 600px) * 0.7188, 115px) + clamp(0px, (100cqw - 480px) * 31, 31px) - clamp(0px, (100cqw - 560px) * 35, 35px))',
+				'full'  => 'calc(2510px + max(-298px, (100cqw - 320px) * -4.2571) + clamp(-246px, (100cqw - 390px) * -2.7333, 0px) + clamp(-165px, (100cqw - 480px) * -1.375, 0px) + clamp(-120px, (100cqw - 600px) * -0.75, 0px) + clamp(0px, (100cqw - 480px) * 31, 31px) - clamp(0px, (100cqw - 560px) * 35, 35px))',
+			),
+		),
+	);
+}
+
+/**
+ * [integra_figure id="arum-5x200-finishing"]
+ *
+ * Optional: theme="light|dark|auto", caption="short|full|none", frame="soft|card", bg="none|page",
+ * fig="none|show", max_width="760" (px).
+ */
+function integra_figure_shortcode( $atts ) {
+	static $count = 0;
+
+	$atts = shortcode_atts(
+		array(
+			'id'        => '',
+			'theme'     => 'light',
+			'caption'   => 'short',
+			'frame'     => 'soft',
+			'bg'        => 'none',
+			'fig'       => 'none',
+			'max_width' => '760',
+		),
+		$atts,
+		'integra_figure'
+	);
+
+	$figures = integra_figures();
+	$id      = sanitize_key( $atts['id'] );
+	if ( ! isset( $figures[ $id ] ) ) {
+		return '';
+	}
+	$figure = $figures[ $id ];
+	$path   = plugin_dir_path( __FILE__ ) . $figure['file'];
+	if ( ! is_readable( $path ) ) {
+		return '';
+	}
+
+	// Each option: the values it takes, the first being this shortcode's default. Anything else falls back to that
+	// default, and only the values the figure's page acts on reach its address.
+	$options = array(
+		'theme'   => array( 'light', 'dark', 'auto' ),
+		'caption' => array( 'short', 'full', 'none' ),
+		'frame'   => array( 'soft', 'card' ),
+		'bg'      => array( 'none', 'page' ),
+		'fig'     => array( 'none', 'show' ),
+	);
+	$silent  = array( 'auto', 'full', 'card', 'page', 'show' );
+	$query   = array();
+	$chosen  = array();
+	foreach ( $options as $key => $values ) {
+		$value = sanitize_key( $atts[ $key ] );
+		if ( ! in_array( $value, $values, true ) ) {
+			$value = $values[0];
+		}
+		$chosen[ $key ] = $value;
+		if ( ! in_array( $value, $silent, true ) ) {
+			$query[ $key ] = $value;
+		}
+	}
+	// A new upload of the figure gets a new address, so no visitor keeps a stale copy.
+	$query['v'] = INTEGRA_FIGURES_VERSION . '-' . filemtime( $path );
+
+	$src = add_query_arg( $query, plugins_url( $figure['file'], __FILE__ ) );
+	$max = max( 320, min( 1200, (int) $atts['max_width'] ) );
+	$count++;
+
+	// The frame holds about the figure's height until the figure reports its real one (see integra_figures_script).
+	$html = sprintf(
+		'<figure class="integra-figure" style="max-width:%1$dpx;width:100%%;margin:0 auto 24px;container-type:inline-size"><iframe class="integra-figure__frame" title="%2$s" src="%3$s" loading="lazy" scrolling="no" style="display:block;width:100%%;aspect-ratio:%4$s;height:%5$s;border:0;background:transparent"></iframe></figure>',
+		$max,
+		esc_attr( $figure['title'] ),
+		esc_url( $src ),
+		esc_attr( $figure['ratio'][ $chosen['caption'] ] ),
+		esc_attr( $figure['height'][ $chosen['caption'] ] )
+	);
+
+	if ( 1 === $count ) {
+		add_action( 'wp_footer', 'integra_figures_script' );
+	}
+
+	return $html;
+}
+add_shortcode( 'integra_figure', 'integra_figure_shortcode' );
+
+/**
+ * Once per page, after every figure's frame is in the document: each figure reports its own height and its frame
+ * takes it. The script asks each frame for its height when it attaches and whenever a frame loads, so a figure that
+ * loaded before this script ran is not missed. A message counts only when it comes from one of the figure frames.
+ */
+function integra_figures_script() {
+	echo '<script>(function(){var q=function(){return document.querySelectorAll("iframe.integra-figure__frame")},ask=function(f){try{f.contentWindow.postMessage({type:"iso-figure:height?"},"*")}catch(e){}};addEventListener("message",function(e){var d=e.data;if(!d||d.type!=="iso-figure:height"||!(d.height>100&&d.height<5000))return;var f=q();for(var i=0;i<f.length;i++)if(f[i].contentWindow===e.source){f[i].style.aspectRatio="auto";f[i].style.height=Math.ceil(d.height)+"px"}});var f=q();for(var i=0;i<f.length;i++){ask(f[i]);f[i].addEventListener("load",function(){ask(this)})}})();</script>';
+}

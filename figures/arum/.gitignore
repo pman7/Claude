@@ -1,2 +1,5 @@
 tools/
 shots/
+reference/
+site/dist/
+site/integra-figures/figures/*.html
